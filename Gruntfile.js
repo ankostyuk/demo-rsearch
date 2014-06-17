@@ -2,7 +2,10 @@
 module.exports = function(grunt) {
     //
     grunt.initConfig({
-        clean: ['node_modules', 'bower_components'],
+        clean: {
+            deps: ['node_modules', 'bower_components'],
+            dist: ['dist']
+        },
 
         jshint: {
             options: {
@@ -11,6 +14,19 @@ module.exports = function(grunt) {
                 '-W069': true
             },
             src: ['src/**/*.js']
+        },
+
+        copy: {
+            dist: {
+                expand: true,
+                cwd: 'src/',
+                src: ['**/*.js', '**/*.html', '**/*.css', '**/*.less'],
+                dest: 'dist/'
+            },
+            docs: {
+                src: 'rsearch.md',
+                dest: 'dist/'
+            }
         },
 
         bower: {
@@ -32,7 +48,13 @@ module.exports = function(grunt) {
     });
 
     //
-    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-bower-task');
+
+    //
+    grunt.registerTask('init', ['bower']);
+    grunt.registerTask('build', ['init', 'jshint']);
+    grunt.registerTask('dist', ['clean:dist', 'build', 'copy']);
 };
