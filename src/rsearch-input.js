@@ -1,5 +1,5 @@
 /**
- * @module rsearch
+ * @module rsearch-input
  * @desc RequireJS/Angular module
  * @author ankostyuk
  */
@@ -8,6 +8,7 @@ define(function(require) {'use strict';
                           require('less!./styles/rsearch-input');
     var template        = require('text!./views/rsearch-input.html');
 
+                          require('underscore');
     var angular         = require('angular');
 
     return angular.module('np.rsearch-input', [])
@@ -18,7 +19,37 @@ define(function(require) {'use strict';
                 template: template,
                 scope: {},
                 controller: ['$scope', '$element', '$attrs', function($scope, $element, $attrs) {
-                    $log.info('npRsearchInput');
+                    //
+                    var scope   = $scope,
+                        element = $element,
+                        attrs   = $attrs;
+
+                    //
+                    _.extend(scope, {
+                        text: null,
+
+                        // TODO
+                        searchInputEnter: function(){
+                            fireRefresh();
+                        },
+
+                        searchBtnClick: function(){
+                            fireRefresh();
+                        }
+                    });
+
+                    scope.$watch('text', function(newValue, oldValue) {
+                        // Не всегда (newValue != oldValue), например, при инициализации scope.
+                        // Поэтому приходится сравнивать, чтобы исключить ложные срабатывания.
+                        if (newValue !== oldValue) {
+                            fireRefresh();
+                        }
+                    });
+
+                    //
+                    function fireRefresh() {
+                        scope.$emit('np.rsearch-input.refresh', scope.text);
+                    }
                 }]
             };
         }]);

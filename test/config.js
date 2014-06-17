@@ -6,8 +6,8 @@ root._RESOURCES_CONFIG = {
 
     paths: {
         'angular':              'test/bower-components/angular/angular',
-        'angular-resource':     'test/bower-components/angular-resource/angular-resource',
         'angular-locale_ru':    'test/bower-components/angular-i18n/angular-locale_ru',
+        'angular-mocks':        'test/bower-components/angular-mocks/angular-mocks',
 
         //'angular-ui-utils':     'test/bower-components/angular-ui-utils/ui-utils',
 
@@ -16,9 +16,7 @@ root._RESOURCES_CONFIG = {
         'underscore':           'test/bower-components/underscore/underscore',
         'underscore.string':    'test/bower-components/underscore.string/underscore.string',
 
-        'i18n':                 'bower-components/nullpointer-i18n/i18n'//,
-
-        //'rsearch':              'src/rsearch'
+        //'i18n':                 'bower-components/nullpointer-i18n/i18n'
     },
 
     packages: [{
@@ -35,12 +33,13 @@ root._RESOURCES_CONFIG = {
         'angular': {
             exports: 'angular'
         },
-        'angular-resource': {
-            deps: ['angular']
-        },
         'angular-locale_ru': {
             deps: ['angular']
         },
+        'angular-mocks': {
+            deps: ['angular']
+        },
+
 //        'angular-ui-utils': {
 //            deps: ['angular']
 //        },
