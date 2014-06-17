@@ -14,6 +14,10 @@
     npm install
     grunt bower
 
+## Проверка кода
+
+    grunt jshint
+    
 ## Очистка
 
     grunt clean
