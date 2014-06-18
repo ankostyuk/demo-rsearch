@@ -1,16 +1,20 @@
 //
 define(function(require) {'use strict';
-                  require('css!./bower-components/bootstrap/css/bootstrap');
-                  require('css!./style');
+    var root = window;
 
+    //
+    require('css!./bower-components/bootstrap/css/bootstrap');
+    require('css!./style');
+
+    //
     var angular = require('angular');
-
-                  require('angular-locale_ru'); // TODO i18n/l10n
-
-                  require('rsearch');
-
+                  require('l10n');
                   require('./app-data');
 
+    //
+    require('rsearch');
+
+    //
     var mock = false;
 
     var app = angular.module('app', ['np.rsearch', 'app.data'])

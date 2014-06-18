@@ -9,9 +9,14 @@ define(function(require) {'use strict';
     var template        = require('text!./views/rsearch-input.html');
 
                           require('underscore');
-    var angular         = require('angular');
+    var i18n            = require('i18n'),
+        angular         = require('angular');
 
     return angular.module('np.rsearch-input', [])
+        //
+        .run([function(){
+            template = i18n.translateTemplate(template);
+        }])
         //
         .directive('npRsearchInput', ['$log', function($log){
             return {

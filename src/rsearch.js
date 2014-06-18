@@ -9,7 +9,8 @@ define(function(require) {'use strict';
     var template        = require('text!./views/rsearch.html');
 
                           require('underscore');
-    var angular         = require('angular');
+    var i18n            = require('i18n'),
+        angular         = require('angular');
 
     var submodules = {
         rsearchInput:     require('./rsearch-input'),
@@ -18,6 +19,10 @@ define(function(require) {'use strict';
     };
 
     return angular.module('np.rsearch', _.pluck(submodules, 'name'))
+        //
+        .run([function(){
+            template = i18n.translateTemplate(template);
+        }])
         //
         .directive('npRsearch', ['$log', 'npRsearchResource', function($log, npRsearchResource){
             return {
