@@ -15,7 +15,11 @@ define(function(require) {'use strict';
 
             var config = npRsearchConfig.resource || {};
 
-            function request(httpConfig) {
+            function request(httpConfig, options) {
+                if (options.previousRequest) {
+                    options.previousRequest.canceler.resolve();
+                }
+
                 var canceler = $q.defer();
 
                 var promise = $http(_.extend({
@@ -37,7 +41,7 @@ define(function(require) {'use strict';
                         params: {
                             q: options.q
                         }
-                    });
+                    }, options);
                 }
             };
         }]);

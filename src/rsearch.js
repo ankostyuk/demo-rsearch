@@ -35,14 +35,17 @@ define(function(require) {'use strict';
                         element = $element,
                         attrs   = $attrs;
 
+                    var searchRequest;
+
                     scope.$on('np.rsearch-input.refresh', function(e, text){
                         $log.info('np.rsearch-input.refresh', text);
 
-                        var request = npRsearchResource.search({
-                            q: text
+                        searchRequest = npRsearchResource.search({
+                            q: text,
+                            previousRequest: searchRequest
                         });
 
-                        request.promise
+                        searchRequest.promise
                             .success(function(data, status){
                                 $log.info('search success', data, status);
                             })
