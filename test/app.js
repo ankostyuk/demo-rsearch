@@ -11,6 +11,8 @@ define(function(require) {'use strict';
 
                   require('./app-data');
 
+    var mock = false;
+
     var app = angular.module('app', ['np.rsearch', 'app.data'])
         //
         .constant('npRsearchConfig', {
@@ -20,13 +22,17 @@ define(function(require) {'use strict';
         })
         //
         .config(function($provide) {
-            $provide.decorator('$httpBackend', angular.mock.e2e.$httpBackendDecorator);
+            if (mock) {
+                $provide.decorator('$httpBackend', angular.mock.e2e.$httpBackendDecorator);
+            }
         })
         //
         .run(['$log', '$rootScope', '$window', 'dataMock', function($log, $rootScope, $window, dataMock){
             $log.log('app...');
 
-            dataMock.mockHttp();
+            if (mock) {
+                dataMock.mockHttp();
+            }
         }]);
 
     angular.bootstrap(document, [app.name]);

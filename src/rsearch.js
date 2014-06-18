@@ -13,7 +13,8 @@ define(function(require) {'use strict';
 
     var submodules = {
         rsearchInput:     require('./rsearch-input'),
-        rsearchResource:  require('./rsearch-resource')
+        rsearchResource:  require('./rsearch-resource'),
+        rsearchMeta:      require('./rsearch-meta')
     };
 
     return angular.module('np.rsearch', _.pluck(submodules, 'name'))
@@ -32,7 +33,9 @@ define(function(require) {'use strict';
                     scope.$on('np.rsearch-input.refresh', function(e, text){
                         $log.info('np.rsearch-input.refresh', text);
 
-                        var request = npRsearchResource.search();
+                        var request = npRsearchResource.search({
+                            q: text
+                        });
 
                         request.promise
                             .success(function(data, status){
