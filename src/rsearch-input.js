@@ -55,6 +55,9 @@ define(function(require) {'use strict';
                     function fireRefresh() {
                         scope.$emit('np.rsearch-input.refresh', scope.text);
                     }
+
+                    //
+                    scope.$emit('np.rsearch-input.ready', element);
                 }]
             };
         }]);

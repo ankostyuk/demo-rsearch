@@ -31,12 +31,17 @@ define(function(require) {'use strict';
             }
         })
         //
-        .run(['$log', '$rootScope', '$window', 'dataMock', function($log, $rootScope, $window, dataMock){
+        .run(['$log', '$rootScope', '$window', '$document', 'dataMock', function($log, $rootScope, $window, $document, dataMock){
             $log.log('app...');
 
             if (mock) {
                 dataMock.mockHttp();
             }
+
+            //
+            $rootScope.$on('np.rsearch-input.ready', function(e, element){
+                element.find('input')[0].focus();
+            });
         }]);
 
     angular.bootstrap(document, [app.name]);
