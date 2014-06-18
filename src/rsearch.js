@@ -13,9 +13,10 @@ define(function(require) {'use strict';
         angular         = require('angular');
 
     var submodules = {
-        rsearchInput:     require('./rsearch-input'),
-        rsearchResource:  require('./rsearch-resource'),
-        rsearchMeta:      require('./rsearch-meta')
+        rsearchInput:       require('./rsearch-input'),
+        rsearchNavigation:  require('./rsearch-navigation'),
+        rsearchResource:    require('./rsearch-resource'),
+        rsearchMeta:        require('./rsearch-meta')
     };
 
     return angular.module('np.rsearch', _.pluck(submodules, 'name'))

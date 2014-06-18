@@ -4,7 +4,7 @@ define(function(require) {'use strict';
 
     //
     require('css!./bower-components/bootstrap/css/bootstrap');
-    require('css!./style');
+    require('less!./style');
 
     //
     var angular = require('angular');
