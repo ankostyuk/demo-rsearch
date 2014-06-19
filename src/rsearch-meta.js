@@ -11,14 +11,27 @@ define(function(require) {'use strict';
         //
         .constant('npRsearchMeta', {
             nodes: {
-                types: ['COMPANY', 'INDIVIDUAL', 'ADDRESS', 'PHONE']
+                types: {
+                    'COMPANY': {
+                        searchResultPriority: 5
+                    },
+                    'INDIVIDUAL': {
+                        searchResultPriority: 4
+                    },
+                    'ADDRESS': {
+                        searchResultPriority: 2
+                    },
+                    'PHONE': {
+                        searchResultPriority: 1
+                    }
+                }
             }
         })
         //
         .factory('npRsearchMetaHelper', ['$log', 'npRsearchMeta', function($log, npRsearchMeta){
 
             return {
-                getNodeTypes: function(options) {
+                getNodeTypes: function() {
                     return npRsearchMeta.nodes.types;
                 }
             };

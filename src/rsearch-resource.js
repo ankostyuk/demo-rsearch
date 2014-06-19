@@ -33,11 +33,11 @@ define(function(require) {'use strict';
             }
 
             return {
-                search: function(options) {
 
+                search: function(options) {
                     return request({
                         method: 'GET',
-                        url: config.searchUrl + '/COMPANY',
+                        url: config.searchUrl + '/' + options.nodeType,
                         params: {
                             q: options.q
                         }

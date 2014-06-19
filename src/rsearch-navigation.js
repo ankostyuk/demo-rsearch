@@ -1,5 +1,5 @@
 /**
- * @module rsearch-input
+ * @module rsearch-navigation
  * @desc RequireJS/Angular module
  * @author ankostyuk
  */
@@ -30,6 +30,21 @@ define(function(require) {'use strict';
                         attrs   = $attrs;
 
                     //
+                    _.extend(scope, {
+                        searchResult: null,
+                        activeSearchResult: null
+                    });
+
+                    //
+                    scope.$on('np.rsearch.search-result', function(e, result){
+                        searchResult(result);
+                    });
+
+                    function searchResult(result) {
+                        $log.info('result', result);
+                        scope.searchResult = result;
+                        scope.activeSearchResult = result.preferredResult;
+                    }
                 }]
             };
         }]);

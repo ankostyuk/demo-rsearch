@@ -25,7 +25,7 @@ define(function(require) {'use strict';
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('npRsearch', ['$log', 'npRsearchResource', function($log, npRsearchResource){
+        .directive('npRsearch', ['$log', '$q', 'npRsearchResource', 'npRsearchMetaHelper', function($log, $q, npRsearchResource, npRsearchMetaHelper){
             return {
                 restrict: 'A',
                 template: template,
@@ -36,27 +36,83 @@ define(function(require) {'use strict';
                         element = $element,
                         attrs   = $attrs;
 
-                    var searchRequest;
+                    //
+                    var byNodeTypes = {},
+                        bySearchResultPriority = {};
 
+                    _.each(npRsearchMetaHelper.getNodeTypes(), function(nodeType, key){
+                        byNodeTypes[key] = {
+                            searchRequest: null,
+                            searchResult: null,
+                            searchResultPriority: nodeType.searchResultPriority
+                        };
+
+                        bySearchResultPriority[nodeType.searchResultPriority] = key;
+                    });
+
+                    //
                     scope.$on('np.rsearch-input.refresh', function(e, text){
-                        $log.info('np.rsearch-input.refresh', text);
+                        search(text);
+                    });
 
-                        searchRequest = npRsearchResource.search({
-                            q: text,
-                            previousRequest: searchRequest
+                    function search(query) {
+                        element.addClass('search-request');
+
+                        var requestPromises = [];
+
+                        _.each(byNodeTypes, function(byNodeType, key){
+                            byNodeType.searchResult = null;
+
+                            if (byNodeType.searchRequest) {
+                                byNodeType.searchRequest.canceler.resolve();
+                            }
+
+                            if (!query) {
+                                return;
+                            }
+
+                            var request = byNodeType.searchRequest = npRsearchResource.search({
+                                q: query,
+                                nodeType: key
+                            });
+
+                            request.promise
+                                .success(function(data, status){
+                                    byNodeType.searchResult = data;
+                                });
+
+                            requestPromises.push(request.promise);
                         });
 
-                        searchRequest.promise
-                            .success(function(data, status){
-                                $log.info('search success', data, status);
-                            })
-                            .error(function(data, status){
-                                $log.warn('search error', data, status);
-                            })
-                            ['finally'](function(){
-                                $log.log('search finally');
-                            });
-                    });
+                        $q.all(requestPromises)['finally'](function(){
+                            searchResult(query);
+                        });
+                    }
+
+                    function searchResult(query) {
+                        var result = {
+                            byNodeTypes: {},
+                            isEmpty: true,
+                            query: query,
+                            preferredResult: null
+                        };
+
+                        var searchResultPriority = 0;
+
+                        _.each(byNodeTypes, function(byNodeType, key){
+                            result.byNodeTypes[key] = byNodeType.searchResult;
+                            if (byNodeType.searchResult && byNodeType.searchResult.total) {
+                                result.isEmpty = false;
+                                searchResultPriority = Math.max(searchResultPriority, byNodeType.searchResultPriority);
+                            }
+                        });
+
+                        result.preferredResult = bySearchResultPriority[searchResultPriority];
+
+                        scope.$broadcast('np.rsearch.search-result', result);
+
+                        element.removeClass('search-request');
+                    }
                 }]
             };
         }]);

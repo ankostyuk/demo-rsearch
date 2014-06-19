@@ -10,6 +10,22 @@
     "Найти": [
       null,
       ""
+    ],
+    "NG_PLURALIZE::COMPANY": [
+      null,
+      "{'one': '{{count|number}} компания', 'few': '{{count|number}} компании', 'many': '{{count|number}} компаний', 'other': '{{count|number}} компании'}"
+    ],
+    "NG_PLURALIZE::INDIVIDUAL": [
+      null,
+      "{'one': '{{count|number}} физическое лицо', 'few': '{{count|number}} физических лица', 'many': '{{count|number}} физических лиц', 'other': '{{count|number}} физического лица'}"
+    ],
+    "NG_PLURALIZE::ADDRESS": [
+      null,
+      "{'one': '{{count|number}} адрес', 'few': '{{count|number}} адреса', 'many': '{{count|number}} адресов', 'other': '{{count|number}} адреса'}"
+    ],
+    "NG_PLURALIZE::PHONE": [
+      null,
+      "{'one': '{{count|number}} телефон', 'few': '{{count|number}} телефона', 'many': '{{count|number}} телефонов', 'other': '{{count|number}} телефона'}"
     ]
   },
   "en": {
@@ -23,6 +39,22 @@
     "Найти": [
       null,
       "Search"
+    ],
+    "NG_PLURALIZE::COMPANY": [
+      null,
+      "{'one': '1 company', 'other': '{{count|number}} companies'}"
+    ],
+    "NG_PLURALIZE::INDIVIDUAL": [
+      null,
+      "{'one': '1 individual', 'other': '{{count|number}} individuals'}"
+    ],
+    "NG_PLURALIZE::ADDRESS": [
+      null,
+      "{'one': '1 address', 'other': '{{count|number}} addresses'}"
+    ],
+    "NG_PLURALIZE::PHONE": [
+      null,
+      "{'one': '1 phone', 'other': '{{count|number}} phones'}"
     ]
   }
 }

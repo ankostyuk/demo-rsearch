@@ -31,7 +31,7 @@ define(function(require) {'use strict';
 
                     //
                     _.extend(scope, {
-                        text: null,
+                        text: 'налпоинтер',//null,
 
                         // TODO
                         searchInputEnter: function(){

@@ -1,5 +1,6 @@
 @import './config.less';
 
+/* global */
 a {
     padding-bottom: 0;
     color: @linkColor;
@@ -28,7 +29,12 @@ a.underline:active {
     border-bottom-color: @linkActiveUnderlineColor;
 }
 
+/* np-rsearch */
+[np-rsearch].search-request [np-rsearch-navigation] .search-result {
+    opacity: 0.75;
+}
 
+/* other */
 .np-rsearch-test {
     margin: 10px 0;
 }
