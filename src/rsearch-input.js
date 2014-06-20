@@ -8,6 +8,7 @@ define(function(require) {'use strict';
                           require('less!./styles/rsearch-input');
     var template        = require('text!./views/rsearch-input.html');
 
+                          require('jquery');
                           require('underscore');
     var i18n            = require('i18n'),
         angular         = require('angular');

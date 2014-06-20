@@ -7,6 +7,8 @@ define(function(require) {'use strict';
     require('less!./style');
 
     //
+                  require('jquery');
+
     var angular = require('angular');
                   require('l10n');
                   require('./app-data');
@@ -21,7 +23,7 @@ define(function(require) {'use strict';
         //
         .constant('npRsearchConfig', {
             resource: {
-                searchUrl: '/rsearch-api/search'
+                searchUrl: '/nkbrelation/api/nodes'
             }
         })
         //

@@ -1,0 +1,15 @@
+<div ng-if="node._type === 'COMPANY'">
+    <h4>{{node.nameshortsort}}</h4>
+</div>
+
+<div ng-if="node._type === 'INDIVIDUAL'">
+    <h4>{{node.name}}</h4>
+</div>
+
+<div ng-if="node._type === 'ADDRESS'">
+    <h4>{{node.value}}</h4>
+</div>
+
+<div ng-if="node._type === 'PHONE'">
+    <h4>{{node.value}}</h4>
+</div>

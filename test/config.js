@@ -17,7 +17,7 @@ root._RESOURCES_CONFIG = {
 
         //'angular-ui-utils':     'test/bower-components/angular-ui-utils/ui-utils',
 
-        //'jquery':               'test/bower-components/jquery/jquery',
+        'jquery':               'test/bower-components/jquery/jquery',
 
         'underscore':           'test/bower-components/underscore/underscore',
         'underscore.string':    'test/bower-components/underscore.string/underscore.string',

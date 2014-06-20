@@ -8,6 +8,7 @@ define(function(require) {'use strict';
                           require('less!./styles/rsearch');
     var template        = require('text!./views/rsearch.html');
 
+                          require('jquery');
                           require('underscore');
     var i18n            = require('i18n'),
         angular         = require('angular');
@@ -15,6 +16,7 @@ define(function(require) {'use strict';
     var submodules = {
         rsearchInput:       require('./rsearch-input'),
         rsearchNavigation:  require('./rsearch-navigation'),
+        rsearchViews:       require('./rsearch-views'),
         rsearchResource:    require('./rsearch-resource'),
         rsearchMeta:        require('./rsearch-meta')
     };
@@ -113,6 +115,9 @@ define(function(require) {'use strict';
 
                         element.removeClass('search-request');
                     }
+
+                    //
+                    search('налпоинтер');
                 }]
             };
         }]);
