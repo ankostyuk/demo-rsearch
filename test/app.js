@@ -41,7 +41,7 @@ define(function(require) {'use strict';
             }
 
             //
-            $rootScope.$on('np.rsearch-input.ready', function(e, element){
+            $rootScope.$on('np-rsearch-input-ready', function(e, element){
                 element.find('input')[0].focus();
             });
         }]);

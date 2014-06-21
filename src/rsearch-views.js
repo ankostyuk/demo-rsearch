@@ -13,11 +13,11 @@ define(function(require) {'use strict';
 
     //
     var templates = {
-        'rsearch-node-simple':              require('text!./views/rsearch-node-simple.html'),
-        'rsearch-node-plain':               require('text!./views/rsearch-node-plain.html'),
-        'rsearch-navigation-breadcrumb':    require('text!./views/rsearch-navigation-breadcrumb.html'),
-        'rsearch-node-list':                require('text!./views/rsearch-node-list.html'),
-        'rsearch-node-form':                require('text!./views/rsearch-node-form.html')
+        'np-rsearch-node-simple':               require('text!./views/rsearch-node-simple.html'),
+        'np-rsearch-node-plain':                require('text!./views/rsearch-node-plain.html'),
+        'np-rsearch-navigation-breadcrumb':     require('text!./views/rsearch-navigation-breadcrumb.html'),
+        'np-rsearch-node-list':                 require('text!./views/rsearch-node-list.html'),
+        'np-rsearch-node-form':                 require('text!./views/rsearch-node-form.html')
     };
 
     return angular.module('np.rsearch-views', [])
@@ -28,43 +28,43 @@ define(function(require) {'use strict';
             });
         }])
         //
-        .directive('rsearchNodeSimple', [function() {
+        .directive('npRsearchNodeSimple', [function() {
             return {
                 restrict: 'A',
                 scope: {
-                    node: '=rsearchNodeSimple'
+                    node: '=npRsearchNodeSimple'
                 },
-                template: templates['rsearch-node-simple'],
+                template: templates['np-rsearch-node-simple'],
                 link: function(scope, element, attrs){
                 }
             };
         }])
         //
-        .directive('rsearchNodePlain', [function() {
+        .directive('npRsearchNodePlain', [function() {
             return {
                 restrict: 'A',
                 scope: {
-                    node: '=rsearchNodePlain'
+                    node: '=npRsearchNodePlain'
                 },
-                template: templates['rsearch-node-plain'],
+                template: templates['np-rsearch-node-plain'],
                 link: function(scope, element, attrs){
                     scope.toggleSelect = function(){
-                        scope.$emit('np.rsearch.node-select', scope.node);
+                        scope.$emit('np-rsearch-node-select', scope.node);
                     };
                 }
             };
         }])
         //
-        .directive('rsearchNavigationBreadcrumb', [function() {
+        .directive('npRsearchNavigationBreadcrumb', [function() {
             return {
                 restrict: 'A',
                 scope: {
-                    breadcrumb: '=rsearchNavigationBreadcrumb'
+                    breadcrumb: '=npRsearchNavigationBreadcrumb'
                 },
-                template: templates['rsearch-navigation-breadcrumb'],
+                template: templates['np-rsearch-navigation-breadcrumb'],
                 link: function(scope, element, attrs){
                     scope.go = function(){
-                        scope.$emit('np.rsearch.navigation-breadcrumb-go', scope.breadcrumb);
+                        scope.$emit('np-rsearch-navigation-breadcrumb-go', scope.breadcrumb);
                     };
                 }
             };
@@ -101,7 +101,7 @@ define(function(require) {'use strict';
             return {
 
                 createNodeListView: function(parent, parentScope) {
-                    var view    = createView('rsearch-node-list', parent, parentScope),
+                    var view    = createView('np-rsearch-node-list', parent, parentScope),
                         scope   = view.scope;
 
                     _.extend(view, {
@@ -114,7 +114,7 @@ define(function(require) {'use strict';
                 },
 
                 createNodeFormView: function(parent, parentScope) {
-                    var view    = createView('rsearch-node-form', parent, parentScope),
+                    var view    = createView('np-rsearch-node-form', parent, parentScope),
                         scope   = view.scope;
 
                     _.extend(view, {

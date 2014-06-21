@@ -49,15 +49,15 @@ define(function(require) {'use strict';
                     });
 
                     //
-                    scope.$on('np.rsearch.search-result', function(e, result){
+                    scope.$on('np-rsearch-search-result', function(e, result){
                         searchResult(result);
                     });
 
-                    scope.$on('np.rsearch.node-select', function(e, node){
+                    scope.$on('np-rsearch-node-select', function(e, node){
                         createNodeForm(node);
                     });
 
-                    scope.$on('np.rsearch.navigation-breadcrumb-go', function(e, breadcrumb){
+                    scope.$on('np-rsearch-navigation-breadcrumb-go', function(e, breadcrumb){
                         goByBreadcrumb(breadcrumb);
                     });
 

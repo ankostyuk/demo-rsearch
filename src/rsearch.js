@@ -53,7 +53,7 @@ define(function(require) {'use strict';
                     });
 
                     //
-                    scope.$on('np.rsearch-input.refresh', function(e, text){
+                    scope.$on('np-rsearch-input-refresh', function(e, text){
                         search(text);
                     });
 
@@ -111,7 +111,7 @@ define(function(require) {'use strict';
 
                         result.preferredResult = bySearchResultPriority[searchResultPriority];
 
-                        scope.$broadcast('np.rsearch.search-result', result);
+                        scope.$broadcast('np-rsearch-search-result', result);
 
                         element.removeClass('search-request');
                     }
