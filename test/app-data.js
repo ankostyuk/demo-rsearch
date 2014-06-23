@@ -2,7 +2,7 @@
 define(function(require) {'use strict';
 
     var angular = require('angular');
-                  require('angular-mocks');
+                  //require('angular-mocks');
 
     return angular.module('app.data', [])
         //

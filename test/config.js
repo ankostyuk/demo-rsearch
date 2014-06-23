@@ -48,7 +48,7 @@ root._RESOURCES_CONFIG = {
         'angular-locale_en': {
             deps: ['angular']
         },
-        'angular-mocks': {
+        'ng-infinite-scroll': {
             deps: ['angular']
         },
 

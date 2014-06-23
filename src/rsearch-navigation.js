@@ -12,8 +12,9 @@ define(function(require) {'use strict';
                           require('underscore');
     var i18n            = require('i18n'),
         angular         = require('angular');
+                          require('ng-infinite-scroll');
 
-    return angular.module('np.rsearch-navigation', [])
+    return angular.module('np.rsearch-navigation', ['infinite-scroll'])
         //
         .run([function(){
             template = i18n.translateTemplate(template);
