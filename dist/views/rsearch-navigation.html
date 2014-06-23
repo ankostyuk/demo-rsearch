@@ -1,0 +1,19 @@
+<div ng-show="searchResult.query">
+    <div class="nav">
+        <div class="search-result-switch" ng-show="searchResult.query">
+            <ul class="inline">
+                <li ng-show="searchResult.isEmpty">${_tr("Не найдено")}</li>
+                <li ng-show="searchResult.byNodeTypes['COMPANY'].total"><a ng-class="{active: activeSearchResult === 'COMPANY'}" ng-click="showSearchResult('COMPANY')"><ng-pluralize count="count = searchResult.byNodeTypes['COMPANY'].total" when="${_tr("NG_PLURALIZE::COMPANY")}"></ng-pluralize></a></li>
+                <li ng-show="searchResult.byNodeTypes['INDIVIDUAL'].total"><a ng-class="{active: activeSearchResult === 'INDIVIDUAL'}" ng-click="showSearchResult('INDIVIDUAL')"><ng-pluralize count="count = searchResult.byNodeTypes['INDIVIDUAL'].total" when="${_tr("NG_PLURALIZE::INDIVIDUAL")}"></ng-pluralize></a></li>
+                <li ng-show="searchResult.byNodeTypes['ADDRESS'].total"><a ng-class="{active: activeSearchResult === 'ADDRESS'}" ng-click="showSearchResult('ADDRESS')"><ng-pluralize count="count = searchResult.byNodeTypes['ADDRESS'].total" when="${_tr("NG_PLURALIZE::ADDRESS")}"></ng-pluralize></a></li>
+                <li ng-show="searchResult.byNodeTypes['PHONE'].total"><a ng-class="{active: activeSearchResult === 'PHONE'}" ng-click="showSearchResult('PHONE')"><ng-pluralize count="count = searchResult.byNodeTypes['PHONE'].total" when="${_tr("NG_PLURALIZE::PHONE")}"></ng-pluralize></a></li>
+            </ul>
+        </div>
+        <div class="breadcrumbs">
+            <ul class="breadcrumb">
+                <li ng-repeat="breadcrumb in breadcrumbs" ng-hide="$last"><span class="divider">/</span><span np-rsearch-navigation-breadcrumb="breadcrumb"></span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="views"></div>
+</div>

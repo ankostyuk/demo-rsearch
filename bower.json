@@ -8,8 +8,8 @@
     "require-css": "0.1.2",
     "require-less": "0.1.2",
     "angular": "1.2.18",
-    "angular-ui-utils": "0.1.*",
-    "underscore": "1.6.x",
+    "ngInfiniteScroll": "1.1.*",
+    "underscore": "1.6.*",
     "underscore.string": "2.3.*",
     "nullpointer-i18n": "git@repo.nkb:nullpointer/i18n-js.git"
   },
@@ -39,9 +39,6 @@
         "angular-locale_en.js"
       ]
     },
-    "angular-ui-utils": {
-      "": "ui-utils.js"
-    },
     "underscore": {
       "": "underscore.js"
     },
@@ -58,7 +55,6 @@
   },
   "private": true,
   "resolutions": {
-    "underscore": "1.6.x",
-    "angular": ">= 1.0.2"
+    "underscore": "1.6.*"
   }
 }

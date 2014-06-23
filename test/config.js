@@ -14,8 +14,7 @@ root._RESOURCES_CONFIG = {
         'angular-locale_ru':    'test/bower-components/angular-i18n/angular-locale_ru',
         'angular-locale_en':    'test/bower-components/angular-i18n/angular-locale_en',
         'angular-mocks':        'test/bower-components/angular-mocks/angular-mocks',
-
-        //'angular-ui-utils':     'test/bower-components/angular-ui-utils/ui-utils',
+        'ng-infinite-scroll':   'test/bower-components/ngInfiniteScroll/ng-infinite-scroll',
 
         'jquery':               'test/bower-components/jquery/jquery',
 
@@ -52,10 +51,6 @@ root._RESOURCES_CONFIG = {
         'angular-mocks': {
             deps: ['angular']
         },
-
-//        'angular-ui-utils': {
-//            deps: ['angular']
-//        },
 
         'underscore': {
             exports: '_',
