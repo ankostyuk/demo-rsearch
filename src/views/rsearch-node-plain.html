@@ -1,17 +1,17 @@
-<div ng-click="toggleSelect()">
+<div node-id="{{node._id}}" ng-click="toggleSelect()">
     <div ng-if="node._type === 'COMPANY'">
-        {{node.nameshortsort}}
+        {{node.__i}} {{node.nameshortsort}}
     </div>
 
     <div ng-if="node._type === 'INDIVIDUAL'">
-        {{node.name}}
+        {{node.__i}} {{node.name}}
     </div>
 
     <div ng-if="node._type === 'ADDRESS'">
-        {{node.value}}
+        {{node.__i}} {{node.value}}
     </div>
 
     <div ng-if="node._type === 'PHONE'">
-        {{node.value}}
+        {{node.__i}} {{node.value}}
     </div>
 </div>

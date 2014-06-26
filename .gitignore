@@ -9,6 +9,7 @@
 *.versionsBackup
 *.orig
 
+tmp
 .tmp*
 
 node_modules

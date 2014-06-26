@@ -12,15 +12,14 @@ define(function(require) {'use strict';
                           require('underscore');
     var i18n            = require('i18n'),
         angular         = require('angular');
-                          require('ng-infinite-scroll');
 
-    return angular.module('np.rsearch-navigation', ['infinite-scroll'])
+    return angular.module('np.rsearch-navigation', [])
         //
         .run([function(){
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('npRsearchNavigation', ['$log', 'npRsearchViews', 'npRsearchMetaHelper', function($log, npRsearchViews, npRsearchMetaHelper){
+        .directive('npRsearchNavigation', ['$log', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', function($log, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource){
             return {
                 restrict: 'A',
                 template: template,
@@ -32,102 +31,200 @@ define(function(require) {'use strict';
                         attrs   = $attrs;
 
                     //
-                    var viewsElement = element.find('.views');
+                    var viewsElement    = element.find('.views'),
+                        nodeListView    = npRsearchViews.createNodeListView(viewsElement, scope),
+                        nodeFormView    = npRsearchViews.createNodeFormView(viewsElement, scope);
 
                     //
-                    var searchResultByNodeTypeViews = {};
+                    var search = {
+                        query: null, //'НКБ',//Костюк Андрей Григорьевич',
+                        total: null,
+                        activeResult: null,
+                        byNodeTypes: {},
+                        getTotalByNodeType: getTotalByNodeType,
+                        showResult: showSearchResult
+                    };
 
-                    _.each(npRsearchMetaHelper.getNodeTypes(), function(nodeType, key){
-                        searchResultByNodeTypeViews[key] = npRsearchViews.createNodeListView(viewsElement, scope);
+                    _.each(npRsearchMetaHelper.getNodeTypes(), function(data, nodeType){
+                        search.byNodeTypes[nodeType] = {
+                              nodeType: nodeType,
+                              resultPriority: data.searchResultPriority,
+                              pageConfig: {
+                                  page: 0,
+                                  pageSize: 20
+                              },
+                              request: null,
+                              result: null,
+                              nodeList: null
+                          };
                     });
 
                     //
                     _.extend(scope, {
-                        searchResult: null,
-                        activeSearchResult: null,
-                        showSearchResult: showSearchResult,
-                        breadcrumbs: []
+                        search: search,
+                        breadcrumbs: [],
+                        isBreadcrumbs: isBreadcrumbs
                     });
 
-                    //
-                    scope.$on('np-rsearch-search-result', function(e, result){
-                        searchResult(result);
+                    $rootScope.$on('np-rsearch-input-refresh', function(e, text){
+                        doSearch(text);
                     });
 
-                    scope.$on('np-rsearch-node-select', function(e, node){
-                        createNodeForm(node);
-                    });
+                    /*
+                     * search
+                     *
+                     */
+                    function doSearch(query) {
+                        search.query = query;
+                        search.total = null;
 
-                    scope.$on('np-rsearch-navigation-breadcrumb-go', function(e, breadcrumb){
-                        goByBreadcrumb(breadcrumb);
-                    });
+                        clearBreadcrumbs();
 
-                    function searchResult(result) {
-                        $log.info('result', result);
-                        scope.searchResult = result;
-                        showSearchResult(result.preferredResult);
-                    }
-
-                    function showSearchResult(nodeType) {
-                        scope.activeSearchResult = nodeType;
-
-                        hideViews();
-
-                        if (!nodeType) {
+                        if (_.isBlank(search.query)) {
                             return;
                         }
 
-                        //
-                        var list = scope.searchResult.byNodeTypes[nodeType] ? scope.searchResult.byNodeTypes[nodeType].list : null,
-                            view = searchResultByNodeTypeViews[nodeType];
+                        var searchPromises = [];
 
-                        view.setList(list);
-                        view.element.show();
+                        _.each(search.byNodeTypes, function(byNodeType){
+                            byNodeType.pageConfig.page = 1;
+                            byNodeType.nodeList = null;
+                            searchRequest(byNodeType);
+                            searchPromises.push(byNodeType.request.promise);
+                        });
 
-                        //
-                        clearBreadcrumbs();
-                        setSearchBreadcrumb(view);
+                        $q.all(searchPromises)['finally'](checkSearchResult);
                     }
 
-                    function createNodeForm(node) {
-                        hideViews();
-                        var view = npRsearchViews.createNodeFormView(viewsElement, scope);
-                        view.setNode(node);
-                        pushNodeFormBreadcrumb(node, view);
+                    function searchRequest(byNodeType) {
+                        byNodeType.request = npRsearchResource.search({
+                            q: search.query,
+                            nodeType: byNodeType.nodeType,
+                            pageConfig: byNodeType.pageConfig,
+                            previousRequest: byNodeType.request
+                        });
+
+                        byNodeType.request.promise
+                            .success(function(data, status){
+                                _.each(data.list, function(node, i){
+                                    node.__i = 1 + i + data.pageSize * (data.pageNumber - 1);
+                                });
+
+                                complete(data);
+                            })
+                            .error(function(data, status){
+                                complete(null);
+                            });
+
+                        function complete(result) {
+                            byNodeType.result = result;
+                        }
                     }
 
-                    function hideViews() {
-                        viewsElement.children().hide();
+                    function checkSearchResult() {
+                        var resultPriority  = 0,
+                            activeResult;
+
+                        search.total = 0;
+
+                        _.each(search.byNodeTypes, function(byNodeType, nodeType){
+                            var result = byNodeType.result;
+
+                            if (result) {
+                                search.total += result.total;
+
+                                if (result.total && byNodeType.resultPriority > resultPriority) {
+                                    resultPriority = byNodeType.resultPriority;
+                                    activeResult = nodeType;
+                                }
+
+                                byNodeType.nodeList = result.list ? result.list : [];
+                            }
+                        });
+
+                        if (activeResult) {
+                            showSearchResult(activeResult);
+                        } else {
+                            nodeListView.clear();
+                        }
                     }
 
-                    function showView(view) {
-                        view.element.show();
+                    function getTotalByNodeType(nodeType) {
+                        var result = search.byNodeTypes[nodeType].result;
+                        return result ? result.total : null;
+                    }
+
+                    function noMore(result) {
+                        return result ? result.pageNumber >= result.pageCount : null;
+                    }
+
+                    function showSearchResult(nodeType) {
+                        var byNodeType = search.byNodeTypes[nodeType];
+
+                        search.activeResult = nodeType;
+
+                        setSearchBreadcrumb(nodeType);
+
+                        nodeListView.reset(byNodeType.nodeList, noMore(byNodeType.result), function(callback){
+                            byNodeType.pageConfig.page++;
+
+                            searchRequest(byNodeType);
+
+                            byNodeType.request.promise['finally'](function(){
+                                _.each(byNodeType.result.list, function(node){
+                                    byNodeType.nodeList.push(node);
+                                });
+                                callback(noMore(byNodeType.result));
+                            });
+                        });
                     }
 
                     /*
                      * breadcrumbs
                      *
                      */
-                    function setSearchBreadcrumb(view) {
+                    $rootScope.$on('np-rsearch-node-select', function(e, node){
+                        setNodeFormBreadcrumb(node, element);
+                    });
+
+                    $rootScope.$on('np-rsearch-navigation-breadcrumb-go', function(e, breadcrumb){
+                        goByBreadcrumb(breadcrumb);
+                    });
+
+                    function isBreadcrumbs() {
+                        return scope.breadcrumbs.length > 1;
+                    }
+
+                    function setNodeFormBreadcrumb(node) {
+                        nodeFormView.setNode(node);
+                        nodeFormView.show(node);
+                        pushNodeFormBreadcrumb(node);
+                    }
+
+                    function setSearchBreadcrumb(nodeType) {
+                        clearBreadcrumbs();
+
                         var index = 0;
 
                         scope.breadcrumbs[index] = {
                             index: index,
                             type: 'SEARCH',
-                            view: view,
                             data: {
-                                query: scope.searchResult.query
+                                nodeType: nodeType
                             }
                         };
                     }
 
-                    function pushNodeFormBreadcrumb(node, view) {
+                    function pushNodeFormBreadcrumb(node) {
                         var index = _.size(scope.breadcrumbs);
+
+                        if (index === 1) {
+                            nodeListView.clear();
+                        }
 
                         scope.breadcrumbs[index] = {
                             index: index,
                             type: 'NODE_FORM',
-                            view: view,
                             data: {
                                 node: node
                             }
@@ -135,22 +232,37 @@ define(function(require) {'use strict';
                     }
 
                     function goByBreadcrumb(breadcrumb) {
-                        clearBreadcrumbs(breadcrumb.index + 1);
-                        hideViews();
-                        showView(breadcrumb.view);
+                        $log.info('goByBreadcrumb', breadcrumb);
+
+                        var index           = breadcrumb.index + 1,
+                            nextBreadcrumb  = scope.breadcrumbs[index];
+
+                        clearBreadcrumbs(index);
+
+                        if (breadcrumb.type === 'SEARCH') {
+                            showSearchResult(breadcrumb.data.nodeType);
+
+                            if (nextBreadcrumb && nextBreadcrumb.type === 'NODE_FORM') {
+                                // TODO Не прокручивать до ноды,
+                                // а прокрутить до сохраненного положения прокрутки
+                                // и выделить ноду?
+                                nodeListView.scrollToNode(nextBreadcrumb.data.node);
+                            }
+                        }
                     }
 
                     function clearBreadcrumbs(fromIndex) {
-                        fromIndex = fromIndex || 0;
+                        $log.info('clearBreadcrumbs', fromIndex);
 
-                        // не очищать view в первом breadcrumb,
-                        // т.к. данный view статический -- searchResultByNodeTypeViews
-                        for (var i = fromIndex > 0 ? fromIndex : 1; i < _.size(scope.breadcrumbs); i++) {
-                            scope.breadcrumbs[i].view.remove();
-                        }
+                        nodeFormView.hide();
 
-                        scope.breadcrumbs = scope.breadcrumbs.slice(0, fromIndex);
+                        scope.breadcrumbs = scope.breadcrumbs.slice(0, fromIndex || 0);
                     }
+
+                    //
+                    $timeout(function(){
+                        doSearch('1');
+                    });
                 }]
             };
         }]);

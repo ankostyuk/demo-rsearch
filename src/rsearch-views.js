@@ -9,7 +9,7 @@ define(function(require) {'use strict';
                           require('underscore');
     var i18n            = require('i18n'),
         angular         = require('angular');
-
+                          require('ng-infinite-scroll');
 
     //
     var templates = {
@@ -20,7 +20,7 @@ define(function(require) {'use strict';
         'np-rsearch-node-form':                 require('text!./views/rsearch-node-form.html')
     };
 
-    return angular.module('np.rsearch-views', [])
+    return angular.module('np.rsearch-views', ['infinite-scroll'])
         //
         .run([function(){
             _.each(templates, function(template, name){
@@ -40,7 +40,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .directive('npRsearchNodePlain', [function() {
+        .directive('npRsearchNodePlain', ['$rootScope', function($rootScope) {
             return {
                 restrict: 'A',
                 scope: {
@@ -49,13 +49,13 @@ define(function(require) {'use strict';
                 template: templates['np-rsearch-node-plain'],
                 link: function(scope, element, attrs){
                     scope.toggleSelect = function(){
-                        scope.$emit('np-rsearch-node-select', scope.node);
+                        $rootScope.$emit('np-rsearch-node-select', scope.node, element);
                     };
                 }
             };
         }])
         //
-        .directive('npRsearchNavigationBreadcrumb', [function() {
+        .directive('npRsearchNavigationBreadcrumb', ['$rootScope', function($rootScope) {
             return {
                 restrict: 'A',
                 scope: {
@@ -64,13 +64,16 @@ define(function(require) {'use strict';
                 template: templates['np-rsearch-navigation-breadcrumb'],
                 link: function(scope, element, attrs){
                     scope.go = function(){
-                        scope.$emit('np-rsearch-navigation-breadcrumb-go', scope.breadcrumb);
+                        $rootScope.$emit('np-rsearch-navigation-breadcrumb-go', scope.breadcrumb);
                     };
                 }
             };
         }])
         //
-        .factory('npRsearchViews', ['$log', '$compile', 'npRsearchConfig', function($log, $compile, npRsearchConfig){
+        .factory('npRsearchViews', ['$log', '$compile', '$timeout', '$window', 'npRsearchConfig', function($log, $compile, $timeout, $window, npRsearchConfig){
+
+            var windowElement   = angular.element($window),
+                htmlbodyElement = $('html, body');
 
             function createView(name, parent, parentScope, scopeData) {
                 var scope = parentScope.$new(true);
@@ -93,6 +96,12 @@ define(function(require) {'use strict';
                     remove: function(){
                         element.remove();
                         scope.$destroy();
+                    },
+                    show: function(){
+                        element.show();
+                    },
+                    hide: function(){
+                        element.hide();
                     }
                 };
             }
@@ -100,15 +109,69 @@ define(function(require) {'use strict';
             //
             return {
 
-                createNodeListView: function(parent, parentScope) {
-                    var view    = createView('np-rsearch-node-list', parent, parentScope),
-                        scope   = view.scope;
+                createNodeListView: function(parent, parentScope, options) {
+                    var view                = createView('np-rsearch-node-list', parent, parentScope),
+                        scope               = view.scope,
+                        internalDisabled    = false,
+                        noNextPage          = false,
+                        nextPageHandler     = null;
 
                     _.extend(view, {
-                        setList: function(nodeList){
+                        reset: function(nodeList, noMore, pageHandler){
                             scope.nodeList = nodeList;
+
+                            internalDisabled = false;
+                            noNextPage = noMore;
+                            nextPageHandler = pageHandler;
+
+                            refresh();
+                        },
+                        clear: function(){
+                            scope.nodeList = null;
+
+                            internalDisabled = false;
+                            noNextPage = false;
+                            nextPageHandler = null;
+                        },
+                        scrollToNode: function(node){
+                            $timeout(function(){
+                                var nodeElement = view.element.find('[node-id="' + node._id + '"]');
+
+                                if (nodeElement.length !== 1) {
+                                    return;
+                                }
+
+                                htmlbodyElement.animate({
+                                    scrollTop: nodeElement.offset().top
+                                }, 200);
+                            });
                         }
                     });
+
+                    _.extend(scope, {
+                        nodeList: null,
+                        pager: {
+                            nextPage: function(){
+                                if (!isDisabled() && nextPageHandler) {
+                                    internalDisabled = true;
+
+                                    nextPageHandler(function(noMore){
+                                        internalDisabled = false;
+                                        noNextPage = noMore;
+                                    });
+                                }
+                            },
+                            isDisabled: isDisabled
+                        }
+                    });
+
+                    function isDisabled() {
+                        return internalDisabled || noNextPage || !nextPageHandler;
+                    }
+
+                    function refresh() {
+                        //windowElement.trigger('scroll');
+                    }
 
                     return view;
                 },

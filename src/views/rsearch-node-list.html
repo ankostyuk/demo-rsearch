@@ -1,1 +1,3 @@
-<div ng-repeat="node in nodeList" np-rsearch-node-plain="node"></div>
+<div infinite-scroll='pager.nextPage()' infinite-scroll-disabled='pager.isDisabled()' infinite-scroll-distance='0'>
+    <div ng-repeat="node in nodeList" np-rsearch-node-plain="node"></div>
+</div>

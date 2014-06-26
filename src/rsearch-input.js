@@ -19,7 +19,7 @@ define(function(require) {'use strict';
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('npRsearchInput', ['$log', function($log){
+        .directive('npRsearchInput', ['$log', '$rootScope', function($log, $rootScope){
             return {
                 restrict: 'A',
                 template: template,
@@ -54,11 +54,11 @@ define(function(require) {'use strict';
 
                     //
                     function fireRefresh() {
-                        scope.$emit('np-rsearch-input-refresh', scope.text);
+                        $rootScope.$emit('np-rsearch-input-refresh', scope.text);
                     }
 
                     //
-                    scope.$emit('np-rsearch-input-ready', element);
+                    $rootScope.$emit('np-rsearch-input-ready', element);
                 }]
             };
         }]);

@@ -33,9 +33,15 @@ a.underline:active {
 [np-rsearch].search-request [np-rsearch-navigation] .search-result-switch {
     opacity: 0.75;
 }
-[np-rsearch] [np-rsearch-navigation] .breadcrumbs .divider {
+
+[np-rsearch] [np-rsearch-navigation] .breadcrumb {
+    padding: 0;
+    background-color: transparent;
+}
+[np-rsearch] [np-rsearch-navigation] .breadcrumb .divider {
     padding-right: 0;
 }
+
 [np-rsearch] [np-rsearch-node-plain] {
     width: 700px;
     margin-bottom: 5px;
@@ -53,8 +59,4 @@ a.underline:active {
 /* other */
 .np-rsearch-test {
     margin: 10px 0;
-}
-
-.np-rsearch-test input[type="text"] {
-    height: 30px; /* !!! */
 }

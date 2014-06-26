@@ -26,6 +26,9 @@ define(function(require) {'use strict';
                 searchUrl: '/nkbrelation/api/nodes'
             }
         })
+        .config(function($logProvider){
+            $logProvider.debugEnabled(false);
+        })
         //
         .config(function($provide) {
             if (mock) {
@@ -33,7 +36,7 @@ define(function(require) {'use strict';
             }
         })
         //
-        .run(['$log', '$rootScope', '$window', '$document', 'dataMock', function($log, $rootScope, $window, $document, dataMock){
+        .run(['$log', '$timeout', '$rootScope', '$window', '$document', 'dataMock', function($log, $timeout, $rootScope, $window, $document, dataMock){
             $log.log('app...');
 
             if (mock) {

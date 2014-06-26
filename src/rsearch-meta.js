@@ -13,10 +13,10 @@ define(function(require) {'use strict';
             nodes: {
                 types: {
                     'COMPANY': {
-                        searchResultPriority: 5
+                        searchResultPriority: 4
                     },
                     'INDIVIDUAL': {
-                        searchResultPriority: 4
+                        searchResultPriority: 3
                     },
                     'ADDRESS': {
                         searchResultPriority: 2

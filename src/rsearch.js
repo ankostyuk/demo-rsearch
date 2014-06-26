@@ -27,7 +27,7 @@ define(function(require) {'use strict';
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('npRsearch', ['$log', '$q', 'npRsearchResource', 'npRsearchMetaHelper', function($log, $q, npRsearchResource, npRsearchMetaHelper){
+        .directive('npRsearch', ['$log', '$q', '$rootScope', 'npRsearchResource', 'npRsearchMetaHelper', function($log, $q, $rootScope, npRsearchResource, npRsearchMetaHelper){
             return {
                 restrict: 'A',
                 template: template,
@@ -53,8 +53,8 @@ define(function(require) {'use strict';
                     });
 
                     //
-                    scope.$on('np-rsearch-input-refresh', function(e, text){
-                        search(text);
+                    $rootScope.$on('np-rsearch-input-refresh', function(e, text){
+                        //search(text);
                     });
 
                     function search(query) {
@@ -111,13 +111,13 @@ define(function(require) {'use strict';
 
                         result.preferredResult = bySearchResultPriority[searchResultPriority];
 
-                        scope.$broadcast('np-rsearch-search-result', result);
+                        $rootScope.$emit('np-rsearch-search-result', result);
 
                         element.removeClass('search-request');
                     }
 
                     //
-                    search('налпоинтер');
+                    //search('1');
                 }]
             };
         }]);
