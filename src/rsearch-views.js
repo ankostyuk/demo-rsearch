@@ -15,6 +15,7 @@ define(function(require) {'use strict';
     var templates = {
         'np-rsearch-node-simple':               require('text!./views/rsearch-node-simple.html'),
         'np-rsearch-node-plain':                require('text!./views/rsearch-node-plain.html'),
+        'np-rsearch-node-relations-counts':     require('text!./views/rsearch-node-relations-counts.html'),
         'np-rsearch-navigation-breadcrumb':     require('text!./views/rsearch-navigation-breadcrumb.html'),
         'np-rsearch-node-list':                 require('text!./views/rsearch-node-list.html'),
         'np-rsearch-node-form':                 require('text!./views/rsearch-node-form.html')
@@ -50,6 +51,19 @@ define(function(require) {'use strict';
                 link: function(scope, element, attrs){
                     scope.toggleSelect = function(){
                         $rootScope.$emit('np-rsearch-node-select', scope.node, element);
+                    };
+                }
+            };
+        }])
+        //
+        .directive('npRsearchNodeRelationsCounts', ['$rootScope', function($rootScope) {
+            return {
+                restrict: 'A',
+                scope: false, // require <node>
+                template: templates['np-rsearch-node-relations-counts'],
+                link: function(scope, element, attrs){
+                    scope.countClick = function(relationType){
+                        $rootScope.$emit('np-rsearch-node-relations-counts-count-click', relationType);
                     };
                 }
             };
