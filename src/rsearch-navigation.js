@@ -45,6 +45,8 @@ define(function(require) {'use strict';
                         showResult: showSearchResult
                     };
 
+                    var byRelationsStore = {};
+
                     _.each(npRsearchMetaHelper.getNodeTypes(), function(data, nodeType){
                         search.byNodeTypes[nodeType] = {
                               nodeType: nodeType,
@@ -66,14 +68,30 @@ define(function(require) {'use strict';
                         isBreadcrumbs: isBreadcrumbs
                     });
 
-                    $rootScope.$on('np-rsearch-input-refresh', function(e, text){
-                        doSearch(text);
-                    });
+                    // utils
+                    function setNodeList(object) {
+                        object.nodeList = object.result.list ? object.result.list : [];
+                    }
+
+                    function pushNodeList(object, callback) {
+                        if (object.result) {
+                            _.each(object.result.list, function(node){
+                                object.nodeList.push(node);
+                            });
+                            callback(noMore(object.result));
+                        } else {
+                            callback(true);
+                        }
+                    }
 
                     /*
                      * search
                      *
                      */
+                    $rootScope.$on('np-rsearch-input-refresh', function(e, text){
+                        doSearch(text);
+                    });
+
                     function doSearch(query) {
                         search.query = query;
                         search.total = null;
@@ -106,10 +124,7 @@ define(function(require) {'use strict';
 
                         byNodeType.request.promise
                             .success(function(data, status){
-                                _.each(data.list, function(node, i){
-                                    node.__i = 1 + i + data.pageSize * (data.pageNumber - 1);
-                                });
-
+                                testNodeListProcess(data);
                                 complete(data);
                             })
                             .error(function(data, status){
@@ -138,7 +153,7 @@ define(function(require) {'use strict';
                                     activeResult = nodeType;
                                 }
 
-                                byNodeType.nodeList = result.list ? result.list : [];
+                                setNodeList(byNodeType);
                             }
                         });
 
@@ -163,6 +178,8 @@ define(function(require) {'use strict';
 
                         search.activeResult = nodeType;
 
+                        nodeFormView.hide();
+
                         setSearchBreadcrumb(nodeType);
 
                         nodeListView.reset(byNodeType.nodeList, noMore(byNodeType.result), function(callback){
@@ -171,34 +188,112 @@ define(function(require) {'use strict';
                             searchRequest(byNodeType);
 
                             byNodeType.request.promise['finally'](function(){
-                                _.each(byNodeType.result.list, function(node){
-                                    byNodeType.nodeList.push(node);
-                                });
-                                callback(noMore(byNodeType.result));
+                                pushNodeList(byNodeType, callback);
                             });
                         });
+                    }
+
+                    /*
+                     * node form
+                     *
+                     */
+                    $rootScope.$on('np-rsearch-node-select', function(e, node){
+                        showNodeForm(node, element);
+                    });
+
+                    function showNodeForm(node) {
+                        nodeListView.clear();
+
+                        nodeFormView.setNode(node);
+                        nodeFormView.show(node);
+
+                        pushNodeFormBreadcrumb(node);
+                    }
+
+                    /*
+                     * relations
+                     *
+                     */
+                    $rootScope.$on('np-rsearch-node-relations-counts-count-click', function(e, node, direction, relationType){
+                        showRelations(node, direction === 'in' ? 'parents' : 'children', relationType);
+                    });
+
+                    function relationsRequest(byRelations) {
+                        byRelations.request = npRsearchResource.relations({
+                            node: byRelations.node,
+                            direction: byRelations.direction,
+                            relationType: byRelations.relationType,
+                            pageConfig: byRelations.pageConfig,
+                            previousRequest: byRelations.request
+                        });
+
+                        byRelations.request.promise
+                            .success(function(data, status){
+                                testNodeListProcess(data);
+                                complete(data);
+                            })
+                            .error(function(data, status){
+                                complete(null);
+                            });
+
+                        function complete(result) {
+                            byRelations.result = result;
+                        }
+                    }
+
+                    function showRelations(node, direction, relationType, key) {
+                        nodeFormView.hide();
+
+                        var index       = pushRelationsBreadcrumb(node, direction, relationType),
+                            byRelations = byRelationsStore[key];
+
+                        if (byRelations) {
+                            resetNodeListView();
+                        } else {
+                            byRelations = byRelationsStore[index] = {
+                                node: node,
+                                direction: direction,
+                                relationType: relationType,
+                                pageConfig: {
+                                    page: 1,
+                                    pageSize: 20
+                                },
+                                request: null,
+                                result: null,
+                                nodeList: null
+                            };
+
+                            relationsRequest(byRelations);
+
+                            byRelations.request.promise['finally'](function(){
+                                setNodeList(byRelations);
+                                resetNodeListView();
+                            });
+                        }
+
+                        function resetNodeListView() {
+                            nodeListView.reset(byRelations.nodeList, noMore(byRelations.result), function(callback){
+                                byRelations.pageConfig.page++;
+
+                                relationsRequest(byRelations);
+
+                                byRelations.request.promise['finally'](function(){
+                                    pushNodeList(byRelations, callback);
+                                });
+                            });
+                        }
                     }
 
                     /*
                      * breadcrumbs
                      *
                      */
-                    $rootScope.$on('np-rsearch-node-select', function(e, node){
-                        setNodeFormBreadcrumb(node, element);
-                    });
-
                     $rootScope.$on('np-rsearch-navigation-breadcrumb-go', function(e, breadcrumb){
                         goByBreadcrumb(breadcrumb);
                     });
 
                     function isBreadcrumbs() {
                         return scope.breadcrumbs.length > 1;
-                    }
-
-                    function setNodeFormBreadcrumb(node) {
-                        nodeFormView.setNode(node);
-                        nodeFormView.show(node);
-                        pushNodeFormBreadcrumb(node);
                     }
 
                     function setSearchBreadcrumb(nodeType) {
@@ -213,14 +308,12 @@ define(function(require) {'use strict';
                                 nodeType: nodeType
                             }
                         };
+
+                        return index;
                     }
 
                     function pushNodeFormBreadcrumb(node) {
                         var index = _.size(scope.breadcrumbs);
-
-                        if (index === 1) {
-                            nodeListView.clear();
-                        }
 
                         scope.breadcrumbs[index] = {
                             index: index,
@@ -229,19 +322,51 @@ define(function(require) {'use strict';
                                 node: node
                             }
                         };
+
+                        return index;
+                    }
+
+                    function pushRelationsBreadcrumb(node, direction, relationType) {
+                        var index = _.size(scope.breadcrumbs);
+
+                        nodeFormView.hide();
+
+                        scope.breadcrumbs[index] = {
+                            index: index,
+                            type: 'NODE_RELATIONS',
+                            data: {
+                                node: node,
+                                direction: direction,
+                                relationType: relationType
+                            }
+                        };
+
+                        return index;
                     }
 
                     function goByBreadcrumb(breadcrumb) {
-                        $log.info('goByBreadcrumb', breadcrumb);
+                        if (isLastBreadcrumb(breadcrumb)) {
+                            return;
+                        }
 
-                        var index           = breadcrumb.index + 1,
-                            nextBreadcrumb  = scope.breadcrumbs[index];
+                        var index           = breadcrumb.index,
+                            nextBreadcrumb  = scope.breadcrumbs[index + 1];
 
                         clearBreadcrumbs(index);
 
                         if (breadcrumb.type === 'SEARCH') {
                             showSearchResult(breadcrumb.data.nodeType);
+                            highlightNodeInList();
+                        } else
+                        if (breadcrumb.type === 'NODE_FORM') {
+                            showNodeForm(breadcrumb.data.node);
+                        } else
+                        if (breadcrumb.type === 'NODE_RELATIONS') {
+                            showRelations(breadcrumb.data.node, breadcrumb.data.direction, breadcrumb.data.relationType, index);
+                            highlightNodeInList();
+                        }
 
+                        function highlightNodeInList() {
                             if (nextBreadcrumb && nextBreadcrumb.type === 'NODE_FORM') {
                                 // TODO Не прокручивать до ноды,
                                 // а прокрутить до сохраненного положения прокрутки
@@ -251,15 +376,26 @@ define(function(require) {'use strict';
                         }
                     }
 
-                    function clearBreadcrumbs(fromIndex) {
-                        $log.info('clearBreadcrumbs', fromIndex);
+                    function clearBreadcrumbs(toIndex) {
+                        for (var i = toIndex + 1; i < _.size(scope.breadcrumbs); i++) {
+                            delete byRelationsStore[i];
+                        }
 
-                        nodeFormView.hide();
-
-                        scope.breadcrumbs = scope.breadcrumbs.slice(0, fromIndex || 0);
+                        scope.breadcrumbs = scope.breadcrumbs.slice(0, toIndex || 0);
                     }
 
+                    function isLastBreadcrumb(breadcrumb) {
+                        return breadcrumb.index === _.size(scope.breadcrumbs) - 1;
+                    }
+
+
                     //
+                    function testNodeListProcess(data) {
+                        _.each(data.list, function(node, i){
+                            node.__i = 1 + i + data.pageSize * (data.pageNumber - 1);
+                        });
+                    }
+
                     $timeout(function(){
                         doSearch('1');
                     });

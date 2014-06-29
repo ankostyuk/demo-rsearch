@@ -23,7 +23,8 @@ define(function(require) {'use strict';
         //
         .constant('npRsearchConfig', {
             resource: {
-                searchUrl: '/nkbrelation/api/nodes'
+                searchUrl: '/nkbrelation/api/nodes',
+                relationsUrl: '/nkbrelation/api/node'
             }
         })
         .config(function($logProvider){

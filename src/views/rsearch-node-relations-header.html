@@ -1,0 +1,34 @@
+<span ng-if="relationsData.node._type === 'COMPANY'">
+    <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'FOUNDER_INDIVIDUAL'">${_tr("Учредители физические лица")}</span>
+    <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'FOUNDER_COMPANY'">${_tr("Учредители компании")}</span>
+    <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'FOUNDER_COMPANY'">${_tr("Учреждённые компании")}</span>
+
+    <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'EXECUTIVE_INDIVIDUAL'">${_tr("Руководители")}</span>
+    <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'EXECUTIVE_COMPANY'">${_tr("Управляющие компании")}</span>
+
+    <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'HEAD_COMPANY'">${_tr("Голвные компании")}</span>
+    <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'HEAD_COMPANY'">${_tr("Филиалы")}</span>
+    <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'EXECUTIVE_COMPANY'">${_tr("Руководимые компании")}</span>
+
+    <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'PREDECESSOR_COMPANY'">${_tr("Предшественники")}</span>
+    <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'PREDECESSOR_COMPANY'">${_tr("Правоприемники")}</span>
+
+    <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'REGISTER_HOLDER'">${_tr("Реестродержатели")}</span>
+    <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'REGISTER_HOLDER'">${_tr("Эмитенты")}</span>
+
+    <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'ADDRESS'">${_tr("Адреса")}</span>
+    <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'PHONE'">${_tr("Телефоны")}</span>
+</span>
+
+<span ng-if="relationsData.node._type === 'INDIVIDUAL'">
+    <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'FOUNDER_INDIVIDUAL'">${_tr("Учреждённые компании")}</span>
+    <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'EXECUTIVE_INDIVIDUAL'">${_tr("Руководимые компании")}</span>
+</span>
+
+<span ng-if="relationsData.node._type === 'ADDRESS'">
+    <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'ADDRESS'">${_tr("Компании")}</span>
+</span>
+
+<span ng-if="relationsData.node._type === 'PHONE'">
+    <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'PHONE'">${_tr("Компании")}</span>
+</span>

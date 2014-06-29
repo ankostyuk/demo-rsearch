@@ -16,6 +16,7 @@ define(function(require) {'use strict';
         'np-rsearch-node-simple':               require('text!./views/rsearch-node-simple.html'),
         'np-rsearch-node-plain':                require('text!./views/rsearch-node-plain.html'),
         'np-rsearch-node-relations-counts':     require('text!./views/rsearch-node-relations-counts.html'),
+        'np-rsearch-node-relations-header':     require('text!./views/rsearch-node-relations-header.html'),
         'np-rsearch-navigation-breadcrumb':     require('text!./views/rsearch-navigation-breadcrumb.html'),
         'np-rsearch-node-list':                 require('text!./views/rsearch-node-list.html'),
         'np-rsearch-node-form':                 require('text!./views/rsearch-node-form.html')
@@ -62,9 +63,21 @@ define(function(require) {'use strict';
                 scope: false, // require <node>
                 template: templates['np-rsearch-node-relations-counts'],
                 link: function(scope, element, attrs){
-                    scope.countClick = function(relationType){
-                        $rootScope.$emit('np-rsearch-node-relations-counts-count-click', relationType);
+                    scope.countClick = function(node, direction, relationType){
+                        $rootScope.$emit('np-rsearch-node-relations-counts-count-click', node, direction, relationType);
                     };
+                }
+            };
+        }])
+        //
+        .directive('npRsearchNodeRelationsHeader', [function() {
+            return {
+                restrict: 'A',
+                scope: {
+                    relationsData: '=npRsearchNodeRelationsHeader'
+                },
+                template: templates['np-rsearch-node-relations-header'],
+                link: function(scope, element, attrs){
                 }
             };
         }])
@@ -73,7 +86,8 @@ define(function(require) {'use strict';
             return {
                 restrict: 'A',
                 scope: {
-                    breadcrumb: '=npRsearchNavigationBreadcrumb'
+                    breadcrumb: '=npRsearchNavigationBreadcrumb',
+                    last: '=npRsearchNavigationBreadcrumbLast'
                 },
                 template: templates['np-rsearch-navigation-breadcrumb'],
                 link: function(scope, element, attrs){

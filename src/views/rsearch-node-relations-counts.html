@@ -1,42 +1,42 @@
 <div ng-if="node._type === 'COMPANY'">
     <ul class="inline">
-        <li ng-show="node._info.in['FOUNDER_INDIVIDUAL']"><a ng-click="countClick('FOUNDER_INDIVIDUAL')"><ng-pluralize count="count = node._info.in['FOUNDER_INDIVIDUAL']" when="${_tr("NG_PLURALIZE::FOUNDER_INDIVIDUAL")}"></ng-pluralize></a></li>
-        <li ng-show="node._info.in['FOUNDER_COMPANY']"><a ng-click="countClick('FOUNDER_COMPANY')"><ng-pluralize count="count = node._info.in['FOUNDER_COMPANY']" when="${_tr("NG_PLURALIZE::FOUNDER_COMPANY")}"></ng-pluralize></a></li>
-        <li ng-show="node._info.out['FOUNDER_COMPANY']"><a ng-click="countClick('FOUNDER_COMPANY')"><ng-pluralize count="count = node._info.out['FOUNDER_COMPANY']" when="${_tr("NG_PLURALIZE::SUBSIDIARY_COMPANY")}"></ng-pluralize></a></li>
+        <li ng-show="node._info.in['FOUNDER_INDIVIDUAL']"><a ng-click="countClick(node, 'in', 'FOUNDER_INDIVIDUAL')"><ng-pluralize count="count = node._info.in['FOUNDER_INDIVIDUAL']" when="${_tr("NG_PLURALIZE::FOUNDER_INDIVIDUAL")}"></ng-pluralize></a></li>
+        <li ng-show="node._info.in['FOUNDER_COMPANY']"><a ng-click="countClick(node, 'in', 'FOUNDER_COMPANY')"><ng-pluralize count="count = node._info.in['FOUNDER_COMPANY']" when="${_tr("NG_PLURALIZE::FOUNDER_COMPANY")}"></ng-pluralize></a></li>
+        <li ng-show="node._info.out['FOUNDER_COMPANY']"><a ng-click="countClick(node, 'out', 'FOUNDER_COMPANY')"><ng-pluralize count="count = node._info.out['FOUNDER_COMPANY']" when="${_tr("NG_PLURALIZE::SUBSIDIARY_COMPANY")}"></ng-pluralize></a></li>
 
-        <li ng-show="node._info.in['EXECUTIVE_INDIVIDUAL']"><a ng-click="countClick('EXECUTIVE_INDIVIDUAL')"><ng-pluralize count="count = node._info.in['EXECUTIVE_INDIVIDUAL']" when="${_tr("NG_PLURALIZE::EXECUTIVE_INDIVIDUAL")}"></ng-pluralize></a></li>
-        <li ng-show="node._info.in['EXECUTIVE_COMPANY']"><a ng-click="countClick('EXECUTIVE_COMPANY')"><ng-pluralize count="count = node._info.in['EXECUTIVE_COMPANY']" when="${_tr("NG_PLURALIZE::EXECUTIVE_COMPANY")}"></ng-pluralize></a></li>
+        <li ng-show="node._info.in['EXECUTIVE_INDIVIDUAL']"><a ng-click="countClick(node, 'in', 'EXECUTIVE_INDIVIDUAL')"><ng-pluralize count="count = node._info.in['EXECUTIVE_INDIVIDUAL']" when="${_tr("NG_PLURALIZE::EXECUTIVE_INDIVIDUAL")}"></ng-pluralize></a></li>
+        <li ng-show="node._info.in['EXECUTIVE_COMPANY']"><a ng-click="countClick(node, 'in', 'EXECUTIVE_COMPANY')"><ng-pluralize count="count = node._info.in['EXECUTIVE_COMPANY']" when="${_tr("NG_PLURALIZE::EXECUTIVE_COMPANY")}"></ng-pluralize></a></li>
 
-        <li ng-show="node._info.in['HEAD_COMPANY']"><a ng-click="countClick('HEAD_COMPANY')"><ng-pluralize count="count = node._info.in['HEAD_COMPANY']" when="${_tr("NG_PLURALIZE::HEAD_COMPANY")}"></ng-pluralize></a></li>
-        <li ng-show="node._info.out['HEAD_COMPANY']"><a ng-click="countClick('HEAD_COMPANY')"><ng-pluralize count="count = node._info.out['HEAD_COMPANY']" when="${_tr("NG_PLURALIZE::BRANCH_COMPANY")}"></ng-pluralize></a></li>
-        <li ng-show="node._info.out['EXECUTIVE_COMPANY']"><a ng-click="countClick('EXECUTIVE_COMPANY')"><ng-pluralize count="count = node._info.out['EXECUTIVE_COMPANY']" when="${_tr("NG_PLURALIZE::LEAD_COMPANY")}"></ng-pluralize></a></li>
+        <li ng-show="node._info.in['HEAD_COMPANY']"><a ng-click="countClick(node, 'in', 'HEAD_COMPANY')"><ng-pluralize count="count = node._info.in['HEAD_COMPANY']" when="${_tr("NG_PLURALIZE::HEAD_COMPANY")}"></ng-pluralize></a></li>
+        <li ng-show="node._info.out['HEAD_COMPANY']"><a ng-click="countClick(node, 'out', 'HEAD_COMPANY')"><ng-pluralize count="count = node._info.out['HEAD_COMPANY']" when="${_tr("NG_PLURALIZE::BRANCH_COMPANY")}"></ng-pluralize></a></li>
+        <li ng-show="node._info.out['EXECUTIVE_COMPANY']"><a ng-click="countClick(node, 'out', 'EXECUTIVE_COMPANY')"><ng-pluralize count="count = node._info.out['EXECUTIVE_COMPANY']" when="${_tr("NG_PLURALIZE::LEAD_COMPANY")}"></ng-pluralize></a></li>
 
-        <li ng-show="node._info.in['PREDECESSOR_COMPANY']"><a ng-click="countClick('PREDECESSOR_COMPANY')"><ng-pluralize count="count = node._info.in['PREDECESSOR_COMPANY']" when="${_tr("NG_PLURALIZE::PREDECESSOR_COMPANY")}"></ng-pluralize></a></li>
-        <li ng-show="node._info.out['PREDECESSOR_COMPANY']"><a ng-click="countClick('PREDECESSOR_COMPANY')"><ng-pluralize count="count = node._info.out['PREDECESSOR_COMPANY']" when="${_tr("NG_PLURALIZE::SUCCESSOR_COMPANY")}"></ng-pluralize></a></li>
+        <li ng-show="node._info.in['PREDECESSOR_COMPANY']"><a ng-click="countClick(node, 'in', 'PREDECESSOR_COMPANY')"><ng-pluralize count="count = node._info.in['PREDECESSOR_COMPANY']" when="${_tr("NG_PLURALIZE::PREDECESSOR_COMPANY")}"></ng-pluralize></a></li>
+        <li ng-show="node._info.out['PREDECESSOR_COMPANY']"><a ng-click="countClick(node, 'out', 'PREDECESSOR_COMPANY')"><ng-pluralize count="count = node._info.out['PREDECESSOR_COMPANY']" when="${_tr("NG_PLURALIZE::SUCCESSOR_COMPANY")}"></ng-pluralize></a></li>
 
-        <li ng-show="node._info.in['REGISTER_HOLDER']"><a ng-click="countClick('PHONE')"><ng-pluralize count="count = node._info.in['REGISTER_HOLDER']" when="${_tr("NG_PLURALIZE::REGISTER_HOLDER_COMPANY")}"></ng-pluralize></a></li>
-        <li ng-show="node._info.out['REGISTER_HOLDER']"><a ng-click="countClick('PHONE')"><ng-pluralize count="count = node._info.out['REGISTER_HOLDER']" when="${_tr("NG_PLURALIZE::REGISTERED_HOLDER_COMPANY")}"></ng-pluralize></a></li>
+        <li ng-show="node._info.in['REGISTER_HOLDER']"><a ng-click="countClick(node, 'in', 'REGISTER_HOLDER')"><ng-pluralize count="count = node._info.in['REGISTER_HOLDER']" when="${_tr("NG_PLURALIZE::REGISTER_HOLDER_COMPANY")}"></ng-pluralize></a></li>
+        <li ng-show="node._info.out['REGISTER_HOLDER']"><a ng-click="countClick(node, 'out', 'REGISTER_HOLDER')"><ng-pluralize count="count = node._info.out['REGISTER_HOLDER']" when="${_tr("NG_PLURALIZE::REGISTERED_HOLDER_COMPANY")}"></ng-pluralize></a></li>
 
-        <li ng-show="node._info.in['ADDRESS']"><a ng-click="countClick('ADDRESS')"><ng-pluralize count="count = node._info.in['ADDRESS']" when="${_tr("NG_PLURALIZE::ADDRESS")}"></ng-pluralize></a></li>
-        <li ng-show="node._info.in['PHONE']"><a ng-click="countClick('PHONE')"><ng-pluralize count="count = node._info.in['PHONE']" when="${_tr("NG_PLURALIZE::PHONE")}"></ng-pluralize></a></li>
+        <li ng-show="node._info.in['ADDRESS']"><a ng-click="countClick(node, 'in', 'ADDRESS')"><ng-pluralize count="count = node._info.in['ADDRESS']" when="${_tr("NG_PLURALIZE::ADDRESS")}"></ng-pluralize></a></li>
+        <li ng-show="node._info.in['PHONE']"><a ng-click="countClick(node, 'in', 'PHONE')"><ng-pluralize count="count = node._info.in['PHONE']" when="${_tr("NG_PLURALIZE::PHONE")}"></ng-pluralize></a></li>
     </ul>
 </div>
 
 <div ng-if="node._type === 'INDIVIDUAL'">
     <ul class="inline">
-        <li ng-show="node._info.out['FOUNDER_INDIVIDUAL']"><a ng-click="countClick('FOUNDER_INDIVIDUAL')"><ng-pluralize count="count = node._info.out['FOUNDER_INDIVIDUAL']" when="${_tr("NG_PLURALIZE::SUBSIDIARY_COMPANY")}"></ng-pluralize></a></li>
-        <li ng-show="node._info.out['EXECUTIVE_INDIVIDUAL']"><a ng-click="countClick('EXECUTIVE_INDIVIDUAL')"><ng-pluralize count="count = node._info.out['EXECUTIVE_INDIVIDUAL']" when="${_tr("NG_PLURALIZE::LEAD_COMPANY")}"></ng-pluralize></a></li>
+        <li ng-show="node._info.out['FOUNDER_INDIVIDUAL']"><a ng-click="countClick(node, 'out', 'FOUNDER_INDIVIDUAL')"><ng-pluralize count="count = node._info.out['FOUNDER_INDIVIDUAL']" when="${_tr("NG_PLURALIZE::SUBSIDIARY_COMPANY")}"></ng-pluralize></a></li>
+        <li ng-show="node._info.out['EXECUTIVE_INDIVIDUAL']"><a ng-click="countClick(node, 'out', 'EXECUTIVE_INDIVIDUAL')"><ng-pluralize count="count = node._info.out['EXECUTIVE_INDIVIDUAL']" when="${_tr("NG_PLURALIZE::LEAD_COMPANY")}"></ng-pluralize></a></li>
     </ul>
 </div>
 
 <div ng-if="node._type === 'ADDRESS'">
     <ul class="inline">
-        <li ng-show="node._info.out['ADDRESS']"><a ng-click="countClick('ADDRESS')"><ng-pluralize count="count = node._info.out['ADDRESS']" when="${_tr("NG_PLURALIZE::COMPANY")}"></ng-pluralize></a></li>
+        <li ng-show="node._info.out['ADDRESS']"><a ng-click="countClick(node, 'out', 'ADDRESS')"><ng-pluralize count="count = node._info.out['ADDRESS']" when="${_tr("NG_PLURALIZE::COMPANY")}"></ng-pluralize></a></li>
     </ul>
 </div>
 
 <div ng-if="node._type === 'PHONE'">
     <ul class="inline">
-        <li ng-show="node._info.out['PHONE']"><a ng-click="countClick('PHONE')"><ng-pluralize count="count = node._info.out['PHONE']" when="${_tr("NG_PLURALIZE::COMPANY")}"></ng-pluralize></a></li>
+        <li ng-show="node._info.out['PHONE']"><a ng-click="countClick(node, 'out', 'PHONE')"><ng-pluralize count="count = node._info.out['PHONE']" when="${_tr("NG_PLURALIZE::COMPANY")}"></ng-pluralize></a></li>
     </ul>
 </div>

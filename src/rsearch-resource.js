@@ -54,6 +54,16 @@ define(function(require) {'use strict';
                         url: config.searchUrl + '/' + options.nodeType,
                         params: params
                     }, options);
+                },
+
+                relations: function(options) {
+                    var params = _.extend({}, options.filter, options.pageConfig);
+
+                    return request({
+                        method: 'GET',
+                        url: config.relationsUrl + '/' + options.node._id + '/' + options.relationType + '/' + options.direction,
+                        params: params
+                    }, options);
                 }
             };
         }]);
