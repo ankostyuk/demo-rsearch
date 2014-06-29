@@ -98,7 +98,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .factory('npRsearchViews', ['$log', '$compile', '$timeout', '$window', 'npRsearchConfig', function($log, $compile, $timeout, $window, npRsearchConfig){
+        .factory('npRsearchViews', ['$log', '$compile', '$timeout', '$window', function($log, $compile, $timeout, $window){
 
             var windowElement   = angular.element($window),
                 htmlbodyElement = $('html, body');

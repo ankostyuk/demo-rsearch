@@ -5,7 +5,6 @@
  */
 define(function(require) {'use strict';
 
-                          require('less!./styles/rsearch');
     var template        = require('text!./views/rsearch.html');
 
                           require('jquery');

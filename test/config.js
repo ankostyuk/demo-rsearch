@@ -13,7 +13,6 @@ root._RESOURCES_CONFIG = {
         'angular':              'test/bower-components/angular/angular',
         'angular-locale_ru':    'test/bower-components/angular-i18n/angular-locale_ru',
         'angular-locale_en':    'test/bower-components/angular-i18n/angular-locale_en',
-        'angular-mocks':        'test/bower-components/angular-mocks/angular-mocks',
         'ng-infinite-scroll':   'test/bower-components/ngInfiniteScroll/ng-infinite-scroll',
 
         'jquery':               'test/bower-components/jquery/jquery',

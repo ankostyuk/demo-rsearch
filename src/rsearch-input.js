@@ -5,7 +5,6 @@
  */
 define(function(require) {'use strict';
 
-                          require('less!./styles/rsearch-input');
     var template        = require('text!./views/rsearch-input.html');
 
                           require('jquery');
@@ -32,9 +31,9 @@ define(function(require) {'use strict';
 
                     //
                     _.extend(scope, {
-                        text: 'налпоинтер',//null,
+                        text: null,
 
-                        // TODO
+                        // TODO Реализовать
                         searchInputEnter: function(){
                             fireRefresh();
                         },

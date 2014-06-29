@@ -11,15 +11,10 @@ define(function(require) {'use strict';
 
     var angular = require('angular');
                   require('l10n');
-                  require('./app-data');
 
-    //
-    require('rsearch');
+                  require('rsearch');
 
-    //
-    var mock = false;
-
-    var app = angular.module('app', ['np.rsearch', 'app.data'])
+    var app = angular.module('app', ['np.rsearch'])
         //
         .constant('npRsearchConfig', {
             resource: {
@@ -27,26 +22,22 @@ define(function(require) {'use strict';
                 relationsUrl: '/nkbrelation/api/node'
             }
         })
+        //
         .config(function($logProvider){
             $logProvider.debugEnabled(false);
         })
         //
-        .config(function($provide) {
-            if (mock) {
-                $provide.decorator('$httpBackend', angular.mock.e2e.$httpBackendDecorator);
-            }
-        })
-        //
-        .run(['$log', '$timeout', '$rootScope', '$window', '$document', 'dataMock', function($log, $timeout, $rootScope, $window, $document, dataMock){
+        .run(['$log', '$timeout', '$rootScope', '$window', '$document', function($log, $timeout, $rootScope, $window, $document){
             $log.log('app...');
-
-            if (mock) {
-                dataMock.mockHttp();
-            }
 
             //
             $rootScope.$on('np-rsearch-input-ready', function(e, element){
                 element.find('input')[0].focus();
+
+                // test
+                $timeout(function(){
+                    $rootScope.$emit('np-rsearch-input-refresh', '1');
+                });
             });
         }]);
 

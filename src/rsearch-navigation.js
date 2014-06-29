@@ -5,7 +5,6 @@
  */
 define(function(require) {'use strict';
 
-                          require('less!./styles/rsearch-navigation');
     var template        = require('text!./views/rsearch-navigation.html');
 
                           require('jquery');
@@ -37,7 +36,7 @@ define(function(require) {'use strict';
 
                     //
                     var search = {
-                        query: null, //'НКБ',//Костюк Андрей Григорьевич',
+                        query: null,
                         total: null,
                         activeResult: null,
                         byNodeTypes: {},
@@ -377,11 +376,13 @@ define(function(require) {'use strict';
                     }
 
                     function clearBreadcrumbs(toIndex) {
+                        toIndex = toIndex || 0;
+
                         for (var i = toIndex + 1; i < _.size(scope.breadcrumbs); i++) {
                             delete byRelationsStore[i];
                         }
 
-                        scope.breadcrumbs = scope.breadcrumbs.slice(0, toIndex || 0);
+                        scope.breadcrumbs = scope.breadcrumbs.slice(0, toIndex);
                     }
 
                     function isLastBreadcrumb(breadcrumb) {
@@ -389,16 +390,12 @@ define(function(require) {'use strict';
                     }
 
 
-                    //
+                    // test
                     function testNodeListProcess(data) {
                         _.each(data.list, function(node, i){
                             node.__i = 1 + i + data.pageSize * (data.pageNumber - 1);
                         });
                     }
-
-                    $timeout(function(){
-                        doSearch('1');
-                    });
                 }]
             };
         }]);
