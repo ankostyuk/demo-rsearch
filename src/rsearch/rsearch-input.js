@@ -10,6 +10,7 @@ define(function(require) {'use strict';
                           require('jquery');
                           require('underscore');
     var i18n            = require('i18n'),
+        purl            = require('purl'),
         angular         = require('angular');
 
     return angular.module('np.rsearch-input', [])
@@ -18,7 +19,7 @@ define(function(require) {'use strict';
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('npRsearchInput', ['$log', '$rootScope', function($log, $rootScope){
+        .directive('npRsearchInput', ['$log', '$rootScope', '$timeout', function($log, $rootScope, $timeout){
             return {
                 restrict: 'A',
                 template: template,
@@ -57,7 +58,17 @@ define(function(require) {'use strict';
                     }
 
                     //
-                    $rootScope.$emit('np-rsearch-input-ready', element);
+                    $timeout(function(){
+                        var locationSearch = purl().param();
+
+                        if (locationSearch.q) {
+                            // Поиск из URL
+                            scope.text = locationSearch.q;
+                        } else {
+                            // Фокус на поиске
+                            element.find('input')[0].focus();
+                        }
+                    });
                 }]
             };
         }]);

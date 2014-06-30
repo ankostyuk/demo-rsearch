@@ -20,6 +20,8 @@ root._RESOURCES_CONFIG = {
         'underscore':           'src/bower-components/underscore/underscore',
         'underscore.string':    'src/bower-components/underscore.string/underscore.string',
 
+        'purl':                 'src/bower-components/purl/purl',
+
         'i18n':                 'src/bower-components/nullpointer-i18n/i18n'
     },
 

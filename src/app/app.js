@@ -23,16 +23,8 @@ define(function(require) {'use strict';
             $logProvider.debugEnabled(false);
         })
         //
-        .run(['$log', '$timeout', '$rootScope', '$window', '$document', function($log, $timeout, $rootScope, $window, $document){
+        .run(['$log', function($log){
             //
-            $rootScope.$on('np-rsearch-input-ready', function(e, element){
-                element.find('input')[0].focus();
-
-                // test
-                $timeout(function(){
-                    $rootScope.$emit('np-rsearch-input-refresh', '1');
-                });
-            });
         }]);
 
     angular.bootstrap(document, [app.name]);
