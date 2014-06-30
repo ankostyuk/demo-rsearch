@@ -3,7 +3,7 @@ module.exports = function(grunt) {
     //
     grunt.initConfig({
         clean: {
-            deps: ['node_modules', 'bower_components'],
+            deps: ['node_modules', 'bower_components', 'test/bower-components'],
             dist: ['dist']
         },
 

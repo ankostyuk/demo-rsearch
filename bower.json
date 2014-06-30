@@ -9,15 +9,14 @@
     "require-less": "0.1.2",
     "jquery": "2.1.*",
     "angular": "1.2.18",
+    "angular-i18n": "1.2.18",
     "ngInfiniteScroll": "1.1.*",
     "underscore": "1.5.*",
     "underscore.string": "2.3.*",
-    "nullpointer-i18n": "git@repo.nkb:nullpointer/i18n-js.git"
+    "nullpointer-i18n": "git@repo.nkb:nullpointer/i18n-js.git",
+    "bootstrap": "http://getbootstrap.com/2.3.2/assets/bootstrap.zip"
   },
   "devDependencies": {
-    "angular-mocks": "1.2.18",
-    "angular-i18n": "1.2.18",
-    "bootstrap": "http://getbootstrap.com/2.3.2/assets/bootstrap.zip"
   },
   "exportsOverride": {
     "requirejs": {

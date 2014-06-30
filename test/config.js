@@ -47,9 +47,6 @@ root._RESOURCES_CONFIG = {
         'angular-locale_en': {
             deps: ['angular']
         },
-        'angular-ui-utils_ng-scroller': {
-            deps: ['angular']
-        },
         'ng-infinite-scroll': {
             deps: ['angular']
         },

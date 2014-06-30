@@ -5,7 +5,6 @@
  */
 define(function(require) {'use strict';
 
-                          require('less!./styles/rsearch-input');
     var template        = require('text!./views/rsearch-input.html');
 
                           require('jquery');
@@ -19,7 +18,7 @@ define(function(require) {'use strict';
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('npRsearchInput', ['$log', function($log){
+        .directive('npRsearchInput', ['$log', '$rootScope', function($log, $rootScope){
             return {
                 restrict: 'A',
                 template: template,
@@ -32,9 +31,9 @@ define(function(require) {'use strict';
 
                     //
                     _.extend(scope, {
-                        text: 'налпоинтер',//null,
+                        text: null,
 
-                        // TODO
+                        // TODO Реализовать
                         searchInputEnter: function(){
                             fireRefresh();
                         },
@@ -54,11 +53,11 @@ define(function(require) {'use strict';
 
                     //
                     function fireRefresh() {
-                        scope.$emit('np-rsearch-input-refresh', scope.text);
+                        $rootScope.$emit('np-rsearch-input-refresh', scope.text);
                     }
 
                     //
-                    scope.$emit('np-rsearch-input-ready', element);
+                    $rootScope.$emit('np-rsearch-input-ready', element);
                 }]
             };
         }]);
