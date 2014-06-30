@@ -32,7 +32,12 @@ module.exports = function(grunt) {
                 expand: true,
                 flatten: true,
                 cwd: 'target/web-resources-build/src/',
-                src: ['app/config.js', 'app/main.js', 'bower-components/requirejs/require.js'],
+                src: [
+                    'app/config.js',
+                    'app/main.js',
+                    'bower-components/requirejs/require.js',
+                    'examples/nkb/nkb-rsearch.css'
+                ],
                 dest: 'dist/'
             }
         },

@@ -33453,7 +33453,7 @@ define('l10n', ['l10n/l10n'], function (main) { return main; });
 define('src/bower-components/requirejs-text/text!rsearch/views/rsearch.html',[],function () { return '<div class="row">\n    <div class="span3"></div>\n    <div class="span9">\n        <div np-rsearch-input></div>\n    </div>\n</div>\n<div class="row">\n    <div class="span3"></div>\n    <div class="span9">\n        <div np-rsearch-navigation></div>\n    </div>\n</div>\n';});
 
 
-define('src/bower-components/requirejs-text/text!rsearch/views/rsearch-input.html',[],function () { return '<div class="input-append">\n    <input class="span6" type="text" ng-model="text">\n    <button class="btn" type="button" ng-click="searchBtnClick()">${_tr("Найти")}</button>\n</div>\n';});
+define('src/bower-components/requirejs-text/text!rsearch/views/rsearch-input.html',[],function () { return '<div class="input-append">\n    <input class="span4 search-query strong" type="search" placeholder="Наименование компании, ОГРН, ИНН, ОКПО" ng-model="text">\n    <button class="btn search-btn strong base-search-submit" type="button" ng-click="searchBtnClick()">${_tr("Найти")}</button>\n</div>\n';});
 
 /*
  * Purl (A JavaScript URL parser) v2.3.1
