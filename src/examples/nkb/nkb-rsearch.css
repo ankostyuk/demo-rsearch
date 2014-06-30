@@ -57,3 +57,11 @@
 [np-rsearch-node-plain] .liquidate-state {
     color: #b94a48;
 }
+
+.rsearch_report_links .price {
+    color: #999;
+}
+.rsearch_report_links .divider {
+    color: #ccc;
+    padding: 0 5px 0 5px;
+}
