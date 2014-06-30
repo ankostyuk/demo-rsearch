@@ -215,6 +215,12 @@ define(function(require) {'use strict';
                     });
 
                     return view;
+                },
+
+                scrollTop: function() {
+                    $timeout(function(){
+                        htmlbodyElement.scrollTop(0);
+                    });
                 }
             };
         }]);

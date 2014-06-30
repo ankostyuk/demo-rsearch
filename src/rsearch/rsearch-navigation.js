@@ -207,6 +207,8 @@ define(function(require) {'use strict';
                         nodeFormView.show(node);
 
                         pushNodeFormBreadcrumb(node);
+
+                        npRsearchViews.scrollTop();
                     }
 
                     /*
@@ -399,7 +401,7 @@ define(function(require) {'use strict';
                             buildNodeExtraMeta(node);
 
                             // test
-                            node.__i = 1 + i + data.pageSize * (data.pageNumber - 1);
+                            //node.__i = 1 + i + data.pageSize * (data.pageNumber - 1);
                         });
                     }
 

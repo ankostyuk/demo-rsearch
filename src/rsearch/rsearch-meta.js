@@ -3,9 +3,18 @@
  * @desc RequireJS/Angular module
  * @author ankostyuk
  */
+// TODO объеденить код со "связями"
 define(function(require) {'use strict';
+    var root = window;
 
     var angular = require('angular');
+
+    var metaConfig = root._APP_CONFIG.meta;
+
+    var MetaSettings = {
+        lastSalesVolumeField: metaConfig.lastSalesVolumeField,
+        currencyOrder: 1000
+    };
 
     return angular.module('np.rsearch-meta', [])
         //
@@ -27,6 +36,54 @@ define(function(require) {'use strict';
                 }
             }
         })
+        .filter('isLastSalesVolume', [function(){
+            return function(node){
+                if (!node) {
+                    return null;
+                }
+
+                return _.has(node, MetaSettings.lastSalesVolumeField);
+            };
+        }])
+        //
+        .filter('lastSalesVolume', [function(){
+            return function(node){
+                if (!node) {
+                    return null;
+                }
+
+                return node[MetaSettings.lastSalesVolumeField] / MetaSettings.currencyOrder;
+            };
+        }])
+        //
+        .filter('isBalance', [function(){
+            return function(node){
+                return node && node['balance'];
+            };
+        }])
+        //
+        .filter('balance', [function(){
+            return function(node){
+                if (!node) {
+                    return null;
+                }
+
+                var value = node['balance'];
+
+                if (!value) {
+                    return null;
+                }
+
+                var years = _.isArray(value) ? _.clone(value) : [value];
+                years.reverse();
+
+                var formYear = node['balance_forms_' + _.last(years)];
+
+                var forms = _.isArray(formYear) ? formYear : [formYear];
+
+                return years.join(', ') + ' [' + forms.join(', ') + ']';
+            };
+        }])
         //
         .filter('OKVED', [function(){
             return function(node){

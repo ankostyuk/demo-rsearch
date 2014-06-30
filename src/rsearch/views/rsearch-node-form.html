@@ -1,7 +1,41 @@
-<div ng-if="node._type === 'COMPANY'">
-    <h4>{{node.nameshortsort}}</h4>
+<div class="{{node._liquidate ? 'liquidate' : null}}" ng-if="node._type === 'COMPANY'">
+    <div class="row">
+        <div class="span4 node-header"><h4>{{node.nameshortsort}}</h4></div>
+        <div class="span3"><strong>${_tr("ОГРН")}: {{node.ogrn}}</strong></div>
+        <div class="align-right"><strong>{{node.founded_dt | date:'mediumDate'}}</strong></div>
+    </div>
+    <div class="row node-entry liquidate-state">
+        <div class="span6"><h5>{{node._liquidate.state.type}}</h5></div>
+        <div class="align-right"><strong>{{node._liquidate.state._since | date:'mediumDate'}}</strong></div>
+    </div>
+    <div class="node-entry">{{node | OKVED}}</div>
+    <div class="node-entry">{{node.chief_name}}</div>
+    <div class="node-entry">{{node.addresssort}}</div>
+    <hr>
+    <p class="node-entry">{{node.okfs_text}}</p>
+    <div class="row node-entry">
+        <div class="span4"><strong>${_tr("ИНН")}:</strong></div>
+        <div class="span4">{{node.inn}}</div>
+    </div>
+    <div class="row node-entry">
+        <div class="span4"><strong>${_tr("ОКПО")}:</strong></div>
+        <div class="span4">{{node.okpo}}</div>
+    </div>
+    <div class="row node-entry">
+        <div class="span4"><strong>${_tr("Полное наименование")}:</strong></div>
+        <div class="span4">{{node.namesort}}</div>
+    </div>
+    <div class="row node-entry" ng-show="node | isLastSalesVolume">
+        <div class="span4"><strong>${_tr("Объём продаж за последний год")}:</strong></div>
+        <div class="span4">{{node | lastSalesVolume | number:0}}&nbsp;${_tr("тыс. руб.")}</div>
+    </div>
+    <div class="row entry" ng-show="node | isBalance">
+        <div class="span4"><strong>${_tr("Финансовая отчётность")}:</strong></div>
+        <div class="span4">{{node | balance}}</div>
+    </div>
+    <hr>
     <div np-rsearch-node-relations-counts></div>
-
+    <hr>
     <div class="row">
         <div class="span5">
             <h5>${_tr("Отчеты")}</h5>
@@ -26,16 +60,16 @@
 </div>
 
 <div ng-if="node._type === 'INDIVIDUAL'">
-    <h4>{{node.name}}</h4>
+    <div class="node-header"><h4>{{node.name}}</h4></div>
     <div np-rsearch-node-relations-counts></div>
 </div>
 
 <div ng-if="node._type === 'ADDRESS'">
-    <h4>{{node.value}}</h4>
+    <div class="node-header"><h4>{{node.value}}</h4></div>
     <div np-rsearch-node-relations-counts></div>
 </div>
 
 <div ng-if="node._type === 'PHONE'">
-    <h4>{{node.value}}</h4>
+    <div class="node-header"><h4>{{node.value}}</h4></div>
     <div np-rsearch-node-relations-counts></div>
 </div>

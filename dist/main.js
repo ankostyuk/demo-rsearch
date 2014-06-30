@@ -33754,6 +33754,16 @@ define('rsearch/rsearch-input',['require','text!./views/rsearch-input.html','jqu
                         attrs   = $attrs;
 
                     //
+                    var inputElement = element.find('input');
+
+                    inputElement.bind('keydown', function(e){
+                        // Отключить дефолтное поведение
+                        if (e.keyCode === 13) {
+                            return false;
+                        }
+                    });
+
+                    //
                     _.extend(scope, {
                         text: null,
 
@@ -33789,7 +33799,7 @@ define('rsearch/rsearch-input',['require','text!./views/rsearch-input.html','jqu
                             scope.text = locationSearch.q;
                         } else {
                             // Фокус на поиске
-                            element.find('input')[0].focus();
+                            inputElement.focus();
                         }
                     });
                 }]
@@ -33926,7 +33936,7 @@ define('rsearch/rsearch-navigation',['require','text!./views/rsearch-navigation.
 
                         byNodeType.request.promise
                             .success(function(data, status){
-                                testNodeListProcess(data);
+                                nodeListProcess(data);
                                 complete(data);
                             })
                             .error(function(data, status){
@@ -34010,6 +34020,8 @@ define('rsearch/rsearch-navigation',['require','text!./views/rsearch-navigation.
                         nodeFormView.show(node);
 
                         pushNodeFormBreadcrumb(node);
+
+                        npRsearchViews.scrollTop();
                     }
 
                     /*
@@ -34031,7 +34043,7 @@ define('rsearch/rsearch-navigation',['require','text!./views/rsearch-navigation.
 
                         byRelations.request.promise
                             .success(function(data, status){
-                                testNodeListProcess(data);
+                                nodeListProcess(data);
                                 complete(data);
                             })
                             .error(function(data, status){
@@ -34193,11 +34205,48 @@ define('rsearch/rsearch-navigation',['require','text!./views/rsearch-navigation.
                     }
 
 
-                    // test
-                    function testNodeListProcess(data) {
+                    /*
+                     * node
+                     *
+                     */
+                    function nodeListProcess(data) {
                         _.each(data.list, function(node, i){
-                            node.__i = 1 + i + data.pageSize * (data.pageNumber - 1);
+                            buildNodeExtraMeta(node);
+
+                            // test
+                            //node.__i = 1 + i + data.pageSize * (data.pageNumber - 1);
                         });
+                    }
+
+                    function buildNodeExtraMeta(node) {
+                        // компания
+                        if (node._type === 'COMPANY') {
+                            // юридическое состояние
+                            var egrulState  = node.egrul_state,
+                                aliveCode   = 5, // Действующее
+                                _liquidate;
+
+                            if (egrulState && egrulState.code != aliveCode) {
+                                _liquidate = {
+                                    state: {
+                                        _actual: egrulState._actual,
+                                        _since: egrulState._since,
+                                        type: egrulState.type
+                                    }
+                                };
+                            } else
+                            if (node.dead_dt) {
+                                _liquidate = {
+                                    state: {
+                                        _actual: null,
+                                        _since: node.dead_dt,
+                                        type: 'Ликвидировано' // TODO l10n
+                                    }
+                                };
+                            }
+
+                            node._liquidate = _liquidate;
+                        }
                     }
                 }]
             };
@@ -34361,7 +34410,7 @@ define("ng-infinite-scroll", ["angular"], function(){});
 define('src/bower-components/requirejs-text/text!rsearch/views/rsearch-node-simple.html',[],function () { return '<span ng-if="node._type === \'COMPANY\'">{{node.nameshortsort}}</span>\n<span ng-if="node._type === \'INDIVIDUAL\'">{{node.name}}</span>\n<span ng-if="node._type === \'ADDRESS\'">{{node.value}}</span>\n<span ng-if="node._type === \'PHONE\'">{{node.value}}</span>\n';});
 
 
-define('src/bower-components/requirejs-text/text!rsearch/views/rsearch-node-plain.html',[],function () { return '<div class="body" node-id="{{node._id}}" ng-click="toggleSelect()">\n    <div ng-if="node._type === \'COMPANY\'">\n        <h5>{{node.__i}}. {{node.nameshortsort}}</h5>\n    </div>\n\n    <div ng-if="node._type === \'INDIVIDUAL\'">\n        <h5>{{node.__i}}. {{node.name}}</h5>\n    </div>\n\n    <div ng-if="node._type === \'ADDRESS\'">\n        <h5>{{node.__i}}. {{node.value}}</h5>\n    </div>\n\n    <div ng-if="node._type === \'PHONE\'">\n        <h5>{{node.__i}}. {{node.value}}</h5>\n    </div>\n</div>\n';});
+define('src/bower-components/requirejs-text/text!rsearch/views/rsearch-node-plain.html',[],function () { return '<div class="body {{node._liquidate ? \'liquidate\' : null}}" node-id="{{node._id}}" ng-click="toggleSelect()">\n    <div ng-if="node._type === \'COMPANY\'">\n        <div class="row">\n            <div class="span4 node-header">{{node.nameshortsort}}</div>\n            <div class="span3">${_tr("ОГРН")}: {{node.ogrn}}</div>\n            <div class="align-right">{{node.founded_dt | date:\'mediumDate\'}}</div>\n        </div>\n        <div class="row node-entry liquidate-state">\n            <div class="span6">{{node._liquidate.state.type}}</div>\n            <div class="align-right">{{node._liquidate.state._since | date:\'mediumDate\'}}</div>\n        </div>\n        <div class="node-entry">{{node | OKVED}}</div>\n        <div class="node-entry">{{node.chief_name}}</div>\n        <div class="node-entry">{{node.addresssort}}</div>\n    </div>\n\n    <div ng-if="node._type === \'INDIVIDUAL\'">\n        <div class="node-header">{{node.name}}</div>\n    </div>\n\n    <div ng-if="node._type === \'ADDRESS\'">\n        <div class="node-header">{{node.value}}</div>\n    </div>\n\n    <div ng-if="node._type === \'PHONE\'">\n        <div class="node-header">{{node.value}}</div>\n    </div>\n</div>\n';});
 
 
 define('src/bower-components/requirejs-text/text!rsearch/views/rsearch-node-relations-counts.html',[],function () { return '<div ng-if="node._type === \'COMPANY\'">\n    <ul class="inline">\n        <li ng-show="node._info.in[\'FOUNDER_INDIVIDUAL\']"><a ng-click="countClick(node, \'in\', \'FOUNDER_INDIVIDUAL\')"><ng-pluralize count="count = node._info.in[\'FOUNDER_INDIVIDUAL\']" when="${_tr("NG_PLURALIZE::FOUNDER_INDIVIDUAL")}"></ng-pluralize></a></li>\n        <li ng-show="node._info.in[\'FOUNDER_COMPANY\']"><a ng-click="countClick(node, \'in\', \'FOUNDER_COMPANY\')"><ng-pluralize count="count = node._info.in[\'FOUNDER_COMPANY\']" when="${_tr("NG_PLURALIZE::FOUNDER_COMPANY")}"></ng-pluralize></a></li>\n        <li ng-show="node._info.out[\'FOUNDER_COMPANY\']"><a ng-click="countClick(node, \'out\', \'FOUNDER_COMPANY\')"><ng-pluralize count="count = node._info.out[\'FOUNDER_COMPANY\']" when="${_tr("NG_PLURALIZE::SUBSIDIARY_COMPANY")}"></ng-pluralize></a></li>\n\n        <li ng-show="node._info.in[\'EXECUTIVE_INDIVIDUAL\']"><a ng-click="countClick(node, \'in\', \'EXECUTIVE_INDIVIDUAL\')"><ng-pluralize count="count = node._info.in[\'EXECUTIVE_INDIVIDUAL\']" when="${_tr("NG_PLURALIZE::EXECUTIVE_INDIVIDUAL")}"></ng-pluralize></a></li>\n        <li ng-show="node._info.in[\'EXECUTIVE_COMPANY\']"><a ng-click="countClick(node, \'in\', \'EXECUTIVE_COMPANY\')"><ng-pluralize count="count = node._info.in[\'EXECUTIVE_COMPANY\']" when="${_tr("NG_PLURALIZE::EXECUTIVE_COMPANY")}"></ng-pluralize></a></li>\n\n        <li ng-show="node._info.in[\'HEAD_COMPANY\']"><a ng-click="countClick(node, \'in\', \'HEAD_COMPANY\')"><ng-pluralize count="count = node._info.in[\'HEAD_COMPANY\']" when="${_tr("NG_PLURALIZE::HEAD_COMPANY")}"></ng-pluralize></a></li>\n        <li ng-show="node._info.out[\'HEAD_COMPANY\']"><a ng-click="countClick(node, \'out\', \'HEAD_COMPANY\')"><ng-pluralize count="count = node._info.out[\'HEAD_COMPANY\']" when="${_tr("NG_PLURALIZE::BRANCH_COMPANY")}"></ng-pluralize></a></li>\n        <li ng-show="node._info.out[\'EXECUTIVE_COMPANY\']"><a ng-click="countClick(node, \'out\', \'EXECUTIVE_COMPANY\')"><ng-pluralize count="count = node._info.out[\'EXECUTIVE_COMPANY\']" when="${_tr("NG_PLURALIZE::LEAD_COMPANY")}"></ng-pluralize></a></li>\n\n        <li ng-show="node._info.in[\'PREDECESSOR_COMPANY\']"><a ng-click="countClick(node, \'in\', \'PREDECESSOR_COMPANY\')"><ng-pluralize count="count = node._info.in[\'PREDECESSOR_COMPANY\']" when="${_tr("NG_PLURALIZE::PREDECESSOR_COMPANY")}"></ng-pluralize></a></li>\n        <li ng-show="node._info.out[\'PREDECESSOR_COMPANY\']"><a ng-click="countClick(node, \'out\', \'PREDECESSOR_COMPANY\')"><ng-pluralize count="count = node._info.out[\'PREDECESSOR_COMPANY\']" when="${_tr("NG_PLURALIZE::SUCCESSOR_COMPANY")}"></ng-pluralize></a></li>\n\n        <li ng-show="node._info.in[\'REGISTER_HOLDER\']"><a ng-click="countClick(node, \'in\', \'REGISTER_HOLDER\')"><ng-pluralize count="count = node._info.in[\'REGISTER_HOLDER\']" when="${_tr("NG_PLURALIZE::REGISTER_HOLDER_COMPANY")}"></ng-pluralize></a></li>\n        <li ng-show="node._info.out[\'REGISTER_HOLDER\']"><a ng-click="countClick(node, \'out\', \'REGISTER_HOLDER\')"><ng-pluralize count="count = node._info.out[\'REGISTER_HOLDER\']" when="${_tr("NG_PLURALIZE::REGISTERED_HOLDER_COMPANY")}"></ng-pluralize></a></li>\n\n        <li ng-show="node._info.in[\'ADDRESS\']"><a ng-click="countClick(node, \'in\', \'ADDRESS\')"><ng-pluralize count="count = node._info.in[\'ADDRESS\']" when="${_tr("NG_PLURALIZE::ADDRESS")}"></ng-pluralize></a></li>\n        <li ng-show="node._info.in[\'PHONE\']"><a ng-click="countClick(node, \'in\', \'PHONE\')"><ng-pluralize count="count = node._info.in[\'PHONE\']" when="${_tr("NG_PLURALIZE::PHONE")}"></ng-pluralize></a></li>\n    </ul>\n</div>\n\n<div ng-if="node._type === \'INDIVIDUAL\'">\n    <ul class="inline">\n        <li ng-show="node._info.out[\'FOUNDER_INDIVIDUAL\']"><a ng-click="countClick(node, \'out\', \'FOUNDER_INDIVIDUAL\')"><ng-pluralize count="count = node._info.out[\'FOUNDER_INDIVIDUAL\']" when="${_tr("NG_PLURALIZE::SUBSIDIARY_COMPANY")}"></ng-pluralize></a></li>\n        <li ng-show="node._info.out[\'EXECUTIVE_INDIVIDUAL\']"><a ng-click="countClick(node, \'out\', \'EXECUTIVE_INDIVIDUAL\')"><ng-pluralize count="count = node._info.out[\'EXECUTIVE_INDIVIDUAL\']" when="${_tr("NG_PLURALIZE::LEAD_COMPANY")}"></ng-pluralize></a></li>\n    </ul>\n</div>\n\n<div ng-if="node._type === \'ADDRESS\'">\n    <ul class="inline">\n        <li ng-show="node._info.out[\'ADDRESS\']"><a ng-click="countClick(node, \'out\', \'ADDRESS\')"><ng-pluralize count="count = node._info.out[\'ADDRESS\']" when="${_tr("NG_PLURALIZE::COMPANY")}"></ng-pluralize></a></li>\n    </ul>\n</div>\n\n<div ng-if="node._type === \'PHONE\'">\n    <ul class="inline">\n        <li ng-show="node._info.out[\'PHONE\']"><a ng-click="countClick(node, \'out\', \'PHONE\')"><ng-pluralize count="count = node._info.out[\'PHONE\']" when="${_tr("NG_PLURALIZE::COMPANY")}"></ng-pluralize></a></li>\n    </ul>\n</div>\n';});
@@ -34376,7 +34425,7 @@ define('src/bower-components/requirejs-text/text!rsearch/views/rsearch-navigatio
 define('src/bower-components/requirejs-text/text!rsearch/views/rsearch-node-list.html',[],function () { return '<div infinite-scroll=\'pager.nextPage()\' infinite-scroll-disabled=\'pager.isDisabled()\' infinite-scroll-distance=\'0\'>\n    <div ng-repeat="node in nodeList" np-rsearch-node-plain="node"></div>\n</div>\n';});
 
 
-define('src/bower-components/requirejs-text/text!rsearch/views/rsearch-node-form.html',[],function () { return '<div ng-if="node._type === \'COMPANY\'">\n    <h4>{{node.nameshortsort}}</h4>\n    <div np-rsearch-node-relations-counts></div>\n</div>\n\n<div ng-if="node._type === \'INDIVIDUAL\'">\n    <h4>{{node.name}}</h4>\n    <div np-rsearch-node-relations-counts></div>\n</div>\n\n<div ng-if="node._type === \'ADDRESS\'">\n    <h4>{{node.value}}</h4>\n    <div np-rsearch-node-relations-counts></div>\n</div>\n\n<div ng-if="node._type === \'PHONE\'">\n    <h4>{{node.value}}</h4>\n    <div np-rsearch-node-relations-counts></div>\n</div>\n';});
+define('src/bower-components/requirejs-text/text!rsearch/views/rsearch-node-form.html',[],function () { return '<div class="{{node._liquidate ? \'liquidate\' : null}}" ng-if="node._type === \'COMPANY\'">\n    <div class="row">\n        <div class="span4 node-header"><h4>{{node.nameshortsort}}</h4></div>\n        <div class="span3"><strong>${_tr("ОГРН")}: {{node.ogrn}}</strong></div>\n        <div class="align-right"><strong>{{node.founded_dt | date:\'mediumDate\'}}</strong></div>\n    </div>\n    <div class="row node-entry liquidate-state">\n        <div class="span6"><h5>{{node._liquidate.state.type}}</h5></div>\n        <div class="align-right"><strong>{{node._liquidate.state._since | date:\'mediumDate\'}}</strong></div>\n    </div>\n    <div class="node-entry">{{node | OKVED}}</div>\n    <div class="node-entry">{{node.chief_name}}</div>\n    <div class="node-entry">{{node.addresssort}}</div>\n    <hr>\n    <p class="node-entry">{{node.okfs_text}}</p>\n    <div class="row node-entry">\n        <div class="span4"><strong>${_tr("ИНН")}:</strong></div>\n        <div class="span4">{{node.inn}}</div>\n    </div>\n    <div class="row node-entry">\n        <div class="span4"><strong>${_tr("ОКПО")}:</strong></div>\n        <div class="span4">{{node.okpo}}</div>\n    </div>\n    <div class="row node-entry">\n        <div class="span4"><strong>${_tr("Полное наименование")}:</strong></div>\n        <div class="span4">{{node.namesort}}</div>\n    </div>\n    <div class="row node-entry" ng-show="node | isLastSalesVolume">\n        <div class="span4"><strong>${_tr("Объём продаж за последний год")}:</strong></div>\n        <div class="span4">{{node | lastSalesVolume | number:0}}&nbsp;${_tr("тыс. руб.")}</div>\n    </div>\n    <div class="row entry" ng-show="node | isBalance">\n        <div class="span4"><strong>${_tr("Финансовая отчётность")}:</strong></div>\n        <div class="span4">{{node | balance}}</div>\n    </div>\n    <hr>\n    <div np-rsearch-node-relations-counts></div>\n    <hr>\n    <div class="row">\n        <div class="span5">\n            <h5>${_tr("Отчеты")}</h5>\n            <ul class="unstyled rsearch_report_links">\n                <li><a href="http://testing.nkb/reports/?code=rep_market_profile_short&fromSearch=1&id={{node.bsn_id}}">${_tr("Профиль регистрации")}</a><span class="divider">/</span><span class="price">5 ие</span></li>\n                <li><a href="http://testing.nkb/reports/?code=rep_market_list&fromSearch=1&id={{node.bsn_id}}">${_tr("Корпоративная структура")}</a><span class="divider">/</span><span class="price">осталось 7</span></li>\n                <li><a href="http://testing.nkb/reports/?code=rep_business_profile&fromSearch=1&id={{node.bsn_id}}">${_tr("Бизнес профиль")}</a></li>\n                <li><a href="http://testing.nkb/reports/?code=rep_market_profile_full&fromSearch=1&id={{node.bsn_id}}">${_tr("Аналитический профиль")}</a></li>\n                <li><a href="http://testing.nkb/reports/?code=rep_credit_profile&fromSearch=1&id={{node.bsn_id}}">${_tr("Кредитный профиль")}</a></li>\n                <li><a href="http://testing.nkb/reports/?code=rep_history_profile&fromSearch=1&id={{node.bsn_id}}">${_tr("Исторический профиль")}</a></li>\n            </ul>\n        </div>\n        <div class="span4">\n            <h5>${_tr("ЕГРЮЛ")}</h5>\n            <ul class="unstyled rsearch_report_links">\n                <li><a href="#">${_tr("Скачать выписку")}</a> от 01.02.2004</li>\n\n                <li><a href="http://testing.nkb/search/offlinee/?idcomp={{node.bsn_id}}">${_tr("Заказать выписку ЕГРЮЛ")}</a></li>\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div ng-if="node._type === \'INDIVIDUAL\'">\n    <div class="node-header"><h4>{{node.name}}</h4></div>\n    <div np-rsearch-node-relations-counts></div>\n</div>\n\n<div ng-if="node._type === \'ADDRESS\'">\n    <div class="node-header"><h4>{{node.value}}</h4></div>\n    <div np-rsearch-node-relations-counts></div>\n</div>\n\n<div ng-if="node._type === \'PHONE\'">\n    <div class="node-header"><h4>{{node.value}}</h4></div>\n    <div np-rsearch-node-relations-counts></div>\n</div>\n';});
 
 /**
  * @module rsearch-views
@@ -34595,6 +34644,12 @@ define('rsearch/rsearch-views',['require','jquery','underscore','i18n','angular'
                     });
 
                     return view;
+                },
+
+                scrollTop: function() {
+                    $timeout(function(){
+                        htmlbodyElement.scrollTop(0);
+                    });
                 }
             };
         }]);
@@ -34606,9 +34661,18 @@ define('rsearch/rsearch-views',['require','jquery','underscore','i18n','angular'
  * @desc RequireJS/Angular module
  * @author ankostyuk
  */
+// TODO объеденить код со "связями"
 define('rsearch/rsearch-meta',['require','angular'],function(require) {
+    var root = window;
 
     var angular = require('angular');
+
+    var metaConfig = root._APP_CONFIG.meta;
+
+    var MetaSettings = {
+        lastSalesVolumeField: metaConfig.lastSalesVolumeField,
+        currencyOrder: 1000
+    };
 
     return angular.module('np.rsearch-meta', [])
         //
@@ -34630,6 +34694,73 @@ define('rsearch/rsearch-meta',['require','angular'],function(require) {
                 }
             }
         })
+        .filter('isLastSalesVolume', [function(){
+            return function(node){
+                if (!node) {
+                    return null;
+                }
+
+                return _.has(node, MetaSettings.lastSalesVolumeField);
+            };
+        }])
+        //
+        .filter('lastSalesVolume', [function(){
+            return function(node){
+                if (!node) {
+                    return null;
+                }
+
+                return node[MetaSettings.lastSalesVolumeField] / MetaSettings.currencyOrder;
+            };
+        }])
+        //
+        .filter('isBalance', [function(){
+            return function(node){
+                return node && node['balance'];
+            };
+        }])
+        //
+        .filter('balance', [function(){
+            return function(node){
+                if (!node) {
+                    return null;
+                }
+
+                var value = node['balance'];
+
+                if (!value) {
+                    return null;
+                }
+
+                var years = _.isArray(value) ? _.clone(value) : [value];
+                years.reverse();
+
+                var formYear = node['balance_forms_' + _.last(years)];
+
+                var forms = _.isArray(formYear) ? formYear : [formYear];
+
+                return years.join(', ') + ' [' + forms.join(', ') + ']';
+            };
+        }])
+        //
+        .filter('OKVED', [function(){
+            return function(node){
+                if (!node) {
+                    return null;
+                }
+
+                var okved = node['okvedcode_bal'] || node['okvedcode_main'];
+
+                if (!okved) {
+                    return null;
+                }
+
+                var okvedCode = _.chop(okved, 2).join('.');
+                var okvedText = node['okved_bal_text'] || node['okved_main_text'];
+
+                return okvedCode + ' ' + okvedText;
+            };
+        }])
         //
         .factory('npRsearchMetaHelper', ['$log', 'npRsearchMeta', function($log, npRsearchMeta){
 

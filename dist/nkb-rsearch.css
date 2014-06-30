@@ -1,3 +1,4 @@
+
 [np-rsearch-navigation] a {
     padding-bottom: 0;
     color: #0088cc;
@@ -24,7 +25,6 @@
 }
 [np-rsearch-node-plain] {
     margin-bottom: 5px;
-    background-color: #ffffff;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
@@ -34,5 +34,47 @@
     cursor: pointer;
 }
 [np-rsearch-node-plain] .body {
-    padding: 5px;
+    margin-bottom: 20px;
+    padding: 5px 5px 0 5px;
+}
+[np-rsearch-node-plain] .node-header {
+    padding-bottom: 5px;
+    font-weight: bold;
+}
+[np-rsearch-node-plain] .node-entry {
+    padding-bottom: 5px;
+}
+[np-rsearch-node-plain] .liquidate-state {
+    display: none;
+}
+[np-rsearch-node-plain] .liquidate .liquidate-state {
+    display: block;
+}
+[np-rsearch-node-plain] .liquidate .node-header,
+[np-rsearch-node-plain] .liquidate-state {
+    color: #b94a48;
+}
+[np-rsearch-node-form] .node-header {
+    padding-bottom: 5px;
+    font-weight: bold;
+}
+[np-rsearch-node-form] .node-entry {
+    padding-bottom: 5px;
+}
+[np-rsearch-node-form] .liquidate-state {
+    display: none;
+}
+[np-rsearch-node-form] .liquidate .liquidate-state {
+    display: block;
+}
+[np-rsearch-node-form] .liquidate .node-header,
+[np-rsearch-node-form] .liquidate-state {
+    color: #b94a48;
+}
+.rsearch_report_links .price {
+    color: #999;
+}
+.rsearch_report_links .divider {
+    color: #ccc;
+    padding: 0 5px 0 5px;
 }

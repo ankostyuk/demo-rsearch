@@ -2,7 +2,11 @@ var root = this;
 
 //
 root._APP_CONFIG = {
-    lang: 'ru'
+    lang: 'ru',
+    meta: {
+        // Параметр: Объём продаж за последний год
+        lastSalesVolumeField: 'p20103_2012'
+    }
 };
 
 //
