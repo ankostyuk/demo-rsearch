@@ -27,7 +27,6 @@
 
 [np-rsearch-node-plain] {
     margin-bottom: 5px;
-    background-color: #ffffff;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
@@ -37,5 +36,24 @@
     cursor: pointer;
 }
 [np-rsearch-node-plain] .body {
-    padding: 5px;
+    margin-bottom: 20px;
+    padding: 5px 5px 0 5px;
+}
+[np-rsearch-node-plain] .node-header {
+    padding-bottom: 5px;
+    font-weight: bold;
+}
+[np-rsearch-node-plain] .node-entry {
+    padding-bottom: 5px;
+}
+
+[np-rsearch-node-plain] .liquidate-state {
+    display: none;
+}
+[np-rsearch-node-plain] .liquidate .liquidate-state {
+    display: block;
+}
+[np-rsearch-node-plain] .liquidate .node-header,
+[np-rsearch-node-plain] .liquidate-state {
+    color: #b94a48;
 }

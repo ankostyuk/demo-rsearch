@@ -28,6 +28,25 @@ define(function(require) {'use strict';
             }
         })
         //
+        .filter('OKVED', [function(){
+            return function(node){
+                if (!node) {
+                    return null;
+                }
+
+                var okved = node['okvedcode_bal'] || node['okvedcode_main'];
+
+                if (!okved) {
+                    return null;
+                }
+
+                var okvedCode = _.chop(okved, 2).join('.');
+                var okvedText = node['okved_bal_text'] || node['okved_main_text'];
+
+                return okvedCode + ' ' + okvedText;
+            };
+        }])
+        //
         .factory('npRsearchMetaHelper', ['$log', 'npRsearchMeta', function($log, npRsearchMeta){
 
             return {

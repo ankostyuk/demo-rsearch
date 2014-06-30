@@ -31,6 +31,16 @@ define(function(require) {'use strict';
                         attrs   = $attrs;
 
                     //
+                    var inputElement = element.find('input');
+
+                    inputElement.bind('keydown', function(e){
+                        // Отключить дефолтное поведение
+                        if (e.keyCode === 13) {
+                            return false;
+                        }
+                    });
+
+                    //
                     _.extend(scope, {
                         text: null,
 
@@ -66,7 +76,7 @@ define(function(require) {'use strict';
                             scope.text = locationSearch.q;
                         } else {
                             // Фокус на поиске
-                            element.find('input')[0].focus();
+                            inputElement.focus();
                         }
                     });
                 }]

@@ -1,17 +1,28 @@
-<div class="body" node-id="{{node._id}}" ng-click="toggleSelect()">
+<div class="body {{node._liquidate ? 'liquidate' : null}}" node-id="{{node._id}}" ng-click="toggleSelect()">
     <div ng-if="node._type === 'COMPANY'">
-        <h5>{{node.__i}}. {{node.nameshortsort}}</h5>
+        <div class="row">
+            <div class="span4 node-header">{{node.nameshortsort}}</div>
+            <div class="span3">${_tr("ОГРН")}: {{node.ogrn}}</div>
+            <div class="align-right">{{node.founded_dt | date:'mediumDate'}}</div>
+        </div>
+        <div class="row node-entry liquidate-state">
+            <div class="span6">{{node._liquidate.state.type}}</div>
+            <div class="align-right">{{node._liquidate.state._since | date:'mediumDate'}}</div>
+        </div>
+        <div class="node-entry">{{node | OKVED}}</div>
+        <div class="node-entry">{{node.chief_name}}</div>
+        <div class="node-entry">{{node.addresssort}}</div>
     </div>
 
     <div ng-if="node._type === 'INDIVIDUAL'">
-        <h5>{{node.__i}}. {{node.name}}</h5>
+        <div class="node-header">{{node.name}}</div>
     </div>
 
     <div ng-if="node._type === 'ADDRESS'">
-        <h5>{{node.__i}}. {{node.value}}</h5>
+        <div class="node-header">{{node.value}}</div>
     </div>
 
     <div ng-if="node._type === 'PHONE'">
-        <h5>{{node.__i}}. {{node.value}}</h5>
+        <div class="node-header">{{node.value}}</div>
     </div>
 </div>
