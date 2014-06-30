@@ -3,10 +3,6 @@ define(function(require) {'use strict';
     var root = window;
 
     //
-    require('css!src/bower-components/bootstrap/css/bootstrap');
-    require('less!./style');
-
-    //
                   require('jquery');
 
     var angular = require('angular');
@@ -28,8 +24,6 @@ define(function(require) {'use strict';
         })
         //
         .run(['$log', '$timeout', '$rootScope', '$window', '$document', function($log, $timeout, $rootScope, $window, $document){
-            $log.log('app...');
-
             //
             $rootScope.$on('np-rsearch-input-ready', function(e, element){
                 element.find('input')[0].focus();
