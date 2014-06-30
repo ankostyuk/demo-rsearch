@@ -10,30 +10,30 @@ root._RESOURCES_CONFIG = {
     baseUrl: '/rsearch',
 
     paths: {
-        'angular':              'test/bower-components/angular/angular',
-        'angular-locale_ru':    'test/bower-components/angular-i18n/angular-locale_ru',
-        'angular-locale_en':    'test/bower-components/angular-i18n/angular-locale_en',
-        'ng-infinite-scroll':   'test/bower-components/ngInfiniteScroll/ng-infinite-scroll',
+        'angular':              'src/bower-components/angular/angular',
+        'angular-locale_ru':    'src/bower-components/angular-i18n/angular-locale_ru',
+        'angular-locale_en':    'src/bower-components/angular-i18n/angular-locale_en',
+        'ng-infinite-scroll':   'src/bower-components/ngInfiniteScroll/ng-infinite-scroll',
 
-        'jquery':               'test/bower-components/jquery/jquery',
+        'jquery':               'src/bower-components/jquery/jquery',
 
-        'underscore':           'test/bower-components/underscore/underscore',
-        'underscore.string':    'test/bower-components/underscore.string/underscore.string',
+        'underscore':           'src/bower-components/underscore/underscore',
+        'underscore.string':    'src/bower-components/underscore.string/underscore.string',
 
-        'i18n':                 'test/bower-components/nullpointer-i18n/i18n'
+        'i18n':                 'src/bower-components/nullpointer-i18n/i18n'
     },
 
     packages: [{
         name: 'app',
-        location: '/rsearch/test',
+        location: 'src/app',
         main: 'app'
     }, {
         name: 'l10n',
-        location: '/rsearch/test/l10n',
+        location: 'src/app/l10n',
         main: 'l10n'
     }, {
         name: 'rsearch',
-        location: '/rsearch/src',
+        location: 'src/rsearch',
         main: 'rsearch'
     }],
 
@@ -83,9 +83,9 @@ root._RESOURCES_CONFIG = {
 
     map: {
         '*': {
-            'css': 'test/bower-components/require-css/css',
-            'less': 'test/bower-components/require-less/less',
-            'text': 'test/bower-components/requirejs-text/text'
+            'css': 'src/bower-components/require-css/css',
+            'less': 'src/bower-components/require-less/less',
+            'text': 'src/bower-components/requirejs-text/text'
         }
     },
 

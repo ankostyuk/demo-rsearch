@@ -3,7 +3,7 @@ define(function(require) {'use strict';
     var root = window;
 
     //
-    require('css!./bower-components/bootstrap/css/bootstrap');
+    require('css!src/bower-components/bootstrap/css/bootstrap');
     require('less!./style');
 
     //
