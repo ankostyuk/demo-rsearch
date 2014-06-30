@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Поиск</title>
+        <link rel="shortcut icon" href="http://newsite.nkb/wp-content/themes/nkbsite/static/img/favicon.ico?1" type="image/x-icon">
+        <link rel="alternate" type="application/rss+xml" title="НКБ &raquo; Лента комментариев к &laquo;Поиск&raquo;" href="http://newsite.nkb/search/feed/" />
+        <link rel='stylesheet' id='bootstrap-css' href='http://newsite.nkb/wp-content/themes/nkbsite/static/components/bootstrap/css/bootstrap.css?ver=2.3.0' type='text/css' media='all' />
+        <link rel='stylesheet' id='main-css' href='http://newsite.nkb/wp-content/themes/nkbsite/static/css/main.css?ver=1.0.0' type='text/css' media='all' />
+        <link rel='stylesheet' id='autoSuggest-css' href='http://newsite.nkb/wp-content/themes/nkbsite/static/components/jquery-autosuggest/css/autoSuggest.css?ver=1.2' type='text/css' media='all' />
+        <link rel='stylesheet' id='jquery-ui-css' href='http://newsite.nkb/wp-content/themes/nkbsite/static/components/jquery-ui/themes/base/jquery-ui.css?ver=1.10.3' type='text/css' media='all' />
+        <link rel='stylesheet' id='jquery.ui.datepicker-css' href='http://newsite.nkb/wp-content/themes/nkbsite/static/components/jquery-ui/themes/base/jquery.ui.datepicker.css?ver=1.10.3' type='text/css' media='all' />
+        <link rel='stylesheet' id='style-css' href='http://newsite.nkb/wp-content/themes/nkbsite/static/css/style.css?ver=1.0.0' type='text/css' media='all' />
+        <script type='text/javascript' src='http://newsite.nkb/wp-content/themes/nkbsite/static/js/lib/jquery.js?ver=1.11.0'>
+        </script>
+        <script type='text/javascript' src='http://newsite.nkb/wp-content/themes/nkbsite/static/js/lib/underscore.js?ver=1.4.4'>
+        </script>
+        <script type='text/javascript' src='http://newsite.nkb/wp-content/themes/nkbsite/static/js/lib/underscore.string.js?ver=2.3.0'>
+        </script>
+        <script type='text/javascript' src='http://newsite.nkb/wp-content/themes/nkbsite/static/js/lib/iso8601.js?ver=1.0.0'>
+        </script>
+        <script type='text/javascript' src='http://newsite.nkb/wp-content/themes/nkbsite/static/js/lib/dateformat.js?ver=1.2.3'>
+        </script>
+        <script type='text/javascript' src='http://newsite.nkb/wp-content/themes/nkbsite/static/components/bootstrap/js/bootstrap.js?ver=2.3.0'>
+        </script>
+        <script type='text/javascript' src='http://newsite.nkb/wp-content/themes/nkbsite/static/components/jquery-autosuggest/js/jquery.autoSuggest.js?ver=1.4'>
+        </script>
+        <script type='text/javascript' src='http://newsite.nkb/wp-content/themes/nkbsite/static/components/jquery-ui/js/jquery-ui.js?ver=1.10.3'>
+        </script>
+        <script type='text/javascript' src='http://newsite.nkb/wp-content/themes/nkbsite/static/components/jquery-ui/development-bundle/ui/i18n/jquery-ui-i18n.js?ver=1.10.3'>
+        </script>
+        <script type='text/javascript' src='http://newsite.nkb/wp-content/themes/nkbsite/static/js/defaults.js?ver=1.0.0'>
+        </script>
+        <script type='text/javascript' src='http://newsite.nkb/wp-content/themes/nkbsite/static/js/main.js?ver=1.0.0'>
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <div class="row">
+                    <div class="span3">
+                        <div class="product-bar site-nav">
+                            <div class="btn-group link-dropdown tabbed">
+                                <button class="pseudo dropdown-toggle site-section" data-toggle="dropdown" type="button">
+                                    Продукты и решения
+                                </button>
+                                <div class="dropdown-menu">
+                                    <div class="dropdown-content">
+                                        <div class="row">
+                                            <div class="span9">
+                                                <ul class="row">
+                                                    <li id="nav-menu-item-359" class="span3  menu-item menu-item-type-post_type menu-item-object-page">
+                                                        <div class="solution-entry">
+                                                            <a href="http://newsite.nkb/products/companies/" class="menu-link main-menu-link">Истории компаний</a>
+                                                        </div>
+                                                    </li>
+                                                    <li id="nav-menu-item-357" class="span3  menu-item menu-item-type-post_type menu-item-object-page">
+                                                        <div class="solution-entry">
+                                                            <a href="http://newsite.nkb/products/relations/" class="menu-link main-menu-link">Система графического анализа</a>
+                                                        </div>
+                                                    </li>
+                                                    <li id="nav-menu-item-360" class="span3  menu-item menu-item-type-post_type menu-item-object-page">
+                                                        <div class="solution-entry">
+                                                            <a href="http://newsite.nkb/products/people/" class="menu-link main-menu-link">Люди в бизнесе</a>
+                                                        </div>
+                                                    </li>
+                                                    <li id="nav-menu-item-358" class="span3  menu-item menu-item-type-post_type menu-item-object-page">
+                                                        <div class="solution-entry">
+                                                            <a href="http://newsite.nkb/products/foreign-market/" class="menu-link main-menu-link">Внешние рынки</a>
+                                                        </div>
+                                                    </li>
+                                                    <li id="nav-menu-item-361" class="span3  menu-item menu-item-type-post_type menu-item-object-page">
+                                                        <div class="solution-entry">
+                                                            <a href="http://newsite.nkb/products/info-trading/" class="menu-link main-menu-link">Обмен информацией</a>
+                                                        </div>
+                                                    </li>
+                                                    <li id="nav-menu-item-362" class="span3  menu-item menu-item-type-post_type menu-item-object-page">
+                                                        <div class="solution-entry">
+                                                            <a href="http://newsite.nkb/products/marketing/" class="menu-link main-menu-link">Решения маркетинга</a>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="logo-bar">
+                            <a class="home-link" href="http://newsite.nkb/"><img src="http://newsite.nkb/wp-content/themes/nkbsite/static/css/i/logo_ru.png"></a>
+                            <div class="contacts">
+                                <div class="btn-group link-dropdown tabbed">
+                                    <button data-toggle="dropdown" class="pseudo dropdown-toggle phone" type="button">
+                                        <small>
+                                            +7 495
+                                        </small>
+                                        229-67-47
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <div class="dropdown-content nowrap">
+                                            <p>
+                                                Мы работаем с 9:00 до 18:00 по московскому времени
+                                            </p>
+                                            <a href="http://newsite.nkb/contacts/">Контактная информация</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span6">
+                        <div class="site-nav">
+                            <div class="row">
+                                <li id="nav-menu-item-369" class="span-auto  menu-item menu-item-type-post_type menu-item-object-page">
+                                    <a href="http://newsite.nkb/about/" class="site-section menu-link main-menu-link">О проекте</a>
+                                </li>
+                                <li id="nav-menu-item-368" class="span-auto  menu-item menu-item-type-post_type menu-item-object-page">
+                                    <a href="http://newsite.nkb/contacts/" class="site-section menu-link main-menu-link">Контакты</a>
+                                </li>
+                                <!--
+                                <div class="more-bar">
+                                <div class="btn-group link-dropdown tabbed right">
+                                <button class="pseudo dropdown-toggle site-section" data-toggle="dropdown" type="button">ещё</button>
+                                <div class="dropdown-menu">
+                                </div>
+                                </div>
+                                </div>
+                                -->
+                            </div>
+                        </div>
+                        <div class="search-bar">
+                            <form class="form-search form-horizontal" action="http://newsite.nkb/search/">
+                                <div class="base-search-box">
+                                    <div class="input-append">
+                                        <input type="search" name="q" class="span4 search-query strong" placeholder="Наименование компании, ОГРН, ИНН, ОКПО"><input type="hidden" name="lang" value="ru" /><input type="submit" class="btn search-btn strong base-search-submit" value="Найти" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="span3">
+                        <div id="user-bar" class="user-bar align-right b_user">
+                            <div class="user-info align-left" style="display: none;">
+                                <div class="alert">
+                                    <p>
+                                        <a class="e_user_info__name e_user_info_name__value" href="/nkbsite/secured/client#/financial-report"></a>
+                                        <a class="e_user_info__btnLogout logout-action" href="/nkbsite/logout">Выйти</a>
+                                    </p>
+                                    <div>
+                                        <span class="e_user_info__currency">Баланс: <a href="#"><span class="currency-display value e_user_info_currency__value"></span>&nbsp;ие</a></span>
+                                        <div class="clear">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="login" style="display: none;">
+                                <div class="btn-group link-dropdown tabbed right">
+                                    <button class="pseudo dropdown-toggle login-link" data-toggle="dropdown" type="button">
+                                        Вход / Регистрация
+                                    </button>
+                                    <div id="loginDropdownMenu" class="dropdown-menu no-self-hide">
+                                        <form class="noindent" method="POST" action="/nkbsite/login">
+                                            <div class="dropdown-content align-left">
+                                                <div class="form-compact">
+                                                    <input type="hidden" name="redirect" value="http://newsite.nkb/search/" />
+                                                    <div>
+                                                        <input name="login" class="login-input" type="text" placeholder="Логин">
+                                                    </div>
+                                                    <div>
+                                                        <input name="password" type="password" placeholder="Пароль">
+                                                    </div>
+                                                    <div class="indent-bottom-10 error" style="display: none;">
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="span1">
+                                                            <button class="btn login-action" type="submit">
+                                                                Войти
+                                                            </button>
+                                                        </div>
+                                                        <div class="align-right remember">
+                                                            <a href="/nkbsite/register?redirect=http://newsite.nkb/search/">Регистрация</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lang-bar">
+                    <ul class="qtrans_language_chooser" id="qtranslate-chooser">
+                        <li class="lang-ru active">
+                            <a href="http://newsite.nkb/search/?q" hreflang="ru" title="Русский"><span>Русский</span></a>
+                        </li>
+                        <li class="lang-en">
+                            <a href="http://newsite.nkb/search/?q&amp;lang=en" hreflang="en" title="English"><span>English</span></a>
+                        </li>
+                        <li class="lang-de">
+                            <a href="http://newsite.nkb/search/?q&amp;lang=de" hreflang="de" title="Deutsch"><span>Deutsch</span></a>
+                        </li>
+                    </ul>
+                    <div class="qtrans_widget_end">
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="span12">
+                        <p>
+                            Hello unisearch!
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <hr>
+                <div class="row">
+                    <div class="span3">
+                        <a href="http://newsite.nkb/contacts/">Контакты</a>
+                    </div>
+                    <div class="align-right">
+                        ©&nbsp;2002—2014
+                        <br>
+                        Национальное Кредитное Бюро
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- container -->
+    </body>
+</html>
