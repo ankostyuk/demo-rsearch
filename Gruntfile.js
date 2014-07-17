@@ -28,7 +28,7 @@ module.exports = function(grunt) {
                 browser: true,
                 '-W069': true
             },
-            src: ['src/**/*.js']
+            src: ['src/app/**/*.js', 'src/rsearch/**/*.js']
         },
 
         copy: {
@@ -105,7 +105,7 @@ module.exports = function(grunt) {
                                 relativeUrls: true
                             },
 
-                            optimize: 'none',//'uglify2',
+                            optimize: 'uglify2',
                             uglify2: {
                                 mangle: true,
                                 output: {
@@ -155,7 +155,7 @@ module.exports = function(grunt) {
             fs.mkdirsSync(options.outputDir);
 
             wb.processResources.run(_.extend(options, {
-                skipProcess: skip
+                skipProcess: true //skip // TODO решить проблему с ресурсами для тестовой страницы НКБ
             }), function(){
                 requirejsOptimize();
             });
@@ -179,7 +179,7 @@ module.exports = function(grunt) {
 
     //
     grunt.registerTask('init', ['bower']);
-    grunt.registerTask('build', ['clean:src', 'clean:target', 'init', 'web-resources:build:false']);
+    grunt.registerTask('build', ['clean:src', 'clean:target', 'init', 'jshint', 'web-resources:build:false']);
     grunt.registerTask('dist', ['copy:dist']);
     grunt.registerTask('cleanup', ['clean:deps', 'clean:src', 'clean:target']);
 };

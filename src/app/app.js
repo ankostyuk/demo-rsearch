@@ -19,9 +19,9 @@ define(function(require) {'use strict';
             }
         })
         //
-        .config(function($logProvider){
+        .config(['$logProvider', function($logProvider){
             $logProvider.debugEnabled(false);
-        })
+        }])
         //
         .run(['$log', function($log){
             //
