@@ -3,35 +3,37 @@
     <head>
         <meta charset="utf-8">
         <title>Поиск</title>
-        <link rel="shortcut icon" href="http://newsite.nkb/wp-content/themes/nkbsite/static/img/favicon.ico?1" type="image/x-icon">
-        <link rel="alternate" type="application/rss+xml" title="НКБ &raquo; Лента комментариев к &laquo;Поиск&raquo;" href="http://newsite.nkb/search/feed/" />
-        <link rel='stylesheet' id='bootstrap-css' href='http://newsite.nkb/wp-content/themes/nkbsite/static/components/bootstrap/css/bootstrap.css?ver=2.3.0' type='text/css' media='all' />
-        <link rel='stylesheet' id='main-css' href='http://newsite.nkb/wp-content/themes/nkbsite/static/css/main.css?ver=1.0.0' type='text/css' media='all' />
-        <link rel='stylesheet' id='autoSuggest-css' href='http://newsite.nkb/wp-content/themes/nkbsite/static/components/jquery-autosuggest/css/autoSuggest.css?ver=1.2' type='text/css' media='all' />
-        <link rel='stylesheet' id='jquery-ui-css' href='http://newsite.nkb/wp-content/themes/nkbsite/static/components/jquery-ui/themes/base/jquery-ui.css?ver=1.10.3' type='text/css' media='all' />
-        <link rel='stylesheet' id='jquery.ui.datepicker-css' href='http://newsite.nkb/wp-content/themes/nkbsite/static/components/jquery-ui/themes/base/jquery.ui.datepicker.css?ver=1.10.3' type='text/css' media='all' />
-        <link rel='stylesheet' id='style-css' href='http://newsite.nkb/wp-content/themes/nkbsite/static/css/style.css?ver=1.0.0' type='text/css' media='all' />
-        <script type='text/javascript' src='http://newsite.nkb/wp-content/themes/nkbsite/static/js/lib/jquery.js?ver=1.11.0'>
+        <!--<link rel="shortcut icon" href="http://newsite.nkb/wp-content/themes/nkbsite/static/img/favicon.ico?1" type="image/x-icon">-->
+        <!--<link rel="alternate" type="application/rss+xml" title="НКБ &raquo; Лента комментариев к &laquo;Поиск&raquo;" href="http://newsite.nkb/search/feed/" />-->
+
+        <link rel='stylesheet' id='bootstrap-css' href='./resources/bootstrap.css?ver=2.3.0' type='text/css' media='all' />
+        <link rel='stylesheet' id='main-css' href='./resources/main.css?ver=1.0.0' type='text/css' media='all' />
+        <link rel='stylesheet' id='autoSuggest-css' href='./resources/autoSuggest.css?ver=1.2' type='text/css' media='all' />
+        <link rel='stylesheet' id='jquery-ui-css' href='./resources/jquery-ui.css?ver=1.10.3' type='text/css' media='all' />
+        <link rel='stylesheet' id='jquery.ui.datepicker-css' href='./resources/jquery.ui.datepicker.css?ver=1.10.3' type='text/css' media='all' />
+        <link rel='stylesheet' id='style-css' href='./resources/style.css?ver=1.0.0' type='text/css' media='all' />
+
+        <script type='text/javascript' src='./resources/jquery.js?ver=1.11.0'>
         </script>
-        <script type='text/javascript' src='http://newsite.nkb/wp-content/themes/nkbsite/static/js/lib/underscore.js?ver=1.4.4'>
+        <script type='text/javascript' src='./resources/underscore.js?ver=1.4.4'>
         </script>
-        <script type='text/javascript' src='http://newsite.nkb/wp-content/themes/nkbsite/static/js/lib/underscore.string.js?ver=2.3.0'>
+        <script type='text/javascript' src='./resources/underscore.string.js?ver=2.3.0'>
         </script>
-        <script type='text/javascript' src='http://newsite.nkb/wp-content/themes/nkbsite/static/js/lib/iso8601.js?ver=1.0.0'>
+        <script type='text/javascript' src='./resources/iso8601.js?ver=1.0.0'>
         </script>
-        <script type='text/javascript' src='http://newsite.nkb/wp-content/themes/nkbsite/static/js/lib/dateformat.js?ver=1.2.3'>
+        <script type='text/javascript' src='./resources/dateformat.js?ver=1.2.3'>
         </script>
-        <script type='text/javascript' src='http://newsite.nkb/wp-content/themes/nkbsite/static/components/bootstrap/js/bootstrap.js?ver=2.3.0'>
+        <script type='text/javascript' src='./resources/bootstrap.js?ver=2.3.0'>
         </script>
-        <script type='text/javascript' src='http://newsite.nkb/wp-content/themes/nkbsite/static/components/jquery-autosuggest/js/jquery.autoSuggest.js?ver=1.4'>
+        <script type='text/javascript' src='./resources/jquery.autoSuggest.js?ver=1.4'>
         </script>
-        <script type='text/javascript' src='http://newsite.nkb/wp-content/themes/nkbsite/static/components/jquery-ui/js/jquery-ui.js?ver=1.10.3'>
+        <script type='text/javascript' src='./resources/jquery-ui.js?ver=1.10.3'>
         </script>
-        <script type='text/javascript' src='http://newsite.nkb/wp-content/themes/nkbsite/static/components/jquery-ui/development-bundle/ui/i18n/jquery-ui-i18n.js?ver=1.10.3'>
+        <script type='text/javascript' src='./resources/jquery-ui-i18n.js?ver=1.10.3'>
         </script>
-        <script type='text/javascript' src='http://newsite.nkb/wp-content/themes/nkbsite/static/js/defaults.js?ver=1.0.0'>
+        <script type='text/javascript' src='./resources/defaults.js?ver=1.0.0'>
         </script>
-        <script type='text/javascript' src='http://newsite.nkb/wp-content/themes/nkbsite/static/js/main.js?ver=1.0.0'>
+        <script type='text/javascript' src='./resources/main.js?ver=1.0.0'>
         </script>
 
         <!-- <<< rsearch -->
@@ -96,7 +98,7 @@
                             </div>
                         </div>
                         <div class="logo-bar">
-                            <a class="home-link" href="http://newsite.nkb/"><img src="http://newsite.nkb/wp-content/themes/nkbsite/static/css/i/logo_ru.png"></a>
+                            <a class="home-link" href="http://newsite.nkb/"><img src="./resources/logo_ru.png"></a>
                             <div class="contacts">
                                 <div class="btn-group link-dropdown tabbed">
                                     <button data-toggle="dropdown" class="pseudo dropdown-toggle phone" type="button">
@@ -224,11 +226,11 @@
                         <!-- <<< np-rsearch -->
                         <!-- Навигация, результаты поиска, фильтры -->
                         <div class="row">
-                            <div class="span3"><!-- TODO Фильтры --></div>
                             <div class="span9">
                                 <!-- Контейнер для навигации, результатов поиска. Содержимое будет заменено шаблоном компонета np-rsearch-navigation -->
                                 <div np-rsearch-navigation></div>
                             </div>
+                            <div class="span3"><!-- TODO Фильтры --></div>
                         </div>
                         <!-- np-rsearch >>> -->
                     </div>
