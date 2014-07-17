@@ -1,0 +1,264 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: i18n\n"
+"Report-Msgid-Bugs-To: feedback@null-pointer.ru\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: ankostyuk <andrew.kostyuk@gmail.com>\n"
+"Language-Team: NULLPOINTER <feedback@null-pointer.ru>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"CLDR_PLURAL_FORMS_FORMAT: one{0}other{1}\n"
+"X-Generator: Poedit 1.5.5\n"
+
+#: ../src/rsearch/views/rsearch-navigation.html:1
+#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
+msgid "NG_PLURALIZE::ADDRESS"
+msgstr "{'one': '1 address', 'other': '{{count|number}} addresses'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
+msgid "NG_PLURALIZE::BRANCH_COMPANY"
+msgstr "{'one': '1 филиал', 'other': '{{count|number}} филиал'}"
+
+#: ../src/rsearch/views/rsearch-navigation.html:1
+#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
+msgid "NG_PLURALIZE::COMPANY"
+msgstr "{'one': '1 company', 'other': '{{count|number}} companies'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
+msgid "NG_PLURALIZE::EXECUTIVE_COMPANY"
+msgstr ""
+"{'one': '1 управляющая компания', 'other': '{{count|number}} управляющая "
+"компания'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
+msgid "NG_PLURALIZE::EXECUTIVE_INDIVIDUAL"
+msgstr "{'one': '1 руководитель', 'other': '{{count|number}} руководитель'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
+msgid "NG_PLURALIZE::FOUNDER_COMPANY"
+msgstr ""
+"{'one': '1 учредитель компания', 'other': '{{count|number}} учредитель "
+"компания'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
+msgid "NG_PLURALIZE::FOUNDER_INDIVIDUAL"
+msgstr ""
+"{'one': '1 учредитель физическое лицо', 'other': '{{count|number}} "
+"учредитель физическое лицо'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
+msgid "NG_PLURALIZE::HEAD_COMPANY"
+msgstr ""
+"{'one': '1 головная компания', 'other': '{{count|number}} головная компания'}"
+
+#: ../src/rsearch/views/rsearch-navigation.html:1
+msgid "NG_PLURALIZE::INDIVIDUAL"
+msgstr "{'one': '1 individual', 'other': '{{count|number}} individuals'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
+msgid "NG_PLURALIZE::LEAD_COMPANY"
+msgstr ""
+"{'one': '1 руководимая компания', 'other': '{{count|number}} руководимая "
+"компания'}"
+
+#: ../src/rsearch/views/rsearch-navigation.html:1
+#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
+msgid "NG_PLURALIZE::PHONE"
+msgstr "{'one': '1 phone', 'other': '{{count|number}} phones'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
+msgid "NG_PLURALIZE::PREDECESSOR_COMPANY"
+msgstr ""
+"{'one': '1 предшественник', 'other': '{{count|number}} предшественник'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
+msgid "NG_PLURALIZE::REGISTERED_HOLDER_COMPANY"
+msgstr "{'one': '1 эмитент', 'other': '{{count|number}} эмитент'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
+msgid "NG_PLURALIZE::REGISTER_HOLDER_COMPANY"
+msgstr ""
+"{'one': '1 реестродержатель', 'other': '{{count|number}} реестродержатель'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
+msgid "NG_PLURALIZE::SUBSIDIARY_COMPANY"
+msgstr ""
+"{'one': '1 учреждённая компания', 'other': '{{count|number}} учреждённая "
+"компания'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
+msgid "NG_PLURALIZE::SUCCESSOR_COMPANY"
+msgstr "{'one': '1 правоприемник', 'other': '{{count|number}} правоприемник'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "Адреса"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Аналитический профиль"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Бизнес профиль"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Выписки и отчеты"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "Головные компании"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "ЕГРЮЛ"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Заказать выписку ЕГРИП"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Заказать выписку ЕГРЮЛ"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "ИНН"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Исследования"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Исторический профиль"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "Компании"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Корпоративная структура"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Кредитный профиль"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-input.html:1
+msgid "Найти"
+msgstr "Search"
+
+#: ../src/rsearch/views/rsearch-navigation.html:1
+msgid "Не найдено"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-plain.html:1
+msgid "ОГРН"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "ОКПО"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Объём продаж за последний год"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Отчеты"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
+msgid "Поиск"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Полное наименование"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "Правоприемники"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "Предшественники"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Профиль регистрации"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Раскрыть связи компании"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Раскрыть связи физического лица"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Расширенное исследование"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "Реестродержатели"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "Руководимые компании"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "Руководители"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Скачать выписку"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Схема аффилированных лиц"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "Телефоны"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "Управляющие компании"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "Учредители компании"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "Учредители физические лица"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "Учреждённые компании"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "Филиалы"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Финансовая отчётность"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "Эмитенты"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "тыс. руб."
+msgstr ""

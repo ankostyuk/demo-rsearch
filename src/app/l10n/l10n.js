@@ -4,7 +4,7 @@ define(function(require) {'use strict';
 
     var angular         = require('angular'),
         i18n            = require('i18n'),
-        bundleContent   = require('text!./bundle.json'),
+        bundleContent   = require('text!./ui/bundle.json'),
         bundleJSON      = angular.fromJson(bundleContent),
         angularLocale   = require('./angular-locale');
 

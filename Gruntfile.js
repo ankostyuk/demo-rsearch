@@ -2,10 +2,14 @@
 var fs      = require('fs-extra'),
     path    = require('path'),
     _       = require('underscore'),
+    i18n    = require('nullpointer-i18n-bin'),
     wb      = require('nullpointer-web-bin');
 
 //
 module.exports = function(grunt) {
+    //
+    var APP_LANGS = ['ru', 'en'];
+
     //
     var WEBAPP_CONFIG = require('./src/app/config.js');
 
@@ -58,6 +62,20 @@ module.exports = function(grunt) {
                 }
             }
         },
+
+        i18n: {
+          ui: {
+              options: {
+                  pattern:        '**/*.+(js|html)',
+                  inputDir:       path.resolve(__dirname, 'src/rsearch'),
+                  inputRootPath:  path.resolve(__dirname, ''),
+                  outputDir:      path.resolve(__dirname, 'i18n/ui'),
+                  bundleDir:      path.resolve(__dirname, 'src/app/l10n/ui'),
+                  baseLang:       APP_LANGS[0],
+                  langs:          APP_LANGS
+              }
+          }
+      },
 
         'web-resources': {
             build: {
@@ -112,6 +130,15 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-bower-task');
+
+    //
+    grunt.task.registerMultiTask('i18n', function(arg1) {
+        var done = this.async();
+
+        i18n.run(this.data.options, function(){
+            done();
+        });
+    });
 
     //
     grunt.task.registerMultiTask('web-resources', function(skipOptimize, contextPath) {
