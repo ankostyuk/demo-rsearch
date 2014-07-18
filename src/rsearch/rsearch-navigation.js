@@ -398,42 +398,11 @@ define(function(require) {'use strict';
                      */
                     function nodeListProcess(data) {
                         _.each(data.list, function(node, i){
-                            buildNodeExtraMeta(node);
+                            npRsearchMetaHelper.buildNodeExtraMeta(node);
 
                             // test
                             //node.__i = 1 + i + data.pageSize * (data.pageNumber - 1);
                         });
-                    }
-
-                    function buildNodeExtraMeta(node) {
-                        // компания
-                        if (node._type === 'COMPANY') {
-                            // юридическое состояние
-                            var egrulState  = node.egrul_state,
-                                aliveCode   = 5, // Действующее
-                                _liquidate;
-
-                            if (egrulState && egrulState.code != aliveCode) {
-                                _liquidate = {
-                                    state: {
-                                        _actual: egrulState._actual,
-                                        _since: egrulState._since,
-                                        type: egrulState.type
-                                    }
-                                };
-                            } else
-                            if (node.dead_dt) {
-                                _liquidate = {
-                                    state: {
-                                        _actual: null,
-                                        _since: node.dead_dt,
-                                        type: 'Ликвидировано' // TODO l10n
-                                    }
-                                };
-                            }
-
-                            node._liquidate = _liquidate;
-                        }
                     }
                 }]
             };

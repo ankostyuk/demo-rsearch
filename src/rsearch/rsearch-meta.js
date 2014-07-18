@@ -5,16 +5,8 @@
  */
 // TODO объеденить код со "связями"
 define(function(require) {'use strict';
-    var root = window;
 
     var angular = require('angular');
-
-    var metaConfig = root._APP_CONFIG.meta;
-
-    var MetaSettings = {
-        lastSalesVolumeField: metaConfig.lastSalesVolumeField,
-        currencyOrder: 1000
-    };
 
     return angular.module('np.rsearch-meta', [])
         //
@@ -36,23 +28,23 @@ define(function(require) {'use strict';
                 }
             }
         })
-        .filter('isLastSalesVolume', [function(){
+        .filter('isLastSalesVolume', ['npRsearchConfig', function(npRsearchConfig){
             return function(node){
                 if (!node) {
                     return null;
                 }
 
-                return _.has(node, MetaSettings.lastSalesVolumeField);
+                return _.has(node, npRsearchConfig.meta.lastSalesVolumeField);
             };
         }])
         //
-        .filter('lastSalesVolume', [function(){
+        .filter('lastSalesVolume', ['npRsearchConfig', function(npRsearchConfig){
             return function(node){
                 if (!node) {
                     return null;
                 }
 
-                return node[MetaSettings.lastSalesVolumeField] / MetaSettings.currencyOrder;
+                return node[npRsearchConfig.meta.lastSalesVolumeField] / npRsearchConfig.meta.currencyOrder;
             };
         }])
         //
@@ -106,11 +98,55 @@ define(function(require) {'use strict';
         //
         .factory('npRsearchMetaHelper', ['$log', 'npRsearchMeta', function($log, npRsearchMeta){
 
-            return {
+            var metaHelper = {
+
                 getNodeTypes: function() {
                     return npRsearchMeta.nodes.types;
+                },
+
+                buildNodeExtraMeta: function(node){
+                    if (!node) {
+                        return;
+                    }
+
+                    // uid
+                    //metaHelper.buildNodeUID(node);
+
+                    // компания
+                    if (node._type === 'COMPANY') {
+                        // юридическое состояние
+                        var egrulState  = node.egrul_state,
+                            aliveCode   = 5, // Действующее
+                            _liquidate;
+
+                        if (egrulState && egrulState.code != aliveCode) {
+                            _liquidate = {
+                                state: {
+                                    _actual: egrulState._actual,
+                                    _since: egrulState._since,
+                                    type: egrulState.type
+                                }
+                            };
+                        } else
+                        if (node.dead_dt) {
+                            _liquidate = {
+                                state: {
+                                    _actual: null,
+                                    _since: node.dead_dt,
+                                    type: 'Ликвидировано' // TODO l10n|messages
+                                }
+                            };
+                        }
+
+                        node._liquidate = _liquidate;
+                    }
+
+                    // информация о связях
+                    //nodeHelper.buildNodeRelationsInfo(node);
                 }
             };
+
+            return metaHelper;
         }]);
     //
 });

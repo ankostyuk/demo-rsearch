@@ -13,6 +13,7 @@ define(function(require) {'use strict';
     var app = angular.module('app', ['np.rsearch'])
         //
         .constant('npRsearchConfig', {
+            meta: root._APP_CONFIG.meta,
             resource: {
                 searchUrl: '/nkbrelation/api/nodes',
                 relationsUrl: '/nkbrelation/api/node'
