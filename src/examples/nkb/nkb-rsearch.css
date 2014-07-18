@@ -61,6 +61,18 @@
     color: #b94a48;
 }
 
+/* np-rsearch-node-list */
+[np-rsearch-node-list] .node-list-item {
+    position: relative;
+}
+[np-rsearch-node-list] .node-list-item .item-number {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    padding: 5px 5px 0 0;
+    color: #999;
+}
+
 /* np-rsearch-node-form */
 [np-rsearch-node-form] .node-header {
     padding-bottom: 5px;
@@ -81,6 +93,7 @@
     color: #b94a48;
 }
 
+/**/
 .rsearch_report_links .price {
     color: #999;
 }

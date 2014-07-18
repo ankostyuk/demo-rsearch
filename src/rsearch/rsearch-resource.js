@@ -62,9 +62,11 @@ define(function(require) {'use strict';
             }
 
             function nodeListProcess(data) {
+                var baseIndex = data.pageSize * (data.pageNumber - 1);
+
                 _.each(data.list, function(node, i){
                     npRsearchMetaHelper.buildNodeExtraMeta(node);
-                    //node.__index = 1 + i + data.pageSize * (data.pageNumber - 1);
+                    node.__index = baseIndex + i;
                 });
 
                 return data;

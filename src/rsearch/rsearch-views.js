@@ -173,6 +173,9 @@ define(function(require) {'use strict';
                                     scrollTop: nodeElement.offset().top
                                 }, 200);
                             });
+                        },
+                        showItemNumber: function(show){
+                            scope.showItemNumber = show;
                         }
                     });
 

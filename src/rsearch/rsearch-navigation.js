@@ -178,6 +178,8 @@ define(function(require) {'use strict';
 
                         setSearchBreadcrumb(nodeType);
 
+                        nodeListView.showItemNumber(false);
+
                         nodeListView.reset(byNodeType.nodeList, noMore(byNodeType.result), function(callback){
                             byNodeType.pageConfig.page++;
 
@@ -268,6 +270,8 @@ define(function(require) {'use strict';
                         }
 
                         function resetNodeListView() {
+                            nodeListView.showItemNumber(true);
+
                             nodeListView.reset(byRelations.nodeList, noMore(byRelations.result), function(callback){
                                 byRelations.pageConfig.page++;
 
