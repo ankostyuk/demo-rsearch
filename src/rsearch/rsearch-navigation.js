@@ -118,17 +118,14 @@ define(function(require) {'use strict';
                             q: search.query,
                             nodeType: byNodeType.nodeType,
                             pageConfig: byNodeType.pageConfig,
-                            previousRequest: byNodeType.request
-                        });
-
-                        byNodeType.request.promise
-                            .success(function(data, status){
-                                nodeListProcess(data);
+                            previousRequest: byNodeType.request,
+                            success: function(data, status){
                                 complete(data);
-                            })
-                            .error(function(data, status){
+                            },
+                            error: function(data, status){
                                 complete(null);
-                            });
+                            }
+                        });
 
                         function complete(result) {
                             byNodeType.result = result;
@@ -225,17 +222,15 @@ define(function(require) {'use strict';
                             direction: byRelations.direction,
                             relationType: byRelations.relationType,
                             pageConfig: byRelations.pageConfig,
-                            previousRequest: byRelations.request
-                        });
-
-                        byRelations.request.promise
-                            .success(function(data, status){
-                                nodeListProcess(data);
+                            previousRequest: byRelations.request,
+                            success: function(data, status){
                                 complete(data);
-                            })
-                            .error(function(data, status){
+                            },
+                            error: function(data, status){
                                 complete(null);
-                            });
+                            }
+
+                        });
 
                         function complete(result) {
                             byRelations.result = result;
@@ -389,20 +384,6 @@ define(function(require) {'use strict';
 
                     function isLastBreadcrumb(breadcrumb) {
                         return breadcrumb.index === _.size(scope.breadcrumbs) - 1;
-                    }
-
-
-                    /*
-                     * node
-                     *
-                     */
-                    function nodeListProcess(data) {
-                        _.each(data.list, function(node, i){
-                            npRsearchMetaHelper.buildNodeExtraMeta(node);
-
-                            // test
-                            //node.__i = 1 + i + data.pageSize * (data.pageNumber - 1);
-                        });
                     }
                 }]
             };

@@ -5,6 +5,7 @@
  */
 define(function(require) {'use strict';
 
+                  require('underscore');
     var angular = require('angular');
 
                   require('./rsearch-meta');
@@ -15,7 +16,10 @@ define(function(require) {'use strict';
 
             var config = npRsearchConfig.resource || {};
 
-            function request(httpConfig, options) {
+            function request(httpConfig, requestConfig, options) {
+                requestConfig = requestConfig || {};
+                options = options || {};
+
                 if (options.previousRequest) {
                     options.previousRequest.abort();
                 }
@@ -27,9 +31,24 @@ define(function(require) {'use strict';
                     timeout: canceler.promise
                 }, httpConfig));
 
-                promise['finally'](function(){
-                    complete = true;
-                });
+                promise
+                    .success(function(data, status){
+                        if (_.isFunction(requestConfig.responseProcess)) {
+                            data = requestConfig.responseProcess(data, status);
+                        }
+
+                        if (_.isFunction(options.success)) {
+                            options.success(data, status);
+                        }
+                    })
+                    .error(function(data, status){
+                        if (_.isFunction(options.error)) {
+                            options.error(data, status);
+                        }
+                    })
+                    ['finally'](function(){
+                        complete = true;
+                    });
 
                 return {
                     promise: promise,
@@ -42,6 +61,16 @@ define(function(require) {'use strict';
                 };
             }
 
+            function nodeListProcess(data) {
+                _.each(data.list, function(node, i){
+                    npRsearchMetaHelper.buildNodeExtraMeta(node);
+                    //node.__index = 1 + i + data.pageSize * (data.pageNumber - 1);
+                });
+
+                return data;
+            }
+
+            // API
             return {
 
                 search: function(options) {
@@ -53,6 +82,8 @@ define(function(require) {'use strict';
                         method: 'GET',
                         url: config.searchUrl + '/' + options.nodeType,
                         params: params
+                    }, {
+                        responseProcess: nodeListProcess
                     }, options);
                 },
 
@@ -63,6 +94,8 @@ define(function(require) {'use strict';
                         method: 'GET',
                         url: config.relationsUrl + '/' + options.node._id + '/' + options.relationType + '/' + options.direction,
                         params: params
+                    }, {
+                        responseProcess: nodeListProcess
                     }, options);
                 }
             };
