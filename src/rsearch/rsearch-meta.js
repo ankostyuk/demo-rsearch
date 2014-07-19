@@ -6,28 +6,138 @@
 // TODO объеденить код со "связями"
 define(function(require) {'use strict';
 
+                  require('underscore');
     var angular = require('angular');
 
     return angular.module('np.rsearch-meta', [])
         //
         .constant('npRsearchMeta', {
-            nodes: {
-                types: {
-                    'COMPANY': {
-                        searchResultPriority: 4
-                    },
-                    'INDIVIDUAL': {
-                        searchResultPriority: 3
-                    },
-                    'ADDRESS': {
-                        searchResultPriority: 2
-                    },
-                    'PHONE': {
-                        searchResultPriority: 1
-                    }
+            nodeTypes: {
+                'COMPANY': {
+                    searchResultPriority: 4
+                },
+                'INDIVIDUAL': {
+                    searchResultPriority: 3
+                },
+                'ADDRESS': {
+                    searchResultPriority: 2
+                },
+                'PHONE': {
+                    searchResultPriority: 1
                 }
-            }
+            },
+            relationTypes: {}
         })
+        //
+        .factory('npRsearchMetaHelper', ['$log', '$q', '$http', '$rootScope', 'npRsearchConfig', 'npRsearchMeta', function($log, $q, $http, $rootScope, npRsearchConfig, npRsearchMeta){
+            var resourceConfig = npRsearchConfig.resource || {};
+
+            // init meta
+            // TODO init user info
+            var nodeTypesMeta       = {},
+                relationTypesMeta   = {},
+                nodeTypes, relationTypes;
+
+            var nodeTypesPromise = $http({
+                    method: 'GET',
+                    url: resourceConfig.metaUrl + '/node/types'
+                })
+                .success(function(data){
+                    nodeTypes = data;
+                });
+
+            var relationTypesPromise = $http({
+                    method: 'GET',
+                    url: resourceConfig.metaUrl + '/relation/types'
+                })
+                .success(function(data){
+                    relationTypes = data;
+                });
+
+            $q.all([nodeTypesPromise, relationTypesPromise])
+                .then(initMeta, initMeta); // !При конструкции ['finally'](initMeta) - генерятся исключения, но не отображаются в консоли
+
+            function initMeta() {
+                if (!nodeTypes || !relationTypes) {
+                    throw new Error('fail init meta');
+                    return;
+                }
+
+                _.each(nodeTypes, function(nodeType){
+                    nodeTypesMeta[nodeType.name] = _.extend(
+                        {},
+                        nodeType,
+                        npRsearchMeta.nodeTypes[nodeType.name]
+                    );
+                });
+
+                _.each(relationTypes, function(relationType){
+                    relationTypesMeta[relationType.name] = _.extend(
+                        {},
+                        relationType,
+                        npRsearchMeta.relationTypes[relationType.name]
+                    );
+                });
+
+                $rootScope.$emit('np-rsearch-meta-ready');
+            }
+
+            // API
+            var metaHelper = {
+
+                getNodeTypes: function() {
+                    return nodeTypesMeta;
+                },
+
+                getRelationTypes: function() {
+                    return relationTypesMeta;
+                },
+
+                buildNodeExtraMeta: function(node){
+                    if (!node) {
+                        return;
+                    }
+
+                    // uid
+                    //metaHelper.buildNodeUID(node);
+
+                    // компания
+                    if (node._type === 'COMPANY') {
+                        // юридическое состояние
+                        var egrulState  = node.egrul_state,
+                            aliveCode   = 5, // Действующее
+                            _liquidate;
+
+                        if (egrulState && egrulState.code != aliveCode) {
+                            _liquidate = {
+                                state: {
+                                    _actual: egrulState._actual,
+                                    _since: egrulState._since,
+                                    type: egrulState.type
+                                }
+                            };
+                        } else
+                        if (node.dead_dt) {
+                            _liquidate = {
+                                state: {
+                                    _actual: null,
+                                    _since: node.dead_dt,
+                                    type: 'Ликвидировано' // TODO l10n|messages
+                                }
+                            };
+                        }
+
+                        node._liquidate = _liquidate;
+                    }
+
+                    // информация о связях
+                    //nodeHelper.buildNodeRelationsInfo(node);
+                }
+            };
+
+            return metaHelper;
+        }])
+        //
         .filter('isLastSalesVolume', ['npRsearchConfig', function(npRsearchConfig){
             return function(node){
                 if (!node) {
@@ -94,59 +204,6 @@ define(function(require) {'use strict';
 
                 return okvedCode + ' ' + okvedText;
             };
-        }])
-        //
-        .factory('npRsearchMetaHelper', ['$log', 'npRsearchMeta', function($log, npRsearchMeta){
-
-            var metaHelper = {
-
-                getNodeTypes: function() {
-                    return npRsearchMeta.nodes.types;
-                },
-
-                buildNodeExtraMeta: function(node){
-                    if (!node) {
-                        return;
-                    }
-
-                    // uid
-                    //metaHelper.buildNodeUID(node);
-
-                    // компания
-                    if (node._type === 'COMPANY') {
-                        // юридическое состояние
-                        var egrulState  = node.egrul_state,
-                            aliveCode   = 5, // Действующее
-                            _liquidate;
-
-                        if (egrulState && egrulState.code != aliveCode) {
-                            _liquidate = {
-                                state: {
-                                    _actual: egrulState._actual,
-                                    _since: egrulState._since,
-                                    type: egrulState.type
-                                }
-                            };
-                        } else
-                        if (node.dead_dt) {
-                            _liquidate = {
-                                state: {
-                                    _actual: null,
-                                    _since: node.dead_dt,
-                                    type: 'Ликвидировано' // TODO l10n|messages
-                                }
-                            };
-                        }
-
-                        node._liquidate = _liquidate;
-                    }
-
-                    // информация о связях
-                    //nodeHelper.buildNodeRelationsInfo(node);
-                }
-            };
-
-            return metaHelper;
         }]);
     //
 });

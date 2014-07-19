@@ -39,26 +39,12 @@ define(function(require) {'use strict';
                         query: null,
                         total: null,
                         activeResult: null,
-                        byNodeTypes: {},
+                        byNodeTypes: null,
                         getTotalByNodeType: getTotalByNodeType,
                         showResult: showSearchResult
                     };
 
                     var byRelationsStore = {};
-
-                    _.each(npRsearchMetaHelper.getNodeTypes(), function(data, nodeType){
-                        search.byNodeTypes[nodeType] = {
-                              nodeType: nodeType,
-                              resultPriority: data.searchResultPriority,
-                              pageConfig: {
-                                  page: 0,
-                                  pageSize: 20
-                              },
-                              request: null,
-                              result: null,
-                              nodeList: null
-                          };
-                    });
 
                     //
                     _.extend(scope, {
@@ -66,6 +52,27 @@ define(function(require) {'use strict';
                         breadcrumbs: [],
                         isBreadcrumbs: isBreadcrumbs
                     });
+
+                    //
+                    $rootScope.$on('np-rsearch-meta-ready', initByMeta);
+
+                    function initByMeta() {
+                        search.byNodeTypes = {};
+
+                        _.each(npRsearchMetaHelper.getNodeTypes(), function(data, nodeType){
+                            search.byNodeTypes[nodeType] = {
+                                  nodeType: nodeType,
+                                  resultPriority: data.searchResultPriority,
+                                  pageConfig: {
+                                      page: 0,
+                                      pageSize: 20
+                                  },
+                                  request: null,
+                                  result: null,
+                                  nodeList: null
+                              };
+                        });
+                    }
 
                     // utils
                     function setNodeList(object) {
@@ -161,7 +168,7 @@ define(function(require) {'use strict';
                     }
 
                     function getTotalByNodeType(nodeType) {
-                        var result = search.byNodeTypes[nodeType].result;
+                        var result = search.byNodeTypes && search.byNodeTypes[nodeType].result;
                         return result ? result.total : null;
                     }
 

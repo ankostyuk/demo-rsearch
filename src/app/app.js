@@ -15,6 +15,7 @@ define(function(require) {'use strict';
         .constant('npRsearchConfig', {
             meta: root._APP_CONFIG.meta,
             resource: {
+                metaUrl: '/nkbrelation/api/meta',
                 searchUrl: '/nkbrelation/api/nodes',
                 relationsUrl: '/nkbrelation/api/node'
             }
