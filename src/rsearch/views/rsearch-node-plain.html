@@ -12,17 +12,21 @@
         <div class="node-entry">{{node | OKVED}}</div>
         <div class="node-entry">{{node.chief_name}}</div>
         <div class="node-entry">{{node.addresssort}}</div>
+        <div np-rsearch-node-target-relations-info></div>
     </div>
 
     <div ng-if="node._type === 'INDIVIDUAL'">
         <div class="node-header">{{node.name}}</div>
+        <div np-rsearch-node-target-relations-info></div>
     </div>
 
     <div ng-if="node._type === 'ADDRESS'">
         <div class="node-header">{{node.value}}</div>
+        <!--<div np-rsearch-node-target-relations-info></div>-->
     </div>
 
     <div ng-if="node._type === 'PHONE'">
         <div class="node-header">{{node.value}}</div>
+        <!--<div np-rsearch-node-target-relations-info></div>-->
     </div>
 </div>

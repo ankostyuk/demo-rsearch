@@ -26,7 +26,35 @@ define(function(require) {'use strict';
                     searchResultPriority: 1
                 }
             },
-            relationTypes: {}
+            relationTypes: {
+                'FOUNDER_COMPANY': {
+                    mergedPriority: 9
+                },
+                'FOUNDER_INDIVIDUAL': {
+                    mergedPriority: 8
+                },
+                'HEAD_COMPANY': {
+                    mergedPriority: 7
+                },
+                'EXECUTIVE_COMPANY': {
+                    mergedPriority: 6
+                },
+                'EXECUTIVE_INDIVIDUAL': {
+                    mergedPriority: 5
+                },
+                'PREDECESSOR_COMPANY': {
+                    mergedPriority: 4
+                },
+                'REGISTER_HOLDER': {
+                    mergedPriority: 3
+                },
+                'ADDRESS': {
+                    mergedPriority: 2
+                },
+                'PHONE': {
+                    mergedPriority: 1
+                }
+            }
         })
         //
         .factory('npRsearchMetaHelper', ['$log', '$q', '$http', '$rootScope', 'npRsearchConfig', 'npRsearchMeta', function($log, $q, $http, $rootScope, npRsearchConfig, npRsearchMeta){
@@ -93,13 +121,22 @@ define(function(require) {'use strict';
                     return relationTypesMeta;
                 },
 
+                buildNodeUID: function(node){
+                    node.__uid = node.$$hashKey = node.__uid || metaHelper.buildNodeUIDByType(node._id, node._type);
+                    return node.__uid;
+                },
+
+                buildNodeUIDByType: function(id, type){
+                    return ('node-' + type + '-' + id);
+                },
+
                 buildNodeExtraMeta: function(node){
                     if (!node) {
                         return;
                     }
 
                     // uid
-                    //metaHelper.buildNodeUID(node);
+                    metaHelper.buildNodeUID(node);
 
                     // компания
                     if (node._type === 'COMPANY') {
@@ -129,9 +166,46 @@ define(function(require) {'use strict';
 
                         node._liquidate = _liquidate;
                     }
+                },
 
-                    // информация о связях
-                    //nodeHelper.buildNodeRelationsInfo(node);
+                buildRelationMap: function(node) {
+                    var relationMap = {};
+
+                    _.each(node._relations, function(relation){
+                        var relationType    = relationTypesMeta[relation._type],
+                            srcNodeUID      = metaHelper.buildNodeUIDByType(relation._srcId, relationType.sourceNodeType),
+                            dstNodeUID      = metaHelper.buildNodeUIDByType(relation._dstId, relationType.destinationNodeType);
+
+                        _.each([[srcNodeUID, 'parents'], [dstNodeUID, 'children']], function(conf){
+                            var nodeUID     = conf[0],
+                                direction   = conf[1];
+
+                            // Только связи с другими нодями и "кольцевые" связи
+                            if (nodeUID === node.__uid && srcNodeUID !== dstNodeUID) {
+                                return;
+                            }
+
+                            var relationInfo = relationMap[nodeUID] || {
+                                'parents': [],
+                                'children': []
+                            };
+
+                            relationInfo[direction].push(relation);
+
+                            relationMap[nodeUID] = relationInfo;
+                        });
+                    });
+
+                    // sort
+                    _.each(relationMap, function(relationInfo){
+                        _.each(['parents', 'children'], function(direction){
+                            relationInfo[direction] = _.sortBy(relationInfo[direction], function(relation){
+                                return -relationTypesMeta[relation._type].mergedPriority;
+                            });
+                        });
+                    });
+
+                    return relationMap;
                 }
             };
 

@@ -60,6 +60,14 @@
 [np-rsearch-node-plain] .liquidate-state {
     color: #b94a48;
 }
+[np-rsearch-node-plain] [np-rsearch-node-target-relations-info] {
+    padding-top: 5px;
+}
+[np-rsearch-node-plain] [np-rsearch-relation-simple] .entry {
+    margin-right: 10px;
+    font-style: italic;
+    color: #999;
+}
 
 /* np-rsearch-node-list */
 [np-rsearch-node-list] .node-list-item {

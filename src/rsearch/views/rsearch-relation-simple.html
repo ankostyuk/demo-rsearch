@@ -1,0 +1,17 @@
+<span ng-if="relation._type === 'FOUNDER_COMPANY'">
+    <span class="entry" ng-show="relation.sharePercent">{{relation.sharePercent | number}}%</span>
+    <span class="entry" ng-show="relation.shareAmount">{{relation.shareAmount | number}}&nbsp;${_tr("руб.")}</span>
+</span>
+
+<span ng-if="relation._type === 'FOUNDER_INDIVIDUAL'">
+    <span class="entry" ng-show="relation.sharePercent">{{relation.sharePercent | number}}%</span>
+    <span class="entry" ng-show="relation.shareAmount">{{relation.shareAmount | number}}&nbsp;${_tr("руб.")}</span>
+    <span class="entry" ng-show="relation.inn">${_tr("ИНН")}:&nbsp;{{relation.inn}}</span>
+</span>
+
+<!--<span ng-if="relation._type === 'EXECUTIVE_COMPANY'">{{relation.representative}}</span>-->
+
+<span ng-if="relation._type === 'EXECUTIVE_INDIVIDUAL'">
+    <span class="entry" ng-show="relation.position">{{relation.position}}</span>
+    <span class="entry" ng-show="relation.inn">${_tr("ИНН")}:&nbsp;{{relation.inn}}</span>
+</span>

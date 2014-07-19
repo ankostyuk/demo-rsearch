@@ -196,6 +196,11 @@ define(function(require) {'use strict';
                                 pushNodeList(byNodeType, callback);
                             });
                         });
+
+//                        // test
+//                        $timeout(function(){
+//                            npRsearchMetaHelper.buildRelationMap(byNodeType.nodeList[0]);
+//                        });
                     }
 
                     /*
@@ -259,6 +264,7 @@ define(function(require) {'use strict';
                                 node: node,
                                 direction: direction,
                                 relationType: relationType,
+                                relationMap: npRsearchMetaHelper.buildRelationMap(node),
                                 pageConfig: {
                                     page: 1,
                                     pageSize: 20
@@ -287,6 +293,15 @@ define(function(require) {'use strict';
                                 byRelations.request.promise['finally'](function(){
                                     pushNodeList(byRelations, callback);
                                 });
+                            });
+
+                            nodeListView.setTargetInfo({
+                                node: byRelations.node,
+                                relationInfo: {
+                                    direction: byRelations.direction,
+                                    relationType: byRelations.relationType,
+                                    relationMap: byRelations.relationMap
+                                }
                             });
                         }
                     }
