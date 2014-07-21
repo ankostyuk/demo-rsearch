@@ -20,8 +20,21 @@
     padding: 0;
     background-color: transparent;
 }
+[np-rsearch-navigation] .breadcrumb > li {
+    line-height: 15px;
+    vertical-align: top;
+}
 [np-rsearch-navigation] .breadcrumb .divider {
     padding-right: 0;
+}
+[np-rsearch-navigation] .breadcrumb [np-rsearch-node-target-relations-info]{
+    padding-left: 15px;
+}
+[np-rsearch-node-simple] [np-rsearch-relation-simple] .entry {
+    margin-right: 5px;
+    font-size: 80%;
+    font-style: italic;
+    color: #999;
 }
 [np-rsearch-node-plain] {
     margin-bottom: 5px;
@@ -53,6 +66,25 @@
 [np-rsearch-node-plain] .liquidate .node-header,
 [np-rsearch-node-plain] .liquidate-state {
     color: #b94a48;
+}
+[np-rsearch-node-plain] [np-rsearch-node-target-relations-info] {
+    display: block;
+    padding-top: 5px;
+}
+[np-rsearch-node-plain] [np-rsearch-relation-simple] .entry {
+    margin-right: 10px;
+    font-style: italic;
+    color: #999;
+}
+[np-rsearch-node-list] .node-list-item {
+    position: relative;
+}
+[np-rsearch-node-list] .node-list-item .item-number {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    padding: 5px 5px 0 0;
+    color: #999;
 }
 [np-rsearch-node-form] .node-header {
     padding-bottom: 5px;
