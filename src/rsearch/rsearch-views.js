@@ -36,7 +36,8 @@ define(function(require) {'use strict';
             return {
                 restrict: 'A',
                 scope: {
-                    node: '=npRsearchNodeSimple'
+                    node: '=npRsearchNodeSimple',
+                    targetInfo: '=npRsearchNodeTargetInfo'
                 },
                 template: templates['np-rsearch-node-simple'],
                 link: function(scope, element, attrs){

@@ -295,14 +295,7 @@ define(function(require) {'use strict';
                                 });
                             });
 
-                            nodeListView.setTargetInfo({
-                                node: byRelations.node,
-                                relationInfo: {
-                                    direction: byRelations.direction,
-                                    relationType: byRelations.relationType,
-                                    relationMap: byRelations.relationMap
-                                }
-                            });
+                            nodeListView.setTargetInfo(getLastTargetInfo());
                         }
                     }
 
@@ -315,7 +308,7 @@ define(function(require) {'use strict';
                     });
 
                     function isBreadcrumbs() {
-                        return scope.breadcrumbs.length > 1;
+                        return getBreadcrumbSize() > 1;
                     }
 
                     function setSearchBreadcrumb(nodeType) {
@@ -335,13 +328,14 @@ define(function(require) {'use strict';
                     }
 
                     function pushNodeFormBreadcrumb(node) {
-                        var index = _.size(scope.breadcrumbs);
+                        var index = getBreadcrumbSize();
 
                         scope.breadcrumbs[index] = {
                             index: index,
                             type: 'NODE_FORM',
                             data: {
-                                node: node
+                                node: node,
+                                targetInfo: getLastTargetInfo()
                             }
                         };
 
@@ -349,7 +343,7 @@ define(function(require) {'use strict';
                     }
 
                     function pushRelationsBreadcrumb(node, direction, relationType) {
-                        var index = _.size(scope.breadcrumbs);
+                        var index = getBreadcrumbSize();
 
                         nodeFormView.hide();
 
@@ -401,7 +395,7 @@ define(function(require) {'use strict';
                     function clearBreadcrumbs(toIndex) {
                         toIndex = toIndex || 0;
 
-                        for (var i = toIndex + 1; i < _.size(scope.breadcrumbs); i++) {
+                        for (var i = toIndex + 1; i < getBreadcrumbSize(); i++) {
                             delete byRelationsStore[i];
                         }
 
@@ -409,7 +403,25 @@ define(function(require) {'use strict';
                     }
 
                     function isLastBreadcrumb(breadcrumb) {
-                        return breadcrumb.index === _.size(scope.breadcrumbs) - 1;
+                        return breadcrumb.index === getBreadcrumbSize() - 1;
+                    }
+
+                    function getBreadcrumbSize() {
+                        return _.size(scope.breadcrumbs);
+                    }
+
+                    //
+                    function getLastTargetInfo() {
+                        var byRelations = byRelationsStore[getBreadcrumbSize() - 1];
+
+                        return byRelations ? {
+                            node: byRelations.node,
+                            relationInfo: {
+                                direction: byRelations.direction,
+                                relationType: byRelations.relationType,
+                                relationMap: byRelations.relationMap
+                            }
+                        } : null;
                     }
                 }]
             };
