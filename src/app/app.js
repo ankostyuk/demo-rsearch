@@ -13,15 +13,17 @@ define(function(require) {'use strict';
     var app = angular.module('app', ['np.rsearch'])
         //
         .constant('npRsearchConfig', {
+            meta: root._APP_CONFIG.meta,
             resource: {
+                metaUrl: '/nkbrelation/api/meta',
                 searchUrl: '/nkbrelation/api/nodes',
                 relationsUrl: '/nkbrelation/api/node'
             }
         })
         //
-        .config(function($logProvider){
+        .config(['$logProvider', function($logProvider){
             $logProvider.debugEnabled(false);
-        })
+        }])
         //
         .run(['$log', function($log){
             //

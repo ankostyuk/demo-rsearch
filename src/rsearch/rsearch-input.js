@@ -44,6 +44,8 @@ define(function(require) {'use strict';
                     _.extend(scope, {
                         text: null,
 
+                        ready: false,
+
                         // TODO Реализовать
                         searchInputEnter: function(){
                             fireRefresh();
@@ -68,16 +70,20 @@ define(function(require) {'use strict';
                     }
 
                     //
-                    $timeout(function(){
-                        var locationSearch = purl().param();
+                    $rootScope.$on('np-rsearch-meta-ready', function(){
+                        scope.ready = true;
 
-                        if (locationSearch.q) {
-                            // Поиск из URL
-                            scope.text = locationSearch.q;
-                        } else {
-                            // Фокус на поиске
-                            inputElement.focus();
-                        }
+                        $timeout(function(){
+                            var locationSearch = purl().param();
+
+                            if (locationSearch.q) {
+                                // Поиск из URL
+                                scope.text = locationSearch.q;
+                            } else {
+                                // Фокус на поиске
+                                inputElement.focus();
+                            }
+                        });
                     });
                 }]
             };

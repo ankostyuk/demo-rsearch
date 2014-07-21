@@ -39,26 +39,12 @@ define(function(require) {'use strict';
                         query: null,
                         total: null,
                         activeResult: null,
-                        byNodeTypes: {},
+                        byNodeTypes: null,
                         getTotalByNodeType: getTotalByNodeType,
                         showResult: showSearchResult
                     };
 
                     var byRelationsStore = {};
-
-                    _.each(npRsearchMetaHelper.getNodeTypes(), function(data, nodeType){
-                        search.byNodeTypes[nodeType] = {
-                              nodeType: nodeType,
-                              resultPriority: data.searchResultPriority,
-                              pageConfig: {
-                                  page: 0,
-                                  pageSize: 20
-                              },
-                              request: null,
-                              result: null,
-                              nodeList: null
-                          };
-                    });
 
                     //
                     _.extend(scope, {
@@ -66,6 +52,27 @@ define(function(require) {'use strict';
                         breadcrumbs: [],
                         isBreadcrumbs: isBreadcrumbs
                     });
+
+                    //
+                    $rootScope.$on('np-rsearch-meta-ready', initByMeta);
+
+                    function initByMeta() {
+                        search.byNodeTypes = {};
+
+                        _.each(npRsearchMetaHelper.getNodeTypes(), function(data, nodeType){
+                            search.byNodeTypes[nodeType] = {
+                                  nodeType: nodeType,
+                                  resultPriority: data.searchResultPriority,
+                                  pageConfig: {
+                                      page: 0,
+                                      pageSize: 20
+                                  },
+                                  request: null,
+                                  result: null,
+                                  nodeList: null
+                              };
+                        });
+                    }
 
                     // utils
                     function setNodeList(object) {
@@ -118,17 +125,14 @@ define(function(require) {'use strict';
                             q: search.query,
                             nodeType: byNodeType.nodeType,
                             pageConfig: byNodeType.pageConfig,
-                            previousRequest: byNodeType.request
-                        });
-
-                        byNodeType.request.promise
-                            .success(function(data, status){
-                                nodeListProcess(data);
+                            previousRequest: byNodeType.request,
+                            success: function(data, status){
                                 complete(data);
-                            })
-                            .error(function(data, status){
+                            },
+                            error: function(data, status){
                                 complete(null);
-                            });
+                            }
+                        });
 
                         function complete(result) {
                             byNodeType.result = result;
@@ -164,7 +168,7 @@ define(function(require) {'use strict';
                     }
 
                     function getTotalByNodeType(nodeType) {
-                        var result = search.byNodeTypes[nodeType].result;
+                        var result = search.byNodeTypes && search.byNodeTypes[nodeType].result;
                         return result ? result.total : null;
                     }
 
@@ -181,6 +185,8 @@ define(function(require) {'use strict';
 
                         setSearchBreadcrumb(nodeType);
 
+                        nodeListView.showItemNumber(false);
+
                         nodeListView.reset(byNodeType.nodeList, noMore(byNodeType.result), function(callback){
                             byNodeType.pageConfig.page++;
 
@@ -190,6 +196,11 @@ define(function(require) {'use strict';
                                 pushNodeList(byNodeType, callback);
                             });
                         });
+
+//                        // test
+//                        $timeout(function(){
+//                            npRsearchMetaHelper.buildRelationMap(byNodeType.nodeList[0]);
+//                        });
                     }
 
                     /*
@@ -225,17 +236,15 @@ define(function(require) {'use strict';
                             direction: byRelations.direction,
                             relationType: byRelations.relationType,
                             pageConfig: byRelations.pageConfig,
-                            previousRequest: byRelations.request
-                        });
-
-                        byRelations.request.promise
-                            .success(function(data, status){
-                                nodeListProcess(data);
+                            previousRequest: byRelations.request,
+                            success: function(data, status){
                                 complete(data);
-                            })
-                            .error(function(data, status){
+                            },
+                            error: function(data, status){
                                 complete(null);
-                            });
+                            }
+
+                        });
 
                         function complete(result) {
                             byRelations.result = result;
@@ -255,6 +264,7 @@ define(function(require) {'use strict';
                                 node: node,
                                 direction: direction,
                                 relationType: relationType,
+                                relationMap: npRsearchMetaHelper.buildRelationMap(node),
                                 pageConfig: {
                                     page: 1,
                                     pageSize: 20
@@ -273,6 +283,8 @@ define(function(require) {'use strict';
                         }
 
                         function resetNodeListView() {
+                            nodeListView.showItemNumber(true);
+
                             nodeListView.reset(byRelations.nodeList, noMore(byRelations.result), function(callback){
                                 byRelations.pageConfig.page++;
 
@@ -282,6 +294,8 @@ define(function(require) {'use strict';
                                     pushNodeList(byRelations, callback);
                                 });
                             });
+
+                            nodeListView.setTargetInfo(getLastTargetInfo());
                         }
                     }
 
@@ -294,7 +308,7 @@ define(function(require) {'use strict';
                     });
 
                     function isBreadcrumbs() {
-                        return scope.breadcrumbs.length > 1;
+                        return getBreadcrumbSize() > 1;
                     }
 
                     function setSearchBreadcrumb(nodeType) {
@@ -314,13 +328,14 @@ define(function(require) {'use strict';
                     }
 
                     function pushNodeFormBreadcrumb(node) {
-                        var index = _.size(scope.breadcrumbs);
+                        var index = getBreadcrumbSize();
 
                         scope.breadcrumbs[index] = {
                             index: index,
                             type: 'NODE_FORM',
                             data: {
-                                node: node
+                                node: node,
+                                targetInfo: getLastTargetInfo()
                             }
                         };
 
@@ -328,7 +343,7 @@ define(function(require) {'use strict';
                     }
 
                     function pushRelationsBreadcrumb(node, direction, relationType) {
-                        var index = _.size(scope.breadcrumbs);
+                        var index = getBreadcrumbSize();
 
                         nodeFormView.hide();
 
@@ -380,7 +395,7 @@ define(function(require) {'use strict';
                     function clearBreadcrumbs(toIndex) {
                         toIndex = toIndex || 0;
 
-                        for (var i = toIndex + 1; i < _.size(scope.breadcrumbs); i++) {
+                        for (var i = toIndex + 1; i < getBreadcrumbSize(); i++) {
                             delete byRelationsStore[i];
                         }
 
@@ -388,52 +403,25 @@ define(function(require) {'use strict';
                     }
 
                     function isLastBreadcrumb(breadcrumb) {
-                        return breadcrumb.index === _.size(scope.breadcrumbs) - 1;
+                        return breadcrumb.index === getBreadcrumbSize() - 1;
                     }
 
-
-                    /*
-                     * node
-                     *
-                     */
-                    function nodeListProcess(data) {
-                        _.each(data.list, function(node, i){
-                            buildNodeExtraMeta(node);
-
-                            // test
-                            //node.__i = 1 + i + data.pageSize * (data.pageNumber - 1);
-                        });
+                    function getBreadcrumbSize() {
+                        return _.size(scope.breadcrumbs);
                     }
 
-                    function buildNodeExtraMeta(node) {
-                        // компания
-                        if (node._type === 'COMPANY') {
-                            // юридическое состояние
-                            var egrulState  = node.egrul_state,
-                                aliveCode   = 5, // Действующее
-                                _liquidate;
+                    //
+                    function getLastTargetInfo() {
+                        var byRelations = byRelationsStore[getBreadcrumbSize() - 1];
 
-                            if (egrulState && egrulState.code != aliveCode) {
-                                _liquidate = {
-                                    state: {
-                                        _actual: egrulState._actual,
-                                        _since: egrulState._since,
-                                        type: egrulState.type
-                                    }
-                                };
-                            } else
-                            if (node.dead_dt) {
-                                _liquidate = {
-                                    state: {
-                                        _actual: null,
-                                        _since: node.dead_dt,
-                                        type: 'Ликвидировано' // TODO l10n
-                                    }
-                                };
+                        return byRelations ? {
+                            node: byRelations.node,
+                            relationInfo: {
+                                direction: byRelations.direction,
+                                relationType: byRelations.relationType,
+                                relationMap: byRelations.relationMap
                             }
-
-                            node._liquidate = _liquidate;
-                        }
+                        } : null;
                     }
                 }]
             };
