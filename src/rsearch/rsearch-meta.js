@@ -88,7 +88,6 @@ define(function(require) {'use strict';
             function initMeta() {
                 if (!nodeTypes || !relationTypes) {
                     throw new Error('fail init meta');
-                    return;
                 }
 
                 _.each(nodeTypes, function(nodeType){
