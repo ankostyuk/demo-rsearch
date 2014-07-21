@@ -1,8 +1,7 @@
 <div class="body {{node._liquidate ? 'liquidate' : null}}" node-id="{{node._id}}" ng-click="toggleSelect()">
     <div ng-if="node._type === 'COMPANY'">
         <div class="row">
-            <div class="span4 node-header">{{node.nameshortsort}}</div>
-            <div class="span3">${_tr("ОГРН")}: {{node.ogrn}}</div>
+            <div class="span7 node-header">{{node.nameshortsort}}</div>
             <div class="align-right">{{node.founded_dt | date:'mediumDate'}}</div>
         </div>
         <div class="row node-entry liquidate-state">
@@ -12,6 +11,11 @@
         <div class="node-entry">{{node | OKVED}}</div>
         <div class="node-entry">{{node.chief_name}}</div>
         <div class="node-entry">{{node.addresssort}}</div>
+        <ul class="inline company-codes">
+            <li class="entry" ng-show="node.ogrn">${_tr("ОГРН")}: {{node.ogrn}}</li>
+            <li class="entry" ng-show="node.inn">${_tr("ИНН")}: {{node.inn}}</li>
+            <li class="entry" ng-show="node.okpo">${_tr("ОКПО")}: {{node.okpo}}</li>
+        </ul>
         <span np-rsearch-node-target-relations-info></span>
     </div>
 
