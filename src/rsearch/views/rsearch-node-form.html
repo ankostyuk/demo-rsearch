@@ -31,7 +31,7 @@
     </div>
     <div class="row entry" ng-show="node | isBalance">
         <div class="span4"><strong>${_tr("Финансовая отчётность")}:</strong></div>
-        <div class="span4">{{node | balance}}</div>
+        <div class="span4">{{node | balanceByPeriod}}</div>
     </div>
     <hr>
     <div np-rsearch-node-relations-counts></div>

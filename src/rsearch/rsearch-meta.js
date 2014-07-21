@@ -260,6 +260,47 @@ define(function(require) {'use strict';
             };
         }])
         //
+        .filter('balanceByPeriod', [function(){
+            return function(node){
+                if (!node) {
+                    return null;
+                }
+
+                var value = node['balance'];
+
+                if (!value) {
+                    return null;
+                }
+
+                var years = _.isArray(value) ? _.clone(value) : [value];
+                years.reverse();
+
+                var prevYear        = years[0],
+                    yearsByPeriod   = [[prevYear]],
+                    p               = 0,
+                    str             = '',
+                    year, i;
+
+                for (i = 1; i < years.length; i++) {
+                    year = years[i];
+
+                    if (year - prevYear === 1) {
+                        yearsByPeriod[p][1] = year;
+                    } else {
+                        yearsByPeriod[++p] = [year];
+                    }
+
+                    prevYear = year;
+                }
+
+                for (i = 0; i < yearsByPeriod.length; i++) {
+                    str += yearsByPeriod[i].join('—') + (i < yearsByPeriod.length - 1 ? ', ' : '');
+                }
+
+                return str;
+            };
+        }])
+        //
         .filter('OKVED', [function(){
             return function(node){
                 if (!node) {

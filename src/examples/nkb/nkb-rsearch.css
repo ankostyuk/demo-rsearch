@@ -8,11 +8,13 @@
 }
 
 /* company info */
-.company-codes {
+.company-codes,
+.company-balance {
     margin: 0;
     padding: 0;
 }
-.company-codes .entry {
+.company-codes .entry,
+.company-balance .entry {
     margin: 0;
     padding: 0 10px 0 0;
     font-style: italic;
@@ -95,7 +97,8 @@
 [np-rsearch-node-plain] .liquidate-state {
     color: #b94a48;
 }
-[np-rsearch-node-plain] .company-codes {
+[np-rsearch-node-plain] .company-codes,
+[np-rsearch-node-plain] .company-balance {
     padding-top: 5px;
 }
 [np-rsearch-node-plain] [np-rsearch-node-target-relations-info] {

@@ -16,6 +16,10 @@
             <li class="entry" ng-show="node.inn">${_tr("ИНН")}: {{node.inn}}</li>
             <li class="entry" ng-show="node.okpo">${_tr("ОКПО")}: {{node.okpo}}</li>
         </ul>
+        <ul class="inline company-balance">
+            <li class="entry" ng-show="node | isLastSalesVolume">{{node | lastSalesVolume | number:0}}&nbsp;${_tr("тыс. руб.")}</li>
+            <li class="entry" ng-show="node | isBalance">${_tr("Финансовая отчётность")}: {{node | balanceByPeriod}}</li>
+        </ul>
         <span np-rsearch-node-target-relations-info></span>
     </div>
 
