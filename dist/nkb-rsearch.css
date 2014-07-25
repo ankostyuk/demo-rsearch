@@ -45,8 +45,14 @@
 [np-rsearch-navigation] .breadcrumb .divider {
     padding-right: 0;
 }
-[np-rsearch-navigation] .breadcrumb [np-rsearch-node-target-relations-info]{
+[np-rsearch-navigation] .breadcrumb [np-rsearch-node-target-relations-info] {
     padding-left: 14px;
+}
+[np-rsearch-navigation] .breadcrumb .node-form {
+    font-weight: bold;
+}
+[np-rsearch-navigation] .breadcrumb .node-form [np-rsearch-node-target-relations-info] {
+    font-weight: normal;
 }
 [np-rsearch-node-simple] [np-rsearch-relation-simple] .entry {
     margin-right: 5px;
