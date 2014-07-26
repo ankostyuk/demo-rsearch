@@ -124,7 +124,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .factory('npRsearchViews', ['$log', '$compile', '$timeout', '$window', function($log, $compile, $timeout, $window){
+        .factory('npRsearchViews', ['$log', '$compile', '$rootScope', '$timeout', '$window', function($log, $compile, $rootScope, $timeout, $window){
 
             var windowElement   = angular.element($window),
                 htmlbodyElement = $('html, body');
@@ -245,6 +245,12 @@ define(function(require) {'use strict';
                     _.extend(view, {
                         setNode: function(node){
                             scope.node = node;
+                        }
+                    });
+
+                    _.extend(scope, {
+                        relationsClick: function(direction, relationType){
+                            $rootScope.$emit('np-rsearch-node-form-relations-click', scope.node, direction, relationType);
                         }
                     });
 

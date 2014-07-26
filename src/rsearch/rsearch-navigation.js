@@ -234,6 +234,10 @@ define(function(require) {'use strict';
                         showRelations(node, direction === 'in' ? 'parents' : 'children', relationType);
                     });
 
+                    $rootScope.$on('np-rsearch-node-form-relations-click', function(e, node, direction, relationType){
+                        showRelations(node, direction, relationType);
+                    });
+
                     function relationsRequest(byRelations) {
                         byRelations.request = npRsearchResource.relations({
                             node: byRelations.node,
