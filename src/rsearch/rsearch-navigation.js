@@ -102,6 +102,8 @@ define(function(require) {'use strict';
                         search.query = query;
                         search.total = null;
 
+                        // TODO #23 Моргание результатов при наборе
+                        nodeFormView.hide();
                         clearBreadcrumbs();
 
                         if (_.isBlank(search.query)) {
@@ -161,7 +163,11 @@ define(function(require) {'use strict';
                         });
 
                         if (activeResult) {
-                            showSearchResult(activeResult);
+                            var accentedResult = checkAccentedResultBySearch(activeResult);
+
+                            if (!accentedResult) {
+                                showSearchResult(activeResult);
+                            }
                         } else {
                             nodeListView.clear();
                         }
@@ -179,11 +185,9 @@ define(function(require) {'use strict';
                     function showSearchResult(nodeType) {
                         var byNodeType = search.byNodeTypes[nodeType];
 
-                        search.activeResult = nodeType;
+                        setSearchResult(nodeType);
 
                         nodeFormView.hide();
-
-                        setSearchBreadcrumb(nodeType);
 
                         nodeListView.showItemNumber(false);
 
@@ -196,11 +200,11 @@ define(function(require) {'use strict';
                                 pushNodeList(byNodeType, callback);
                             });
                         });
+                    }
 
-//                        // test
-//                        $timeout(function(){
-//                            npRsearchMetaHelper.buildRelationMap(byNodeType.nodeList[0]);
-//                        });
+                    function setSearchResult(nodeType) {
+                        search.activeResult = nodeType;
+                        setSearchBreadcrumb(nodeType);
                     }
 
                     /*
@@ -208,7 +212,7 @@ define(function(require) {'use strict';
                      *
                      */
                     $rootScope.$on('np-rsearch-node-select', function(e, node){
-                        showNodeForm(node, element);
+                        showNodeForm(node);
                     });
 
                     function showNodeForm(node) {
@@ -228,6 +232,10 @@ define(function(require) {'use strict';
                      */
                     $rootScope.$on('np-rsearch-node-relations-counts-count-click', function(e, node, direction, relationType){
                         showRelations(node, direction === 'in' ? 'parents' : 'children', relationType);
+                    });
+
+                    $rootScope.$on('np-rsearch-node-form-relations-click', function(e, node, direction, relationType){
+                        showRelations(node, direction, relationType);
                     });
 
                     function relationsRequest(byRelations) {
@@ -278,12 +286,17 @@ define(function(require) {'use strict';
 
                             byRelations.request.promise['finally'](function(){
                                 setNodeList(byRelations);
-                                resetNodeListView();
+
+                                var accentedResult = checkAccentedResultByRelations(byRelations);
+
+                                if (!accentedResult) {
+                                    resetNodeListView();
+                                }
                             });
                         }
 
                         function resetNodeListView() {
-                            nodeListView.showItemNumber(true);
+                            nodeListView.showItemNumber(byRelations.result.total > 1);
 
                             nodeListView.reset(byRelations.nodeList, noMore(byRelations.result), function(callback){
                                 byRelations.pageConfig.page++;
@@ -422,6 +435,42 @@ define(function(require) {'use strict';
                                 relationMap: byRelations.relationMap
                             }
                         } : null;
+                    }
+
+                    /*
+                     * accented result
+                     *
+                     */
+                    function checkAccentedResultBySearch(activeResult) {
+                        var node;
+
+                        if (search.total === 1) {
+                            node = search.byNodeTypes[activeResult].result.list[0];
+                        } else if (search.byNodeTypes['INDIVIDUAL'].result.total === 1) {
+                            var n = search.byNodeTypes['INDIVIDUAL'].result.list[0];
+                            node = n.gender ? n : null;
+                        }
+
+                        if (!node) {
+                            return false;
+                        }
+
+                        setSearchResult(node._type);
+                        showNodeForm(node);
+
+                        return true;
+                    }
+
+                    function checkAccentedResultByRelations(byRelations) {
+                        if (byRelations.result.total !== 1) {
+                            return false;
+                        }
+
+                        var node = byRelations.result.list[0];
+
+                        showNodeForm(node);
+
+                        return true;
                     }
                 }]
             };

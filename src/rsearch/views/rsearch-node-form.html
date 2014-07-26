@@ -9,8 +9,8 @@
         <div class="align-right"><strong>{{node._liquidate.state._since | date:'mediumDate'}}</strong></div>
     </div>
     <div class="node-entry">{{node | OKVED}}</div>
-    <div class="node-entry">{{node.chief_name}}</div>
-    <div class="node-entry">{{node.addresssort}}</div>
+    <div class="node-entry"><a ng-click="relationsClick('parents', 'EXECUTIVE_INDIVIDUAL')">{{node.chief_name}}</a></div>
+    <div class="node-entry"><a ng-click="relationsClick('parents', 'ADDRESS')">{{node.addresssort}}</a></div>
     <hr>
     <p class="node-entry">{{node.okfs_text}}</p>
     <div class="row node-entry">

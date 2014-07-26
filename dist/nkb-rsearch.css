@@ -26,11 +26,14 @@
 [np-rsearch-navigation] a:hover,
 [np-rsearch-navigation] a:focus,
 [np-rsearch-navigation] a:active,
-[np-rsearch-navigation] a.active {
+[np-rsearch-navigation] .active a:hover,
+[np-rsearch-navigation] .active a:focus,
+[np-rsearch-navigation] .active a:active {
     color: #98012e;
     cursor: pointer;
 }
-[np-rsearch-navigation] li a.active {
+[np-rsearch-navigation] a.active,
+[np-rsearch-navigation] .active a {
     color: #98012e !important;
     cursor: default !important;
 }
