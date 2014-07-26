@@ -282,12 +282,17 @@ define(function(require) {'use strict';
 
                             byRelations.request.promise['finally'](function(){
                                 setNodeList(byRelations);
-                                resetNodeListView();
+
+                                var accentedResult = checkAccentedResultByRelations(byRelations);
+
+                                if (!accentedResult) {
+                                    resetNodeListView();
+                                }
                             });
                         }
 
                         function resetNodeListView() {
-                            nodeListView.showItemNumber(true);
+                            nodeListView.showItemNumber(byRelations.result.total > 1);
 
                             nodeListView.reset(byRelations.nodeList, noMore(byRelations.result), function(callback){
                                 byRelations.pageConfig.page++;
@@ -447,6 +452,18 @@ define(function(require) {'use strict';
                         }
 
                         setSearchResult(node._type);
+                        showNodeForm(node);
+
+                        return true;
+                    }
+
+                    function checkAccentedResultByRelations(byRelations) {
+                        if (byRelations.result.total !== 1) {
+                            return false;
+                        }
+
+                        var node = byRelations.result.list[0];
+
                         showNodeForm(node);
 
                         return true;

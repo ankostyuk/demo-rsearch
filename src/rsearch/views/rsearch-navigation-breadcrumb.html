@@ -1,5 +1,5 @@
-<span ng-click="go()">
-    <a ng-if="breadcrumb.type === 'SEARCH'" ng-class="{'active': last}">${_tr("Поиск")}</a>
-    <a ng-if="breadcrumb.type === 'NODE_FORM'" class="node-form" ng-class="{'active': last}" np-rsearch-node-simple="breadcrumb.data.node" np-rsearch-node-target-info="breadcrumb.data.targetInfo"></a>
-    <a ng-if="breadcrumb.type === 'NODE_RELATIONS'" ng-class="{'active': last}" np-rsearch-node-relations-header="breadcrumb.data"></a>
+<span ng-class="{'active': last}" ng-click="go()">
+    <a ng-if="breadcrumb.type === 'SEARCH'">${_tr("Поиск")}</a>
+    <a ng-if="breadcrumb.type === 'NODE_FORM'" class="node-form" np-rsearch-node-simple="breadcrumb.data.node" np-rsearch-node-target-info="breadcrumb.data.targetInfo"></a>
+    <a ng-if="breadcrumb.type === 'NODE_RELATIONS'" np-rsearch-node-relations-header="breadcrumb.data"></a>
 </span>
