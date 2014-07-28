@@ -64,18 +64,30 @@ module.exports = function(grunt) {
         },
 
         i18n: {
-          ui: {
-              options: {
-                  pattern:        '**/*.+(js|html)',
-                  inputDir:       path.resolve(__dirname, 'src/rsearch'),
-                  inputRootPath:  path.resolve(__dirname, ''),
-                  outputDir:      path.resolve(__dirname, 'i18n/ui'),
-                  bundleDir:      path.resolve(__dirname, 'src/app/l10n/ui'),
-                  baseLang:       APP_LANGS[0],
-                  langs:          APP_LANGS
-              }
-          }
-      },
+            'ui': {
+                options: {
+                    pattern:        '**/*.+(js|html)',
+                    inputDir:       path.resolve(__dirname, 'src/rsearch'),
+                    inputRootPath:  path.resolve(__dirname, ''),
+                    outputDir:      path.resolve(__dirname, 'i18n/ui'),
+                    bundleDir:      path.resolve(__dirname, 'src/app/l10n/ui'),
+                    baseLang:       APP_LANGS[0],
+                    langs:          APP_LANGS
+                }
+            },
+            'okato_region': {
+                options: {
+                    mode:           'simple',
+                    pattern:        '**/*.txt',
+                    inputDir:       path.resolve(__dirname, 'i18n/okato_region'),
+                    inputRootPath:  path.resolve(__dirname, ''),
+                    outputDir:      path.resolve(__dirname, 'i18n/okato_region'),
+                    bundleDir:      path.resolve(__dirname, 'src/app/l10n/okato_region'),
+                    baseLang:       APP_LANGS[0],
+                    langs:          APP_LANGS
+                }
+            }
+        },
 
         'web-resources': {
             build: {

@@ -6,7 +6,7 @@
             <a class="action">${_tr("Любой")}</a>
         </li>
         <li class="filter-item" ng-class="{active: filter.getValue() === p[0]}" ng-click="filter.doFilter(p[0])" ng-repeat="p in filter.getSortedPairs() track by $index">
-            <a class="action">{{_tr(p[0])}}<span class="count">{{p[1]}}</span></a>
+            <a class="action">{{_tr(p[0])}}<span class="count">{{p[1] | number}}</span></a>
         </li>
     </ul>
 </div>

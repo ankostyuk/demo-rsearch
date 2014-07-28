@@ -1,0 +1,342 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: i18n\n"
+"Report-Msgid-Bugs-To: feedback@null-pointer.ru\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: NULLPOINTER <feedback@null-pointer.ru>\n"
+"Language-Team: NULLPOINTER <feedback@null-pointer.ru>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"CLDR_PLURAL_FORMS_FORMAT: one{0}few{1}many{2}other{2}\n"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "1"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "3"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "4"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "5"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "7"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "8"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "10"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "11"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "12"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "14"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "15"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "17"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "18"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "19"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "20"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "22"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "24"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "25"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "26"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "27"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "28"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "29"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "30"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "32"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "33"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "34"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "35"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "36"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "37"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "38"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "40"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "41"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "42"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "44"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "45"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "46"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "47"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "49"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "50"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "52"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "53"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "54"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "56"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "57"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "58"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "60"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "61"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "63"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "64"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "65"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "66"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "67"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "68"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "69"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "70"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "71"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "73"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "75"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "76"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "77"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "78"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "79"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "80"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "81"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "82"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "83"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "84"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "85"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "86"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "87"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "88"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "89"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "90"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "91"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "92"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "93"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "94"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "95"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "96"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "97"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "98"
+msgstr ""
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "99"
+msgstr ""

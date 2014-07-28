@@ -109,11 +109,16 @@ msgstr "{'one': '{{count|number}} правоприемник', 'few': '{{count|n
 msgid "Аналитический профиль"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-inn-filter.html:1
+msgid "Без ИНН"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Бизнес профиль"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-filters.html:1
+#: ../src/rsearch/views/rsearch-inn-filter.html:1
+#: ../src/rsearch/views/rsearch-region-filter.html:1
 msgid "Все"
 msgstr ""
 
@@ -139,6 +144,10 @@ msgstr ""
 msgid "ИНН"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-inn-filter.html:1
+msgid "ИНН физического лица"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Исследования"
 msgstr ""
@@ -153,6 +162,11 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Кредитный профиль"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-inn-filter.html:1
+#: ../src/rsearch/views/rsearch-region-filter.html:1
+msgid "Любой"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-input.html:1
@@ -206,8 +220,8 @@ msgstr ""
 msgid "Расширенное исследование"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-filters.html:1
-msgid "Регионы"
+#: ../src/rsearch/views/rsearch-region-filter.html:1
+msgid "Регион"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
