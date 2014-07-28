@@ -9,8 +9,8 @@
         <div class="align-right"><strong>{{node._liquidate.state._since | date:'mediumDate'}}</strong></div>
     </div>
     <div class="node-entry">{{node | OKVED}}</div>
-    <div class="node-entry"><a ng-click="relationsClick('parents', 'EXECUTIVE_INDIVIDUAL')">{{node.chief_name}}</a></div>
-    <div class="node-entry"><a ng-click="relationsClick('parents', 'ADDRESS')">{{node.addresssort}}</a></div>
+    <div class="node-entry"><a class="action" ng-click="relationsClick('parents', 'EXECUTIVE_INDIVIDUAL')">{{node.chief_name}}</a></div>
+    <div class="node-entry"><a class="action" ng-click="relationsClick('parents', 'ADDRESS')">{{node.addresssort}}</a></div>
     <hr>
     <p class="node-entry">{{node.okfs_text}}</p>
     <div class="row node-entry">
@@ -40,28 +40,28 @@
         <div class="span5">
             <h5>${_tr("Отчеты")}</h5>
             <ul class="unstyled rsearch_report_links">
-                <li><a target="_blank" href="http://testing.nkb/reports/?code=rep_market_profile_short&fromSearch=1&id={{node.bsn_id}}">${_tr("Профиль регистрации")}</a><span class="divider">/</span><span class="price">5 ие</span></li>
-                <li><a target="_blank" href="http://testing.nkb/reports/?code=rep_market_list&fromSearch=1&id={{node.bsn_id}}">${_tr("Корпоративная структура")}</a><span class="divider">/</span><span class="price">осталось 7</span></li>
-                <li><a target="_blank" href="http://testing.nkb/reports/?code=rep_business_profile&fromSearch=1&id={{node.bsn_id}}">${_tr("Бизнес профиль")}</a></li>
-                <li><a target="_blank" href="http://testing.nkb/reports/?code=rep_market_profile_full&fromSearch=1&id={{node.bsn_id}}">${_tr("Аналитический профиль")}</a></li>
-                <li><a target="_blank" href="http://testing.nkb/reports/?code=rep_credit_profile&fromSearch=1&id={{node.bsn_id}}">${_tr("Кредитный профиль")}</a></li>
-                <li><a target="_blank" href="http://testing.nkb/reports/?code=rep_history_profile&fromSearch=1&id={{node.bsn_id}}">${_tr("Исторический профиль")}</a></li>
+                <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_market_profile_short&fromSearch=1&id={{node.bsn_id}}">${_tr("Профиль регистрации")}</a><span class="divider">/</span><span class="price">5 ие</span></li>
+                <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_market_list&fromSearch=1&id={{node.bsn_id}}">${_tr("Корпоративная структура")}</a><span class="divider">/</span><span class="price">осталось 7</span></li>
+                <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_business_profile&fromSearch=1&id={{node.bsn_id}}">${_tr("Бизнес профиль")}</a></li>
+                <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_market_profile_full&fromSearch=1&id={{node.bsn_id}}">${_tr("Аналитический профиль")}</a></li>
+                <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_credit_profile&fromSearch=1&id={{node.bsn_id}}">${_tr("Кредитный профиль")}</a></li>
+                <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_history_profile&fromSearch=1&id={{node.bsn_id}}">${_tr("Исторический профиль")}</a></li>
 
-                <li><a target="_blank" href="http://testing.nkb/nkbrelation/report?node.type=COMPANY&bsn_id.equals={{node.bsn_id}}">${_tr("Раскрыть связи компании")}</a></li>
+                <li><a class="action" target="_blank" href="http://testing.nkb/nkbrelation/report?node.type=COMPANY&bsn_id.equals={{node.bsn_id}}">${_tr("Раскрыть связи компании")}</a></li>
             </ul>
         </div>
         <div class="span4">
             <h5>${_tr("Исследования")}</h5>
             <ul class="unstyled rsearch_report_links">
-                <li><a target="_blank" href="http://testing.nkb/search/offlinea/?idcomp={{node.bsn_id}}">${_tr("Расширенное исследование")}</a></li>
-                <li><a target="_blank" href="http://testing.nkb/search/offlinea/?idcomp={{node.bsn_id}}">${_tr("Схема аффилированных лиц")}</a></li>
+                <li><a class="action" target="_blank" href="http://testing.nkb/search/offlinea/?idcomp={{node.bsn_id}}">${_tr("Расширенное исследование")}</a></li>
+                <li><a class="action" target="_blank" href="http://testing.nkb/search/offlinea/?idcomp={{node.bsn_id}}">${_tr("Схема аффилированных лиц")}</a></li>
             </ul>
 
             <h5>${_tr("ЕГРЮЛ")}</h5>
             <ul class="unstyled rsearch_report_links">
-                <li><a href="#">${_tr("Скачать выписку")}</a> от 01.02.2004</li>
+                <li><a class="action" href="#">${_tr("Скачать выписку")}</a> от 01.02.2004</li>
 
-                <li><a target="_blank" href="http://testing.nkb/search/offlinee/?idcomp={{node.bsn_id}}">${_tr("Заказать выписку ЕГРЮЛ")}</a></li>
+                <li><a class="action" target="_blank" href="http://testing.nkb/search/offlinee/?idcomp={{node.bsn_id}}">${_tr("Заказать выписку ЕГРЮЛ")}</a></li>
             </ul>
         </div>
     </div>
@@ -74,10 +74,10 @@
         <div class="span9">
             <h5>${_tr("Выписки и отчеты")}</h5>
             <ul class="unstyled rsearch_report_links">
-                <li><a target="_blank" href="http://testing.nkb/search/offlinee/">${_tr("Заказать выписку ЕГРЮЛ")}</a></li>
-                <li><a target="_blank" href="http://testing.nkb/search/offlinep/">${_tr("Заказать выписку ЕГРИП")}</a></li>
+                <li><a class="action" target="_blank" href="http://testing.nkb/search/offlinee/">${_tr("Заказать выписку ЕГРЮЛ")}</a></li>
+                <li><a class="action" target="_blank" href="http://testing.nkb/search/offlinep/">${_tr("Заказать выписку ЕГРИП")}</a></li>
 
-                <li><a target="_blank" href="http://testing.nkb/nkbrelation/report?node.type=INDIVIDUAL&id.equals={{node.id}}">${_tr("Раскрыть связи физического лица")}</a></li>
+                <li><a class="action" target="_blank" href="http://testing.nkb/nkbrelation/report?node.type=INDIVIDUAL&id.equals={{node.id}}">${_tr("Раскрыть связи физического лица")}</a></li>
             </ul>
         </div>
     </div>

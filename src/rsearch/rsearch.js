@@ -15,6 +15,7 @@ define(function(require) {'use strict';
     var submodules = {
         rsearchInput:       require('./rsearch-input'),
         rsearchNavigation:  require('./rsearch-navigation'),
+        rsearchFilters:     require('./rsearch-filters'),
         rsearchViews:       require('./rsearch-views'),
         rsearchResource:    require('./rsearch-resource'),
         rsearchMeta:        require('./rsearch-meta')

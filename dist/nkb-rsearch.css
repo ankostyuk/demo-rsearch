@@ -6,6 +6,29 @@
     color: #ccc;
     padding: 0 5px 0 5px;
 }
+a.action {
+    padding-bottom: 0;
+    color: #3a87ad;
+    text-decoration: none !important;
+    border-bottom: 1px solid transparent;
+}
+a.action:hover,
+a.action:focus,
+a.action:active {
+    color: #98012e !important;
+    cursor: pointer !important;
+}
+a.active.action,
+a.active.action:hover,
+a.active.action:focus,
+a.active.action:active,
+.active a.action,
+.active a.action:hover,
+.active a.action:focus,
+.active a.action:active {
+    color: #98012e !important;
+    cursor: default !important;
+}
 .company-codes,
 .company-balance {
     margin: 0;
@@ -16,26 +39,6 @@
     margin: 0;
     padding: 0 10px 0 0;
     font-style: italic;
-}
-[np-rsearch-navigation] a {
-    padding-bottom: 0;
-    color: #3a87ad;
-    text-decoration: none !important;
-    border-bottom: 1px solid transparent;
-}
-[np-rsearch-navigation] a:hover,
-[np-rsearch-navigation] a:focus,
-[np-rsearch-navigation] a:active,
-[np-rsearch-navigation] .active a:hover,
-[np-rsearch-navigation] .active a:focus,
-[np-rsearch-navigation] .active a:active {
-    color: #98012e;
-    cursor: pointer;
-}
-[np-rsearch-navigation] a.active,
-[np-rsearch-navigation] .active a {
-    color: #98012e !important;
-    cursor: default !important;
 }
 [np-rsearch-navigation] .breadcrumb {
     padding: 0;
@@ -133,4 +136,23 @@
 [np-rsearch-node-form] .liquidate .node-header,
 [np-rsearch-node-form] .liquidate-state {
     color: #b94a48;
+}
+[np-rsearch-filters] {
+    padding-left: 40px;
+}
+[np-rsearch-filters] .filter-label {
+    line-height: 1;
+}
+[np-rsearch-filters] .no-filter-message {
+    font-style: italic;
+}
+[np-rsearch-filters] .filter-item a {
+    display: block;
+}
+[np-rsearch-filters] .filter-item .count {
+    display: block;
+    float: right;
+}
+[np-rsearch-filters] .filter-item.active a {
+    font-weight: bold;
 }

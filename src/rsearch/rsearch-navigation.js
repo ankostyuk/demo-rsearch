@@ -70,6 +70,10 @@ define(function(require) {'use strict';
                     }
 
                     // utils
+                    function noMore(result) {
+                        return result ? result.pageNumber >= result.pageCount : null;
+                    }
+
                     function setNodeList(object) {
                         object.nodeList = object.result.list ? object.result.list : [];
                     }
@@ -100,6 +104,7 @@ define(function(require) {'use strict';
                         // TODO #23 Моргание результатов при наборе
                         nodeFormView.hide();
                         clearBreadcrumbs();
+                        hideRelationsFilters();
 
                         if (_.isBlank(search.query)) {
                             return;
@@ -173,16 +178,13 @@ define(function(require) {'use strict';
                         return result ? result.total : null;
                     }
 
-                    function noMore(result) {
-                        return result ? result.pageNumber >= result.pageCount : null;
-                    }
-
                     function showSearchResult(nodeType) {
                         var byNodeType = search.byNodeTypes[nodeType];
 
                         setSearchResult(nodeType);
 
                         nodeFormView.hide();
+                        hideRelationsFilters();
 
                         nodeListView.showItemNumber(false);
 
@@ -212,6 +214,7 @@ define(function(require) {'use strict';
 
                     function showNodeForm(node) {
                         nodeListView.clear();
+                        hideRelationsFilters();
 
                         nodeFormView.setNode(node);
                         nodeFormView.show(node);
@@ -233,27 +236,6 @@ define(function(require) {'use strict';
                         showRelations(node, direction, relationType);
                     });
 
-                    function relationsRequest(byRelations) {
-                        byRelations.request = npRsearchResource.relations({
-                            node: byRelations.node,
-                            direction: byRelations.direction,
-                            relationType: byRelations.relationType,
-                            pageConfig: byRelations.pageConfig,
-                            previousRequest: byRelations.request,
-                            success: function(data, status){
-                                complete(data);
-                            },
-                            error: function(data, status){
-                                complete(null);
-                            }
-
-                        });
-
-                        function complete(result) {
-                            byRelations.result = result;
-                        }
-                    }
-
                     function showRelations(node, direction, relationType, key) {
                         nodeFormView.hide();
 
@@ -261,7 +243,7 @@ define(function(require) {'use strict';
                             byRelations = byRelationsStore[key];
 
                         if (byRelations) {
-                            resetNodeListView();
+                            resetRelationsNodeListView(byRelations);
                         } else {
                             byRelations = byRelationsStore[index] = {
                                 node: node,
@@ -277,33 +259,66 @@ define(function(require) {'use strict';
                                 nodeList: null
                             };
 
+                            doRelations(byRelations);
+                        }
+                    }
+
+                    function doRelations(byRelations) {
+                        relationsRequest(byRelations);
+
+                        byRelations.request.promise['finally'](function(){
+                            setNodeList(byRelations);
+
+                            var accentedResult = checkAccentedResultByRelations(byRelations);
+
+                            if (!accentedResult) {
+                                resetRelationsNodeListView(byRelations);
+                            }
+                        });
+                    }
+
+                    function resetRelationsNodeListView(byRelations) {
+                        nodeListView.showItemNumber(byRelations.result.total > 1);
+
+                        nodeListView.reset(byRelations.nodeList, noMore(byRelations.result), function(callback){
+                            byRelations.pageConfig.page++;
+
                             relationsRequest(byRelations);
 
                             byRelations.request.promise['finally'](function(){
-                                setNodeList(byRelations);
-
-                                var accentedResult = checkAccentedResultByRelations(byRelations);
-
-                                if (!accentedResult) {
-                                    resetNodeListView();
-                                }
+                                pushNodeList(byRelations, callback);
                             });
-                        }
+                        });
 
-                        function resetNodeListView() {
-                            nodeListView.showItemNumber(byRelations.result.total > 1);
+                        nodeListView.setTargetInfo(getLastTargetInfo());
 
-                            nodeListView.reset(byRelations.nodeList, noMore(byRelations.result), function(callback){
-                                byRelations.pageConfig.page++;
+                        initRelationsFilters(byRelations);
+                    }
 
-                                relationsRequest(byRelations);
+                    function relationsRequest(byRelations) {
+                        var filter = {};
 
-                                byRelations.request.promise['finally'](function(){
-                                    pushNodeList(byRelations, callback);
-                                });
-                            });
+                        _.each(byRelations.filters, function(f){
+                            _.extend(filter, f.condition);
+                        });
 
-                            nodeListView.setTargetInfo(getLastTargetInfo());
+                        byRelations.request = npRsearchResource.relations({
+                            node: byRelations.node,
+                            direction: byRelations.direction,
+                            relationType: byRelations.relationType,
+                            pageConfig: byRelations.pageConfig,
+                            filter: filter,
+                            previousRequest: byRelations.request,
+                            success: function(data, status){
+                                complete(data);
+                            },
+                            error: function(data, status){
+                                complete(null);
+                            }
+                        });
+
+                        function complete(result) {
+                            byRelations.result = result;
                         }
                     }
 
@@ -350,10 +365,8 @@ define(function(require) {'use strict';
                         return index;
                     }
 
-                    function pushRelationsBreadcrumb(node, direction, relationType) {
+                    function pushRelationsBreadcrumb(node, direction, relationType, filter) {
                         var index = getBreadcrumbSize();
-
-                        nodeFormView.hide();
 
                         scope.breadcrumbs[index] = {
                             index: index,
@@ -466,6 +479,43 @@ define(function(require) {'use strict';
                         showNodeForm(node);
 
                         return true;
+                    }
+
+                    /*
+                     * filters
+                     *
+                     */
+                    function hideRelationsFilters() {
+                        $rootScope.$emit('np-rsearch-filters-toggle-region-filter', false);
+                    }
+
+                    function initRelationsFilters(byRelations) {
+                        var filters = byRelations.filters;
+
+                        if (!filters) {
+                            var regionFilter = {
+                                regionCodes: byRelations.result.info.nodeFacet && byRelations.result.info.nodeFacet.region_code,
+                                value: null,
+                                callback: function(value){
+                                    regionFilter.value = value;
+                                    regionFilter.condition = {
+                                        'node.region_code.equals': value
+                                    };
+                                    doRelations(byRelations);
+                                }
+                            };
+
+                            filters = {
+                                region: regionFilter
+                            };
+
+                            byRelations.filters = filters;
+                        }
+
+                        if (filters.region.regionCodes) {
+                            $rootScope.$emit('np-rsearch-filters-set-region-filter-data', filters.region);
+                            $rootScope.$emit('np-rsearch-filters-toggle-region-filter', true);
+                        }
                     }
                 }
             };

@@ -1,0 +1,13 @@
+<!-- region filter -->
+<div class="filter" ng-show="regionFilter.isShow()">
+    <h5 class="filter-label">${_tr("Регионы")}</h5>
+    <p class="no-filter-message" ng-show="regionFilter.isNoFilter()">${_tr("Все")} — {{_tr(regionFilter.sortedRegionCodes[0][0])}}</p>
+    <ul class="unstyled" ng-show="!regionFilter.isNoFilter()">
+        <li class="filter-item" ng-class="{active: !regionFilter.value}" ng-click="regionFilter.doFilter(null)">
+            <a class="action">${_tr("Все")}</a>
+        </li>
+        <li class="filter-item" ng-class="{active: regionFilter.value === p[0]}" ng-click="regionFilter.doFilter(p[0])" ng-repeat="p in regionFilter.sortedRegionCodes track by $index">
+            <a class="action">{{_tr(p[0])}}<span class="count">{{p[1]}}</span></a>
+        </li>
+    </ul>
+</div>
