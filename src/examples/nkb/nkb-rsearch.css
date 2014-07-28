@@ -159,10 +159,14 @@ a.active.action:active,
 [np-rsearch-filters] {
     padding-left: 40px;
 }
+[np-rsearch-filters] .filter {
+    margin-bottom: 20px;
+}
 [np-rsearch-filters] .filter-label {
     line-height: 1;
 }
 [np-rsearch-filters] .no-filter-message {
+    color: #999;
     font-style: italic;
 }
 [np-rsearch-filters] .filter-item a {

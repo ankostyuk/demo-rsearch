@@ -487,15 +487,19 @@ define(function(require) {'use strict';
                      */
                     function hideRelationsFilters() {
                         $rootScope.$emit('np-rsearch-filters-toggle-region-filter', false);
+                        $rootScope.$emit('np-rsearch-filters-toggle-inn-filter', false);
                     }
 
                     function initRelationsFilters(byRelations) {
                         var filters = byRelations.filters;
 
                         if (!filters) {
+                            var total = byRelations.result.total;
+
                             var regionFilter = {
-                                regionCodes: byRelations.result.info.nodeFacet && byRelations.result.info.nodeFacet.region_code,
+                                values: byRelations.result.info.nodeFacet && byRelations.result.info.nodeFacet.region_code,
                                 value: null,
+                                total: total,
                                 callback: function(value){
                                     regionFilter.value = value;
                                     regionFilter.condition = {
@@ -505,16 +509,38 @@ define(function(require) {'use strict';
                                 }
                             };
 
+                            var innFilter = {
+                                values: byRelations.result.info.relFacet && byRelations.result.info.relFacet.inn,
+                                value: null,
+                                total: total,
+                                callback: function(value){
+                                    innFilter.value = value;
+                                    innFilter.condition = {};
+                                    if (value === false) {
+                                        innFilter.condition['rel.inn.exists'] = value;
+                                    } else if (value) {
+                                        innFilter.condition['rel.inn.equals'] = value;
+                                    }
+                                    doRelations(byRelations);
+                                }
+                            };
+
                             filters = {
-                                region: regionFilter
+                                region: regionFilter,
+                                inn: innFilter
                             };
 
                             byRelations.filters = filters;
                         }
 
-                        if (filters.region.regionCodes) {
+                        if (filters.region.values) {
                             $rootScope.$emit('np-rsearch-filters-set-region-filter-data', filters.region);
                             $rootScope.$emit('np-rsearch-filters-toggle-region-filter', true);
+                        }
+
+                        if (filters.inn.values) {
+                            $rootScope.$emit('np-rsearch-filters-set-inn-filter-data', filters.inn);
+                            $rootScope.$emit('np-rsearch-filters-toggle-inn-filter', true);
                         }
                     }
                 }
