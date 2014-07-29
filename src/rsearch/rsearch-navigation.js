@@ -259,17 +259,17 @@ define(function(require) {'use strict';
                                 nodeList: null
                             };
 
-                            doRelations(byRelations);
+                            doRelations(byRelations, true);
                         }
                     }
 
-                    function doRelations(byRelations) {
+                    function doRelations(byRelations, checkAccentedResult) {
                         relationsRequest(byRelations);
 
                         byRelations.request.promise['finally'](function(){
                             setNodeList(byRelations);
 
-                            var accentedResult = checkAccentedResultByRelations(byRelations);
+                            var accentedResult = checkAccentedResult && checkAccentedResultByRelations(byRelations);
 
                             if (!accentedResult) {
                                 resetRelationsNodeListView(byRelations);
@@ -505,7 +505,7 @@ define(function(require) {'use strict';
                                     regionFilter.condition = {
                                         'node.region_code.equals': value
                                     };
-                                    doRelations(byRelations);
+                                    doRelations(byRelations, false);
                                 }
                             };
 
@@ -521,7 +521,7 @@ define(function(require) {'use strict';
                                     } else if (value) {
                                         innFilter.condition['rel.inn.equals'] = value;
                                     }
-                                    doRelations(byRelations);
+                                    doRelations(byRelations, false);
                                 }
                             };
 
