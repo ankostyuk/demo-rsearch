@@ -30,25 +30,6 @@ define(function(require) {'use strict';
                         nodeFormView    = npRsearchViews.createNodeFormView(viewsElement, scope);
 
                     //
-                    var search = {
-                        query: null,
-                        total: null,
-                        activeResult: null,
-                        byNodeTypes: null,
-                        getTotalByNodeType: getTotalByNodeType,
-                        showResult: showSearchResult
-                    };
-
-                    var byRelationsStore = {};
-
-                    //
-                    _.extend(scope, {
-                        search: search,
-                        breadcrumbs: [],
-                        isBreadcrumbs: isBreadcrumbs
-                    });
-
-                    //
                     $rootScope.$on('np-rsearch-meta-ready', initByMeta);
 
                     function initByMeta() {
@@ -93,15 +74,23 @@ define(function(require) {'use strict';
                      * search
                      *
                      */
+                    var search = {
+                        query: null,
+                        total: null,
+                        activeResult: null,
+                        byNodeTypes: null,
+                        isEmptyResult: isEmptySearchResult,
+                        getTotalByNodeType: getSearchTotalByNodeType,
+                        showResult: showSearchResult
+                    };
+
                     $rootScope.$on('np-rsearch-input-refresh', function(e, text){
                         doSearch(text);
                     });
 
                     function doSearch(query) {
                         search.query = query;
-                        search.total = null;
 
-                        // TODO #23 Моргание результатов при наборе
                         nodeFormView.hide();
                         clearBreadcrumbs();
                         hideRelationsFilters();
@@ -116,7 +105,7 @@ define(function(require) {'use strict';
                             byNodeType.pageConfig.page = 1;
                             byNodeType.nodeList = null;
                             searchRequest(byNodeType);
-                            searchPromises.push(byNodeType.request.promise);
+                            searchPromises.push(byNodeType.request.completePromise);
                         });
 
                         $q.all(searchPromises)['finally'](checkSearchResult);
@@ -159,6 +148,10 @@ define(function(require) {'use strict';
                                 }
 
                                 setNodeList(byNodeType);
+
+                                byNodeType.total = result.total;
+                            } else {
+                                byNodeType.total = null;
                             }
                         });
 
@@ -173,9 +166,8 @@ define(function(require) {'use strict';
                         }
                     }
 
-                    function getTotalByNodeType(nodeType) {
-                        var result = search.byNodeTypes && search.byNodeTypes[nodeType].result;
-                        return result ? result.total : null;
+                    function getSearchTotalByNodeType(nodeType) {
+                        return (search.byNodeTypes && search.byNodeTypes[nodeType].total) || null;
                     }
 
                     function showSearchResult(nodeType) {
@@ -204,6 +196,10 @@ define(function(require) {'use strict';
                         setSearchBreadcrumb(nodeType);
                     }
 
+                    function isEmptySearchResult() {
+                        return search.total === 0;
+                    }
+
                     /*
                      * node form
                      *
@@ -228,6 +224,8 @@ define(function(require) {'use strict';
                      * relations
                      *
                      */
+                    var byRelationsStore = {};
+
                     $rootScope.$on('np-rsearch-node-relations-counts-count-click', function(e, node, direction, relationType){
                         showRelations(node, direction === 'in' ? 'parents' : 'children', relationType);
                     });
@@ -543,6 +541,16 @@ define(function(require) {'use strict';
                             $rootScope.$emit('np-rsearch-filters-toggle-inn-filter', true);
                         }
                     }
+
+                    /*
+                     * scope
+                     *
+                     */
+                    _.extend(scope, {
+                        search: search,
+                        breadcrumbs: [],
+                        isBreadcrumbs: isBreadcrumbs
+                    });
                 }
             };
         }]);

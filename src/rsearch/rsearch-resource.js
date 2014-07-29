@@ -24,8 +24,9 @@ define(function(require) {'use strict';
                     options.previousRequest.abort();
                 }
 
-                var canceler = $q.defer(),
-                    complete = false;
+                var canceler    = $q.defer(),
+                    completer   = $q.defer(),
+                    complete    = false;
 
                 var promise = $http(_.extend({
                     timeout: canceler.promise
@@ -48,10 +49,12 @@ define(function(require) {'use strict';
                     })
                     ['finally'](function(){
                         complete = true;
+                        completer.resolve();
                     });
 
                 return {
                     promise: promise,
+                    completePromise: completer.promise,
                     abort: function(){
                         canceler.resolve();
                     },
