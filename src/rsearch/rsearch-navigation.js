@@ -23,12 +23,7 @@ define(function(require) {'use strict';
                 restrict: 'A',
                 template: template,
                 scope: {},
-                controller: ['$scope', '$element', '$attrs', function($scope, $element, $attrs) {
-                    //
-                    var scope   = $scope,
-                        element = $element,
-                        attrs   = $attrs;
-
+                link: function(scope, element, attrs) {
                     //
                     var viewsElement    = element.find('.views'),
                         nodeListView    = npRsearchViews.createNodeListView(viewsElement, scope),
@@ -75,6 +70,10 @@ define(function(require) {'use strict';
                     }
 
                     // utils
+                    function noMore(result) {
+                        return result ? result.pageNumber >= result.pageCount : null;
+                    }
+
                     function setNodeList(object) {
                         object.nodeList = object.result.list ? object.result.list : [];
                     }
@@ -105,6 +104,7 @@ define(function(require) {'use strict';
                         // TODO #23 Моргание результатов при наборе
                         nodeFormView.hide();
                         clearBreadcrumbs();
+                        hideRelationsFilters();
 
                         if (_.isBlank(search.query)) {
                             return;
@@ -178,16 +178,13 @@ define(function(require) {'use strict';
                         return result ? result.total : null;
                     }
 
-                    function noMore(result) {
-                        return result ? result.pageNumber >= result.pageCount : null;
-                    }
-
                     function showSearchResult(nodeType) {
                         var byNodeType = search.byNodeTypes[nodeType];
 
                         setSearchResult(nodeType);
 
                         nodeFormView.hide();
+                        hideRelationsFilters();
 
                         nodeListView.showItemNumber(false);
 
@@ -217,6 +214,7 @@ define(function(require) {'use strict';
 
                     function showNodeForm(node) {
                         nodeListView.clear();
+                        hideRelationsFilters();
 
                         nodeFormView.setNode(node);
                         nodeFormView.show(node);
@@ -238,27 +236,6 @@ define(function(require) {'use strict';
                         showRelations(node, direction, relationType);
                     });
 
-                    function relationsRequest(byRelations) {
-                        byRelations.request = npRsearchResource.relations({
-                            node: byRelations.node,
-                            direction: byRelations.direction,
-                            relationType: byRelations.relationType,
-                            pageConfig: byRelations.pageConfig,
-                            previousRequest: byRelations.request,
-                            success: function(data, status){
-                                complete(data);
-                            },
-                            error: function(data, status){
-                                complete(null);
-                            }
-
-                        });
-
-                        function complete(result) {
-                            byRelations.result = result;
-                        }
-                    }
-
                     function showRelations(node, direction, relationType, key) {
                         nodeFormView.hide();
 
@@ -266,7 +243,7 @@ define(function(require) {'use strict';
                             byRelations = byRelationsStore[key];
 
                         if (byRelations) {
-                            resetNodeListView();
+                            resetRelationsNodeListView(byRelations);
                         } else {
                             byRelations = byRelationsStore[index] = {
                                 node: node,
@@ -282,33 +259,66 @@ define(function(require) {'use strict';
                                 nodeList: null
                             };
 
+                            doRelations(byRelations, true);
+                        }
+                    }
+
+                    function doRelations(byRelations, checkAccentedResult) {
+                        relationsRequest(byRelations);
+
+                        byRelations.request.promise['finally'](function(){
+                            setNodeList(byRelations);
+
+                            var accentedResult = checkAccentedResult && checkAccentedResultByRelations(byRelations);
+
+                            if (!accentedResult) {
+                                resetRelationsNodeListView(byRelations);
+                            }
+                        });
+                    }
+
+                    function resetRelationsNodeListView(byRelations) {
+                        nodeListView.showItemNumber(byRelations.result.total > 1);
+
+                        nodeListView.reset(byRelations.nodeList, noMore(byRelations.result), function(callback){
+                            byRelations.pageConfig.page++;
+
                             relationsRequest(byRelations);
 
                             byRelations.request.promise['finally'](function(){
-                                setNodeList(byRelations);
-
-                                var accentedResult = checkAccentedResultByRelations(byRelations);
-
-                                if (!accentedResult) {
-                                    resetNodeListView();
-                                }
+                                pushNodeList(byRelations, callback);
                             });
-                        }
+                        });
 
-                        function resetNodeListView() {
-                            nodeListView.showItemNumber(byRelations.result.total > 1);
+                        nodeListView.setTargetInfo(getLastTargetInfo());
 
-                            nodeListView.reset(byRelations.nodeList, noMore(byRelations.result), function(callback){
-                                byRelations.pageConfig.page++;
+                        initRelationsFilters(byRelations);
+                    }
 
-                                relationsRequest(byRelations);
+                    function relationsRequest(byRelations) {
+                        var filter = {};
 
-                                byRelations.request.promise['finally'](function(){
-                                    pushNodeList(byRelations, callback);
-                                });
-                            });
+                        _.each(byRelations.filters, function(f){
+                            _.extend(filter, f.condition);
+                        });
 
-                            nodeListView.setTargetInfo(getLastTargetInfo());
+                        byRelations.request = npRsearchResource.relations({
+                            node: byRelations.node,
+                            direction: byRelations.direction,
+                            relationType: byRelations.relationType,
+                            pageConfig: byRelations.pageConfig,
+                            filter: filter,
+                            previousRequest: byRelations.request,
+                            success: function(data, status){
+                                complete(data);
+                            },
+                            error: function(data, status){
+                                complete(null);
+                            }
+                        });
+
+                        function complete(result) {
+                            byRelations.result = result;
                         }
                     }
 
@@ -355,10 +365,8 @@ define(function(require) {'use strict';
                         return index;
                     }
 
-                    function pushRelationsBreadcrumb(node, direction, relationType) {
+                    function pushRelationsBreadcrumb(node, direction, relationType, filter) {
                         var index = getBreadcrumbSize();
-
-                        nodeFormView.hide();
 
                         scope.breadcrumbs[index] = {
                             index: index,
@@ -472,7 +480,70 @@ define(function(require) {'use strict';
 
                         return true;
                     }
-                }]
+
+                    /*
+                     * filters
+                     *
+                     */
+                    function hideRelationsFilters() {
+                        $rootScope.$emit('np-rsearch-filters-toggle-region-filter', false);
+                        $rootScope.$emit('np-rsearch-filters-toggle-inn-filter', false);
+                    }
+
+                    function initRelationsFilters(byRelations) {
+                        var filters = byRelations.filters;
+
+                        if (!filters) {
+                            var total = byRelations.result.total;
+
+                            var regionFilter = {
+                                values: byRelations.result.info.nodeFacet && byRelations.result.info.nodeFacet.region_code,
+                                value: null,
+                                total: total,
+                                callback: function(value){
+                                    regionFilter.value = value;
+                                    regionFilter.condition = {
+                                        'node.region_code.equals': value
+                                    };
+                                    doRelations(byRelations, false);
+                                }
+                            };
+
+                            var innFilter = {
+                                values: byRelations.result.info.relFacet && byRelations.result.info.relFacet.inn,
+                                value: null,
+                                total: total,
+                                callback: function(value){
+                                    innFilter.value = value;
+                                    innFilter.condition = {};
+                                    if (value === false) {
+                                        innFilter.condition['rel.inn.exists'] = value;
+                                    } else if (value) {
+                                        innFilter.condition['rel.inn.equals'] = value;
+                                    }
+                                    doRelations(byRelations, false);
+                                }
+                            };
+
+                            filters = {
+                                region: regionFilter,
+                                inn: innFilter
+                            };
+
+                            byRelations.filters = filters;
+                        }
+
+                        if (filters.region.values) {
+                            $rootScope.$emit('np-rsearch-filters-set-region-filter-data', filters.region);
+                            $rootScope.$emit('np-rsearch-filters-toggle-region-filter', true);
+                        }
+
+                        if (filters.inn.values) {
+                            $rootScope.$emit('np-rsearch-filters-set-inn-filter-data', filters.inn);
+                            $rootScope.$emit('np-rsearch-filters-toggle-inn-filter', true);
+                        }
+                    }
+                }
             };
         }]);
     //

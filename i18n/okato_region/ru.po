@@ -1,0 +1,342 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: i18n\n"
+"Report-Msgid-Bugs-To: feedback@null-pointer.ru\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: NULLPOINTER <feedback@null-pointer.ru>\n"
+"Language-Team: NULLPOINTER <feedback@null-pointer.ru>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"CLDR_PLURAL_FORMS_FORMAT: one{0}few{1}many{2}other{2}\n"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "1"
+msgstr "Алтайский край"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "10"
+msgstr "Амурская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "11"
+msgstr "Архангельская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "12"
+msgstr "Астраханская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "14"
+msgstr "Белгородская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "15"
+msgstr "Брянская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "17"
+msgstr "Владимирская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "18"
+msgstr "Волгоградская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "19"
+msgstr "Вологодская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "20"
+msgstr "Воронежская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "22"
+msgstr "Нижегородская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "24"
+msgstr "Ивановская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "25"
+msgstr "Иркутская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "26"
+msgstr "Республика Ингушетия"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "27"
+msgstr "Калининградская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "28"
+msgstr "Тверская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "29"
+msgstr "Калужская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "3"
+msgstr "Краснодарский край"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "30"
+msgstr "Камчатский край"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "32"
+msgstr "Кемеровская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "33"
+msgstr "Кировская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "34"
+msgstr "Костромская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "35"
+msgstr "Республика Крым"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "36"
+msgstr "Самарская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "37"
+msgstr "Курганская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "38"
+msgstr "Курская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "4"
+msgstr "Красноярский край"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "40"
+msgstr "Санкт-Петербург"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "41"
+msgstr "Ленинградская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "42"
+msgstr "Липецкая область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "44"
+msgstr "Магаданская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "45"
+msgstr "Москва"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "46"
+msgstr "Московская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "47"
+msgstr "Мурманская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "49"
+msgstr "Новгородская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "5"
+msgstr "Приморский край"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "50"
+msgstr "Новосибирская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "52"
+msgstr "Омская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "53"
+msgstr "Оренбургская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "54"
+msgstr "Орловская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "56"
+msgstr "Пензенская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "57"
+msgstr "Пермский край"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "58"
+msgstr "Псковская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "60"
+msgstr "Ростовская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "61"
+msgstr "Рязанская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "63"
+msgstr "Саратовская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "64"
+msgstr "Сахалинская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "65"
+msgstr "Свердловская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "66"
+msgstr "Смоленская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "67"
+msgstr "Севастополь"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "68"
+msgstr "Тамбовская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "69"
+msgstr "Томская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "7"
+msgstr "Ставропольский край"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "70"
+msgstr "Тульская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "71"
+msgstr "Тюменская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "73"
+msgstr "Ульяновская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "75"
+msgstr "Челябинская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "76"
+msgstr "Забайкальский край"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "77"
+msgstr "Чукотский АО"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "78"
+msgstr "Ярославская область"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "79"
+msgstr "Республика Адыгея"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "8"
+msgstr "Хабаровский край"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "80"
+msgstr "Республика Башкортостан"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "81"
+msgstr "Республика Бурятия"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "82"
+msgstr "Республика Дагестан"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "83"
+msgstr "Кабардино-Балкарская Республика"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "84"
+msgstr "Республика Алтай"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "85"
+msgstr "Республика Калмыкия"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "86"
+msgstr "Республика Карелия"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "87"
+msgstr "Республика Коми"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "88"
+msgstr "Республика Марий Эл"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "89"
+msgstr "Республика Мордовия"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "90"
+msgstr "Республика Северная Осетия-Алания"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "91"
+msgstr "Карачаево-Черкесская Республика"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "92"
+msgstr "Республика Татарстан"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "93"
+msgstr "Республика Тыва"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "94"
+msgstr "Удмуртская Республика"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "95"
+msgstr "Республика Хакасия"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "96"
+msgstr "Чеченская Республика"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "97"
+msgstr "Чувашская Республика"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "98"
+msgstr "Республика Саха (Якутия)"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "99"
+msgstr "Еврейская автономная область"

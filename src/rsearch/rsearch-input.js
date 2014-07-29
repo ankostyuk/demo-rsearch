@@ -24,13 +24,8 @@ define(function(require) {'use strict';
                 restrict: 'A',
                 template: template,
                 scope: {},
-                controller: ['$scope', '$element', '$attrs', function($scope, $element, $attrs) {
-                    //
-                    var scope   = $scope,
-                        element = $element,
-                        attrs   = $attrs;
+                link: function(scope, element, attrs) {
 
-                    //
                     var inputElement = element.find('input');
 
                     inputElement.bind('keydown', function(e){
@@ -85,7 +80,7 @@ define(function(require) {'use strict';
                             }
                         });
                     });
-                }]
+                }
             };
         }]);
     //
