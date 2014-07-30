@@ -103,7 +103,7 @@ msgstr "{'one': '{{count|number}} учреждённая компания', 'few
 #: ../src/rsearch/views/rsearch-node-relations-counts.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 msgid "NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY"
-msgstr "{'one': '{{count|number}} правоприемник', 'few': '{{count|number}} правоприемника', 'many': '{{count|number}} правоприемников', 'other': '{{count|number}} правоприемника'}"
+msgstr "{'one': '{{count|number}} правопреемник', 'few': '{{count|number}} правопреемника', 'many': '{{count|number}} правопреемников', 'other': '{{count|number}} правопреемника'}"
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Аналитический профиль"
