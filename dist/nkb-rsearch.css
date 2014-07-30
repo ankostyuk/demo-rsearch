@@ -40,6 +40,34 @@ a.active.action:active,
     padding: 0 10px 0 0;
     font-style: italic;
 }
+[np-rsearch-navigation] {
+    position: relative;
+}
+[np-rsearch-navigation] .mask {
+    position: absolute;
+    z-index: 10;
+    display: none;
+    left: -1000px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+}
+[np-rsearch-navigation] .mask .message-box {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+}
+[np-rsearch-navigation] .mask .message {
+    margin-left: -100%;
+}
+[np-rsearch-navigation].loading .mask {
+    display: block;
+}
+[np-rsearch-navigation].loading .navigation-content {
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+}
 [np-rsearch-navigation] .breadcrumb {
     padding: 0;
     background-color: transparent;

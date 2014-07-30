@@ -96,19 +96,25 @@ define(function(require) {'use strict';
                         hideRelationsFilters();
 
                         if (_.isBlank(search.query)) {
+                            reset();
                             return;
                         }
 
                         var searchPromises = [];
 
-                        _.each(search.byNodeTypes, function(byNodeType){
-                            byNodeType.pageConfig.page = 1;
-                            byNodeType.nodeList = null;
-                            searchRequest(byNodeType);
-                            searchPromises.push(byNodeType.request.completePromise);
-                        });
+                        loading(function(done){
+                            _.each(search.byNodeTypes, function(byNodeType){
+                                byNodeType.pageConfig.page = 1;
+                                byNodeType.nodeList = null;
+                                searchRequest(byNodeType);
+                                searchPromises.push(byNodeType.request.completePromise);
+                            });
 
-                        $q.all(searchPromises)['finally'](checkSearchResult);
+                            $q.all(searchPromises)['finally'](function(){
+                                checkSearchResult();
+                                done();
+                            });
+                        });
                     }
 
                     function searchRequest(byNodeType) {
@@ -181,12 +187,15 @@ define(function(require) {'use strict';
                         nodeListView.showItemNumber(false);
 
                         nodeListView.reset(byNodeType.nodeList, noMore(byNodeType.result), function(callback){
-                            byNodeType.pageConfig.page++;
+                            loading(function(done){
+                                byNodeType.pageConfig.page++;
 
-                            searchRequest(byNodeType);
+                                searchRequest(byNodeType);
 
-                            byNodeType.request.promise['finally'](function(){
-                                pushNodeList(byNodeType, callback);
+                                byNodeType.request.promise['finally'](function(){
+                                    pushNodeList(byNodeType, callback);
+                                    done();
+                                });
                             });
                         });
                     }
@@ -262,16 +271,20 @@ define(function(require) {'use strict';
                     }
 
                     function doRelations(byRelations, checkAccentedResult) {
-                        relationsRequest(byRelations);
+                        loading(function(done){
+                            relationsRequest(byRelations);
 
-                        byRelations.request.promise['finally'](function(){
-                            setNodeList(byRelations);
+                            byRelations.request.promise['finally'](function(){
+                                setNodeList(byRelations);
 
-                            var accentedResult = checkAccentedResult && checkAccentedResultByRelations(byRelations);
+                                var accentedResult = checkAccentedResult && checkAccentedResultByRelations(byRelations);
 
-                            if (!accentedResult) {
-                                resetRelationsNodeListView(byRelations);
-                            }
+                                if (!accentedResult) {
+                                    resetRelationsNodeListView(byRelations);
+                                }
+
+                                done();
+                            });
                         });
                     }
 
@@ -279,12 +292,15 @@ define(function(require) {'use strict';
                         nodeListView.showItemNumber(byRelations.result.total > 1);
 
                         nodeListView.reset(byRelations.nodeList, noMore(byRelations.result), function(callback){
-                            byRelations.pageConfig.page++;
+                            loading(function(done){
+                                byRelations.pageConfig.page++;
 
-                            relationsRequest(byRelations);
+                                relationsRequest(byRelations);
 
-                            byRelations.request.promise['finally'](function(){
-                                pushNodeList(byRelations, callback);
+                                byRelations.request.promise['finally'](function(){
+                                    pushNodeList(byRelations, callback);
+                                    done();
+                                });
                             });
                         });
 
@@ -543,6 +559,40 @@ define(function(require) {'use strict';
                     }
 
                     /*
+                     * loading
+                     *
+                     */
+                    var loadingShowDelay = 500,
+                        loadingId;
+
+                    function loading(operation) {
+                        loadingId = _.uniqueId();
+
+                        process(loadingId, operation);
+
+                        function process(id, operation) {
+                            var complete = false;
+
+                            $timeout(function(){
+                                if (!complete && id === loadingId) {
+                                    element.addClass('loading');
+                                }
+                            }, loadingShowDelay);
+
+                            operation(done);
+
+                            function done() {
+                                $timeout(function(){
+                                    if (id === loadingId) {
+                                        element.removeClass('loading');
+                                        complete = true;
+                                    }
+                                });
+                            }
+                        }
+                    }
+
+                    /*
                      * scope
                      *
                      */
@@ -551,6 +601,17 @@ define(function(require) {'use strict';
                         breadcrumbs: [],
                         isBreadcrumbs: isBreadcrumbs
                     });
+
+                    function reset() {
+                        search.total = null;
+
+                        _.each(search.byNodeTypes, function(byNodeType, nodeType){
+                            byNodeType.request.abort();
+                            byNodeType.total = null;
+                        });
+
+                        nodeListView.clear();
+                    }
                 }
             };
         }]);
