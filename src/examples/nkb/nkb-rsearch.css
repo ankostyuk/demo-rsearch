@@ -1,35 +1,3 @@
-/* shadows */
-.shadow-lift-lb-corner:before {
-  z-index: -2;
-  position: absolute;
-  content: "";
-  bottom: 20px;
-  right: 5px;
-  left: 10px;
-  top: 10px;
-
-  background-color: #777777;
-
-  -webkit-box-shadow: 0 15px 10px #777777;
-     -moz-box-shadow: 0 15px 10px #777777;
-          box-shadow: 0 15px 10px #777777;
-
-  -webkit-transform: rotate(1deg);
-     -moz-transform: rotate(1deg);
-      -ms-transform: rotate(1deg);
-       -o-transform: rotate(1deg);
-          transform: rotate(1deg);
-}
-.shadow-lift-lb-corner:after {
-  z-index: -1;
-  position: absolute;
-  content: "";
-  left: 0;
-  top: 0;
-  right: -5px;
-  bottom: 0;
-}
-
 /**/
 .rsearch_report_links .price {
     color: #999;
@@ -62,6 +30,38 @@ a.active.action:active,
 .active a.action:active {
     color: #98012e !important;
     cursor: default !important;
+}
+
+/* shadows */
+.shadow-lift-lb-corner:before {
+  z-index: -2;
+  position: absolute;
+  content: "";
+  bottom: 20px;
+  right: 5px;
+  left: 10px;
+  top: 10px;
+
+  background-color: #777777;
+
+  -webkit-box-shadow: 0 15px 10px #777777;
+     -moz-box-shadow: 0 15px 10px #777777;
+          box-shadow: 0 15px 10px #777777;
+
+  -webkit-transform: rotate(1deg);
+     -moz-transform: rotate(1deg);
+      -ms-transform: rotate(1deg);
+       -o-transform: rotate(1deg);
+          transform: rotate(1deg);
+}
+.shadow-lift-lb-corner:after {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  right: -5px;
+  bottom: 0;
 }
 
 /* company info */
@@ -147,10 +147,6 @@ a.active.action:active,
 [np-rsearch-node-plain].shadow-lift-lb-corner:after {
     background-color: #ece7df;
 }
-[np-rsearch-node-plain]:hover {
-    background-color: #ffffff;
-    cursor: pointer;
-}
 [np-rsearch-node-plain] .body {
     padding: 5px 5px 0 5px;
 }
@@ -176,6 +172,13 @@ a.active.action:active,
 [np-rsearch-node-plain] .company-codes,
 [np-rsearch-node-plain] .company-balance {
     padding-top: 5px;
+}
+[np-rsearch-node-plain]:hover {
+    background-color: #ffffff;
+    cursor: pointer;
+}
+[np-rsearch-node-plain]:hover .node-header {
+    color: #98012e;
 }
 [np-rsearch-node-plain] [np-rsearch-node-target-relations-info] {
     display: block;
