@@ -25,7 +25,7 @@
 
 ## i18n
 
-Сбор ключей перевода, формирования бандлов перевода
+Сбор ключей перевода, формирование бандлов перевода
 
 [nullpointer-i18n-bin/docs/build.md](http://git.repo.nkb/git/gitweb.cgi?p=nullpointer/i18n-bin.git;a=shortlog;h=refs/heads/master)
 
@@ -48,7 +48,7 @@
 
 ## Очистка
 
-Удаление зависимостей проекта, зависимостей модуля, сборки
+Удаление зависимостей проекта
 
     grunt clean:deps
 
