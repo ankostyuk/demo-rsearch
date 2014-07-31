@@ -56,7 +56,7 @@ define(function(require) {'use strict';
                     }
 
                     function setNodeList(object) {
-                        object.nodeList = object.result.list ? object.result.list : [];
+                        object.nodeList = object.result && object.result.list ? object.result.list : [];
                     }
 
                     function pushNodeList(object, callback) {
@@ -110,10 +110,13 @@ define(function(require) {'use strict';
                                 searchPromises.push(byNodeType.request.completePromise);
                             });
 
-                            $q.all(searchPromises)['finally'](function(){
+                            // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
+                            $q.all(searchPromises).then(complete, complete);
+
+                            function complete() {
                                 checkSearchResult();
                                 done();
-                            });
+                            }
                         });
                     }
 
@@ -192,10 +195,13 @@ define(function(require) {'use strict';
 
                                 searchRequest(byNodeType);
 
-                                byNodeType.request.promise['finally'](function(){
+                                // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
+                                byNodeType.request.promise.then(complete, complete);
+
+                                function complete() {
                                     pushNodeList(byNodeType, callback);
                                     done();
-                                });
+                                }
                             });
                         });
                     }
@@ -274,7 +280,10 @@ define(function(require) {'use strict';
                         loading(function(done){
                             relationsRequest(byRelations);
 
-                            byRelations.request.promise['finally'](function(){
+                            // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
+                            byRelations.request.promise.then(complete, complete);
+
+                            function complete() {
                                 setNodeList(byRelations);
 
                                 var accentedResult = checkAccentedResult && checkAccentedResultByRelations(byRelations);
@@ -284,12 +293,12 @@ define(function(require) {'use strict';
                                 }
 
                                 done();
-                            });
+                            }
                         });
                     }
 
                     function resetRelationsNodeListView(byRelations) {
-                        nodeListView.showItemNumber(byRelations.result.total > 1);
+                        nodeListView.showItemNumber(byRelations.result && byRelations.result.total > 1);
 
                         nodeListView.reset(byRelations.nodeList, noMore(byRelations.result), function(callback){
                             loading(function(done){
@@ -297,10 +306,13 @@ define(function(require) {'use strict';
 
                                 relationsRequest(byRelations);
 
-                                byRelations.request.promise['finally'](function(){
+                                // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
+                                byRelations.request.promise.then(complete, complete);
+
+                                function complete() {
                                     pushNodeList(byRelations, callback);
                                     done();
-                                });
+                                }
                             });
                         });
 
@@ -484,6 +496,10 @@ define(function(require) {'use strict';
                     }
 
                     function checkAccentedResultByRelations(byRelations) {
+                        if (!byRelations.result) {
+                            return null;
+                        }
+
                         if (byRelations.result.total !== 1) {
                             return false;
                         }
@@ -505,6 +521,10 @@ define(function(require) {'use strict';
                     }
 
                     function initRelationsFilters(byRelations) {
+                        if (!byRelations.result) {
+                            return;
+                        }
+
                         var filters = byRelations.filters;
 
                         if (!filters) {

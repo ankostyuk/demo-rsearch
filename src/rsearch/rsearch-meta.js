@@ -82,8 +82,8 @@ define(function(require) {'use strict';
                     relationTypes = data;
                 });
 
-            $q.all([nodeTypesPromise, relationTypesPromise])
-                .then(initMeta, initMeta); // !При конструкции ['finally'](initMeta) - генерятся исключения, но не отображаются в консоли
+            // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
+            $q.all([nodeTypesPromise, relationTypesPromise]).then(initMeta, initMeta);
 
             function initMeta() {
                 if (!nodeTypes || !relationTypes) {
