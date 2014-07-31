@@ -8,6 +8,7 @@
             <div class="span6">{{node._liquidate.state.type}}</div>
             <div class="align-right">{{node._liquidate.state._since | date:'mediumDate'}}</div>
         </div>
+        <div class="node-entry" ng-show="node.name_diff">{{node.namesort}}</div>
         <div class="node-entry">{{node | OKVED}}</div>
         <div class="node-entry">{{node.chief_name}}</div>
         <div class="node-entry">{{node.addresssort}}</div>
