@@ -6,6 +6,8 @@ define(function(require) {'use strict';
                   require('jquery');
 
     var angular = require('angular');
+
+                  require('icons');
                   require('l10n');
 
                   require('rsearch');

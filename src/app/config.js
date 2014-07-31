@@ -35,6 +35,10 @@ root._RESOURCES_CONFIG = {
         location: 'src/app',
         main: 'app'
     }, {
+        name: 'icons',
+        location: 'src/app/icons',
+        main: 'icons'
+    }, {
         name: 'l10n',
         location: 'src/app/l10n',
         main: 'l10n'

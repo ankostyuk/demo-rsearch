@@ -10,8 +10,8 @@
     </div>
     <div class="node-entry" ng-show="node.name_diff">{{node.namesort}}</div>
     <div class="node-entry">{{node | OKVED}}</div>
-    <div class="node-entry"><a class="action" ng-click="relationsClick('parents', 'EXECUTIVE_INDIVIDUAL')">{{node.chief_name}}</a></div>
-    <div class="node-entry"><a class="action" ng-click="relationsClick('parents', 'ADDRESS')">{{node.addresssort}}</a></div>
+    <div class="node-entry"><a class="action" ng-click="relationsClick('parents', 'EXECUTIVE_INDIVIDUAL')"><i class="icon i-user small {{node.chief_gender}}"></i> {{node.chief_name}}</a></div>
+    <div class="node-entry"><a class="action" ng-click="relationsClick('parents', 'ADDRESS')"><i class="icon i-map-marker small"></i> {{node.addresssort}}</a></div>
     <hr>
     <p class="node-entry">{{node.okfs_text}}</p>
     <div class="row node-entry">
