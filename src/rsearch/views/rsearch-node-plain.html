@@ -1,8 +1,8 @@
 <div class="body {{node._liquidate ? 'liquidate' : null}}" node-id="{{node._id}}" ng-click="toggleSelect()">
     <div ng-if="node._type === 'COMPANY'">
         <div class="row">
-            <div class="span7 node-header">{{node.nameshortsort}}</div>
-            <div class="align-right">{{node.founded_dt | date:'mediumDate'}}</div>
+            <div class="span6 node-header">{{node.nameshortsort}}</div>
+            <div class="align-right">${_tr("основано")} {{node.founded_dt | date:'mediumDate'}}</div>
         </div>
         <div class="row node-entry liquidate-state">
             <div class="span6">{{node._liquidate.state.type}}</div>

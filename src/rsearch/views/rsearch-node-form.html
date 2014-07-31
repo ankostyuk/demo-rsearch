@@ -1,8 +1,8 @@
 <div class="{{node._liquidate ? 'liquidate' : null}}" ng-if="node._type === 'COMPANY'">
     <div class="row">
-        <div class="span4 node-header"><h4>{{node.nameshortsort}}</h4></div>
+        <div class="span3 node-header"><h4>{{node.nameshortsort}}</h4></div>
         <div class="span3"><strong>${_tr("ОГРН")}: {{node.ogrn}}</strong></div>
-        <div class="align-right"><strong>{{node.founded_dt | date:'mediumDate'}}</strong></div>
+        <div class="align-right"><strong>${_tr("основано")} {{node.founded_dt | date:'mediumDate'}}</strong></div>
     </div>
     <div class="row node-entry liquidate-state">
         <div class="span6"><h5>{{node._liquidate.state.type}}</h5></div>
