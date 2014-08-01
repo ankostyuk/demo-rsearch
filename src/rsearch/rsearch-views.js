@@ -17,9 +17,7 @@ define(function(require) {'use strict';
         'np-rsearch-node-plain':                    require('text!./views/rsearch-node-plain.html'),
         'np-rsearch-node-info':                     require('text!./views/rsearch-node-info.html'),
         'np-rsearch-node-relations-counts':         require('text!./views/rsearch-node-relations-counts.html'),
-        'np-rsearch-node-target-relations-info':    require('text!./views/rsearch-node-target-relations-info.html'),
         'np-rsearch-node-relations-header':         require('text!./views/rsearch-node-relations-header.html'),
-        'np-rsearch-relation-simple':               require('text!./views/rsearch-relation-simple.html'),
         'np-rsearch-navigation-breadcrumb':         require('text!./views/rsearch-navigation-breadcrumb.html'),
         'np-rsearch-node-list':                     require('text!./views/rsearch-node-list.html'),
         'np-rsearch-node-form':                     require('text!./views/rsearch-node-form.html')
@@ -85,16 +83,6 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .directive('npRsearchNodeTargetRelationsInfo', [function() {
-            return {
-                restrict: 'A',
-                scope: false, // require <node>, <targetInfo>
-                template: templates['np-rsearch-node-target-relations-info'],
-                link: function(scope, element, attrs){
-                }
-            };
-        }])
-        //
         .directive('npRsearchNodeRelationsHeader', [function() {
             return {
                 restrict: 'A',
@@ -102,18 +90,6 @@ define(function(require) {'use strict';
                     relationsData: '=npRsearchNodeRelationsHeader'
                 },
                 template: templates['np-rsearch-node-relations-header'],
-                link: function(scope, element, attrs){
-                }
-            };
-        }])
-        //
-        .directive('npRsearchRelationSimple', [function() {
-            return {
-                restrict: 'A',
-                scope: {
-                    relation: '=npRsearchRelationSimple'
-                },
-                template: templates['np-rsearch-relation-simple'],
                 link: function(scope, element, attrs){
                 }
             };

@@ -1,42 +1,43 @@
-<div np-rsearch-node-info></div>
-<div class="extra-info">
-    <div ng-if="node._type === 'COMPANY'">
-        <ul class="inline">
-            <li ng-show="node._info.in['FOUNDER_INDIVIDUAL'] && node._info.in['FOUNDER_COMPANY']"><ng-pluralize count="count = node._info.in['FOUNDER_INDIVIDUAL'] + node._info.in['FOUNDER_COMPANY']" when="${_tr("NG_PLURALIZE::RELATION_FOUNDER")}"></ng-pluralize></li>
-            <li ng-show="node._info.in['FOUNDER_INDIVIDUAL'] && node._info.in['FOUNDER_INDIVIDUAL'] !== 1 && node._info.in['FOUNDER_INDIVIDUAL'] === (node._info.in['FOUNDER_INDIVIDUAL'] + node._info.in['FOUNDER_COMPANY'])"><ng-pluralize count="count = node._info.in['FOUNDER_INDIVIDUAL']" when="${_tr("NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL")}"></ng-pluralize></li>
-            <li ng-show="node._info.in['FOUNDER_INDIVIDUAL'] && node._info.in['FOUNDER_INDIVIDUAL'] === 1 && node._info.in['FOUNDER_INDIVIDUAL'] === (node._info.in['FOUNDER_INDIVIDUAL'] + node._info.in['FOUNDER_COMPANY'])">${_tr("Учредитель — физическое лицо")}</li>
-            <li ng-show="node._info.in['FOUNDER_COMPANY'] && node._info.in['FOUNDER_COMPANY'] !== 1 && node._info.in['FOUNDER_COMPANY'] === (node._info.in['FOUNDER_INDIVIDUAL'] + node._info.in['FOUNDER_COMPANY'])"><ng-pluralize count="count = node._info.in['FOUNDER_COMPANY']" when="${_tr("NG_PLURALIZE::RELATION_FOUNDER_COMPANY")}"></ng-pluralize></li>
-            <li ng-show="node._info.in['FOUNDER_COMPANY'] && node._info.in['FOUNDER_COMPANY'] === 1 && node._info.in['FOUNDER_COMPANY'] === (node._info.in['FOUNDER_INDIVIDUAL'] + node._info.in['FOUNDER_COMPANY'])">${_tr("Учредитель — компания")}</li>
+<div node-id="{{node._id}}" ng-click="toggleSelect()">
+    <div class="target-relations-info">{{targetInfo | targetRelationsInfo:node}}</div>
 
-            <li ng-show="node._info.out['FOUNDER_COMPANY']"><ng-pluralize count="count = node._info.out['FOUNDER_COMPANY']" when="${_tr("NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY")}"></ng-pluralize></li>
+    <div np-rsearch-node-info></div>
 
-            <li ng-show="node._info.out['HEAD_COMPANY']"><ng-pluralize count="count = node._info.out['HEAD_COMPANY']" when="${_tr("NG_PLURALIZE::RELATION_BRANCH_COMPANY")}"></ng-pluralize></li>
+    <div class="extra-info">
+        <div ng-if="node._type === 'COMPANY'">
+            <ul class="inline">
+                <li ng-show="node._info.in['FOUNDER_INDIVIDUAL'] && node._info.in['FOUNDER_COMPANY']"><ng-pluralize count="count = node._info.in['FOUNDER_INDIVIDUAL'] + node._info.in['FOUNDER_COMPANY']" when="${_tr("NG_PLURALIZE::RELATION_FOUNDER")}"></ng-pluralize></li>
+                <li ng-show="node._info.in['FOUNDER_INDIVIDUAL'] && node._info.in['FOUNDER_INDIVIDUAL'] !== 1 && node._info.in['FOUNDER_INDIVIDUAL'] === (node._info.in['FOUNDER_INDIVIDUAL'] + node._info.in['FOUNDER_COMPANY'])"><ng-pluralize count="count = node._info.in['FOUNDER_INDIVIDUAL']" when="${_tr("NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL")}"></ng-pluralize></li>
+                <li ng-show="node._info.in['FOUNDER_INDIVIDUAL'] && node._info.in['FOUNDER_INDIVIDUAL'] === 1 && node._info.in['FOUNDER_INDIVIDUAL'] === (node._info.in['FOUNDER_INDIVIDUAL'] + node._info.in['FOUNDER_COMPANY'])">${_tr("Учредитель — физическое лицо")}</li>
+                <li ng-show="node._info.in['FOUNDER_COMPANY'] && node._info.in['FOUNDER_COMPANY'] !== 1 && node._info.in['FOUNDER_COMPANY'] === (node._info.in['FOUNDER_INDIVIDUAL'] + node._info.in['FOUNDER_COMPANY'])"><ng-pluralize count="count = node._info.in['FOUNDER_COMPANY']" when="${_tr("NG_PLURALIZE::RELATION_FOUNDER_COMPANY")}"></ng-pluralize></li>
+                <li ng-show="node._info.in['FOUNDER_COMPANY'] && node._info.in['FOUNDER_COMPANY'] === 1 && node._info.in['FOUNDER_COMPANY'] === (node._info.in['FOUNDER_INDIVIDUAL'] + node._info.in['FOUNDER_COMPANY'])">${_tr("Учредитель — компания")}</li>
 
-            <li ng-show="node._info.in['PREDECESSOR_COMPANY']"><ng-pluralize count="count = node._info.in['PREDECESSOR_COMPANY']" when="${_tr("NG_PLURALIZE::RELATION_PREDECESSOR_COMPANY")}"></ng-pluralize></li>
-            <li ng-show="node._info.out['PREDECESSOR_COMPANY']"><ng-pluralize count="count = node._info.out['PREDECESSOR_COMPANY']" when="${_tr("NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY")}"></ng-pluralize></li>
-        </ul>
+                <li ng-show="node._info.out['FOUNDER_COMPANY']"><ng-pluralize count="count = node._info.out['FOUNDER_COMPANY']" when="${_tr("NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY")}"></ng-pluralize></li>
 
-        <span np-rsearch-node-target-relations-info></span>
-    </div>
+                <li ng-show="node._info.out['HEAD_COMPANY']"><ng-pluralize count="count = node._info.out['HEAD_COMPANY']" when="${_tr("NG_PLURALIZE::RELATION_BRANCH_COMPANY")}"></ng-pluralize></li>
 
-    <div ng-if="node._type === 'INDIVIDUAL'">
-        <ul class="inline">
-            <li ng-show="node._info.out['FOUNDER_INDIVIDUAL']"><ng-pluralize count="count = node._info.out['FOUNDER_INDIVIDUAL']" when="${_tr("NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY")}"></ng-pluralize></li>
-            <li ng-show="node._info.out['EXECUTIVE_INDIVIDUAL']"><ng-pluralize count="count = node._info.out['EXECUTIVE_INDIVIDUAL']" when="${_tr("NG_PLURALIZE::RELATION_LEAD_COMPANY")}"></ng-pluralize></li>
-        </ul>
+                <li ng-show="node._info.in['PREDECESSOR_COMPANY']"><ng-pluralize count="count = node._info.in['PREDECESSOR_COMPANY']" when="${_tr("NG_PLURALIZE::RELATION_PREDECESSOR_COMPANY")}"></ng-pluralize></li>
+                <li ng-show="node._info.out['PREDECESSOR_COMPANY']"><ng-pluralize count="count = node._info.out['PREDECESSOR_COMPANY']" when="${_tr("NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY")}"></ng-pluralize></li>
+            </ul>
+        </div>
 
-        <span np-rsearch-node-target-relations-info></span>
-    </div>
+        <div ng-if="node._type === 'INDIVIDUAL'">
+            <ul class="inline">
+                <li ng-show="node._info.out['FOUNDER_INDIVIDUAL']"><ng-pluralize count="count = node._info.out['FOUNDER_INDIVIDUAL']" when="${_tr("NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY")}"></ng-pluralize></li>
+                <li ng-show="node._info.out['EXECUTIVE_INDIVIDUAL']"><ng-pluralize count="count = node._info.out['EXECUTIVE_INDIVIDUAL']" when="${_tr("NG_PLURALIZE::RELATION_LEAD_COMPANY")}"></ng-pluralize></li>
+            </ul>
+        </div>
 
-    <div ng-if="node._type === 'ADDRESS'">
-        <ul class="inline">
-            <li ng-show="node._info.out['ADDRESS']"><ng-pluralize count="count = node._info.out['ADDRESS']" when="${_tr("NG_PLURALIZE::RELATION_COMPANY")}"></ng-pluralize></li>
-        </ul>
-    </div>
+        <div ng-if="node._type === 'ADDRESS'">
+            <ul class="inline">
+                <li ng-show="node._info.out['ADDRESS']"><ng-pluralize count="count = node._info.out['ADDRESS']" when="${_tr("NG_PLURALIZE::RELATION_COMPANY")}"></ng-pluralize></li>
+            </ul>
+        </div>
 
-    <div ng-if="node._type === 'PHONE'">
-        <ul class="inline">
-            <li ng-show="node._info.out['PHONE']"><ng-pluralize count="count = node._info.out['PHONE']" when="${_tr("NG_PLURALIZE::RELATION_COMPANY")}"></ng-pluralize></li>
-        </ul>
+        <div ng-if="node._type === 'PHONE'">
+            <ul class="inline">
+                <li ng-show="node._info.out['PHONE']"><ng-pluralize count="count = node._info.out['PHONE']" when="${_tr("NG_PLURALIZE::RELATION_COMPANY")}"></ng-pluralize></li>
+            </ul>
+        </div>
     </div>
 </div>
