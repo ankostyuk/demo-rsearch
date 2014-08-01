@@ -1,7 +1,7 @@
 <div np-rsearch-node-info></div>
 <div class="extra-info">
     <div ng-if="node._type === 'COMPANY'">
-        <ul class="inline small-text">
+        <ul class="inline">
             <li ng-show="node._info.in['FOUNDER_INDIVIDUAL'] && node._info.in['FOUNDER_COMPANY']"><ng-pluralize count="count = node._info.in['FOUNDER_INDIVIDUAL'] + node._info.in['FOUNDER_COMPANY']" when="${_tr("NG_PLURALIZE::RELATION_FOUNDER")}"></ng-pluralize></li>
             <li ng-show="node._info.in['FOUNDER_INDIVIDUAL'] && node._info.in['FOUNDER_INDIVIDUAL'] !== 1 && node._info.in['FOUNDER_INDIVIDUAL'] === (node._info.in['FOUNDER_INDIVIDUAL'] + node._info.in['FOUNDER_COMPANY'])"><ng-pluralize count="count = node._info.in['FOUNDER_INDIVIDUAL']" when="${_tr("NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL")}"></ng-pluralize></li>
             <li ng-show="node._info.in['FOUNDER_INDIVIDUAL'] && node._info.in['FOUNDER_INDIVIDUAL'] === 1 && node._info.in['FOUNDER_INDIVIDUAL'] === (node._info.in['FOUNDER_INDIVIDUAL'] + node._info.in['FOUNDER_COMPANY'])">${_tr("Учредитель — физическое лицо")}</li>
@@ -20,7 +20,7 @@
     </div>
 
     <div ng-if="node._type === 'INDIVIDUAL'">
-        <ul class="inline small-text">
+        <ul class="inline">
             <li ng-show="node._info.out['FOUNDER_INDIVIDUAL']"><ng-pluralize count="count = node._info.out['FOUNDER_INDIVIDUAL']" when="${_tr("NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY")}"></ng-pluralize></li>
             <li ng-show="node._info.out['EXECUTIVE_INDIVIDUAL']"><ng-pluralize count="count = node._info.out['EXECUTIVE_INDIVIDUAL']" when="${_tr("NG_PLURALIZE::RELATION_LEAD_COMPANY")}"></ng-pluralize></li>
         </ul>
@@ -29,13 +29,13 @@
     </div>
 
     <div ng-if="node._type === 'ADDRESS'">
-        <ul class="inline small-text">
+        <ul class="inline">
             <li ng-show="node._info.out['ADDRESS']"><ng-pluralize count="count = node._info.out['ADDRESS']" when="${_tr("NG_PLURALIZE::RELATION_COMPANY")}"></ng-pluralize></li>
         </ul>
     </div>
 
     <div ng-if="node._type === 'PHONE'">
-        <ul class="inline small-text">
+        <ul class="inline">
             <li ng-show="node._info.out['PHONE']"><ng-pluralize count="count = node._info.out['PHONE']" when="${_tr("NG_PLURALIZE::RELATION_COMPANY")}"></ng-pluralize></li>
         </ul>
     </div>
