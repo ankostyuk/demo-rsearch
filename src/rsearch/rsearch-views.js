@@ -15,6 +15,7 @@ define(function(require) {'use strict';
     var templates = {
         'np-rsearch-node-simple':                   require('text!./views/rsearch-node-simple.html'),
         'np-rsearch-node-plain':                    require('text!./views/rsearch-node-plain.html'),
+        'np-rsearch-node-info':                     require('text!./views/rsearch-node-info.html'),
         'np-rsearch-node-relations-counts':         require('text!./views/rsearch-node-relations-counts.html'),
         'np-rsearch-node-target-relations-info':    require('text!./views/rsearch-node-target-relations-info.html'),
         'np-rsearch-node-relations-header':         require('text!./views/rsearch-node-relations-header.html'),
@@ -57,6 +58,16 @@ define(function(require) {'use strict';
                     scope.toggleSelect = function(){
                         $rootScope.$emit('np-rsearch-node-select', scope.node, element);
                     };
+                }
+            };
+        }])
+        //
+        .directive('npRsearchNodeInfo', [function() {
+            return {
+                restrict: 'A',
+                scope: false, // require <node>
+                template: templates['np-rsearch-node-info'],
+                link: function(scope, element, attrs){
                 }
             };
         }])

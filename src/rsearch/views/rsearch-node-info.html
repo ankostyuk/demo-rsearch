@@ -1,0 +1,35 @@
+<div class="body {{node._liquidate ? 'liquidate' : null}}" node-id="{{node._id}}" ng-click="toggleSelect()">
+    <div ng-if="node._type === 'COMPANY'">
+        <div class="row">
+            <div class="span6 node-header">{{node.nameshortsort}}</div>
+            <div class="align-right"><span class="small-text">${_tr("основано")}</span> {{node.founded_dt | date:'mediumDate'}}</div>
+        </div>
+        <div class="row node-entry liquidate-state">
+            <div class="span6">{{node._liquidate.state.type}}</div>
+            <div class="align-right">{{node._liquidate.state._since | date:'mediumDate'}}</div>
+        </div>
+        <div class="node-entry" ng-show="node.name_diff">{{node.namesort}}</div>
+        <div class="node-entry">{{node | OKVED}}</div>
+        <div class="node-entry"><a class="action" ng-click="relationsClick('parents', 'EXECUTIVE_INDIVIDUAL')"><i class="icon i-user small {{node.chief_gender}}"></i> {{node.chief_name}}</a></div>
+        <div class="node-entry"><a class="action" ng-click="relationsClick('parents', 'ADDRESS')"><i class="icon i-map-marker small"></i> {{node.addresssort}}</a></div>
+        <ul class="inline">
+            <li ng-show="node.ogrn"><span class="small-text">${_tr("ОГРН")}</span> {{node.ogrn}}</li>
+            <li ng-show="node.inn"><span class="small-text">${_tr("ИНН")}</span> {{node.inn}}</li>
+            <li ng-show="node.okpo"><span class="small-text">${_tr("ОКПО")}</span> {{node.okpo}}</li>
+        </ul>
+        <div class="node-entry" ng-show="node | isLastSalesVolume"><span class="small-text">${_tr("Объём продаж за последний год")}</span> {{node | lastSalesVolume | number:0}}&nbsp;${_tr("тыс. руб.")}</div>
+        <div class="node-entry" ng-show="node | isBalance"><span class="small-text">${_tr("Финансовая отчётность")}</span> {{node | balanceByPeriod}}</div>
+    </div>
+
+    <div ng-if="node._type === 'INDIVIDUAL'">
+        <div class="node-header">{{node.name}}</div>
+    </div>
+
+    <div ng-if="node._type === 'ADDRESS'">
+        <div class="node-header">{{node.value}}</div>
+    </div>
+
+    <div ng-if="node._type === 'PHONE'">
+        <div class="node-header">{{node.value}}</div>
+    </div>
+</div>
