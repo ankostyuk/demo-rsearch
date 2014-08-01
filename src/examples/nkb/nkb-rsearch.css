@@ -225,6 +225,9 @@ a.active.action:active,
 [np-rsearch-node-list] [np-rsearch-node-info] a.action {
     color: #333333 !important;
 }
+[np-rsearch-node-list] [np-rsearch-node-info] .balance-forms {
+    display: none;
+}
 
 /* np-rsearch-node-form */
 [np-rsearch-node-form] {

@@ -19,6 +19,7 @@
         </ul>
         <div class="node-entry" ng-show="node | isLastSalesVolume"><span class="small-text">${_tr("Объём продаж за последний год")}</span> {{node | lastSalesVolume | number:0}}&nbsp;${_tr("тыс. руб.")}</div>
         <div class="node-entry" ng-show="node | isBalance"><span class="small-text">${_tr("Финансовая отчётность")}</span> {{node | balanceByPeriod}}</div>
+        <div class="node-entry balance-forms" ng-show="node | isBalance"><span class="small-text">${_tr("Формы отчетности за последний год")}</span> {{node | balanceForms}}</div>
     </div>
 
     <div ng-if="node._type === 'INDIVIDUAL'">

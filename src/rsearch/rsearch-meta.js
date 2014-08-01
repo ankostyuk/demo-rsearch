@@ -260,6 +260,26 @@ define(function(require) {'use strict';
             };
         }])
         //
+        .filter('balanceForms', [function(){
+            return function(node){
+                if (!node) {
+                    return null;
+                }
+
+                var value = node['balance'];
+
+                if (!value) {
+                    return null;
+                }
+
+                var years       = _.isArray(value) ? _.clone(value) : [value],
+                    formYear    = node['balance_forms_' + _.first(years)],
+                    forms       = _.isArray(formYear) ? formYear : [formYear];
+
+                return forms.join(', ');
+            };
+        }])
+        //
         .filter('balanceByPeriod', [function(){
             return function(node){
                 if (!node) {
