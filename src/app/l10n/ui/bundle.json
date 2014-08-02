@@ -57,7 +57,7 @@
     ],
     "NG_PLURALIZE::RELATION_HEAD_COMPANY": [
       null,
-      "{'one': '{{count|number}} головная компания', 'few': '{{count|number}} головные компании', 'many': '{{count|number}} головных компаний', 'other': '{{count|number}} головной компании'}"
+      "{'one': 'Головная компания', 'few': '{{count|number}} головные компании', 'many': '{{count|number}} головных компаний', 'other': '{{count|number}} головной компании'}"
     ],
     "NG_PLURALIZE::RELATION_LEAD_COMPANY": [
       null,
@@ -298,7 +298,7 @@
     ],
     "NG_PLURALIZE::RELATION_HEAD_COMPANY": [
       null,
-      "{'one': '1 головная компания', 'other': '{{count|number}} головная компания'}"
+      "{'one': 'Головная компания', 'other': '{{count|number}} головная компания'}"
     ],
     "NG_PLURALIZE::RELATION_LEAD_COMPANY": [
       null,

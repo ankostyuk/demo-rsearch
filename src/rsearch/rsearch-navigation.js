@@ -241,10 +241,6 @@ define(function(require) {'use strict';
                      */
                     var byRelationsStore = {};
 
-                    $rootScope.$on('np-rsearch-node-relations-counts-count-click', function(e, node, direction, relationType){
-                        showRelations(node, direction === 'in' ? 'parents' : 'children', relationType);
-                    });
-
                     $rootScope.$on('np-rsearch-node-form-relations-click', function(e, node, direction, relationType){
                         showRelations(node, direction, relationType);
                     });
