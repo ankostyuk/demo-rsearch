@@ -28,31 +28,22 @@ define(function(require) {'use strict';
             },
             relationTypes: {
                 'FOUNDER_COMPANY': {
-                    mergedPriority: 9
                 },
                 'FOUNDER_INDIVIDUAL': {
-                    mergedPriority: 8
                 },
                 'HEAD_COMPANY': {
-                    mergedPriority: 7
                 },
                 'EXECUTIVE_COMPANY': {
-                    mergedPriority: 6
                 },
                 'EXECUTIVE_INDIVIDUAL': {
-                    mergedPriority: 5
                 },
                 'PREDECESSOR_COMPANY': {
-                    mergedPriority: 4
                 },
                 'REGISTER_HOLDER': {
-                    mergedPriority: 3
                 },
                 'ADDRESS': {
-                    mergedPriority: 2
                 },
                 'PHONE': {
-                    mergedPriority: 1
                 }
             }
         })
@@ -82,8 +73,8 @@ define(function(require) {'use strict';
                     relationTypes = data;
                 });
 
-            $q.all([nodeTypesPromise, relationTypesPromise])
-                .then(initMeta, initMeta); // !При конструкции ['finally'](initMeta) - генерятся исключения, но не отображаются в консоли
+            // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
+            $q.all([nodeTypesPromise, relationTypesPromise]).then(initMeta, initMeta);
 
             function initMeta() {
                 if (!nodeTypes || !relationTypes) {
@@ -185,22 +176,13 @@ define(function(require) {'use strict';
                             }
 
                             var relationInfo = relationMap[nodeUID] || {
-                                'parents': [],
-                                'children': []
+                                'parents': {},
+                                'children': {}
                             };
 
-                            relationInfo[direction].push(relation);
+                            relationInfo[direction][relation._type] = relation;
 
                             relationMap[nodeUID] = relationInfo;
-                        });
-                    });
-
-                    // sort
-                    _.each(relationMap, function(relationInfo){
-                        _.each(['parents', 'children'], function(direction){
-                            relationInfo[direction] = _.sortBy(relationInfo[direction], function(relation){
-                                return -relationTypesMeta[relation._type].mergedPriority;
-                            });
                         });
                     });
 
@@ -260,6 +242,26 @@ define(function(require) {'use strict';
             };
         }])
         //
+        .filter('balanceForms', [function(){
+            return function(node){
+                if (!node) {
+                    return null;
+                }
+
+                var value = node['balance'];
+
+                if (!value) {
+                    return null;
+                }
+
+                var years       = _.isArray(value) ? _.clone(value) : [value],
+                    formYear    = node['balance_forms_' + _.first(years)],
+                    forms       = _.isArray(formYear) ? formYear : [formYear];
+
+                return forms.join(', ');
+            };
+        }])
+        //
         .filter('balanceByPeriod', [function(){
             return function(node){
                 if (!node) {
@@ -313,10 +315,99 @@ define(function(require) {'use strict';
                     return null;
                 }
 
-                var okvedCode = _.chop(okved, 2).join('.');
-                var okvedText = node['okved_bal_text'] || node['okved_main_text'];
+                var okvedCode = _.chop(okved, 2).join('.'),
+                    okvedText = node['okved_bal_text'] || node['okved_main_text'];
 
                 return okvedCode + ' ' + okvedText;
+            };
+        }])
+        //
+        .filter('targetRelationsInfo', ['$filter', function($filter){
+            return function(data, node){
+                if (!data) {
+                    return null;
+                }
+
+                var nbsp = ' ';
+
+                var SHOW_TYPES = {
+                    'FOUNDER_COMPANY': {
+                        order: 101,
+                        text: function(relation){
+                            return getFounderText(relation);
+                        }
+                    },
+
+                    'FOUNDER_INDIVIDUAL': {
+                        order: 201,
+                        mergedInn: true,
+                        text: function(relation){
+                            return getFounderText(relation);
+                        }
+                    },
+
+                    'EXECUTIVE_INDIVIDUAL': {
+                        order: 202,
+                        mergedInn: true,
+                        text: function(relation){
+                            return relation.position ? relation.position : '';
+                        }
+                    }
+                };
+
+                // TODO i18n
+                function getFounderText(relation) {
+                    if (relation.sharePercent || relation.shareAmount) {
+                        return 'доля' +
+                            (relation.sharePercent ? nbsp + $filter('number')(relation.sharePercent) + '%' : '') +
+                            (relation.shareAmount ? nbsp + $filter('number')(relation.shareAmount) + nbsp + 'руб.' : '');
+                    }
+
+                    return '';
+                }
+
+                // TODO i18n
+                function getInnText(inn) {
+                    return 'ИНН' + nbsp + inn;
+                }
+
+                var relations   = data.relationInfo.relationMap[node.__uid][data.relationInfo.direction],
+                    list        = [],
+                    text        = '',
+                    inn;
+
+                _.each(relations, function(relation, type){
+                    if (SHOW_TYPES[type]) {
+                        list.push(relation);
+                    }
+                });
+
+                var size = _.size(list);
+
+                if (size === 0) {
+                    return null;
+                }
+
+                list = _.sortBy(list, function(relation){
+                    return relation._type === data.relationInfo.relationType ? 0 : SHOW_TYPES[relation._type].order;
+                });
+
+                _.each(list, function(relation, i){
+                    var showType    = SHOW_TYPES[relation._type],
+                        t           = showType.text(relation);
+
+                    text += t + (t && i < size - 1 ? ', ' : '');
+
+                    if (showType.mergedInn) {
+                        inn = relation.inn;
+                    }
+                });
+
+                if (inn) {
+                    text += text ? ', ' + getInnText(inn) : getInnText(inn);
+                }
+
+                return _.capitalize(text);
             };
         }]);
     //

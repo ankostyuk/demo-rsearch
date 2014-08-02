@@ -1,6 +1,6 @@
 <div infinite-scroll='pager.nextPage()' infinite-scroll-disabled='pager.isDisabled()' infinite-scroll-distance='0'>
     <div class="node-list-item" ng-repeat="node in nodeList">
         <div class="item-number" ng-show="showItemNumber">{{node.__index + 1 | number}}.</div>
-        <div np-rsearch-node-plain="node" np-rsearch-node-target-info="targetInfo"></div>
+        <div class="shadow-lift-lb-corner" np-rsearch-node-plain="node" np-rsearch-node-target-info="targetInfo"></div>
     </div>
 </div>

@@ -43,6 +43,10 @@
       null,
       "{'one': 'Руководитель', 'few': '{{count|number}} руководителя', 'many': '{{count|number}} руководителей', 'other': '{{count|number}} руководителя'}"
     ],
+    "NG_PLURALIZE::RELATION_FOUNDER": [
+      null,
+      "{'one': '{{count|number}} учредитель', 'few': '{{count|number}} учредителя', 'many': '{{count|number}} учредителей', 'other': '{{count|number}} учредителя'}"
+    ],
     "NG_PLURALIZE::RELATION_FOUNDER_COMPANY": [
       null,
       "{'one': '{{count|number}} учредитель компания', 'few': '{{count|number}} учредителя компании', 'many': '{{count|number}} учредителей компаний', 'other': '{{count|number}} учредителя компании'}"
@@ -163,15 +167,15 @@
       null,
       ""
     ],
+    "Ожидайте...": [
+      null,
+      ""
+    ],
     "Отчеты": [
       null,
       ""
     ],
     "Поиск": [
-      null,
-      ""
-    ],
-    "Полное наименование": [
       null,
       ""
     ],
@@ -204,6 +208,10 @@
       ""
     ],
     "Финансовая отчётность": [
+      null,
+      ""
+    ],
+    "основано": [
       null,
       ""
     ],
@@ -259,6 +267,10 @@
     "NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL": [
       null,
       "{'one': 'Руководитель', 'other': '{{count|number}} руководитель'}"
+    ],
+    "NG_PLURALIZE::RELATION_FOUNDER": [
+      null,
+      "{'one': '1 учредитель', 'other': '{{count|number}} учредитель'}"
     ],
     "NG_PLURALIZE::RELATION_FOUNDER_COMPANY": [
       null,
@@ -380,15 +392,15 @@
       null,
       ""
     ],
+    "Ожидайте...": [
+      null,
+      ""
+    ],
     "Отчеты": [
       null,
       ""
     ],
     "Поиск": [
-      null,
-      ""
-    ],
-    "Полное наименование": [
       null,
       ""
     ],
@@ -421,6 +433,10 @@
       ""
     ],
     "Финансовая отчётность": [
+      null,
+      ""
+    ],
+    "основано": [
       null,
       ""
     ],

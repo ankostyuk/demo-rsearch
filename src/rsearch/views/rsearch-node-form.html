@@ -1,94 +1,56 @@
-<div class="{{node._liquidate ? 'liquidate' : null}}" ng-if="node._type === 'COMPANY'">
-    <div class="row">
-        <div class="span4 node-header"><h4>{{node.nameshortsort}}</h4></div>
-        <div class="span3"><strong>${_tr("ОГРН")}: {{node.ogrn}}</strong></div>
-        <div class="align-right"><strong>{{node.founded_dt | date:'mediumDate'}}</strong></div>
-    </div>
-    <div class="row node-entry liquidate-state">
-        <div class="span6"><h5>{{node._liquidate.state.type}}</h5></div>
-        <div class="align-right"><strong>{{node._liquidate.state._since | date:'mediumDate'}}</strong></div>
-    </div>
-    <div class="node-entry">{{node | OKVED}}</div>
-    <div class="node-entry"><a class="action" ng-click="relationsClick('parents', 'EXECUTIVE_INDIVIDUAL')">{{node.chief_name}}</a></div>
-    <div class="node-entry"><a class="action" ng-click="relationsClick('parents', 'ADDRESS')">{{node.addresssort}}</a></div>
-    <hr>
-    <p class="node-entry">{{node.okfs_text}}</p>
-    <div class="row node-entry">
-        <div class="span4"><strong>${_tr("ИНН")}:</strong></div>
-        <div class="span4">{{node.inn}}</div>
-    </div>
-    <div class="row node-entry">
-        <div class="span4"><strong>${_tr("ОКПО")}:</strong></div>
-        <div class="span4">{{node.okpo}}</div>
-    </div>
-    <div class="row node-entry">
-        <div class="span4"><strong>${_tr("Полное наименование")}:</strong></div>
-        <div class="span4">{{node.namesort}}</div>
-    </div>
-    <div class="row node-entry" ng-show="node | isLastSalesVolume">
-        <div class="span4"><strong>${_tr("Объём продаж за последний год")}:</strong></div>
-        <div class="span4">{{node | lastSalesVolume | number:0}}&nbsp;${_tr("тыс. руб.")}</div>
-    </div>
-    <div class="row entry" ng-show="node | isBalance">
-        <div class="span4"><strong>${_tr("Финансовая отчётность")}:</strong></div>
-        <div class="span4">{{node | balanceByPeriod}}</div>
-    </div>
-    <hr>
-    <div np-rsearch-node-relations-counts></div>
-    <hr>
-    <div class="row">
-        <div class="span5">
-            <h5>${_tr("Отчеты")}</h5>
-            <ul class="unstyled rsearch_report_links">
-                <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_market_profile_short&fromSearch=1&id={{node.bsn_id}}">${_tr("Профиль регистрации")}</a><span class="divider">/</span><span class="price">5 ие</span></li>
-                <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_market_list&fromSearch=1&id={{node.bsn_id}}">${_tr("Корпоративная структура")}</a><span class="divider">/</span><span class="price">осталось 7</span></li>
-                <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_business_profile&fromSearch=1&id={{node.bsn_id}}">${_tr("Бизнес профиль")}</a></li>
-                <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_market_profile_full&fromSearch=1&id={{node.bsn_id}}">${_tr("Аналитический профиль")}</a></li>
-                <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_credit_profile&fromSearch=1&id={{node.bsn_id}}">${_tr("Кредитный профиль")}</a></li>
-                <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_history_profile&fromSearch=1&id={{node.bsn_id}}">${_tr("Исторический профиль")}</a></li>
+<div np-rsearch-node-info></div>
+<div np-rsearch-node-relations-counts></div>
+<div class="extra-info">
+    <div ng-if="node._type === 'COMPANY'">
+        <div class="row">
+            <div class="span5">
+                <h5>${_tr("Отчеты")}</h5>
+                <ul class="unstyled rsearch_report_links">
+                    <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_market_profile_short&fromSearch=1&id={{node.bsn_id}}">${_tr("Профиль регистрации")}</a><span class="divider">/</span><span class="price">5 ие</span></li>
+                    <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_market_list&fromSearch=1&id={{node.bsn_id}}">${_tr("Корпоративная структура")}</a><span class="divider">/</span><span class="price">осталось 7</span></li>
+                    <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_business_profile&fromSearch=1&id={{node.bsn_id}}">${_tr("Бизнес профиль")}</a></li>
+                    <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_market_profile_full&fromSearch=1&id={{node.bsn_id}}">${_tr("Аналитический профиль")}</a></li>
+                    <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_credit_profile&fromSearch=1&id={{node.bsn_id}}">${_tr("Кредитный профиль")}</a></li>
+                    <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_history_profile&fromSearch=1&id={{node.bsn_id}}">${_tr("Исторический профиль")}</a></li>
 
-                <li><a class="action" target="_blank" href="http://testing.nkb/nkbrelation/report?node.type=COMPANY&bsn_id.equals={{node.bsn_id}}">${_tr("Раскрыть связи компании")}</a></li>
-            </ul>
-        </div>
-        <div class="span4">
-            <h5>${_tr("Исследования")}</h5>
-            <ul class="unstyled rsearch_report_links">
-                <li><a class="action" target="_blank" href="http://testing.nkb/search/offlinea/?idcomp={{node.bsn_id}}">${_tr("Расширенное исследование")}</a></li>
-                <li><a class="action" target="_blank" href="http://testing.nkb/search/offlinea/?idcomp={{node.bsn_id}}">${_tr("Схема аффилированных лиц")}</a></li>
-            </ul>
+                    <li><a class="action" target="_blank" href="http://testing.nkb/nkbrelation/report?node.type=COMPANY&bsn_id.equals={{node.bsn_id}}">${_tr("Раскрыть связи компании")}</a></li>
+                </ul>
+            </div>
+            <div class="span4">
+                <h5>${_tr("Исследования")}</h5>
+                <ul class="unstyled rsearch_report_links">
+                    <li><a class="action" target="_blank" href="http://testing.nkb/search/offlinea/?idcomp={{node.bsn_id}}">${_tr("Расширенное исследование")}</a></li>
+                    <li><a class="action" target="_blank" href="http://testing.nkb/search/offlinea/?idcomp={{node.bsn_id}}">${_tr("Схема аффилированных лиц")}</a></li>
+                </ul>
 
-            <h5>${_tr("ЕГРЮЛ")}</h5>
-            <ul class="unstyled rsearch_report_links">
-                <li><a class="action" href="#">${_tr("Скачать выписку")}</a> от 01.02.2004</li>
+                <h5>${_tr("ЕГРЮЛ")}</h5>
+                <ul class="unstyled rsearch_report_links">
+                    <li><a class="action" href="#">${_tr("Скачать выписку")}</a> от 01.02.2004</li>
 
-                <li><a class="action" target="_blank" href="http://testing.nkb/search/offlinee/?idcomp={{node.bsn_id}}">${_tr("Заказать выписку ЕГРЮЛ")}</a></li>
-            </ul>
+                    <li><a class="action" target="_blank" href="http://testing.nkb/search/offlinee/?idcomp={{node.bsn_id}}">${_tr("Заказать выписку ЕГРЮЛ")}</a></li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
 
-<div ng-if="node._type === 'INDIVIDUAL'">
-    <div class="node-header"><h4>{{node.name}}</h4></div>
-    <div np-rsearch-node-relations-counts></div>
-    <div class="row">
-        <div class="span9">
-            <h5>${_tr("Выписки и отчеты")}</h5>
-            <ul class="unstyled rsearch_report_links">
-                <li><a class="action" target="_blank" href="http://testing.nkb/search/offlinee/">${_tr("Заказать выписку ЕГРЮЛ")}</a></li>
-                <li><a class="action" target="_blank" href="http://testing.nkb/search/offlinep/">${_tr("Заказать выписку ЕГРИП")}</a></li>
+    <div ng-if="node._type === 'INDIVIDUAL'">
+        <div class="row">
+            <div class="span9">
+                <h5>${_tr("Выписки и отчеты")}</h5>
+                <ul class="unstyled rsearch_report_links">
+                    <li><a class="action" target="_blank" href="http://testing.nkb/search/offlinee/">${_tr("Заказать выписку ЕГРЮЛ")}</a></li>
+                    <li><a class="action" target="_blank" href="http://testing.nkb/search/offlinep/">${_tr("Заказать выписку ЕГРИП")}</a></li>
 
-                <li><a class="action" target="_blank" href="http://testing.nkb/nkbrelation/report?node.type=INDIVIDUAL&id.equals={{node.id}}">${_tr("Раскрыть связи физического лица")}</a></li>
-            </ul>
+                    <li><a class="action" target="_blank" href="http://testing.nkb/nkbrelation/report?node.type=INDIVIDUAL&id.equals={{node.id}}">${_tr("Раскрыть связи физического лица")}</a></li>
+                </ul>
+            </div>
         </div>
     </div>
-</div>
+    <!--
+    <div ng-if="node._type === 'ADDRESS'">
+    </div>
 
-<div ng-if="node._type === 'ADDRESS'">
-    <div class="node-header"><h4>{{node.value}}</h4></div>
-    <div np-rsearch-node-relations-counts></div>
-</div>
-
-<div ng-if="node._type === 'PHONE'">
-    <div class="node-header"><h4>{{node.value}}</h4></div>
-    <div np-rsearch-node-relations-counts></div>
+    <div ng-if="node._type === 'PHONE'">
+    </div>
+    -->
 </div>
