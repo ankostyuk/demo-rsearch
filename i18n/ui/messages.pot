@@ -64,43 +64,6 @@ msgid "NG_PLURALIZE::NODE_PHONE"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-msgid "ОГРН"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-msgid "основано"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-relation-simple.html:1
-#: ../src/rsearch/views/rsearch-relation-simple.html:1
-msgid "ИНН"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-msgid "ОКПО"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-msgid "Объём продаж за последний год"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-msgid "тыс. руб."
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-msgid "Финансовая отчётность"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Отчеты"
 msgstr ""
 
@@ -169,6 +132,46 @@ msgstr ""
 msgid "Раскрыть связи физического лица"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-history-info.html:1
+msgid "Бывшее наименование"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-history-info.html:1
+msgid "Бывший руководитель"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgid "основано"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgid "ОГРН"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgid "ИНН"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgid "ОКПО"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgid "Объём продаж за последний год"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgid "тыс. руб."
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgid "Финансовая отчётность"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgid "Формы отчетности за последний год"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 msgid "NG_PLURALIZE::RELATION_FOUNDER"
 msgstr ""
@@ -180,11 +183,20 @@ msgid "NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
+msgid "Учредитель — физическое лицо"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-counts.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 msgid "NG_PLURALIZE::RELATION_FOUNDER_COMPANY"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-plain.html:1
+msgid "Учредитель — компания"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-counts.html:1
 #: ../src/rsearch/views/rsearch-node-relations-counts.html:1
@@ -211,6 +223,23 @@ msgstr ""
 msgid "NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-plain.html:1
+#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
+#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "NG_PLURALIZE::RELATION_LEAD_COMPANY"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-plain.html:1
+#: ../src/rsearch/views/rsearch-node-plain.html:1
+#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
+#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "NG_PLURALIZE::RELATION_COMPANY"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-relations-counts.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 msgid "NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL"
@@ -224,13 +253,6 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-node-relations-counts.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 msgid "NG_PLURALIZE::RELATION_HEAD_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
-#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-msgid "NG_PLURALIZE::RELATION_LEAD_COMPANY"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations-counts.html:1
@@ -253,18 +275,6 @@ msgstr ""
 msgid "NG_PLURALIZE::RELATION_PHONE"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
-#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-msgid "NG_PLURALIZE::RELATION_COMPANY"
-msgstr ""
-
 #: ../src/rsearch/views/rsearch-region-filter.html:1
 msgid "Регион"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-relation-simple.html:1
-#: ../src/rsearch/views/rsearch-relation-simple.html:1
-msgid "руб."
 msgstr ""

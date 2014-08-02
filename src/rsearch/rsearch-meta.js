@@ -156,6 +156,22 @@ define(function(require) {'use strict';
 
                         node._liquidate = _liquidate;
                     }
+
+                    // история?
+                    var matches     = node._info && node._info.matches,
+                        matchesSize = _.size(matches);
+
+                    if ((matchesSize === 1 &&
+                            (_.contains(matches, 'namehistory') || _.contains(matches, 'chiefhistory'))) ||
+                        (matchesSize === 2 &&
+                            _.contains(matches, 'namehistory') && _.contains(matches, 'chiefhistory'))) {
+                        //
+                        node.__historical = {};
+
+                        _.each(matches, function(m){
+                            node.__historical[m] = true;
+                        });
+                    }
                 },
 
                 buildRelationMap: function(node) {

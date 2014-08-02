@@ -147,7 +147,25 @@ a.active.action:active,
     margin: 0;
     padding: 0 10px 0 0;
 }
+[np-rsearch-node-history-info] .history-labels {
+    font-style: italic;
+    color: #999;
+}
+[np-rsearch-node-history-info] .history-labels .icon {
+    vertical-align: -5px;
+    font-size: 150%;
+}
+[np-rsearch-node-history-info] .history-labels .entry {
+    margin-right: 10px;
+}
 [np-rsearch-node-simple] {
+}
+[np-rsearch-node-plain] [np-rsearch-node-history-info] .history-labels {
+    padding: 5px 5px 0 5px;
+}
+[np-rsearch-node-plain] .history-label .icon {
+    vertical-align: -5px;
+    font-size: 150%;
 }
 [np-rsearch-node-plain] .extra-info {
     padding: 0 7px;
@@ -209,6 +227,9 @@ a.active.action:active,
 }
 [np-rsearch-node-form] {
     padding-top: 10px;
+}
+[np-rsearch-node-form] [np-rsearch-node-history-info] .history-labels {
+    padding: 0 5px 5px 5px;
 }
 [np-rsearch-node-form] .node-header {
     font-size: 150%;
