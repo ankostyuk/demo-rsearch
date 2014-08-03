@@ -155,7 +155,7 @@ msgid "NG_PLURALIZE::RELATION_COMPANY"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Отчеты"
+msgid "Бизнес-справки онлайн"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -183,11 +183,17 @@ msgid "Исторический профиль"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Раскрыть связи компании"
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Система графического анализа"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Исследования"
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Построить схему"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Отчеты на заказ"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -198,6 +204,7 @@ msgstr ""
 msgid "Схема аффилированных лиц"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-form.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "ЕГРЮЛ"
 msgstr ""
@@ -212,15 +219,7 @@ msgid "Заказать выписку ЕГРЮЛ"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Выписки и отчеты"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Заказать выписку ЕГРИП"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Раскрыть связи физического лица"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-history-info.html:1

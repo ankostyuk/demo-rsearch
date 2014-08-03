@@ -129,6 +129,10 @@ msgstr ""
 msgid "Бизнес профиль"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Бизнес-справки онлайн"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-history-info.html:1
 msgid "Бывшее наименование"
 msgstr ""
@@ -140,10 +144,6 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 #: ../src/rsearch/views/rsearch-region-filter.html:1
 msgid "Все"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Выписки и отчеты"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -164,10 +164,6 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 msgid "ИНН физического лица"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Исследования"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -212,7 +208,7 @@ msgid "Ожидайте..."
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Отчеты"
+msgid "Отчеты на заказ"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
@@ -220,15 +216,11 @@ msgid "Поиск"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Построить схему"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Профиль регистрации"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Раскрыть связи компании"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Раскрыть связи физического лица"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -237,6 +229,10 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-region-filter.html:1
 msgid "Регион"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Система графического анализа"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1

@@ -1,12 +1,3 @@
-/**/
-.rsearch_report_links .price {
-    color: #999;
-}
-.rsearch_report_links .divider {
-    color: #ccc;
-    padding: 0 5px 0 5px;
-}
-
 /* base */
 a.action {
     padding-bottom: 0;
@@ -62,6 +53,24 @@ a.active.action:active,
   top: -10px;
   right: -10px;
   bottom: 0;
+}
+
+/* actions */
+.actions .actions-label {
+    line-height: 1;
+}
+.actions .actions-list {
+    margin-bottom: 20px;
+}
+.actions .price {
+    color: #999;
+}
+.actions .divider {
+    padding: 0 5px 0 5px;
+    color: #ccc;
+}
+.actions .divider:before {
+    content: "—";
 }
 
 /* np-rsearch-node-navigation */
@@ -264,6 +273,9 @@ a.active.action:active,
     width: 220px;
     padding: 15px 0 0 20px;
     white-space: nowrap;
+}
+[np-rsearch-node-form] .actions {
+    padding: 20px 7px 0 7px;
 }
 
 /* np-rsearch-filters */
