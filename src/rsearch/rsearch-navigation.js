@@ -30,6 +30,38 @@ define(function(require) {'use strict';
                         nodeFormView    = npRsearchViews.createNodeFormView(viewsElement, scope);
 
                     //
+                    var init                    = false,
+                        initMetaDefer           = $q.defer(),
+                        initMetaPromise         = initMetaDefer.promise,
+                        initPromise             = $q.all([initMetaPromise]),
+                        initDeferredFunctions   = [];
+
+                    $q.all(initPromise).then(initSuccess);
+
+                    function initSuccess() {
+                        $log.info('initSuccess...');
+                        init = true;
+                        _.each(initDeferredFunctions, function(f){
+                            $log.info('apply...');
+                            f.func.apply(this, f.args);
+                        });
+                    }
+
+                    function functionAfterInit(func, args) {
+                        $log.info('functionAfterInit...', init);
+                        if (init) {
+                            $log.info('now...');
+                            func.apply(this, args);
+                        } else {
+                            $log.info('deferred...');
+                            initDeferredFunctions.push({
+                                func: func,
+                                args: args
+                            });
+                        }
+                    }
+
+                    //
                     $rootScope.$on('np-rsearch-meta-ready', initByMeta);
 
                     function initByMeta() {
@@ -48,6 +80,8 @@ define(function(require) {'use strict';
                                   nodeList: null
                               };
                         });
+
+                        initMetaDefer.resolve();
                     }
 
                     // utils
@@ -85,7 +119,7 @@ define(function(require) {'use strict';
                     };
 
                     $rootScope.$on('np-rsearch-input-refresh', function(e, text){
-                        doSearch(text);
+                        functionAfterInit(doSearch, [text]);
                     });
 
                     function doSearch(query) {
