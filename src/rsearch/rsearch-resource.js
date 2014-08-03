@@ -12,7 +12,7 @@ define(function(require) {'use strict';
 
     return angular.module('np.rsearch-resource', [])
         //
-        .factory('npRsearchResource', ['$log', '$q', '$http', 'npRsearchConfig', 'npRsearchMetaHelper', function($log, $q, $http, npRsearchConfig, npRsearchMetaHelper){
+        .factory('npRsearchResource', ['$log', '$q', '$http', '$injector', 'npRsearchConfig', function($log, $q, $http, $injector, npRsearchConfig){
 
             var config = npRsearchConfig.resource || {};
 
@@ -65,7 +65,8 @@ define(function(require) {'use strict';
             }
 
             function nodeListProcess(data) {
-                var baseIndex = data.pageSize * (data.pageNumber - 1);
+                var npRsearchMetaHelper = $injector.get('npRsearchMetaHelper'),
+                    baseIndex           = data.pageSize * (data.pageNumber - 1);
 
                 _.each(data.list, function(node, i){
                     npRsearchMetaHelper.buildNodeExtraMeta(node);
@@ -77,6 +78,20 @@ define(function(require) {'use strict';
 
             // API
             return {
+
+                nodeTypes: function(options) {
+                    return request({
+                        method: 'GET',
+                        url: config['meta.url'] + '/node/types'
+                    }, null, options);
+                },
+
+                relationTypes: function(options) {
+                    return request({
+                        method: 'GET',
+                        url: config['meta.url'] + '/relation/types'
+                    }, null, options);
+                },
 
                 search: function(options) {
                     var params = _.extend({}, options.filter, options.pageConfig, {
