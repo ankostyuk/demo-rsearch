@@ -17,9 +17,11 @@ define(function(require) {'use strict';
         .constant('npRsearchConfig', {
             meta: root._APP_CONFIG.meta,
             resource: {
-                metaUrl: '/nkbrelation/api/meta',
-                searchUrl: '/nkbrelation/api/nodes',
-                relationsUrl: '/nkbrelation/api/node'
+                'meta.url':                 '/nkbrelation/api/meta',
+                'search.url':               '/nkbrelation/api/nodes',
+                'relations.url':            '/nkbrelation/api/node',
+                'egrul.list.url':           '/search/ajax/egrul.php',
+                'nkb.file.download.url':    '/reports/file.php'
             }
         })
         //

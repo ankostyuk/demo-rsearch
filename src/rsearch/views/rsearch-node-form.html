@@ -76,9 +76,8 @@
 
                 <h5 class="actions-label">${_tr("ЕГРЮЛ")}</h5>
                 <ul class="unstyled actions-list">
-                    <li><a class="action" href="#">${_tr("Скачать выписку")}</a> от 01.02.2004</li>
-
                     <li><a class="action" target="_blank" href="http://testing.nkb/search/offlinee/?idcomp={{node.bsn_id}}">${_tr("Заказать выписку ЕГРЮЛ")}</a></li>
+                    <li ng-repeat="egrul in node.__egrulList"><a class="action" ng-href="{{egrul._link}}" download="{{egrul._downloadName}}" target="_self">${_tr("Скачать выписку")}</a> ${_trc("от", "от такой-то даты")} {{egrul.fileDate | date:'mediumDate'}}</li>
                 </ul>
             </div>
         </div>
