@@ -85,7 +85,7 @@ define(function(require) {'use strict';
 
                     return request({
                         method: 'GET',
-                        url: config.searchUrl + '/' + options.nodeType,
+                        url: config['search.url'] + '/' + options.nodeType,
                         params: params
                     }, {
                         responseProcess: nodeListProcess
@@ -97,7 +97,7 @@ define(function(require) {'use strict';
 
                     return request({
                         method: 'GET',
-                        url: config.relationsUrl + '/' + options.node._id + '/' + options.relationType + '/' + options.direction,
+                        url: config['relations.url'] + '/' + options.node._id + '/' + options.relationType + '/' + options.direction,
                         params: params
                     }, {
                         responseProcess: nodeListProcess

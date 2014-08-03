@@ -59,7 +59,7 @@ define(function(require) {'use strict';
 
             var nodeTypesPromise = $http({
                     method: 'GET',
-                    url: resourceConfig.metaUrl + '/node/types'
+                    url: resourceConfig['meta.url'] + '/node/types'
                 })
                 .success(function(data){
                     nodeTypes = data;
@@ -67,7 +67,7 @@ define(function(require) {'use strict';
 
             var relationTypesPromise = $http({
                     method: 'GET',
-                    url: resourceConfig.metaUrl + '/relation/types'
+                    url: resourceConfig['meta.url'] + '/relation/types'
                 })
                 .success(function(data){
                     relationTypes = data;
