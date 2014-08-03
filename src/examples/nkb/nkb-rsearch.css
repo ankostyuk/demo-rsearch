@@ -250,7 +250,8 @@ a.active.action:active,
 [np-rsearch-node-list] [np-rsearch-node-info] a.action {
     color: #333333 !important;
 }
-[np-rsearch-node-list] [np-rsearch-node-info] .balance-forms {
+[np-rsearch-node-list] [np-rsearch-node-info] .balance-forms,
+[np-rsearch-node-list] [np-rsearch-node-info] .okfs {
     display: none;
 }
 
