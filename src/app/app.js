@@ -19,7 +19,9 @@ define(function(require) {'use strict';
             resource: {
                 'meta.url':                 '/nkbrelation/api/meta',
                 'search.url':               '/nkbrelation/api/nodes',
-                'relations.url':            '/nkbrelation/api/node'
+                'relations.url':            '/nkbrelation/api/node',
+                'egrul.list.url':           '/search/ajax/egrul.php',
+                'nkb.file.download.url':    '/reports/file.php'
             }
         })
         //

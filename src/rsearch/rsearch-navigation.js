@@ -219,20 +219,53 @@ define(function(require) {'use strict';
                      * node form
                      *
                      */
+                    var nodeForm = {
+                        egrulRequest: null
+                    };
+
                     $rootScope.$on('np-rsearch-node-select', function(e, node){
                         showNodeForm(node);
                     });
 
                     function showNodeForm(node) {
-                        nodeListView.clear();
-                        hideRelationsFilters();
+                        loading(function(done){
+                            var nodePromises = [];
 
-                        nodeFormView.setNode(node);
-                        nodeFormView.show(node);
+                            // egrul list
+                            if (node._type === 'COMPANY') {
+                                var egrulRequest = nodeForm.egrulRequest = npRsearchResource.egrulList({
+                                    node: node,
+                                    previousRequest: nodeForm.egrulRequest,
+                                    success: function(data, status){
+                                        node.__egrulList = data;
+                                    },
+                                    error: function(data, status){
+                                        node.__egrulList = [];
+                                    }
+                                });
 
-                        pushNodeFormBreadcrumb(node);
+                                nodePromises.push(egrulRequest.completePromise);
+                            }
 
-                        npRsearchViews.scrollTop();
+                            // TODO user limits
+
+                            // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
+                            $q.all(nodePromises).then(complete, complete);
+
+                            function complete() {
+                                nodeListView.clear();
+                                hideRelationsFilters();
+
+                                nodeFormView.setNode(node);
+                                nodeFormView.show(node);
+
+                                pushNodeFormBreadcrumb(node);
+
+                                npRsearchViews.scrollTop();
+
+                                done();
+                            }
+                        });
                     }
 
                     /*

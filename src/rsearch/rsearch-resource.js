@@ -102,6 +102,35 @@ define(function(require) {'use strict';
                     }, {
                         responseProcess: nodeListProcess
                     }, options);
+                },
+
+                egrulList: function(options) {
+                    return request({
+                        method: 'POST',
+                        url: config['egrul.list.url'],
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+                        data: 'json=' + angular.toJson({
+                            'inn': options.node.inn,
+                            'ogrn': options.node.ogrn
+                        })
+                    }, {
+                        responseProcess: function(data){
+                            if (!_.isObject(data) || data['serviceError']) {
+                                return [];
+                            }
+
+                            _.each(data, function(egrul, key){
+                                egrul['_link']          = config['nkb.file.download.url'] + '?id=' + key;
+                                egrul['_downloadName']  = egrul.ogrn + '.' + egrul.fileFormat;
+                            });
+
+                            var egrulList = _.sortBy(_.toArray(data), function(egrul){
+                                return -(egrul.fileDate);
+                            });
+
+                            return egrulList;
+                        }
+                    }, options);
                 }
             };
         }]);
