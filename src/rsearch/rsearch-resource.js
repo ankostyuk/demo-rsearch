@@ -115,16 +115,22 @@ define(function(require) {'use strict';
                         })
                     }, {
                         responseProcess: function(data){
-                            if (!_.isObject(data) || data['serviceError']) {
+                            if (!_.isObject(data)) {
                                 return [];
                             }
 
+                            var egrulList = [];
+
                             _.each(data, function(egrul, key){
-                                egrul['_link']          = config['nkb.file.download.url'] + '?id=' + key;
-                                egrul['_downloadName']  = egrul.ogrn + '.' + egrul.fileFormat;
+                                if (egrul.ogrn && egrul.fileDate) {
+                                    egrul['_link']          = config['nkb.file.download.url'] + '?id=' + key;
+                                    egrul['_downloadName']  = egrul.ogrn + '.' + egrul.fileFormat;
+
+                                    egrulList.push(egrul);
+                                }
                             });
 
-                            var egrulList = _.sortBy(_.toArray(data), function(egrul){
+                            egrulList = _.sortBy(egrulList, function(egrul){
                                 return -(egrul.fileDate);
                             });
 

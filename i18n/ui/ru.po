@@ -263,6 +263,11 @@ msgstr ""
 msgid "основано"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "от такой-то даты"
+msgid "от"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "тыс. руб."
 msgstr ""
