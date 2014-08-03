@@ -64,7 +64,98 @@ msgid "NG_PLURALIZE::NODE_PHONE"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Отчеты"
+#: ../src/rsearch/views/rsearch-node-plain.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "NG_PLURALIZE::RELATION_FOUNDER_COMPANY"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-plain.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-plain.html:1
+#: ../src/rsearch/views/rsearch-node-plain.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-plain.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "NG_PLURALIZE::RELATION_BRANCH_COMPANY"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-plain.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "NG_PLURALIZE::RELATION_PREDECESSOR_COMPANY"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-plain.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "NG_PLURALIZE::RELATION_REGISTER_HOLDER_COMPANY"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "NG_PLURALIZE::RELATION_REGISTERED_HOLDER_COMPANY"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "NG_PLURALIZE::RELATION_EXECUTIVE_COMPANY"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-plain.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "NG_PLURALIZE::RELATION_LEAD_COMPANY"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "NG_PLURALIZE::RELATION_HEAD_COMPANY"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "NG_PLURALIZE::RELATION_ADDRESS"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "NG_PLURALIZE::RELATION_PHONE"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-plain.html:1
+#: ../src/rsearch/views/rsearch-node-plain.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "NG_PLURALIZE::RELATION_COMPANY"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Бизнес-справки онлайн"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -92,11 +183,17 @@ msgid "Исторический профиль"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Раскрыть связи компании"
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Система графического анализа"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Исследования"
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Построить схему"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Отчеты на заказ"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -107,6 +204,7 @@ msgstr ""
 msgid "Схема аффилированных лиц"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-form.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "ЕГРЮЛ"
 msgstr ""
@@ -121,15 +219,7 @@ msgid "Заказать выписку ЕГРЮЛ"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Выписки и отчеты"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Заказать выписку ЕГРИП"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Раскрыть связи физического лица"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-history-info.html:1
@@ -177,102 +267,11 @@ msgid "NG_PLURALIZE::RELATION_FOUNDER"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-msgid "NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-plain.html:1
 msgid "Учредитель — физическое лицо"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-msgid "NG_PLURALIZE::RELATION_FOUNDER_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-plain.html:1
 msgid "Учредитель — компания"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
-#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-msgid "NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-msgid "NG_PLURALIZE::RELATION_BRANCH_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-msgid "NG_PLURALIZE::RELATION_PREDECESSOR_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-msgid "NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
-#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-msgid "NG_PLURALIZE::RELATION_LEAD_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
-#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-msgid "NG_PLURALIZE::RELATION_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-msgid "NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-msgid "NG_PLURALIZE::RELATION_EXECUTIVE_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-msgid "NG_PLURALIZE::RELATION_HEAD_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-msgid "NG_PLURALIZE::RELATION_REGISTER_HOLDER_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-msgid "NG_PLURALIZE::RELATION_REGISTERED_HOLDER_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-msgid "NG_PLURALIZE::RELATION_ADDRESS"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-counts.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-msgid "NG_PLURALIZE::RELATION_PHONE"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-region-filter.html:1
