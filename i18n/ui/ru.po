@@ -259,6 +259,16 @@ msgstr ""
 msgid "Формы отчетности за последний год"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-user-product-limits-info.html:1
+msgctxt "доступность продукта"
+msgid "доступно"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-user-product-limits-info.html:1
+msgctxt "валюта"
+msgid "ие"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "основано"
 msgstr ""

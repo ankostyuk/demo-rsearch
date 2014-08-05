@@ -282,3 +282,13 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-region-filter.html:1
 msgid "Регион"
 msgstr ""
+
+#: ../src/rsearch/views/rsearch-user-product-limits-info.html:1
+msgctxt "доступность продукта"
+msgid "доступно"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-user-product-limits-info.html:1
+msgctxt "валюта"
+msgid "ие"
+msgstr ""
