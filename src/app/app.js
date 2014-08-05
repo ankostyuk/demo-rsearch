@@ -26,35 +26,35 @@ define(function(require) {'use strict';
             },
             product: {
                 'market_profile_short': {
-                    'info.url': '/products/companies/',
+                    'info.url': '/products/companies/профили-компаний/',
                     'purchase.url': 'http://testing.nkb/reports/?code=rep_market_profile_short&fromSearch=1&id={{node.bsn_id}}'
                 },
                 'market_list': {
-                    'info.url': '/products/companies/',
+                    'info.url': '/products/companies/профили-компаний/',
                     'purchase.url': 'http://testing.nkb/reports/?code=rep_market_list&fromSearch=1&id={{node.bsn_id}}'
                 },
                 'business_profile': {
-                    'info.url': '/products/companies/',
+                    'info.url': '/products/companies/профили-компаний/',
                     'purchase.url': 'http://testing.nkb/reports/?code=rep_business_profile&fromSearch=1&id={{node.bsn_id}}'
                 },
                 'market_profile_full': {
-                    'info.url': '/products/companies/',
+                    'info.url': '/products/companies/профили-компаний/',
                     'purchase.url': 'http://testing.nkb/reports/?code=rep_market_profile_full&fromSearch=1&id={{node.bsn_id}}'
                 },
                 'credit_profile': {
-                    'info.url': '/products/companies/',
+                    'info.url': '/products/companies/профили-компаний/',
                     'purchase.url': 'http://testing.nkb/reports/?code=rep_credit_profile&fromSearch=1&id={{node.bsn_id}}'
                 },
                 'ext_history_profile': {
-                    'info.url': '/products/companies/',
+                    'info.url': '/products/companies/профили-компаний/',
                     'purchase.url': 'http://testing.nkb/reports/?code=rep_history_profile&fromSearch=1&id={{node.bsn_id}}'
                 },
                 'extended_research': {
-                    'info.url': '/products/companies/',
+                    'info.url': '/products/companies/расширенное-исследование-компаний/',
                     'purchase.url': 'http://testing.nkb/search/offlinea/?idcomp={{node.bsn_id}}'
                 },
                 'egrulCompanyReport': {
-                    'info.url': '/products/companies/',
+                    'info.url': '/products/companies/egrul/',
                     'purchase.url': 'http://testing.nkb/search/offlinee/?idcomp={{node.bsn_id}}'
                 },
                 'egrulChiefReport': {
@@ -66,7 +66,7 @@ define(function(require) {'use strict';
                     'purchase.url': 'http://testing.nkb/search/offlinep/'
                 },
                 'relations_xxx': {
-                    'info.url': '/products/relations/',
+                    'info.url': '/products/companies/схема-связанных-лиц/',
                     'purchase.url': '/relations_xxx'
                 },
                 'relations_find_related': {
