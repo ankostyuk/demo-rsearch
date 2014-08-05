@@ -17,7 +17,7 @@
             <li ng-show="node.inn"><span class="value-label">${_tr("ИНН")}</span> {{node.inn}}</li>
             <li ng-show="node.okpo"><span class="value-label">${_tr("ОКПО")}</span> {{node.okpo}}</li>
         </ul>
-        <div class="node-entry" ng-show="node | isLastSalesVolume">${_tr("Объём продаж за последний год")}: {{node | lastSalesVolume | number:0}}&nbsp;${_tr("тыс. руб.")}</div>
+        <div class="node-entry" ng-show="user.isAuthenticated() && (node | isLastSalesVolume)">${_tr("Объём продаж за последний год")}: {{node | lastSalesVolume | number:0}}&nbsp;${_tr("тыс. руб.")}</div>
         <div class="node-entry" ng-show="node | isBalance">${_tr("Финансовая отчётность")}: {{node | balanceByPeriod}}</div>
         <div class="node-entry balance-forms" ng-show="node | isBalance">${_tr("Формы отчетности за последний год")}: {{node | balanceForms}}</div>
         <div class="node-entry okfs" ng-show="node.okfscode && node.okfscode !== 16">{{node.okfs_text}}</div>

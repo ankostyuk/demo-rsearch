@@ -54,29 +54,29 @@
             <div class="span5">
                 <h5 class="actions-label">${_tr("Бизнес-справки онлайн")}</h5>
                 <ul class="unstyled actions-list">
-                    <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_market_profile_short&fromSearch=1&id={{node.bsn_id}}">${_tr("Профиль регистрации")}</a><span class="divider"></span><span class="price">5 ие</span></li>
-                    <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_market_list&fromSearch=1&id={{node.bsn_id}}">${_tr("Корпоративная структура")}</a><span class="divider"></span><span class="price">доступно 7</span></li>
-                    <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_business_profile&fromSearch=1&id={{node.bsn_id}}">${_tr("Бизнес профиль")}</a></li>
-                    <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_market_profile_full&fromSearch=1&id={{node.bsn_id}}">${_tr("Аналитический профиль")}</a></li>
-                    <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_credit_profile&fromSearch=1&id={{node.bsn_id}}">${_tr("Кредитный профиль")}</a></li>
-                    <li><a class="action" target="_blank" href="http://testing.nkb/reports/?code=rep_history_profile&fromSearch=1&id={{node.bsn_id}}">${_tr("Исторический профиль")}</a></li>
+                    <li><a class="action" ng-click="productClick('market_profile_short')">${_tr("Профиль регистрации")}</a><span class="divider"></span><span class="price">5 ие</span></li>
+                    <li><a class="action" ng-click="productClick('market_list')">${_tr("Корпоративная структура")}</a><span class="divider"></span><span class="price">доступно 7</span></li>
+                    <li><a class="action" ng-click="productClick('business_profile')">${_tr("Бизнес профиль")}</a></li>
+                    <li><a class="action" ng-click="productClick('market_profile_full')">${_tr("Аналитический профиль")}</a></li>
+                    <li><a class="action" ng-click="productClick('credit_profile')">${_tr("Кредитный профиль")}</a></li>
+                    <li><a class="action" ng-click="productClick('ext_history_profile')">${_tr("Исторический профиль")}</a></li>
                 </ul>
 
                 <h5 class="actions-label">${_tr("Система графического анализа")}</h5>
                 <ul class="unstyled actions-list">
-                    <li><a class="action" target="_blank" href="http://testing.nkb/nkbrelation/report?node.type=COMPANY&bsn_id.equals={{node.bsn_id}}">${_tr("Построить схему")}</a></li>
+                    <li><a class="action" ng-click="productClick('relations_find_related')">${_tr("Построить схему")}</a></li>
                 </ul>
             </div>
             <div class="span4">
                 <h5 class="actions-label">${_tr("Отчеты на заказ")}</h5>
                 <ul class="unstyled actions-list">
-                    <li><a class="action" target="_blank" href="http://testing.nkb/search/offlinea/?idcomp={{node.bsn_id}}">${_tr("Расширенное исследование")}</a></li>
-                    <li><a class="action" target="_blank" href="http://testing.nkb/search/offlinea/?idcomp={{node.bsn_id}}">${_tr("Схема аффилированных лиц")}</a></li>
+                    <li><a class="action" ng-click="productClick('extended_research')">${_tr("Расширенное исследование")}</a></li>
+                    <li><a class="action" ng-click="productClick('relations_xxx')">${_tr("Схема аффилированных лиц")}</a></li>
                 </ul>
 
                 <h5 class="actions-label">${_tr("ЕГРЮЛ")}</h5>
                 <ul class="unstyled actions-list">
-                    <li><a class="action" target="_blank" href="http://testing.nkb/search/offlinee/?idcomp={{node.bsn_id}}">${_tr("Заказать выписку ЕГРЮЛ")}</a></li>
+                    <li><a class="action" ng-click="productClick('egrulCompanyReport')">${_tr("Заказать выписку ЕГРЮЛ")}</a></li>
                     <li ng-repeat="egrul in node.__egrulList"><a class="action" ng-href="{{egrul._link}}" download="{{egrul._downloadName}}" target="_self">${_tr("Скачать выписку")}</a> ${_trc("от", "от такой-то даты")} {{egrul.fileDate | date:'mediumDate'}}</li>
                 </ul>
             </div>
@@ -88,14 +88,14 @@
             <div class="span5">
                 <h5 class="actions-label">${_tr("Система графического анализа")}</h5>
                 <ul class="unstyled actions-list">
-                    <li><a class="action" target="_blank" href="http://testing.nkb/nkbrelation/report?node.type=INDIVIDUAL&id.equals={{node.id}}">${_tr("Построить схему")}</a></li>
+                    <li><a class="action" ng-click="productClick('relations_find_related')">${_tr("Построить схему")}</a></li>
                 </ul>
             </div>
             <div class="span4">
                 <h5 class="actions-label">${_tr("ЕГРЮЛ")}</h5>
                 <ul class="unstyled actions-list">
-                    <li><a class="action" target="_blank" href="http://testing.nkb/search/offlinee/">${_tr("Заказать выписку ЕГРЮЛ")}</a></li>
-                    <li><a class="action" target="_blank" href="http://testing.nkb/search/offlinep/">${_tr("Заказать выписку ЕГРИП")}</a></li>
+                    <li><a class="action" ng-click="productClick('egrulChiefReport')">${_tr("Заказать выписку ЕГРЮЛ")}</a></li>
+                    <li><a class="action" ng-click="productClick('egripReport')">${_tr("Заказать выписку ЕГРИП")}</a></li>
                 </ul>
             </div>
         </div>

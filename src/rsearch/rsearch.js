@@ -18,6 +18,7 @@ define(function(require) {'use strict';
         rsearchFilters:     require('./rsearch-filters'),
         rsearchViews:       require('./rsearch-views'),
         rsearchResource:    require('./rsearch-resource'),
+        rsearchUser:        require('./rsearch-user'),
         rsearchMeta:        require('./rsearch-meta')
     };
 

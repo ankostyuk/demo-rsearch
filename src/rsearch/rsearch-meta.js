@@ -124,6 +124,9 @@ define(function(require) {'use strict';
                     // uid
                     metaHelper.buildNodeUID(node);
 
+                    //
+                    node.__idField = nodeTypesMeta[node._type]['idField'];
+
                     // компания
                     if (node._type === 'COMPANY') {
                         // юридическое состояние

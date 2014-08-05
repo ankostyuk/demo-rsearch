@@ -79,6 +79,13 @@ define(function(require) {'use strict';
             // API
             return {
 
+                userLimits: function(options) {
+                    return request({
+                        method: 'GET',
+                        url: config['users.url'] + '/me/limits'
+                    }, null, options);
+                },
+
                 nodeTypes: function(options) {
                     return request({
                         method: 'GET',
