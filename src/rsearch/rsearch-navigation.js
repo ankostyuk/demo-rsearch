@@ -298,7 +298,11 @@ define(function(require) {'use strict';
                                 nodePromises.push(egrulRequest.completePromise);
                             }
 
-                            // TODO user limits
+                            // user limits
+                            //
+                            // TODO возможно, надо будет убрать,
+                            // если обновление лимитов будет в другом месте -- при заказе продуктов
+                            nodePromises.push(fetchUser());
 
                             // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
                             $q.all(nodePromises).then(complete, complete);

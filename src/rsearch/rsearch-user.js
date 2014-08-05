@@ -45,7 +45,19 @@ define(function(require) {'use strict';
                                 return false;
                             }
 
-                            return true;
+                            var productLimitsInfo = me.getProductLimitsInfo(productName);
+
+                            if (!productLimitsInfo) {
+                                return false;
+                            }
+
+                            if (productLimitsInfo['unlimited'] ||
+                                    productLimitsInfo['amount'] > 0 ||
+                                    productLimitsInfo['price'] <= user.balance) {
+                                return true;
+                            }
+
+                            return false;
                         }
                     };
                 },
