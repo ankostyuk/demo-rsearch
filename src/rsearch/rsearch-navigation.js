@@ -47,18 +47,20 @@ define(function(require) {'use strict';
 
                     function initSuccess() {
                         $log.info('initSuccess...');
+                        var me = this;
                         init = true;
                         _.each(initDeferredFunctions, function(f){
                             $log.info('apply...');
-                            f.func.apply(this, f.args);
+                            f.func.apply(me, f.args);
                         });
                     }
 
                     function functionAfterInit(func, args) {
                         $log.info('functionAfterInit...', init);
+                        var me = this;
                         if (init) {
                             $log.info('now...');
-                            func.apply(this, args);
+                            func.apply(me, args);
                         } else {
                             $log.info('deferred...');
                             initDeferredFunctions.push({
@@ -83,10 +85,7 @@ define(function(require) {'use strict';
                             search.byNodeTypes[nodeType] = {
                                   nodeType: nodeType,
                                   resultPriority: data.searchResultPriority,
-                                  pageConfig: {
-                                      page: 0,
-                                      pageSize: 20
-                                  },
+                                  pageConfig: null,
                                   request: null,
                                   result: null,
                                   nodeList: null
@@ -100,6 +99,13 @@ define(function(require) {'use strict';
                      * utils
                      *
                      */
+                    function resetPageConfig() {
+                        return {
+                            page: 1,
+                            pageSize: 20
+                        };
+                    }
+
                     function noMore(result) {
                         return result ? result.pageNumber >= result.pageCount : null;
                     }
@@ -153,7 +159,7 @@ define(function(require) {'use strict';
 
                         loading(function(done){
                             _.each(search.byNodeTypes, function(byNodeType){
-                                byNodeType.pageConfig.page = 1;
+                                byNodeType.pageConfig = resetPageConfig();
                                 byNodeType.nodeList = null;
                                 searchRequest(byNodeType);
                                 searchPromises.push(byNodeType.request.completePromise);
@@ -347,10 +353,7 @@ define(function(require) {'use strict';
                                 direction: direction,
                                 relationType: relationType,
                                 relationMap: npRsearchMetaHelper.buildRelationMap(node),
-                                pageConfig: {
-                                    page: 1,
-                                    pageSize: 20
-                                },
+                                pageConfig: null,
                                 request: null,
                                 result: null,
                                 nodeList: null
@@ -362,6 +365,8 @@ define(function(require) {'use strict';
 
                     function doRelations(byRelations, checkAccentedResult) {
                         loading(function(done){
+                            byRelations.pageConfig = resetPageConfig();
+
                             relationsRequest(byRelations);
 
                             // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли

@@ -387,9 +387,7 @@ define(function(require) {'use strict';
                 }
 
                 var relations   = data.relationInfo.relationMap[node.__uid][data.relationInfo.direction],
-                    list        = [],
-                    text        = '',
-                    inn;
+                    list        = [];
 
                 _.each(relations, function(relation, type){
                     if (SHOW_TYPES[type]) {
@@ -403,6 +401,9 @@ define(function(require) {'use strict';
                     return null;
                 }
 
+                var texts = [],
+                    inn;
+
                 list = _.sortBy(list, function(relation){
                     return relation._type === data.relationInfo.relationType ? 0 : SHOW_TYPES[relation._type].order;
                 });
@@ -411,18 +412,20 @@ define(function(require) {'use strict';
                     var showType    = SHOW_TYPES[relation._type],
                         t           = showType.text(relation);
 
-                    text += t + (t && i < size - 1 ? ', ' : '');
+                    if (t) {
+                        texts.push(t);
+                    }
 
-                    if (showType.mergedInn) {
+                    if (!inn && showType.mergedInn) {
                         inn = relation.inn;
                     }
                 });
 
                 if (inn) {
-                    text += text ? ', ' + getInnText(inn) : getInnText(inn);
+                    texts.push(getInnText(inn));
                 }
 
-                return _.capitalize(text);
+                return _.capitalize(texts.join(', '));
             };
         }]);
     //
