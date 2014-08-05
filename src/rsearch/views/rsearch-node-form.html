@@ -56,9 +56,9 @@
                 <ul class="unstyled actions-list">
                     <li><a class="action" ng-click="productClick('market_profile_short')">${_tr("Профиль регистрации")}</a><span class="divider"></span><span class="price">5 ие</span></li>
                     <li><a class="action" ng-click="productClick('market_list')">${_tr("Корпоративная структура")}</a><span class="divider"></span><span class="price">доступно 7</span></li>
-                    <li><a class="action" ng-click="productClick('business_profile')">${_tr("Бизнес профиль")}</a></li>
-                    <li><a class="action" ng-click="productClick('market_profile_full')">${_tr("Аналитический профиль")}</a></li>
-                    <li><a class="action" ng-click="productClick('credit_profile')">${_tr("Кредитный профиль")}</a></li>
+                    <li ng-show="node | isBalance"><a class="action" ng-click="productClick('business_profile')">${_tr("Бизнес профиль")}</a></li>
+                    <li ng-show="node | isBalance"><a class="action" ng-click="productClick('market_profile_full')">${_tr("Аналитический профиль")}</a></li>
+                    <li ng-show="node | isBalance"><a class="action" ng-click="productClick('credit_profile')">${_tr("Кредитный профиль")}</a></li>
                     <li><a class="action" ng-click="productClick('ext_history_profile')">${_tr("Исторический профиль")}</a></li>
                 </ul>
 
