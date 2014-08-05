@@ -55,16 +55,6 @@ a.active.action:active,
 .actions .actions-list {
     margin-bottom: 20px;
 }
-.actions .price {
-    color: #999;
-}
-.actions .divider {
-    padding: 0 5px 0 5px;
-    color: #ccc;
-}
-.actions .divider:before {
-    content: "—";
-}
 [np-rsearch-navigation] {
     position: relative;
 }
@@ -279,4 +269,13 @@ a.active.action:active,
 }
 [np-rsearch-filters] .filter-item.active a {
     font-weight: bold;
+}
+[np-rsearch-user-product-limits-info] {
+    white-space: nowrap;
+}
+[np-rsearch-user-product-limits-info] .divider {
+    color: #ccc;
+}
+[np-rsearch-user-product-limits-info] .info {
+    color: #999;
 }

@@ -18,7 +18,7 @@ define(function(require) {'use strict';
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('npRsearchNavigation', ['$log', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', function($log, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource){
+        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'npRsearchUser', 'npRsearchConfig', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, npRsearchUser, npRsearchConfig){
             return {
                 restrict: 'A',
                 template: template,
@@ -28,6 +28,48 @@ define(function(require) {'use strict';
                     var viewsElement    = element.find('.views'),
                         nodeListView    = npRsearchViews.createNodeListView(viewsElement, scope),
                         nodeFormView    = npRsearchViews.createNodeFormView(viewsElement, scope);
+
+                    /*
+                     * init
+                     *
+                     */
+                    var init                    = false,
+                        user                    = npRsearchUser.user(),
+                        userPromise             = fetchUser(),
+                        initMetaDefer           = $q.defer(),
+                        initMetaPromise         = initMetaDefer.promise,
+                        initPromise             = $q.all([initMetaPromise, userPromise]),
+                        initDeferredFunctions   = [];
+
+                    $q.all(initPromise).then(initSuccess);
+
+                    function initSuccess() {
+                        var me = this;
+
+                        init = true;
+
+                        _.each(initDeferredFunctions, function(f){
+                            f.func.apply(me, f.args);
+                        });
+                    }
+
+                    function functionAfterInit(func, args) {
+                        var me = this;
+
+                        if (init) {
+                            func.apply(me, args);
+                        } else {
+                            initDeferredFunctions.push({
+                                func: func,
+                                args: args
+                            });
+                        }
+                    }
+
+                    // user
+                    function fetchUser() {
+                        return npRsearchUser.fetchUser().completePromise;
+                    }
 
                     //
                     $rootScope.$on('np-rsearch-meta-ready', initByMeta);
@@ -45,9 +87,14 @@ define(function(require) {'use strict';
                                   nodeList: null
                               };
                         });
+
+                        initMetaDefer.resolve();
                     }
 
-                    // utils
+                    /*
+                     * utils
+                     *
+                     */
                     function resetPageConfig() {
                         return {
                             page: 1,
@@ -89,7 +136,7 @@ define(function(require) {'use strict';
                     };
 
                     $rootScope.$on('np-rsearch-input-refresh', function(e, text){
-                        doSearch(text);
+                        functionAfterInit(doSearch, [text]);
                     });
 
                     function doSearch(query) {
@@ -235,7 +282,7 @@ define(function(require) {'use strict';
                         loading(function(done){
                             var nodePromises = [];
 
-                            // egrul list
+                            // egrul list // TODO no PHP API - ответ презаписывает тикет и слетает аутентификация
                             if (node._type === 'COMPANY') {
                                 var egrulRequest = nodeForm.egrulRequest = npRsearchResource.egrulList({
                                     node: node,
@@ -251,7 +298,11 @@ define(function(require) {'use strict';
                                 nodePromises.push(egrulRequest.completePromise);
                             }
 
-                            // TODO user limits
+                            // user limits
+                            //
+                            // TODO возможно, надо будет убрать,
+                            // если обновление лимитов будет в другом месте -- при заказе продуктов
+                            nodePromises.push(fetchUser());
 
                             // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
                             $q.all(nodePromises).then(complete, complete);
@@ -279,7 +330,11 @@ define(function(require) {'use strict';
                     var byRelationsStore = {};
 
                     $rootScope.$on('np-rsearch-node-form-relations-click', function(e, node, direction, relationType){
-                        showRelations(node, direction, relationType);
+                        if (user.isProductAvailable('relations_find_related')) {
+                            showRelations(node, direction, relationType);
+                        } else {
+                            showProductInfo('relations_find_related');
+                        }
                     });
 
                     function showRelations(node, direction, relationType, key) {
@@ -642,6 +697,34 @@ define(function(require) {'use strict';
                                 });
                             }
                         }
+                    }
+
+                    /*
+                     * products
+                     *
+                     */
+                    var productConfig = npRsearchConfig.product || {};
+
+                    $rootScope.$on('np-rsearch-node-form-product-click', function(e, productName, node){
+                        if (user.isProductAvailable(productName)) {
+                            purchaseProduct(productName, {
+                                node: node
+                            });
+                        } else {
+                            showProductInfo(productName);
+                        }
+                    });
+
+                    function showProductInfo(productName, context) {
+                        var url = $interpolate(productConfig[productName]['info.url'])(context);
+
+                        $window.open(url, '_blank');
+                    }
+
+                    function purchaseProduct(productName, context) {
+                        var url = $interpolate(productConfig[productName]['purchase.url'])(context);
+
+                        $window.open(url, '_blank');
                     }
 
                     /*

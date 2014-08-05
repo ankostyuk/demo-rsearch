@@ -39,8 +39,6 @@ define(function(require) {'use strict';
                     _.extend(scope, {
                         text: null,
 
-                        ready: false,
-
                         // TODO Реализовать
                         searchInputEnter: function(){
                             fireRefresh();
@@ -65,20 +63,16 @@ define(function(require) {'use strict';
                     }
 
                     //
-                    $rootScope.$on('np-rsearch-meta-ready', function(){
-                        scope.ready = true;
+                    $timeout(function(){
+                        var locationSearch = purl().param();
 
-                        $timeout(function(){
-                            var locationSearch = purl().param();
-
-                            if (locationSearch.q) {
-                                // Поиск из URL
-                                scope.text = locationSearch.q;
-                            } else {
-                                // Фокус на поиске
-                                inputElement.focus();
-                            }
-                        });
+                        if (locationSearch.q) {
+                            // Поиск из URL
+                            scope.text = locationSearch.q;
+                        } else {
+                            // Фокус на поиске
+                            inputElement.focus();
+                        }
                     });
                 }
             };

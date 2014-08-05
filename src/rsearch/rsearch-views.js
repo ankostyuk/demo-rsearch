@@ -20,6 +20,7 @@ define(function(require) {'use strict';
         'np-rsearch-node-relations-header':         require('text!./views/rsearch-node-relations-header.html'),
         'np-rsearch-navigation-breadcrumb':         require('text!./views/rsearch-navigation-breadcrumb.html'),
         'np-rsearch-node-list':                     require('text!./views/rsearch-node-list.html'),
+        'np-rsearch-user-product-limits-info':      require('text!./views/rsearch-user-product-limits-info.html'),
         'np-rsearch-node-form':                     require('text!./views/rsearch-node-form.html')
     };
 
@@ -42,7 +43,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .directive('npRsearchNodePlain', ['$rootScope', function($rootScope) {
+        .directive('npRsearchNodePlain', ['$rootScope', 'npRsearchUser', function($rootScope, npRsearchUser) {
             return {
                 restrict: 'A',
                 scope: {
@@ -51,6 +52,8 @@ define(function(require) {'use strict';
                 },
                 template: templates['np-rsearch-node-plain'],
                 link: function(scope, element, attrs){
+                    scope.user = npRsearchUser.user();
+
                     scope.toggleSelect = function(){
                         $rootScope.$emit('np-rsearch-node-select', scope.node, element);
                     };
@@ -100,7 +103,17 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .factory('npRsearchViews', ['$log', '$compile', '$rootScope', '$timeout', '$window', function($log, $compile, $rootScope, $timeout, $window){
+        .directive('npRsearchUserProductLimitsInfo', ['$rootScope', function($rootScope) {
+            return {
+                restrict: 'A',
+                scope: {
+                    info: '=npRsearchUserProductLimitsInfo'
+                },
+                template: templates['np-rsearch-user-product-limits-info']
+            };
+        }])
+        //
+        .factory('npRsearchViews', ['$log', '$compile', '$rootScope', '$timeout', '$window', 'npRsearchUser', function($log, $compile, $rootScope, $timeout, $window, npRsearchUser){
 
             var windowElement   = angular.element($window),
                 htmlbodyElement = $('html, body');
@@ -225,8 +238,12 @@ define(function(require) {'use strict';
                     });
 
                     _.extend(scope, {
+                        user: npRsearchUser.user(),
                         relationsClick: function(direction, relationType){
                             $rootScope.$emit('np-rsearch-node-form-relations-click', scope.node, direction, relationType);
+                        },
+                        productClick: function(productName){
+                            $rootScope.$emit('np-rsearch-node-form-product-click', productName, scope.node);
                         }
                     });
 

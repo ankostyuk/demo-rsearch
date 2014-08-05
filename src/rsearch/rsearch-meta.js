@@ -48,7 +48,7 @@ define(function(require) {'use strict';
             }
         })
         //
-        .factory('npRsearchMetaHelper', ['$log', '$q', '$http', '$rootScope', 'npRsearchConfig', 'npRsearchMeta', function($log, $q, $http, $rootScope, npRsearchConfig, npRsearchMeta){
+        .factory('npRsearchMetaHelper', ['$log', '$q', '$rootScope', 'npRsearchConfig', 'npRsearchMeta', 'npRsearchResource', function($log, $q, $rootScope, npRsearchConfig, npRsearchMeta, npRsearchResource){
             var resourceConfig = npRsearchConfig.resource || {};
 
             // init meta
@@ -57,21 +57,17 @@ define(function(require) {'use strict';
                 relationTypesMeta   = {},
                 nodeTypes, relationTypes;
 
-            var nodeTypesPromise = $http({
-                    method: 'GET',
-                    url: resourceConfig['meta.url'] + '/node/types'
-                })
-                .success(function(data){
+            var nodeTypesPromise = npRsearchResource.nodeTypes({
+                success: function(data){
                     nodeTypes = data;
-                });
+                }
+            }).completePromise;
 
-            var relationTypesPromise = $http({
-                    method: 'GET',
-                    url: resourceConfig['meta.url'] + '/relation/types'
-                })
-                .success(function(data){
+            var relationTypesPromise = npRsearchResource.relationTypes({
+                success: function(data){
                     relationTypes = data;
-                });
+                }
+            }).completePromise;
 
             // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
             $q.all([nodeTypesPromise, relationTypesPromise]).then(initMeta, initMeta);
@@ -127,6 +123,9 @@ define(function(require) {'use strict';
 
                     // uid
                     metaHelper.buildNodeUID(node);
+
+                    //
+                    node.__idField = nodeTypesMeta[node._type]['idField'];
 
                     // компания
                     if (node._type === 'COMPANY') {
