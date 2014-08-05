@@ -41,28 +41,24 @@ define(function(require) {'use strict';
                         initPromise             = $q.all([initMetaPromise, userPromise]),
                         initDeferredFunctions   = [];
 
-                    $log.warn('user...', user.isAuthenticated());
-
                     $q.all(initPromise).then(initSuccess);
 
                     function initSuccess() {
-                        $log.info('initSuccess...');
                         var me = this;
+
                         init = true;
+
                         _.each(initDeferredFunctions, function(f){
-                            $log.info('apply...');
                             f.func.apply(me, f.args);
                         });
                     }
 
                     function functionAfterInit(func, args) {
-                        $log.info('functionAfterInit...', init);
                         var me = this;
+
                         if (init) {
-                            $log.info('now...');
                             func.apply(me, args);
                         } else {
-                            $log.info('deferred...');
                             initDeferredFunctions.push({
                                 func: func,
                                 args: args
@@ -330,8 +326,6 @@ define(function(require) {'use strict';
                     var byRelationsStore = {};
 
                     $rootScope.$on('np-rsearch-node-form-relations-click', function(e, node, direction, relationType){
-                        $log.warn('product...', 'relations_find_related', user.isProductAvailable('relations_find_related'));
-
                         if (user.isProductAvailable('relations_find_related')) {
                             showRelations(node, direction, relationType);
                         } else {
@@ -708,8 +702,6 @@ define(function(require) {'use strict';
                     var productConfig = npRsearchConfig.product || {};
 
                     $rootScope.$on('np-rsearch-node-form-product-click', function(e, productName, node){
-                        $log.warn('product...', productName, user.isProductAvailable(productName));
-
                         if (user.isProductAvailable(productName)) {
                             purchaseProduct(productName, {
                                 node: node

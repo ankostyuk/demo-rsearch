@@ -1,0 +1,5 @@
+<span ng-show="info && !info.unlimited">
+    <span class="divider">—</span>
+    <span class="info" ng-show="info.amount">${_trc("доступно", "доступность продукта")} {{info.amount | number}}</span>
+    <span class="info" ng-show="info.price">{{info.price | number}} ${_trc("ие", "валюта")}</span>
+</span>

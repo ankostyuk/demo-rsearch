@@ -71,7 +71,7 @@ define(function(require) {'use strict';
                 },
                 'relations_find_related': {
                     'info.url': '/products/relations/',
-                    'purchase.url': 'http://testing.nkb/nkbrelation/report?node.type={{node._type}}&{{node.__idField}}.equals={{node[node.__idField]}}'
+                    'purchase.url': '/nkbrelation/report?node.type={{node._type}}&{{node.__idField}}.equals={{node[node.__idField]}}'
                 }
             }
         })

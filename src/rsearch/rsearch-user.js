@@ -24,20 +24,28 @@ define(function(require) {'use strict';
 
                 user: function() {
                     return {
-                        isAuthenticated: function(){
+                        isAuthenticated: function() {
                             return !!user;
                         },
 
-                        isProductAvailable: function(productName){
-                            return true;
+                        getProductLimitsInfo: function(productName) {
+                            var me = this;
 
-//                            var me = this;
-//
-//                            if (!me.isAuthenticated()) {
-//                                return false;
-//                            }
-//
-//                            return true;
+                            if (!me.isAuthenticated()) {
+                                return null;
+                            }
+
+                            return user.limits[productName];
+                        },
+
+                        isProductAvailable: function(productName) {
+                            var me = this;
+
+                            if (!me.isAuthenticated()) {
+                                return false;
+                            }
+
+                            return true;
                         }
                     };
                 },
@@ -46,9 +54,7 @@ define(function(require) {'use strict';
                     var userLimitsRequest = npRsearchResource.userLimits({
                         previousRequest: userLimitsRequest,
                         success: function(data){
-                            applyUser({
-                                limits: data
-                            });
+                            applyUser(data);
                         },
                         error: function(){
                             applyUser(null);
