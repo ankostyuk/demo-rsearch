@@ -22,10 +22,10 @@ define(function(require) {'use strict';
             sortedPairs = [];
 
         return {
-            setData: function(d){
+            setData: function(d, sort){
                 data = d;
                 value = data.value;
-                sortedPairs = sortByCount(data.values);
+                sortedPairs = sortBy(data.values, sort);
             },
 
             getSortedPairs: function(){
@@ -58,12 +58,18 @@ define(function(require) {'use strict';
         };
     }
 
-    function sortByCount(data) {
+    function sortBy(data, sort) {
         if (!data) {
             return [];
         }
 
         var list = _.pairs(data);
+
+        if (sort === 'byKey') {
+            return _.sortBy(list, function(p){
+                return p[0];
+            });
+        }
 
         return _.sortBy(list, function(p){
             return -p[1];
@@ -115,7 +121,7 @@ define(function(require) {'use strict';
                     });
 
                     $rootScope.$on('np-rsearch-filters-set-inn-filter-data', function(e, data){
-                        filter.setData(data);
+                        filter.setData(data, 'byKey');
                     });
 
                     _.extend(scope, {
