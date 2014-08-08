@@ -128,13 +128,12 @@ define(function(require) {'use strict';
 
                 egrulList: function(options) {
                     return request({
-                        method: 'POST',
-                        url: config['egrul.list.url'],
-                        headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-                        data: 'json=' + angular.toJson({
+                        method: 'GET',
+                        url: config['egrul.history.url'],
+                        params: {
                             'inn': options.node.inn,
                             'ogrn': options.node.ogrn
-                        })
+                        }
                     }, {
                         responseProcess: function(data){
                             if (!_.isObject(data)) {
