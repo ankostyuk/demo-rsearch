@@ -210,7 +210,6 @@ msgid "ЕГРЮЛ"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-#: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Заказать выписку ЕГРЮЛ"
 msgstr ""
 
@@ -221,6 +220,14 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgctxt "от такой-то даты"
 msgid "от"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Заказать выписку ЕГРЮЛ по руководителю"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Заказать выписку ЕГРЮЛ по учредителю"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1

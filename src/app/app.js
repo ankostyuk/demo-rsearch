@@ -57,7 +57,11 @@ define(function(require) {'use strict';
                     'info.url': '/products/companies/egrul/',
                     'purchase.url': 'http://testing.nkb/search/offlinee/?idcomp={{node.bsn_id}}'
                 },
-                'egrulChiefReport': {
+                'egrulFounderPersonReport': {
+                    'info.url': '/products/people/',
+                    'purchase.url': 'http://testing.nkb/search/offlinee/'
+                },
+                'egrulFounderCompanyReport': {
                     'info.url': '/products/people/',
                     'purchase.url': 'http://testing.nkb/search/offlinee/'
                 },

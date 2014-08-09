@@ -158,6 +158,14 @@ msgstr ""
 msgid "Заказать выписку ЕГРЮЛ"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Заказать выписку ЕГРЮЛ по руководителю"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Заказать выписку ЕГРЮЛ по учредителю"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ИНН"
 msgstr ""
