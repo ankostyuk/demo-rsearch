@@ -70,7 +70,7 @@ module.exports = function(grunt) {
                     inputDir:       path.resolve(__dirname, 'src/rsearch'),
                     inputRootPath:  path.resolve(__dirname, ''),
                     outputDir:      path.resolve(__dirname, 'i18n/ui'),
-                    bundleDir:      path.resolve(__dirname, 'src/app/l10n/ui'),
+                    bundleDir:      path.resolve(__dirname, 'src/l10n/ui'),
                     baseLang:       APP_LANGS[0],
                     langs:          APP_LANGS
                 }
@@ -82,7 +82,7 @@ module.exports = function(grunt) {
                     inputDir:       path.resolve(__dirname, 'i18n/okato_region'),
                     inputRootPath:  path.resolve(__dirname, ''),
                     outputDir:      path.resolve(__dirname, 'i18n/okato_region'),
-                    bundleDir:      path.resolve(__dirname, 'src/app/l10n/okato_region'),
+                    bundleDir:      path.resolve(__dirname, 'src/l10n/okato_region'),
                     baseLang:       APP_LANGS[0],
                     langs:          APP_LANGS
                 }
