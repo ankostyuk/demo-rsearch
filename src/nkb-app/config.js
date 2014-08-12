@@ -32,7 +32,7 @@ root._RESOURCES_CONFIG = {
 
     packages: [{
         name: 'app',
-        location: 'src/app',
+        location: 'src/nkb-app',
         main: 'app'
     }, {
         name: 'icons',

@@ -1,16 +1,37 @@
+/* Общие стили для всего приложения */
 
-a.action {
+@import './config.less';
+
+/* base */
+a {
     padding-bottom: 0;
-    color: #3a87ad;
+    color: @linkColor;
     text-decoration: none !important;
     border-bottom: 1px solid transparent;
 }
-a.action:hover,
-a.action:focus,
-a.action:active {
-    color: #98012e !important;
-    cursor: pointer !important;
+a.underline {
+    border-bottom-color: @linkUnderlineColor;
 }
+a:hover,
+a:focus,
+a:active {
+    color: @linkActiveColor;
+    cursor: pointer;
+}
+a.underline:hover,
+a.underline:focus,
+a.underline:active {
+    border-bottom-color: @linkActiveUnderlineColor;
+}
+
+a.disabled,
+a.disabled:hover,
+a.disabled:focus {
+    color: @defaultDisabledColor;
+    border-bottom-color: transparent;
+    cursor: default;
+}
+
 a.active.action,
 a.active.action:hover,
 a.active.action:focus,
@@ -19,9 +40,29 @@ a.active.action:active,
 .active a.action:hover,
 .active a.action:focus,
 .active a.action:active {
-    color: #98012e !important;
+    color: @linkActiveColor !important;
     cursor: default !important;
 }
+
+ul > li {
+    margin-bottom: 5px;
+}
+
+.align-left {
+    text-align: left !important;
+}
+.align-center {
+    text-align: center !important;
+}
+.align-right {
+    text-align: right !important;
+}
+
+.small {
+    font-size: 85%;
+}
+
+/* shadows */
 .shadow-lift-lb-corner:before {
   z-index: -2;
   position: absolute;
@@ -30,10 +71,13 @@ a.active.action:active,
   right: 5px;
   left: 10px;
   top: 0;
-  background-color: #777777;
-  -webkit-box-shadow: 0 15px 10px #777777;
-     -moz-box-shadow: 0 15px 10px #777777;
-          box-shadow: 0 15px 10px #777777;
+
+  background-color: @defaultShadowColor;
+
+  -webkit-box-shadow: 0 15px 10px @defaultShadowColor;
+     -moz-box-shadow: 0 15px 10px @defaultShadowColor;
+          box-shadow: 0 15px 10px @defaultShadowColor;
+
   -webkit-transform: rotate(1deg);
      -moz-transform: rotate(1deg);
       -ms-transform: rotate(1deg);
@@ -49,12 +93,42 @@ a.active.action:active,
   right: -10px;
   bottom: 0;
 }
-.actions .actions-label {
-    line-height: 1;
+
+/* header */
+.nkb-logo {
+    height: 42px;
+    background: transparent url("./i/nkb-logo_ru.png") no-repeat 0 0;
 }
-.actions .actions-list {
-    margin-bottom: 20px;
+
+.header {
+    padding: 20px 0;
 }
+
+/* footer */
+.footer {
+    padding-bottom: 20px;
+}
+
+/*
+ * rsearch
+ *
+ */
+
+/* np-rsearch-input */
+[np-rsearch-input] {
+    padding-top: 8px;
+}
+[np-rsearch-input] input.search-query {
+    width: 360px;
+    -webkit-border-radius: 4px 0 0 4px;
+       -moz-border-radius: 4px 0 0 4px;
+            border-radius: 4px 0 0 4px;
+}
+[np-rsearch-input] .search-btn {
+    width: 70px;
+}
+
+/* np-rsearch-node-navigation */
 [np-rsearch-navigation] {
     position: relative;
 }
@@ -112,6 +186,8 @@ a.active.action:active,
 [np-rsearch-navigation] .breadcrumb .node-form .target-relations-info {
     font-weight: normal;
 }
+
+/* np-rsearch-node-info */
 [np-rsearch-node-info] .body {
     padding: 5px 7px 0 7px;
 }
@@ -126,7 +202,7 @@ a.active.action:active,
     display: none;
 }
 [np-rsearch-node-info] .value-label {
-    color: #999;
+    color: @defaultDisabledColor;
 }
 [np-rsearch-node-info] .liquidate-state {
     display: none;
@@ -136,7 +212,7 @@ a.active.action:active,
 }
 [np-rsearch-node-info] .liquidate .node-header,
 [np-rsearch-node-info] .liquidate-state {
-    color: #b94a48;
+    color: @invalidColor;
 }
 [np-rsearch-node-info] ul.inline {
     margin: 0;
@@ -146,9 +222,11 @@ a.active.action:active,
     margin: 0;
     padding: 0 10px 0 0;
 }
+
+/* np-rsearch-node-history-info */
 [np-rsearch-node-history-info] .history-labels {
     font-style: italic;
-    color: #999;
+    color: @defaultDisabledColor;
 }
 [np-rsearch-node-history-info] .history-labels .icon {
     vertical-align: -5px;
@@ -157,8 +235,12 @@ a.active.action:active,
 [np-rsearch-node-history-info] .history-labels .entry {
     margin-right: 10px;
 }
+
+/* np-rsearch-node-simple */
 [np-rsearch-node-simple] {
 }
+
+/* np-rsearch-node-plain */
 [np-rsearch-node-plain] [np-rsearch-node-history-info] .history-labels {
     padding: 5px 5px 0 5px;
 }
@@ -186,8 +268,10 @@ a.active.action:active,
 [np-rsearch-node-plain] [np-rsearch-relation-simple] .entry {
     margin-right: 10px;
     font-style: italic;
-    color: #999;
+    color: @defaultDisabledColor;
 }
+
+/* np-rsearch-node-list */
 [np-rsearch-node-list] .node-list-item {
     position: relative;
 }
@@ -196,7 +280,7 @@ a.active.action:active,
     top: 0;
     right: 100%;
     padding: 5px 5px 0 0;
-    color: #999;
+    color: @defaultDisabledColor;
 }
 [np-rsearch-node-list] [np-rsearch-node-plain] {
     position: relative;
@@ -204,27 +288,31 @@ a.active.action:active,
     -webkit-border-radius: 3px;
        -moz-border-radius: 3px;
             border-radius: 3px;
-    background-color: #ffffff;
+    border: 1px solid @defaultShadowBorderColor;
+    background-color: @defaultBackgroundColor;
 }
 [np-rsearch-node-list] [np-rsearch-node-plain].shadow-lift-lb-corner:after {
-    background-color: #ece7df;
+    background-color: @defaultBackgroundColor;
 }
 [np-rsearch-node-list] [np-rsearch-node-plain] .node-header {
-    color: #3a87ad;
+    color: @linkColor;
 }
 [np-rsearch-node-list] [np-rsearch-node-plain]:hover {
+    border-color: @defaultShadowHighlightBorderColor;
     cursor: pointer;
 }
 [np-rsearch-node-list] [np-rsearch-node-plain]:hover .node-header {
-    color: #98012e;
+    color: @linkActiveColor;
 }
 [np-rsearch-node-list] [np-rsearch-node-info] a.action {
-    color: #333333 !important;
+    color: @defaultColor !important;
 }
 [np-rsearch-node-list] [np-rsearch-node-info] .balance-forms,
 [np-rsearch-node-list] [np-rsearch-node-info] .okfs {
     display: none;
 }
+
+/* np-rsearch-node-form */
 [np-rsearch-node-form] {
     position: relative;
     padding-top: 10px;
@@ -247,6 +335,17 @@ a.active.action:active,
 [np-rsearch-node-form] .actions {
     padding: 20px 7px 0 7px;
 }
+[np-rsearch-node-form] .actions .span5 {
+    width: 360px;
+}
+[np-rsearch-node-form] .actions .actions-label {
+    line-height: 1;
+}
+[np-rsearch-node-form] .actions .actions-list {
+    margin-bottom: 20px;
+}
+
+/* np-rsearch-filters */
 [np-rsearch-filters] {
     padding-left: 40px;
 }
@@ -257,7 +356,7 @@ a.active.action:active,
     line-height: 1;
 }
 [np-rsearch-filters] .no-filter-message {
-    color: #999;
+    color: @defaultDisabledColor;
     font-style: italic;
 }
 [np-rsearch-filters] .filter-item a {
@@ -270,12 +369,13 @@ a.active.action:active,
 [np-rsearch-filters] .filter-item.active a {
     font-weight: bold;
 }
+
 [np-rsearch-user-product-limits-info] {
     white-space: nowrap;
 }
 [np-rsearch-user-product-limits-info] .divider {
-    color: #ccc;
+    color: @defaultDisabledLightColor;
 }
 [np-rsearch-user-product-limits-info] .info {
-    color: #999;
+    color: @defaultDisabledColor;
 }
