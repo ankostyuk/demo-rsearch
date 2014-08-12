@@ -11,7 +11,8 @@ module.exports = function(grunt) {
     var APP_LANGS = ['ru', 'en'];
 
     //
-    var WEBAPP_CONFIG = require('./src/app/config.js');
+    var APP_CONFIG      = require('./src/app/config.js'),
+        NKB_APP_CONFIG  = require('./src/nkb-app/config.js');
 
     //
     grunt.initConfig({
@@ -28,21 +29,57 @@ module.exports = function(grunt) {
                 browser: true,
                 '-W069': true
             },
-            src: ['src/app/**/*.js', 'src/rsearch/**/*.js']
+            src: [
+                'src/app/**/*.js',
+                'src/nkb-app/**/*.js',
+                'src/l10n/**/*.js',
+                'src/rsearch/**/*.js'
+            ]
         },
 
         copy: {
-            dist: {
+            'dist-app': {
                 expand: true,
                 flatten: true,
-                cwd: 'target/web-resources-build/src/',
+                cwd: 'target/web-resources-build/app',
                 src: [
-                    'app/config.js',
-                    'app/main.js',
-                    'bower-components/requirejs/require.js',
-                    'examples/nkb/nkb-rsearch.css'
+                    'build.properties',
+                    'src/app/config.js',
+                    'src/app/main.js',
+                    'src/bower-components/requirejs/require.js',
+                    'example/app/rsearch.css'
                 ],
-                dest: 'dist/'
+                dest: 'dist/app'
+            },
+            'dist-nkb-app': {
+                expand: true,
+                flatten: true,
+                cwd: 'target/web-resources-build/nkb-app',
+                src: [
+                    'build.properties',
+                    'src/nkb-app/config.js',
+                    'src/nkb-app/main.js',
+                    'src/bower-components/requirejs/require.js'
+                ],
+                dest: 'dist/nkb-app'
+            },
+            'dist-nkb-app-static': {
+                expand: true,
+                cwd: 'target/web-resources-build/nkb-app/src/nkb-app/styles/i',
+                src: '**',
+                dest: 'dist/nkb-app/styles/i/'
+            },
+            'app-example': {
+                expand: true,
+                cwd: 'examples/app',
+                src: '**',
+                dest: 'target/web-resources-build/app/example/app/'
+            },
+            'nkb-app-example': {
+                expand: true,
+                cwd: 'examples/nkb-app',
+                src: '**',
+                dest: 'target/web-resources-build/nkb-app/example/nkb-app/'
             }
         },
 
@@ -89,49 +126,84 @@ module.exports = function(grunt) {
             }
         },
 
-        'web-resources': {
+        'process-resources': {
             build: {
                 options: {
-                    'process-resources': {
-                        inputDir: path.resolve(__dirname, 'src'),
-                        outputDir: path.resolve(__dirname, 'target/web-resources-process/src'),
+                    inputDir: path.resolve(__dirname, 'src'),
+                    outputDir: path.resolve(__dirname, 'target/web-resources-process/src'),
 
-                        // значение будет взято из аргумента [grunt web-resources:build:true|false], см. register task web-resources
-                        skipProcess: null,
-                    },
-                    'requirejs-optimize': {
-                        propertiesFile: path.resolve(__dirname, 'target/web-resources-build.properties'),
-                        mainFile: path.resolve(__dirname, 'target/web-resources-build/app/main.js'),
+                    // значение будет взято из аргумента [grunt process-resources:build:true|false], см. register task web-resources
+                    skipProcess: null
+                }
+            }
+        },
 
-                        requirejs: _.extend({}, WEBAPP_CONFIG._RESOURCES_CONFIG, {
-                            dir: path.resolve(__dirname, 'target/web-resources-build'),
-                            baseUrl: path.resolve(__dirname, 'target/web-resources-process'),
-                            modules: [{
-                                name: 'app/main'
-                            }],
+        'web-resources': {
+            'build-app': {
+                options: {
+                    propertiesFile: path.resolve(__dirname, 'target/web-resources-build/app/build.properties'),
+                    mainFile: path.resolve(__dirname, 'target/web-resources-build/app/src/app/main.js'),
 
-                            less: {
-                                // к rootpath будет добавлен путь к контексту веб-приложения:
-                                // взятый из [grunt web-resources:build:true|false:contextPath], см. register task web-resources
-                                rootpath: '/xxx/',
-                                relativeUrls: true
-                            },
+                    requirejs: _.extend({}, APP_CONFIG._RESOURCES_CONFIG, {
+                        dir: path.resolve(__dirname, 'target/web-resources-build/app'),
+                        baseUrl: path.resolve(__dirname, 'target/web-resources-process'),
+                        modules: [{
+                            name: 'app/main'
+                        }],
 
-                            optimize: 'uglify2',
-                            uglify2: {
-                                mangle: true,
-                                output: {
-                                    comments: /-- DO_NOT_DELETE --/
-                                }
-                            },
+                        less: {
+                            rootpath: '/',
+                            relativeUrls: true
+                        },
 
-                            removeCombined: false,
-                            preserveLicenseComments: false
-                        }),
+                        optimize: 'uglify2',
+                        uglify2: {
+                            mangle: true,
+                            output: {
+                                comments: /-- DO_NOT_DELETE --/
+                            }
+                        },
 
-                        // значение будет взято из аргумента [grunt web-resources:build:true|false], см. register task web-resources
-                        skipOptimize: null
-                    }
+                        removeCombined: false,
+                        preserveLicenseComments: false
+                    }),
+
+                    // значение будет взято из аргумента [grunt web-resources:build-xxx:true|false], см. register task web-resources
+                    skipOptimize: null
+                }
+            },
+            'build-nkb-app': {
+                options: {
+                    propertiesFile: path.resolve(__dirname, 'target/web-resources-build/nkb-app/build.properties'),
+                    mainFile: path.resolve(__dirname, 'target/web-resources-build/nkb-app/src/nkb-app/main.js'),
+
+                    requirejs: _.extend({}, NKB_APP_CONFIG._RESOURCES_CONFIG, {
+                        dir: path.resolve(__dirname, 'target/web-resources-build/nkb-app'),
+                        baseUrl: path.resolve(__dirname, 'target/web-resources-process'),
+                        modules: [{
+                            name: 'app/main'
+                        }],
+
+                        less: {
+                            // TODO разобраться со статикой при деплое
+                            rootpath: '/rsearch/',
+                            relativeUrls: true
+                        },
+
+                        optimize: 'uglify2',
+                        uglify2: {
+                            mangle: true,
+                            output: {
+                                comments: /-- DO_NOT_DELETE --/
+                            }
+                        },
+
+                        removeCombined: false,
+                        preserveLicenseComments: false
+                    }),
+
+                    // значение будет взято из аргумента [grunt web-resources-xxx:build:true|false], см. register task web-resources
+                    skipOptimize: null
                 }
             }
         }
@@ -153,45 +225,40 @@ module.exports = function(grunt) {
     });
 
     //
-    grunt.task.registerMultiTask('web-resources', function(skipOptimize, contextPath) {
-        var done = this.async(),
-            data = this.data,
-            skip = (skipOptimize === 'true');
+    grunt.task.registerMultiTask('process-resources', function(skip) {
+        var done        = this.async(),
+            options     = this.data.options,
+            skipProcess = (skip === 'true');
 
-        processResources();
+        fs.removeSync(options.outputDir);
+        fs.mkdirsSync(options.outputDir);
 
-        function processResources() {
-            var options = data.options['process-resources'];
+        wb.processResources.run(_.extend(options, {
+            skipProcess: skipProcess
+        }), function(){
+            done();
+        });
+    });
 
-            fs.removeSync(options.outputDir);
-            fs.mkdirsSync(options.outputDir);
+    //
+    grunt.task.registerMultiTask('web-resources', function(skipOptimize) {
+        var done            = this.async(),
+            options         = this.data.options,
+            skipOptimize    = (skipOptimize === 'true');
 
-            wb.processResources.run(_.extend(options, {
-                skipProcess: true //skip // TODO решить проблему с ресурсами для тестовой страницы НКБ
-            }), function(){
-                requirejsOptimize();
-            });
-        }
+        fs.removeSync(options.requirejs.dir);
+        fs.mkdirsSync(options.requirejs.dir);
 
-        function requirejsOptimize() {
-            var options = data.options['requirejs-optimize'];
-
-            fs.removeSync(options.requirejs.dir);
-            fs.mkdirsSync(options.requirejs.dir);
-
-            options.requirejs.less.rootpath = contextPath + options.requirejs.less.rootpath;
-
-            wb.requirejsOptimize.run(_.extend(options, {
-                skipOptimize: skip
-            }), function(){
-                done();
-            });
-        }
+        wb.requirejsOptimize.run(_.extend(options, {
+            skipOptimize: skipOptimize
+        }), function(){
+            done();
+        });
     });
 
     //
     grunt.registerTask('init', ['bower']);
-    grunt.registerTask('build', ['clean:src', 'clean:target', 'init', 'jshint', 'web-resources:build:false']);
-    grunt.registerTask('dist', ['copy:dist']);
+    grunt.registerTask('dist', ['clean:dist', 'copy:dist-app', 'copy:dist-nkb-app', 'copy:dist-nkb-app-static']);
+    grunt.registerTask('build', ['clean:src', 'clean:target', 'init', 'jshint', 'process-resources:build:false', 'web-resources:build-app:false', 'web-resources:build-nkb-app:false', 'copy:app-example', 'copy:nkb-app-example', 'dist']);
     grunt.registerTask('cleanup', ['clean:deps', 'clean:src', 'clean:target']);
 };
