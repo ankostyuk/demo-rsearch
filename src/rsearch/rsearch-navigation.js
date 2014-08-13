@@ -12,13 +12,15 @@ define(function(require) {'use strict';
     var i18n            = require('i18n'),
         angular         = require('angular');
 
-    return angular.module('np.rsearch-navigation', [])
+                          require('user');
+
+    return angular.module('np.rsearch-navigation', ['np.user'])
         //
         .run([function(){
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'npRsearchUser', 'npRsearchConfig', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, npRsearchUser, npRsearchConfig){
+        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'npUser', 'appConfig', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, npUser, appConfig){
             return {
                 restrict: 'A',
                 template: template,
@@ -34,7 +36,7 @@ define(function(require) {'use strict';
                      *
                      */
                     var init                    = false,
-                        user                    = npRsearchUser.user(),
+                        user                    = npUser.user(),
                         userPromise             = fetchUser(),
                         initMetaDefer           = $q.defer(),
                         initMetaPromise         = initMetaDefer.promise,
@@ -68,7 +70,7 @@ define(function(require) {'use strict';
 
                     // user
                     function fetchUser() {
-                        return npRsearchUser.fetchUser().completePromise;
+                        return npUser.fetchUser().completePromise;
                     }
 
                     //
@@ -703,7 +705,7 @@ define(function(require) {'use strict';
                      * products
                      *
                      */
-                    var productConfig = npRsearchConfig.product || {};
+                    var productConfig = appConfig.product || {};
 
                     $rootScope.$on('np-rsearch-node-form-product-click', function(e, productName, node){
                         if (user.isProductAvailable(productName)) {

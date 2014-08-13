@@ -48,8 +48,8 @@ define(function(require) {'use strict';
             }
         })
         //
-        .factory('npRsearchMetaHelper', ['$log', '$q', '$rootScope', 'npRsearchConfig', 'npRsearchMeta', 'npRsearchResource', function($log, $q, $rootScope, npRsearchConfig, npRsearchMeta, npRsearchResource){
-            var resourceConfig = npRsearchConfig.resource || {};
+        .factory('npRsearchMetaHelper', ['$log', '$q', '$rootScope', 'appConfig', 'npRsearchMeta', 'npRsearchResource', function($log, $q, $rootScope, appConfig, npRsearchMeta, npRsearchResource){
+            var resourceConfig = appConfig.resource || {};
 
             // init meta
             // TODO init user info
@@ -208,23 +208,23 @@ define(function(require) {'use strict';
             return metaHelper;
         }])
         //
-        .filter('isLastSalesVolume', ['npRsearchConfig', function(npRsearchConfig){
+        .filter('isLastSalesVolume', ['appConfig', function(appConfig){
             return function(node){
                 if (!node) {
                     return null;
                 }
 
-                return _.has(node, npRsearchConfig.meta.lastSalesVolumeField);
+                return _.has(node, appConfig.meta.lastSalesVolumeField);
             };
         }])
         //
-        .filter('lastSalesVolume', ['npRsearchConfig', function(npRsearchConfig){
+        .filter('lastSalesVolume', ['appConfig', function(appConfig){
             return function(node){
                 if (!node) {
                     return null;
                 }
 
-                return node[npRsearchConfig.meta.lastSalesVolumeField] / npRsearchConfig.meta.currencyOrder;
+                return node[appConfig.meta.lastSalesVolumeField] / appConfig.meta.currencyOrder;
             };
         }])
         //

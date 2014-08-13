@@ -13,9 +13,9 @@ define(function(require) {'use strict';
 
     return angular.module('np.rsearch-resource', ['np.resource'])
         //
-        .factory('npRsearchResource', ['$log', '$q', '$http', '$injector', 'npRsearchConfig', 'npResource', function($log, $q, $http, $injector, npRsearchConfig, npResource){
+        .factory('npRsearchResource', ['$log', '$q', '$http', '$injector', 'appConfig', 'npResource', function($log, $q, $http, $injector, appConfig, npResource){
 
-            var config = npRsearchConfig.resource || {};
+            var config = appConfig.resource || {};
 
             function nodeListProcess(data) {
                 var npRsearchMetaHelper = $injector.get('npRsearchMetaHelper'),
@@ -31,13 +31,6 @@ define(function(require) {'use strict';
 
             // API
             return {
-
-                userLimits: function(options) {
-                    return npResource.request({
-                        method: 'GET',
-                        url: config['users.url'] + '/me/limits'
-                    }, null, options);
-                },
 
                 nodeTypes: function(options) {
                     return npResource.request({

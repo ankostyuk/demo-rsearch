@@ -14,7 +14,7 @@ define(function(require) {'use strict';
 
     var app = angular.module('app', ['np.rsearch'])
         //
-        .constant('npRsearchConfig', {
+        .constant('appConfig', {
             meta: root._APP_CONFIG.meta,
             resource: {
                 'users.url':                '/siteapp/api/users',

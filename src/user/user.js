@@ -1,5 +1,5 @@
 /**
- * @module rsearch-user
+ * @module user
  * @desc RequireJS/Angular module
  * @author ankostyuk
  */
@@ -8,10 +8,15 @@ define(function(require) {'use strict';
                   require('underscore');
     var angular = require('angular');
 
-    return angular.module('np.rsearch-user', [])
-        //
-        .factory('npRsearchUser', ['$log', '$rootScope', 'npRsearchResource', function($log, $rootScope, npRsearchResource){
+                  require('resource');
 
+    return angular.module('np.user', ['np.resource'])
+        //
+        .factory('npUser', ['$log', '$rootScope', 'npResource', 'appConfig', function($log, $rootScope, npResource, appConfig){
+
+            var resourceConfig = appConfig.resource || {};
+
+            //
             var user = null,
                 userLimitsRequest;
 
@@ -62,8 +67,15 @@ define(function(require) {'use strict';
                     };
                 },
 
+                userLimitsRequest: function(options) {
+                    return npResource.request({
+                        method: 'GET',
+                        url: resourceConfig['users.url'] + '/me/limits'
+                    }, null, options);
+                },
+
                 fetchUser: function() {
-                    var userLimitsRequest = npRsearchResource.userLimits({
+                    var userLimitsRequest = this.userLimitsRequest({
                         previousRequest: userLimitsRequest,
                         success: function(data){
                             applyUser(data);

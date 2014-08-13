@@ -20,7 +20,7 @@ define(function(require) {'use strict';
 
     var app = angular.module('app', _.pluck(submodules, 'name'))
         //
-        .constant('npRsearchConfig', {
+        .constant('appConfig', {
             meta: root._APP_CONFIG.meta,
             resource: {
                 'users.url':                '/siteapp/api/users',

@@ -17,14 +17,14 @@ define(function(require) {'use strict';
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('appLoginForm', ['$log', '$http', '$rootScope', 'npRsearchConfig', function($log, $http, $rootScope, npRsearchConfig){
+        .directive('appLoginForm', ['$log', '$http', '$rootScope', 'appConfig', function($log, $http, $rootScope, appConfig){
             return {
                 restrict: 'A',
                 template: template,
                 scope: {},
                 link: function(scope, element, attrs) {
 
-                    var resourceConfig = npRsearchConfig.resource || {};
+                    var resourceConfig = appConfig.resource || {};
 
                     var formData = {};
 
