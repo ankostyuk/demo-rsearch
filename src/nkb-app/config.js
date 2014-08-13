@@ -35,6 +35,10 @@ root._RESOURCES_CONFIG = {
         location: 'src/nkb-app',
         main: 'app'
     }, {
+        name: 'app.login',
+        location: 'src/nkb-app/components/login',
+        main: 'login'
+    }, {
         name: 'icons',
         location: 'src/icons',
         main: 'icons'
@@ -42,6 +46,14 @@ root._RESOURCES_CONFIG = {
         name: 'l10n',
         location: 'src/l10n',
         main: 'l10n'
+    }, {
+        name: 'resource',
+        location: 'src/resource',
+        main: 'resource'
+    }, {
+        name: 'user',
+        location: 'src/user',
+        main: 'user'
     }, {
         name: 'rsearch',
         location: 'src/rsearch',

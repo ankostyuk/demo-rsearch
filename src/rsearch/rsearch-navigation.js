@@ -12,13 +12,15 @@ define(function(require) {'use strict';
     var i18n            = require('i18n'),
         angular         = require('angular');
 
-    return angular.module('np.rsearch-navigation', [])
+                          require('user');
+
+    return angular.module('np.rsearch-navigation', ['np.user'])
         //
         .run([function(){
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'npRsearchUser', 'npRsearchConfig', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, npRsearchUser, npRsearchConfig){
+        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'npUser', 'appConfig', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, npUser, appConfig){
             return {
                 restrict: 'A',
                 template: template,
@@ -34,11 +36,10 @@ define(function(require) {'use strict';
                      *
                      */
                     var init                    = false,
-                        user                    = npRsearchUser.user(),
-                        userPromise             = fetchUser(),
+                        user                    = npUser.user(),
                         initMetaDefer           = $q.defer(),
                         initMetaPromise         = initMetaDefer.promise,
-                        initPromise             = $q.all([initMetaPromise, userPromise]),
+                        initPromise             = $q.all([initMetaPromise]),
                         initDeferredFunctions   = [];
 
                     $q.all(initPromise).then(initSuccess);
@@ -64,11 +65,6 @@ define(function(require) {'use strict';
                                 args: args
                             });
                         }
-                    }
-
-                    // user
-                    function fetchUser() {
-                        return npRsearchUser.fetchUser().completePromise;
                     }
 
                     //
@@ -282,7 +278,7 @@ define(function(require) {'use strict';
                         loading(function(done){
                             var nodePromises = [];
 
-                            // egrul list // TODO no PHP API - ответ презаписывает тикет и слетает аутентификация
+                            // egrul list
                             if (node._type === 'COMPANY') {
                                 var egrulRequest = nodeForm.egrulRequest = npRsearchResource.egrulList({
                                     node: node,
@@ -298,11 +294,8 @@ define(function(require) {'use strict';
                                 nodePromises.push(egrulRequest.completePromise);
                             }
 
-                            // user limits
-                            //
-                            // TODO возможно, надо будет убрать,
-                            // если обновление лимитов будет в другом месте -- при заказе продуктов
-                            nodePromises.push(fetchUser());
+                            // user
+                            nodePromises.push(npUser.fetchUser());
 
                             // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
                             $q.all(nodePromises).then(complete, complete);
@@ -703,7 +696,7 @@ define(function(require) {'use strict';
                      * products
                      *
                      */
-                    var productConfig = npRsearchConfig.product || {};
+                    var productConfig = appConfig.product || {};
 
                     $rootScope.$on('np-rsearch-node-form-product-click', function(e, productName, node){
                         if (user.isProductAvailable(productName)) {

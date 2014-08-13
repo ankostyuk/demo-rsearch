@@ -32,6 +32,10 @@ msgid "Без ИНН"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-input.html:1
+msgid "Наименование компании, ОГРН, ИНН, ОКПО"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-input.html:1
 msgid "Найти"
 msgstr ""
 

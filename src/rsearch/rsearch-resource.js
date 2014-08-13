@@ -8,61 +8,14 @@ define(function(require) {'use strict';
                   require('underscore');
     var angular = require('angular');
 
+                  require('resource');
                   require('./rsearch-meta');
 
-    return angular.module('np.rsearch-resource', [])
+    return angular.module('np.rsearch-resource', ['np.resource'])
         //
-        .factory('npRsearchResource', ['$log', '$q', '$http', '$injector', 'npRsearchConfig', function($log, $q, $http, $injector, npRsearchConfig){
+        .factory('npRsearchResource', ['$log', '$q', '$http', '$injector', 'appConfig', 'npResource', function($log, $q, $http, $injector, appConfig, npResource){
 
-            var config = npRsearchConfig.resource || {};
-
-            function request(httpConfig, requestConfig, options) {
-                requestConfig = requestConfig || {};
-                options = options || {};
-
-                if (options.previousRequest) {
-                    options.previousRequest.abort();
-                }
-
-                var canceler    = $q.defer(),
-                    completer   = $q.defer(),
-                    complete    = false;
-
-                var promise = $http(_.extend({
-                    timeout: canceler.promise
-                }, httpConfig));
-
-                promise
-                    .success(function(data, status){
-                        if (_.isFunction(requestConfig.responseProcess)) {
-                            data = requestConfig.responseProcess(data, status);
-                        }
-
-                        if (_.isFunction(options.success)) {
-                            options.success(data, status);
-                        }
-                    })
-                    .error(function(data, status){
-                        if (_.isFunction(options.error)) {
-                            options.error(data, status);
-                        }
-                    })
-                    ['finally'](function(){
-                        complete = true;
-                        completer.resolve();
-                    });
-
-                return {
-                    promise: promise,
-                    completePromise: completer.promise,
-                    abort: function(){
-                        canceler.resolve();
-                    },
-                    isComplete: function(){
-                        return complete;
-                    }
-                };
-            }
+            var config = appConfig.resource || {};
 
             function nodeListProcess(data) {
                 var npRsearchMetaHelper = $injector.get('npRsearchMetaHelper'),
@@ -79,22 +32,15 @@ define(function(require) {'use strict';
             // API
             return {
 
-                userLimits: function(options) {
-                    return request({
-                        method: 'GET',
-                        url: config['users.url'] + '/me/limits'
-                    }, null, options);
-                },
-
                 nodeTypes: function(options) {
-                    return request({
+                    return npResource.request({
                         method: 'GET',
                         url: config['meta.url'] + '/node/types'
                     }, null, options);
                 },
 
                 relationTypes: function(options) {
-                    return request({
+                    return npResource.request({
                         method: 'GET',
                         url: config['meta.url'] + '/relation/types'
                     }, null, options);
@@ -105,7 +51,7 @@ define(function(require) {'use strict';
                         q: options.q
                     });
 
-                    return request({
+                    return npResource.request({
                         method: 'GET',
                         url: config['search.url'] + '/' + options.nodeType,
                         params: params
@@ -117,7 +63,7 @@ define(function(require) {'use strict';
                 relations: function(options) {
                     var params = _.extend({}, options.filter, options.pageConfig);
 
-                    return request({
+                    return npResource.request({
                         method: 'GET',
                         url: config['relations.url'] + '/' + options.node._id + '/' + options.relationType + '/' + options.direction,
                         params: params
@@ -127,7 +73,7 @@ define(function(require) {'use strict';
                 },
 
                 egrulList: function(options) {
-                    return request({
+                    return npResource.request({
                         method: 'GET',
                         url: config['egrul.history.url'],
                         params: {

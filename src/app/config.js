@@ -43,6 +43,14 @@ root._RESOURCES_CONFIG = {
         location: 'src/l10n',
         main: 'l10n'
     }, {
+        name: 'resource',
+        location: 'src/resource',
+        main: 'resource'
+    }, {
+        name: 'user',
+        location: 'src/user',
+        main: 'user'
+    }, {
         name: 'rsearch',
         location: 'src/rsearch',
         main: 'rsearch'
