@@ -146,8 +146,22 @@ input.input-mini {
 
     border: 1px solid @defaultShadowBorderColor;
     border-top: 0 none;
+}
+[app-login-form] .login-form:before {
+    position: absolute;
+    z-index: -10;
+
+    content: "";
+
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
 
     background-color: @defaultBackgroundColor;
+
+    opacity: 0.75;
+    filter: alpha(opacity=75);
 }
 [app-login-form] form {
     margin: 0;
@@ -405,13 +419,11 @@ input.input-mini {
 }
 
 /* np-rsearch-filters */
-[np-rsearch-filters] {
-    padding-left: 40px;
-}
 [np-rsearch-filters] .filter {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 [np-rsearch-filters] .filter-label {
+    margin-top: 5px;
     line-height: 1;
 }
 [np-rsearch-filters] .no-filter-message {
