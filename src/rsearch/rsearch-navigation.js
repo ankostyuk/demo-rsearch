@@ -37,10 +37,9 @@ define(function(require) {'use strict';
                      */
                     var init                    = false,
                         user                    = npUser.user(),
-                        userPromise             = fetchUser(),
                         initMetaDefer           = $q.defer(),
                         initMetaPromise         = initMetaDefer.promise,
-                        initPromise             = $q.all([initMetaPromise, userPromise]),
+                        initPromise             = $q.all([initMetaPromise]),
                         initDeferredFunctions   = [];
 
                     $q.all(initPromise).then(initSuccess);
@@ -66,11 +65,6 @@ define(function(require) {'use strict';
                                 args: args
                             });
                         }
-                    }
-
-                    // user
-                    function fetchUser() {
-                        return npUser.fetchUser().completePromise;
                     }
 
                     //
@@ -284,7 +278,7 @@ define(function(require) {'use strict';
                         loading(function(done){
                             var nodePromises = [];
 
-                            // egrul list // TODO no PHP API - ответ презаписывает тикет и слетает аутентификация
+                            // egrul list
                             if (node._type === 'COMPANY') {
                                 var egrulRequest = nodeForm.egrulRequest = npRsearchResource.egrulList({
                                     node: node,
@@ -300,11 +294,8 @@ define(function(require) {'use strict';
                                 nodePromises.push(egrulRequest.completePromise);
                             }
 
-                            // user limits
-                            //
-                            // TODO возможно, надо будет убрать,
-                            // если обновление лимитов будет в другом месте -- при заказе продуктов
-                            nodePromises.push(fetchUser());
+                            // user
+                            nodePromises.push(npUser.fetchUser());
 
                             // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
                             $q.all(nodePromises).then(complete, complete);

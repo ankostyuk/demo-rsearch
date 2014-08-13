@@ -11,13 +11,13 @@ define(function(require) {'use strict';
     var i18n            = require('i18n'),
         angular         = require('angular');
 
-    return angular.module('app.user.login-form', [])
+    return angular.module('app.user.login-form', ['np.user'])
         //
         .run([function(){
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('appLoginForm', ['$log', '$http', '$rootScope', 'appConfig', function($log, $http, $rootScope, appConfig){
+        .directive('appLoginForm', ['$log', '$http', '$rootScope', 'npUser', 'appConfig', function($log, $http, $rootScope, npUser, appConfig){
             return {
                 restrict: 'A',
                 template: template,
@@ -26,7 +26,8 @@ define(function(require) {'use strict';
 
                     var resourceConfig = appConfig.resource || {};
 
-                    var formData = {};
+                    var user        = npUser.user(),
+                        formData    = {};
 
                     var loginInfo = {
                         pending: false,
@@ -35,7 +36,7 @@ define(function(require) {'use strict';
                     };
 
                     _.extend(scope, {
-                        userInfo: null,
+                        user: user,
                         formData: formData,
                         loginInfo: loginInfo,
 
@@ -45,60 +46,43 @@ define(function(require) {'use strict';
                         },
 
                         login: function(e) {
-                            loginInfo.pending = true;
-
-                            $http({
-                                method: 'POST',
-                                url: resourceConfig['login.url'],
-                                headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-                                data: $.param(formData)
-                            })
-                            .success(function(data, status){
-                                loginInfo.pending = false;
-                                loginInfo.hasError = !!data.error;
-                                loginInfo.errorMessage = data.error;
-
-                                applyUser(data);
-                            })
-                            .error(function(data, status){
-                                loginInfo.pending = false;
-                                loginInfo.hasError = true;
-                                loginInfo.errorMessage = null;
-
-                                applyUser(null);
-                            });
-
                             e.preventDefault();
                             e.stopPropagation();
+
+                            if (loginInfo.pending) {
+                                return;
+                            }
+
+                            loginInfo.pending = true;
+
+                            npUser.login(
+                                formData,
+                                function(){
+                                    loginInfo.pending = false;
+                                    loginInfo.hasError = false;
+                                    loginInfo.errorMessage = null;
+                                },
+                                function(data){
+                                    loginInfo.pending = false;
+                                    loginInfo.hasError = true;
+                                    loginInfo.errorMessage = data && data.error;
+                                }
+                            );
                         },
 
                         logout: function() {
-                            $http({
-                                method: 'GET',
-                                url: resourceConfig['logout.url']
-                            })
-                            .success(function(data, status){
-                                $log.log('logout success...', data, status);
-                                applyUser(null);
-                            })
-                            .error(function(data, status){
-                                $log.log('logout error...', data, status);
-                            });
+                            loginInfo.pending = true;
+
+                            npUser.logout(
+                                function(){
+                                    loginInfo.pending = false;
+                                },
+                                function(data){
+                                    loginInfo.pending = false;
+                                }
+                            );
                         }
                     });
-
-                    function applyUser(data) {
-                        data = data || {};
-
-                        scope.userInfo = {
-                            userId: data.userId,
-                            userName: data.userName,
-                            balance: data.balance
-                        };
-                    }
-
-                    // TODO проверить логин
-                    applyUser(null);
                 }
             };
         }]);

@@ -1,5 +1,5 @@
-<div class="login-form" ng-show="userInfo">
-    <form ng-submit="login($event)" ng-hide="userInfo.userId">
+<div class="login-form" ng-show="user.isFetch()">
+    <form ng-submit="login($event)" ng-hide="user.isAuthenticated()">
         <div class="controls">
             <input class="span-x input-mini" type="text" placeholder='${_tr("Логин")}' name="login" ng-model="formData.login" ng-disabled="loginInfo.pending" ng-focus="reset()">
             <a class="underline small" href="http://www.creditnet.ru/reg/" target="_blank">${_tr("Регистрация")}</a>
@@ -14,11 +14,11 @@
             <div ng-show="!loginInfo.errorMessage">${_tr("Вход временно недоступен")}</div>
         </div>
     </form>
-    <div class="user-info small" ng-show="userInfo.userId">
+    <div class="user-info small" ng-show="user.isAuthenticated()">
         <div class="row">
-            <p class="span2 text-ellipsis"><a class="underline" href="http://www.creditnet.ru/stat/" target="_blank">{{userInfo.userName}}</a></p>
-            <p class="align-right"><button class="btn btn-mini" type="button" ng-click="logout()">${_tr("Выйти")}</button></p>
+            <p class="span2 text-ellipsis"><a class="underline" href="http://www.creditnet.ru/stat/" target="_blank">{{user.getName()}}</a></p>
+            <p class="align-right"><button class="btn btn-mini" type="button" ng-click="logout()" ng-disabled="loginInfo.pending">${_tr("Выйти")}</button></p>
         </div>
-        <p>${_trc("Баланс", "баланс пользователя")}: {{userInfo.balance | number}} ${_trc("ие", "валюта")}</p>
+        <p>${_trc("Баланс", "баланс пользователя")}: {{user.getBalance() | number}} ${_trc("ие", "валюта")}</p>
     </div>
 </div>
