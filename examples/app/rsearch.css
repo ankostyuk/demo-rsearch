@@ -271,7 +271,7 @@ a.active.action:active,
 
 /* np-rsearch-filters */
 [np-rsearch-filters] {
-    padding-left: 40px;
+    padding-left: 20px;
 }
 [np-rsearch-filters] .filter {
     margin-bottom: 20px;
