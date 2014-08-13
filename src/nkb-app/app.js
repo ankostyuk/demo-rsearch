@@ -4,6 +4,7 @@ define(function(require) {'use strict';
 
     //
                   require('jquery');
+                  require('underscore');
 
     var angular = require('angular');
 
@@ -12,14 +13,19 @@ define(function(require) {'use strict';
                   require('css!../src/bower-components/bootstrap/css/bootstrap');
                   require('less!./styles/app');
 
-                  require('rsearch');
+    var submodules = {
+        login:          require('app.login'),
+        rsearch:        require('rsearch')
+    };
 
-    var app = angular.module('app', ['np.rsearch'])
+    var app = angular.module('app', _.pluck(submodules, 'name'))
         //
         .constant('npRsearchConfig', {
             meta: root._APP_CONFIG.meta,
             resource: {
                 'users.url':                '/siteapp/api/users',
+                'login.url':                '/siteapp/login',
+                'logout.url':               '/siteapp/logout',
                 'meta.url':                 '/nkbrelation/api/meta',
                 'search.url':               '/nkbrelation/api/nodes',
                 'relations.url':            '/nkbrelation/api/node',

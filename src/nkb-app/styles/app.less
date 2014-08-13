@@ -62,6 +62,23 @@ ul > li {
     font-size: 85%;
 }
 
+.text-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+input.input-mini {
+    height: 16px;
+    padding: 2px 3px;
+    font-size: 13px;
+    line-height: 16px;
+
+    -webkit-border-radius: 3px;
+       -moz-border-radius: 3px;
+            border-radius: 3px;
+}
+
 /* shadows */
 .shadow-lift-lb-corner:before {
   z-index: -2;
@@ -101,12 +118,54 @@ ul > li {
 }
 
 .header {
-    padding: 20px 0;
+    padding: 20px 0 50px 0;
 }
 
 /* footer */
 .footer {
-    padding-bottom: 20px;
+    padding: 0 0 20px 0;
+}
+
+/* app-login-form */
+[app-login-form] {
+    position: relative;
+    z-index: 10;
+}
+[app-login-form] .login-form {
+    position: absolute;
+
+    left: 0;
+    top: 3px;
+    right: 0;
+
+    padding: 10px 10px 0 10px;
+
+    -webkit-border-radius: 0 0 3px 3px;
+       -moz-border-radius: 0 0 3px 3px;
+            border-radius: 0 0 3px 3px;
+
+    border: 1px solid @defaultShadowBorderColor;
+    border-top: 0 none;
+
+    background-color: @defaultBackgroundColor;
+}
+[app-login-form] form {
+    margin: 0;
+    padding: 0;
+}
+[app-login-form] .span-x {
+    width: 100px;
+    margin: 0 5px 0 0;
+}
+[app-login-form] .controls {
+    margin-bottom: 10px;
+}
+[app-login-form] .login-error-message {
+    margin-bottom: 10px;
+    line-height: 1;
+}
+[app-login-form] .user-info p {
+    margin-bottom: 5px;
 }
 
 /*

@@ -35,6 +35,10 @@ root._RESOURCES_CONFIG = {
         location: 'src/nkb-app',
         main: 'app'
     }, {
+        name: 'app.login',
+        location: 'src/nkb-app/components/login',
+        main: 'login'
+    }, {
         name: 'icons',
         location: 'src/icons',
         main: 'icons'
