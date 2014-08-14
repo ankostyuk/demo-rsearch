@@ -556,12 +556,13 @@ define(function(require) {'use strict';
                      *
                      */
                     function checkAccentedResultBySearch(activeResult) {
-                        var node;
+                        var individualResult = search.byNodeTypes['INDIVIDUAL'].result,
+                            node;
 
                         if (search.total === 1) {
                             node = search.byNodeTypes[activeResult].result.list[0];
-                        } else if (search.byNodeTypes['INDIVIDUAL'].result.total === 1) {
-                            var n = search.byNodeTypes['INDIVIDUAL'].result.list[0];
+                        } else if (individualResult && individualResult.total === 1) {
+                            var n = individualResult.list[0];
                             node = n.gender ? n : null;
                         }
 
