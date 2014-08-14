@@ -283,15 +283,18 @@ a.active.action:active,
     color: #999;
     font-style: italic;
 }
-[np-rsearch-filters] .filter-item a {
+[np-rsearch-filters] .filter-item .action {
     display: block;
 }
 [np-rsearch-filters] .filter-item .count {
     display: block;
     float: right;
 }
-[np-rsearch-filters] .filter-item.active a {
+[np-rsearch-filters] .filter-item.active .action {
     font-weight: bold;
+}
+[np-rsearch-filters] .filter-item.disabled .action {
+    color: #999;
 }
 
 [np-rsearch-user-product-limits-info] {

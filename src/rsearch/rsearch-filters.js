@@ -121,12 +121,23 @@ define(function(require) {'use strict';
                     });
 
                     $rootScope.$on('np-rsearch-filters-set-inn-filter-data', function(e, data){
+                        noInnCount = _.reduce(data.values, function(c, v){
+                            return c - v;
+                        }, data.total);
+
                         filter.setData(data, 'byKey');
                     });
 
                     _.extend(scope, {
                         filter: filter,
                     }, i18n.translateFuncs);
+
+                    //
+                    var noInnCount;
+
+                    filter.getNoInnCount = function() {
+                        return noInnCount;
+                    };
                 }
             };
         }])
