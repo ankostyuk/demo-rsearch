@@ -339,6 +339,7 @@ define(function(require) {'use strict';
 
                     function showRelations(node, direction, relationType, key) {
                         nodeFormView.hide();
+                        hideRelationsFilters();
                         clearMessages();
 
                         var index       = pushRelationsBreadcrumb(node, direction, relationType),
