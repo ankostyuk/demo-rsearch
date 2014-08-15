@@ -102,6 +102,10 @@ define(function(require) {'use strict';
                         return result ? result.pageNumber >= result.pageCount : null;
                     }
 
+                    function isEmptyResult(result) {
+                        return result ? result.total === 0 : true;
+                    }
+
                     function setNodeList(object) {
                         object.nodeList = object.result && object.result.list ? object.result.list : [];
                     }
@@ -141,6 +145,7 @@ define(function(require) {'use strict';
                         nodeFormView.hide();
                         clearBreadcrumbs();
                         hideRelationsFilters();
+                        clearMessages();
 
                         if (_.isBlank(search.query)) {
                             reset();
@@ -233,6 +238,7 @@ define(function(require) {'use strict';
 
                         nodeFormView.hide();
                         hideRelationsFilters();
+                        clearMessages();
 
                         nodeListView.showItemNumber(false);
 
@@ -303,6 +309,7 @@ define(function(require) {'use strict';
                             function complete() {
                                 nodeListView.clear();
                                 hideRelationsFilters();
+                                clearMessages();
 
                                 nodeFormView.setNode(node);
                                 nodeFormView.show(node);
@@ -332,6 +339,7 @@ define(function(require) {'use strict';
 
                     function showRelations(node, direction, relationType, key) {
                         nodeFormView.hide();
+                        clearMessages();
 
                         var index       = pushRelationsBreadcrumb(node, direction, relationType),
                             byRelations = byRelationsStore[key];
@@ -354,8 +362,10 @@ define(function(require) {'use strict';
                         }
                     }
 
-                    function doRelations(byRelations, checkAccentedResult) {
+                    function doRelations(byRelations, checkAccentedResult, initiator) {
                         loading(function(done){
+                            clearMessages();
+
                             byRelations.pageConfig = resetPageConfig();
 
                             relationsRequest(byRelations);
@@ -370,6 +380,10 @@ define(function(require) {'use strict';
 
                                 if (!accentedResult) {
                                     resetRelationsNodeListView(byRelations);
+                                }
+
+                                if (initiator && isEmptyResult(byRelations.result)) {
+                                    showMessage(initiator + '_RESULT_EMPTY');
                                 }
 
                                 done();
@@ -620,7 +634,7 @@ define(function(require) {'use strict';
                                     regionFilter.condition = {
                                         'node.region_code.equals': value
                                     };
-                                    doRelations(byRelations, false);
+                                    doRelations(byRelations, false, 'FILTERS');
                                 }
                             };
 
@@ -636,7 +650,7 @@ define(function(require) {'use strict';
                                     } else if (value) {
                                         innFilter.condition['rel.inn.equals'] = value;
                                     }
-                                    doRelations(byRelations, false);
+                                    doRelations(byRelations, false, 'FILTERS');
                                 }
                             };
 
@@ -722,11 +736,28 @@ define(function(require) {'use strict';
                     }
 
                     /*
+                     * messages
+                     *
+                     */
+                    var messages = {
+                        message: null
+                    };
+
+                    function showMessage(message) {
+                        messages.message = message;
+                    }
+
+                    function clearMessages() {
+                        messages.message = null;
+                    }
+
+                    /*
                      * scope
                      *
                      */
                     _.extend(scope, {
                         search: search,
+                        messages: messages,
                         breadcrumbs: [],
                         isBreadcrumbs: isBreadcrumbs
                     });

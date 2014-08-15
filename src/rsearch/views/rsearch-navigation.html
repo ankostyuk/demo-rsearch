@@ -18,7 +18,13 @@
                     </ul>
                 </div>
             </div>
-            <div class="views"></div>
+            <div class="views">
+                <div class="messages">
+                    <div ng-show="messages.message === 'FILTERS_RESULT_EMPTY'">
+                        ${_tr("Нет данных. Попробуйте изменить значения фильтров.")}
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="span3">
             <div np-rsearch-filters></div>
