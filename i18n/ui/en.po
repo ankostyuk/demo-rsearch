@@ -203,6 +203,10 @@ msgstr "Search"
 msgid "Не найдено"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-navigation.html:1
+msgid "Нет данных. Попробуйте изменить значения фильтров."
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ОГРН"
 msgstr ""

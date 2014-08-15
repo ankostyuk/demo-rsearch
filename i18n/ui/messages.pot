@@ -28,6 +28,7 @@ msgid "Любой"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
+#: ../src/rsearch/views/rsearch-inn-filter.html:1
 msgid "Без ИНН"
 msgstr ""
 
@@ -65,6 +66,10 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-navigation.html:1
 msgid "NG_PLURALIZE::NODE_PHONE"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-navigation.html:1
+msgid "Нет данных. Попробуйте изменить значения фильтров."
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
