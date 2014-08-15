@@ -324,14 +324,14 @@ define(function(require) {'use strict';
                     return null;
                 }
 
-                var okved = node['okvedcode_bal'] || node['okvedcode_main'];
+                var okved       = node['okvedcode_bal'] || node['okvedcode_main'],
+                    okvedText   = node['okved_bal_text'] || node['okved_main_text'];
 
-                if (!okved) {
+                if (!okved || !okvedText) {
                     return null;
                 }
 
-                var okvedCode = _.chop(okved, 2).join('.'),
-                    okvedText = node['okved_bal_text'] || node['okved_main_text'];
+                var okvedCode = _.chop(okved, 2).join('.');
 
                 return okvedCode + ' ' + okvedText;
             };
