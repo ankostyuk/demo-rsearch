@@ -83,7 +83,10 @@ define(function(require) {'use strict';
         .directive('npRsearchNodeRelations', [function() {
             return {
                 restrict: 'A',
-                scope: false, // require <node>
+                scope: {
+                    node: '=npRsearchNodeRelations',
+                    relationsClick: '=npRsearchNodeRelationsClick'
+                },
                 template: templates['np-rsearch-node-relations']
             };
         }])
