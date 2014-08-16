@@ -85,6 +85,7 @@ define(function(require) {'use strict';
                 restrict: 'A',
                 scope: {
                     node: '=npRsearchNodeRelations',
+                    active: '=npRsearchNodeRelationsActive',
                     relationsClick: '=npRsearchNodeRelationsClick'
                 },
                 template: templates['np-rsearch-node-relations']
