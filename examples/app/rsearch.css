@@ -121,6 +121,18 @@ a.active.action:active,
 [np-rsearch-navigation] .breadcrumb .node-form .target-relations-info {
     font-weight: normal;
 }
+[np-rsearch-navigation] .messages {
+    padding-left: 5px;
+    color: #999;
+}
+[np-rsearch-navigation] [np-rsearch-node-relations] {
+    margin-bottom: 25px;
+    padding-top: 1px;
+    padding-left: 20px;
+}
+[np-rsearch-navigation] [np-rsearch-node-relations] .active {
+    font-weight: bold;
+}
 
 /* np-rsearch-node-info */
 [np-rsearch-node-info] .body {
@@ -257,7 +269,7 @@ a.active.action:active,
     font-size: 150%;
     line-height: 150%;
 }
-[np-rsearch-node-form] .relations {
+[np-rsearch-node-form] [np-rsearch-node-relations] {
     position: absolute;
     left: 100%;
     top: 0;

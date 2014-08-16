@@ -144,6 +144,7 @@ define(function(require) {'use strict';
 
                         nodeFormView.hide();
                         clearBreadcrumbs();
+                        clearNodeRelationsFilter();
                         hideRelationsFilters();
                         clearMessages();
 
@@ -308,6 +309,7 @@ define(function(require) {'use strict';
 
                             function complete() {
                                 nodeListView.clear();
+                                clearNodeRelationsFilter();
                                 hideRelationsFilters();
                                 clearMessages();
 
@@ -330,15 +332,20 @@ define(function(require) {'use strict';
                     var byRelationsStore = {};
 
                     $rootScope.$on('np-rsearch-node-form-relations-click', function(e, node, direction, relationType){
+                        relationsClick(node, direction, relationType);
+                    });
+
+                    function relationsClick(node, direction, relationType) {
                         if (user.isProductAvailable('relations_find_related')) {
                             showRelations(node, direction, relationType);
                         } else {
                             showProductInfo('relations_find_related');
                         }
-                    });
+                    }
 
                     function showRelations(node, direction, relationType, key) {
                         nodeFormView.hide();
+                        setNodeRelationsFilter(node, direction, relationType);
                         hideRelationsFilters();
                         clearMessages();
 
@@ -544,6 +551,10 @@ define(function(require) {'use strict';
                         scope.breadcrumbs = scope.breadcrumbs.slice(0, toIndex);
                     }
 
+                    function clearLastBreadcrumb() {
+                        clearBreadcrumbs(getBreadcrumbSize() - 1);
+                    }
+
                     function isLastBreadcrumb(breadcrumb) {
                         return breadcrumb.index === getBreadcrumbSize() - 1;
                     }
@@ -611,6 +622,33 @@ define(function(require) {'use strict';
                      * filters
                      *
                      */
+                    var nodeRelationsFilter = {
+                        node: null,
+                        active: null,
+                        relationsClick: function(direction, relationType){
+                            if (buildNodeRelationActiveKey(direction, relationType) === nodeRelationsFilter.active) {
+                                return;
+                            }
+
+                            clearLastBreadcrumb();
+                            relationsClick(nodeRelationsFilter.node, direction, relationType);
+                        },
+                    };
+
+                    function buildNodeRelationActiveKey(direction, relationType) {
+                        return direction + '::' + relationType;
+                    }
+
+                    function setNodeRelationsFilter(node, direction, relationType) {
+                        nodeRelationsFilter.node = node;
+                        nodeRelationsFilter.active = buildNodeRelationActiveKey(direction, relationType);
+                    }
+
+                    function clearNodeRelationsFilter() {
+                        nodeRelationsFilter.node = null;
+                        nodeRelationsFilter.active = null;
+                    }
+
                     function hideRelationsFilters() {
                         $rootScope.$emit('np-rsearch-filters-toggle-region-filter', false);
                         $rootScope.$emit('np-rsearch-filters-toggle-inn-filter', false);
@@ -760,7 +798,8 @@ define(function(require) {'use strict';
                         search: search,
                         messages: messages,
                         breadcrumbs: [],
-                        isBreadcrumbs: isBreadcrumbs
+                        isBreadcrumbs: isBreadcrumbs,
+                        nodeRelationsFilter: nodeRelationsFilter
                     });
 
                     function reset() {
