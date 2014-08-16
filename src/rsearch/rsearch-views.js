@@ -19,6 +19,7 @@ define(function(require) {'use strict';
         'np-rsearch-node-plain':                    require('text!./views/rsearch-node-plain.html'),
         'np-rsearch-node-info':                     require('text!./views/rsearch-node-info.html'),
         'np-rsearch-node-history-info':             require('text!./views/rsearch-node-history-info.html'),
+        'np-rsearch-node-relations':                require('text!./views/rsearch-node-relations.html'),
         'np-rsearch-node-relations-header':         require('text!./views/rsearch-node-relations-header.html'),
         'np-rsearch-navigation-breadcrumb':         require('text!./views/rsearch-navigation-breadcrumb.html'),
         'np-rsearch-node-list':                     require('text!./views/rsearch-node-list.html'),
@@ -76,6 +77,14 @@ define(function(require) {'use strict';
                 restrict: 'A',
                 scope: false, // require <node>
                 template: templates['np-rsearch-node-history-info']
+            };
+        }])
+        //
+        .directive('npRsearchNodeRelations', [function() {
+            return {
+                restrict: 'A',
+                scope: false, // require <node>
+                template: templates['np-rsearch-node-relations']
             };
         }])
         //
