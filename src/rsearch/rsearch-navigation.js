@@ -239,6 +239,7 @@ define(function(require) {'use strict';
                         setSearchResult(nodeType, breadcrumb);
 
                         nodeFormView.hide();
+                        clearNodeRelationsFilter();
                         hideRelationsFilters();
                         clearMessages();
 
