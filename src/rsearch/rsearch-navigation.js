@@ -27,7 +27,8 @@ define(function(require) {'use strict';
                 scope: {},
                 link: function(scope, element, attrs) {
                     //
-                    var viewsElement    = element.find('.views'),
+                    var windowElement   = angular.element($window),
+                        viewsElement    = element.find('.views'),
                         nodeListView    = npRsearchViews.createNodeListView(viewsElement, scope),
                         nodeFormView    = npRsearchViews.createNodeFormView(viewsElement, scope);
 
@@ -232,10 +233,10 @@ define(function(require) {'use strict';
                         return (search.byNodeTypes && search.byNodeTypes[nodeType].total) || null;
                     }
 
-                    function showSearchResult(nodeType) {
+                    function showSearchResult(nodeType, breadcrumb) {
                         var byNodeType = search.byNodeTypes[nodeType];
 
-                        setSearchResult(nodeType);
+                        setSearchResult(nodeType, breadcrumb);
 
                         nodeFormView.hide();
                         hideRelationsFilters();
@@ -260,9 +261,9 @@ define(function(require) {'use strict';
                         });
                     }
 
-                    function setSearchResult(nodeType) {
+                    function setSearchResult(nodeType, breadcrumb) {
                         search.activeResult = nodeType;
-                        setSearchBreadcrumb(nodeType);
+                        setSearchBreadcrumb(nodeType, breadcrumb);
                     }
 
                     function isEmptySearchResult() {
@@ -281,7 +282,7 @@ define(function(require) {'use strict';
                         showNodeForm(node);
                     });
 
-                    function showNodeForm(node) {
+                    function showNodeForm(node, breadcrumb) {
                         loading(function(done){
                             var nodePromises = [];
 
@@ -316,7 +317,7 @@ define(function(require) {'use strict';
                                 nodeFormView.setNode(node);
                                 nodeFormView.show(node);
 
-                                pushNodeFormBreadcrumb(node);
+                                pushNodeFormBreadcrumb(node, breadcrumb);
 
                                 npRsearchViews.scrollTop();
 
@@ -343,13 +344,13 @@ define(function(require) {'use strict';
                         }
                     }
 
-                    function showRelations(node, direction, relationType, key) {
+                    function showRelations(node, direction, relationType, key, breadcrumb) {
                         nodeFormView.hide();
                         setNodeRelationsFilter(node, direction, relationType);
                         hideRelationsFilters();
                         clearMessages();
 
-                        var index       = pushRelationsBreadcrumb(node, direction, relationType),
+                        var index       = pushRelationsBreadcrumb(node, direction, relationType, breadcrumb),
                             byRelations = byRelationsStore[key];
 
                         if (byRelations) {
@@ -454,6 +455,10 @@ define(function(require) {'use strict';
                      * breadcrumbs
                      *
                      */
+                    var breadcrumbs = {
+                        list: [],
+                    };
+
                     $rootScope.$on('np-rsearch-navigation-breadcrumb-go', function(e, breadcrumb){
                         goByBreadcrumb(breadcrumb);
                     });
@@ -462,12 +467,14 @@ define(function(require) {'use strict';
                         return getBreadcrumbSize() > 1;
                     }
 
-                    function setSearchBreadcrumb(nodeType) {
-                        clearBreadcrumbs();
+                    function setSearchBreadcrumb(nodeType, breadcrumb) {
+                        if (breadcrumb) {
+                            return breadcrumb.index;
+                        }
 
                         var index = 0;
 
-                        scope.breadcrumbs[index] = {
+                        breadcrumbs.list[index] = {
                             index: index,
                             type: 'SEARCH',
                             data: {
@@ -478,10 +485,14 @@ define(function(require) {'use strict';
                         return index;
                     }
 
-                    function pushNodeFormBreadcrumb(node) {
+                    function pushNodeFormBreadcrumb(node, breadcrumb) {
+                        if (breadcrumb) {
+                            return breadcrumb.index;
+                        }
+
                         var index = getBreadcrumbSize();
 
-                        scope.breadcrumbs[index] = {
+                        breadcrumbs.list[index] = {
                             index: index,
                             type: 'NODE_FORM',
                             data: {
@@ -493,10 +504,14 @@ define(function(require) {'use strict';
                         return index;
                     }
 
-                    function pushRelationsBreadcrumb(node, direction, relationType, filter) {
+                    function pushRelationsBreadcrumb(node, direction, relationType, breadcrumb) {
+                        if (breadcrumb) {
+                            return breadcrumb.index;
+                        }
+
                         var index = getBreadcrumbSize();
 
-                        scope.breadcrumbs[index] = {
+                        breadcrumbs.list[index] = {
                             index: index,
                             type: 'NODE_RELATIONS',
                             data: {
@@ -515,19 +530,19 @@ define(function(require) {'use strict';
                         }
 
                         var index           = breadcrumb.index,
-                            nextBreadcrumb  = scope.breadcrumbs[index + 1];
+                            nextBreadcrumb  = breadcrumbs.list[index + 1];
 
-                        clearBreadcrumbs(index);
+                        clearBreadcrumbs(index + 1);
 
                         if (breadcrumb.type === 'SEARCH') {
-                            showSearchResult(breadcrumb.data.nodeType);
+                            showSearchResult(breadcrumb.data.nodeType, breadcrumb);
                             highlightNodeInList();
                         } else
                         if (breadcrumb.type === 'NODE_FORM') {
-                            showNodeForm(breadcrumb.data.node);
+                            showNodeForm(breadcrumb.data.node, breadcrumb);
                         } else
                         if (breadcrumb.type === 'NODE_RELATIONS') {
-                            showRelations(breadcrumb.data.node, breadcrumb.data.direction, breadcrumb.data.relationType, index);
+                            showRelations(breadcrumb.data.node, breadcrumb.data.direction, breadcrumb.data.relationType, index, breadcrumb);
                             highlightNodeInList();
                         }
 
@@ -548,7 +563,7 @@ define(function(require) {'use strict';
                             delete byRelationsStore[i];
                         }
 
-                        scope.breadcrumbs = scope.breadcrumbs.slice(0, toIndex);
+                        breadcrumbs.list = breadcrumbs.list.slice(0, toIndex);
                     }
 
                     function clearLastBreadcrumb() {
@@ -560,7 +575,7 @@ define(function(require) {'use strict';
                     }
 
                     function getBreadcrumbSize() {
-                        return _.size(scope.breadcrumbs);
+                        return _.size(breadcrumbs.list);
                     }
 
                     //
@@ -797,7 +812,7 @@ define(function(require) {'use strict';
                     _.extend(scope, {
                         search: search,
                         messages: messages,
-                        breadcrumbs: [],
+                        breadcrumbs: breadcrumbs,
                         isBreadcrumbs: isBreadcrumbs,
                         nodeRelationsFilter: nodeRelationsFilter
                     });

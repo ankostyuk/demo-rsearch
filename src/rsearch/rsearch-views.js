@@ -107,7 +107,7 @@ define(function(require) {'use strict';
                 restrict: 'A',
                 scope: {
                     breadcrumb: '=npRsearchNavigationBreadcrumb',
-                    last: '=npRsearchNavigationBreadcrumbLast'
+                    active: '=npRsearchNavigationBreadcrumbActive'
                 },
                 template: templates['np-rsearch-navigation-breadcrumb'],
                 link: function(scope, element, attrs){
