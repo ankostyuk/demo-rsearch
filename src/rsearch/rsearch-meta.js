@@ -373,9 +373,10 @@ define(function(require) {'use strict';
                 // TODO i18n
                 function getFounderText(relation) {
                     if (relation.sharePercent || relation.shareAmount) {
-                        return 'доля' +
-                            (relation.sharePercent ? nbsp + $filter('number')(relation.sharePercent) + '%' : '') +
-                            (relation.shareAmount ? nbsp + $filter('number')(relation.shareAmount) + nbsp + 'руб.' : '');
+                        return 'доля' + nbsp +
+                            (relation.sharePercent ? $filter('number')(relation.sharePercent) + '%' : '') +
+                            (relation.sharePercent && relation.shareAmount ? nbsp + nbsp : '') +
+                            (relation.shareAmount ? $filter('number')(relation.shareAmount) + nbsp + 'руб.' : '');
                     }
 
                     return '';
