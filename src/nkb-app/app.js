@@ -6,7 +6,8 @@ define(function(require) {'use strict';
                   require('jquery');
                   require('underscore');
 
-    var angular = require('angular');
+    var angular = require('angular'),
+        uuid    = require('uuid');
 
                   require('icons');
                   require('l10n');
@@ -21,6 +22,7 @@ define(function(require) {'use strict';
     var app = angular.module('app', _.pluck(submodules, 'name'))
         //
         .constant('appConfig', {
+            uuid: uuid.v4(),
             meta: root._APP_CONFIG.meta,
             resource: {
                 'users.url':                '/siteapp/api/users',

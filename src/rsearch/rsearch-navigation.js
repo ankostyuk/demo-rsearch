@@ -136,8 +136,10 @@ define(function(require) {'use strict';
                         showResult: showSearchResult
                     };
 
-                    $rootScope.$on('np-rsearch-input-refresh', function(e, text){
-                        functionAfterInit(doSearch, [text]);
+                    $rootScope.$on('np-rsearch-input-refresh', function(e, text, initiator){
+                        if (initiator !== history) {
+                            functionAfterInit(doSearch, [text]);
+                        }
                     });
 
                     function doSearch(query) {
@@ -283,7 +285,11 @@ define(function(require) {'use strict';
                         showNodeForm(node);
                     });
 
-                    function showNodeForm(node, breadcrumb) {
+                    function showNodeForm(node, breadcrumb, noHistory) {
+                        if (!noHistory) {
+                            checkSearchToHistory();
+                        }
+
                         loading(function(done){
                             var nodePromises = [];
 
@@ -322,6 +328,10 @@ define(function(require) {'use strict';
 
                                 npRsearchViews.scrollTop();
 
+                                if (!noHistory) {
+                                    checkNodeFormToHistory();
+                                }
+
                                 done();
                             }
                         });
@@ -345,7 +355,7 @@ define(function(require) {'use strict';
                         }
                     }
 
-                    function showRelations(node, direction, relationType, key, breadcrumb) {
+                    function showRelations(node, direction, relationType, key, breadcrumb, noHistory) {
                         nodeFormView.hide();
                         setNodeRelationsFilter(node, direction, relationType);
                         hideRelationsFilters();
@@ -356,6 +366,10 @@ define(function(require) {'use strict';
 
                         if (byRelations) {
                             resetRelationsNodeListView(byRelations);
+
+                            if (!noHistory) {
+                                checkNodeRelationsToHistory();
+                            }
                         } else {
                             byRelations = byRelationsStore[index] = {
                                 node: node,
@@ -368,11 +382,11 @@ define(function(require) {'use strict';
                                 nodeList: null
                             };
 
-                            doRelations(byRelations, true);
+                            doRelations(byRelations, true, noHistory);
                         }
                     }
 
-                    function doRelations(byRelations, checkAccentedResult, initiator) {
+                    function doRelations(byRelations, checkAccentedResult, noHistory) {
                         loading(function(done){
                             clearMessages();
 
@@ -392,8 +406,8 @@ define(function(require) {'use strict';
                                     resetRelationsNodeListView(byRelations);
                                 }
 
-                                if (initiator && isEmptyResult(byRelations.result)) {
-                                    showMessage(initiator + '_RESULT_EMPTY');
+                                if (!noHistory) {
+                                    checkNodeRelationsToHistory();
                                 }
 
                                 done();
@@ -402,6 +416,10 @@ define(function(require) {'use strict';
                     }
 
                     function resetRelationsNodeListView(byRelations) {
+                        if (isEmptyResult(byRelations.result)) {
+                            showMessage('FILTERS_RESULT_EMPTY');
+                        }
+
                         nodeListView.showItemNumber(byRelations.result && byRelations.result.total > 1);
 
                         nodeListView.reset(byRelations.nodeList, noMore(byRelations.result), function(callback){
@@ -537,23 +555,14 @@ define(function(require) {'use strict';
 
                         if (breadcrumb.type === 'SEARCH') {
                             showSearchResult(breadcrumb.data.nodeType, breadcrumb);
-                            highlightNodeInList();
+                            highlightNodeInListByBreadcrumb(nextBreadcrumb);
                         } else
                         if (breadcrumb.type === 'NODE_FORM') {
                             showNodeForm(breadcrumb.data.node, breadcrumb);
                         } else
                         if (breadcrumb.type === 'NODE_RELATIONS') {
                             showRelations(breadcrumb.data.node, breadcrumb.data.direction, breadcrumb.data.relationType, index, breadcrumb);
-                            highlightNodeInList();
-                        }
-
-                        function highlightNodeInList() {
-                            if (nextBreadcrumb && nextBreadcrumb.type === 'NODE_FORM') {
-                                // TODO Не прокручивать до ноды,
-                                // а прокрутить до сохраненного положения прокрутки
-                                // и выделить ноду?
-                                nodeListView.scrollToNode(nextBreadcrumb.data.node);
-                            }
+                            highlightNodeInListByBreadcrumb(nextBreadcrumb);
                         }
                     }
 
@@ -575,6 +584,10 @@ define(function(require) {'use strict';
                         return breadcrumb.index === getBreadcrumbSize() - 1;
                     }
 
+                    function getLastBreadcrumb() {
+                        return breadcrumbs.list[getBreadcrumbSize() - 1];
+                    }
+
                     function getBreadcrumbSize() {
                         return _.size(breadcrumbs.list);
                     }
@@ -591,6 +604,15 @@ define(function(require) {'use strict';
                                 relationMap: byRelations.relationMap
                             }
                         } : null;
+                    }
+
+                    function highlightNodeInListByBreadcrumb(breadcrumb) {
+                        if (breadcrumb && breadcrumb.type === 'NODE_FORM') {
+                            // TODO Не прокручивать до ноды,
+                            // а прокрутить до сохраненного положения прокрутки
+                            // и выделить ноду?
+                            nodeListView.scrollToNode(breadcrumb.data.node);
+                        }
                     }
 
                     /*
@@ -689,7 +711,7 @@ define(function(require) {'use strict';
                                     regionFilter.condition = {
                                         'node.region_code.equals': value
                                     };
-                                    doRelations(byRelations, false, 'FILTERS');
+                                    doRelations(byRelations, false, true);
                                 }
                             };
 
@@ -705,7 +727,7 @@ define(function(require) {'use strict';
                                     } else if (value) {
                                         innFilter.condition['rel.inn.equals'] = value;
                                     }
-                                    doRelations(byRelations, false, 'FILTERS');
+                                    doRelations(byRelations, false, true);
                                 }
                             };
 
@@ -804,6 +826,161 @@ define(function(require) {'use strict';
 
                     function clearMessages() {
                         messages.message = null;
+                    }
+
+                    /*
+                     * browser history
+                     *
+                     */
+                    var History = function() {
+                        var windowHistory   = $window.history,
+                            isHistory       = windowHistory && windowHistory.pushState,
+                            // historyId -
+                            // Для идентификации истории в контексте только данного приложения,
+                            // если в браузерной истории есть состояния от предыдущего выполнения приложения,
+                            // например, пользователь перезагрузил страницу, то данная история учитываться не будет.
+                            // Это делается для того, чтобы исключить ошибки в работе истории при обновлении приложения.
+                            // TODO Вместо appConfig.uuid, использовать идентификатор сборки приложения,
+                            // т.к. в пределах одной сборки "старые истории" должны работать.
+                            // TODO В случае игнорирования "старой истории" пользователь не видит изменений
+                            // при манипуляциях с кнопками "вперед/назад" -- это плохо, нужно
+                            // или извещать пользователя об этом, или чистить историю (не тривиально).
+                            // Или забить на данный UX -- случаи когда пользователь перезагружает страницу редки,
+                            // а когда пользователь долго работает с приложением,
+                            // не закрывая страницу (и в это время приложение обновляется) еще более редки.
+                            historyId       = appConfig.uuid,
+                            historyList     = [];
+
+                        windowElement.bind('popstate', function(e){
+                            pop(e.originalEvent.state);
+                        });
+
+                        function isHistoryStateValid(state) {
+                            return state && state.historyId === historyId;
+                        }
+
+                        function getHistorySize() {
+                            return historyList.length;
+                        }
+
+                        function push(type) {
+                            if (!isHistory) {
+                                return;
+                            }
+
+                            var currentHistoryIndex = isHistoryStateValid(windowHistory.state) ? windowHistory.state.historyIndex : -1,
+                                historyIndex        = currentHistoryIndex + 1;
+
+                            var historyData = {
+                                type: type,
+                                searchQuery: search.query,
+                                lastBreadcrumb: getLastBreadcrumb(),
+                                breadcrumbs: copyBreadcrumbs(breadcrumbs),
+                                byRelationsStore: copyRelationsStore(byRelationsStore)
+                            };
+
+                            var state = {
+                                historyId: historyId,
+                                historyIndex: historyIndex
+                            };
+
+                            if (getHistorySize() > historyIndex + 1) {
+                                historyList = historyList.slice(0, historyIndex);
+                            }
+
+                            if (type === 'SEARCH') {
+                                historyData.search = copySearch(search);
+                            }
+
+                            historyList[historyIndex] = historyData;
+                            windowHistory.pushState(state, '');
+                        }
+
+                        function pop(state) {
+                            if (!isHistory || !isHistoryStateValid(state)) {
+                                return;
+                            }
+
+                            var historyData     = historyList[state.historyIndex],
+                                breadcrumb      = historyData.lastBreadcrumb,
+                                nextHistoryData = historyList[state.historyIndex + 1],
+                                nextBreadcrumb  = nextHistoryData && nextHistoryData.lastBreadcrumb;
+
+
+                            $rootScope.$emit('np-rsearch-input-set-text', historyData.searchQuery, history);
+
+                            copyBreadcrumbs(historyData.breadcrumbs, breadcrumbs);
+                            byRelationsStore = copyRelationsStore(historyData.byRelationsStore);
+
+                            if (historyData.type === 'SEARCH') {
+                                copySearch(historyData.search, search);
+                                showSearchResult(breadcrumb.data.nodeType, breadcrumb);
+                                highlightNodeInListByBreadcrumb(nextBreadcrumb);
+                            } else
+                            if (historyData.type === 'NODE_FORM') {
+                                showNodeForm(breadcrumb.data.node, breadcrumb, true);
+                            } else
+                            if (historyData.type === 'NODE_RELATIONS') {
+                                showRelations(breadcrumb.data.node, breadcrumb.data.direction, breadcrumb.data.relationType, breadcrumb.index, breadcrumb, true);
+                                highlightNodeInListByBreadcrumb(nextBreadcrumb);
+                            }
+
+                            scope.$apply();
+                        }
+
+                        return {
+                            push: push
+                        };
+                    };
+
+                    var history = new History();
+
+                    function checkSearchToHistory() {
+                        var lastBreadcrumb = getLastBreadcrumb();
+
+                        if (lastBreadcrumb.type === 'SEARCH') {
+                            history.push('SEARCH');
+                        }
+                    }
+
+                    function checkNodeFormToHistory() {
+                        history.push('NODE_FORM');
+                    }
+
+                    function checkNodeRelationsToHistory() {
+                        history.push('NODE_RELATIONS');
+                    }
+
+                    function copyBreadcrumbs(src, dst) {
+                        dst = dst || {};
+
+                        dst.list = _.clone(src.list);
+
+                        return dst;
+                    }
+
+                    function copyRelationsStore(src) {
+                        return _.clone(src);
+                    }
+
+                    function copySearch(src, dst) {
+                        dst = dst || {};
+
+                        dst.query           = src.query;
+                        dst.total           = src.total;
+                        dst.activeResult    = src.activeResult;
+
+                        dst.byNodeTypes = dst.byNodeTypes || {};
+
+                        _.each(src.byNodeTypes, function(srcByNodeType, nodeType){
+                            var dstByNodeType = dst.byNodeTypes[nodeType] || (dst.byNodeTypes[nodeType] = {});
+
+                            dstByNodeType.total         = srcByNodeType.total;
+                            dstByNodeType.nodeList      = _.clone(srcByNodeType.nodeList);
+                            dstByNodeType.pageConfig    = _.clone(srcByNodeType.pageConfig);
+                        });
+
+                        return dst;
                     }
 
                     /*
