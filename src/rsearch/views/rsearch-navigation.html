@@ -1,34 +1,36 @@
 <div ng-show="search.query">
     <div class="mask"><div class="message-box"><span class="message">${_tr("Ожидайте...")}</span></div></div>
-    <div class="row navigation-content">
-        <div class="span9">
-            <div class="nav">
-                <div class="search-result-switch" ng-hide="isBreadcrumbs()">
-                    <ul class="inline">
-                        <li ng-show="search.isEmptyResult()">${_tr("Не найдено")}</li>
-                        <li ng-show="!search.isEmptyResult() && search.getTotalByNodeType('COMPANY')"><a class="action" ng-class="{active: search.activeResult === 'COMPANY'}" ng-click="search.showResult('COMPANY')"><ng-pluralize count="count = search.getTotalByNodeType('COMPANY')" when="${_tr("NG_PLURALIZE::NODE_COMPANY")}"></ng-pluralize></a></li>
-                        <li ng-show="!search.isEmptyResult() && search.getTotalByNodeType('INDIVIDUAL')"><a class="action" ng-class="{active: search.activeResult === 'INDIVIDUAL'}" ng-click="search.showResult('INDIVIDUAL')"><ng-pluralize count="count = search.getTotalByNodeType('INDIVIDUAL')" when="${_tr("NG_PLURALIZE::NODE_INDIVIDUAL")}"></ng-pluralize></a></li>
-                        <li ng-show="!search.isEmptyResult() && search.getTotalByNodeType('ADDRESS')"><a class="action" ng-class="{active: search.activeResult === 'ADDRESS'}" ng-click="search.showResult('ADDRESS')"><ng-pluralize count="count = search.getTotalByNodeType('ADDRESS')" when="${_tr("NG_PLURALIZE::NODE_ADDRESS")}"></ng-pluralize></a></li>
-                        <li ng-show="!search.isEmptyResult() && search.getTotalByNodeType('PHONE')"><a class="action" ng-class="{active: search.activeResult === 'PHONE'}" ng-click="search.showResult('PHONE')"><ng-pluralize count="count = search.getTotalByNodeType('PHONE')" when="${_tr("NG_PLURALIZE::NODE_PHONE")}"></ng-pluralize></a></li>
-                    </ul>
-                </div>
-                <div class="breadcrumbs" ng-show="isBreadcrumbs()">
-                    <ul class="breadcrumb">
-                        <li ng-repeat="breadcrumb in breadcrumbs.list track by $index"><strong>&nbsp;</strong><span class="divider">/</span><span np-rsearch-navigation-breadcrumb="breadcrumb" np-rsearch-navigation-breadcrumb-active="$last"></span></li>
-                    </ul>
-                </div>
+    <div class="navigation-content">
+        <div class="nav">
+            <div class="search-result-switch" ng-hide="isBreadcrumbs()">
+                <ul class="inline">
+                    <li ng-show="search.isEmptyResult()">${_tr("Не найдено")}</li>
+                    <li ng-show="!search.isEmptyResult() && search.getTotalByNodeType('COMPANY')"><a class="action" ng-class="{active: search.activeResult === 'COMPANY'}" ng-click="search.showResult('COMPANY')"><ng-pluralize count="count = search.getTotalByNodeType('COMPANY')" when="${_tr("NG_PLURALIZE::NODE_COMPANY")}"></ng-pluralize></a></li>
+                    <li ng-show="!search.isEmptyResult() && search.getTotalByNodeType('INDIVIDUAL')"><a class="action" ng-class="{active: search.activeResult === 'INDIVIDUAL'}" ng-click="search.showResult('INDIVIDUAL')"><ng-pluralize count="count = search.getTotalByNodeType('INDIVIDUAL')" when="${_tr("NG_PLURALIZE::NODE_INDIVIDUAL")}"></ng-pluralize></a></li>
+                    <li ng-show="!search.isEmptyResult() && search.getTotalByNodeType('ADDRESS')"><a class="action" ng-class="{active: search.activeResult === 'ADDRESS'}" ng-click="search.showResult('ADDRESS')"><ng-pluralize count="count = search.getTotalByNodeType('ADDRESS')" when="${_tr("NG_PLURALIZE::NODE_ADDRESS")}"></ng-pluralize></a></li>
+                    <li ng-show="!search.isEmptyResult() && search.getTotalByNodeType('PHONE')"><a class="action" ng-class="{active: search.activeResult === 'PHONE'}" ng-click="search.showResult('PHONE')"><ng-pluralize count="count = search.getTotalByNodeType('PHONE')" when="${_tr("NG_PLURALIZE::NODE_PHONE")}"></ng-pluralize></a></li>
+                </ul>
             </div>
-            <div class="views">
-                <div class="messages">
-                    <div ng-show="messages.message === 'FILTERS_RESULT_EMPTY'">
-                        ${_tr("Нет данных. Попробуйте изменить значения фильтров.")}
+            <div class="breadcrumbs" ng-show="isBreadcrumbs()">
+                <ul class="breadcrumb">
+                    <li ng-repeat="breadcrumb in breadcrumbs.list track by $index"><strong>&nbsp;</strong><span class="divider">/</span><span np-rsearch-navigation-breadcrumb="breadcrumb" np-rsearch-navigation-breadcrumb-active="$last"></span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span9">
+                <div class="views">
+                    <div class="messages">
+                        <div class="message" ng-show="messages.message === 'FILTERS_RESULT_EMPTY'">
+                            ${_tr("Нет данных. Попробуйте изменить значения фильтров.")}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="span3">
-            <div np-rsearch-node-relations="nodeRelationsFilter.node" np-rsearch-node-relations-active="nodeRelationsFilter.active" np-rsearch-node-relations-click="nodeRelationsFilter.relationsClick"></div>
-            <div np-rsearch-filters></div>
+            <div class="span3">
+                <div np-rsearch-node-relations="nodeRelationsFilter.node" np-rsearch-node-relations-active="nodeRelationsFilter.active" np-rsearch-node-relations-click="nodeRelationsFilter.relationsClick"></div>
+                <div np-rsearch-filters></div>
+            </div>
         </div>
     </div>
 </div>
