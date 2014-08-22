@@ -285,8 +285,8 @@ define(function(require) {'use strict';
                         showNodeForm(node);
                     });
 
-                    function showNodeForm(node, breadcrumb, noHistory) {
-                        if (!noHistory) {
+                    function showNodeForm(node, breadcrumb, noHistory, noSearchHistory) {
+                        if (!noHistory && !noSearchHistory) {
                             checkSearchToHistory();
                         }
 
@@ -404,10 +404,10 @@ define(function(require) {'use strict';
 
                                 if (!accentedResult) {
                                     resetRelationsNodeListView(byRelations);
-                                }
 
-                                if (!noHistory) {
-                                    checkNodeRelationsToHistory();
+                                    if (!noHistory) {
+                                        checkNodeRelationsToHistory();
+                                    }
                                 }
 
                                 done();
@@ -635,7 +635,7 @@ define(function(require) {'use strict';
                         }
 
                         setSearchResult(node._type);
-                        showNodeForm(node);
+                        showNodeForm(node, null, false, true);
 
                         return true;
                     }
