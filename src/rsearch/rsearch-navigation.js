@@ -285,6 +285,26 @@ define(function(require) {'use strict';
                         showNodeForm(node);
                     });
 
+                    function nodeFormEgrulList(node) {
+                        if (!user.isAuthenticated()) {
+                            node.__egrulList = [];
+                            return $q.all();
+                        }
+
+                        nodeForm.egrulRequest = npRsearchResource.egrulList({
+                            node: node,
+                            previousRequest: nodeForm.egrulRequest,
+                            success: function(data, status){
+                                node.__egrulList = data;
+                            },
+                            error: function(data, status){
+                                node.__egrulList = [];
+                            }
+                        });
+
+                        return nodeForm.egrulRequest.completePromise;
+                    }
+
                     function showNodeForm(node, breadcrumb, noHistory, noSearchHistory) {
                         if (!noHistory && !noSearchHistory) {
                             checkSearchToHistory();
@@ -295,18 +315,7 @@ define(function(require) {'use strict';
 
                             // egrul list
                             if (node._type === 'COMPANY') {
-                                var egrulRequest = nodeForm.egrulRequest = npRsearchResource.egrulList({
-                                    node: node,
-                                    previousRequest: nodeForm.egrulRequest,
-                                    success: function(data, status){
-                                        node.__egrulList = data;
-                                    },
-                                    error: function(data, status){
-                                        node.__egrulList = [];
-                                    }
-                                });
-
-                                nodePromises.push(egrulRequest.completePromise);
+                                nodePromises.push(nodeFormEgrulList(node));
                             }
 
                             // user
@@ -982,6 +991,22 @@ define(function(require) {'use strict';
 
                         return dst;
                     }
+
+                    /*
+                     * user
+                     *
+                     */
+                    $rootScope.$on('app-user-login', function(e){
+                        var lastBreadcrumb = getLastBreadcrumb();
+
+                        if (lastBreadcrumb && lastBreadcrumb.type === 'NODE_FORM') {
+                            loading(function(done){
+                                // Перезапросить список выписок ЕГРЮЛ
+                                nodeFormEgrulList(lastBreadcrumb.data.node).then(done, done);
+                            });
+                        }
+                    });
+
 
                     /*
                      * scope
