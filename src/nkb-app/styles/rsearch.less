@@ -117,8 +117,12 @@
     display: block;
 }
 [np-rsearch-node-info] .liquidate .node-header,
-[np-rsearch-node-info] .liquidate-state {
-    color: @invalidColor;
+[np-rsearch-node-info] .liquidate .liquidate-state {
+    color: @invalidColor !important;
+}
+[np-rsearch-node-info] .liquidate.liquidate-intermediate .node-header,
+[np-rsearch-node-info] .liquidate.liquidate-intermediate .liquidate-state {
+    color: @dangerColor !important;
 }
 [np-rsearch-node-info] ul.inline {
     margin: 0;
@@ -212,7 +216,7 @@
     cursor: pointer;
 }
 [np-rsearch-node-list] [np-rsearch-node-plain]:hover .node-header {
-    color: @linkActiveColor;
+    color: @linkActiveColor !important;
 }
 [np-rsearch-node-list] [np-rsearch-node-info] a.action {
     color: @defaultColor !important;

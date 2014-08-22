@@ -130,8 +130,9 @@ define(function(require) {'use strict';
                     // компания
                     if (node._type === 'COMPANY') {
                         // юридическое состояние
-                        var egrulState  = node.egrul_state,
-                            aliveCode   = 5, // действующее
+                        var egrulState          = node.egrul_state,
+                            aliveCode           = '5', // действующее
+                            intermediateCodes   = ['6', '111', '121', '122', '123', '124', '131', '132'], // коды промежуточных состояний
                             _liquidate;
 
                         if (egrulState && egrulState.code != aliveCode) {
@@ -139,7 +140,8 @@ define(function(require) {'use strict';
                                 state: {
                                     _actual: egrulState._actual,
                                     _since: egrulState._since,
-                                    type: egrulState.type
+                                    type: egrulState.type,
+                                    intermediate: _.contains(intermediateCodes, egrulState.code)
                                 }
                             };
                         } else

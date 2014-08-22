@@ -1,4 +1,4 @@
-<div class="body {{node._liquidate ? 'liquidate' : null}}">
+<div class="body" ng-class="{'liquidate': node._liquidate, 'liquidate-intermediate': node._liquidate.state.intermediate}">
     <div ng-if="node._type === 'COMPANY'">
         <div class="row">
             <div class="span6 node-header">{{node.nameshortsort || node.namesort}}</div>
