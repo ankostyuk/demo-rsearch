@@ -107,7 +107,7 @@ define(function(require) {'use strict';
                 restrict: 'A',
                 scope: {
                     breadcrumb: '=npRsearchNavigationBreadcrumb',
-                    last: '=npRsearchNavigationBreadcrumbLast'
+                    active: '=npRsearchNavigationBreadcrumbActive'
                 },
                 template: templates['np-rsearch-navigation-breadcrumb'],
                 link: function(scope, element, attrs){
@@ -172,7 +172,8 @@ define(function(require) {'use strict';
                         scope               = view.scope,
                         internalDisabled    = false,
                         noNextPage          = false,
-                        nextPageHandler     = null;
+                        nextPageHandler     = null,
+                        scrollMargin        = 5; // TODO взять из CSS
 
                     _.extend(view, {
                         reset: function(nodeList, noMore, pageHandler){
@@ -201,7 +202,7 @@ define(function(require) {'use strict';
                                 }
 
                                 htmlbodyElement.animate({
-                                    scrollTop: nodeElement.offset().top
+                                    scrollTop: nodeElement.offset().top - scrollMargin
                                 }, 200);
                             });
                         },

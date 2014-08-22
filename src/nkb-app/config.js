@@ -27,6 +27,8 @@ root._RESOURCES_CONFIG = {
 
         'purl':                 'src/bower-components/purl/purl',
 
+        'uuid':                 'src/bower-components/node-uuid/uuid',
+
         'i18n':                 'src/bower-components/nullpointer-i18n/i18n'
     },
 

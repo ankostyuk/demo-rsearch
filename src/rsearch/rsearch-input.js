@@ -38,6 +38,7 @@ define(function(require) {'use strict';
                     //
                     _.extend(scope, {
                         text: null,
+                        initiator: null,
 
                         // TODO Реализовать
                         searchInputEnter: function(){
@@ -57,9 +58,15 @@ define(function(require) {'use strict';
                         }
                     });
 
+                    $rootScope.$on('np-rsearch-input-set-text', function(e, text, initiator){
+                        scope.initiator = (scope.text === text ? null : initiator);
+                        scope.text = text;
+                    });
+
                     //
                     function fireRefresh() {
-                        $rootScope.$emit('np-rsearch-input-refresh', scope.text);
+                        $rootScope.$emit('np-rsearch-input-refresh', scope.text, scope.initiator);
+                        scope.initiator = null;
                     }
 
                     //
