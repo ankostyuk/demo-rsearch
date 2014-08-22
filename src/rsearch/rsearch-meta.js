@@ -131,7 +131,7 @@ define(function(require) {'use strict';
                     if (node._type === 'COMPANY') {
                         // юридическое состояние
                         var egrulState  = node.egrul_state,
-                            aliveCode   = 5, // Действующее
+                            aliveCode   = 5, // действующее
                             _liquidate;
 
                         if (egrulState && egrulState.code != aliveCode) {
@@ -154,6 +154,20 @@ define(function(require) {'use strict';
                         }
 
                         node._liquidate = _liquidate;
+
+                        // способ организации компании
+                        var egrulReg    = node.egrul_reg,
+                            baseCode    = '100001'; // регистрация при создании
+
+                        if (egrulReg && egrulReg.code !== baseCode) {
+                            node._reg = {
+                                state: {
+                                    _actual: egrulReg._actual,
+                                    _since: egrulReg._since,
+                                    type: egrulReg.type
+                                }
+                            };
+                        }
                     }
 
                     // история?

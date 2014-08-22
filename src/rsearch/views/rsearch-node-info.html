@@ -4,6 +4,10 @@
             <div class="span6 node-header">{{node.nameshortsort || node.namesort}}</div>
             <div class="align-right" ng-show="node.founded_dt">${_tr("основано")} {{node.founded_dt | date:'mediumDate'}}</div>
         </div>
+        <div class="row node-entry reg-state" ng-show="node._reg.state">
+            <div class="span6">{{node._reg.state.type}}</div>
+            <div class="align-right">{{node._reg.state._since | date:'mediumDate'}}</div>
+        </div>
         <div class="row node-entry liquidate-state">
             <div class="span6">{{node._liquidate.state.type}}</div>
             <div class="align-right">{{node._liquidate.state._since | date:'mediumDate'}}</div>
