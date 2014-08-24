@@ -94,8 +94,20 @@ define(function(require) {'use strict';
             $logProvider.debugEnabled(false);
         }])
         //
-        .run(['$log', function($log){
+        .run(['$log', '$rootScope', function($log, $rootScope){
             //
+            _.extend($rootScope, {
+                app: {
+                    ready: false
+                },
+                isAppReady: function() {
+                    return $rootScope.app.ready;
+                }
+            });
+
+            $rootScope.$on('np-rsearch-meta-ready', function(){
+                $rootScope.app.ready = true;
+            });
         }]);
 
     angular.bootstrap(document, [app.name]);
