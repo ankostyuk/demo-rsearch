@@ -11,7 +11,7 @@ define(function(require) {'use strict';
     var i18n            = require('i18n'),
         angular         = require('angular');
 
-    return angular.module('app.user.login-form', ['np.user'])
+    return angular.module('app.login.login-form', ['np.user'])
         //
         .run([function(){
             template = i18n.translateTemplate(template);
