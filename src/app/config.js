@@ -2,7 +2,9 @@ var root = this;
 
 //
 root._APP_CONFIG = {
-    lang: 'ru',
+    lang: {
+        defaultLang: 'ru'
+    },
     meta: {
         // Параметр: Объём продаж за последний год
         lastSalesVolumeField: 'p20103_2012',
@@ -21,11 +23,14 @@ root._RESOURCES_CONFIG = {
         'ng-infinite-scroll':   'src/bower-components/ngInfiniteScroll/ng-infinite-scroll',
 
         'jquery':               'src/bower-components/jquery/jquery',
+        'jquery.cookie':        'src/bower-components/jquery.cookie/jquery.cookie',
 
         'underscore':           'src/bower-components/underscore/underscore',
         'underscore.string':    'src/bower-components/underscore.string/underscore.string',
 
         'purl':                 'src/bower-components/purl/purl',
+
+        'uuid':                 'src/bower-components/node-uuid/uuid',
 
         'i18n':                 'src/bower-components/nullpointer-i18n/i18n'
     },
@@ -68,6 +73,10 @@ root._RESOURCES_CONFIG = {
         },
         'ng-infinite-scroll': {
             deps: ['angular']
+        },
+
+        'jquery.cookie': {
+            deps: ['jquery']
         },
 
         'underscore': {

@@ -17,14 +17,12 @@ define(function(require) {'use strict';
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('appLoginForm', ['$log', '$http', '$rootScope', 'npUser', 'appConfig', function($log, $http, $rootScope, npUser, appConfig){
+        .directive('appLoginForm', ['$log', '$http', '$rootScope', 'npUser', 'npL10n', function($log, $http, $rootScope, npUser, npL10n){
             return {
                 restrict: 'A',
                 template: template,
                 scope: {},
                 link: function(scope, element, attrs) {
-
-                    var resourceConfig = appConfig.resource || {};
 
                     var user        = npUser.user(),
                         formData    = {};
@@ -37,6 +35,7 @@ define(function(require) {'use strict';
 
                     _.extend(scope, {
                         user: user,
+                        l10n: npL10n.l10n(),
                         formData: formData,
                         loginInfo: loginInfo,
 

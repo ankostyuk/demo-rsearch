@@ -5,16 +5,18 @@ define(function(require) {'use strict';
     //
                   require('jquery');
 
-    var angular = require('angular');
+    var angular = require('angular'),
+        uuid    = require('uuid');
 
                   require('icons');
                   require('l10n');
 
                   require('rsearch');
 
-    var app = angular.module('app', ['np.rsearch'])
+    var app = angular.module('app', ['np.rsearch', 'np.l10n'])
         //
         .constant('appConfig', {
+            uuid: uuid.v4(),
             meta: root._APP_CONFIG.meta,
             resource: {
                 'users.url':                '/siteapp/api/users',

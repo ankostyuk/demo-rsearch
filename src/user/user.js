@@ -18,8 +18,8 @@ define(function(require) {'use strict';
             var resourceConfig = appConfig.resource || {};
 
             //
-            var user            = undefined,
-                pollingInterval = 60000, // 1 минута
+            var pollingInterval = 60000, // 1 минута
+                user,
                 userRequest, loginRequest, logoutRequest;
 
             function applyUser(u) {

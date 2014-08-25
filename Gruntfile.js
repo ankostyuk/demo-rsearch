@@ -33,6 +33,8 @@ module.exports = function(grunt) {
                 'src/app/**/*.js',
                 'src/nkb-app/**/*.js',
                 'src/l10n/**/*.js',
+                'src/resource/**/*.js',
+                'src/user/**/*.js',
                 'src/rsearch/**/*.js'
             ]
         },

@@ -2,7 +2,7 @@
     <form ng-submit="login($event)" ng-hide="user.isAuthenticated()">
         <div class="controls">
             <input class="span-x input-mini" type="text" placeholder='${_tr("Логин")}' name="login" ng-model="formData.login" ng-disabled="loginInfo.pending" ng-focus="reset()">
-            <a class="underline small" href="http://www.creditnet.ru/reg/" target="_blank" tabindex="1">${_tr("Регистрация")}</a>
+            <a class="underline small" ng-href="{{l10n.urlWithLang('http://www.creditnet.ru/reg/')}}" target="_blank" tabindex="1">${_tr("Регистрация")}</a>
         </div>
         <div class="controls">
             <input class="span-x input-mini" type="password" placeholder='${_tr("Пароль")}' name="password" ng-model="formData.password" ng-disabled="loginInfo.pending" ng-focus="reset()">

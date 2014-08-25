@@ -10,12 +10,13 @@ define(function(require) {'use strict';
         uuid    = require('uuid');
 
                   require('icons');
-                  require('l10n');
                   require('css!../src/bower-components/bootstrap/css/bootstrap');
                   require('less!./styles/app');
 
     var submodules = {
         login:          require('app.login'),
+        lang:           require('app.lang'),
+        l10n:           require('l10n'),
         rsearch:        require('rsearch')
     };
 

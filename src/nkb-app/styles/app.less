@@ -114,10 +114,17 @@ input.input-mini {
 /* header */
 .nkb-logo {
     height: 42px;
+}
+.nkb-logo,
+.lang-ru .nkb-logo {
     background: transparent url("./i/nkb-logo_ru.png") no-repeat 0 0;
+}
+.lang-en .nkb-logo {
+    background: transparent url("./i/nkb-logo_en.png") no-repeat 0 0;
 }
 
 .header {
+    position: relative;
     padding: 20px 0 50px 0;
 }
 
@@ -182,6 +189,20 @@ input.input-mini {
 }
 [app-login-form] .user-info p {
     margin-bottom: 5px;
+}
+
+/* app-login-form */
+[app-lang] {
+    position: absolute;
+    z-index: 10;
+
+    padding: 34px 0 0 20px;
+
+    left: 100%;
+    top: 0;
+}
+[app-lang] .active a.action {
+    color: @defaultDisabledColor !important;
 }
 
 /* rsearch */
