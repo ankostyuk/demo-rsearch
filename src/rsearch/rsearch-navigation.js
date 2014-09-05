@@ -286,6 +286,10 @@ define(function(require) {'use strict';
                     });
 
                     function nodeFormEgrulList(node) {
+                        if (node._type !== 'COMPANY') {
+                            return $q.all();
+                        }
+
                         if (!user.isAuthenticated()) {
                             node.__egrulList = [];
                             return $q.all();
@@ -314,9 +318,7 @@ define(function(require) {'use strict';
                             var nodePromises = [];
 
                             // egrul list
-                            if (node._type === 'COMPANY') {
-                                nodePromises.push(nodeFormEgrulList(node));
-                            }
+                            nodePromises.push(nodeFormEgrulList(node));
 
                             // user
                             nodePromises.push(npUser.fetchUser());
