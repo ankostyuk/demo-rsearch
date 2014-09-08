@@ -12,9 +12,12 @@ define(function(require) {'use strict';
     var messageWidgetTemplates  = require('text!../src/bower-components/nkbcomment-message-widget.templates/index.html'),
         commentWidgetTemplates  = require('text!../src/bower-components/nkbcomment-comment-widget.templates/index.html');
 
+    var template                = require('text!./views/nkbcomment.html');
+
                   require('jquery');
                   require('underscore');
-    var angular = require('angular');
+    var i18n    = require('i18n'),
+        angular = require('angular');
 
     //
     return angular.module('np.nkbcomment', [])
@@ -23,34 +26,61 @@ define(function(require) {'use strict';
             MessageWidgetSettings.templates = messageWidgetTemplates;
             CommentWidgetSettings.templates = commentWidgetTemplates;
             CommentWidgetSettings.apiUrl = CommentUtils.API_URL = appConfig.resource['nkbcomment.api.url'];
+            template = i18n.translateTemplate(template);
         }])
         //
         .factory('npNkbCommentHelper', ['$log', '$q', '$rootScope', function($log, $q, $rootScope){
-            var initDefer = $q.defer();
+            var initPromise = initComment();
 
-            CommentUtils.setupWidget('creditnet_ticket', function() {
-                initDefer.resolve();
-                $rootScope.$emit('np-nkbcomment-ready');
+            $rootScope.$on('app-user-apply', function(e, change){
+                if (change.login) {
+                    initComment();
+                }
             });
+
+            function initComment() {
+                var defer = $q.defer();
+
+                CommentUtils.setupWidget('creditnet_ticket',
+                    function() {
+                        defer.resolve();
+                        $rootScope.$emit('np-nkbcomment-init');
+                    },
+                    function() {
+                        defer.resolve();
+                        $rootScope.$emit('np-nkbcomment-init');
+                    }
+                );
+
+                return defer.promise;
+            }
 
             return {
                 initPromise: function() {
-                    return initDefer.promise;
+                    return initPromise;
                 }
             };
         }])
         //
-        .directive('npNkbCommentWidget', ['$log', 'npNkbCommentHelper', function($log, npNkbCommentHelper){
+        .directive('npNkbCommentWidget', ['$log', '$rootScope', 'npNkbCommentHelper', function($log, $rootScope, npNkbCommentHelper){
             return {
                 restrict: 'A',
-                scope: false, // require <node>
+                scope: {
+                    node: '=npNkbCommentWidget'
+                },
+                template: template,
                 link: function(scope, element, attrs) {
-                    var commentWidget;
+                    var commentWidgetContainer = element.find('.comment-widget-container'),
+                        commentWidget;
 
-                    npNkbCommentHelper.initPromise().then(function(){
+                    $rootScope.$on('np-nkbcomment-init', function(e){
+                        commentWidgetContainer.empty();
+
                         commentWidget = new CommentWidget({
-                            container: element
+                            container: commentWidgetContainer
                         });
+
+                        checkComment(scope.node);
                     });
 
                     scope.$watch('node', function(newNode, oldNode) {
@@ -87,6 +117,14 @@ define(function(require) {'use strict';
 
                         return null;
                     }
+
+                    /*
+                     * scope
+                     *
+                     */
+                    _.extend(scope, {
+                        CommentUtils: CommentUtils
+                    });
                 }
             };
         }]);

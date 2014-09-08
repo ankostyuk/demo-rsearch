@@ -1006,7 +1006,6 @@ define(function(require) {'use strict';
                         }
                     });
 
-
                     /*
                      * scope
                      *

@@ -23,7 +23,17 @@ define(function(require) {'use strict';
                 userRequest, loginRequest, logoutRequest;
 
             function applyUser(u) {
+                var change = {
+                    login: getUserId(user) !== getUserId(u)
+                };
+
                 user = u;
+
+                $rootScope.$emit('app-user-apply', change);
+            }
+
+            function getUserId(u) {
+                return u ? u.userId : null;
             }
 
             //
