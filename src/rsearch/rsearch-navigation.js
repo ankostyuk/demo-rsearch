@@ -995,7 +995,7 @@ define(function(require) {'use strict';
                      * user
                      *
                      */
-                    $rootScope.$on('app-user-login', function(e){
+                    $rootScope.$on('app-user-apply', function(e){
                         var lastBreadcrumb = getLastBreadcrumb();
 
                         if (lastBreadcrumb && lastBreadcrumb.type === 'NODE_FORM') {

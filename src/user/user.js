@@ -90,7 +90,6 @@ define(function(require) {'use strict';
                             fetchUser().promise.then(
                                 function(){
                                     success();
-                                    $rootScope.$emit('app-user-login');
                                 },
                                 function(){
                                     error(null);
