@@ -52,7 +52,8 @@ define(function(require) {'use strict';
             var resourceConfig = appConfig.resource || {};
 
             // init meta
-            // TODO init user info
+            var initDefer = $q.defer();
+
             var nodeTypesMeta       = {},
                 relationTypesMeta   = {},
                 nodeTypes, relationTypes;
@@ -93,11 +94,16 @@ define(function(require) {'use strict';
                     );
                 });
 
+                initDefer.resolve();
                 $rootScope.$emit('np-rsearch-meta-ready');
             }
 
             // API
             var metaHelper = {
+
+                initPromise: function() {
+                    return initDefer.promise;
+                },
 
                 getNodeTypes: function() {
                     return nodeTypesMeta;

@@ -17,6 +17,7 @@ define(function(require) {'use strict';
         login:          require('app.login'),
         lang:           require('app.lang'),
         l10n:           require('l10n'),
+        nkbcomment:     require('nkbcomment'),
         rsearch:        require('rsearch')
     };
 
@@ -33,7 +34,8 @@ define(function(require) {'use strict';
                 'search.url':               '/nkbrelation/api/nodes',
                 'relations.url':            '/nkbrelation/api/node',
                 'egrul.history.url':        '/siteapp/api/egrul/history',
-                'nkb.file.download.url':    '/reports/file.php'
+                'nkb.file.download.url':    '/reports/file.php',
+                'nkbcomment.api.url':       '/nkbcomment/api'
             },
             product: {
                 'market_profile_short': {
@@ -95,7 +97,7 @@ define(function(require) {'use strict';
             $logProvider.debugEnabled(false);
         }])
         //
-        .run(['$log', '$rootScope', function($log, $rootScope){
+        .run(['$log', '$q', '$rootScope', 'npRsearchMetaHelper', 'npNkbCommentHelper', function($log, $q, $rootScope, npRsearchMetaHelper, npNkbCommentHelper){
             //
             _.extend($rootScope, {
                 app: {
@@ -106,7 +108,7 @@ define(function(require) {'use strict';
                 }
             });
 
-            $rootScope.$on('np-rsearch-meta-ready', function(){
+            $q.all([npRsearchMetaHelper.initPromise(), npNkbCommentHelper.initPromise()]).then(function(){
                 $rootScope.app.ready = true;
             });
         }]);
