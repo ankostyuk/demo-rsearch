@@ -159,9 +159,9 @@ define(function(require) {'use strict';
 
                         // способ организации компании
                         var egrulReg    = node.egrul_reg,
-                            baseCode    = '100001'; // регистрация при создании
+                            baseCodes   = ['100001', '100024', '210001']; // коды стандартных регистраций
 
-                        if (egrulReg && egrulReg.code !== baseCode) {
+                        if (egrulReg && !_.contains(baseCodes, egrulReg.code)) {
                             node._reg = {
                                 state: {
                                     _actual: egrulReg._actual,
