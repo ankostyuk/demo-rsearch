@@ -41,6 +41,7 @@ root._RESOURCES_CONFIG = {
         'jquery.ui.widget':             'src/bower-components/jquery-file-upload/jquery.ui.widget',
         'jquery.iframe-transport':      'src/bower-components/jquery-file-upload/jquery.iframe-transport',
         'jquery.fileupload':            'src/bower-components/jquery-file-upload/jquery.fileupload',
+        'jquery.fileDownload':          'src/bower-components/jquery.fileDownload/jquery.fileDownload',
         'nkbcomment-defaults':          'src/bower-components/nkbcomment-defaults/index',
         'nkbcomment-comment-utils':     'src/bower-components/nkbcomment-comment-utils/index',
         'nkbcomment-message-widget':    'src/bower-components/nkbcomment-message-widget/index',
@@ -125,7 +126,7 @@ root._RESOURCES_CONFIG = {
             deps: ['iso8601']
         },
         'nkbcomment-defaults': {
-            deps: ['backbone', 'underscore', 'jquery' /* + остальные зависимости для nkbcomment-comment */, 'jquery.cookie', 'jquery.fileupload', 'dateformat']
+            deps: ['backbone', 'underscore', 'jquery' /* + остальные зависимости для nkbcomment-comment */, 'jquery.cookie', 'jquery.fileupload', 'jquery.fileDownload', 'dateformat']
         },
         'nkbcomment-comment-utils': {
             deps: ['nkbcomment-defaults']
