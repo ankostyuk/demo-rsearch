@@ -301,5 +301,19 @@
 /* np-nkb-comment-widget */
 [np-nkb-comment-widget],
 [np-nkb-comment-widget] .comment-widget {
-    position: relative;
+    position: relative !important;
+}
+[np-nkb-comment-widget] .comment-widget .modal {
+    -webkit-box-shadow: none;
+    -moz-box-shadow:    none;
+    box-shadow:         none;
+}
+[np-nkb-comment-widget] .comment-widget .widget-header {
+    display: none !important;
+}
+[np-nkb-comment-widget] .comment-widget .comment-list .no-comments {
+    display: none !important;
+}
+[np-nkb-comment-widget] .comment-widget .attach-file {
+    display: inline-block !important;
 }

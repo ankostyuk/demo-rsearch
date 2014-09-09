@@ -14,9 +14,9 @@ msgstr ""
 "CLDR_PLURAL_FORMS_FORMAT: one{0}few{1}many{2}other{2}\n"
 
 #: ../src/nkbcomment/views/nkbcomment.html:1
-msgid "NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT"
+msgid "Нет комментариев"
 msgstr ""
 
 #: ../src/nkbcomment/views/nkbcomment.html:1
-msgid "Нет комментариев"
+msgid "NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT"
 msgstr ""
