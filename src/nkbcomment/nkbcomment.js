@@ -77,7 +77,11 @@ define(function(require) {'use strict';
                         commentWidgetContainer.empty();
 
                         commentWidget = new CommentWidget({
-                            container: commentWidgetContainer
+                            container: commentWidgetContainer,
+                            onChange: function(data){
+                                scope.commentData = data;
+                                scope.$apply();
+                            }
                         });
 
                         checkComment(scope.node);
@@ -122,6 +126,7 @@ define(function(require) {'use strict';
                      *
                      */
                     _.extend(scope, {
+                        commentData: null,
                         CommentUtils: CommentUtils
                     });
                 }
