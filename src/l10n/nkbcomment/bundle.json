@@ -1,0 +1,36 @@
+{
+  "ru": {
+    "": {
+      "pluralForms": {
+        "count": 3,
+        "ruleCode": "n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2",
+        "cldrFormat": "one{0}few{1}many{2}other{2}"
+      }
+    },
+    "NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT": [
+      null,
+      "{'one': '{{count|number}} комментарий', 'few': '{{count|number}} комментария', 'many': '{{count|number}} комментариев', 'other': '{{count|number}} комментария'}"
+    ],
+    "Нет комментариев": [
+      null,
+      ""
+    ]
+  },
+  "en": {
+    "": {
+      "pluralForms": {
+        "count": 2,
+        "ruleCode": "n != 1",
+        "cldrFormat": "one{0}other{1}"
+      }
+    },
+    "NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT": [
+      null,
+      "{'one': '1 comment', 'other': '{{count|number}} comments'}"
+    ],
+    "Нет комментариев": [
+      null,
+      "No comments"
+    ]
+  }
+}
