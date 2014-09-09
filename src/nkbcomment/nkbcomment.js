@@ -38,6 +38,7 @@ define(function(require) {'use strict';
                 }
             });
 
+            // TODO В CommentUtils.setupWidget `CommentUtils.USER_INFO = {}` при error
             function initComment() {
                 var defer = $q.defer();
 
