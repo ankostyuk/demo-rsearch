@@ -32,7 +32,20 @@ root._RESOURCES_CONFIG = {
 
         'uuid':                 'src/bower-components/node-uuid/uuid',
 
-        'i18n':                 'src/bower-components/nullpointer-i18n/i18n'
+        'i18n':                 'src/bower-components/nullpointer-i18n/i18n',
+
+        // nkbcomment
+        'backbone':                     'src/bower-components/backbone/backbone',
+        'iso8601':                      'src/bower-components/iso8601/iso8601',
+        'dateformat':                   'src/bower-components/dateformat/index',
+        'jquery.ui.widget':             'src/bower-components/jquery-file-upload/jquery.ui.widget',
+        'jquery.iframe-transport':      'src/bower-components/jquery-file-upload/jquery.iframe-transport',
+        'jquery.fileupload':            'src/bower-components/jquery-file-upload/jquery.fileupload',
+        'jquery.fileDownload':          'src/bower-components/jquery.fileDownload/jquery.fileDownload',
+        'nkbcomment-defaults':          'src/bower-components/nkbcomment-defaults/index',
+        'nkbcomment-comment-utils':     'src/bower-components/nkbcomment-comment-utils/index',
+        'nkbcomment-message-widget':    'src/bower-components/nkbcomment-message-widget/index',
+        'nkbcomment-comment-widget':    'src/bower-components/nkbcomment-comment-widget/index'
     },
 
     packages: [{
@@ -47,6 +60,10 @@ root._RESOURCES_CONFIG = {
         name: 'app.lang',
         location: 'src/nkb-app/components/lang',
         main: 'lang'
+    }, {
+        name: 'nkbcomment',
+        location: 'src/nkbcomment',
+        main: 'nkbcomment'
     }, {
         name: 'icons',
         location: 'src/icons',
@@ -99,6 +116,26 @@ root._RESOURCES_CONFIG = {
 
                 _.mixin(UnderscoreString);
             }
+        },
+
+        // nkbcomment
+        'backbone': {
+            deps: ['underscore']
+        },
+        'dateformat': {
+            deps: ['iso8601']
+        },
+        'nkbcomment-defaults': {
+            deps: ['backbone', 'underscore', 'jquery' /* + остальные зависимости для nkbcomment-comment */, 'jquery.cookie', 'jquery.fileupload', 'jquery.fileDownload', 'dateformat']
+        },
+        'nkbcomment-comment-utils': {
+            deps: ['nkbcomment-defaults']
+        },
+        'nkbcomment-message-widget': {
+            deps: ['nkbcomment-defaults']
+        },
+        'nkbcomment-comment-widget': {
+            deps: ['nkbcomment-defaults', 'nkbcomment-comment-utils', 'nkbcomment-message-widget']
         }
     },
 

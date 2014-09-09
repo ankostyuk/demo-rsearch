@@ -114,6 +114,17 @@ module.exports = function(grunt) {
                     langs:          APP_LANGS
                 }
             },
+            'nkbcomment': {
+                options: {
+                    pattern:        '**/*.+(js|html)',
+                    inputDir:       path.resolve(__dirname, 'src/nkbcomment'),
+                    inputRootPath:  path.resolve(__dirname, ''),
+                    outputDir:      path.resolve(__dirname, 'i18n/nkbcomment'),
+                    bundleDir:      path.resolve(__dirname, 'src/l10n/nkbcomment'),
+                    baseLang:       APP_LANGS[0],
+                    langs:          APP_LANGS
+                }
+            },
             'okato_region': {
                 options: {
                     mode:           'simple',

@@ -20,7 +20,7 @@ define(function(require) {'use strict';
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'npUser', 'appConfig', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, npUser, appConfig){
+        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'npUser', 'appConfig', 'npNkbCommentHelper', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, npUser, appConfig, npNkbCommentHelper){
             return {
                 restrict: 'A',
                 template: template,
@@ -38,9 +38,8 @@ define(function(require) {'use strict';
                      */
                     var init                    = false,
                         user                    = npUser.user(),
-                        initMetaDefer           = $q.defer(),
-                        initMetaPromise         = initMetaDefer.promise,
-                        initPromise             = $q.all([initMetaPromise]),
+                        initMetaPromise         = npRsearchMetaHelper.initPromise(),
+                        initPromise             = $q.all([initMetaPromise, npNkbCommentHelper.initPromise()]),
                         initDeferredFunctions   = [];
 
                     $q.all(initPromise).then(initSuccess);
@@ -69,7 +68,7 @@ define(function(require) {'use strict';
                     }
 
                     //
-                    $rootScope.$on('np-rsearch-meta-ready', initByMeta);
+                    initMetaPromise.then(initByMeta);
 
                     function initByMeta() {
                         search.byNodeTypes = {};
@@ -84,8 +83,6 @@ define(function(require) {'use strict';
                                   nodeList: null
                               };
                         });
-
-                        initMetaDefer.resolve();
                     }
 
                     /*
@@ -998,7 +995,7 @@ define(function(require) {'use strict';
                      * user
                      *
                      */
-                    $rootScope.$on('app-user-login', function(e){
+                    $rootScope.$on('app-user-apply', function(e){
                         var lastBreadcrumb = getLastBreadcrumb();
 
                         if (lastBreadcrumb && lastBreadcrumb.type === 'NODE_FORM') {
@@ -1008,7 +1005,6 @@ define(function(require) {'use strict';
                             });
                         }
                     });
-
 
                     /*
                      * scope

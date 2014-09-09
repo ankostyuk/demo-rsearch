@@ -9,6 +9,7 @@
     "require-less": "0.1.2",
     "jquery": "2.1.*",
     "jquery.cookie": "1.4.1",
+    "jquery.fileDownload": "1.4.2",
     "angular": "1.2.18",
     "angular-i18n": "1.2.18",
     "ngInfiniteScroll": "1.1.*",
@@ -17,6 +18,16 @@
     "purl": "2.3.*",
     "node-uuid": "1.4.1",
     "nullpointer-i18n": "git@repo.nkb:nullpointer/i18n-js.git",
+    "backbone": "0.9.2",
+    "jquery-file-upload": "9.7.1",
+    "iso8601": "git://github.com/csnover/js-iso8601.git",
+    "dateformat": "http://www.creditnet.ru/nkbcomment/static/js/lib/dateformat.js",
+    "nkbcomment-defaults": "http://www.creditnet.ru/nkbcomment/static/js/defaults.js",
+    "nkbcomment-comment-utils": "http://www.creditnet.ru/nkbcomment/static/components/comment-widget/js/comment-utils.js",
+    "nkbcomment-message-widget": "http://www.creditnet.ru/nkbcomment/static/components/message-widget/js/message-widget.js",
+    "nkbcomment-message-widget.templates": "http://www.creditnet.ru/nkbcomment/static/components/message-widget/view/message-widget-templates.html",
+    "nkbcomment-comment-widget": "http://www.creditnet.ru/nkbcomment/static/components/comment-widget/js/comment-widget.js",
+    "nkbcomment-comment-widget.templates": "http://www.creditnet.ru/nkbcomment/static/components/comment-widget/view/comment-widget-templates.html",
     "bootstrap": "http://getbootstrap.com/2.3.2/assets/bootstrap.zip"
   },
   "devDependencies": {
@@ -56,6 +67,20 @@
     },
     "nullpointer-i18n": {
       "": "i18n.js"
+    },
+    "backbone": {
+      "": "backbone.js"
+    },
+    "jquery-file-upload": {
+      "": [
+        "js/vendor/jquery.ui.widget.js",
+        "js/jquery.fileupload.js",
+        "js/jquery.iframe-transport.js"
+      ]
+    },
+    "blueimp-*": {},
+    "iso8601": {
+      "": "iso8601.js"
     }
   },
   "private": true,
