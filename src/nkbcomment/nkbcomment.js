@@ -111,8 +111,7 @@ define(function(require) {'use strict';
                             return '/bsnId:' + node.bsn_id + '/blocks/cnblk04';
                         } else
                         if (node._type === 'INDIVIDUAL') {
-                            // TODO
-                            return null;
+                            return _.clean(node.name).toUpperCase();
                         }
 
                         return null;
