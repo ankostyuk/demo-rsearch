@@ -1,5 +1,6 @@
 <div ng-show="CommentUtils.hasUserPermission('VIEW')">
     <h5>
+        <!--<i class="icon i-comment"></i>-->
         <span ng-hide="commentData.commentCount">${_tr("Нет комментариев")}</span>
         <ng-pluralize ng-show="commentData.commentCount" count="count = commentData.commentCount" when="${_tr("NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT")}"></ng-pluralize>
     </h5>
