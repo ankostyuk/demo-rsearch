@@ -6,7 +6,7 @@
     <div class="row" ng-if="node._type === 'COMPANY'">
         <div class="span5">
             <div class="product-panel shadow-lift-lb-corner strong">
-                <h5 class="product-panel-label"><i class="icon i-note"></i> ${_tr("Бизнес-справки онлайн")}</h5>
+                <h5 class="product-panel-label"><i class="icon big i-document-ok"></i> ${_tr("Бизнес-справки онлайн")}</h5>
                 <ul class="unstyled product-list">
                     <li><a class="action" ng-click="productClick('ext_history_profile')">${_tr("Исторический профиль")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('ext_history_profile')"></span></li>
                     <li ng-show="node | isBalance"><a class="action" ng-click="productClick('credit_profile')">${_tr("Кредитный профиль")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('credit_profile')"></span></li>
@@ -19,7 +19,7 @@
         </div>
         <div class="span4">
             <div class="product-panel shadow-lift-lb-corner strong">
-                <h5 class="product-panel-label"><i class="icon i-note"></i> ${_tr("Отчеты на заказ")}</h5>
+                <h5 class="product-panel-label"><i class="icon big i-document-plus"></i> ${_tr("Отчеты на заказ")}</h5>
                 <ul class="unstyled product-list">
                     <li><a class="action" ng-click="productClick('extended_research')">${_tr("Расширенное исследование")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('extended_research')"></span></li>
                     <li><a class="action" ng-click="productClick('relations_xxx')">${_tr("Схема аффилированных лиц")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('relations_xxx')"></span></li>
@@ -38,11 +38,11 @@
 
     <div class="row">
         <div class="span5">
-            <div ng-if="node._type === 'COMPANY'">
-                <h5 class="actions-label">${_tr("ЕГРЮЛ")}</h5>
+            <div ng-if="node._type === 'COMPANY'" class="egrul-products">
+                <h5 class="actions-label"><i class="icon large i-document-stamp"></i> ${_tr("ЕГРЮЛ")}</h5>
                 <ul class="unstyled actions-list">
                     <li><a class="action" ng-click="productClick('egrulCompanyReport')">${_tr("Заказать выписку ЕГРЮЛ")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('egrulCompanyReport')"></span></li>
-                    <li ng-repeat="egrul in node.__egrulList"><a class="action" ng-href="{{egrul._link}}" download="{{egrul._downloadName}}" target="_self">${_tr("Скачать выписку")}</a> ${_trc("от", "от такой-то даты")} {{egrul.fileDate | date:'mediumDate'}}</li>
+                    <li ng-repeat="egrul in node.__egrulList"><a class="action" ng-href="{{egrul._link}}" download="{{egrul._downloadName}}" target="_self">${_tr("Выписка")} ${_trc("от", "от такой-то даты")} {{egrul.fileDate | date:'mediumDate'}}</a></li>
                 </ul>
             </div>
             <div ng-if="node._type === 'INDIVIDUAL'">
