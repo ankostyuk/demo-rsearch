@@ -695,9 +695,12 @@ define(function(require) {'use strict';
                         nodeRelationsFilter.active = null;
                     }
 
+                    var relationsRegionFilterScope  = element.find('.relation-filters [np-rsearch-region-filter]').isolateScope(),
+                        relationsInnFilterScope     = element.find('.relation-filters [np-rsearch-inn-filter]').isolateScope();
+
                     function hideRelationsFilters() {
-                        $rootScope.$emit('np-rsearch-filters-toggle-region-filter', false);
-                        $rootScope.$emit('np-rsearch-filters-toggle-inn-filter', false);
+                        relationsRegionFilterScope.toggle(false);
+                        relationsInnFilterScope.toggle(false);
                     }
 
                     function initRelationsFilters(byRelations) {
@@ -748,13 +751,13 @@ define(function(require) {'use strict';
                         }
 
                         if (filters.region.values) {
-                            $rootScope.$emit('np-rsearch-filters-set-region-filter-data', filters.region);
-                            $rootScope.$emit('np-rsearch-filters-toggle-region-filter', true);
+                            relationsRegionFilterScope.setData(filters.region);
+                            relationsRegionFilterScope.toggle(true);
                         }
 
                         if (filters.inn.values) {
-                            $rootScope.$emit('np-rsearch-filters-set-inn-filter-data', filters.inn);
-                            $rootScope.$emit('np-rsearch-filters-toggle-inn-filter', true);
+                            relationsInnFilterScope.setData(filters.inn);
+                            relationsInnFilterScope.toggle(true);
                         }
                     }
 
