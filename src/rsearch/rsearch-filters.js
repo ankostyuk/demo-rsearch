@@ -5,8 +5,7 @@
  */
 define(function(require) {'use strict';
 
-    var template                = require('text!./views/rsearch-filters.html'),
-        regionFilterTemplate    = require('text!./views/rsearch-region-filter.html'),
+    var regionFilterTemplate    = require('text!./views/rsearch-region-filter.html'),
         innFilterTemplate       = require('text!./views/rsearch-inn-filter.html');
 
                           require('jquery');
@@ -80,7 +79,6 @@ define(function(require) {'use strict';
     return angular.module('np.rsearch-filters', [])
         //
         .run([function(){
-            template = i18n.translateTemplate(template);
             regionFilterTemplate = i18n.translateTemplate(regionFilterTemplate);
             innFilterTemplate = i18n.translateTemplate(innFilterTemplate);
         }])
@@ -93,16 +91,14 @@ define(function(require) {'use strict';
                 link: function(scope, element, attrs) {
                     var filter = new Filter();
 
-                    $rootScope.$on('np-rsearch-filters-toggle-region-filter', function(e, show){
-                        filter.toggle(show);
-                    });
-
-                    $rootScope.$on('np-rsearch-filters-set-region-filter-data', function(e, data){
-                        filter.setData(data);
-                    });
-
                     _.extend(scope, {
-                        filter: filter,
+                        toggle: function(show) {
+                            filter.toggle(show);
+                        },
+                        setData: function(data) {
+                            filter.setData(data);
+                        },
+                        filter: filter
                     }, i18n.translateFuncs);
                 }
             };
@@ -116,20 +112,18 @@ define(function(require) {'use strict';
                 link: function(scope, element, attrs) {
                     var filter = new Filter();
 
-                    $rootScope.$on('np-rsearch-filters-toggle-inn-filter', function(e, show){
-                        filter.toggle(show);
-                    });
-
-                    $rootScope.$on('np-rsearch-filters-set-inn-filter-data', function(e, data){
-                        noInnCount = _.reduce(data.values, function(c, v){
-                            return c - v;
-                        }, data.total);
-
-                        filter.setData(data, 'byKey');
-                    });
-
                     _.extend(scope, {
-                        filter: filter,
+                        toggle: function(show) {
+                            filter.toggle(show);
+                        },
+                        setData: function(data) {
+                            noInnCount = _.reduce(data.values, function(c, v){
+                                return c - v;
+                            }, data.total);
+
+                            filter.setData(data, 'byKey');
+                        },
+                        filter: filter
                     }, i18n.translateFuncs);
 
                     //
@@ -138,16 +132,6 @@ define(function(require) {'use strict';
                     filter.getNoInnCount = function() {
                         return noInnCount;
                     };
-                }
-            };
-        }])
-        //
-        .directive('npRsearchFilters', ['$log', '$rootScope', function($log, $rootScope){
-            return {
-                restrict: 'A',
-                template: template,
-                scope: {},
-                link: function(scope, element, attrs) {
                 }
             };
         }]);
