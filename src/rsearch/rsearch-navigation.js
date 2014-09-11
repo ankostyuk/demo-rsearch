@@ -78,6 +78,7 @@ define(function(require) {'use strict';
                                   nodeType: nodeType,
                                   resultPriority: data.searchResultPriority,
                                   pageConfig: null,
+                                  filters: null,
                                   request: null,
                                   result: null,
                                   nodeList: null
@@ -145,6 +146,7 @@ define(function(require) {'use strict';
                         nodeFormView.hide();
                         clearBreadcrumbs();
                         clearNodeRelationsFilter();
+                        hideSearchFilters();
                         hideRelationsFilters();
                         clearMessages();
 
@@ -158,6 +160,7 @@ define(function(require) {'use strict';
                         loading(function(done){
                             _.each(search.byNodeTypes, function(byNodeType){
                                 byNodeType.pageConfig = resetPageConfig();
+                                byNodeType.filters = null;
                                 byNodeType.nodeList = null;
                                 searchRequest(byNodeType);
                                 searchPromises.push(byNodeType.request.completePromise);
@@ -173,11 +176,34 @@ define(function(require) {'use strict';
                         });
                     }
 
+                    function doSearchByNodeType(byNodeType) {
+                        loading(function(done){
+                            byNodeType.pageConfig = resetPageConfig();
+                            byNodeType.nodeList = null;
+                            searchRequest(byNodeType);
+
+                            byNodeType.request.completePromise.then(complete, complete);
+
+                            function complete() {
+                                setNodeList(byNodeType);
+                                resetSearchNodeListView(byNodeType);
+                                done();
+                            }
+                        });
+                    }
+
                     function searchRequest(byNodeType) {
+                        var filter = {};
+
+                        _.each(byNodeType.filters, function(f){
+                            _.extend(filter, f.condition);
+                        });
+
                         byNodeType.request = npRsearchResource.search({
                             q: search.query,
                             nodeType: byNodeType.nodeType,
                             pageConfig: byNodeType.pageConfig,
+                            filter: filter,
                             previousRequest: byNodeType.request,
                             success: function(data, status){
                                 complete(data);
@@ -242,6 +268,10 @@ define(function(require) {'use strict';
                         hideRelationsFilters();
                         clearMessages();
 
+                        resetSearchNodeListView(byNodeType);
+                    }
+
+                    function resetSearchNodeListView(byNodeType) {
                         nodeListView.showItemNumber(false);
 
                         nodeListView.reset(byNodeType.nodeList, noMore(byNodeType.result), function(callback){
@@ -259,6 +289,8 @@ define(function(require) {'use strict';
                                 }
                             });
                         });
+
+                        initSearchFilters(byNodeType);
                     }
 
                     function setSearchResult(nodeType, breadcrumb) {
@@ -326,6 +358,7 @@ define(function(require) {'use strict';
                             function complete() {
                                 nodeListView.clear();
                                 clearNodeRelationsFilter();
+                                hideSearchFilters();
                                 hideRelationsFilters();
                                 clearMessages();
 
@@ -366,6 +399,7 @@ define(function(require) {'use strict';
                     function showRelations(node, direction, relationType, key, breadcrumb, noHistory) {
                         nodeFormView.hide();
                         setNodeRelationsFilter(node, direction, relationType);
+                        hideSearchFilters();
                         hideRelationsFilters();
                         clearMessages();
 
@@ -668,6 +702,52 @@ define(function(require) {'use strict';
                      * filters
                      *
                      */
+                    var searchRegionFilterScope = element.find('.search-filters [np-rsearch-region-filter]').isolateScope();
+
+                    searchRegionFilterScope.toggle(true);
+
+                    function hideSearchFilters() {
+                        searchRegionFilterScope.toggle(false);
+                    }
+
+                    function initSearchFilters(byNodeType) {
+                        if (!byNodeType.result) {
+                            return;
+                        }
+
+                        var filters = byNodeType.filters;
+
+                        if (!filters) {
+                            var total = byNodeType.result.total;
+
+                            var regionFilter = {
+                                values: byNodeType.result.info.nodeFacet && byNodeType.result.info.nodeFacet.region_code,
+                                value: null,
+                                total: total,
+                                callback: function(value){
+                                    regionFilter.value = value;
+                                    regionFilter.condition = {
+                                        'region_code.equals': value
+                                    };
+                                    doSearchByNodeType(byNodeType);
+                                }
+                            };
+
+                            filters = {
+                                region: regionFilter
+                            };
+
+                            byNodeType.filters = filters;
+                        }
+
+                        if (filters.region.values) {
+                            searchRegionFilterScope.setData(filters.region);
+                            searchRegionFilterScope.toggle(true);
+                        } else {
+                            searchRegionFilterScope.toggle(false);
+                        }
+                    }
+
                     var nodeRelationsFilter = {
                         node: null,
                         active: null,
@@ -989,6 +1069,7 @@ define(function(require) {'use strict';
                             dstByNodeType.total         = srcByNodeType.total;
                             dstByNodeType.nodeList      = _.clone(srcByNodeType.nodeList);
                             dstByNodeType.pageConfig    = _.clone(srcByNodeType.pageConfig);
+                            dstByNodeType.filters       = _.clone(srcByNodeType.filters);
                         });
 
                         return dst;
