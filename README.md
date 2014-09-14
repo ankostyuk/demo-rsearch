@@ -27,7 +27,7 @@
 
 Сбор ключей перевода, формирование бандлов перевода
 
-[nullpointer-i18n-bin/docs/build.md](http://repo.nkb/git/gitweb.cgi?p=nullpointer/i18n-bin.git;a=blob;f=README.md;h=e6f088c99ed5f43a0ae12ef133f9befaba117268;hb=refs/heads/master)
+[nullpointer-i18n-bin/docs/build.md](http://repo.nkb/git/gitweb.cgi?p=nullpointer/i18n-bin.git;a=blob;f=docs/build.md;h=fca0b68a34fea1419744ba3eeaf15b53116aaaed;hb=refs/heads/master)
 
     grunt i18n
 
