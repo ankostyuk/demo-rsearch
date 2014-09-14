@@ -11,8 +11,7 @@ module.exports = function(grunt) {
     var APP_LANGS = ['ru', 'en'];
 
     //
-    var APP_CONFIG      = require('./src/app/config.js'),
-        NKB_APP_CONFIG  = require('./src/nkb-app/config.js');
+    var NKB_APP_CONFIG = require('./src/nkb-app/config.js');
 
     //
     grunt.initConfig({
@@ -40,19 +39,6 @@ module.exports = function(grunt) {
         },
 
         copy: {
-            'dist-app': {
-                expand: true,
-                flatten: true,
-                cwd: 'target/web-resources-build/app',
-                src: [
-                    'build.properties',
-                    'src/app/config.js',
-                    'src/app/main.js',
-                    'src/bower-components/requirejs/require.js',
-                    'example/app/rsearch.css'
-                ],
-                dest: 'dist/app'
-            },
             'dist-nkb-app': {
                 expand: true,
                 flatten: true,
@@ -70,12 +56,6 @@ module.exports = function(grunt) {
                 cwd: 'target/web-resources-build/nkb-app/src/nkb-app/styles/i',
                 src: '**',
                 dest: 'dist/nkb-app/styles/i/'
-            },
-            'app-example': {
-                expand: true,
-                cwd: 'examples/app',
-                src: '**',
-                dest: 'target/web-resources-build/app/example/app/'
             },
             'nkb-app-example': {
                 expand: true,
@@ -152,39 +132,6 @@ module.exports = function(grunt) {
         },
 
         'web-resources': {
-            'build-app': {
-                options: {
-                    propertiesFile: path.resolve(__dirname, 'target/web-resources-build/app/build.properties'),
-                    mainFile: path.resolve(__dirname, 'target/web-resources-build/app/src/app/main.js'),
-
-                    requirejs: _.extend({}, APP_CONFIG._RESOURCES_CONFIG, {
-                        dir: path.resolve(__dirname, 'target/web-resources-build/app'),
-                        baseUrl: path.resolve(__dirname, 'target/web-resources-process'),
-                        modules: [{
-                            name: 'app/main'
-                        }],
-
-                        less: {
-                            rootpath: '/',
-                            relativeUrls: true
-                        },
-
-                        optimize: 'uglify2',
-                        uglify2: {
-                            mangle: true,
-                            output: {
-                                comments: /-- DO_NOT_DELETE --/
-                            }
-                        },
-
-                        removeCombined: false,
-                        preserveLicenseComments: false
-                    }),
-
-                    // значение будет взято из аргумента [grunt web-resources:build-xxx:true|false], см. register task web-resources
-                    skipOptimize: null
-                }
-            },
             'build-nkb-app': {
                 options: {
                     propertiesFile: path.resolve(__dirname, 'target/web-resources-build/nkb-app/build.properties'),
@@ -271,7 +218,7 @@ module.exports = function(grunt) {
 
     //
     grunt.registerTask('init', ['bower']);
-    grunt.registerTask('dist', ['clean:dist', 'copy:dist-app', 'copy:dist-nkb-app', 'copy:dist-nkb-app-static']);
-    grunt.registerTask('build', ['clean:src', 'clean:target', 'init', 'jshint', 'process-resources:build:false', 'web-resources:build-app:false', 'web-resources:build-nkb-app:false', 'copy:app-example', 'copy:nkb-app-example', 'dist']);
+    grunt.registerTask('dist', ['clean:dist', 'copy:dist-nkb-app', 'copy:dist-nkb-app-static']);
+    grunt.registerTask('build', ['clean:src', 'clean:target', 'init', 'jshint', 'process-resources:build:false', 'web-resources:build-nkb-app:false', 'copy:nkb-app-example', 'dist']);
     grunt.registerTask('cleanup', ['clean:deps', 'clean:src', 'clean:target']);
 };
