@@ -10,7 +10,7 @@ define(function(require) {'use strict';
         uuid    = require('uuid');
 
                   require('icons');
-                  require('css!../src/bower-components/bootstrap/css/bootstrap');
+                  require('css!../external_components/bootstrap/css/bootstrap');
                   require('less!./styles/app');
 
     var submodules = {

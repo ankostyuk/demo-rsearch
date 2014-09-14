@@ -16,8 +16,7 @@ module.exports = function(grunt) {
     //
     grunt.initConfig({
         clean: {
-            deps: ['node_modules', 'bower_components'],
-            src: ['src/bower-components'],
+            deps: ['node_modules', 'bower_components', 'external_components'],
             target: ['target'],
             dist: ['dist']
         },
@@ -29,12 +28,7 @@ module.exports = function(grunt) {
                 '-W069': true
             },
             src: [
-                'src/app/**/*.js',
-                'src/nkb-app/**/*.js',
-                'src/l10n/**/*.js',
-                'src/resource/**/*.js',
-                'src/user/**/*.js',
-                'src/rsearch/**/*.js'
+                'src/**/*.js'
             ]
         },
 
@@ -47,28 +41,22 @@ module.exports = function(grunt) {
                     'build.properties',
                     'src/nkb-app/config.js',
                     'src/nkb-app/main.js',
-                    'src/bower-components/requirejs/require.js'
+                    'src/nkb-app/index.html'
                 ],
                 dest: 'dist/nkb-app'
             },
-            'dist-nkb-app-static': {
+            'target-external-components': {
                 expand: true,
-                cwd: 'target/web-resources-build/nkb-app/src/nkb-app/styles/i',
-                src: '**',
-                dest: 'dist/nkb-app/styles/i/'
-            },
-            'nkb-app-example': {
-                expand: true,
-                cwd: 'examples/nkb-app',
-                src: '**',
-                dest: 'target/web-resources-build/nkb-app/example/nkb-app/'
+                cwd: 'external_components',
+                src: ['**'],
+                dest: 'target/web-resources-process/external_components'
             }
         },
 
         bower: {
             install: {
                 options: {
-                    targetDir: 'src/bower-components',
+                    targetDir: 'external_components',
                     layout: 'byComponent',
                     install: true,
                     verbose: true,
@@ -86,21 +74,10 @@ module.exports = function(grunt) {
             'ui': {
                 options: {
                     pattern:        '**/*.+(js|html)',
-                    inputDir:       path.resolve(__dirname, 'src/rsearch'),
+                    inputDir:       path.resolve(__dirname, 'src'),
                     inputRootPath:  path.resolve(__dirname, ''),
                     outputDir:      path.resolve(__dirname, 'i18n/ui'),
                     bundleDir:      path.resolve(__dirname, 'src/l10n/ui'),
-                    baseLang:       APP_LANGS[0],
-                    langs:          APP_LANGS
-                }
-            },
-            'nkbcomment': {
-                options: {
-                    pattern:        '**/*.+(js|html)',
-                    inputDir:       path.resolve(__dirname, 'src/nkbcomment'),
-                    inputRootPath:  path.resolve(__dirname, ''),
-                    outputDir:      path.resolve(__dirname, 'i18n/nkbcomment'),
-                    bundleDir:      path.resolve(__dirname, 'src/l10n/nkbcomment'),
                     baseLang:       APP_LANGS[0],
                     langs:          APP_LANGS
                 }
@@ -218,7 +195,7 @@ module.exports = function(grunt) {
 
     //
     grunt.registerTask('init', ['bower']);
-    grunt.registerTask('dist', ['clean:dist', 'copy:dist-nkb-app', 'copy:dist-nkb-app-static']);
-    grunt.registerTask('build', ['clean:src', 'clean:target', 'init', 'jshint', 'process-resources:build:false', 'web-resources:build-nkb-app:false', 'copy:nkb-app-example', 'dist']);
-    grunt.registerTask('cleanup', ['clean:deps', 'clean:src', 'clean:target']);
+    grunt.registerTask('dist', ['clean:dist', 'copy:dist-nkb-app']);
+    grunt.registerTask('build', ['clean:target', 'init', 'jshint', 'process-resources:build:false', 'copy:target-external-components', 'web-resources:build-nkb-app:false', 'dist']);
+    grunt.registerTask('cleanup', ['clean:deps', 'clean:target']);
 };

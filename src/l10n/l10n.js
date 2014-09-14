@@ -14,12 +14,11 @@ define(function(require) {'use strict';
         purl            = require('purl'),
         angularLocale   = require('./angular-locale');
 
-    var uiBundle            = angular.fromJson(require('text!./ui/bundle.json')),
-        nkbcommentBundle    = angular.fromJson(require('text!./nkbcomment/bundle.json')),
-        regionBundle        = angular.fromJson(require('text!./okato_region/bundle.json'));
+    var uiBundle        = angular.fromJson(require('text!./ui/bundle.json')),
+        regionBundle    = angular.fromJson(require('text!./okato_region/bundle.json'));
 
     i18n.setConfig(root._RESOURCES_CONFIG['config']['i18n']);
-    i18n.setBundle([uiBundle, nkbcommentBundle, regionBundle]);
+    i18n.setBundle([uiBundle, regionBundle]);
 
     //
     var config      = root._APP_CONFIG.lang || {},

@@ -17,35 +17,35 @@ root._RESOURCES_CONFIG = {
     baseUrl: '/rsearch',
 
     paths: {
-        'angular':              'src/bower-components/angular/angular',
-        'angular-locale_ru':    'src/bower-components/angular-i18n/angular-locale_ru',
-        'angular-locale_en':    'src/bower-components/angular-i18n/angular-locale_en',
-        'ng-infinite-scroll':   'src/bower-components/ngInfiniteScroll/ng-infinite-scroll',
+        'angular':              'external_components/angular/angular',
+        'angular-locale_ru':    'external_components/angular-i18n/angular-locale_ru',
+        'angular-locale_en':    'external_components/angular-i18n/angular-locale_en',
+        'ng-infinite-scroll':   'external_components/ngInfiniteScroll/ng-infinite-scroll',
 
-        'jquery':               'src/bower-components/jquery/jquery',
-        'jquery.cookie':        'src/bower-components/jquery.cookie/jquery.cookie',
+        'jquery':               'external_components/jquery/jquery',
+        'jquery.cookie':        'external_components/jquery.cookie/jquery.cookie',
 
-        'underscore':           'src/bower-components/underscore/underscore',
-        'underscore.string':    'src/bower-components/underscore.string/underscore.string',
+        'underscore':           'external_components/underscore/underscore',
+        'underscore.string':    'external_components/underscore.string/underscore.string',
 
-        'purl':                 'src/bower-components/purl/purl',
+        'purl':                 'external_components/purl/purl',
 
-        'uuid':                 'src/bower-components/node-uuid/uuid',
+        'uuid':                 'external_components/node-uuid/uuid',
 
-        'i18n':                 'src/bower-components/nullpointer-i18n/i18n',
+        'i18n':                 'external_components/nullpointer-i18n/i18n',
 
         // nkbcomment
-        'backbone':                     'src/bower-components/backbone/backbone',
-        'iso8601':                      'src/bower-components/iso8601/iso8601',
-        'dateformat':                   'src/bower-components/dateformat/index',
-        'jquery.ui.widget':             'src/bower-components/jquery-file-upload/jquery.ui.widget',
-        'jquery.iframe-transport':      'src/bower-components/jquery-file-upload/jquery.iframe-transport',
-        'jquery.fileupload':            'src/bower-components/jquery-file-upload/jquery.fileupload',
-        'jquery.fileDownload':          'src/bower-components/jquery.fileDownload/jquery.fileDownload',
-        'nkbcomment-defaults':          'src/bower-components/nkbcomment-defaults/index',
-        'nkbcomment-comment-utils':     'src/bower-components/nkbcomment-comment-utils/index',
-        'nkbcomment-message-widget':    'src/bower-components/nkbcomment-message-widget/index',
-        'nkbcomment-comment-widget':    'src/bower-components/nkbcomment-comment-widget/index'
+        'backbone':                     'external_components/backbone/backbone',
+        'iso8601':                      'external_components/iso8601/iso8601',
+        'dateformat':                   'external_components/dateformat/index',
+        'jquery.ui.widget':             'external_components/jquery-file-upload/jquery.ui.widget',
+        'jquery.iframe-transport':      'external_components/jquery-file-upload/jquery.iframe-transport',
+        'jquery.fileupload':            'external_components/jquery-file-upload/jquery.fileupload',
+        'jquery.fileDownload':          'external_components/jquery.fileDownload/jquery.fileDownload',
+        'nkbcomment-defaults':          'external_components/nkbcomment-defaults/index',
+        'nkbcomment-comment-utils':     'external_components/nkbcomment-comment-utils/index',
+        'nkbcomment-message-widget':    'external_components/nkbcomment-message-widget/index',
+        'nkbcomment-comment-widget':    'external_components/nkbcomment-comment-widget/index'
     },
 
     packages: [{
@@ -156,9 +156,9 @@ root._RESOURCES_CONFIG = {
 
     map: {
         '*': {
-            'css': 'src/bower-components/require-css/css',
-            'less': 'src/bower-components/require-less/less',
-            'text': 'src/bower-components/requirejs-text/text'
+            'css': 'external_components/require-css/css',
+            'less': 'external_components/require-less/less',
+            'text': 'external_components/requirejs-text/text'
         }
     },
 
