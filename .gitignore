@@ -14,6 +14,7 @@ tmp
 node_modules
 bower_components
 bower-components
+external_components
 target
 
 npm-debug.log

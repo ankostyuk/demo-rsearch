@@ -11,14 +11,12 @@ module.exports = function(grunt) {
     var APP_LANGS = ['ru', 'en'];
 
     //
-    var APP_CONFIG      = require('./src/app/config.js'),
-        NKB_APP_CONFIG  = require('./src/nkb-app/config.js');
+    var NKB_APP_CONFIG = require('./src/nkb-app/config.js');
 
     //
     grunt.initConfig({
         clean: {
-            deps: ['node_modules', 'bower_components'],
-            src: ['src/bower-components'],
+            deps: ['node_modules', 'bower_components', 'external_components'],
             target: ['target'],
             dist: ['dist']
         },
@@ -30,29 +28,11 @@ module.exports = function(grunt) {
                 '-W069': true
             },
             src: [
-                'src/app/**/*.js',
-                'src/nkb-app/**/*.js',
-                'src/l10n/**/*.js',
-                'src/resource/**/*.js',
-                'src/user/**/*.js',
-                'src/rsearch/**/*.js'
+                'src/**/*.js'
             ]
         },
 
         copy: {
-            'dist-app': {
-                expand: true,
-                flatten: true,
-                cwd: 'target/web-resources-build/app',
-                src: [
-                    'build.properties',
-                    'src/app/config.js',
-                    'src/app/main.js',
-                    'src/bower-components/requirejs/require.js',
-                    'example/app/rsearch.css'
-                ],
-                dest: 'dist/app'
-            },
             'dist-nkb-app': {
                 expand: true,
                 flatten: true,
@@ -61,34 +41,22 @@ module.exports = function(grunt) {
                     'build.properties',
                     'src/nkb-app/config.js',
                     'src/nkb-app/main.js',
-                    'src/bower-components/requirejs/require.js'
+                    'src/nkb-app/index.html'
                 ],
                 dest: 'dist/nkb-app'
             },
-            'dist-nkb-app-static': {
+            'target-external-components': {
                 expand: true,
-                cwd: 'target/web-resources-build/nkb-app/src/nkb-app/styles/i',
-                src: '**',
-                dest: 'dist/nkb-app/styles/i/'
-            },
-            'app-example': {
-                expand: true,
-                cwd: 'examples/app',
-                src: '**',
-                dest: 'target/web-resources-build/app/example/app/'
-            },
-            'nkb-app-example': {
-                expand: true,
-                cwd: 'examples/nkb-app',
-                src: '**',
-                dest: 'target/web-resources-build/nkb-app/example/nkb-app/'
+                cwd: 'external_components',
+                src: ['**'],
+                dest: 'target/web-resources-process/external_components'
             }
         },
 
         bower: {
             install: {
                 options: {
-                    targetDir: 'src/bower-components',
+                    targetDir: 'external_components',
                     layout: 'byComponent',
                     install: true,
                     verbose: true,
@@ -106,21 +74,10 @@ module.exports = function(grunt) {
             'ui': {
                 options: {
                     pattern:        '**/*.+(js|html)',
-                    inputDir:       path.resolve(__dirname, 'src/rsearch'),
+                    inputDir:       path.resolve(__dirname, 'src'),
                     inputRootPath:  path.resolve(__dirname, ''),
                     outputDir:      path.resolve(__dirname, 'i18n/ui'),
                     bundleDir:      path.resolve(__dirname, 'src/l10n/ui'),
-                    baseLang:       APP_LANGS[0],
-                    langs:          APP_LANGS
-                }
-            },
-            'nkbcomment': {
-                options: {
-                    pattern:        '**/*.+(js|html)',
-                    inputDir:       path.resolve(__dirname, 'src/nkbcomment'),
-                    inputRootPath:  path.resolve(__dirname, ''),
-                    outputDir:      path.resolve(__dirname, 'i18n/nkbcomment'),
-                    bundleDir:      path.resolve(__dirname, 'src/l10n/nkbcomment'),
                     baseLang:       APP_LANGS[0],
                     langs:          APP_LANGS
                 }
@@ -152,39 +109,6 @@ module.exports = function(grunt) {
         },
 
         'web-resources': {
-            'build-app': {
-                options: {
-                    propertiesFile: path.resolve(__dirname, 'target/web-resources-build/app/build.properties'),
-                    mainFile: path.resolve(__dirname, 'target/web-resources-build/app/src/app/main.js'),
-
-                    requirejs: _.extend({}, APP_CONFIG._RESOURCES_CONFIG, {
-                        dir: path.resolve(__dirname, 'target/web-resources-build/app'),
-                        baseUrl: path.resolve(__dirname, 'target/web-resources-process'),
-                        modules: [{
-                            name: 'app/main'
-                        }],
-
-                        less: {
-                            rootpath: '/',
-                            relativeUrls: true
-                        },
-
-                        optimize: 'uglify2',
-                        uglify2: {
-                            mangle: true,
-                            output: {
-                                comments: /-- DO_NOT_DELETE --/
-                            }
-                        },
-
-                        removeCombined: false,
-                        preserveLicenseComments: false
-                    }),
-
-                    // значение будет взято из аргумента [grunt web-resources:build-xxx:true|false], см. register task web-resources
-                    skipOptimize: null
-                }
-            },
             'build-nkb-app': {
                 options: {
                     propertiesFile: path.resolve(__dirname, 'target/web-resources-build/nkb-app/build.properties'),
@@ -271,7 +195,7 @@ module.exports = function(grunt) {
 
     //
     grunt.registerTask('init', ['bower']);
-    grunt.registerTask('dist', ['clean:dist', 'copy:dist-app', 'copy:dist-nkb-app', 'copy:dist-nkb-app-static']);
-    grunt.registerTask('build', ['clean:src', 'clean:target', 'init', 'jshint', 'process-resources:build:false', 'web-resources:build-app:false', 'web-resources:build-nkb-app:false', 'copy:app-example', 'copy:nkb-app-example', 'dist']);
-    grunt.registerTask('cleanup', ['clean:deps', 'clean:src', 'clean:target']);
+    grunt.registerTask('dist', ['clean:dist', 'copy:dist-nkb-app']);
+    grunt.registerTask('build', ['clean:target', 'init', 'jshint', 'process-resources:build:false', 'copy:target-external-components', 'web-resources:build-nkb-app:false', 'dist']);
+    grunt.registerTask('cleanup', ['clean:deps', 'clean:target']);
 };
