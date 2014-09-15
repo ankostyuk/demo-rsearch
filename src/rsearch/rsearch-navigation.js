@@ -140,6 +140,10 @@ define(function(require) {'use strict';
                         }
                     });
 
+                    function isSearch() {
+                        return !_.isBlank(search.query);
+                    }
+
                     function doSearch(query) {
                         search.query = query;
 
@@ -150,7 +154,7 @@ define(function(require) {'use strict';
                         hideRelationsFilters();
                         clearMessages();
 
-                        if (_.isBlank(search.query)) {
+                        if (!isSearch()) {
                             reset();
                             return;
                         }
@@ -1096,6 +1100,7 @@ define(function(require) {'use strict';
                      */
                     _.extend(scope, {
                         search: search,
+                        isSearch: isSearch,
                         messages: messages,
                         breadcrumbs: breadcrumbs,
                         isBreadcrumbs: isBreadcrumbs,

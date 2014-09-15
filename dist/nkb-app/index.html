@@ -12,6 +12,18 @@
 
         <title>Поиск — НКБ</title>
 
+        <style type="text/css">
+            .app-state-indicator {
+                position: fixed;
+                z-index: 1000000;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ffffff;
+            }
+        </style>
+
         <!-- nkbcommens -->
         <link rel='stylesheet' id='nkbcomment-message-widget-css' href='http://www.creditnet.ru/nkbcomment/static/components/message-widget/css/message-widget.css' type='text/css' media='all' />
         <link rel='stylesheet' id='nkbcomment-comment-widget-css' href='http://www.creditnet.ru/nkbcomment/static/components/comment-widget/css/comment-widget.css' type='text/css' media='all' />
@@ -19,17 +31,13 @@
         <!-- requirejs -->
         <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.min.js"></script>
 
-        <!-- <<< nkb-app -->
+        <!-- nkb-app -->
         <script src="./config.js"></script>
         <script src="./main.js"></script>
-        <!-- nkb-app >>> -->
     </head>
 
     <body>
-        <!-- <<< nkb-app -->
-        <!-- Маска загрузки приложения -->
-        <div style="position: fixed; z-index: 100000; left: 0; top: 0; right: 0; bottom: 0; background-color: #ffffff;" ng-hide="isAppReady()"></div>
-        <!-- nkb-app >>> -->
+        <div class="app-state-indicator" ng-hide="isAppReady()"></div>
         <div class="container">
             <div class="header">
                 <ul class="inline header-links">
@@ -42,29 +50,97 @@
                 </ul>
                 <div class="row">
                     <div class="span3 nkb-logo"></div>
-                    <div class="span6">
-                        <!-- <<< np-rsearch -->
-                        <!-- Контейнер для поля поиска. Содержимое будет заменено шаблоном компонета np-rsearch-input -->
-                        <div np-rsearch-input></div>
-                        <!-- np-rsearch >>> -->
-                    </div>
-                    <!-- <<< nkb-app -->
-                    <!-- Контейнер для формы логина. Содержимое будет заменено шаблоном компонета app-login-form -->
+                    <div class="span6" np-rsearch-input></div>
                     <div class="span3" app-login-form></div>
-                    <!-- nkb-app >>> -->
                 </div>
-                <!-- <<< nkb-app -->
-                <!-- Контейнер для переключения языков. Содержимое будет заменено шаблоном компонета app-lang -->
                 <div app-lang></div>
-                <!-- nkb-app >>> -->
             </div>
             <div class="content">
                 <div class="row">
                     <div class="span12">
-                        <!-- <<< np-rsearch -->
-                        <!-- Навигация, результаты поиска, фильтры -->
+                        <div ng-hide="app.isSearch()">
+                            <div class="products">
+                                <div class="row">
+                                    <div class="span3">
+                                        <div class="teaser shadow-lift-lb-corner strong online-reports">
+                                            <span class="teaser-header">
+                                                <span class="header-icon"><i class="icon i-document-ok"></i></span>
+                                                <span class="header-text">Бизнес-справки онлайн</span>
+                                            </span>
+                                            <ul class="unstyled">
+                                                <li><a class="underline">Исторический профиль</a></li>
+                                                <li><a class="underline">Кредитный профиль</a></li>
+                                                <li><a class="underline">Аналитический профиль</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="span3">
+                                        <div class="teaser shadow-lift-lb-corner strong offline-reports">
+                                            <span class="teaser-header">
+                                                <span class="header-icon"><i class="icon i-document-plus"></i></span>
+                                                <span class="header-text">Отчеты на заказ</span>
+                                            </span>
+                                            <ul class="unstyled">
+                                                <li><a class="underline">Расширенное исследование</a></li>
+                                                <li><a class="underline">Схема аффилированных лиц</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="span3">
+                                        <a class="teaser shadow-lift-lb-corner strong relations">
+                                            <span class="teaser-header">
+                                                <span class="header-icon"><i class="icon i-graph-cluster"></i></span>
+                                                <span class="header-text">Анализ связей</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="span3">&nbsp;</div>
+                                </div>
+                                <div class="row">
+                                    <div class="span3">&nbsp;</div>
+                                    <div class="span3">
+                                        <a class="teaser shadow-lift-lb-corner strong comments">
+                                            <span class="teaser-header">
+                                                <span class="header-icon"><i class="icon i-comments-2"></i></span>
+                                                <span class="header-text">Обмен информацией</span>
+                                            </span>
+                                            <span class="info">Обмен собственной информацией о компаниях и организациях между участниками рынка</span>
+                                        </a>
+                                    </div>
+                                    <div class="span3">
+                                        <a class="teaser shadow-lift-lb-corner strong foreign">
+                                            <span class="teaser-header">
+                                                <span class="header-icon"><i class="icon i-document-info"></i></span>
+                                                <span class="header-text">Бизнес-справки по иностранным компаниям</span>
+                                            </span>
+                                            <span class="info">Информация по компаниям различных стран мира</span>
+                                        </a>
+                                    </div>
+                                    <div class="span3">
+                                        <div class="teaser shadow-lift-lb-corner strong egrul">
+                                            <span class="teaser-header">
+                                                <span class="header-icon"><i class="icon i-document-stamp"></i></span>
+                                                <span class="header-text">ЕГРЮЛ / ЕГРИП</span>
+                                            </span>
+                                            <ul class="unstyled">
+                                                <li><a class="underline">Заказать выписку из ЕГРЮЛ</a></li>
+                                                <li><a class="underline">Заказать выписку из ЕГРИП</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="message">
+                                <div class="message-icon"><i class="icon i-message-4"></i></div>
+                                <div class="message-text">
+                                    19 сентября 2014 г. состоится конференция<br>
+                                    <em>«Аффилированность участников закупок: вопросы раскрытия информации, комплаенс-контроль,<br>инструментальные решения»</em><br>
+                                    <a class="underline" href="http://www.creditnet.ru/conference" target="_blank">Регистрация участников</a>
+                                </div>
+                            </div>
+                        </div>
                         <div np-rsearch-navigation></div>
-                        <!-- np-rsearch >>> -->
                     </div>
                 </div>
             </div>
@@ -77,8 +153,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- <<< счетчики -->
 
         <!-- Rating@Mail.ru counter -->
         <script type="text/javascript">
@@ -122,8 +196,6 @@
         </script>
         <noscript><div><img src="//mc.yandex.ru/watch/23296318" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
         <!-- /Yandex.Metrika counter -->
-
-        <!-- >>> счетчики -->
 
     </body>
 </html>

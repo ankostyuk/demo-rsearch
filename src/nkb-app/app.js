@@ -97,10 +97,11 @@ define(function(require) {'use strict';
             $logProvider.debugEnabled(false);
         }])
         //
-        .run(['$log', '$q', '$rootScope', 'npRsearchMetaHelper', 'npNkbCommentHelper', function($log, $q, $rootScope, npRsearchMetaHelper, npNkbCommentHelper){
+        .run(['$log', '$q', '$rootScope', '$document', 'npRsearchMetaHelper', 'npNkbCommentHelper', function($log, $q, $rootScope, $document, npRsearchMetaHelper, npNkbCommentHelper){
             //
             _.extend($rootScope, {
                 app: {
+                    isSearch: null,
                     ready: false
                 },
                 isAppReady: function() {
@@ -109,7 +110,12 @@ define(function(require) {'use strict';
             });
 
             $q.all([npRsearchMetaHelper.initPromise(), npNkbCommentHelper.initPromise()]).then(function(){
-                $rootScope.app.ready = true;
+                var rsearchNavigationScope = $document.find('[np-rsearch-navigation]').isolateScope();
+
+                _.extend($rootScope.app, {
+                    isSearch: rsearchNavigationScope.isSearch,
+                    ready: true
+                });
             });
         }]);
 

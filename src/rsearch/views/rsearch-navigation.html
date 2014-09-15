@@ -1,4 +1,4 @@
-<div ng-show="search.query">
+<div ng-show="isSearch()">
     <div class="mask"><div class="message-box"><span class="message">${_tr("Ожидайте...")}</span></div></div>
     <div class="navigation-content">
         <div class="nav">
@@ -40,7 +40,8 @@
         </div>
     </div>
 </div>
-<div ng-hide="search.query">
+<!--
+<div ng-hide="isSearch()">
     <div class="products">
         <div class="row">
             <div class="span3">
@@ -117,8 +118,9 @@
         <div class="message-icon"><i class="icon i-message-4"></i></div>
         <div class="message-text">
             19 сентября 2014 г. состоится конференция<br>
-            <em>«Аффилированность участников закупок: вопросы раскрытия информации, комплаенс-контроль,<br>инструментальные решения.»</em><br>
+            <em>«Аффилированность участников закупок: вопросы раскрытия информации, комплаенс-контроль,<br>инструментальные решения»</em><br>
             <a class="underline" href="http://www.creditnet.ru/conference" target="_blank">Регистрация участников</a>
         </div>
     </div>
 </div>
+-->
