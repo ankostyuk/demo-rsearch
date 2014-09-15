@@ -40,18 +40,22 @@
         <div class="app-state-indicator" ng-hide="isAppReady()"></div>
         <div class="container">
             <div class="header">
-                <ul class="inline header-links">
-                    <li><a class="underline" href="/solid/" target="_blank">Расширенный поиск</a></li>
-                    <li><a class="underline" href="/about/" target="_blank">О проекте</a></li>
-                    <li><a class="underline" href="/examples/" target="_blank">Продукты и услуги</a></li>
-                    <li><a class="underline" href="/contacts/" target="_blank">Контакты</a></li>
-                    <li><a class="underline" href="/cc/library/" target="_blank">Библиотека</a></li>
-                    <li><a class="underline" href="/reg/" target="_blank">Регистрация</a></li>
-                </ul>
+                <div class="row">
+                    <div class="span9">
+                        <ul class="inline header-links">
+                            <li><a class="underline" href="/solid/" target="_blank">Расширенный поиск</a></li>
+                            <li><a class="underline" href="/about/" target="_blank">О проекте</a></li>
+                            <li><a class="underline" href="/examples/" target="_blank">Продукты и услуги</a></li>
+                            <li><a class="underline" href="/contacts/" target="_blank">Контакты</a></li>
+                            <li><a class="underline" href="/cc/library/" target="_blank">Библиотека</a></li>
+                            <li><a class="underline" href="/reg/" target="_blank">Регистрация</a></li>
+                        </ul>
+                    </div>
+                    <div class="span3" app-login-form></div>
+                </div>
                 <div class="row">
                     <div class="span3 nkb-logo"></div>
                     <div class="span6" np-rsearch-input></div>
-                    <div class="span3" app-login-form></div>
                 </div>
                 <div app-lang></div>
             </div>

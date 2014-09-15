@@ -140,11 +140,11 @@ input.input-mini {
 
 .header {
     position: relative;
-    padding: 20px 0 50px 0;
+    padding: 15px 0 50px 0;
 }
 
 .header-links {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 .header-links li {
     margin-bottom: 0;
@@ -165,12 +165,12 @@ input.input-mini {
     position: absolute;
 
     left: 0;
-    top: 3px;
+    top: 0;
     right: 0;
 
     min-height: 24px;
 
-    padding: 10px 10px 0 10px;
+    padding: 0 10px 0 10px;
 
     -webkit-border-radius: 0 0 3px 3px;
        -moz-border-radius: 0 0 3px 3px;
@@ -210,8 +210,14 @@ input.input-mini {
     margin-bottom: 10px;
     line-height: 1;
 }
+[app-login-form] .user-info {
+    margin-top: 1px;
+}
 [app-login-form] .user-info p {
     margin-bottom: 5px;
+}
+[app-login-form] .credit-info .span2 {
+    width: 120px;
 }
 
 /* app-login-form */
@@ -219,10 +225,13 @@ input.input-mini {
     position: absolute;
     z-index: 10;
 
-    padding: 34px 0 0 20px;
+    padding: 16px 0 0 20px;
 
     left: 100%;
     top: 0;
+}
+[app-lang] ul > li {
+    margin-bottom: 7px;
 }
 [app-lang] .active a.action {
     color: @defaultDisabledColor !important;
