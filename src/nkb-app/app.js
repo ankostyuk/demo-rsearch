@@ -82,9 +82,9 @@ define(function(require) {'use strict';
                     'info.url': '/egryl/',
                     'purchase.url': '/search/offlinep/'
                 },
-                'relations_xxx': {
-                    'info.url': '/search/relations/',
-                    'purchase.url': '/relations_xxx'
+                'actualizeReport': {
+                    'info.url': '/examples/quartal_profile/',
+                    'purchase.url': '/search/offlinea/?idcomp={{node.bsn_id}}'
                 },
                 'relations_find_related': {
                     'info.url': '/search/relations/',
