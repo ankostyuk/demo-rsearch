@@ -39,55 +39,55 @@ define(function(require) {'use strict';
             },
             product: {
                 'market_profile_short': {
-                    'info.url': '/products/companies/профили-компаний/',
-                    'purchase.url': 'http://testing.nkb/reports/?code=rep_market_profile_short&fromSearch=1&id={{node.bsn_id}}'
+                    'info.url': '/examples/marketing_profile/',
+                    'purchase.url': '/reports/?code=rep_market_profile_short&fromSearch=1&id={{node.bsn_id}}'
                 },
                 'market_list': {
-                    'info.url': '/products/companies/профили-компаний/',
-                    'purchase.url': 'http://testing.nkb/reports/?code=rep_market_list&fromSearch=1&id={{node.bsn_id}}'
+                    'info.url': '/examples/direct_mail/',
+                    'purchase.url': '/reports/?code=rep_market_list&fromSearch=1&id={{node.bsn_id}}'
                 },
                 'business_profile': {
-                    'info.url': '/products/companies/профили-компаний/',
-                    'purchase.url': 'http://testing.nkb/reports/?code=rep_business_profile&fromSearch=1&id={{node.bsn_id}}'
+                    'info.url': '/examples/business_profile/',
+                    'purchase.url': '/reports/?code=rep_business_profile&fromSearch=1&id={{node.bsn_id}}'
                 },
                 'market_profile_full': {
-                    'info.url': '/products/companies/профили-компаний/',
-                    'purchase.url': 'http://testing.nkb/reports/?code=rep_market_profile_full&fromSearch=1&id={{node.bsn_id}}'
+                    'info.url': '/examples/analitic_profile/',
+                    'purchase.url': '/reports/?code=rep_market_profile_full&fromSearch=1&id={{node.bsn_id}}'
                 },
                 'credit_profile': {
-                    'info.url': '/products/companies/профили-компаний/',
-                    'purchase.url': 'http://testing.nkb/reports/?code=rep_credit_profile&fromSearch=1&id={{node.bsn_id}}'
+                    'info.url': '/examples/credit_profile/',
+                    'purchase.url': '/reports/?code=rep_credit_profile&fromSearch=1&id={{node.bsn_id}}'
                 },
                 'ext_history_profile': {
-                    'info.url': '/products/companies/профили-компаний/',
-                    'purchase.url': 'http://testing.nkb/reports/?code=rep_history_profile&fromSearch=1&id={{node.bsn_id}}'
+                    'info.url': '/examples/history_profile/',
+                    'purchase.url': '/reports/?code=rep_history_profile&fromSearch=1&id={{node.bsn_id}}'
                 },
                 'extended_research': {
-                    'info.url': '/products/companies/расширенное-исследование-компаний/',
-                    'purchase.url': 'http://testing.nkb/search/offlinea/?idcomp={{node.bsn_id}}'
+                    'info.url': '/examples/extended/',
+                    'purchase.url': '/search/offlinea/?idcomp={{node.bsn_id}}'
                 },
                 'egrulCompanyReport': {
-                    'info.url': '/products/companies/egrul/',
-                    'purchase.url': 'http://testing.nkb/search/offlinee/?idcomp={{node.bsn_id}}'
+                    'info.url': '/egryl/',
+                    'purchase.url': '/search/offlinee/?idcomp={{node.bsn_id}}'
                 },
                 'egrulFounderPersonReport': {
-                    'info.url': '/products/people/',
-                    'purchase.url': 'http://testing.nkb/search/offlinee/'
+                    'info.url': '/egryl/',
+                    'purchase.url': '/search/offlinee/'
                 },
                 'egrulFounderCompanyReport': {
-                    'info.url': '/products/people/',
-                    'purchase.url': 'http://testing.nkb/search/offlinee/'
+                    'info.url': '/egryl/',
+                    'purchase.url': '/search/offlinee/'
                 },
                 'egripReport': {
-                    'info.url': '/products/people/',
-                    'purchase.url': 'http://testing.nkb/search/offlinep/'
+                    'info.url': '/egryl/',
+                    'purchase.url': '/search/offlinep/'
                 },
                 'relations_xxx': {
-                    'info.url': '/products/companies/схема-связанных-лиц/',
+                    'info.url': '/search/relations/',
                     'purchase.url': '/relations_xxx'
                 },
                 'relations_find_related': {
-                    'info.url': '/products/relations/',
+                    'info.url': '/search/relations/',
                     'purchase.url': '/nkbrelation/report?node.type={{node._type}}&{{node.__idField}}.equals={{node[node.__idField]}}'
                 }
             }

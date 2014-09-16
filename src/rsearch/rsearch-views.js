@@ -86,7 +86,8 @@ define(function(require) {'use strict';
                 scope: {
                     node: '=npRsearchNodeRelations',
                     active: '=npRsearchNodeRelationsActive',
-                    relationsClick: '=npRsearchNodeRelationsClick'
+                    relationsClick: '=npRsearchNodeRelationsClick',
+                    productClick: '=npRsearchNodeProductClick'
                 },
                 template: templates['np-rsearch-node-relations']
             };
