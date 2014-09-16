@@ -40,26 +40,82 @@
         <div class="app-state-indicator" ng-hide="isAppReady()"></div>
         <div class="container">
             <div class="header">
-                <ul class="inline header-links">
-                    <li><a class="underline" href="/solid/" target="_blank">Расширенный поиск</a></li>
-                    <li><a class="underline" href="/about/" target="_blank">О проекте</a></li>
-                    <li><a class="underline" href="/examples/" target="_blank">Продукты и услуги</a></li>
-                    <li><a class="underline" href="/contacts/" target="_blank">Контакты</a></li>
-                    <li><a class="underline" href="/cc/library/" target="_blank">Библиотека</a></li>
-                    <li><a class="underline" href="/reg/" target="_blank">Регистрация</a></li>
-                </ul>
+                <div class="row">
+                    <div class="span9">
+                        <ul class="inline header-links">
+                            <li><a class="underline" href="/solid/" target="_blank">Расширенный поиск</a></li>
+                            <li><a class="underline" href="/about/" target="_blank">О проекте</a></li>
+                            <li><a class="underline" href="/examples/" target="_blank">Продукты и услуги</a></li>
+                            <li><a class="underline" href="/contacts/" target="_blank">Контакты</a></li>
+                            <li><a class="underline" href="/cc/library/" target="_blank">Библиотека</a></li>
+                            <li><a class="underline" href="/reg/" target="_blank">Регистрация</a></li>
+                        </ul>
+                    </div>
+                    <div class="span3" app-login-form></div>
+                </div>
                 <div class="row">
                     <div class="span3 nkb-logo"></div>
                     <div class="span6" np-rsearch-input></div>
-                    <div class="span3" app-login-form></div>
                 </div>
                 <div app-lang></div>
+                <div class="providesupport-container">
+                    <!-- ProvideSupport.com Graphics Chat Button Code -->
+                    <div id="scXase" style="display:inline"></div>
+                </div>
             </div>
             <div class="content">
                 <div class="row">
                     <div class="span12">
                         <div ng-hide="app.isSearch()">
-                            <div class="products">
+                            <div class="row message">
+                                <div class="message-icon"><i class="icon i-message-4"></i></div>
+                                <div class="message-text">
+                                    19 сентября 2014 г. состоится конференция<br>
+                                    <em>«Аффилированность участников закупок: вопросы раскрытия информации, комплаенс-контроль, инструментальные решения»</em><br>
+                                    <a class="underline" href="http://www.creditnet.ru/conference" target="_blank">Регистрация участников</a>
+                                </div>
+                            </div>
+                            <div class="row products">
+                                <ul class="inline product-links">
+                                    <li>
+                                        <a class="relations" href="">
+                                            <span class="link-icon"><i class="icon i-graph-cluster"></i></span>
+                                            <span class="link-text">Анализ<br>аффилированных лиц</span>
+                                        </a>
+                                    </li>
+                                    <li class="sep"></li>
+                                    <li>
+                                        <a class="offline-reports" href="">
+                                            <span class="link-icon"><i class="icon i-document-plus"></i></span>
+                                            <span class="link-text">Отчеты<br>на заказ</span>
+                                        </a>
+                                    </li>
+                                    <li class="sep"></li>
+                                    <li>
+                                        <a class="egrul" href="">
+                                            <span class="link-icon"><i class="icon i-document-stamp"></i></span>
+                                            <span class="link-text">Выписка<br>из ЕГРЮЛ</span>
+                                        </a>
+                                    </li>
+                                    <li class="sep"></li>
+                                    <li>
+                                        <a class="egrip" href="">
+                                            <span class="link-icon"><i class="icon i-document-stamp"></i></span>
+                                            <span class="link-text">Выписка<br>из ЕГРИП</span>
+                                        </a>
+                                    </li>
+                                    <li class="sep"></li>
+                                    <li>
+                                        <a class="foreign" href="">
+                                            <span class="link-icon"><i class="icon i-document-info"></i></span>
+                                            <span class="link-text">Бизнес-справка<br>по иностранной компании</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="teaser shadow-lift-lb-corner strong relations-info" href="">Система графического анализа</a>
+                                    </li>
+                                </ul>
+                                <!--
                                 <div class="row">
                                     <div class="span3">
                                         <div class="teaser shadow-lift-lb-corner strong online-reports">
@@ -129,15 +185,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <hr>
-                            <div class="message">
-                                <div class="message-icon"><i class="icon i-message-4"></i></div>
-                                <div class="message-text">
-                                    19 сентября 2014 г. состоится конференция<br>
-                                    <em>«Аффилированность участников закупок: вопросы раскрытия информации, комплаенс-контроль,<br>инструментальные решения»</em><br>
-                                    <a class="underline" href="http://www.creditnet.ru/conference" target="_blank">Регистрация участников</a>
-                                </div>
+                                -->
                             </div>
                         </div>
                         <div np-rsearch-navigation></div>
@@ -147,12 +195,30 @@
             <div class="footer">
                 <hr>
                 <div class="row">
-                    <div class="span12 muted">
+                    <div class="span6 partners"></div>
+                    <div class="muted align-right">
                         ©&nbsp;2002—2014 <a class="underline" href="/" target="_blank">Национальное кредитное бюро</a>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- BEGIN ProvideSupport.com Graphics Chat Button Code -->
+        <div id="ciXase" style="z-index:100;position:absolute"></div>
+        <!--<div id="scXase" style="display:inline"></div>-->
+        <div id="sdXase" style="display:none"></div>
+        <script type="text/javascript">
+            var seXase=document.createElement("script");
+            seXase.type="text/javascript";
+            var seXases=(location.protocol.indexOf("https")==0?"https":"http")+"://image.providesupport.com/js/nkb-trial/safe-standard.js?ps_h=Xase&ps_t="+new Date().getTime()+"";
+            setTimeout("seXase.src=seXases;document.getElementById('sdXase').appendChild(seXase)",1)
+        </script>
+        <noscript>
+            <div style="display:inline">
+                <a href="http://www.providesupport.com?messenger=nkb-trial">Онлайн-консультант</a>
+            </div>
+        </noscript>
+        <!-- END ProvideSupport.com Graphics Chat Button Code -->
 
         <!-- Rating@Mail.ru counter -->
         <script type="text/javascript">
