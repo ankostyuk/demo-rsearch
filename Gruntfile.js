@@ -195,7 +195,6 @@ module.exports = function(grunt) {
 
     //
     grunt.registerTask('init', ['bower']);
-    grunt.registerTask('dist', ['clean:dist', 'copy:dist-nkb-app']);
     grunt.registerTask('build', ['clean:target', 'init', 'jshint', 'process-resources:build:false', 'copy:target-external-components', 'web-resources:build-nkb-app:false', 'dist']);
     grunt.registerTask('cleanup', ['clean:deps', 'clean:target']);
 };
