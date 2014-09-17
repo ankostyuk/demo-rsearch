@@ -141,17 +141,18 @@ define(function(require) {'use strict';
                             intermediateCodes   = ['6', '111', '121', '122', '123', '124', '131', '132'], // коды промежуточных состояний
                             _liquidate;
 
-                        if (egrulState && egrulState.code != aliveCode) {
-                            _liquidate = {
-                                state: {
-                                    _actual: egrulState._actual,
-                                    _since: egrulState._since,
-                                    type: egrulState.type,
-                                    intermediate: _.contains(intermediateCodes, egrulState.code)
-                                }
-                            };
-                        } else
-                        if (node.dead_dt) {
+                        if (egrulState) {
+                            if (egrulState.code !== aliveCode) {
+                                _liquidate = {
+                                    state: {
+                                        _actual: egrulState._actual,
+                                        _since: egrulState._since,
+                                        type: egrulState.type,
+                                        intermediate: _.contains(intermediateCodes, egrulState.code)
+                                    }
+                                };
+                            }
+                        } else if (node.dead_dt) {
                             _liquidate = {
                                 state: {
                                     _actual: null,
