@@ -37,15 +37,15 @@ root._RESOURCES_CONFIG = {
         // nkbcomment
         'backbone':                     'external_components/backbone/backbone',
         'iso8601':                      'external_components/iso8601/iso8601',
-        'dateformat':                   'external_components/dateformat/index',
         'jquery.ui.widget':             'external_components/jquery-file-upload/jquery.ui.widget',
         'jquery.iframe-transport':      'external_components/jquery-file-upload/jquery.iframe-transport',
         'jquery.fileupload':            'external_components/jquery-file-upload/jquery.fileupload',
         'jquery.fileDownload':          'external_components/jquery.fileDownload/jquery.fileDownload',
-        'nkbcomment-defaults':          'external_components/nkbcomment-defaults/index',
-        'nkbcomment-comment-utils':     'external_components/nkbcomment-comment-utils/index',
-        'nkbcomment-message-widget':    'external_components/nkbcomment-message-widget/index',
-        'nkbcomment-comment-widget':    'external_components/nkbcomment-comment-widget/index'
+        'dateformat':                   'external_components/nkbcomment/nkbcomment-lib/dateformat',
+        'nkbcomment-defaults':          'external_components/nkbcomment/nkbcomment-defaults/defaults',
+        'nkbcomment-message-widget':    'external_components/nkbcomment/nkbcomment-message-widget/js/message-widget',
+        'nkbcomment-comment-utils':     'external_components/nkbcomment/nkbcomment-comment-widget/js/comment-utils',
+        'nkbcomment-comment-widget':    'external_components/nkbcomment/nkbcomment-comment-widget/js/comment-widget'
     },
 
     packages: [{
