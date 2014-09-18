@@ -131,7 +131,7 @@ define(function(require) {'use strict';
                     _.extend(scope, {
                         commentData: null,
                         addComment: function() {
-                            commentWidget.showEdit();
+                            commentWidget.showAddComment();
                         },
                         isShowComments: function() {
                             return scope.commentData && scope.commentData.postId && CommentUtils.hasUserPermission('VIEW');
