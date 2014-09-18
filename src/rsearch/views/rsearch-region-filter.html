@@ -1,9 +1,8 @@
 <div class="np-rsearch-filter" ng-show="filter.isShow()">
-    <h5 class="filter-label">${_tr("Регион")}</h5>
     <p class="no-filter-message" ng-show="filter.isNoFilter()">${_tr("Все")} — {{_tr(filter.getSortedPairs()[0][0])}}</p>
     <ul class="unstyled" ng-show="!filter.isNoFilter()">
         <li class="filter-item" ng-class="{active: filter.getValue() === null}" ng-click="filter.doFilter(null)">
-            <a class="action">${_tr("Любой")}</a>
+            <a class="action">${_tr("Любой регион")}</a>
         </li>
         <li class="filter-item" ng-class="{active: filter.getValue() === p[0]}" ng-click="filter.doFilter(p[0])" ng-repeat="p in filter.getSortedPairs() track by $index">
             <a class="action">{{_tr(p[0])}}<span class="count">{{p[1] | number}}</span></a>
