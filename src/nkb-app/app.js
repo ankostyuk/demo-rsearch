@@ -70,17 +70,17 @@ define(function(require) {'use strict';
                     'info.url': '/egryl/',
                     'purchase.url': '/search/offlinee/?idcomp={{node.bsn_id}}'
                 },
+                'egrulChiefReport': {
+                    'info.url': '/egryl/',
+                    'purchase.url': '/search/offlinee/?form[chief_name]={{node.name}}&form[use_chief]=1'
+                },
                 'egrulFounderPersonReport': {
                     'info.url': '/egryl/',
-                    'purchase.url': '/search/offlinee/'
-                },
-                'egrulFounderCompanyReport': {
-                    'info.url': '/egryl/',
-                    'purchase.url': '/search/offlinee/'
+                    'purchase.url': '/search/offlinee/?form[founder_person]={{node.name}}&form[use_founder_person]=1'
                 },
                 'egripReport': {
                     'info.url': '/egryl/',
-                    'purchase.url': '/search/offlinep/'
+                    'purchase.url': '/search/offlinep/?form[comp_name]={{node.name}}'
                 },
                 'actualizeReport': {
                     'info.url': '/examples/quartal_profile/',
