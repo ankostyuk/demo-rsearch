@@ -16,7 +16,7 @@
     </form>
     <div class="user-info small" ng-show="user.isAuthenticated()">
         <div class="row">
-            <p class="span2 text-ellipsis"><a class="underline" ng-href="{{l10n.urlWithLang('/stat/')}}" target="_blank">{{user.getName()}}</a></p>
+            <p class="span2 text-ellipsis"><a class="underline" ng-href="{{l10n.urlWithLang('/stat/reports/')}}" target="_blank">{{user.getName()}}</a></p>
             <p class="align-right"><button class="btn btn-mini" type="button" ng-click="logout()" ng-disabled="loginInfo.pending">${_tr("Выйти")}</button></p>
         </div>
         <div class="row credit-info">
