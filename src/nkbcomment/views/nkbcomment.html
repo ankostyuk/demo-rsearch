@@ -1,9 +1,14 @@
-<div ng-show="CommentUtils.hasUserPermission('VIEW')">
-    <h5 class="comment-widget-header">
-        <i class="icon large i-comment-4"></i>
-        <span ng-hide="commentData.commentCount">${_tr("Нет комментариев")}</span>
-        <ng-pluralize ng-show="commentData.commentCount" count="count = commentData.commentCount" when="${_tr("NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT")}"></ng-pluralize>
-        <a class="underline" href="/nkbcomment/groups" target="_blank">${_trc("Прямой эфир", "Прямой эфир Системы комментариев")}</a>
-    </h5>
+<div ng-show="isShowComments()">
+    <ul class="inline comment-widget-toolbar">
+        <li class="nkbcomment-info">
+            <i class="icon large i-comment-4"></i>
+            <span ng-hide="commentData.commentCount">${_tr("Нет комментариев")}</span>
+            <ng-pluralize ng-show="commentData.commentCount" count="count = commentData.commentCount" when="${_tr("NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT")}"></ng-pluralize>
+        </li>
+        <li><a ng-click="addComment()">${_trc("Добавить", "Добавить комментарий")}</a></li>
+        <li class="nkbcomment-groups">
+            <a class="underline with-icon" href="/nkbcomment/groups" target="_blank"><i class="icon large i-comments-2"></i> <span class="text">${_trc("Прямой эфир", "Прямой эфир Системы комментариев")}</span></a>
+        </li>
+    </ul>
     <div class="comment-widget-container"></div>
 </div>
