@@ -44,6 +44,24 @@ a.active.action:active,
     cursor: default !important;
 }
 
+a.with-icon,
+a.with-icon.underline,
+a.with-icon.underline,
+a.with-icon.underline {
+    border-bottom: 0 none;
+}
+a.with-icon .text {
+    border-bottom: 1px solid transparent;
+}
+a.with-icon.underline .text {
+    border-bottom-color: @linkUnderlineColor;
+}
+a.with-icon.underline:hover .text,
+a.with-icon.underline:focus .text,
+a.with-icon.underline:active .text {
+    border-bottom-color: @linkActiveUnderlineColor;
+}
+
 ul > li {
     margin-bottom: 5px;
 }

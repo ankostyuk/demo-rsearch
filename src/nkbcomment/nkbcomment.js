@@ -93,6 +93,8 @@ define(function(require) {'use strict';
                     });
 
                     function checkComment(node) {
+                        scope.commentData = null;
+
                         if (!commentWidget) {
                             return;
                         }
@@ -128,7 +130,12 @@ define(function(require) {'use strict';
                      */
                     _.extend(scope, {
                         commentData: null,
-                        CommentUtils: CommentUtils
+                        addComment: function() {
+                            commentWidget.showAddComment();
+                        },
+                        isShowComments: function() {
+                            return scope.commentData && scope.commentData.postId && CommentUtils.hasUserPermission('VIEW');
+                        }
                     });
                 }
             };

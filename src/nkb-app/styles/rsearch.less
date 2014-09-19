@@ -309,13 +309,49 @@
     margin-right: 0;
     margin-left: -4px;
 }
-[np-rsearch-node-form] .comment-widget-header {
-    font-weight: normal;
+
+/* np-nkb-comment-widget */
+[np-nkb-comment-widget] {
+    width: 500px;
+    padding-top: 10px;
+}
+[np-nkb-comment-widget] .comment-widget-toolbar {
     color: @defaultHeaderLightColor;
 }
-[np-rsearch-node-form] .comment-widget-header a {
+[np-nkb-comment-widget] .comment-widget-toolbar > li {
+    padding-left: 0;
+    padding-right: 0;
+    margin-right: 20px;
+}
+[np-nkb-comment-widget] .comment-widget-toolbar .nkbcomment-info .icon {
+    margin-left: 1px;
+}
+[np-nkb-comment-widget] .comment-widget-toolbar .nkbcomment-groups {
     margin-left: 20px;
-    font-weight: normal;
+}
+/* nkbcomment comment-widget */
+[np-nkb-comment-widget] .comment-widget {
+    position: relative !important;
+}
+[np-nkb-comment-widget] .comment-widget .modal {
+    -webkit-box-shadow: none;
+    -moz-box-shadow:    none;
+    box-shadow:         none;
+}
+[np-nkb-comment-widget] .comment-widget .widget-header {
+    display: none !important;
+}
+[np-nkb-comment-widget] .comment-widget .widget-body {
+    padding-top: 0 !important;
+}
+[np-nkb-comment-widget] .comment-widget .widget-body .add-comment {
+    display: none !important;
+}
+[np-nkb-comment-widget] .comment-widget .comment-list .no-comments {
+    display: none !important;
+}
+[np-nkb-comment-widget] .comment-widget .attach-file {
+    display: inline-block !important;
 }
 
 /* np-rsearch-filter */
@@ -354,24 +390,4 @@
 }
 [np-rsearch-user-product-limits-info] .info {
     color: @defaultDisabledColor;
-}
-
-/* np-nkb-comment-widget */
-[np-nkb-comment-widget],
-[np-nkb-comment-widget] .comment-widget {
-    position: relative !important;
-}
-[np-nkb-comment-widget] .comment-widget .modal {
-    -webkit-box-shadow: none;
-    -moz-box-shadow:    none;
-    box-shadow:         none;
-}
-[np-nkb-comment-widget] .comment-widget .widget-header {
-    display: none !important;
-}
-[np-nkb-comment-widget] .comment-widget .comment-list .no-comments {
-    display: none !important;
-}
-[np-nkb-comment-widget] .comment-widget .attach-file {
-    display: inline-block !important;
 }
