@@ -9,8 +9,11 @@ define(function(require) {'use strict';
                                   require('nkbcomment-comment-utils');
                                   require('nkbcomment-message-widget');
                                   require('nkbcomment-comment-widget');
+
     var messageWidgetTemplates  = require('text!../external_components/nkbcomment/nkbcomment-message-widget/view/message-widget-templates.html'),
         commentWidgetTemplates  = require('text!../external_components/nkbcomment/nkbcomment-comment-widget/view/comment-widget-templates.html');
+                                  require('css!../external_components/nkbcomment/nkbcomment-message-widget/css/message-widget.css');
+                                  require('css!../external_components/nkbcomment/nkbcomment-comment-widget/css/comment-widget.css');
 
     var template                = require('text!./views/nkbcomment.html');
 
