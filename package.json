@@ -24,7 +24,7 @@
         "fs-extra": "0.8.x",
         "underscore": "1.4.x",
 
-        "nullpointer-i18n-bin": "git+ssh://git@repo.nkb:nullpointer/i18n-bin.git",
-        "nullpointer-web-bin": "git+ssh://git@repo.nkb:nullpointer/web-bin.git"
+        "nullpointer-i18n-bin": "newpointer/i18n-bin.git",
+        "nullpointer-web-bin": "newpointer/web-bin.git"
     }
 }

@@ -53,8 +53,7 @@
       "": "lib/underscore.string.js"
     },
     "bootstrap": {
-      "css": "css/bootstrap.css",
-      "img": "img/*.*"
+      "css": "css/bootstrap.css"
     },
     "node-uuid": {
       "": "uuid.js"

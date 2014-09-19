@@ -11,7 +11,10 @@ module.exports = function(grunt) {
     var APP_LANGS = ['ru', 'en'];
 
     //
-    var NKB_APP_CONFIG = require('./src/nkb-app/config.js');
+    var nkbAppBuildInfo = {
+        main: require('./src/nkb-app/main.js'),
+        hash: null
+    };
 
     //
     grunt.initConfig({
@@ -39,17 +42,19 @@ module.exports = function(grunt) {
                 cwd: 'target/web-resources-build/nkb-app',
                 src: [
                     'build.properties',
-                    'src/nkb-app/config.js',
                     'src/nkb-app/main.js',
                     'src/nkb-app/index.html'
                 ],
-                dest: 'dist/nkb-app'
-            },
-            'target-external-components': {
-                expand: true,
-                cwd: 'external_components',
-                src: ['**'],
-                dest: 'target/web-resources-process/external_components'
+                dest: 'dist/nkb-app',
+                options: {
+                    process: function (content, srcpath) {
+                        if (srcpath === 'target/web-resources-build/nkb-app/src/nkb-app/index.html') {
+                            return content.replace(/\${nkb-app.build.id}/g, nkbAppBuildInfo.hash);
+                        }
+
+                        return content;
+                    }
+                }
             }
         },
 
@@ -97,10 +102,23 @@ module.exports = function(grunt) {
         },
 
         'process-resources': {
-            build: {
+            'external_components': {
+                options: {
+                    inputDir: path.resolve(__dirname, 'external_components'),
+                    outputDir: path.resolve(__dirname, 'target/web-resources-process/external_components'),
+
+                    urlToBase64: true,
+
+                    // значение будет взято из аргумента [grunt process-resources:build:true|false], см. register task web-resources
+                    skipProcess: null
+                }
+            },
+            'src': {
                 options: {
                     inputDir: path.resolve(__dirname, 'src'),
                     outputDir: path.resolve(__dirname, 'target/web-resources-process/src'),
+
+                    urlToBase64: true,
 
                     // значение будет взято из аргумента [grunt process-resources:build:true|false], см. register task web-resources
                     skipProcess: null
@@ -114,7 +132,7 @@ module.exports = function(grunt) {
                     propertiesFile: path.resolve(__dirname, 'target/web-resources-build/nkb-app/build.properties'),
                     mainFile: path.resolve(__dirname, 'target/web-resources-build/nkb-app/src/nkb-app/main.js'),
 
-                    requirejs: _.extend({}, NKB_APP_CONFIG._RESOURCES_CONFIG, {
+                    requirejs: _.extend({}, nkbAppBuildInfo.main._RESOURCES_CONFIG, {
                         dir: path.resolve(__dirname, 'target/web-resources-build/nkb-app'),
                         baseUrl: path.resolve(__dirname, 'target/web-resources-process'),
                         modules: [{
@@ -140,7 +158,9 @@ module.exports = function(grunt) {
                     }),
 
                     // значение будет взято из аргумента [grunt web-resources-xxx:build:true|false], см. register task web-resources
-                    skipOptimize: null
+                    skipOptimize: null,
+
+                    buildInfo: nkbAppBuildInfo
                 }
             }
         }
@@ -188,7 +208,8 @@ module.exports = function(grunt) {
 
         wb.requirejsOptimize.run(_.extend(options, {
             skipOptimize: skipOptimize
-        }), function(){
+        }), function(hash){
+            nkbAppBuildInfo.hash = hash;
             done();
         });
     });
@@ -196,6 +217,6 @@ module.exports = function(grunt) {
     //
     grunt.registerTask('init', ['bower']);
     grunt.registerTask('dist', ['clean:dist', 'copy:dist-nkb-app']);
-    grunt.registerTask('build', ['clean:target', 'init', 'jshint', 'process-resources:build:false', 'copy:target-external-components', 'web-resources:build-nkb-app:false', 'dist']);
+    grunt.registerTask('build', ['clean:target', 'init', 'jshint', 'process-resources:external_components:false', 'process-resources:src:false', 'web-resources:build-nkb-app:false', 'dist']);
     grunt.registerTask('cleanup', ['clean:deps', 'clean:target']);
 };
