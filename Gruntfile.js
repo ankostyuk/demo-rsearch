@@ -11,9 +11,11 @@ module.exports = function(grunt) {
     var APP_LANGS = ['ru', 'en'];
 
     //
-    var nkbAppBuildInfo = {
-        main: require('./src/nkb-app/main.js'),
-        hash: null
+    var buildInfo = {
+        'nkb-app': {
+            main: require('./src/nkb-app/main.js'),
+            hash: null
+        }
     };
 
     //
@@ -49,7 +51,7 @@ module.exports = function(grunt) {
                 options: {
                     process: function (content, srcpath) {
                         if (srcpath === 'target/web-resources-build/nkb-app/src/nkb-app/index.html') {
-                            return content.replace(/\${nkb-app.build.id}/g, nkbAppBuildInfo.hash);
+                            return content.replace(/\${nkb-app.build.id}/g, buildInfo['nkb-app'].hash);
                         }
 
                         return content;
@@ -128,11 +130,12 @@ module.exports = function(grunt) {
 
         'web-resources': {
             'build-nkb-app': {
+                appBuildInfoName: 'nkb-app',
                 options: {
                     propertiesFile: path.resolve(__dirname, 'target/web-resources-build/nkb-app/build.properties'),
                     mainFile: path.resolve(__dirname, 'target/web-resources-build/nkb-app/src/nkb-app/main.js'),
 
-                    requirejs: _.extend({}, nkbAppBuildInfo.main._RESOURCES_CONFIG, {
+                    requirejs: _.extend({}, buildInfo['nkb-app'].main._RESOURCES_CONFIG, {
                         dir: path.resolve(__dirname, 'target/web-resources-build/nkb-app'),
                         baseUrl: path.resolve(__dirname, 'target/web-resources-process'),
                         modules: [{
@@ -158,9 +161,7 @@ module.exports = function(grunt) {
                     }),
 
                     // значение будет взято из аргумента [grunt web-resources-xxx:build:true|false], см. register task web-resources
-                    skipOptimize: null,
-
-                    buildInfo: nkbAppBuildInfo
+                    skipOptimize: null
                 }
             }
         }
@@ -201,6 +202,7 @@ module.exports = function(grunt) {
     grunt.task.registerMultiTask('web-resources', function(skipOptimize) {
         var done            = this.async(),
             options         = this.data.options,
+            appBuildInfo    = buildInfo[this.data.appBuildInfoName],
             skipOptimize    = (skipOptimize === 'true');
 
         fs.removeSync(options.requirejs.dir);
@@ -209,7 +211,7 @@ module.exports = function(grunt) {
         wb.requirejsOptimize.run(_.extend(options, {
             skipOptimize: skipOptimize
         }), function(hash){
-            nkbAppBuildInfo.hash = hash;
+            appBuildInfo.hash = hash;
             done();
         });
     });

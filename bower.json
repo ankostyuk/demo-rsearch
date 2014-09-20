@@ -17,7 +17,7 @@
     "underscore.string": "2.3.*",
     "purl": "2.3.*",
     "node-uuid": "1.4.1",
-    "nullpointer-i18n": "git@repo.nkb:nullpointer/i18n-js.git",
+    "nullpointer-i18n": "git://github.com/newpointer/i18n-js.git",
     "backbone": "0.9.2",
     "jquery-file-upload": "9.7.1",
     "iso8601": "git://github.com/csnover/js-iso8601.git",
