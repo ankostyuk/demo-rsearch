@@ -133,6 +133,25 @@ msgctxt "Прямой эфир Системы комментариев"
 msgid "Прямой эфир"
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
+msgctxt "Состояние ЮЛ"
+msgid "Ликвидировано"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgctxt "Доля в учреждении компании"
+msgid "доля"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "руб."
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgid "ИНН"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 #: ../src/rsearch/views/rsearch-region-filter.html:1
 msgid "Все"
@@ -275,10 +294,6 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ОГРН"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-info.html:1
-msgid "ИНН"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1

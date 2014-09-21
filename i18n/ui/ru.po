@@ -236,6 +236,7 @@ msgstr ""
 msgid "Заказать выписку ЕГРЮЛ по учредителю"
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ИНН"
 msgstr ""
@@ -254,6 +255,11 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Кредитный профиль"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgctxt "Состояние ЮЛ"
+msgid "Ликвидировано"
 msgstr ""
 
 #: ../src/nkb-app/components/login/views/login-form.html:1
@@ -393,6 +399,11 @@ msgstr ""
 msgid "Формы отчетности за последний год"
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
+msgctxt "Доля в учреждении компании"
+msgid "доля"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-user-product-limits-info.html:1
 msgctxt "доступность продукта"
 msgid "доступно"
@@ -411,6 +422,10 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgctxt "от такой-то даты"
 msgid "от"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "руб."
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
