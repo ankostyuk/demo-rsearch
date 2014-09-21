@@ -7,7 +7,8 @@
 define(function(require) {'use strict';
 
                   require('underscore');
-    var angular = require('angular');
+    var angular = require('angular'),
+        i18n    = require('i18n');
 
     return angular.module('np.rsearch-meta', [])
         //
@@ -157,7 +158,7 @@ define(function(require) {'use strict';
                                 state: {
                                     _actual: null,
                                     _since: node.dead_dt,
-                                    type: 'Ликвидировано' // TODO l10n|messages
+                                    type: _trc("Ликвидировано", "Состояние ЮЛ")
                                 }
                             };
                         }
@@ -393,21 +394,19 @@ define(function(require) {'use strict';
                     }
                 };
 
-                // TODO i18n
                 function getFounderText(relation) {
                     if (relation.sharePercent || relation.shareAmount) {
-                        return 'доля' + nbsp +
+                        return _trc("доля", "Доля в учреждении компании") + nbsp +
                             (relation.sharePercent ? $filter('number')(relation.sharePercent) + '%' : '') +
                             (relation.sharePercent && relation.shareAmount ? nbsp + nbsp : '') +
-                            (relation.shareAmount ? $filter('number')(relation.shareAmount) + nbsp + 'руб.' : '');
+                            (relation.shareAmount ? $filter('number')(relation.shareAmount) + nbsp + _tr("руб.") : '');
                     }
 
                     return '';
                 }
 
-                // TODO i18n
                 function getInnText(inn) {
-                    return 'ИНН' + nbsp + inn;
+                    return _tr("ИНН") + nbsp + inn;
                 }
 
                 var relations   = data.relationInfo.relationMap[node.__uid][data.relationInfo.direction],

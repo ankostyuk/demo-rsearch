@@ -134,12 +134,19 @@ msgstr ""
 msgid "NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY"
 msgstr "{'one': '1 правопреемник', 'other': '{{count|number}} правопреемник'}"
 
-#: ../src/rsearch/views/rsearch-navigation.html:1
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid ""
+"Анализ\n"
+"аффилированных лиц"
+msgstr ""
+"Analysis\n"
+"of affiliated persons"
+
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Анализ связей"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-navigation.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Аналитический профиль"
 msgstr ""
@@ -153,17 +160,23 @@ msgstr ""
 msgid "Без ИНН"
 msgstr ""
 
+#: ../src/nkb-app/index.html:1
+msgid "Библиотека"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Бизнес профиль"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-navigation.html:1
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Бизнес-справки онлайн"
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid ""
+"Бизнес-справка\n"
+"по иностранной компании"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-navigation.html:1
-msgid "Бизнес-справки по иностранным компаниям"
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Бизнес-справки онлайн"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-history-info.html:1
@@ -195,11 +208,29 @@ msgstr ""
 msgid "Выписка"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-navigation.html:1
-msgid "ЕГРИП"
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid ""
+"Выписка\n"
+"из ЕГРИП"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-navigation.html:1
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid ""
+"Выписка\n"
+"из ЕГРЮЛ"
+msgstr ""
+
+#: ../src/nkb-app/components/login/views/login-form.html:1
+msgid "Демо-доступ"
+msgstr ""
+
+#: ../src/nkbcomment/views/nkbcomment.html:1
+msgctxt "Добавить комментарий"
+msgid "Добавить"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "ЕГРЮЛ"
 msgstr ""
@@ -220,56 +251,55 @@ msgstr ""
 msgid "Заказать выписку ЕГРЮЛ по учредителю"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-navigation.html:1
-msgid "Заказать выписку из ЕГРИП"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-navigation.html:1
-msgid "Заказать выписку из ЕГРЮЛ"
-msgstr ""
-
+#: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ИНН"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-inn-filter.html:1
-msgid "ИНН физического лица"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-navigation.html:1
-msgid "Информация по компаниям различных стран мира"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-navigation.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Исторический профиль"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgid "Контакты"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Корпоративная структура"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-navigation.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Кредитный профиль"
 msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgctxt "Состояние ЮЛ"
+msgid "Ликвидировано"
+msgstr "Liquidated"
 
 #: ../src/nkb-app/components/login/views/login-form.html:1
 msgid "Логин"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
+msgid "Любой ИНН"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-region-filter.html:1
-msgid "Любой"
+msgid "Любой регион"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-input.html:1
-msgid "Наименование компании, ОГРН, ИНН, ОКПО"
+msgid "Наименование компании, ИНН/ОГРН, адрес или ФИО"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-input.html:1
 msgid "Найти"
 msgstr "Search"
+
+#: ../src/nkb-app/index.html:1
+msgid "Национальное кредитное бюро"
+msgstr "National Credit Bureau"
 
 #: ../src/rsearch/views/rsearch-navigation.html:1
 msgid "Не найдено"
@@ -283,22 +313,16 @@ msgstr ""
 msgid "Нет комментариев"
 msgstr "No comments"
 
+#: ../src/nkb-app/index.html:1
+msgid "О проекте"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ОГРН"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ОКПО"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-navigation.html:1
-msgid "Обмен информацией"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-navigation.html:1
-msgid ""
-"Обмен собственной информацией о компаниях и организациях между участниками "
-"рынка"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
@@ -309,7 +333,13 @@ msgstr ""
 msgid "Ожидайте..."
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-navigation.html:1
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid ""
+"Отчеты\n"
+"на заказ"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Отчеты на заказ"
 msgstr ""
@@ -322,8 +352,21 @@ msgstr ""
 msgid "Поиск"
 msgstr ""
 
+#: ../src/nkb-app/index.html:1
+msgctxt "Наименование приложения поиска"
+msgid "Поиск — НКБ"
+msgstr "Search — NCB"
+
+#: ../src/nkb-app/components/login/views/login-form.html:1
+msgid "Пополнить"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Построить схему"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgid "Продукты и услуги"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -335,28 +378,22 @@ msgctxt "Прямой эфир Системы комментариев"
 msgid "Прямой эфир"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-navigation.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Расширенное исследование"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-region-filter.html:1
-msgid "Регион"
-msgstr ""
+#: ../src/nkb-app/index.html:1
+msgid "Расширенный поиск"
+msgstr "Advanced search"
 
-#: ../src/nkb-app/components/login/views/login-form.html:1
+#: ../src/nkb-app/index.html:1
 msgid "Регистрация"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/nkb-app/index.html:1 ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Система графического анализа"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Скачать выписку"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-navigation.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Схема аффилированных лиц"
 msgstr ""
@@ -376,6 +413,11 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "Формы отчетности за последний год"
 msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgctxt "Доля в учреждении компании"
+msgid "доля"
+msgstr "share"
 
 #: ../src/rsearch/views/rsearch-user-product-limits-info.html:1
 msgctxt "доступность продукта"
@@ -397,6 +439,10 @@ msgctxt "от такой-то даты"
 msgid "от"
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "руб."
+msgstr "RUB"
+
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "тыс. руб."
-msgstr ""
+msgstr "thous. RUB"

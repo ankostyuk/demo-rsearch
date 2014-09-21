@@ -78,7 +78,10 @@ define(function(require) {'use strict';
 
     return angular.module('np.l10n', [])
         //
-        .factory('npL10n', ['$log', '$location', function($log, $location){
+        .factory('npL10n', ['$log', '$location', '$rootScope', function($log, $location, $rootScope){
+            //
+            _.extend($rootScope, i18n.translateFuncs);
+
             //
             $('body').addClass('lang-' + currentLang);
 
