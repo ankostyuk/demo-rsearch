@@ -89,6 +89,10 @@ define(function(require) {'use strict';
                 'relations_find_related': {
                     'info.url': '/search/relations/',
                     'purchase.url': '/nkbrelation/report?node.type={{node._type}}&{{node.__idField}}.equals={{node[node.__idField]}}'
+                },
+                'ForeignCompanyReport': {
+                    'info.url': '/dnb/profile/',
+                    'purchase.url': '/search/offlined/'
                 }
             }
         })
