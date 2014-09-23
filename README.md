@@ -55,3 +55,12 @@
 Удаление сборки
 
     grunt clean:target
+
+## Полная пересборка
+
+Очистка, обновление зависимостей проекта, сборка
+
+    grunt clean
+    npm install
+    grunt build
+
