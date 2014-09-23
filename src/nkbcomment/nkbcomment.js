@@ -120,7 +120,7 @@ define(function(require) {'use strict';
                         if (node._type === 'COMPANY') {
                             return '/bsnId:' + node.bsn_id + '/blocks/cnblk04';
                         } else
-                        if (node._type === 'INDIVIDUAL') {
+                        if (node._type === 'INDIVIDUAL' && !node.subtype) {
                             return _.clean(node.name).toUpperCase();
                         }
 

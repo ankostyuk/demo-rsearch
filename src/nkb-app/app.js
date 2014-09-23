@@ -64,7 +64,7 @@ define(function(require) {'use strict';
                 },
                 'extended_research': {
                     'info.url': '/examples/extended/',
-                    'purchase.url': '/search/offlinea/?idcomp={{node.bsn_id}}'
+                    'purchase.url': '/search/offlinea/?form[comp_name]={{node.name}}&idcomp={{node.bsn_id}}'
                 },
                 'egrulCompanyReport': {
                     'info.url': '/egryl/',
@@ -84,11 +84,15 @@ define(function(require) {'use strict';
                 },
                 'actualizeReport': {
                     'info.url': '/examples/quartal_profile/',
-                    'purchase.url': '/search/offlinea/?idcomp={{node.bsn_id}}'
+                    'purchase.url': '/search/offlinea/?form[comp_name]={{node.name}}&idcomp={{node.bsn_id}}'
                 },
                 'relations_find_related': {
                     'info.url': '/search/relations/',
                     'purchase.url': '/nkbrelation/report?node.type={{node._type}}&{{node.__idField}}.equals={{node[node.__idField]}}'
+                },
+                'ForeignCompanyReport': {
+                    'info.url': '/dnb/profile/',
+                    'purchase.url': '/search/offlined/'
                 }
             }
         })

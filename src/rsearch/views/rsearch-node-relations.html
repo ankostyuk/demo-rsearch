@@ -22,7 +22,7 @@
         <li ng-show="node._info.in['ADDRESS']" ng-class="{active: active === 'parents::ADDRESS'}"><a class="action" ng-click="relationsClick('parents', 'ADDRESS')"><ng-pluralize count="count = node._info.in['ADDRESS']" when="${_tr("NG_PLURALIZE::RELATION_ADDRESS")}"></ng-pluralize></a></li>
         <li ng-show="node._info.in['PHONE']" ng-class="{active: active === 'parents::PHONE'}"><a class="action" ng-click="relationsClick('parents', 'PHONE')"><ng-pluralize count="count = node._info.in['PHONE']" when="${_tr("NG_PLURALIZE::RELATION_PHONE")}"></ng-pluralize></a></li>
     </ul>
-    <a class="action relations-product shadow-lift-lb-corner strong" ng-click="productClick('relations_find_related')">${_tr("Анализ связей")}</a>
+    <a class="action relations-product shadow-lift-lb-corner strong" ng-click="productClick('relations_find_related')">${_tr("Анализ аффилированных лиц")}</a>
 </div>
 
 <div ng-if="node._type === 'INDIVIDUAL'">
@@ -30,6 +30,7 @@
         <li ng-show="node._info.out['FOUNDER_INDIVIDUAL']" ng-class="{active: active === 'children::FOUNDER_INDIVIDUAL'}"><a class="action" ng-click="relationsClick('children', 'FOUNDER_INDIVIDUAL')"><ng-pluralize count="count = node._info.out['FOUNDER_INDIVIDUAL']" when="${_tr("NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY")}"></ng-pluralize></a></li>
         <li ng-show="node._info.out['EXECUTIVE_INDIVIDUAL']" ng-class="{active: active === 'children::EXECUTIVE_INDIVIDUAL'}"><a class="action" ng-click="relationsClick('children', 'EXECUTIVE_INDIVIDUAL')"><ng-pluralize count="count = node._info.out['EXECUTIVE_INDIVIDUAL']" when="${_tr("NG_PLURALIZE::RELATION_LEAD_COMPANY")}"></ng-pluralize></a></li>
     </ul>
+    <a class="action relations-product shadow-lift-lb-corner strong" ng-click="productClick('relations_find_related')">${_tr("Анализ аффилированных лиц")}</a>
 </div>
 
 <div ng-if="node._type === 'ADDRESS'">
