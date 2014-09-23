@@ -29,6 +29,9 @@
                             </div>
                         </div>
                     </div>
+                    <div ng-if="node._type === 'INDIVIDUAL' && !node.subtype">
+                        <a class="underline with-icon" ng-href="https://yandex.ru/yandsearch?text={{node.name}}&filter=people" target="_blank"><i class="icon large i-global-search-1"></i> <span class="text">${_tr("Искать в социальных сетях")}</span></a>
+                    </div>
                     <div class="row" ng-if="node._type === 'INDIVIDUAL' && node.subtype === 'foreign'">
                         <div class="span5">
                             <a class="action with-icon" ng-click="productClick('ForeignCompanyReport')"><i class="icon large i-document-info"></i> <span class="text">${_tr("Бизнес-справка")}</span></a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('ForeignCompanyReport')"></span>
@@ -100,7 +103,6 @@
                         <li><a class="action" ng-click="productClick('egrulFounderPersonReport')">${_tr("Заказать выписку ЕГРЮЛ по учредителю")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('egrulFounderPersonReport')"></span></li>
                         <li><a class="action" ng-click="productClick('egripReport')">${_tr("Заказать выписку ЕГРИП")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('egripReport')"></span></li>
                     </ul>
-                    <a class="underline with-icon" ng-href="https://yandex.ru/yandsearch?text={{node.name}}&filter=people" target="_blank"><i class="icon large i-global-search-1"></i> <span class="text">${_tr("Искать в социальных сетях")}</span></a>
                 </div>
                 <!--
                 <div ng-if="node._type === 'INDIVIDUAL'">
