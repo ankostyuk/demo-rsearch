@@ -101,7 +101,7 @@
             border-radius: @panelBorderRadius;
     border: @panelBorder;
 
-    background: @panelBackgroundColor no-repeat 20px 33px url("./i/relations-gray.png");
+    background: @panelBackgroundColor no-repeat 22px 38px url("./i/relations.png");
 }
 [np-rsearch-navigation] [np-rsearch-node-relations] .action.relations-product.shadow-lift-lb-corner:after {
     background-color: @defaultBackgroundColor;
@@ -302,16 +302,25 @@
 [np-rsearch-node-form] .product-list {
     margin-bottom: 0;
 }
-
 [np-rsearch-node-form] .egrul-products .icon {
     margin-right: 0;
     margin-left: -4px;
+}
+[np-rsearch-node-form] .COMPANY [np-nkb-comment-widget] {
+    padding-top: 10px;
+}
+[np-rsearch-node-form] .INDIVIDUAL .egrul-products {
+    width: 330px;
+}
+[np-rsearch-node-form] .INDIVIDUAL .extra-search {
+    padding-top: 10px;
+    width: 330px;
+    white-space: nowrap;
 }
 
 /* np-nkb-comment-widget */
 [np-nkb-comment-widget] {
     width: 500px;
-    padding-top: 10px;
 }
 [np-nkb-comment-widget] .comment-widget-toolbar {
     color: @defaultHeaderLightColor;

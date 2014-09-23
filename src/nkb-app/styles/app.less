@@ -134,12 +134,12 @@ input.input-mini {
 
 /* icons */
 .icon.large {
-    margin-right: 2px;
+    padding-right: 2px;
     font-size: 150%;
     vertical-align: -5px;
 }
 .icon.big {
-    margin-right: 5px;
+    p-right: 5px;
     vertical-align: -6px;
     font-size: 200%;
 }
@@ -326,10 +326,6 @@ input.input-mini {
     margin-bottom: 0;
     padding: 0;
 }
-.products .product-links a {
-    display: block;
-    text-rendering: optimizelegibility;
-}
 .products .product-links .sep {
     height: 35px;
     margin-bottom: 3px;
@@ -337,39 +333,50 @@ input.input-mini {
     margin-right: 10px;
     border-left: 1px solid @defaultLineColor;
 }
-.products .product-links .link-icon {
-    display: block;
-    float: left;
-    margin-top: 4px;
-    font-size: 180%;
-}
-.products .product-links .link-text {
-    display: block;
-    float: left;
-    margin-left: 7px;
-    font-size: 120%;
-    white-space: pre;
-}
-.products .product-links .relations .link-text {
-    /*width: 200px;*/
-}
-.products .product-links .offline-reports .link-text {
-    /*width: 95px;*/
-}
-.products .product-links .egrul .link-text {
-    margin-left: 3px;
-    /*width: 95px;*/
-}
-.products .product-links .egrip .link-text {
-    margin-left: 3px;
-    /*width: 95px;*/
-}
 .products .product-links .relations-info {
     width: 920px;
     height: 555px;
     margin-top: 40px;
     background: transparent no-repeat 27px 55px url("./i/relations-big-white.png");
     font-size: 120%;
+}
+
+/* product-link */
+.product-link {
+    display: block;
+    text-rendering: optimizelegibility;
+}
+.product-link:before, .product-link:after {
+    display: table;
+    line-height: 0;
+    content: "";
+}
+.product-link:after {
+    clear: both;
+}
+.product-link .link-icon {
+    display: block;
+    float: left;
+    margin-top: 4px;
+    padding-right: 7px;
+    font-size: 150%;
+}
+.product-link .link-text {
+    display: block;
+    float: left;
+    white-space: pre;
+}
+.product-link.large .link-icon {
+    font-size: 180%;
+}
+.product-link.large .link-text {
+    font-size: 120%;
+}
+.product-link.large.egrul .link-icon {
+    padding-right: 3px;
+}
+.product-link.large.egrip .link-icon {
+    padding-right: 3px;
 }
 
 /* messages */
