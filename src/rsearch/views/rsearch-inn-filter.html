@@ -6,14 +6,14 @@
         </li>
 
         <li class="filter-item" ng-show="filter.getNoInnCount()" ng-class="{active: filter.getValue() === false}" ng-click="filter.doFilter(false)">
-            <a class="action">${_tr("Без ИНН")}<span class="count">{{filter.getNoInnCount() | number}}</span></a>
+            <a class="simple-row action"><span class="count">{{filter.getNoInnCount() | number}}</span><span class="text">${_tr("Без ИНН")}</span></a>
         </li>
         <li class="filter-item disabled" ng-hide="filter.getNoInnCount()">
-            <span class="action">${_tr("Без ИНН")}<span class="count">нет</span></span>
+            <span class="simple-row action"><span class="count">нет</span><span class="text">${_tr("Без ИНН")}</span></span>
         </li>
 
         <li class="filter-item" ng-class="{active: filter.getValue() === p[0]}" ng-click="filter.doFilter(p[0])" ng-repeat="p in filter.getSortedPairs() track by $index">
-            <a class="action">{{_tr(p[0])}}<span class="count">{{p[1] | number}}</span></a>
+            <a class="simple-row action"><span class="count">{{p[1] | number}}</span><span class="text">{{_tr(p[0])}}</span></a>
         </li>
     </ul>
 </div>

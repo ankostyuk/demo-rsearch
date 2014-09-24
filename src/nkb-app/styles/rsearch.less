@@ -63,17 +63,28 @@
     vertical-align: top;
 }
 [np-rsearch-navigation] .breadcrumb .divider {
-    padding: 0 0 0 1px;
+    padding: 0 5px;
+    vertical-align: top;
+}
+[np-rsearch-navigation] .breadcrumb [np-rsearch-navigation-breadcrumb],
+[np-rsearch-navigation] .breadcrumb [np-rsearch-navigation-breadcrumb] > span {
+    display: inline-block;
+}
+[np-rsearch-navigation] .breadcrumb [np-rsearch-navigation-breadcrumb] a,
+[np-rsearch-navigation] .breadcrumb [np-rsearch-navigation-breadcrumb] a > span {
+    display: block;
 }
 [np-rsearch-navigation] .breadcrumb .target-relations-info {
-    padding-left: 15px;
+    display: block;
     font-size: 80%;
 }
 [np-rsearch-navigation] .breadcrumb .node-form {
+    margin-top: -1px;
     font-weight: bold;
 }
 [np-rsearch-navigation] .breadcrumb .node-form .target-relations-info {
     font-weight: normal;
+    color: @defaultHeaderLightColor;
 }
 [np-rsearch-navigation] .messages {
     padding-left: 5px;
@@ -377,9 +388,15 @@
 .np-rsearch-filter .filter-item .action {
     display: block;
 }
+.np-rsearch-filter .filter-item .text {
+    display: block;
+    overflow: hidden;
+}
 .np-rsearch-filter .filter-item .count {
     display: block;
     float: right;
+    padding-left: 10px;
+    text-align: right;
 }
 .np-rsearch-filter .filter-item.active .action {
     font-weight: bold;

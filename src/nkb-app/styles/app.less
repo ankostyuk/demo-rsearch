@@ -3,6 +3,16 @@
 @import './config.less';
 
 /* base */
+.simple-row:before,
+.simple-row:after {
+    display: table;
+    line-height: 0;
+    content: "";
+}
+.simple-row:after {
+    clear: both;
+}
+
 a {
     padding-bottom: 0;
     color: @linkColor;
@@ -345,14 +355,6 @@ input.input-mini {
 .product-link {
     display: block;
     text-rendering: optimizelegibility;
-}
-.product-link:before, .product-link:after {
-    display: table;
-    line-height: 0;
-    content: "";
-}
-.product-link:after {
-    clear: both;
 }
 .product-link .link-icon {
     display: block;
