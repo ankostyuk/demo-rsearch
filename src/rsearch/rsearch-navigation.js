@@ -20,7 +20,7 @@ define(function(require) {'use strict';
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'npUser', 'appConfig', 'npNkbCommentHelper', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, npUser, appConfig, npNkbCommentHelper){
+        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'npUser', 'appConfig', 'npNkbCommentHelper', 'npL10n', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, npUser, appConfig, npNkbCommentHelper, npL10n){
             return {
                 restrict: 'A',
                 template: template,
@@ -37,6 +37,7 @@ define(function(require) {'use strict';
                      *
                      */
                     var init                    = false,
+                        l10n                    = npL10n.l10n(),
                         user                    = npUser.user(),
                         initMetaPromise         = npRsearchMetaHelper.initPromise(),
                         initPromise             = $q.all([initMetaPromise, npNkbCommentHelper.initPromise()]),
@@ -895,7 +896,8 @@ define(function(require) {'use strict';
                     function doProduct(productName, node) {
                         if (user.isProductAvailable(productName)) {
                             purchaseProduct(productName, {
-                                node: node
+                                node: node,
+                                lang: l10n.getLang()
                             });
                         } else {
                             showProductInfo(productName);

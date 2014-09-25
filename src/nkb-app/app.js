@@ -40,27 +40,27 @@ define(function(require) {'use strict';
             product: {
                 'market_profile_short': {
                     'info.url': '/examples/marketing_profile/',
-                    'purchase.url': '/reports/?code=rep_market_profile_short&fromSearch=1&id={{node.bsn_id}}'
+                    'purchase.url': '/reports/?code=rep_market_profile_short&fromSearch=1&id={{node.bsn_id}}&lang={{lang}}'
                 },
                 'market_list': {
                     'info.url': '/examples/direct_mail/',
-                    'purchase.url': '/reports/?code=rep_market_list&fromSearch=1&id={{node.bsn_id}}'
+                    'purchase.url': '/reports/?code=rep_market_list&fromSearch=1&id={{node.bsn_id}}&lang={{lang}}'
                 },
                 'business_profile': {
                     'info.url': '/examples/business_profile/',
-                    'purchase.url': '/reports/?code=rep_business_profile&fromSearch=1&id={{node.bsn_id}}'
+                    'purchase.url': '/reports/?code=rep_business_profile&fromSearch=1&id={{node.bsn_id}}&lang={{lang}}'
                 },
                 'market_profile_full': {
                     'info.url': '/examples/analitic_profile/',
-                    'purchase.url': '/reports/?code=rep_market_profile_full&fromSearch=1&id={{node.bsn_id}}'
+                    'purchase.url': '/reports/?code=rep_market_profile_full&fromSearch=1&id={{node.bsn_id}}&lang={{lang}}'
                 },
                 'credit_profile': {
                     'info.url': '/examples/credit_profile/',
-                    'purchase.url': '/reports/?code=rep_credit_profile&fromSearch=1&id={{node.bsn_id}}'
+                    'purchase.url': '/reports/?code=rep_credit_profile&fromSearch=1&id={{node.bsn_id}}&lang={{lang}}'
                 },
                 'ext_history_profile': {
                     'info.url': '/examples/history_profile/',
-                    'purchase.url': '/reports/?code=rep_history_profile&fromSearch=1&id={{node.bsn_id}}'
+                    'purchase.url': '/reports/?code=rep_history_profile&fromSearch=1&id={{node.bsn_id}}&lang={{lang}}'
                 },
                 'extended_research': {
                     'info.url': '/examples/extended/',
