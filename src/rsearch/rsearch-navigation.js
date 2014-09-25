@@ -755,7 +755,7 @@ define(function(require) {'use strict';
                     var nodeRelationsFilter = {
                         node: null,
                         active: null,
-                        relationsClick: function(direction, relationType){
+                        relationsClick: function(direction, relationType) {
                             if (buildNodeRelationActiveKey(direction, relationType) === nodeRelationsFilter.active) {
                                 return;
                             }
@@ -763,6 +763,9 @@ define(function(require) {'use strict';
                             clearLastBreadcrumb();
                             relationsClick(nodeRelationsFilter.node, direction, relationType);
                         },
+                        productClick: function(productName) {
+                            doProduct(productName, nodeRelationsFilter.node);
+                        }
                     };
 
                     function buildNodeRelationActiveKey(direction, relationType) {
@@ -886,6 +889,10 @@ define(function(require) {'use strict';
                     var productConfig = appConfig.product || {};
 
                     $rootScope.$on('np-rsearch-node-form-product-click', function(e, productName, node){
+                        doProduct(productName, node);
+                    });
+
+                    function doProduct(productName, node) {
                         if (user.isProductAvailable(productName)) {
                             purchaseProduct(productName, {
                                 node: node
@@ -893,7 +900,7 @@ define(function(require) {'use strict';
                         } else {
                             showProductInfo(productName);
                         }
-                    });
+                    }
 
                     function showProductInfo(productName, context) {
                         var url = $interpolate(productConfig[productName]['info.url'])(context);
