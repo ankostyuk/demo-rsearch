@@ -44,11 +44,13 @@ module.exports = function(grunt) {
                 cwd: 'target/web-resources-build/nkb-app',
                 src: [
                     'build.properties',
+                    'src/nkb-app/favicon.ico',
                     'src/nkb-app/main.js',
                     'src/nkb-app/index.html'
                 ],
                 dest: 'dist/nkb-app',
                 options: {
+                    noProcess: '**/*.{ico,properties,js}',
                     process: function (content, srcpath) {
                         if (srcpath === 'target/web-resources-build/nkb-app/src/nkb-app/index.html') {
                             return content.replace(/\${nkb-app.build.id}/g, buildInfo['nkb-app'].hash);
