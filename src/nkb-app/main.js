@@ -118,7 +118,7 @@ root._RESOURCES_CONFIG = {
                     escape:         /\{%-([\s\S]+?)%\}/g
                 };
 
-                _.mixin(UnderscoreString);
+                _.mixin(UnderscoreString.exports());
             }
         },
 
