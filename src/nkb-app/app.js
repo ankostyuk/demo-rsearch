@@ -97,8 +97,24 @@ define(function(require) {'use strict';
             }
         })
         //
-        .config(['$logProvider', function($logProvider){
+        .config(['$logProvider', '$httpProvider', function($logProvider, $httpProvider){
+            //
             $logProvider.debugEnabled(false);
+
+            //
+            $httpProvider.interceptors.push(['$q', function($q){
+                return {
+                    'request': function(config){
+                        // жестко отключить cache
+                        config.cache = false;
+                        config.params = _.extend({}, config.params, {
+                            '_': $.now()
+                        });
+
+                        return config || $q.when(config);
+                    }
+                };
+            }]);
         }])
         //
         .run(['$log', '$q', '$rootScope', '$document', 'npRsearchMetaHelper', 'npNkbCommentHelper', function($log, $q, $rootScope, $document, npRsearchMetaHelper, npNkbCommentHelper){
