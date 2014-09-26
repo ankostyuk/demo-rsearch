@@ -418,7 +418,7 @@
     ],
     "NG_PLURALIZE::RELATION_BRANCH_COMPANY": [
       null,
-      "{'one': '1 филиал', 'other': '{{count|number}} филиал'}"
+      "{'one': '1 branch', 'other': '{{count|number}} branches'}"
     ],
     "NG_PLURALIZE::RELATION_COMPANY": [
       null,
@@ -426,31 +426,31 @@
     ],
     "NG_PLURALIZE::RELATION_EXECUTIVE_COMPANY": [
       null,
-      "{'one': '1 управляющая компания', 'other': '{{count|number}} управляющая компания'}"
+      "{'one': '1 managing company', 'other': '{{count|number}} managing companies'}"
     ],
     "NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL": [
       null,
-      "{'one': 'Руководитель', 'other': '{{count|number}} руководитель'}"
+      "{'one': 'Director', 'other': '{{count|number}} directors'}"
     ],
     "NG_PLURALIZE::RELATION_FOUNDER": [
       null,
-      "{'one': '1 учредитель', 'other': '{{count|number}} учредитель'}"
+      "{'one': '1 shareholder', 'other': '{{count|number}} shareholders'}"
     ],
     "NG_PLURALIZE::RELATION_FOUNDER_COMPANY": [
       null,
-      "{'one': '1 учредитель компания', 'other': '{{count|number}} учредитель компания'}"
+      "{'one': '1 shareholder company', 'other': '{{count|number}} shareholder companies'}"
     ],
     "NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL": [
       null,
-      "{'one': '1 учредитель физическое лицо', 'other': '{{count|number}} учредитель физическое лицо'}"
+      "{'one': '1 individual shareholder', 'other': '{{count|number}} individual shareholders'}"
     ],
     "NG_PLURALIZE::RELATION_HEAD_COMPANY": [
       null,
-      "{'one': 'Головная компания', 'other': '{{count|number}} головная компания'}"
+      "{'one': 'Head company', 'other': '{{count|number}} head companies'}"
     ],
     "NG_PLURALIZE::RELATION_LEAD_COMPANY": [
       null,
-      "{'one': '1 руководимая компания', 'other': '{{count|number}} руководимая компания'}"
+      "{'one': '1 managed company', 'other': '{{count|number}} managed companies'}"
     ],
     "NG_PLURALIZE::RELATION_PHONE": [
       null,
@@ -458,143 +458,143 @@
     ],
     "NG_PLURALIZE::RELATION_PREDECESSOR_COMPANY": [
       null,
-      "{'one': '1 предшественник', 'other': '{{count|number}} предшественник'}"
+      "{'one': '1 predecessor', 'other': '{{count|number}} predecessors'}"
     ],
     "NG_PLURALIZE::RELATION_REGISTERED_HOLDER_COMPANY": [
       null,
-      "{'one': '1 эмитент', 'other': '{{count|number}} эмитент'}"
+      "{'one': '1 issuer', 'other': '{{count|number}} issuers'}"
     ],
     "NG_PLURALIZE::RELATION_REGISTER_HOLDER_COMPANY": [
       null,
-      "{'one': '1 реестродержатель', 'other': '{{count|number}} реестродержатель'}"
+      "{'one': '1 registrar', 'other': '{{count|number}} registrars'}"
     ],
     "NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY": [
       null,
-      "{'one': '1 учреждённая компания', 'other': '{{count|number}} учреждённая компания'}"
+      "{'one': '1 established company', 'other': '{{count|number}} established companies'}"
     ],
     "NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY": [
       null,
-      "{'one': '1 правопреемник', 'other': '{{count|number}} правопреемник'}"
+      "{'one': '1 legal successor', 'other': '{{count|number}} legal successors'}"
     ],
     "Анализ аффилированных лиц": [
       null,
-      "Analysis\nof affiliated persons"
+      "Affiliated Network Analysis"
     ],
     "Аналитический профиль": [
       null,
-      ""
+      "Analytical Report"
     ],
     "Банк данных исполнительных производств": [
       null,
-      ""
+      "Enforcement proceedings database"
     ],
     "Без ИНН": [
       null,
-      ""
+      "No INN"
     ],
     "Библиотека": [
       null,
-      ""
+      "Library"
     ],
     "Бизнес профиль": [
       null,
-      ""
+      "Business Report"
     ],
     "Бизнес-справки онлайн": [
       null,
-      ""
+      "Online reports"
     ],
     "Бывшее наименование": [
       null,
-      ""
+      "Former name"
     ],
     "Бывший руководитель": [
       null,
-      ""
+      "Former manager"
     ],
     "Войти": [
       null,
-      ""
+      "Login"
     ],
     "Все": [
       null,
-      ""
+      "All"
     ],
     "Вход временно недоступен": [
       null,
-      ""
+      "Login temporarily unavailable"
     ],
     "Выйти": [
       null,
-      ""
+      "Logout"
     ],
     "Выписка": [
       null,
-      ""
+      "Report"
     ],
     "Демо-доступ": [
       null,
-      ""
+      "Trial access"
     ],
     "ЕГРЮЛ": [
       null,
-      ""
+      "EGRUL"
     ],
     "Заказать выписку ЕГРИП": [
       null,
-      ""
+      "Order EGRIP Report"
     ],
     "Заказать выписку ЕГРЮЛ": [
       null,
-      ""
+      "Order EGRUL Report"
     ],
     "Заказать список руководимых компаний": [
       null,
-      ""
+      "Order Managed Companies list"
     ],
     "Заказать список учрежденных компаний": [
       null,
-      ""
+      "Order Established Companies list"
     ],
     "ИНН": [
       null,
-      ""
+      "INN"
     ],
     "Искать в социальных сетях": [
       null,
-      ""
+      "Search social networks"
     ],
     "Исторический профиль": [
       null,
-      ""
+      "Historical Report"
     ],
     "Контакты": [
       null,
-      ""
+      "Contact"
     ],
     "Корпоративная структура": [
       null,
-      ""
+      "Corporate Structure"
     ],
     "Кредитный профиль": [
       null,
-      ""
+      "Credit Report"
     ],
     "Логин": [
       null,
-      ""
+      "Login"
     ],
     "Любой ИНН": [
       null,
-      ""
+      "Any INN"
     ],
     "Любой регион": [
       null,
-      ""
+      "Any region"
     ],
     "Наименование компании, ИНН/ОГРН, адрес или ФИО": [
       null,
-      ""
+      "Company name, INN/OGRN, address or personal name"
     ],
     "Найти": [
       null,
@@ -606,11 +606,11 @@
     ],
     "Не найдено": [
       null,
-      ""
+      "Not found"
     ],
     "Нет данных. Попробуйте изменить значения фильтров.": [
       null,
-      ""
+      "No data. Try to adjust filters."
     ],
     "Нет комментариев": [
       null,
@@ -618,55 +618,55 @@
     ],
     "О проекте": [
       null,
-      ""
+      "About"
     ],
     "О системе графического анализа": [
       null,
-      ""
+      "About Affiliated Network Analysis System"
     ],
     "ОГРН": [
       null,
-      ""
+      "OGRN"
     ],
     "ОКПО": [
       null,
-      ""
+      "OKPO"
     ],
     "Объём продаж за последний год": [
       null,
-      ""
+      "Last year sales volume"
     ],
     "Ожидайте...": [
       null,
-      ""
+      "Loading..."
     ],
     "Отчеты на заказ": [
       null,
-      ""
+      "Custom Reports"
     ],
     "Пароль": [
       null,
-      ""
+      "Password"
     ],
     "Поиск": [
       null,
-      ""
+      "Search"
     ],
     "Пополнить": [
       null,
-      ""
+      "Payment"
     ],
     "Продукты и услуги": [
       null,
-      ""
+      "Products"
     ],
     "Профиль регистрации": [
       null,
-      ""
+      "Registration Report"
     ],
     "Расширенное исследование": [
       null,
-      ""
+      "Extended Report"
     ],
     "Расширенный поиск": [
       null,
@@ -674,71 +674,71 @@
     ],
     "Регистрация": [
       null,
-      ""
+      "Registration"
     ],
     "Схема аффилированных лиц": [
       null,
-      ""
+      "Affiliated network diagram"
     ],
     "Учредитель — компания": [
       null,
-      ""
+      "Founder — company"
     ],
     "Учредитель — физическое лицо": [
       null,
-      ""
+      "Founder — person"
     ],
     "Финансовая отчётность": [
       null,
-      ""
+      "Financial statements"
     ],
     "Формы отчетности за последний год": [
       null,
-      ""
+      "Last year balance forms"
     ],
     "основано": [
       null,
-      ""
+      "Est."
     ],
     "руб.": [
       null,
-      "RUB"
+      "rub."
     ],
     "тыс. руб.": [
       null,
-      "thous. RUB"
+      "thous. rub."
     ],
     "Продукты НКБ на главной странице\u0004Анализ\nаффилированных лиц": [
       null,
-      "Analysis\nof affiliated persons"
+      "Affiliated\nNetwork Analysis"
     ],
     "Продукты НКБ на главной странице\u0004Бизнес-справка\nпо иностранной компании": [
       null,
-      ""
+      "Report on\nForeign Company"
     ],
     "Продукты НКБ на главной странице\u0004Выписка\nиз ЕГРИП": [
       null,
-      ""
+      "EGRIP\nReport"
     ],
     "Продукты НКБ на главной странице\u0004Выписка\nиз ЕГРЮЛ": [
       null,
-      ""
+      "EGRUL\nReport"
     ],
     "Продукты НКБ на главной странице\u0004Отчеты\nна заказ": [
       null,
-      ""
+      "Custom\nReports"
     ],
     "баланс пользователя\u0004Баланс": [
       null,
-      ""
+      "Balance"
     ],
     "Добавить комментарий\u0004Добавить": [
       null,
-      ""
+      "Add"
     ],
     "Заказ продукта НКБ на странице миниотчета\u0004Заказать бизнес-справку\nпо иностранной компании": [
       null,
-      ""
+      "Order Report on Foreign Company"
     ],
     "Состояние ЮЛ\u0004Ликвидировано": [
       null,
@@ -750,7 +750,7 @@
     ],
     "Прямой эфир Системы комментариев\u0004Прямой эфир": [
       null,
-      ""
+      "Live now"
     ],
     "Доля в учреждении компании\u0004доля": [
       null,
@@ -758,15 +758,15 @@
     ],
     "доступность продукта\u0004доступно": [
       null,
-      ""
+      "available"
     ],
     "валюта\u0004ие": [
       null,
-      ""
+      "ie"
     ],
     "от такой-то даты\u0004от": [
       null,
-      ""
+      "on"
     ]
   }
 }
