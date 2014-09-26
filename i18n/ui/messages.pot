@@ -107,8 +107,7 @@ msgid "Бизнес-справка\nпо иностранной компании
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Система графического анализа"
+msgid "О системе графического анализа"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
@@ -235,24 +234,49 @@ msgid "Профиль регистрации"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Отчеты на заказ"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-form.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Расширенное исследование"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Схема аффилированных лиц"
-msgstr ""
-
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Построить схему"
+msgid "Схема аффилированных лиц"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "ЕГРЮЛ"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Заказать список руководимых компаний"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Заказать список учрежденных компаний"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Заказать выписку ЕГРИП"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Искать в социальных сетях"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Банк данных исполнительных производств"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "Заказ продукта НКБ на странице миниотчета"
+msgid "Заказать бизнес-справку\nпо иностранной компании"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -266,18 +290,6 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgctxt "от такой-то даты"
 msgid "от"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Заказать выписку ЕГРЮЛ по руководителю"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Заказать выписку ЕГРЮЛ по учредителю"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Заказать выписку ЕГРИП"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-history-info.html:1
@@ -420,7 +432,8 @@ msgid "NG_PLURALIZE::RELATION_PHONE"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "Анализ связей"
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Анализ аффилированных лиц"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-region-filter.html:1
