@@ -43,12 +43,12 @@ define(function(require) {'use strict';
                         initPromise             = $q.all([initMetaPromise, npNkbCommentHelper.initPromise()]),
                         initDeferredFunctions   = [];
 
-                    $q.all(initPromise).then(initSuccess);
-
                     function initSuccess() {
                         var me = this;
 
                         init = true;
+
+                        $rootScope.$emit('np-rsearch-navigation-init', scope);
 
                         _.each(initDeferredFunctions, function(f){
                             f.func.apply(me, f.args);
@@ -522,7 +522,7 @@ define(function(require) {'use strict';
                      *
                      */
                     var breadcrumbs = {
-                        list: [],
+                        list: []
                     };
 
                     $rootScope.$on('np-rsearch-navigation-breadcrumb-go', function(e, breadcrumb){
@@ -1126,6 +1126,9 @@ define(function(require) {'use strict';
 
                         nodeListView.clear();
                     }
+
+                    // Выполнить после отработки кода модуля
+                    $q.all(initPromise).then(initSuccess);
                 }
             };
         }]);
