@@ -129,7 +129,7 @@ msgid ""
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "Анализ связей"
+msgid "Анализ аффилированных лиц"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -139,6 +139,10 @@ msgstr ""
 #: ../src/nkb-app/components/login/views/login-form.html:1
 msgctxt "баланс пользователя"
 msgid "Баланс"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Банк данных исполнительных производств"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
@@ -221,6 +225,13 @@ msgid "ЕГРЮЛ"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "Заказ продукта НКБ на странице миниотчета"
+msgid ""
+"Заказать бизнес-справку\n"
+"по иностранной компании"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Заказать выписку ЕГРИП"
 msgstr ""
 
@@ -229,16 +240,20 @@ msgid "Заказать выписку ЕГРЮЛ"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Заказать выписку ЕГРЮЛ по руководителю"
+msgid "Заказать список руководимых компаний"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Заказать выписку ЕГРЮЛ по учредителю"
+msgid "Заказать список учрежденных компаний"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ИНН"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Искать в социальных сетях"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -302,6 +317,10 @@ msgstr ""
 msgid "О проекте"
 msgstr ""
 
+#: ../src/nkb-app/index.html:1
+msgid "О системе графического анализа"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ОГРН"
 msgstr ""
@@ -346,10 +365,6 @@ msgstr ""
 msgid "Пополнить"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Построить схему"
-msgstr ""
-
 #: ../src/nkb-app/index.html:1
 msgid "Продукты и услуги"
 msgstr ""
@@ -373,10 +388,6 @@ msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgid "Регистрация"
-msgstr ""
-
-#: ../src/nkb-app/index.html:1 ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Система графического анализа"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1

@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: feedback@null-pointer.ru\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: NULLPOINTER <feedback@null-pointer.ru>\n"
+"Last-Translator: Alexander Yastrebov <yastrebov.alex@gmail.com>\n"
 "Language-Team: NULLPOINTER <feedback@null-pointer.ru>\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
@@ -12,331 +12,332 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "CLDR_PLURAL_FORMS_FORMAT: one{0}other{1}\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "1"
-msgstr "Алтайский край"
+msgstr "Altai Krai"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "10"
-msgstr "Амурская область"
+msgstr "Amur Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "11"
-msgstr "Архангельская область"
+msgstr "Arkhangelsk Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "12"
-msgstr "Астраханская область"
+msgstr "Astrakhan Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "14"
-msgstr "Белгородская область"
+msgstr "Belgorod Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "15"
-msgstr "Брянская область"
+msgstr "Bryansk Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "17"
-msgstr "Владимирская область"
+msgstr "Vladimir Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "18"
-msgstr "Волгоградская область"
+msgstr "Volgograd Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "19"
-msgstr "Вологодская область"
+msgstr "Vologda Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "20"
-msgstr "Воронежская область"
+msgstr "Voronezh Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "22"
-msgstr "Нижегородская область"
+msgstr "Nizhny Novgorod Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "24"
-msgstr "Ивановская область"
+msgstr "Ivanovo Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "25"
-msgstr "Иркутская область"
+msgstr "Irkutsk Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "26"
-msgstr "Республика Ингушетия"
+msgstr "Republic of Ingushetia"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "27"
-msgstr "Калининградская область"
+msgstr "Kaliningrad Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "28"
-msgstr "Тверская область"
+msgstr "Tver Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "29"
-msgstr "Калужская область"
+msgstr "Kaluga Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "3"
-msgstr "Краснодарский край"
+msgstr "Krasnodar Krai"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "30"
-msgstr "Камчатский край"
+msgstr "Kamchatka Krai"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "32"
-msgstr "Кемеровская область"
+msgstr "Kemerovo Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "33"
-msgstr "Кировская область"
+msgstr "Kirov Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "34"
-msgstr "Костромская область"
+msgstr "Kostroma Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "35"
-msgstr "Республика Крым"
+msgstr "Republic of Crimea"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "36"
-msgstr "Самарская область"
+msgstr "Samara Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "37"
-msgstr "Курганская область"
+msgstr "Kurgan Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "38"
-msgstr "Курская область"
+msgstr "Kursk Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "4"
-msgstr "Красноярский край"
+msgstr "Krasnoyarsk Krai"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "40"
-msgstr "Санкт-Петербург"
+msgstr "Saint Petersburg"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "41"
-msgstr "Ленинградская область"
+msgstr "Leningrad Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "42"
-msgstr "Липецкая область"
+msgstr "Lipetsk Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "44"
-msgstr "Магаданская область"
+msgstr "Magadan Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "45"
-msgstr "Москва"
+msgstr "Moscow"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "46"
-msgstr "Московская область"
+msgstr "Moscow Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "47"
-msgstr "Мурманская область"
+msgstr "Murmansk Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "49"
-msgstr "Новгородская область"
+msgstr "Novgorod Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "5"
-msgstr "Приморский край"
+msgstr "Primorsky Krai"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "50"
-msgstr "Новосибирская область"
+msgstr "Novosibirsk Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "52"
-msgstr "Омская область"
+msgstr "Omsk Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "53"
-msgstr "Оренбургская область"
+msgstr "Orenburg Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "54"
-msgstr "Орловская область"
+msgstr "Oryol Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "56"
-msgstr "Пензенская область"
+msgstr "Penza Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "57"
-msgstr "Пермский край"
+msgstr "Perm Krai"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "58"
-msgstr "Псковская область"
+msgstr "Pskov Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "60"
-msgstr "Ростовская область"
+msgstr "Rostov Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "61"
-msgstr "Рязанская область"
+msgstr "Ryazan Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "63"
-msgstr "Саратовская область"
+msgstr "Saratov Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "64"
-msgstr "Сахалинская область"
+msgstr "Sakhalin Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "65"
-msgstr "Свердловская область"
+msgstr "Sverdlovsk Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "66"
-msgstr "Смоленская область"
+msgstr "Smolensk Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "67"
-msgstr "Севастополь"
+msgstr "Sevastopol"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "68"
-msgstr "Тамбовская область"
+msgstr "Tambov Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "69"
-msgstr "Томская область"
+msgstr "Tomsk Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "7"
-msgstr "Ставропольский край"
+msgstr "Stavropol Krai"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "70"
-msgstr "Тульская область"
+msgstr "Tula Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "71"
-msgstr "Тюменская область"
+msgstr "Tyumen Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "73"
-msgstr "Ульяновская область"
+msgstr "Ulyanovsk Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "75"
-msgstr "Челябинская область"
+msgstr "Chelyabinsk Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "76"
-msgstr "Забайкальский край"
+msgstr "Zabaykalsky Krai"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "77"
-msgstr "Чукотский АО"
+msgstr "Chukotka Autonomous Okrug"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "78"
-msgstr "Ярославская область"
+msgstr "Yaroslavl Oblast"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "79"
-msgstr "Республика Адыгея"
+msgstr "Republic of Adygea"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "8"
-msgstr "Хабаровский край"
+msgstr "Khabarovsk Krai"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "80"
-msgstr "Республика Башкортостан"
+msgstr "Republic of Bashkortostan"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "81"
-msgstr "Республика Бурятия"
+msgstr "Republic of Buryatia"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "82"
-msgstr "Республика Дагестан"
+msgstr "Republic of Dagestan"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "83"
-msgstr "Кабардино-Балкарская Республика"
+msgstr "Kabardino-Balkar Republic"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "84"
-msgstr "Республика Алтай"
+msgstr "Altai Republic"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "85"
-msgstr "Республика Калмыкия"
+msgstr "Republic of Kalmykia"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "86"
-msgstr "Республика Карелия"
+msgstr "Republic of Karelia"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "87"
-msgstr "Республика Коми"
+msgstr "Komi Republic"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "88"
-msgstr "Республика Марий Эл"
+msgstr "Mari El Republic"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "89"
-msgstr "Республика Мордовия"
+msgstr "Republic of Mordovia"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "90"
-msgstr "Республика Северная Осетия-Алания"
+msgstr "Republic of North Ossetia-Alania"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "91"
-msgstr "Карачаево-Черкесская Республика"
+msgstr "Karachay-Cherkess Republic"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "92"
-msgstr "Республика Татарстан"
+msgstr "Republic of Tatarstan"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "93"
-msgstr "Республика Тыва"
+msgstr "Tuva Republic"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "94"
-msgstr "Удмуртская Республика"
+msgstr "Udmurt Republic"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "95"
-msgstr "Республика Хакасия"
+msgstr "Republic of Khakassia"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "96"
-msgstr "Чеченская Республика"
+msgstr "Chechen Republic"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "97"
-msgstr "Чувашская Республика"
+msgstr "Chuvash Republic"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "98"
-msgstr "Республика Саха (Якутия)"
+msgstr "Sakha (Yakutia) Republic"
 
 #: ../i18n/okato_region/src/keys.txt:1
 msgid "99"
-msgstr "Еврейская автономная область"
+msgstr "Jewish Autonomous Oblast"
