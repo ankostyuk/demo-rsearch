@@ -58,17 +58,19 @@
     background-color: transparent;
 }
 [np-rsearch-navigation] .breadcrumb > li {
-    height: 32px;
+    height: 35px;
     line-height: 15px;
     vertical-align: top;
 }
 [np-rsearch-navigation] .breadcrumb .divider {
+    display: inline-block;
     padding: 0 5px;
     vertical-align: top;
 }
 [np-rsearch-navigation] .breadcrumb [np-rsearch-navigation-breadcrumb],
 [np-rsearch-navigation] .breadcrumb [np-rsearch-navigation-breadcrumb] > span {
     display: inline-block;
+    vertical-align: top;
 }
 [np-rsearch-navigation] .breadcrumb [np-rsearch-navigation-breadcrumb] a,
 [np-rsearch-navigation] .breadcrumb [np-rsearch-navigation-breadcrumb] a > span {
@@ -78,11 +80,8 @@
     display: block;
     font-size: 80%;
 }
-[np-rsearch-navigation] .breadcrumb .node-form {
-    margin-top: -1px;
-    font-weight: bold;
-}
 [np-rsearch-navigation] .breadcrumb .node-form .target-relations-info {
+    padding-top: 1px;
     font-weight: normal;
     color: @defaultHeaderLightColor;
 }
