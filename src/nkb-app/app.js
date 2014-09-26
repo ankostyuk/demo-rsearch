@@ -117,7 +117,7 @@ define(function(require) {'use strict';
             }]);
         }])
         //
-        .run(['$log', '$q', '$rootScope', '$document', 'npRsearchMetaHelper', 'npNkbCommentHelper', function($log, $q, $rootScope, $document, npRsearchMetaHelper, npNkbCommentHelper){
+        .run(['$log', '$rootScope', function($log, $rootScope){
             //
             _.extend($rootScope, {
                 app: {
@@ -129,11 +129,10 @@ define(function(require) {'use strict';
                 }
             });
 
-            $q.all([npRsearchMetaHelper.initPromise(), npNkbCommentHelper.initPromise()]).then(function(){
-                var rsearchNavigationScope = $document.find('[np-rsearch-navigation]').isolateScope();
-
+            //
+            $rootScope.$on('np-rsearch-navigation-init', function(e, scope){
                 _.extend($rootScope.app, {
-                    isSearch: rsearchNavigationScope.isSearch,
+                    isSearch: scope.isSearch,
                     ready: true
                 });
             });
