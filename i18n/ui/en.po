@@ -54,9 +54,7 @@ msgstr "{'one': '1 company', 'other': '{{count|number}} companies'}"
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_EXECUTIVE_COMPANY"
-msgstr ""
-"{'one': '1 управляющая компания', 'other': '{{count|number}} управляющая "
-"компания'}"
+msgstr "{'one': '1 управляющая компания', 'other': '{{count|number}} управляющая компания'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -71,31 +69,24 @@ msgstr "{'one': '1 учредитель', 'other': '{{count|number}} учред�
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_FOUNDER_COMPANY"
-msgstr ""
-"{'one': '1 учредитель компания', 'other': '{{count|number}} учредитель "
-"компания'}"
+msgstr "{'one': '1 учредитель компания', 'other': '{{count|number}} учредитель компания'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL"
-msgstr ""
-"{'one': '1 учредитель физическое лицо', 'other': '{{count|number}} "
-"учредитель физическое лицо'}"
+msgstr "{'one': '1 учредитель физическое лицо', 'other': '{{count|number}} учредитель физическое лицо'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_HEAD_COMPANY"
-msgstr ""
-"{'one': 'Головная компания', 'other': '{{count|number}} головная компания'}"
+msgstr "{'one': 'Головная компания', 'other': '{{count|number}} головная компания'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_LEAD_COMPANY"
-msgstr ""
-"{'one': '1 руководимая компания', 'other': '{{count|number}} руководимая "
-"компания'}"
+msgstr "{'one': '1 руководимая компания', 'other': '{{count|number}} руководимая компания'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -106,8 +97,7 @@ msgstr "{'one': '1 phone', 'other': '{{count|number}} phones'}"
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_PREDECESSOR_COMPANY"
-msgstr ""
-"{'one': '1 предшественник', 'other': '{{count|number}} предшественник'}"
+msgstr "{'one': '1 предшественник', 'other': '{{count|number}} предшественник'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -117,16 +107,13 @@ msgstr "{'one': '1 эмитент', 'other': '{{count|number}} эмитент'}"
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_REGISTER_HOLDER_COMPANY"
-msgstr ""
-"{'one': '1 реестродержатель', 'other': '{{count|number}} реестродержатель'}"
+msgstr "{'one': '1 реестродержатель', 'other': '{{count|number}} реестродержатель'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY"
-msgstr ""
-"{'one': '1 учреждённая компания', 'other': '{{count|number}} учреждённая "
-"компания'}"
+msgstr "{'one': '1 учреждённая компания', 'other': '{{count|number}} учреждённая компания'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
@@ -144,8 +131,11 @@ msgstr ""
 "of affiliated persons"
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "Анализ связей"
+#, fuzzy
+msgid "Анализ аффилированных лиц"
 msgstr ""
+"Analysis\n"
+"of affiliated persons"
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Аналитический профиль"
@@ -154,6 +144,10 @@ msgstr ""
 #: ../src/nkb-app/components/login/views/login-form.html:1
 msgctxt "баланс пользователя"
 msgid "Баланс"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Банк данных исполнительных производств"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
@@ -236,6 +230,13 @@ msgid "ЕГРЮЛ"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "Заказ продукта НКБ на странице миниотчета"
+msgid ""
+"Заказать бизнес-справку\n"
+"по иностранной компании"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Заказать выписку ЕГРИП"
 msgstr ""
 
@@ -244,16 +245,20 @@ msgid "Заказать выписку ЕГРЮЛ"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Заказать выписку ЕГРЮЛ по руководителю"
+msgid "Заказать список руководимых компаний"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Заказать выписку ЕГРЮЛ по учредителю"
+msgid "Заказать список учрежденных компаний"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ИНН"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Искать в социальных сетях"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -317,6 +322,10 @@ msgstr "No comments"
 msgid "О проекте"
 msgstr ""
 
+#: ../src/nkb-app/index.html:1
+msgid "О системе графического анализа"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ОГРН"
 msgstr ""
@@ -361,10 +370,6 @@ msgstr "Search — NCB"
 msgid "Пополнить"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Построить схему"
-msgstr ""
-
 #: ../src/nkb-app/index.html:1
 msgid "Продукты и услуги"
 msgstr ""
@@ -388,10 +393,6 @@ msgstr "Advanced search"
 
 #: ../src/nkb-app/index.html:1
 msgid "Регистрация"
-msgstr ""
-
-#: ../src/nkb-app/index.html:1 ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Система графического анализа"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
