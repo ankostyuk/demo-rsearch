@@ -78,7 +78,7 @@
                     <h5 class="actions-label"><i class="icon large i-document-stamp"></i> ${_tr("ЕГРЮЛ")}</h5>
                     <ul class="unstyled actions-list">
                         <li><a class="action" ng-click="productClick('egrulCompanyReport')">${_tr("Заказать выписку ЕГРЮЛ")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('egrulCompanyReport')"></span></li>
-                        <li ng-repeat="egrul in node.__egrulList"><a class="action" ng-href="{{egrul._link}}" download="{{egrul._downloadName}}" target="_self">${_tr("Выписка")} ${_trc("от", "от такой-то даты")} {{egrul.fileDate | date:'mediumDate'}}</a></li>
+                        <li ng-repeat="egrul in node.__egrulList"><a class="action" ng-href="{{egrul._link}}" download="{{egrul._downloadName}}" target="_self">${_tr("Выписка")} ${_trc("от", "от такой-то даты")} {{egrul.fileDate | date:'dd.MM.yyyy'}}</a></li>
                     </ul>
                 </div>
                 <hr>
