@@ -11,7 +11,7 @@ root._APP_CONFIG = {
     },
     meta: {
         // Параметр: Объём продаж за последний год
-        lastSalesVolumeField: 'p20103_2012',
+        lastSalesVolumeField: 'p20103_2013',
         currencyOrder: 1000
     }
 };
