@@ -137,6 +137,13 @@ define(function(require) {'use strict';
                 });
             });
         }]);
+    //
 
-    angular.bootstrap(document, [app.name]);
+    return {
+        init: function(parent) {
+            $(function() {
+                angular.bootstrap(parent, [app.name]);
+            });
+        }
+    };
 });

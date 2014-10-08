@@ -181,6 +181,6 @@ if (typeof define === 'function' && define.amd) {
     requirejs.config(root._RESOURCES_CONFIG);
 
     require(['app'], function(app){
-        // init nkb-app
+        app.init(document);
     });
 }
