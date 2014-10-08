@@ -349,16 +349,14 @@ define(function(require) {'use strict';
                         }
 
                         loading(function(done){
-                            var nodePromises = [];
-
-                            // egrul list
-                            nodePromises.push(nodeFormEgrulList(node));
-
-                            // user
-                            nodePromises.push(npUser.fetchUser());
-
                             // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
-                            $q.all(nodePromises).then(complete, complete);
+                            npUser.fetchUser()
+                                .then(egrulList, egrulList)
+                                .then(complete, complete);
+
+                            function egrulList() {
+                                nodeFormEgrulList(node);
+                            }
 
                             function complete() {
                                 nodeListView.clear();
