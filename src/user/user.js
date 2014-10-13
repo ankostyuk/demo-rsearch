@@ -159,6 +159,10 @@ define(function(require) {'use strict';
                             return user && user.userName;
                         },
 
+                        getLogin: function() {
+                            return user && user.userLogin;
+                        },
+
                         getBalance: function() {
                             return user && user.balance;
                         },
