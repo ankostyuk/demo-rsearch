@@ -49,18 +49,37 @@
 [np-rsearch-navigation] .nav {
     margin: 0;
 }
-[np-rsearch-navigation] .search-result-switch {
-    margin-bottom: 20px;
+/*[np-rsearch-navigation] .search-result-switch {
+    display: inline-block;
+    margin: 3px 0 5px -10px;
+    padding: 0;
+    list-style: none;
 }
+[np-rsearch-navigation] .search-result-switch > li {
+    padding-left: 10px;
+}
+[np-rsearch-navigation] .search-result-switch > li:first-child {
+    padding-left: 5px;
+}*/
 [np-rsearch-navigation] .breadcrumb {
-    margin: 3px 0 5px 2px;
+    /*display: inline-block;*/
+    margin: 3px 0 5px 0;
     padding: 0;
     background-color: transparent;
 }
+/*[np-rsearch-navigation] .search-result-switch > li,*/
 [np-rsearch-navigation] .breadcrumb > li {
+    display: inline-block;
     height: 35px;
     line-height: 15px;
     vertical-align: top;
+}
+[np-rsearch-navigation] .breadcrumb > li.search-result {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+[np-rsearch-navigation] .breadcrumb > li.search-result .action.active {
+    cursor: pointer !important;
 }
 [np-rsearch-navigation] .breadcrumb .divider {
     display: inline-block;

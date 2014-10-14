@@ -538,6 +538,8 @@ define(function(require) {'use strict';
 
                         var index = 0;
 
+                        clearBreadcrumbs(index + 1);
+
                         breadcrumbs.list[index] = {
                             index: index,
                             type: 'SEARCH',
