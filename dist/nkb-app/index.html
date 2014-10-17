@@ -12,7 +12,7 @@
 
         <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
 
-        <title ng-bind-template='{{_trc("Поиск — НКБ", "Наименование приложения поиска")}}'>Поиск — НКБ</title>
+        <title ng-bind-template='{{::_trc("Поиск — НКБ", "Наименование приложения поиска")}}'>Поиск — НКБ</title>
 
         <style type="text/css">
             .app-state-indicator {
@@ -30,7 +30,7 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.min.js"></script>
 
         <!-- nkb-app -->
-        <script src="./main.js?02f17cdbc4f2881b30d75ad584d9447edb631e2f"></script>
+        <script src="./main.js?41ede76b4b245450b3f44b005c474408a048a812"></script>
     </head>
 
     <body>
@@ -172,7 +172,7 @@
         (function (d, w, c) {
             (w[c] = w[c] || []).push(function() {
                 try {
-                    w.yaCounter23296318 = new Ya.Metrika({id:23296318,
+                    w.yaCounter = new Ya.Metrika({id:23296318,
                             webvisor:true,
                             clickmap:true,
                             trackLinks:true,
