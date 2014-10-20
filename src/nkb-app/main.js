@@ -25,6 +25,8 @@ root._RESOURCES_CONFIG = {
         'angular-locale_ru':    'external_components/angular-i18n/angular-locale_ru',
         'angular-locale_en':    'external_components/angular-i18n/angular-locale_en',
         'ng-infinite-scroll':   'external_components/ngInfiniteScroll/ng-infinite-scroll',
+
+        // @Deprecated
         'angulartics':          'external_components/angulartics/angulartics',
         'angulartics.yandex.metrika': 'src/angulartics/angulartics.yandex.metrika',
 
@@ -66,6 +68,10 @@ root._RESOURCES_CONFIG = {
         name: 'app.lang',
         location: 'src/nkb-app/components/lang',
         main: 'lang'
+    }, {
+        name: 'app.log',
+        location: 'src/nkb-app/components/log',
+        main: 'log'
     }, {
         name: 'nkbcomment',
         location: 'src/nkbcomment',

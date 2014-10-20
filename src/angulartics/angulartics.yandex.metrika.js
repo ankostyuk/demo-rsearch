@@ -11,6 +11,8 @@
  */
 angular.module('angulartics.yandex.metrika', ['angulartics'])
 .config(['$analyticsProvider', function($analyticsProvider) {
+    return;
+
     //
     //$analyticsProvider.registerPageTrack(function(path){
     //});

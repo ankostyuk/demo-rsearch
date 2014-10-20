@@ -19,6 +19,7 @@ define(function(require) {'use strict';
     var submodules = {
         login:          require('app.login'),
         lang:           require('app.lang'),
+        log:            require('app.log'),
         l10n:           require('l10n'),
         nkbcomment:     require('nkbcomment'),
         rsearch:        require('rsearch')
@@ -29,6 +30,7 @@ define(function(require) {'use strict';
         .constant('appConfig', {
             uuid: uuid.v4(),
             meta: root._APP_CONFIG.meta,
+            yandexMetrikaCounterName: 'yaCounter23296318',
             resource: {
                 'users.url':                '/siteapp/api/users',
                 'login.url':                '/siteapp/login',
