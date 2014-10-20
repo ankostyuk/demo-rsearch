@@ -25,6 +25,7 @@ define(function(require) {'use strict';
     var app = angular.module('app', _.pluck(submodules, 'name'))
         //
         .constant('appConfig', {
+            name: 'rsearch',
             uuid: uuid.v4(),
             meta: root._APP_CONFIG.meta,
             yandexMetrikaCounterName: 'yaCounter23296318',

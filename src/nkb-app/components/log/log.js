@@ -8,50 +8,92 @@ define(function(require) {'use strict';
 
     return angular.module('app.log', [])
         //
-        .run(['$log', '$rootScope', 'appLog', function($log, $rootScope, appLog){
+        .run(['$log', '$rootScope', '$timeout', 'npUser', 'appLog', function($log, $rootScope, $timeout, npUser, appLog){
             //
+            var user = npUser.user();
+
             $rootScope.$on('app-user-apply', function(e, change){
                 if (!change.first) {
                     return;
                 }
 
-                appLog.log('user', null, true);
+                var d = {};
+
+                d[user.isAuthenticated() ? 'authenticated' : 'anonymous'] = {};
+
+                appLog.log('open', d, true);
             });
+
+            //
+            var searchLogDelay = 2000, // 2 секунды
+                searchLogPromise;
+
+            $rootScope.$on('np-rsearch-navigation-search-result', function(e, query, result){
+                $timeout.cancel(searchLogPromise);
+
+                searchLogPromise = $timeout(function(){
+                    var d = {
+                        q: query,
+                        totalResult: result.total
+                    };
+
+                    d[result.total ? 'effective' : 'empty'] = {};
+
+                    appLog.log('search', d, true);
+                }, searchLogDelay);
+            });
+
+            //
+            $rootScope.$on('np-rsearch-navigation-node-form', function(e, node){
+                appLog.log('open_mini_report', {
+                    nodeId: buildNodeId(node),
+                    nodeType: node._type
+                }, true);
+            });
+
+            //
+            $rootScope.$on('np-rsearch-navigation-node-relations', function(e, node, relationType){
+                appLog.log('open_related', {
+                    nodeId: buildNodeId(node),
+                    nodeType: node._type,
+                    relationType: relationType
+                }, true);
+            });
+
+            //
+            function buildNodeId(node) {
+                return node._type + '.' + node._id;
+            }
         }])
         //
         .factory('appLog', ['$log', 'npUser', 'appConfig', function($log, npUser, appConfig){
             var user = npUser.user();
 
             //
-            function logToYandexMetrika(action, params) {
+            function logToYandexMetrika(logObj) {
                 var yaCounter = window[appConfig.yandexMetrikaCounterName];
-
-                $log.info('logToYandexMetrika...', yaCounter);
 
                 if (!yaCounter) {
                     return;
                 }
 
-                var yaParams = {};
-
-                yaParams[action] = params;
-
-                console.info('yaCounter params...', yaParams);
-
-                yaCounter.params(yaParams);
+                yaCounter.params(logObj);
             }
 
             return {
                 log: function(action, params, withUserInfo) {
-                    params = params || {};
+                    var logData = {},
+                        logObj  = {};
+
+                    logData[action] = params || {};
 
                     if (withUserInfo) {
-                        params['userId'] = user.getId() || 'anonymous';
+                        logData['userId'] = user.getId() || 'anonymous';
                     }
 
-                    $log.info('appLog...', action, params);
+                    logObj[appConfig.name] = logData;
 
-                    logToYandexMetrika(action, params);
+                    logToYandexMetrika(logObj);
                 }
             };
         }]);

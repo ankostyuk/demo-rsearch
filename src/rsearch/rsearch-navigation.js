@@ -175,7 +175,7 @@ define(function(require) {'use strict';
                             $q.all(searchPromises).then(complete, complete);
 
                             function complete() {
-                                checkSearchResult();
+                                checkSearchResult(query);
                                 done();
                             }
                         });
@@ -223,7 +223,7 @@ define(function(require) {'use strict';
                         }
                     }
 
-                    function checkSearchResult() {
+                    function checkSearchResult(query) {
                         var resultPriority  = 0,
                             activeResult;
 
@@ -257,6 +257,10 @@ define(function(require) {'use strict';
                         } else {
                             nodeListView.clear();
                         }
+
+                        $rootScope.$emit('np-rsearch-navigation-search-result', query, {
+                            total: search.total
+                        });
                     }
 
                     function getSearchTotalByNodeType(nodeType) {
@@ -376,6 +380,8 @@ define(function(require) {'use strict';
                                     checkNodeFormToHistory();
                                 }
 
+                                $rootScope.$emit('np-rsearch-navigation-node-form', node);
+
                                 done();
                             }
                         });
@@ -429,6 +435,8 @@ define(function(require) {'use strict';
 
                             doRelations(byRelations, true, noHistory);
                         }
+
+                        $rootScope.$emit('np-rsearch-navigation-node-relations', node, relationType);
                     }
 
                     function doRelations(byRelations, checkAccentedResult, noHistory) {
