@@ -12,7 +12,9 @@
 
         <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
 
-        <title ng-bind-template='{{_trc("Поиск — НКБ", "Наименование приложения поиска")}}'>Поиск — НКБ</title>
+        <link rel="search" type="application/opensearchdescription+xml" title="Национальное кредитное бюро" href="./opensearch.xml" />
+
+        <title ng-bind-template='{{::_trc("Поиск — НКБ", "Наименование приложения поиска")}}'>Поиск — НКБ</title>
 
         <style type="text/css">
             .app-state-indicator {
@@ -30,7 +32,7 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.14/require.min.js"></script>
 
         <!-- nkb-app -->
-        <script src="./main.js?02f17cdbc4f2881b30d75ad584d9447edb631e2f"></script>
+        <script src="./main.js?604ec5c94a1cf877067c43fc207a8257ba26a49f"></script>
     </head>
 
     <body>
