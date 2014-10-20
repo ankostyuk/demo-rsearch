@@ -9,9 +9,6 @@ define(function(require) {'use strict';
     var angular = require('angular'),
         uuid    = require('uuid');
 
-                  require('angulartics');
-                  require('angulartics.yandex.metrika');
-
                   require('icons');
                   require('css!../external_components/bootstrap/css/bootstrap');
                   require('less!./styles/app');
@@ -25,7 +22,7 @@ define(function(require) {'use strict';
         rsearch:        require('rsearch')
     };
 
-    var app = angular.module('app', _.pluck(submodules, 'name').concat(['angulartics', 'angulartics.yandex.metrika']))
+    var app = angular.module('app', _.pluck(submodules, 'name'))
         //
         .constant('appConfig', {
             uuid: uuid.v4(),
@@ -122,7 +119,7 @@ define(function(require) {'use strict';
             }]);
         }])
         //
-        .run(['$log', '$rootScope', '$analytics', function($log, $rootScope, $analytics){
+        .run(['$log', '$rootScope', function($log, $rootScope){
             //
             _.extend($rootScope, {
                 app: {
@@ -141,9 +138,6 @@ define(function(require) {'use strict';
                     ready: true
                 });
             });
-
-            //
-            $analytics.eventTrack('userId', null);
         }]);
     //
 

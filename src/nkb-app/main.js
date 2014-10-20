@@ -26,10 +26,6 @@ root._RESOURCES_CONFIG = {
         'angular-locale_en':    'external_components/angular-i18n/angular-locale_en',
         'ng-infinite-scroll':   'external_components/ngInfiniteScroll/ng-infinite-scroll',
 
-        // @Deprecated
-        'angulartics':          'external_components/angulartics/angulartics',
-        'angulartics.yandex.metrika': 'src/angulartics/angulartics.yandex.metrika',
-
         'jquery':               'external_components/jquery/jquery',
         'jquery.cookie':        'external_components/jquery.cookie/jquery.cookie',
 
@@ -110,12 +106,6 @@ root._RESOURCES_CONFIG = {
         },
         'ng-infinite-scroll': {
             deps: ['angular']
-        },
-        'angulartics': {
-            deps: ['angular']
-        },
-        'angulartics.yandex.metrika': {
-            deps: ['angulartics']
         },
 
         'jquery.cookie': {
