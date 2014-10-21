@@ -147,6 +147,14 @@ msgid "руб."
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+msgid "учредитель"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "руководитель"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ИНН"
 msgstr ""
