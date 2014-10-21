@@ -39,14 +39,15 @@ define(function(require) {'use strict';
                     var init                    = false,
                         l10n                    = npL10n.l10n(),
                         user                    = npUser.user(),
-                        initMetaPromise         = npRsearchMetaHelper.initPromise(),
-                        initPromise             = $q.all([initMetaPromise, npNkbCommentHelper.initPromise()]),
+                        initPromise             = $q.all([npRsearchMetaHelper.initPromise(), npNkbCommentHelper.initPromise()]),
                         initDeferredFunctions   = [];
 
                     function initSuccess() {
                         var me = this;
 
                         init = true;
+
+                        initByMeta();
 
                         $rootScope.$emit('np-rsearch-navigation-init', scope);
 
@@ -67,9 +68,6 @@ define(function(require) {'use strict';
                             });
                         }
                     }
-
-                    //
-                    initMetaPromise.then(initByMeta);
 
                     function initByMeta() {
                         search.byNodeTypes = {};
@@ -1136,7 +1134,7 @@ define(function(require) {'use strict';
                     }
 
                     // Выполнить после отработки кода модуля
-                    $q.all(initPromise).then(initSuccess);
+                    initPromise.then(initSuccess);
                 }
             };
         }]);
