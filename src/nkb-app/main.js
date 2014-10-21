@@ -65,6 +65,10 @@ root._RESOURCES_CONFIG = {
         location: 'src/nkb-app/components/lang',
         main: 'lang'
     }, {
+        name: 'app.log',
+        location: 'src/nkb-app/components/log',
+        main: 'log'
+    }, {
         name: 'nkbcomment',
         location: 'src/nkbcomment',
         main: 'nkbcomment'
