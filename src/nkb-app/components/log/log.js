@@ -4,7 +4,8 @@
  */
 define(function(require) {'use strict';
 
-    var angular         = require('angular');
+    var angular         = require('angular'),
+        purl            = require('purl');
 
     return angular.module('app.log', [])
         //
@@ -67,7 +68,9 @@ define(function(require) {'use strict';
         }])
         //
         .factory('appLog', ['$log', 'npUser', 'appConfig', function($log, npUser, appConfig){
-            var user = npUser.user();
+            var url     = purl(),
+                urlPath = url.attr('path'),
+                user    = npUser.user();
 
             //
             function logToYandexMetrika(logObj) {
@@ -77,7 +80,7 @@ define(function(require) {'use strict';
                     return;
                 }
 
-                yaCounter.params(logObj);
+                yaCounter.hit(urlPath, null, null, logObj);
             }
 
             return {
