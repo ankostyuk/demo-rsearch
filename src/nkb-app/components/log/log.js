@@ -91,7 +91,7 @@ define(function(require) {'use strict';
                     logData[action] = params || {};
 
                     if (withUserInfo) {
-                        logData['userId'] = user.getId() || 'anonymous';
+                        logData['userLogin'] = user.getLogin() || 'anonymous';
                     }
 
                     logObj[appConfig.name] = logData;
