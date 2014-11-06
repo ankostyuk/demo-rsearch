@@ -1,0 +1,7 @@
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+    <ShortName>НКБ</ShortName>
+    <Description>Справочно-информационная система</Description>
+    <InputEncoding>UTF-8</InputEncoding>
+    <Image width="48" height="48" type="image/x-icon">http://www.creditnet.ru/hyper/favicon.ico</Image>
+    <Url type="text/html" method="get" template="http://www.creditnet.ru/hyper/?q={searchTerms}" />
+</OpenSearchDescription>

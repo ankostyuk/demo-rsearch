@@ -5,16 +5,57 @@
 
 /* np-rsearch-input */
 [np-rsearch-input] {
-    padding-top: 8px;
+    padding-top: 4px;
 }
-[np-rsearch-input] input.search-query {
-    width: 360px;
-    -webkit-border-radius: 4px 0 0 4px;
-       -moz-border-radius: 4px 0 0 4px;
-            border-radius: 4px 0 0 4px;
+[np-rsearch-input] .input-append {
+    margin: 0;
+    padding: 2px;
+    background-color: @searchInputBackgroundColor;
+    white-space: nowrap;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+}
+[np-rsearch-input] input {
+    width: 366px;
+
+    height: 25px;
+    line-height: 25px;
+    font-size: 16px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+
+    -webkit-border-radius: 3px 0 0 3px;
+       -moz-border-radius: 3px 0 0 3px;
+            border-radius: 3px 0 0 3px;
+}
+[np-rsearch-input] input:focus {
+    border-color: @searchInputBorderColor;
+    -webkit-box-shadow: none;
+       -moz-box-shadow: none;
+            box-shadow: none;
+}
+[np-rsearch-input] input:-moz-placeholder {
+  color: @searchInputPlaceholderColor;
+}
+[np-rsearch-input] input:-ms-input-placeholder {
+    color: @searchInputPlaceholderColor;
+}
+[np-rsearch-input] input::-webkit-input-placeholder {
+    color: @searchInputPlaceholderColor;
 }
 [np-rsearch-input] .search-btn {
     width: 70px;
+
+    line-height: 25px;
+    font-size: 16px;
+
+    -webkit-border-radius: 0 3px 3px 0;
+       -moz-border-radius: 0 3px 3px 0;
+            border-radius: 0 3px 3px 0;
+
+    color: @searchInputBtnColor;
 }
 
 /* np-rsearch-node-navigation */
@@ -49,22 +90,28 @@
 [np-rsearch-navigation] .nav {
     margin: 0;
 }
-[np-rsearch-navigation] .search-result-switch {
-    margin-bottom: 20px;
-}
 [np-rsearch-navigation] .breadcrumb {
-    margin: 3px 0 5px 2px;
+    margin: 3px 0 5px 0;
     padding: 0;
     background-color: transparent;
 }
 [np-rsearch-navigation] .breadcrumb > li {
+    display: inline-block;
+    padding-right: 5px;
     height: 35px;
     line-height: 15px;
     vertical-align: top;
 }
+[np-rsearch-navigation] .breadcrumb > li.search-result {
+    margin-right: -3px;
+    padding-left: 5px;
+}
+[np-rsearch-navigation] .breadcrumb > li.search-result .action.active {
+    cursor: pointer !important;
+}
 [np-rsearch-navigation] .breadcrumb .divider {
     display: inline-block;
-    padding: 0 5px;
+    padding: 0 5px 0 0;
     vertical-align: top;
 }
 [np-rsearch-navigation] .breadcrumb [np-rsearch-navigation-breadcrumb],

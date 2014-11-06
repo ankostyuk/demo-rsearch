@@ -389,10 +389,14 @@ define(function(require) {'use strict';
                         order: 202,
                         mergedInn: true,
                         text: function(relation){
-                            return relation.position ? relation.position : '';
+                            return getExecutiveText(relation);
                         }
                     }
                 };
+
+                function isTargetRelation(relation) {
+                    return relation._type === data.relationInfo.relationType;
+                }
 
                 function getFounderText(relation) {
                     if (relation.sharePercent || relation.shareAmount) {
@@ -402,7 +406,15 @@ define(function(require) {'use strict';
                             (relation.shareAmount ? $filter('number')(relation.shareAmount) + nbsp + _tr("руб.") : '');
                     }
 
-                    return '';
+                    return isTargetRelation(relation) ? '' : _tr("учредитель");
+                }
+
+                function getExecutiveText(relation) {
+                    if (relation.position) {
+                        return relation.position
+                    }
+
+                    return isTargetRelation(relation) ? '' : _tr("руководитель");
                 }
 
                 function getInnText(inn) {

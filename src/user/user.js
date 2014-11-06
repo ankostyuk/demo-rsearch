@@ -24,12 +24,17 @@ define(function(require) {'use strict';
 
             function applyUser(u) {
                 var change = {
+                    first: !isFetch(),
                     login: getUserId(user) !== getUserId(u)
                 };
 
                 user = u;
 
                 $rootScope.$emit('app-user-apply', change);
+            }
+
+            function isFetch(u) {
+                return user !== undefined;
             }
 
             function getUserId(u) {
@@ -140,16 +145,22 @@ define(function(require) {'use strict';
 
                 user: function() {
                     return {
-                        isFetch: function() {
-                            return user !== undefined;
-                        },
+                        isFetch: isFetch,
 
                         isAuthenticated: function() {
                             return !!user;
                         },
 
+                        getId: function() {
+                            return user && user.userId;
+                        },
+
                         getName: function() {
                             return user && user.userName;
+                        },
+
+                        getLogin: function() {
+                            return user && user.userLogin;
                         },
 
                         getBalance: function() {

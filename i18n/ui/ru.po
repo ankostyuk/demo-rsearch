@@ -14,6 +14,11 @@ msgstr ""
 "CLDR_PLURAL_FORMS_FORMAT: one{0}few{1}many{2}other{2}\n"
 "X-Generator: Poedit 1.6.4\n"
 
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid "Cвязи между участниками закупок"
+msgstr ""
+
 #: ../src/nkbcomment/views/nkbcomment.html:1
 msgid "NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT"
 msgstr "{'one': '{{count|number}} комментарий', 'few': '{{count|number}} комментария', 'many': '{{count|number}} комментариев', 'other': '{{count|number}} комментария'}"
@@ -121,14 +126,12 @@ msgstr "{'one': '{{count|number}} учреждённая компания', 'few
 msgid "NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY"
 msgstr "{'one': '{{count|number}} правопреемник', 'few': '{{count|number}} правопреемника', 'many': '{{count|number}} правопреемников', 'other': '{{count|number}} правопреемника'}"
 
-#: ../src/nkb-app/index.html:1
-msgctxt "Продукты НКБ на главной странице"
-msgid ""
-"Анализ\n"
-"аффилированных лиц"
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Анализ аффилированных лиц"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-node-relations.html:1
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
 msgid "Анализ аффилированных лиц"
 msgstr ""
 
@@ -155,13 +158,6 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Бизнес профиль"
-msgstr ""
-
-#: ../src/nkb-app/index.html:1
-msgctxt "Продукты НКБ на главной странице"
-msgid ""
-"Бизнес-справка\n"
-"по иностранной компании"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -195,20 +191,6 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Выписка"
-msgstr ""
-
-#: ../src/nkb-app/index.html:1
-msgctxt "Продукты НКБ на главной странице"
-msgid ""
-"Выписка\n"
-"из ЕГРИП"
-msgstr ""
-
-#: ../src/nkb-app/index.html:1
-msgctxt "Продукты НКБ на главной странице"
-msgid ""
-"Выписка\n"
-"из ЕГРЮЛ"
 msgstr ""
 
 #: ../src/nkb-app/components/login/views/login-form.html:1
@@ -252,6 +234,10 @@ msgstr ""
 msgid "ИНН"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-input.html:1
+msgid "ИНН, ОГРН, наименование, адрес или ФИО"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Искать в социальных сетях"
 msgstr ""
@@ -287,10 +273,6 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-region-filter.html:1
 msgid "Любой регион"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-input.html:1
-msgid "Наименование компании, ИНН/ОГРН, адрес или ФИО"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-input.html:1
@@ -337,13 +319,6 @@ msgstr ""
 msgid "Ожидайте..."
 msgstr ""
 
-#: ../src/nkb-app/index.html:1
-msgctxt "Продукты НКБ на главной странице"
-msgid ""
-"Отчеты\n"
-"на заказ"
-msgstr ""
-
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Отчеты на заказ"
 msgstr ""
@@ -388,6 +363,11 @@ msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgid "Регистрация"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid "Сервис комментариев"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -439,6 +419,14 @@ msgstr ""
 msgid "руб."
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "руководитель"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "тыс. руб."
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "учредитель"
 msgstr ""

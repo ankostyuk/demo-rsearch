@@ -16,6 +16,7 @@ define(function(require) {'use strict';
     var submodules = {
         login:          require('app.login'),
         lang:           require('app.lang'),
+        log:            require('app.log'),
         l10n:           require('l10n'),
         nkbcomment:     require('nkbcomment'),
         rsearch:        require('rsearch')
@@ -24,8 +25,10 @@ define(function(require) {'use strict';
     var app = angular.module('app', _.pluck(submodules, 'name'))
         //
         .constant('appConfig', {
+            name: 'rsearch',
             uuid: uuid.v4(),
             meta: root._APP_CONFIG.meta,
+            yandexMetrikaCounterName: 'yaCounter23296318',
             resource: {
                 'users.url':                '/siteapp/api/users',
                 'login.url':                '/siteapp/login',
@@ -136,6 +139,27 @@ define(function(require) {'use strict';
                     ready: true
                 });
             });
+        }])
+        //
+        .directive('appProvideSupport', ['$rootScope', '$timeout', 'npUser', function($rootScope, $timeout, npUser) {
+            return {
+                restrict: 'A',
+                link: function(scope, element, attrs) {
+                    $rootScope.$on('app-user-apply', function() {
+                        var src = '//image.providesupport.com/js/nkb-trial/safe-standard.js?ps_h=Xase&ps_t=' + new Date().getTime();
+                        var user = npUser.user();
+                        if (user.isAuthenticated()) {
+                            src += '&Client%20Login=' + user.getLogin();
+                                    //'&Client%20Details=' +
+                                    //'http%3A//www.creditnet.ru/admin/clients/details/%3Fid%3D' + user.getId();
+                        }
+                        var html ='<div id="scXase" style="display:inline"></div><script type="text/javascript" src="' + src + '"></script>';
+                        $timeout(function() {
+                            element.html(html);
+                        });
+                    });
+                }
+            };
         }]);
     //
 

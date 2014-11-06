@@ -1,7 +1,7 @@
 <div class="body" ng-class="{'liquidate': node._liquidate, 'liquidate-intermediate': node._liquidate.state.intermediate}">
     <div ng-if="node._type === 'COMPANY'">
         <div class="row">
-            <div class="span6 node-header">{{node.nameshortsort || node.namesort}}</div>
+            <div class="span6 node-header" data-node-id="{{node._id}}">{{node.nameshortsort || node.namesort}}</div>
             <div class="align-right" ng-show="node.founded_dt">${_tr("основано")} {{node.founded_dt | date:'dd.MM.yyyy'}}</div>
         </div>
         <div class="row node-entry reg-state" ng-show="node._reg.state">
@@ -28,14 +28,14 @@
     </div>
 
     <div ng-if="node._type === 'INDIVIDUAL'">
-        <div class="node-header">{{node.name}}</div>
+        <div class="node-header" data-node-id="{{node._id}}">{{node.name}}</div>
     </div>
 
     <div ng-if="node._type === 'ADDRESS'">
-        <div class="node-header">{{node.value}}</div>
+        <div class="node-header" data-node-id="{{node._id}}">{{node.value}}</div>
     </div>
 
     <div ng-if="node._type === 'PHONE'">
-        <div class="node-header">{{node.value}}</div>
+        <div class="node-header" data-node-id="{{node._id}}">{{node.value}}</div>
     </div>
 </div>

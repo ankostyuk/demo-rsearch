@@ -7,6 +7,7 @@
 
 *.versionsBackup
 *.orig
+*.mo
 
 tmp
 .tmp*

@@ -1,9 +1,8 @@
 <ul class="unstyled small">
-    <li ng-class="{active: l10n.getLang() === 'ru'}">
-        <a class="action" ng-href="{{l10n.getLang() === 'ru' ? null : l10n.currentUrlWithLang('ru')}}">Русский</a>
+    <li ng-class="::{active: l10n.getLang() === 'ru'}">
+        <a class="action" ng-href="{{::(l10n.getLang() === 'ru' ? null : l10n.currentUrlWithLang('ru'))}}">Русский</a>
     </li>
-    <li ng-class="{active: l10n.getLang() === 'en'}">
-        <a class="action" ng-href="{{l10n.getLang() === 'en' ? null : l10n.currentUrlWithLang('en')}}">English</a>
+    <li ng-class="::{active: l10n.getLang() === 'en'}">
+        <a class="action" ng-href="{{::(l10n.getLang() === 'en' ? null : l10n.currentUrlWithLang('en'))}}">English</a>
     </li>
 </ul>
-
