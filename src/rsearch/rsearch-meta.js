@@ -411,7 +411,7 @@ define(function(require) {'use strict';
 
                 function getExecutiveText(relation) {
                     if (relation.position) {
-                        return relation.position
+                        return relation.position;
                     }
 
                     return isTargetRelation(relation) ? '' : _tr("руководитель");

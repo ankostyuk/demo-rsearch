@@ -100,24 +100,8 @@ define(function(require) {'use strict';
             }
         })
         //
-        .config(['$logProvider', '$httpProvider', function($logProvider, $httpProvider){
-            //
+        .config(['$logProvider', function($logProvider){
             $logProvider.debugEnabled(false);
-
-            //
-            $httpProvider.interceptors.push(['$q', function($q){
-                return {
-                    'request': function(config){
-                        // жестко отключить cache
-                        config.cache = false;
-                        config.params = _.extend({}, config.params, {
-                            '_': $.now()
-                        });
-
-                        return config || $q.when(config);
-                    }
-                };
-            }]);
         }])
         //
         .run(['$log', '$rootScope', function($log, $rootScope){
@@ -153,9 +137,16 @@ define(function(require) {'use strict';
                                     //'&Client%20Details=' +
                                     //'http%3A//www.creditnet.ru/admin/clients/details/%3Fid%3D' + user.getId();
                         }
-                        var html ='<div id="scXase" style="display:inline"></div><script type="text/javascript" src="' + src + '"></script>';
+
+                        element.html('<div id="scXase" style="display:inline"></div>');
+
                         $timeout(function() {
-                            element.html(html);
+                            // Загружаем скрипт без параметра '_'
+                            $.ajax({
+                                url: src,
+                                dataType: 'script',
+                                cache: true
+                            });
                         });
                     });
                 }
