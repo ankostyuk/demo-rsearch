@@ -1,6 +1,6 @@
 {
   "name": "rsearch",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "rsearch frontend",
   "dependencies": {
     "requirejs": "2.1.14",
