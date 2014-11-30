@@ -10,7 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "CLDR_PLURAL_FORMS_FORMAT: one{0}few{1}many{2}other{2}\n"
 "X-Generator: Poedit 1.6.4\n"
 
@@ -21,110 +22,197 @@ msgstr ""
 
 #: ../src/nkbcomment/views/nkbcomment.html:1
 msgid "NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT"
-msgstr "{'one': '{{count|number}} комментарий', 'few': '{{count|number}} комментария', 'many': '{{count|number}} комментариев', 'other': '{{count|number}} комментария'}"
+msgstr ""
+"{'one': '{{count|number}} комментарий', 'few': '{{count|number}} "
+"комментария', 'many': '{{count|number}} комментариев', 'other': '{{count|"
+"number}} комментария'}"
 
 #: ../src/rsearch/views/rsearch-navigation.html:1
 msgid "NG_PLURALIZE::NODE_ADDRESS"
-msgstr "{'one': '{{count|number}} адрес', 'few': '{{count|number}} адреса', 'many': '{{count|number}} адресов', 'other': '{{count|number}} адреса'}"
+msgstr ""
+"{'one': '{{count|number}} адрес', 'few': '{{count|number}} адреса', 'many': "
+"'{{count|number}} адресов', 'other': '{{count|number}} адреса'}"
 
 #: ../src/rsearch/views/rsearch-navigation.html:1
 msgid "NG_PLURALIZE::NODE_COMPANY"
-msgstr "{'one': '{{count|number}} компания', 'few': '{{count|number}} компании', 'many': '{{count|number}} компаний', 'other': '{{count|number}} компании'}"
+msgstr ""
+"{'one': '{{count|number}} компания', 'few': '{{count|number}} компании', "
+"'many': '{{count|number}} компаний', 'other': '{{count|number}} компании'}"
 
 #: ../src/rsearch/views/rsearch-navigation.html:1
 msgid "NG_PLURALIZE::NODE_INDIVIDUAL"
-msgstr "{'one': '{{count|number}} физическое лицо', 'few': '{{count|number}} физических лица', 'many': '{{count|number}} физических лиц', 'other': '{{count|number}} физического лица'}"
+msgstr ""
+"{'one': '{{count|number}} физическое лицо', 'few': '{{count|number}} "
+"физических лица', 'many': '{{count|number}} физических лиц', 'other': "
+"'{{count|number}} физического лица'}"
 
 #: ../src/rsearch/views/rsearch-navigation.html:1
 msgid "NG_PLURALIZE::NODE_PHONE"
-msgstr "{'one': '{{count|number}} телефон', 'few': '{{count|number}} телефона', 'many': '{{count|number}} телефонов', 'other': '{{count|number}} телефона'}"
+msgstr ""
+"{'one': '{{count|number}} телефон', 'few': '{{count|number}} телефона', "
+"'many': '{{count|number}} телефонов', 'other': '{{count|number}} телефона'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_ADDRESS"
-msgstr "{'one': 'Адрес', 'few': '{{count|number}} адреса', 'many': '{{count|number}} адресов', 'other': '{{count|number}} адреса'}"
+msgstr ""
+"{'one': 'Адрес', 'few': '{{count|number}} адреса', 'many': '{{count|number}} "
+"адресов', 'other': '{{count|number}} адреса'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_CHILDREN"
+msgstr ""
+"{'one': '{{count|number}} аффилированная компания', 'few': '{{count|number}} "
+"аффилированные компании', 'many': '{{count|number}} аффилированных "
+"компаний', 'other': '{{count|number}} аффилированной компании'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_PARENTS"
+msgstr ""
+"{'one': '{{count|number}} аффилированная компания', 'few': '{{count|number}} "
+"аффилированные компании', 'many': '{{count|number}} аффилированных "
+"компаний', 'other': '{{count|number}} аффилированной компании'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_CHILDREN"
+msgstr ""
+"{'one': '{{count|number}} аффилированная компания', 'few': '{{count|number}} "
+"аффилированные компании', 'many': '{{count|number}} аффилированных "
+"компаний', 'other': '{{count|number}} аффилированной компании'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_PARENTS"
+msgstr ""
+"{'one': '{{count|number}} аффилированное физическое лицо', 'few': '{{count|"
+"number}} аффилированных физических лица', 'many': '{{count|number}} "
+"аффилированных физических лиц', 'other': '{{count|number}} аффилированного "
+"физического лица'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_BRANCH_COMPANY"
-msgstr "{'one': '{{count|number}} филиал', 'few': '{{count|number}} филиала', 'many': '{{count|number}} филиалов', 'other': '{{count|number}} филиала'}"
+msgstr ""
+"{'one': '{{count|number}} филиал', 'few': '{{count|number}} филиала', "
+"'many': '{{count|number}} филиалов', 'other': '{{count|number}} филиала'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_COMPANY"
-msgstr "{'one': '{{count|number}} компания', 'few': '{{count|number}} компании', 'many': '{{count|number}} компаний', 'other': '{{count|number}} компании'}"
+msgstr ""
+"{'one': '{{count|number}} компания', 'few': '{{count|number}} компании', "
+"'many': '{{count|number}} компаний', 'other': '{{count|number}} компании'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_EXECUTIVE_COMPANY"
-msgstr "{'one': '{{count|number}} управляющая компания', 'few': '{{count|number}} управляющие компании', 'many': '{{count|number}} управляющих компаний', 'other': '{{count|number}} управляющей компании'}"
+msgstr ""
+"{'one': '{{count|number}} управляющая компания', 'few': '{{count|number}} "
+"управляющие компании', 'many': '{{count|number}} управляющих компаний', "
+"'other': '{{count|number}} управляющей компании'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL"
-msgstr "{'one': 'Руководитель', 'few': '{{count|number}} руководителя', 'many': '{{count|number}} руководителей', 'other': '{{count|number}} руководителя'}"
+msgstr ""
+"{'one': 'Руководитель', 'few': '{{count|number}} руководителя', 'many': "
+"'{{count|number}} руководителей', 'other': '{{count|number}} руководителя'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 msgid "NG_PLURALIZE::RELATION_FOUNDER"
-msgstr "{'one': '{{count|number}} учредитель', 'few': '{{count|number}} учредителя', 'many': '{{count|number}} учредителей', 'other': '{{count|number}} учредителя'}"
+msgstr ""
+"{'one': '{{count|number}} учредитель', 'few': '{{count|number}} учредителя', "
+"'many': '{{count|number}} учредителей', 'other': '{{count|number}} "
+"учредителя'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_FOUNDER_COMPANY"
-msgstr "{'one': '{{count|number}} учредитель компания', 'few': '{{count|number}} учредителя компании', 'many': '{{count|number}} учредителей компаний', 'other': '{{count|number}} учредителя компании'}"
+msgstr ""
+"{'one': '{{count|number}} учредитель компания', 'few': '{{count|number}} "
+"учредителя компании', 'many': '{{count|number}} учредителей компаний', "
+"'other': '{{count|number}} учредителя компании'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL"
-msgstr "{'one': '{{count|number}} учредитель физическое лицо', 'few': '{{count|number}} учредителя физических лица', 'many': '{{count|number}} учредителей физических лиц', 'other': '{{count|number}} учредителя физического лица'}"
+msgstr ""
+"{'one': '{{count|number}} учредитель физическое лицо', 'few': '{{count|"
+"number}} учредителя физических лица', 'many': '{{count|number}} учредителей "
+"физических лиц', 'other': '{{count|number}} учредителя физического лица'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_HEAD_COMPANY"
-msgstr "{'one': 'Головная компания', 'few': '{{count|number}} головные компании', 'many': '{{count|number}} головных компаний', 'other': '{{count|number}} головной компании'}"
+msgstr ""
+"{'one': 'Головная компания', 'few': '{{count|number}} головные компании', "
+"'many': '{{count|number}} головных компаний', 'other': '{{count|number}} "
+"головной компании'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_LEAD_COMPANY"
-msgstr "{'one': '{{count|number}} руководимая компания', 'few': '{{count|number}} руководимые компании', 'many': '{{count|number}} руководимых компаний', 'other': '{{count|number}} руководимой компании'}"
+msgstr ""
+"{'one': '{{count|number}} руководимая компания', 'few': '{{count|number}} "
+"руководимые компании', 'many': '{{count|number}} руководимых компаний', "
+"'other': '{{count|number}} руководимой компании'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_PHONE"
-msgstr "{'one': '{{count|number}} телефон', 'few': '{{count|number}} телефона', 'many': '{{count|number}} телефонов', 'other': '{{count|number}} телефона'}"
+msgstr ""
+"{'one': '{{count|number}} телефон', 'few': '{{count|number}} телефона', "
+"'many': '{{count|number}} телефонов', 'other': '{{count|number}} телефона'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_PREDECESSOR_COMPANY"
-msgstr "{'one': '{{count|number}} предшественник', 'few': '{{count|number}} предшественника', 'many': '{{count|number}} предшественников', 'other': '{{count|number}} предшественника'}"
+msgstr ""
+"{'one': '{{count|number}} предшественник', 'few': '{{count|number}} "
+"предшественника', 'many': '{{count|number}} предшественников', 'other': "
+"'{{count|number}} предшественника'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_REGISTERED_HOLDER_COMPANY"
-msgstr "{'one': '{{count|number}} эмитент', 'few': '{{count|number}} эмитента', 'many': '{{count|number}} эмитентов', 'other': '{{count|number}} эмитента'}"
+msgstr ""
+"{'one': '{{count|number}} эмитент', 'few': '{{count|number}} эмитента', "
+"'many': '{{count|number}} эмитентов', 'other': '{{count|number}} эмитента'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_REGISTER_HOLDER_COMPANY"
-msgstr "{'one': '{{count|number}} реестродержатель', 'few': '{{count|number}} реестродержателя', 'many': '{{count|number}} реестродержателей', 'other': '{{count|number}} реестродержателя'}"
+msgstr ""
+"{'one': '{{count|number}} реестродержатель', 'few': '{{count|number}} "
+"реестродержателя', 'many': '{{count|number}} реестродержателей', 'other': "
+"'{{count|number}} реестродержателя'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY"
-msgstr "{'one': '{{count|number}} учреждённая компания', 'few': '{{count|number}} учреждённые компании', 'many': '{{count|number}} учреждённых компаний', 'other': '{{count|number}} учреждённой компании'}"
+msgstr ""
+"{'one': '{{count|number}} учреждённая компания', 'few': '{{count|number}} "
+"учреждённые компании', 'many': '{{count|number}} учреждённых компаний', "
+"'other': '{{count|number}} учреждённой компании'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY"
-msgstr "{'one': '{{count|number}} правопреемник', 'few': '{{count|number}} правопреемника', 'many': '{{count|number}} правопреемников', 'other': '{{count|number}} правопреемника'}"
+msgstr ""
+"{'one': '{{count|number}} правопреемник', 'few': '{{count|number}} "
+"правопреемника', 'many': '{{count|number}} правопреемников', 'other': "
+"'{{count|number}} правопреемника'}"
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Анализ аффилированных лиц"

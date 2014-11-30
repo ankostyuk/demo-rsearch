@@ -38,6 +38,10 @@ define(function(require) {'use strict';
                 },
                 'EXECUTIVE_INDIVIDUAL': {
                 },
+                'AFFILIATED_COMPANY': {
+                },
+                'AFFILIATED_INDIVIDUAL': {
+                },
                 'PREDECESSOR_COMPANY': {
                 },
                 'REGISTER_HOLDER': {

@@ -31,6 +31,22 @@
       null,
       "{'one': 'Адрес', 'few': '{{count|number}} адреса', 'many': '{{count|number}} адресов', 'other': '{{count|number}} адреса'}"
     ],
+    "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_CHILDREN": [
+      null,
+      "{'one': '{{count|number}} аффилированная компания', 'few': '{{count|number}} аффилированные компании', 'many': '{{count|number}} аффилированных компаний', 'other': '{{count|number}} аффилированной компании'}"
+    ],
+    "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_PARENTS": [
+      null,
+      "{'one': '{{count|number}} аффилированная компания', 'few': '{{count|number}} аффилированные компании', 'many': '{{count|number}} аффилированных компаний', 'other': '{{count|number}} аффилированной компании'}"
+    ],
+    "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_CHILDREN": [
+      null,
+      "{'one': '{{count|number}} аффилированная компания', 'few': '{{count|number}} аффилированные компании', 'many': '{{count|number}} аффилированных компаний', 'other': '{{count|number}} аффилированной компании'}"
+    ],
+    "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_PARENTS": [
+      null,
+      "{'one': '{{count|number}} аффилированное физическое лицо', 'few': '{{count|number}} аффилированных физических лица', 'many': '{{count|number}} аффилированных физических лиц', 'other': '{{count|number}} аффилированного физического лица'}"
+    ],
     "NG_PLURALIZE::RELATION_BRANCH_COMPANY": [
       null,
       "{'one': '{{count|number}} филиал', 'few': '{{count|number}} филиала', 'many': '{{count|number}} филиалов', 'other': '{{count|number}} филиала'}"
@@ -415,6 +431,22 @@
     "NG_PLURALIZE::RELATION_ADDRESS": [
       null,
       "{'one': 'Address', 'other': '{{count|number}} addresses'}"
+    ],
+    "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_CHILDREN": [
+      null,
+      "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+    ],
+    "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_PARENTS": [
+      null,
+      "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+    ],
+    "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_CHILDREN": [
+      null,
+      "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+    ],
+    "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_PARENTS": [
+      null,
+      "{'one': '1 аффилированное физическое лицо', 'other': '{{count|number}} аффилированное физическое лицо'}"
     ],
     "NG_PLURALIZE::RELATION_BRANCH_COMPANY": [
       null,
