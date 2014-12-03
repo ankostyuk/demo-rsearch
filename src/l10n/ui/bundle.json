@@ -33,7 +33,7 @@
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_CHILDREN": [
       null,
-      "{'one': '{{count|number}} аффилированная компания', 'few': '{{count|number}} аффилированные компании', 'many': '{{count|number}} аффилированных компаний', 'other': '{{count|number}} аффилированной компании'}"
+      "{'one': '{{count|number}}  зависимая компания', 'few': '{{count|number}} зависимые компании', 'many': '{{count|number}} зависимых компаний', 'other': '{{count|number}} зависимой компании'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_PARENTS": [
       null,
@@ -41,7 +41,7 @@
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_CHILDREN": [
       null,
-      "{'one': '{{count|number}} аффилированная компания', 'few': '{{count|number}} аффилированные компании', 'many': '{{count|number}} аффилированных компаний', 'other': '{{count|number}} аффилированной компании'}"
+      "{'one': '{{count|number}}  зависимая компания', 'few': '{{count|number}} зависимые компании', 'many': '{{count|number}} зависимых компаний', 'other': '{{count|number}} зависимой компании'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_PARENTS": [
       null,
@@ -434,7 +434,7 @@
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_CHILDREN": [
       null,
-      "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+      "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_PARENTS": [
       null,
@@ -442,7 +442,7 @@
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_CHILDREN": [
       null,
-      "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+      "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_PARENTS": [
       null,
