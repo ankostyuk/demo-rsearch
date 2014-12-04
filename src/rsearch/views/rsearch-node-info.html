@@ -38,4 +38,8 @@
     <div ng-if="node._type === 'PHONE'">
         <div class="node-header" data-node-id="{{node._id}}">{{node.value}}</div>
     </div>
+
+    <div ng-if="node._type === 'PURCHASE'">
+        <div class="node-header" data-node-id="{{node._id}}">${_tr("Закупка")} {{node.id}}</div>
+    </div>
 </div>

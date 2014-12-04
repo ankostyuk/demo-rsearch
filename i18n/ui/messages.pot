@@ -446,12 +446,40 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_CHILDREN"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_CHILDREN"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "NG_PLURALIZE::RELATION_EMPLOYEE_PARENTS"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_CHILDREN"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "NG_PLURALIZE::RELATION_EMPLOYEE_CHILDREN"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Анализ аффилированных лиц"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_PARENTS"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_PARENTS"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-region-filter.html:1

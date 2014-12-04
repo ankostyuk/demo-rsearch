@@ -35,30 +35,7 @@ define(function(require) {'use strict';
                     searchResultPriority: 0
                 }
             },
-            relationTypes: {
-                'FOUNDER_COMPANY': {
-                },
-                'FOUNDER_INDIVIDUAL': {
-                },
-                'HEAD_COMPANY': {
-                },
-                'EXECUTIVE_COMPANY': {
-                },
-                'EXECUTIVE_INDIVIDUAL': {
-                },
-                'AFFILIATED_COMPANY': {
-                },
-                'AFFILIATED_INDIVIDUAL': {
-                },
-                'PREDECESSOR_COMPANY': {
-                },
-                'REGISTER_HOLDER': {
-                },
-                'ADDRESS': {
-                },
-                'PHONE': {
-                }
-            }
+            relationTypes: {}
         })
         //
         .factory('npRsearchMetaHelper', ['$log', '$q', '$rootScope', 'appConfig', 'npRsearchMeta', 'npRsearchResource', function($log, $q, $rootScope, appConfig, npRsearchMeta, npRsearchResource){

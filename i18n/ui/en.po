@@ -77,6 +77,29 @@ msgstr "{'one': '1 company', 'other': '{{count|number}} companies'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
+#, fuzzy
+msgid "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_CHILDREN"
+msgstr "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+#, fuzzy
+msgid "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_PARENTS"
+msgstr "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+#, fuzzy
+msgid "NG_PLURALIZE::RELATION_EMPLOYEE_CHILDREN"
+msgstr "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+#, fuzzy
+msgid "NG_PLURALIZE::RELATION_EMPLOYEE_PARENTS"
+msgstr "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_EXECUTIVE_COMPANY"
 msgstr "{'one': '1 managing company', 'other': '{{count|number}} managing companies'}"
 
@@ -111,6 +134,17 @@ msgstr "{'one': 'Head company', 'other': '{{count|number}} head companies'}"
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_LEAD_COMPANY"
 msgstr "{'one': '1 managed company', 'other': '{{count|number}} managed companies'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+#, fuzzy
+msgid "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_CHILDREN"
+msgstr "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+#, fuzzy
+msgid "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_PARENTS"
+msgstr "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1

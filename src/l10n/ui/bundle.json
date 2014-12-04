@@ -55,6 +55,22 @@
       null,
       "{'one': '{{count|number}} компания', 'few': '{{count|number}} компании', 'many': '{{count|number}} компаний', 'other': '{{count|number}} компании'}"
     ],
+    "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_CHILDREN": [
+      null,
+      "{'one': '{{count|number}}  закупка', 'few': '{{count|number}} закупки', 'many': '{{count|number}} закупок', 'other': '{{count|number}} закупки'}"
+    ],
+    "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_PARENTS": [
+      null,
+      "{'one': 'Заказчик', 'few': '{{count|number}} заказчика', 'many': '{{count|number}} заказчиков', 'other': '{{count|number}} заказчика'}"
+    ],
+    "NG_PLURALIZE::RELATION_EMPLOYEE_CHILDREN": [
+      null,
+      "{'one': '{{count|number}}  компания', 'few': '{{count|number}} компании', 'many': '{{count|number}} компаний', 'other': '{{count|number}} компании'}"
+    ],
+    "NG_PLURALIZE::RELATION_EMPLOYEE_PARENTS": [
+      null,
+      "{'one': '{{count|number}} сотрудник', 'few': '{{count|number}} сотрудника', 'many': '{{count|number}} сотрудников', 'other': '{{count|number}} сотрудника'}"
+    ],
     "NG_PLURALIZE::RELATION_EXECUTIVE_COMPANY": [
       null,
       "{'one': '{{count|number}} управляющая компания', 'few': '{{count|number}} управляющие компании', 'many': '{{count|number}} управляющих компаний', 'other': '{{count|number}} управляющей компании'}"
@@ -82,6 +98,14 @@
     "NG_PLURALIZE::RELATION_LEAD_COMPANY": [
       null,
       "{'one': '{{count|number}} руководимая компания', 'few': '{{count|number}} руководимые компании', 'many': '{{count|number}} руководимых компаний', 'other': '{{count|number}} руководимой компании'}"
+    ],
+    "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_CHILDREN": [
+      null,
+      "{'one': '{{count|number}}  участие в закупках', 'few': '{{count|number}} участия в закупках', 'many': '{{count|number}} участий в закупках', 'other': '{{count|number}} участий в закупках'}"
+    ],
+    "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_PARENTS": [
+      null,
+      "{'one': '{{count|number}}  участник', 'few': '{{count|number}} участника', 'many': '{{count|number}} участников', 'other': '{{count|number}} участника'}"
     ],
     "NG_PLURALIZE::RELATION_PHONE": [
       null,
@@ -456,6 +480,22 @@
       null,
       "{'one': '1 company', 'other': '{{count|number}} companies'}"
     ],
+    "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_CHILDREN": [
+      null,
+      "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+    ],
+    "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_PARENTS": [
+      null,
+      "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+    ],
+    "NG_PLURALIZE::RELATION_EMPLOYEE_CHILDREN": [
+      null,
+      "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+    ],
+    "NG_PLURALIZE::RELATION_EMPLOYEE_PARENTS": [
+      null,
+      "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+    ],
     "NG_PLURALIZE::RELATION_EXECUTIVE_COMPANY": [
       null,
       "{'one': '1 managing company', 'other': '{{count|number}} managing companies'}"
@@ -483,6 +523,14 @@
     "NG_PLURALIZE::RELATION_LEAD_COMPANY": [
       null,
       "{'one': '1 managed company', 'other': '{{count|number}} managed companies'}"
+    ],
+    "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_CHILDREN": [
+      null,
+      "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+    ],
+    "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_PARENTS": [
+      null,
+      "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
     ],
     "NG_PLURALIZE::RELATION_PHONE": [
       null,
