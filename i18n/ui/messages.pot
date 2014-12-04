@@ -88,7 +88,7 @@ msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
-msgid "Cвязи между участниками закупок"
+msgid "Связи между участниками закупок"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1

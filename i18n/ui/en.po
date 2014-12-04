@@ -12,12 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "CLDR_PLURAL_FORMS_FORMAT: one{0}other{1}\n"
-"X-Generator: Poedit 1.5.5\n"
-
-#: ../src/nkb-app/index.html:1
-msgctxt "Продукты НКБ на главной странице"
-msgid "Cвязи между участниками закупок"
-msgstr "Connections between participants of procurement"
+"X-Generator: Poedit 1.7\n"
 
 #: ../src/nkbcomment/views/nkbcomment.html:1
 msgid "NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT"
@@ -46,31 +41,27 @@ msgstr "{'one': 'Address', 'other': '{{count|number}} addresses'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
+#, fuzzy
 msgid "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_CHILDREN"
-msgstr ""
-"{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая "
-"компания'}"
+msgstr "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
+#, fuzzy
 msgid "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_PARENTS"
-msgstr ""
-"{'one': '1 аффилированная компания', 'other': '{{count|number}} "
-"аффилированная компания'}"
+msgstr "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
+#, fuzzy
 msgid "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_CHILDREN"
-msgstr ""
-"{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая "
-"компания'}"
+msgstr "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
+#, fuzzy
 msgid "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_PARENTS"
-msgstr ""
-"{'one': '1 аффилированное физическое лицо', 'other': '{{count|number}} "
-"аффилированное физическое лицо'}"
+msgstr "{'one': '1 аффилированное физическое лицо', 'other': '{{count|number}} аффилированное физическое лицо'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
@@ -87,8 +78,7 @@ msgstr "{'one': '1 company', 'other': '{{count|number}} companies'}"
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_EXECUTIVE_COMPANY"
-msgstr ""
-"{'one': '1 managing company', 'other': '{{count|number}} managing companies'}"
+msgstr "{'one': '1 managing company', 'other': '{{count|number}} managing companies'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -103,17 +93,13 @@ msgstr "{'one': '1 shareholder', 'other': '{{count|number}} shareholders'}"
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_FOUNDER_COMPANY"
-msgstr ""
-"{'one': '1 shareholder company', 'other': '{{count|number}} shareholder "
-"companies'}"
+msgstr "{'one': '1 shareholder company', 'other': '{{count|number}} shareholder companies'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL"
-msgstr ""
-"{'one': '1 individual shareholder', 'other': '{{count|number}} individual "
-"shareholders'}"
+msgstr "{'one': '1 individual shareholder', 'other': '{{count|number}} individual shareholders'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -124,8 +110,7 @@ msgstr "{'one': 'Head company', 'other': '{{count|number}} head companies'}"
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_LEAD_COMPANY"
-msgstr ""
-"{'one': '1 managed company', 'other': '{{count|number}} managed companies'}"
+msgstr "{'one': '1 managed company', 'other': '{{count|number}} managed companies'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -152,16 +137,13 @@ msgstr "{'one': '1 registrar', 'other': '{{count|number}} registrars'}"
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY"
-msgstr ""
-"{'one': '1 established company', 'other': '{{count|number}} established "
-"companies'}"
+msgstr "{'one': '1 established company', 'other': '{{count|number}} established companies'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY"
-msgstr ""
-"{'one': '1 legal successor', 'other': '{{count|number}} legal successors'}"
+msgstr "{'one': '1 legal successor', 'other': '{{count|number}} legal successors'}"
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Анализ аффилированных лиц"
@@ -401,6 +383,11 @@ msgstr "Advanced search"
 #: ../src/nkb-app/index.html:1
 msgid "Регистрация"
 msgstr "Registration"
+
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid "Связи между участниками закупок"
+msgstr "Connections between participants of procurement"
 
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
