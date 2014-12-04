@@ -73,6 +73,10 @@ define(function(require) {'use strict';
                         search.byNodeTypes = {};
 
                         _.each(npRsearchMetaHelper.getNodeTypes(), function(data, nodeType){
+                            if (!data.search) {
+                                return;
+                            }
+
                             search.byNodeTypes[nodeType] = {
                                   nodeType: nodeType,
                                   resultPriority: data.searchResultPriority,
@@ -81,7 +85,7 @@ define(function(require) {'use strict';
                                   request: null,
                                   result: null,
                                   nodeList: null
-                              };
+                            };
                         });
                     }
 

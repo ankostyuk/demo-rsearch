@@ -15,16 +15,24 @@ define(function(require) {'use strict';
         .constant('npRsearchMeta', {
             nodeTypes: {
                 'COMPANY': {
+                    search: true,
                     searchResultPriority: 4
                 },
                 'INDIVIDUAL': {
+                    search: true,
                     searchResultPriority: 3
                 },
                 'ADDRESS': {
+                    search: true,
                     searchResultPriority: 2
                 },
                 'PHONE': {
+                    search: true,
                     searchResultPriority: 1
+                },
+                'PURCHASE': {
+                    search: false,
+                    searchResultPriority: 0
                 }
             },
             relationTypes: {
