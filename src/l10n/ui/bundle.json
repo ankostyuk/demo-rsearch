@@ -51,6 +51,14 @@
       null,
       "{'one': '{{count|number}} филиал', 'few': '{{count|number}} филиала', 'many': '{{count|number}} филиалов', 'other': '{{count|number}} филиала'}"
     ],
+    "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_CHILDREN": [
+      null,
+      "{'one': '{{count|number}} закупочная комиссия', 'few': '{{count|number}} закупочные комиссии', 'many': '{{count|number}} закупочных комиссий', 'other': '{{count|number}} закупочных комиссий'}"
+    ],
+    "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_PARENTS": [
+      null,
+      "{'one': '{{count|number}} член комиссии', 'few': '{{count|number}} члена комиссии', 'many': '{{count|number}} членов комиссии', 'other': '{{count|number}} члена комиссии'}"
+    ],
     "NG_PLURALIZE::RELATION_COMPANY": [
       null,
       "{'one': '{{count|number}} компания', 'few': '{{count|number}} компании', 'many': '{{count|number}} компаний', 'other': '{{count|number}} компании'}"
@@ -65,7 +73,7 @@
     ],
     "NG_PLURALIZE::RELATION_EMPLOYEE_CHILDREN": [
       null,
-      "{'one': '{{count|number}}  компания', 'few': '{{count|number}} компании', 'many': '{{count|number}} компаний', 'other': '{{count|number}} компании'}"
+      "{'one': 'Работодатель', 'few': '{{count|number}} работодателя', 'many': '{{count|number}} работодателей', 'other': '{{count|number}} работодателя'}"
     ],
     "NG_PLURALIZE::RELATION_EMPLOYEE_PARENTS": [
       null,
@@ -105,7 +113,15 @@
     ],
     "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_PARENTS": [
       null,
-      "{'one': '{{count|number}}  участник', 'few': '{{count|number}} участника', 'many': '{{count|number}} участников', 'other': '{{count|number}} участника'}"
+      "{'one': '{{count|number}}  участник компания', 'few': '{{count|number}} участника компании', 'many': '{{count|number}} участников компаний', 'other': '{{count|number}} участника компании'}"
+    ],
+    "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_CHILDREN": [
+      null,
+      "{'one': '{{count|number}}  участие в закупках', 'few': '{{count|number}} участия в закупках', 'many': '{{count|number}} участий в закупках', 'other': '{{count|number}} участий в закупках'}"
+    ],
+    "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_PARENTS": [
+      null,
+      "{'one': '{{count|number}} участник физическое лицо', 'few': '{{count|number}} участника физических лица', 'many': '{{count|number}} участников физических лиц', 'other': '{{count|number}} участника физического лица'}"
     ],
     "NG_PLURALIZE::RELATION_PHONE": [
       null,
@@ -208,6 +224,10 @@
       ""
     ],
     "Заказать список учрежденных компаний": [
+      null,
+      ""
+    ],
+    "Закупка": [
       null,
       ""
     ],
@@ -476,6 +496,14 @@
       null,
       "{'one': '1 branch', 'other': '{{count|number}} branches'}"
     ],
+    "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_CHILDREN": [
+      null,
+      "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+    ],
+    "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_PARENTS": [
+      null,
+      "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+    ],
     "NG_PLURALIZE::RELATION_COMPANY": [
       null,
       "{'one': '1 company', 'other': '{{count|number}} companies'}"
@@ -531,6 +559,14 @@
     "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_PARENTS": [
       null,
       "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+    ],
+    "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_CHILDREN": [
+      null,
+      "{'one': '1 аффилированное физическое лицо', 'other': '{{count|number}} аффилированное физическое лицо'}"
+    ],
+    "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_PARENTS": [
+      null,
+      "{'one': '1 аффилированное физическое лицо', 'other': '{{count|number}} аффилированное физическое лицо'}"
     ],
     "NG_PLURALIZE::RELATION_PHONE": [
       null,
@@ -635,6 +671,10 @@
     "Заказать список учрежденных компаний": [
       null,
       "Order Established Companies list"
+    ],
+    "Закупка": [
+      null,
+      ""
     ],
     "ИНН": [
       null,

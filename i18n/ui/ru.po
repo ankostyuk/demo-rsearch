@@ -65,6 +65,18 @@ msgstr "{'one': '{{count|number}} аффилированное физическ�
 msgid "NG_PLURALIZE::RELATION_BRANCH_COMPANY"
 msgstr "{'one': '{{count|number}} филиал', 'few': '{{count|number}} филиала', 'many': '{{count|number}} филиалов', 'other': '{{count|number}} филиала'}"
 
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+#, fuzzy
+msgid "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_CHILDREN"
+msgstr "{'one': '{{count|number}} закупочная комиссия', 'few': '{{count|number}} закупочные комиссии', 'many': '{{count|number}} закупочных комиссий', 'other': '{{count|number}} закупочных комиссий'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+#, fuzzy
+msgid "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_PARENTS"
+msgstr "{'one': '{{count|number}} член комиссии', 'few': '{{count|number}} члена комиссии', 'many': '{{count|number}} членов комиссии', 'other': '{{count|number}} члена комиссии'}"
+
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -77,6 +89,7 @@ msgstr "{'one': '{{count|number}} компания', 'few': '{{count|number}} к
 msgid "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_CHILDREN"
 msgstr "{'one': '{{count|number}}  закупка', 'few': '{{count|number}} закупки', 'many': '{{count|number}} закупок', 'other': '{{count|number}} закупки'}"
 
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #, fuzzy
 msgid "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_PARENTS"
@@ -86,7 +99,7 @@ msgstr "{'one': 'Заказчик', 'few': '{{count|number}} заказчика'
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #, fuzzy
 msgid "NG_PLURALIZE::RELATION_EMPLOYEE_CHILDREN"
-msgstr "{'one': '{{count|number}}  компания', 'few': '{{count|number}} компании', 'many': '{{count|number}} компаний', 'other': '{{count|number}} компании'}"
+msgstr "{'one': 'Работодатель', 'few': '{{count|number}} работодателя', 'many': '{{count|number}} работодателей', 'other': '{{count|number}} работодателя'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -137,10 +150,23 @@ msgstr "{'one': '{{count|number}} руководимая компания', 'few
 msgid "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_CHILDREN"
 msgstr "{'one': '{{count|number}}  участие в закупках', 'few': '{{count|number}} участия в закупках', 'many': '{{count|number}} участий в закупках', 'other': '{{count|number}} участий в закупках'}"
 
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #, fuzzy
 msgid "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_PARENTS"
-msgstr "{'one': '{{count|number}}  участник', 'few': '{{count|number}} участника', 'many': '{{count|number}} участников', 'other': '{{count|number}} участника'}"
+msgstr "{'one': '{{count|number}}  участник компания', 'few': '{{count|number}} участника компании', 'many': '{{count|number}} участников компаний', 'other': '{{count|number}} участника компании'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+#, fuzzy
+msgid "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_CHILDREN"
+msgstr "{'one': '{{count|number}}  участие в закупках', 'few': '{{count|number}} участия в закупках', 'many': '{{count|number}} участий в закупках', 'other': '{{count|number}} участий в закупках'}"
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+#, fuzzy
+msgid "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_PARENTS"
+msgstr "{'one': '{{count|number}} участник физическое лицо', 'few': '{{count|number}} участника физических лица', 'many': '{{count|number}} участников физических лиц', 'other': '{{count|number}} участника физического лица'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -276,6 +302,10 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Заказать список учрежденных компаний"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgid "Закупка"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
