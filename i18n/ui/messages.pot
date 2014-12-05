@@ -204,6 +204,11 @@ msgid "Нет данных. Попробуйте изменить значени
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "номер"
+msgid "№"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Бизнес-справки онлайн"
 msgstr ""
 
@@ -278,6 +283,10 @@ msgid "Заказать бизнес-справку\nпо иностранной
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Информация на официальном сайте"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Заказать выписку ЕГРЮЛ"
 msgstr ""
 
@@ -324,10 +333,6 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "Формы отчетности за последний год"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-info.html:1
-msgid "Закупка"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1

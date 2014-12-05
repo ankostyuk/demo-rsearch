@@ -92,11 +92,23 @@ module.exports = function(grunt) {
                     langs:          APP_LANGS
                 }
             },
+            'ui_keys': {
+                options: {
+                    mode:           'simple',
+                    pattern:        '**/*.txt',
+                    inputDir:       path.resolve(__dirname, 'i18n/ui_keys/src'),
+                    inputRootPath:  path.resolve(__dirname, ''),
+                    outputDir:      path.resolve(__dirname, 'i18n/ui_keys'),
+                    bundleDir:      path.resolve(__dirname, 'src/l10n/ui_keys'),
+                    baseLang:       APP_LANGS[0],
+                    langs:          APP_LANGS
+                }
+            },
             'okato_region': {
                 options: {
                     mode:           'simple',
                     pattern:        '**/*.txt',
-                    inputDir:       path.resolve(__dirname, 'i18n/okato_region'),
+                    inputDir:       path.resolve(__dirname, 'i18n/okato_region/src'),
                     inputRootPath:  path.resolve(__dirname, ''),
                     outputDir:      path.resolve(__dirname, 'i18n/okato_region'),
                     bundleDir:      path.resolve(__dirname, 'src/l10n/okato_region'),

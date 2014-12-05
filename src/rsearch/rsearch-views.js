@@ -55,11 +55,12 @@ define(function(require) {'use strict';
                 },
                 template: templates['np-rsearch-node-plain'],
                 link: function(scope, element, attrs){
-                    scope.user = npUser.user();
-
-                    scope.toggleSelect = function(){
-                        $rootScope.$emit('np-rsearch-node-select', scope.node, element);
-                    };
+                    _.extend(scope, {
+                        user: npUser.user(),
+                        toggleSelect: function() {
+                            $rootScope.$emit('np-rsearch-node-select', scope.node, element);
+                        }
+                    }, i18n.translateFuncs);
                 }
             };
         }])
@@ -262,7 +263,7 @@ define(function(require) {'use strict';
                         productClick: function(productName){
                             $rootScope.$emit('np-rsearch-node-form-product-click', productName, scope.node);
                         }
-                    });
+                    }, i18n.translateFuncs);
 
                     return view;
                 },

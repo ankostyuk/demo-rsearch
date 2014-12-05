@@ -4,6 +4,22 @@
             <div class="span9">
                 <div np-rsearch-node-history-info></div>
                 <div np-rsearch-node-info></div>
+                <div ng-if="node._type === 'PURCHASE'">
+                    <div class="np-rsearch-node-info">
+                        <div class="node-info">
+                            <div class="lot-list">
+                                <div class="lot" ng-repeat="(number, lot) in node.lots track by number">
+                                    <div class="row lot-header">
+                                        <div class="span4 lot-number">${_trc("Лот", "Лот закупки")} ${_trc("№", "номер")} {{number}}</div>
+                                        <div class="span3">{{lot.price | number:0}} {{_tr(node.currency)}}</div>
+                                        <div class="align-right" ng-show="lot.abandoned">${_trc("Отменён", "Лот закупки")}</div>
+                                    </div>
+                                    <div class="lot-info">{{lot.name}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="actions">
                     <div class="row" ng-if="node._type === 'COMPANY'">
                         <div class="span5">
@@ -63,6 +79,13 @@
                                     <li><a class="action" ng-click="productClick('actualizeReport')">${_tr("Схема аффилированных лиц")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('actualizeReport')"></span></li>
                                 </ul>
                             </div>
+                        </div>
+                    </div>
+                    <div ng-if="node._type === 'PURCHASE'">
+                        <div class="extra-search">
+                            <p>
+                                {{_tr(node.law)}} <a class="underline" ng-href="{{node.href}}" target="_blank">${_trc("№", "номер")} {{node.id}}</a>
+                            </p>
                         </div>
                     </div>
                 </div>

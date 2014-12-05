@@ -1,0 +1,39 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: i18n\n"
+"Report-Msgid-Bugs-To: feedback@null-pointer.ru\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: ankostyuk <andrew.kostyuk@gmail.com>\n"
+"Language-Team: NULLPOINTER <feedback@null-pointer.ru>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"CLDR_PLURAL_FORMS_FORMAT: one{0}other{1}\n"
+"X-Generator: Poedit 1.7\n"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "EUR"
+msgstr "€"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "FZ_223"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "FZ_44"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "GBP"
+msgstr "£"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "RUB"
+msgstr "rub."
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "USD"
+msgstr "$"

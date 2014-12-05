@@ -308,10 +308,6 @@ msgstr "Order Managed Companies list"
 msgid "Заказать список учрежденных компаний"
 msgstr "Order Established Companies list"
 
-#: ../src/rsearch/views/rsearch-node-info.html:1
-msgid "Закупка"
-msgstr ""
-
 #: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ИНН"
@@ -320,6 +316,10 @@ msgstr "INN"
 #: ../src/rsearch/views/rsearch-input.html:1
 msgid "ИНН, ОГРН, наименование, адрес или ФИО"
 msgstr "INN, OGRN, name or address"
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Информация на официальном сайте"
+msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Искать в социальных сетях"
@@ -518,6 +518,11 @@ msgstr "thous. rub."
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "учредитель"
 msgstr "founder"
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "номер"
+msgid "№"
+msgstr ""
 
 #~ msgctxt "Продукты НКБ на главной странице"
 #~ msgid ""

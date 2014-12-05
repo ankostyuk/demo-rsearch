@@ -304,10 +304,6 @@ msgstr ""
 msgid "Заказать список учрежденных компаний"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-node-info.html:1
-msgid "Закупка"
-msgstr ""
-
 #: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ИНН"
@@ -315,6 +311,10 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-input.html:1
 msgid "ИНН, ОГРН, наименование, адрес или ФИО"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Информация на официальном сайте"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -513,4 +513,9 @@ msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "учредитель"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "номер"
+msgid "№"
 msgstr ""
