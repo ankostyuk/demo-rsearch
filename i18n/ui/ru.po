@@ -314,10 +314,6 @@ msgid "ИНН, ОГРН, наименование, адрес или ФИО"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Информация на официальном сайте"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Искать в социальных сетях"
 msgstr ""
 
@@ -344,6 +340,11 @@ msgstr ""
 
 #: ../src/nkb-app/components/login/views/login-form.html:1
 msgid "Логин"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "Лот закупки"
+msgid "Лот"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
@@ -396,6 +397,11 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-navigation.html:1
 msgid "Ожидайте..."
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "Лот закупки"
+msgid "Отменён"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -475,8 +481,20 @@ msgid "Формы отчетности за последний год"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+msgid "аффилированное лицо"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
 msgctxt "Доля в учреждении компании"
 msgid "доля"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "доля УК"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "доля акций"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-user-product-limits-info.html:1
@@ -488,6 +506,11 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-user-product-limits-info.html:1
 msgctxt "валюта"
 msgid "ие"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgctxt "лот в закупке"
+msgid "лот"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
@@ -507,12 +530,24 @@ msgstr ""
 msgid "руководитель"
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "сотрудник"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "тыс. руб."
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+msgid "участник"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
 msgid "учредитель"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "член комиссии"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1

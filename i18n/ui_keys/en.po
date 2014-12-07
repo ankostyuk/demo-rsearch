@@ -31,9 +31,17 @@ msgid "GBP"
 msgstr "£"
 
 #: ../i18n/ui_keys/src/keys.txt:1
+msgid "NOT_ADMITTED"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
 msgid "RUB"
 msgstr "rub."
 
 #: ../i18n/ui_keys/src/keys.txt:1
 msgid "USD"
 msgstr "$"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "WIN"
+msgstr ""

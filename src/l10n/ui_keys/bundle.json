@@ -23,6 +23,10 @@
       null,
       "£"
     ],
+    "NOT_ADMITTED": [
+      null,
+      "не допущен"
+    ],
     "RUB": [
       null,
       "руб."
@@ -30,6 +34,10 @@
     "USD": [
       null,
       "$"
+    ],
+    "WIN": [
+      null,
+      "победитель"
     ]
   },
   "en": {
@@ -56,6 +64,10 @@
       null,
       "£"
     ],
+    "NOT_ADMITTED": [
+      null,
+      ""
+    ],
     "RUB": [
       null,
       "rub."
@@ -63,6 +75,10 @@
     "USD": [
       null,
       "$"
+    ],
+    "WIN": [
+      null,
+      ""
     ]
   }
 }

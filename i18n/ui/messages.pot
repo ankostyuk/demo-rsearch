@@ -141,7 +141,36 @@ msgid "учредитель"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+msgid "доля УК"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "доля акций"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "аффилированное лицо"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
 msgid "руководитель"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "сотрудник"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgctxt "лот в закупке"
+msgid "лот"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "участник"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "член комиссии"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
@@ -204,8 +233,13 @@ msgid "Нет данных. Попробуйте изменить значени
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgctxt "номер"
-msgid "№"
+msgctxt "Лот закупки"
+msgid "Лот"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "Лот закупки"
+msgid "Отменён"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -283,7 +317,8 @@ msgid "Заказать бизнес-справку\nпо иностранной
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Информация на официальном сайте"
+msgctxt "номер"
+msgid "№"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1

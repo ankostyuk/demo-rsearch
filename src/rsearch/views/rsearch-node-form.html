@@ -10,7 +10,7 @@
                             <div class="lot-list">
                                 <div class="lot" ng-repeat="(number, lot) in node.lots track by number">
                                     <div class="row lot-header">
-                                        <div class="span4 lot-number">${_trc("Лот", "Лот закупки")} ${_trc("№", "номер")} {{number}}</div>
+                                        <div class="span4 lot-number">${_trc("Лот", "Лот закупки")}&nbsp;{{number}}</div>
                                         <div class="span3">{{lot.price | number:0}} {{_tr(node.currency)}}</div>
                                         <div class="align-right" ng-show="lot.abandoned">${_trc("Отменён", "Лот закупки")}</div>
                                     </div>

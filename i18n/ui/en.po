@@ -318,10 +318,6 @@ msgid "ИНН, ОГРН, наименование, адрес или ФИО"
 msgstr "INN, OGRN, name or address"
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Информация на официальном сайте"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Искать в социальных сетях"
 msgstr "Search social networks"
 
@@ -349,6 +345,12 @@ msgstr "Liquidated"
 #: ../src/nkb-app/components/login/views/login-form.html:1
 msgid "Логин"
 msgstr "Login"
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#, fuzzy
+msgctxt "Лот закупки"
+msgid "Лот"
+msgstr "on"
 
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 msgid "Любой ИНН"
@@ -401,6 +403,11 @@ msgstr "Last year sales volume"
 #: ../src/rsearch/views/rsearch-navigation.html:1
 msgid "Ожидайте..."
 msgstr "Loading..."
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "Лот закупки"
+msgid "Отменён"
+msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Отчеты на заказ"
@@ -479,9 +486,23 @@ msgid "Формы отчетности за последний год"
 msgstr "Last year balance forms"
 
 #: ../src/rsearch/rsearch-meta.js:1
+#, fuzzy
+msgid "аффилированное лицо"
+msgstr "Affiliated network diagram"
+
+#: ../src/rsearch/rsearch-meta.js:1
 msgctxt "Доля в учреждении компании"
 msgid "доля"
 msgstr "share"
+
+#: ../src/rsearch/rsearch-meta.js:1
+#, fuzzy
+msgid "доля УК"
+msgstr "share"
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "доля акций"
+msgstr ""
 
 #: ../src/rsearch/views/rsearch-user-product-limits-info.html:1
 msgctxt "доступность продукта"
@@ -493,6 +514,12 @@ msgstr "available"
 msgctxt "валюта"
 msgid "ие"
 msgstr "ie"
+
+#: ../src/rsearch/rsearch-meta.js:1
+#, fuzzy
+msgctxt "лот в закупке"
+msgid "лот"
+msgstr "on"
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "основано"
@@ -511,13 +538,25 @@ msgstr "rub."
 msgid "руководитель"
 msgstr "manager"
 
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "сотрудник"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "тыс. руб."
 msgstr "thous. rub."
 
 #: ../src/rsearch/rsearch-meta.js:1
+msgid "участник"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
 msgid "учредитель"
 msgstr "founder"
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "член комиссии"
+msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgctxt "номер"
