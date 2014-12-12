@@ -5,6 +5,8 @@
 /.settings
 /.classpath
 
+.idea
+
 *.versionsBackup
 *.orig
 *.mo
