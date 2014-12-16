@@ -538,17 +538,17 @@ define(function(require) {'use strict';
 
                 function getParticipantText(relation) {
                     var t = getRelationText(relation, [{
-                        name: 'lot',
-                        filter: function(v) {
-                            return _trc("лот", "лот в закупке") + nbsp + v;
-                        }
-                    }, {
                         name: 'status',
                         filter: _tr
                     }, {
                         name: 'price',
                         filter: function(v) {
                             return $filter('number')(v, 0) + nbsp + _tr(data.node.currency || node.currency);
+                        }
+                    }, {
+                        name: 'lot',
+                        filter: function(v) {
+                            return _trc("лот", "лот в закупке") + nbsp + v;
                         }
                     }]);
 
