@@ -122,6 +122,7 @@ define(function(require) {'use strict';
 
                     //
                     node.__idField = nodeTypesMeta[node._type]['idField'];
+                    node.__isPurchaseRelations = isPurchaseRelations();
 
                     // компания
                     if (node._type === 'COMPANY') {
@@ -183,6 +184,16 @@ define(function(require) {'use strict';
                         _.each(matches, function(m){
                             node.__historical[m] = true;
                         });
+                    }
+
+                    function isPurchaseRelations() {
+                        var out = node._info && node._info.out;
+                        return out && (
+                            out['CUSTOMER_COMPANY'] ||
+                            out['PARTICIPANT_COMPANY'] ||
+                            out['PARTICIPANT_INDIVIDUAL'] ||
+                            out['COMMISSION_MEMBER']
+                        );
                     }
                 },
 
