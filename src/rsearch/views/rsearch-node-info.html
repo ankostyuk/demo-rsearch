@@ -44,7 +44,10 @@
             <div class="span7 node-header" data-node-id="{{node._id}}">{{node.form}}</div>
             <div class="align-right" ng-show="node.date">{{node.date | date:'dd.MM.yyyy'}}</div>
         </div>
-        <div class="node-entry">{{node.total_price | number:0}} {{_tr(node.currency)}}</div>
+        <div class="row node-entry">
+            <div class="span7">{{node.total_price | number:0}} {{_tr(node.currency)}}</div>
+            <div class="align-right">{{_tr(node.law)}}</div>
+        </div>
         <div class="node-entry">{{node.name}}</div>
     </div>
 </div>
