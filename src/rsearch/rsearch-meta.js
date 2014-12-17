@@ -505,7 +505,26 @@ define(function(require) {'use strict';
 
                 function getAffiliatedText(relation) {
                     var t = getRelationText(relation, [{
-                        name: 'cause'
+                        name: 'causes',
+                        filter: function(causes) {
+                            //
+                            if (_.isArray(causes) || _.isObject(causes)) {
+                                throw new Error('// TODO hack - Улучшение #2715: Поддержка ObjectProperty для связей');
+                            } else {
+                                causes = angular.fromJson(causes);
+                            }
+                            //
+
+                            var v = [];
+
+                            _.each(causes, function(cause){
+                                if (cause.name) {
+                                    v.push(_tr(cause.name));
+                                }
+                            });
+
+                            return v.join(', ');
+                        }
                     }, {
                         name: 'shareCapital',
                         filter: function(v) {

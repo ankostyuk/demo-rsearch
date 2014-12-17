@@ -227,6 +227,10 @@
       null,
       ""
     ],
+    "Закупки": [
+      null,
+      ""
+    ],
     "ИНН": [
       null,
       ""
@@ -312,6 +316,10 @@
       ""
     ],
     "Отчеты на заказ": [
+      null,
+      ""
+    ],
+    "Официальная страница закупки": [
       null,
       ""
     ],
@@ -708,6 +716,10 @@
       null,
       "Order Established Companies list"
     ],
+    "Закупки": [
+      null,
+      ""
+    ],
     "ИНН": [
       null,
       "INN"
@@ -795,6 +807,10 @@
     "Отчеты на заказ": [
       null,
       "Custom Reports"
+    ],
+    "Официальная страница закупки": [
+      null,
+      "Connections between participants of procurement"
     ],
     "Пароль": [
       null,

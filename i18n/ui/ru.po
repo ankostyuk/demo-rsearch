@@ -304,6 +304,10 @@ msgstr ""
 msgid "Заказать список учрежденных компаний"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Закупки"
+msgstr ""
+
 #: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ИНН"
@@ -406,6 +410,10 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Отчеты на заказ"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Официальная страница закупки"
 msgstr ""
 
 #: ../src/nkb-app/components/login/views/login-form.html:1

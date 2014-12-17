@@ -14,6 +14,22 @@ msgstr ""
 "CLDR_PLURAL_FORMS_FORMAT: one{0}few{1}many{2}other{2}\n"
 
 #: ../i18n/ui_keys/src/keys.txt:1
+msgid "AFFILIATE_MEMBER_BOARD_DIRECTORS"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "AFFILIATE_SOLE_EXECUTIVE"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "AFFILIATE_SAME_GROUP"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "AFFILIATE_20_PERCENT"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
 msgid "RUB"
 msgstr ""
 

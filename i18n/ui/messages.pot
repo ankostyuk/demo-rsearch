@@ -317,6 +317,10 @@ msgid "Заказать бизнес-справку\nпо иностранной
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Официальная страница закупки"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
 msgctxt "номер"
 msgid "№"
 msgstr ""
@@ -541,6 +545,11 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_PARENTS"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Закупки"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
