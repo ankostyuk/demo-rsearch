@@ -426,6 +426,15 @@ msgid "NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
+msgid "NG_PLURALIZE::RELATION_AFFILIATED_PARENTS"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-plain.html:1
+#: ../src/rsearch/views/rsearch-node-plain.html:1
+msgid "NG_PLURALIZE::RELATION_AFFILIATED_CHILDREN"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1

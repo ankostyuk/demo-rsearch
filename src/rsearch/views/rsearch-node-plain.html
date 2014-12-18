@@ -20,6 +20,9 @@
 
                 <li ng-show="node._info.in['PREDECESSOR_COMPANY']"><ng-pluralize count="count = node._info.in['PREDECESSOR_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_PREDECESSOR_COMPANY")}"></ng-pluralize></li>
                 <li ng-show="node._info.out['PREDECESSOR_COMPANY']"><ng-pluralize count="count = node._info.out['PREDECESSOR_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY")}"></ng-pluralize></li>
+
+                <li ng-show="node._info.in['AFFILIATED_INDIVIDUAL'] && node._info.in['AFFILIATED_COMPANY']"><ng-pluralize count="count = node._info.in['AFFILIATED_INDIVIDUAL'] + node._info.in['AFFILIATED_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_AFFILIATED_PARENTS")}"></ng-pluralize></li>
+                <li ng-show="node._info.out['AFFILIATED_COMPANY']"><ng-pluralize count="count = node._info.out['AFFILIATED_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_AFFILIATED_CHILDREN")}"></ng-pluralize></li>
             </ul>
         </div>
 
@@ -27,6 +30,7 @@
             <ul class="inline">
                 <li ng-show="node._info.out['FOUNDER_INDIVIDUAL']"><ng-pluralize count="count = node._info.out['FOUNDER_INDIVIDUAL']" when="::${_tr("NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY")}"></ng-pluralize></li>
                 <li ng-show="node._info.out['EXECUTIVE_INDIVIDUAL']"><ng-pluralize count="count = node._info.out['EXECUTIVE_INDIVIDUAL']" when="::${_tr("NG_PLURALIZE::RELATION_LEAD_COMPANY")}"></ng-pluralize></li>
+                <li ng-show="node._info.out['AFFILIATED_INDIVIDUAL']"><ng-pluralize count="count = node._info.out['AFFILIATED_INDIVIDUAL']" when="::${_tr("NG_PLURALIZE::RELATION_AFFILIATED_CHILDREN")}"></ng-pluralize></li>
             </ul>
         </div>
 
