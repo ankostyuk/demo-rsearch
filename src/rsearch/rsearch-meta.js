@@ -648,7 +648,7 @@ define(function(require) {'use strict';
         .filter('share', ['$filter', function($filter){
             return function(number, maxFractionSize){
                 if (number > 100) {
-                    return  $filter('number')(number, maxFractionSize);
+                    return $filter('number')(number, maxFractionSize);
                 }
 
                 var numberText = $filter('number')(
