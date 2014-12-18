@@ -528,12 +528,12 @@ define(function(require) {'use strict';
                     }, {
                         name: 'shareCapital',
                         filter: function(v) {
-                            return _tr("доля УК") + nbsp + $filter('number')(v) + '%';
+                            return _tr("доля УК") + nbsp + $filter('share')(v) + '%';
                         }
                     }, {
                         name: 'shareStock',
                         filter: function(v) {
-                            return _tr("доля акций") + nbsp + $filter('number')(v) + '%';
+                            return _tr("доля акций") + nbsp + $filter('share')(v) + '%';
                         }
                     }]);
 
@@ -641,6 +641,26 @@ define(function(require) {'use strict';
                 }
 
                 return _.capitalize(texts.join(', '));
+            };
+        }])
+        //
+        // TODO перенести в commons
+        .filter('share', ['$filter', function($filter){
+            return function(number, maxFractionSize){
+                if (number > 100) {
+                    return  $filter('number')(number, maxFractionSize);
+                }
+
+                var numberText = $filter('number')(
+                    number,
+                    maxFractionSize === 0 ? 0 : maxFractionSize || 10
+                );
+
+                var text = /[.,]/.test(numberText) ?
+                    numberText.replace(/[0]+$/, '').replace(/[.,]$/, '') :
+                    numberText;
+
+                return text;
             };
         }]);
     //
