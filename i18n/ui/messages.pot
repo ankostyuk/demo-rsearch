@@ -70,6 +70,7 @@ msgid "Продукты и услуги"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Контакты"
 msgstr ""
 
@@ -338,6 +339,10 @@ msgctxt "от такой-то даты"
 msgid "от"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Страница эмитента"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-history-info.html:1
 msgid "Бывшее наименование"
 msgstr ""
@@ -556,6 +561,8 @@ msgstr ""
 msgid "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_PARENTS"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Закупки"

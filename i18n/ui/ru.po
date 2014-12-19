@@ -113,7 +113,7 @@ msgstr "{'one': 'Работодатель', 'few': '{{count|number}} работ�
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #, fuzzy
 msgid "NG_PLURALIZE::RELATION_EMPLOYEE_PARENTS"
-msgstr "{'one': '{{count|number}} сотрудник', 'few': '{{count|number}} сотрудника', 'many': '{{count|number}} сотрудников', 'other': '{{count|number}} сотрудника'}"
+msgstr "{'one': '{{count|number}} контактное лицо', 'few': '{{count|number}} контактных лица', 'many': '{{count|number}} контактных лиц', 'other': '{{count|number}} контактных лица'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -334,6 +334,7 @@ msgid "Исторический профиль"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Контакты"
 msgstr ""
 
@@ -474,6 +475,10 @@ msgstr ""
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
 msgid "Сервис комментариев"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Страница эмитента"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1

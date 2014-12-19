@@ -85,7 +85,7 @@
     ],
     "NG_PLURALIZE::RELATION_EMPLOYEE_PARENTS": [
       null,
-      "{'one': '{{count|number}} сотрудник', 'few': '{{count|number}} сотрудника', 'many': '{{count|number}} сотрудников', 'other': '{{count|number}} сотрудника'}"
+      "{'one': '{{count|number}} контактное лицо', 'few': '{{count|number}} контактных лица', 'many': '{{count|number}} контактных лиц', 'other': '{{count|number}} контактных лица'}"
     ],
     "NG_PLURALIZE::RELATION_EXECUTIVE_COMPANY": [
       null,
@@ -360,6 +360,10 @@
       ""
     ],
     "Регистрация": [
+      null,
+      ""
+    ],
+    "Страница эмитента": [
       null,
       ""
     ],
@@ -859,6 +863,10 @@
     "Регистрация": [
       null,
       "Registration"
+    ],
+    "Страница эмитента": [
+      null,
+      ""
     ],
     "Схема аффилированных лиц": [
       null,

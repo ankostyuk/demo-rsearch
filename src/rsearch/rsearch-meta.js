@@ -122,7 +122,6 @@ define(function(require) {'use strict';
 
                     //
                     node.__idField = nodeTypesMeta[node._type]['idField'];
-                    node.__isPurchaseRelations = isPurchaseRelations();
 
                     // компания
                     if (node._type === 'COMPANY') {
@@ -168,6 +167,32 @@ define(function(require) {'use strict';
                                 }
                             };
                         }
+
+                        // группы связей
+                        node.__isAffiliatedRelations = isRelations([
+                            ['AFFILIATED_COMPANY', 'in'],
+                            ['AFFILIATED_INDIVIDUAL', 'in'],
+                            ['AFFILIATED_COMPANY', 'out']
+                        ]);
+
+                        node.__isContactsRelations = isRelations([
+                            ['ADDRESS', 'in'],
+                            ['PHONE', 'in'],
+                            ['EMPLOYEE', 'in']
+                        ]);
+
+                        node.__isPurchaseRelations = isRelations([
+                            ['CUSTOMER_COMPANY', 'out'],
+                            ['PARTICIPANT_COMPANY', 'out']
+                        ]);
+                    } else
+                    // физическое лицо
+                    if (node._type === 'INDIVIDUAL') {
+                        // группы связей
+                        node.__isPurchaseRelations = isRelations([
+                            ['PARTICIPANT_INDIVIDUAL', 'out'],
+                            ['COMMISSION_MEMBER', 'out']
+                        ]);
                     }
 
                     // история?
@@ -186,14 +211,24 @@ define(function(require) {'use strict';
                         });
                     }
 
-                    function isPurchaseRelations() {
-                        var out = node._info && node._info.out;
-                        return out && (
-                            out['CUSTOMER_COMPANY'] ||
-                            out['PARTICIPANT_COMPANY'] ||
-                            out['PARTICIPANT_INDIVIDUAL'] ||
-                            out['COMMISSION_MEMBER']
-                        );
+                    function isRelations(relationTypes) {
+                        if (!node._info) {
+                            return false;
+                        }
+
+                        var type, d, t, i;
+
+                        for (i = 0; i < relationTypes.length; i++) {
+                            t = relationTypes[i];
+                            d   = t[1];
+                            type = t[0];
+
+                            if (node._info[d] && node._info[d][type]) {
+                                return true;
+                            }
+                        }
+
+                        return false;
                     }
                 },
 

@@ -340,6 +340,7 @@ msgid "Исторический профиль"
 msgstr "Historical Report"
 
 #: ../src/nkb-app/index.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Контакты"
 msgstr "Contact"
 
@@ -483,6 +484,10 @@ msgstr "Connections between participants of procurement"
 msgctxt "Продукты НКБ на главной странице"
 msgid "Сервис комментариев"
 msgstr "Comments"
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Страница эмитента"
+msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Схема аффилированных лиц"
