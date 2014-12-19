@@ -495,7 +495,7 @@ define(function(require) {'use strict';
                 function getFounderText(relation) {
                     if (relation.sharePercent || relation.shareAmount) {
                         return _trc("доля", "Доля в учреждении компании") + nbsp +
-                            (relation.sharePercent ? $filter('number')(relation.sharePercent) + '%' : '') +
+                            (relation.sharePercent ? $filter('share')(relation.sharePercent, 2) + '%' : '') +
                             (relation.sharePercent && relation.shareAmount ? nbsp + nbsp : '') +
                             (relation.shareAmount ? $filter('number')(relation.shareAmount) + nbsp + _tr("руб.") : '');
                     }
