@@ -220,7 +220,7 @@ define(function(require) {'use strict';
 
                         for (i = 0; i < relationTypes.length; i++) {
                             t = relationTypes[i];
-                            d   = t[1];
+                            d = t[1];
                             type = t[0];
 
                             if (node._info[d] && node._info[d][type]) {
@@ -520,11 +520,14 @@ define(function(require) {'use strict';
 
                     _.each(properties, function(p){
                         if (relation[p.name]) {
-                            t.push(p.filter ? p.filter(relation[p.name]) : relation[p.name]);
+                            var v = p.filter ? p.filter(relation[p.name]) : relation[p.name];
+                            if (v) {
+                                t.push(v);
+                            }
                         }
                     });
 
-                    return _.size(t) ? t.join(', ') : '';
+                    return t.join(', ');
                 }
 
                 function getFounderText(relation) {
