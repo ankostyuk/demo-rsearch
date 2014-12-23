@@ -36,8 +36,6 @@ root._RESOURCES_CONFIG = {
 
         'uuid':                 'external_components/node-uuid/uuid',
 
-        'i18n':                 'external_components/nullpointer-i18n/i18n',
-
         // nkbcomment
         'backbone':                     'external_components/backbone/backbone',
         'iso8601':                      'external_components/iso8601/iso8601',
@@ -81,10 +79,6 @@ root._RESOURCES_CONFIG = {
         location: 'src/l10n',
         main: 'l10n'
     }, {
-        name: 'resource',
-        location: 'src/resource',
-        main: 'resource'
-    }, {
         name: 'user',
         location: 'src/user',
         main: 'user'
@@ -92,6 +86,19 @@ root._RESOURCES_CONFIG = {
         name: 'rsearch',
         location: 'src/rsearch',
         main: 'rsearch'
+    },
+    /*
+     * external packages
+     *
+     */
+    {
+        name: 'i18n',
+        location: 'external_components/nullpointer-i18n',
+        main: 'i18n'
+    }, {
+        name: 'resource',
+        location: 'external_components/nullpointer-commons/angular/resource',
+        main: 'resource'
     }],
 
     shim: {
