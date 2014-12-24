@@ -222,6 +222,10 @@ msgstr ""
 msgid "Аналитический профиль"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Аффилированные лица"
+msgstr ""
+
 #: ../src/nkb-app/components/login/views/login-form.html:1
 msgctxt "баланс пользователя"
 msgid "Баланс"

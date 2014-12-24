@@ -562,6 +562,10 @@ msgid "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_PARENTS"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Аффилированные лица"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1

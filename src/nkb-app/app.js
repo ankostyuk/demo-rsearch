@@ -155,10 +155,13 @@ define(function(require) {'use strict';
     //
 
     return {
+        // TODO promises: l10n, ...?
         init: function(parent) {
-            $(function() {
-                angular.bootstrap(parent, [app.name]);
-            });
+            _.delay(function(){
+                $(function() {
+                    angular.bootstrap(parent, [app.name]);
+                });
+            }, 0);
         }
     };
 });

@@ -3,26 +3,48 @@
  * @desc RequireJS/Angular module
  * @author ankostyuk
  */
-define(function(require) {'use strict';
-    var root = window;
+define(function(require, exports, module) {'use strict';
+    var moduleConfig = module.config();
 
                           require('jquery');
                           require('jquery.cookie');
 
     var angular         = require('angular'),
         i18n            = require('i18n'),
-        purl            = require('purl'),
-        angularLocale   = require('./angular-locale');
-
-    var uiBundle        = angular.fromJson(require('text!./ui/bundle.json')),
-        uiKeysBundle    = angular.fromJson(require('text!./ui_keys/bundle.json')),
-        regionBundle    = angular.fromJson(require('text!./okato_region/bundle.json'));
-
-    i18n.setConfig(root._RESOURCES_CONFIG['config']['i18n']);
-    i18n.setBundle([uiBundle, uiKeysBundle, regionBundle]);
+        purl            = require('purl');
 
     //
-    var config      = root._APP_CONFIG.lang || {},
+    i18n.setConfig(moduleConfig['i18n-component']);
+
+    function setLocale(lang) {
+        var bundles = [],
+            locale  = false;
+
+        // dynamic require bundles
+        require(moduleConfig.bundles, function(){
+            angular.forEach(arguments, function(bundle){
+                bundles.push(angular.fromJson(bundle));
+            });
+            check();
+        });
+
+        // dynamic require angular-locale_<lang>
+        require(['text!angular-locale_' + lang + '.js'], function(localeScript){
+            eval(localeScript);
+            locale = true;
+            check();
+        });
+
+        function check() {
+            if (bundles.length === moduleConfig.bundles.length && locale) {
+                i18n.setBundle(bundles);
+                i18n.setLang(currentLang);
+            }
+        }
+    }
+
+    //
+    var config      = moduleConfig.lang || {},
         langParam   = 'lang',
         currentLang;
 
@@ -70,8 +92,7 @@ define(function(require) {'use strict';
     }
 
     function applyLang() {
-        i18n.setLang(currentLang);
-        angularLocale.setLocale(currentLang);
+        setLocale(currentLang);
     }
 
     resolveLang();
@@ -81,7 +102,7 @@ define(function(require) {'use strict';
         //
         .factory('npL10n', ['$log', '$location', '$rootScope', function($log, $location, $rootScope){
             //
-            _.extend($rootScope, i18n.translateFuncs);
+            angular.extend($rootScope, i18n.translateFuncs);
 
             //
             $('body').addClass('lang-' + currentLang);

@@ -8,15 +8,15 @@ var fs      = require('fs-extra'),
 //
 module.exports = function(grunt) {
     //
-    var APP_LANGS = ['ru', 'en'];
-
-    //
     var buildInfo = {
         'nkb-app': {
             main: require('./src/nkb-app/main.js'),
             hash: null
         }
     };
+
+    //
+    var APP_LANGS = buildInfo['nkb-app'].main._APP_CONFIG.lang.langs;
 
     //
     grunt.initConfig({
@@ -153,9 +153,6 @@ module.exports = function(grunt) {
                     requirejs: _.extend({}, buildInfo['nkb-app'].main._RESOURCES_CONFIG, {
                         dir: path.resolve(__dirname, 'target/web-resources-build/nkb-app'),
                         baseUrl: path.resolve(__dirname, 'target/web-resources-process'),
-                        modules: [{
-                            name: 'app/main'
-                        }],
 
                         less: {
                             // TODO разобраться со статикой при деплое

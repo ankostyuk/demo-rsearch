@@ -228,6 +228,11 @@ msgstr "Affiliated Network Analysis"
 msgid "Аналитический профиль"
 msgstr "Analytical Report"
 
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+#, fuzzy
+msgid "Аффилированные лица"
+msgstr "Affiliated network diagram"
+
 #: ../src/nkb-app/components/login/views/login-form.html:1
 msgctxt "баланс пользователя"
 msgid "Баланс"
