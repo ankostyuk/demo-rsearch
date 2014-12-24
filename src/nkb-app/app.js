@@ -18,7 +18,7 @@ define(function(require) {'use strict';
         lang:           require('app.lang'),
         log:            require('app.log'),
         l10n:           require('l10n'),
-        nkbcomment:     require('nkbcomment'),
+        nkbcomment:     require('nkb.comment'),
         rsearch:        require('rsearch')
     };
 
@@ -26,9 +26,14 @@ define(function(require) {'use strict';
         //
         .constant('nkbUserConfig', {
             resource: {
-                'users.url':                '/siteapp/api/users',
-                'login.url':                '/siteapp/login',
-                'logout.url':               '/siteapp/logout'
+                'users.url':    '/siteapp/api/users',
+                'login.url':    '/siteapp/login',
+                'logout.url':   '/siteapp/logout'
+            }
+        })
+        .constant('nkbCommentConfig', {
+            resource: {
+                'api.url': '/nkbcomment/api'
             }
         })
         .constant('appConfig', {
@@ -41,8 +46,7 @@ define(function(require) {'use strict';
                 'search.url':               '/nkbrelation/api/nodes',
                 'relations.url':            '/nkbrelation/api/node',
                 'egrul.history.url':        '/siteapp/api/egrul/history',
-                'nkb.file.download.url':    '/reports/file.php',
-                'nkbcomment.api.url':       '/nkbcomment/api'
+                'nkb.file.download.url':    '/reports/file.php'
             },
             product: {
                 'market_profile_short': {

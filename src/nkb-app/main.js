@@ -77,9 +77,9 @@ root._RESOURCES_CONFIG = {
      *
      */
     {
-        name: 'nkbcomment',
-        location: 'src/nkbcomment',
-        main: 'nkbcomment'
+        name: 'nkb.comment',
+        location: 'src/comment',
+        main: 'comment'
     }, {
         name: 'nkb.user',
         location: 'external_components/nullpointer-commons/nkb/user',
