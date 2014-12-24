@@ -72,14 +72,6 @@ root._RESOURCES_CONFIG = {
         location: 'src/nkbcomment',
         main: 'nkbcomment'
     }, {
-        name: 'icons',
-        location: 'src/icons',
-        main: 'icons'
-    }, {
-        name: 'l10n',
-        location: 'src/l10n',
-        main: 'l10n'
-    }, {
         name: 'user',
         location: 'src/user',
         main: 'user'
@@ -93,6 +85,10 @@ root._RESOURCES_CONFIG = {
      *
      */
     {
+        name: 'nkb.icons',
+        location: 'external_components/nullpointer-commons/nkb/icons',
+        main: 'icons'
+    }, {
         name: 'i18n',
         location: 'external_components/nullpointer-i18n',
         main: 'i18n'

@@ -3,7 +3,7 @@
   "version": "2.2.0-SNAPSHOT",
   "description": "rsearch frontend",
   "dependencies": {
-    "requirejs": "2.1.14",
+    "requirejs": "2.1.15",
     "requirejs-text": "2.0.12",
     "require-css": "0.1.2",
     "require-less": "0.1.2",
@@ -62,7 +62,8 @@
       "": "i18n.js"
     },
     "nullpointer-commons": {
-      "angular": "src/angular"
+        "angular": "src/angular",
+        "nkb": "src/nkb"
     },
     "backbone": {
       "": "backbone.js"
@@ -90,7 +91,6 @@
   "private": true,
   "resolutions": {
     "underscore": "1.5.*",
-    "jquery": ">=1.6",
-    "requirejs": "2.*"
+    "jquery": ">=1.6"
   }
 }

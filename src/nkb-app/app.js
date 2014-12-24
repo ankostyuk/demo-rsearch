@@ -9,7 +9,7 @@ define(function(require) {'use strict';
     var angular = require('angular'),
         uuid    = require('uuid');
 
-                  require('icons');
+                  require('nkb.icons');
                   require('css!../external_components/bootstrap/css/bootstrap');
                   require('less!./styles/app');
 
