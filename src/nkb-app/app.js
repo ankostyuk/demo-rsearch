@@ -137,7 +137,7 @@ define(function(require) {'use strict';
             return {
                 restrict: 'A',
                 link: function(scope, element, attrs) {
-                    $rootScope.$on('app-user-apply', function() {
+                    $rootScope.$on('nkb-user-apply', function() {
                         var src = '//image.providesupport.com/js/nkb-trial/safe-standard.js?ps_h=Xase&ps_t=' + new Date().getTime();
                         var user = nkbUser.user();
                         if (user.isAuthenticated()) {

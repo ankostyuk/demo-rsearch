@@ -13,7 +13,7 @@ define(function(require) {'use strict';
             //
             var user = nkbUser.user();
 
-            $rootScope.$on('app-user-apply', function(e, change){
+            $rootScope.$on('nkb-user-apply', function(e, change){
                 if (!change.first) {
                     return;
                 }

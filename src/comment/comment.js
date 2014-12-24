@@ -35,7 +35,7 @@ define(function(require) {'use strict';
         .factory('nkbCommentHelper', ['$log', '$q', '$rootScope', function($log, $q, $rootScope){
             var initPromise = initComment();
 
-            $rootScope.$on('app-user-apply', function(e, change){
+            $rootScope.$on('nkb-user-apply', function(e, change){
                 if (change.login) {
                     initComment();
                 }
