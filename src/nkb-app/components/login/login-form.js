@@ -11,20 +11,22 @@ define(function(require) {'use strict';
     var i18n            = require('i18n'),
         angular         = require('angular');
 
-    return angular.module('app.login.login-form', ['np.user'])
+                          require('nkb.user');
+
+    return angular.module('app.login.login-form', ['nkb.user'])
         //
         .run([function(){
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('appLoginForm', ['$log', '$http', '$rootScope', 'npUser', 'npL10n', function($log, $http, $rootScope, npUser, npL10n){
+        .directive('appLoginForm', ['$log', '$http', '$rootScope', 'nkbUser', 'npL10n', function($log, $http, $rootScope, nkbUser, npL10n){
             return {
                 restrict: 'A',
                 template: template,
                 scope: {},
                 link: function(scope, element, attrs) {
 
-                    var user        = npUser.user(),
+                    var user        = nkbUser.user(),
                         formData    = {};
 
                     var loginInfo = {
@@ -54,7 +56,7 @@ define(function(require) {'use strict';
 
                             loginInfo.pending = true;
 
-                            npUser.login(
+                            nkbUser.login(
                                 formData,
                                 function(){
                                     loginInfo.pending = false;
@@ -72,7 +74,7 @@ define(function(require) {'use strict';
                         logout: function() {
                             loginInfo.pending = true;
 
-                            npUser.logout(
+                            nkbUser.logout(
                                 function(){
                                     loginInfo.pending = false;
                                 },

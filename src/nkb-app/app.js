@@ -24,15 +24,19 @@ define(function(require) {'use strict';
 
     var app = angular.module('app', _.pluck(submodules, 'name'))
         //
+        .constant('nkbUserConfig', {
+            resource: {
+                'users.url':                '/siteapp/api/users',
+                'login.url':                '/siteapp/login',
+                'logout.url':               '/siteapp/logout'
+            }
+        })
         .constant('appConfig', {
             name: 'rsearch',
             uuid: uuid.v4(),
             meta: root._APP_CONFIG.meta,
             yandexMetrikaCounterName: 'yaCounter23296318',
             resource: {
-                'users.url':                '/siteapp/api/users',
-                'login.url':                '/siteapp/login',
-                'logout.url':               '/siteapp/logout',
                 'meta.url':                 '/nkbrelation/api/meta',
                 'search.url':               '/nkbrelation/api/nodes',
                 'relations.url':            '/nkbrelation/api/node',
@@ -125,13 +129,13 @@ define(function(require) {'use strict';
             });
         }])
         //
-        .directive('appProvideSupport', ['$rootScope', '$timeout', 'npUser', function($rootScope, $timeout, npUser) {
+        .directive('appProvideSupport', ['$rootScope', '$timeout', 'nkbUser', function($rootScope, $timeout, nkbUser) {
             return {
                 restrict: 'A',
                 link: function(scope, element, attrs) {
                     $rootScope.$on('app-user-apply', function() {
                         var src = '//image.providesupport.com/js/nkb-trial/safe-standard.js?ps_h=Xase&ps_t=' + new Date().getTime();
-                        var user = npUser.user();
+                        var user = nkbUser.user();
                         if (user.isAuthenticated()) {
                             src += '&Client%20Login=' + user.getLogin();
                                     //'&Client%20Details=' +

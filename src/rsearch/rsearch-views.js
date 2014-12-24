@@ -11,7 +11,7 @@ define(function(require) {'use strict';
         angular         = require('angular');
                           require('ng-infinite-scroll');
 
-                          require('user');
+                          require('nkb.user');
 
     //
     var templates = {
@@ -27,7 +27,7 @@ define(function(require) {'use strict';
         'np-rsearch-node-form':                     require('text!./views/rsearch-node-form.html')
     };
 
-    return angular.module('np.rsearch-views', ['infinite-scroll', 'np.user'])
+    return angular.module('np.rsearch-views', ['infinite-scroll', 'nkb.user'])
         //
         .run([function(){
             _.each(templates, function(template, name){
@@ -46,7 +46,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .directive('npRsearchNodePlain', ['$rootScope', 'npUser', function($rootScope, npUser) {
+        .directive('npRsearchNodePlain', ['$rootScope', 'nkbUser', function($rootScope, nkbUser) {
             return {
                 restrict: 'A',
                 scope: {
@@ -56,7 +56,7 @@ define(function(require) {'use strict';
                 template: templates['np-rsearch-node-plain'],
                 link: function(scope, element, attrs){
                     _.extend(scope, {
-                        user: npUser.user(),
+                        user: nkbUser.user(),
                         toggleSelect: function() {
                             $rootScope.$emit('np-rsearch-node-select', scope.node, element);
                         }
@@ -130,7 +130,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .factory('npRsearchViews', ['$log', '$compile', '$rootScope', '$timeout', '$window', 'npUser', function($log, $compile, $rootScope, $timeout, $window, npUser){
+        .factory('npRsearchViews', ['$log', '$compile', '$rootScope', '$timeout', '$window', 'nkbUser', function($log, $compile, $rootScope, $timeout, $window, nkbUser){
 
             var windowElement   = angular.element($window),
                 htmlbodyElement = $('html, body');
@@ -256,7 +256,7 @@ define(function(require) {'use strict';
                     });
 
                     _.extend(scope, {
-                        user: npUser.user(),
+                        user: nkbUser.user(),
                         relationsClick: function(direction, relationType){
                             $rootScope.$emit('np-rsearch-node-form-relations-click', scope.node, direction, relationType);
                         },

@@ -68,14 +68,6 @@ root._RESOURCES_CONFIG = {
         location: 'src/nkb-app/components/log',
         main: 'log'
     }, {
-        name: 'nkbcomment',
-        location: 'src/nkbcomment',
-        main: 'nkbcomment'
-    }, {
-        name: 'user',
-        location: 'src/user',
-        main: 'user'
-    }, {
         name: 'rsearch',
         location: 'src/rsearch',
         main: 'rsearch'
@@ -85,6 +77,14 @@ root._RESOURCES_CONFIG = {
      *
      */
     {
+        name: 'nkbcomment',
+        location: 'src/nkbcomment',
+        main: 'nkbcomment'
+    }, {
+        name: 'nkb.user',
+        location: 'external_components/nullpointer-commons/nkb/user',
+        main: 'user'
+    }, {
         name: 'nkb.icons',
         location: 'external_components/nullpointer-commons/nkb/icons',
         main: 'icons'

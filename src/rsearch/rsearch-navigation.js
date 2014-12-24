@@ -12,15 +12,15 @@ define(function(require) {'use strict';
     var i18n            = require('i18n'),
         angular         = require('angular');
 
-                          require('user');
+                          require('nkb.user');
 
-    return angular.module('np.rsearch-navigation', ['np.user'])
+    return angular.module('np.rsearch-navigation', ['nkb.user'])
         //
         .run([function(){
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'npUser', 'appConfig', 'npNkbCommentHelper', 'npL10n', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, npUser, appConfig, npNkbCommentHelper, npL10n){
+        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npNkbCommentHelper', 'npL10n', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npNkbCommentHelper, npL10n){
             return {
                 restrict: 'A',
                 template: template,
@@ -38,7 +38,7 @@ define(function(require) {'use strict';
                      */
                     var init                    = false,
                         l10n                    = npL10n.l10n(),
-                        user                    = npUser.user(),
+                        user                    = nkbUser.user(),
                         initPromise             = $q.all([npRsearchMetaHelper.initPromise(), npNkbCommentHelper.initPromise()]),
                         initDeferredFunctions   = [];
 
@@ -356,7 +356,7 @@ define(function(require) {'use strict';
 
                         loading(function(done){
                             // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
-                            npUser.fetchUser()
+                            nkbUser.fetchUser()
                                 .then(egrulList, egrulList)
                                 .then(complete, complete);
 
