@@ -98,7 +98,7 @@ root._RESOURCES_CONFIG = {
         main: 'i18n'
     }, {
         name: 'l10n',
-        location: 'src/l10n', // !!!
+        location: 'external_components/nullpointer-commons/angular/l10n',
         main: 'l10n'
     }, {
         name: 'resource',

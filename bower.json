@@ -62,7 +62,7 @@
       "": "i18n.js"
     },
     "nullpointer-commons": {
-        "angular": "src/angular"
+      "angular": "src/angular"
     },
     "backbone": {
       "": "backbone.js"
@@ -90,6 +90,7 @@
   "private": true,
   "resolutions": {
     "underscore": "1.5.*",
-    "jquery": ">=1.6"
+    "jquery": ">=1.6",
+    "requirejs": "2.*"
   }
 }
