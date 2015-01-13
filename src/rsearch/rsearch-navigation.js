@@ -370,6 +370,7 @@ define(function(require) {'use strict';
                                 hideSearchFilters();
                                 hideRelationsFilters();
                                 clearMessages();
+                                $rootScope.$emit('np-autokad-do-clear');
 
                                 nodeFormView.setNode(node);
                                 nodeFormView.show(node);
@@ -381,6 +382,16 @@ define(function(require) {'use strict';
                                 if (!noHistory) {
                                     checkNodeFormToHistory();
                                 }
+
+                                $timeout(function(){
+                                    $rootScope.$emit('np-autokad-do-search', {
+                                        search: {
+                                            name: node['nameshortsort'],
+                                            ogrn: node['ogrn'],
+                                            inn: node['inn']
+                                        }
+                                    });
+                                });
 
                                 $rootScope.$emit('np-rsearch-navigation-node-form', node);
 

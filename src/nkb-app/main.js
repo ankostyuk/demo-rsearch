@@ -4,6 +4,16 @@ var root = this;
  * config
  *
  */
+// i18n
+var i18nBundles = [
+    'text!src/l10n/ui/bundle.json',
+    'text!src/l10n/ui_keys/bundle.json',
+    'text!src/l10n/okato_region/bundle.json',
+    // external
+    'text!external_components/nullpointer-autokad/l10n/ui/bundle.json',
+    'text!external_components/nullpointer-autokad/l10n/ui_keys/bundle.json'
+];
+
 //
 root._APP_CONFIG = {
     lang: {
@@ -34,6 +44,7 @@ root._RESOURCES_CONFIG = {
         'underscore.string':    'external_components/underscore.string/underscore.string',
 
         'purl':                 'external_components/purl/purl',
+        'moment':               'external_components/moment/moment',
 
         'uuid':                 'external_components/node-uuid/uuid',
 
@@ -96,6 +107,10 @@ root._RESOURCES_CONFIG = {
         name: 'l10n',
         location: 'external_components/nullpointer-commons/angular/l10n',
         main: 'l10n'
+    }, {
+        name: 'autokad',
+        location: 'external_components/nullpointer-autokad/autokad',
+        main: 'autokad'
     }, {
         name: 'resource',
         location: 'external_components/nullpointer-commons/angular/resource',
@@ -164,25 +179,17 @@ root._RESOURCES_CONFIG = {
                 },
                 escape: false
             },
-            bundles: [
-                'text!src/l10n/ui/bundle.json',
-                'text!src/l10n/ui_keys/bundle.json',
-                'text!src/l10n/okato_region/bundle.json'
-            ]
+            bundles: i18nBundles
         }
     },
 
     modules: [{
         name: 'app/main',
         include: [
-            // i18n bundles
-            'text!src/l10n/ui/bundle.json',
-            'text!src/l10n/ui_keys/bundle.json',
-            'text!src/l10n/okato_region/bundle.json',
             // locales
             'text!angular-locale_ru.js',
             'text!angular-locale_en.js'
-        ]
+        ].concat(i18nBundles)
     }],
 
     map: {

@@ -9,9 +9,13 @@ define(function(require) {'use strict';
                           require('underscore');
     var i18n            = require('i18n'),
         angular         = require('angular');
+
                           require('ng-infinite-scroll');
 
-                          require('nkb.user');
+    var extmodules = {
+        'autokad':      require('autokad'),
+        'nkb.user':     require('nkb.user')
+    };
 
     //
     var templates = {
@@ -27,7 +31,7 @@ define(function(require) {'use strict';
         'np-rsearch-node-form':                     require('text!./views/rsearch-node-form.html')
     };
 
-    return angular.module('np.rsearch-views', ['infinite-scroll', 'nkb.user'])
+    return angular.module('np.rsearch-views', _.pluck(extmodules, 'name').concat(['infinite-scroll']))
         //
         .run([function(){
             _.each(templates, function(template, name){

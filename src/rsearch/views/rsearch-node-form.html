@@ -106,13 +106,17 @@
                 </div>
                 <hr>
                 <div class="extra-search">
-                    <p><a class="underline with-icon" ng-href="http://fssprus.ru/iss/ip/" target="_blank"><i class="icon large i-justice-1"></i> <span class="text">${_tr("Банк данных исполнительных производств")}</span></a></p>
                     <p><a class="underline with-icon" ng-show="node.disclosure_type === 'interfax'" ng-href="http://disclosure.interfax.ru/portal/files.aspx?id={{node.disclosure_id}}&type=6" target="_blank"><i class="icon large i-document-info"></i> <span class="text">${_tr("Страница эмитента")}</span></a></p>
+                    <p><a class="underline with-icon" ng-href="http://fssprus.ru/iss/ip/" target="_blank"><i class="icon large i-justice-1"></i> <span class="text">${_tr("Банк данных исполнительных производств")}</span></a></p>
                 </div>
             </div>
             <div class="span7">
                 <div nkb-comment-widget="node"></div>
             </div>
+        </div>
+        <hr>
+        <div class="extra-search">
+            <div np-autokad></div>
         </div>
     </div>
 </div>
