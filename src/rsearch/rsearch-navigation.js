@@ -12,15 +12,15 @@ define(function(require) {'use strict';
     var i18n            = require('i18n'),
         angular         = require('angular');
 
-                          require('user');
+                          require('nkb.user');
 
-    return angular.module('np.rsearch-navigation', ['np.user'])
+    return angular.module('np.rsearch-navigation', ['nkb.user'])
         //
         .run([function(){
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'npUser', 'appConfig', 'npNkbCommentHelper', 'npL10n', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, npUser, appConfig, npNkbCommentHelper, npL10n){
+        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'nkbCommentHelper', 'npL10n', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, nkbCommentHelper, npL10n){
             return {
                 restrict: 'A',
                 template: template,
@@ -38,8 +38,8 @@ define(function(require) {'use strict';
                      */
                     var init                    = false,
                         l10n                    = npL10n.l10n(),
-                        user                    = npUser.user(),
-                        initPromise             = $q.all([npRsearchMetaHelper.initPromise(), npNkbCommentHelper.initPromise()]),
+                        user                    = nkbUser.user(),
+                        initPromise             = $q.all([npRsearchMetaHelper.initPromise(), nkbCommentHelper.initPromise()]),
                         initDeferredFunctions   = [];
 
                     function initSuccess() {
@@ -73,6 +73,10 @@ define(function(require) {'use strict';
                         search.byNodeTypes = {};
 
                         _.each(npRsearchMetaHelper.getNodeTypes(), function(data, nodeType){
+                            if (!data.search) {
+                                return;
+                            }
+
                             search.byNodeTypes[nodeType] = {
                                   nodeType: nodeType,
                                   resultPriority: data.searchResultPriority,
@@ -81,7 +85,7 @@ define(function(require) {'use strict';
                                   request: null,
                                   result: null,
                                   nodeList: null
-                              };
+                            };
                         });
                     }
 
@@ -352,7 +356,7 @@ define(function(require) {'use strict';
 
                         loading(function(done){
                             // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
-                            npUser.fetchUser()
+                            nkbUser.fetchUser()
                                 .then(egrulList, egrulList)
                                 .then(complete, complete);
 
@@ -1098,7 +1102,7 @@ define(function(require) {'use strict';
                      * user
                      *
                      */
-                    $rootScope.$on('app-user-apply', function(e){
+                    $rootScope.$on('nkb-user-apply', function(e){
                         var lastBreadcrumb = getLastBreadcrumb();
 
                         if (lastBreadcrumb && lastBreadcrumb.type === 'NODE_FORM') {

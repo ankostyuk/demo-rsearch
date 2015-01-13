@@ -4,6 +4,22 @@
             <div class="span9">
                 <div np-rsearch-node-history-info></div>
                 <div np-rsearch-node-info></div>
+                <div ng-if="node._type === 'PURCHASE'">
+                    <div class="np-rsearch-node-info">
+                        <div class="node-info">
+                            <div class="lot-list">
+                                <div class="lot" ng-repeat="(number, lot) in node.lots track by number">
+                                    <div class="row lot-header">
+                                        <div class="span7 lot-number">${_trc("Лот", "Лот закупки")}&nbsp;{{number}}</div>
+                                        <div class="align-right lot-abandoned" ng-show="lot.abandoned">${_trc("Отменён", "Лот закупки")}</div>
+                                    </div>
+                                    <div class="lot-price">{{lot.price | number:0}} {{_tr(node.currency)}}</div>
+                                    <div class="lot-info">{{lot.name}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="actions">
                     <div class="row" ng-if="node._type === 'COMPANY'">
                         <div class="span5">
@@ -65,6 +81,13 @@
                             </div>
                         </div>
                     </div>
+                    <div ng-if="node._type === 'PURCHASE'">
+                        <div class="extra-search">
+                            <p>
+                                <a class="underline" ng-href="{{node.href}}" target="_blank">${_tr("Официальная страница закупки")} ${_trc("№", "номер")} {{node.id}}</a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="span3">
@@ -83,11 +106,12 @@
                 </div>
                 <hr>
                 <div class="extra-search">
-                    <a class="underline with-icon" ng-href="http://fssprus.ru/iss/ip/" target="_blank"><i class="icon large i-justice-1"></i> <span class="text">${_tr("Банк данных исполнительных производств")}</span></a>
+                    <p><a class="underline with-icon" ng-href="http://fssprus.ru/iss/ip/" target="_blank"><i class="icon large i-justice-1"></i> <span class="text">${_tr("Банк данных исполнительных производств")}</span></a></p>
+                    <p><a class="underline with-icon" ng-show="node.disclosure_type === 'interfax'" ng-href="http://disclosure.interfax.ru/portal/files.aspx?id={{node.disclosure_id}}&type=6" target="_blank"><i class="icon large i-document-info"></i> <span class="text">${_tr("Страница эмитента")}</span></a></p>
                 </div>
             </div>
             <div class="span7">
-                <div np-nkb-comment-widget="node"></div>
+                <div nkb-comment-widget="node"></div>
             </div>
         </div>
     </div>

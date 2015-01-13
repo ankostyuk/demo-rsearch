@@ -15,38 +15,27 @@ define(function(require) {'use strict';
         .constant('npRsearchMeta', {
             nodeTypes: {
                 'COMPANY': {
+                    search: true,
                     searchResultPriority: 4
                 },
                 'INDIVIDUAL': {
+                    search: true,
                     searchResultPriority: 3
                 },
                 'ADDRESS': {
+                    search: true,
                     searchResultPriority: 2
                 },
                 'PHONE': {
+                    search: true,
                     searchResultPriority: 1
+                },
+                'PURCHASE': {
+                    search: false,
+                    searchResultPriority: 0
                 }
             },
-            relationTypes: {
-                'FOUNDER_COMPANY': {
-                },
-                'FOUNDER_INDIVIDUAL': {
-                },
-                'HEAD_COMPANY': {
-                },
-                'EXECUTIVE_COMPANY': {
-                },
-                'EXECUTIVE_INDIVIDUAL': {
-                },
-                'PREDECESSOR_COMPANY': {
-                },
-                'REGISTER_HOLDER': {
-                },
-                'ADDRESS': {
-                },
-                'PHONE': {
-                }
-            }
+            relationTypes: {}
         })
         //
         .factory('npRsearchMetaHelper', ['$log', '$q', '$rootScope', 'appConfig', 'npRsearchMeta', 'npRsearchResource', function($log, $q, $rootScope, appConfig, npRsearchMeta, npRsearchResource){
@@ -178,6 +167,32 @@ define(function(require) {'use strict';
                                 }
                             };
                         }
+
+                        // группы связей
+                        node.__isAffiliatedRelations = isRelations([
+                            ['AFFILIATED_COMPANY', 'in'],
+                            ['AFFILIATED_INDIVIDUAL', 'in'],
+                            ['AFFILIATED_COMPANY', 'out']
+                        ]);
+
+                        node.__isContactsRelations = isRelations([
+                            ['ADDRESS', 'in'],
+                            ['PHONE', 'in'],
+                            ['EMPLOYEE', 'in']
+                        ]);
+
+                        node.__isPurchaseRelations = isRelations([
+                            ['CUSTOMER_COMPANY', 'out'],
+                            ['PARTICIPANT_COMPANY', 'out']
+                        ]);
+                    } else
+                    // физическое лицо
+                    if (node._type === 'INDIVIDUAL') {
+                        // группы связей
+                        node.__isPurchaseRelations = isRelations([
+                            ['PARTICIPANT_INDIVIDUAL', 'out'],
+                            ['COMMISSION_MEMBER', 'out']
+                        ]);
                     }
 
                     // история?
@@ -194,6 +209,26 @@ define(function(require) {'use strict';
                         _.each(matches, function(m){
                             node.__historical[m] = true;
                         });
+                    }
+
+                    function isRelations(relationTypes) {
+                        if (!node._info) {
+                            return false;
+                        }
+
+                        var type, d, t, i;
+
+                        for (i = 0; i < relationTypes.length; i++) {
+                            t = relationTypes[i];
+                            d = t[1];
+                            type = t[0];
+
+                            if (node._info[d] && node._info[d][type]) {
+                                return true;
+                            }
+                        }
+
+                        return false;
                     }
                 },
 
@@ -362,6 +397,44 @@ define(function(require) {'use strict';
         }])
         //
         .filter('targetRelationsInfo', ['$filter', function($filter){
+            // COMPANY-COMPANY
+            //      FOUNDER_COMPANY
+            //          <доля %>
+            //          <доля руб>
+            //      AFFILIATED_COMPANY
+            //          <основание>
+            //          <доля в УК>
+            //          <доля в акциях>
+            //
+            // COMPANY-INDIVIDUAL
+            //      FOUNDER_INDIVIDUAL
+            //          <доля %>
+            //          <доля руб>
+            //      EXECUTIVE_INDIVIDUAL
+            //          <должность>
+            //      AFFILIATED_INDIVIDUAL
+            //          <основание>
+            //          <доля в УК>
+            //          <доля в акциях>
+            //      EMPLOYEE
+            //          <email>
+            //          <телефон>
+            //      + <ИНН>
+            //
+            // PURCHASE-COMPANY
+            //      PARTICIPANT_COMPANY
+            //          <лот>
+            //          <статус>
+            //          <цена>
+            //
+            // PURCHASE-INDIVIDUAL
+            //      PARTICIPANT_INDIVIDUAL
+            //          <лот>
+            //          <статус>
+            //          <цена>
+            //      COMMISSION_MEMBER
+            //          <role>
+            //
             return function(data, node){
                 if (!data) {
                     return null;
@@ -374,6 +447,13 @@ define(function(require) {'use strict';
                         order: 101,
                         text: function(relation){
                             return getFounderText(relation);
+                        }
+                    },
+
+                    'AFFILIATED_COMPANY': {
+                        order: 102,
+                        text: function(relation){
+                            return getAffiliatedText(relation);
                         }
                     },
 
@@ -391,6 +471,43 @@ define(function(require) {'use strict';
                         text: function(relation){
                             return getExecutiveText(relation);
                         }
+                    },
+
+                    'AFFILIATED_INDIVIDUAL': {
+                        order: 203,
+                        text: function(relation){
+                            return getAffiliatedText(relation);
+                        }
+                    },
+
+                    'EMPLOYEE': {
+                        order: 204,
+                        mergedInn: true,
+                        text: function(relation){
+                            return getEmployeeText(relation);
+                        }
+                    },
+
+                    'PARTICIPANT_COMPANY': {
+                        order: 301,
+                        text: function(relation){
+                            return getParticipantText(relation);
+                        }
+                    },
+
+                    'PARTICIPANT_INDIVIDUAL': {
+                        order: 401,
+                        mergedInn: true,
+                        text: function(relation){
+                            return getParticipantText(relation);
+                        }
+                    },
+
+                    'COMMISSION_MEMBER': {
+                        order: 501,
+                        text: function(relation){
+                            return getCommissionMemberText(relation);
+                        }
                     }
                 };
 
@@ -398,15 +515,71 @@ define(function(require) {'use strict';
                     return relation._type === data.relationInfo.relationType;
                 }
 
+                function getRelationText(relation, properties) {
+                    var t = [];
+
+                    _.each(properties, function(p){
+                        if (relation[p.name]) {
+                            var v = p.filter ? p.filter(relation[p.name]) : relation[p.name];
+                            if (v) {
+                                t.push(v);
+                            }
+                        }
+                    });
+
+                    return t.join(', ');
+                }
+
                 function getFounderText(relation) {
                     if (relation.sharePercent || relation.shareAmount) {
                         return _trc("доля", "Доля в учреждении компании") + nbsp +
-                            (relation.sharePercent ? $filter('number')(relation.sharePercent) + '%' : '') +
+                            (relation.sharePercent ? $filter('share')(relation.sharePercent, 2) + '%' : '') +
                             (relation.sharePercent && relation.shareAmount ? nbsp + nbsp : '') +
                             (relation.shareAmount ? $filter('number')(relation.shareAmount) + nbsp + _tr("руб.") : '');
                     }
 
                     return isTargetRelation(relation) ? '' : _tr("учредитель");
+                }
+
+                function getAffiliatedText(relation) {
+                    var t = getRelationText(relation, [{
+                        name: 'causes',
+                        filter: function(causes) {
+                            //
+                            if (_.isArray(causes) || _.isObject(causes)) {
+                                throw new Error('// TODO hack - Улучшение #2715: Поддержка ObjectProperty для связей');
+                            } else {
+                                causes = angular.fromJson(causes);
+                            }
+                            //
+
+                            var v = [];
+
+                            _.each(causes, function(cause){
+                                if (cause.name) {
+                                    v.push(_tr(cause.name));
+                                }
+                            });
+
+                            return v.join(', ');
+                        }
+                    }, {
+                        name: 'shareCapital',
+                        filter: function(v) {
+                            return _tr("доля УК") + nbsp + $filter('share')(v) + '%';
+                        }
+                    }, {
+                        name: 'shareStock',
+                        filter: function(v) {
+                            return _tr("доля акций") + nbsp + $filter('share')(v) + '%';
+                        }
+                    }]);
+
+                    if (t) {
+                        return t;
+                    }
+
+                    return isTargetRelation(relation) ? '' : _tr("аффилированное лицо");
                 }
 
                 function getExecutiveText(relation) {
@@ -415,6 +588,51 @@ define(function(require) {'use strict';
                     }
 
                     return isTargetRelation(relation) ? '' : _tr("руководитель");
+                }
+
+                function getEmployeeText(relation) {
+                    var t = getRelationText(relation, [{
+                        name: 'phone'
+                    }, {
+                        name: 'email'
+                    }]);
+
+                    if (t) {
+                        return t;
+                    }
+
+                    return isTargetRelation(relation) ? '' : _tr("сотрудник");
+                }
+
+                function getParticipantText(relation) {
+                    var t = getRelationText(relation, [{
+                        name: 'status',
+                        filter: _tr
+                    }, {
+                        name: 'price',
+                        filter: function(v) {
+                            return $filter('number')(v, 0) + nbsp + _tr(data.node.currency || node.currency);
+                        }
+                    }, {
+                        name: 'lot',
+                        filter: function(v) {
+                            return _trc("лот", "лот в закупке") + nbsp + v;
+                        }
+                    }]);
+
+                    if (t) {
+                        return t;
+                    }
+
+                    return isTargetRelation(relation) ? '' : _tr("участник");
+                }
+
+                function getCommissionMemberText(relation) {
+                    if (relation.role) {
+                        return relation.role;
+                    }
+
+                    return isTargetRelation(relation) ? '' : _tr("член комиссии");
                 }
 
                 function getInnText(inn) {
@@ -461,6 +679,26 @@ define(function(require) {'use strict';
                 }
 
                 return _.capitalize(texts.join(', '));
+            };
+        }])
+        //
+        // TODO перенести в commons
+        .filter('share', ['$filter', function($filter){
+            return function(number, maxFractionSize){
+                if (number > 100) {
+                    return $filter('number')(number, maxFractionSize);
+                }
+
+                var numberText = $filter('number')(
+                    number,
+                    maxFractionSize === 0 ? 0 : maxFractionSize || 10
+                );
+
+                var text = /[.,]/.test(numberText) ?
+                    numberText.replace(/[0]+$/, '').replace(/[.,]$/, '') :
+                    numberText;
+
+                return text;
             };
         }]);
     //

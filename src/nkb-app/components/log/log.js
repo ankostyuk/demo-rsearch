@@ -9,11 +9,11 @@ define(function(require) {'use strict';
 
     return angular.module('app.log', [])
         //
-        .run(['$log', '$rootScope', '$timeout', 'npUser', 'appLog', function($log, $rootScope, $timeout, npUser, appLog){
+        .run(['$log', '$rootScope', '$timeout', 'nkbUser', 'appLog', function($log, $rootScope, $timeout, nkbUser, appLog){
             //
-            var user = npUser.user();
+            var user = nkbUser.user();
 
-            $rootScope.$on('app-user-apply', function(e, change){
+            $rootScope.$on('nkb-user-apply', function(e, change){
                 if (!change.first) {
                     return;
                 }
@@ -67,10 +67,10 @@ define(function(require) {'use strict';
             }
         }])
         //
-        .factory('appLog', ['$log', 'npUser', 'appConfig', function($log, npUser, appConfig){
+        .factory('appLog', ['$log', 'nkbUser', 'appConfig', function($log, nkbUser, appConfig){
             var url     = purl(),
                 urlPath = url.attr('path'),
-                user    = npUser.user();
+                user    = nkbUser.user();
 
             //
             function logToYandexMetrika(logObj) {

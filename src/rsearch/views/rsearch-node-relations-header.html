@@ -6,6 +6,11 @@
     <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'EXECUTIVE_INDIVIDUAL'"><ng-pluralize count="count = relationsData.node._info.in['EXECUTIVE_INDIVIDUAL']" when="::${_tr("NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL")}"></ng-pluralize></span>
     <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'EXECUTIVE_COMPANY'"><ng-pluralize count="count = relationsData.node._info.in['EXECUTIVE_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_EXECUTIVE_COMPANY")}"></ng-pluralize></span>
 
+    <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'AFFILIATED_COMPANY'"><ng-pluralize count="count = relationsData.node._info.in['AFFILIATED_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_PARENTS")}"></ng-pluralize></span>
+    <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'AFFILIATED_COMPANY'"><ng-pluralize count="count = relationsData.node._info.out['AFFILIATED_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_CHILDREN")}"></ng-pluralize></span>
+
+    <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'AFFILIATED_INDIVIDUAL'"><ng-pluralize count="count = relationsData.node._info.in['AFFILIATED_INDIVIDUAL']" when="::${_tr("NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_PARENTS")}"></ng-pluralize></span>
+
     <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'HEAD_COMPANY'"><ng-pluralize count="count = relationsData.node._info.in['HEAD_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_HEAD_COMPANY")}"></ng-pluralize></span>
     <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'HEAD_COMPANY'"><ng-pluralize count="count = relationsData.node._info.out['HEAD_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_BRANCH_COMPANY")}"></ng-pluralize></span>
     <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'EXECUTIVE_COMPANY'"><ng-pluralize count="count = relationsData.node._info.out['EXECUTIVE_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_LEAD_COMPANY")}"></ng-pluralize></span>
@@ -18,11 +23,23 @@
 
     <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'ADDRESS'"><ng-pluralize count="count = relationsData.node._info.in['ADDRESS']" when="::${_tr("NG_PLURALIZE::RELATION_ADDRESS")}"></ng-pluralize></span>
     <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'PHONE'"><ng-pluralize count="count = relationsData.node._info.in['PHONE']" when="::${_tr("NG_PLURALIZE::RELATION_PHONE")}"></ng-pluralize></span>
+
+    <!-- закупки -->
+    <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'CUSTOMER_COMPANY'"><ng-pluralize count="count = relationsData.node._info.out['CUSTOMER_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_CHILDREN")}"></ng-pluralize></span>
+    <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'PARTICIPANT_COMPANY'"><ng-pluralize count="count = relationsData.node._info.out['PARTICIPANT_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_CHILDREN")}"></ng-pluralize></span>
+
+    <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'EMPLOYEE'"><ng-pluralize count="count = relationsData.node._info.in['EMPLOYEE']" when="::${_tr("NG_PLURALIZE::RELATION_EMPLOYEE_PARENTS")}"></ng-pluralize></span>
 </span>
 
 <span ng-if="relationsData.node._type === 'INDIVIDUAL'">
     <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'FOUNDER_INDIVIDUAL'"><ng-pluralize count="count = relationsData.node._info.out['FOUNDER_INDIVIDUAL']" when="::${_tr("NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY")}"></ng-pluralize></span>
     <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'EXECUTIVE_INDIVIDUAL'"><ng-pluralize count="count = relationsData.node._info.out['EXECUTIVE_INDIVIDUAL']" when="::${_tr("NG_PLURALIZE::RELATION_LEAD_COMPANY")}"></ng-pluralize></span>
+    <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'AFFILIATED_INDIVIDUAL'"><ng-pluralize count="count = relationsData.node._info.out['AFFILIATED_INDIVIDUAL']" when="::${_tr("NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_CHILDREN")}"></ng-pluralize></span>
+
+    <!-- закупки -->
+    <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'PARTICIPANT_INDIVIDUAL'"><ng-pluralize count="count = relationsData.node._info.out['PARTICIPANT_INDIVIDUAL']" when="::${_tr("NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_CHILDREN")}"></ng-pluralize></span>
+    <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'COMMISSION_MEMBER'"><ng-pluralize count="count = relationsData.node._info.out['COMMISSION_MEMBER']" when="::${_tr("NG_PLURALIZE::RELATION_COMMISSION_MEMBER_CHILDREN")}"></ng-pluralize></span>
+    <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'EMPLOYEE'"><ng-pluralize count="count = relationsData.node._info.out['EMPLOYEE']" when="::${_tr("NG_PLURALIZE::RELATION_EMPLOYEE_CHILDREN")}"></ng-pluralize></span>
 </span>
 
 <span ng-if="relationsData.node._type === 'ADDRESS'">
@@ -31,4 +48,14 @@
 
 <span ng-if="relationsData.node._type === 'PHONE'">
     <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'PHONE'"><ng-pluralize count="count = relationsData.node._info.out['PHONE']" when="::${_tr("NG_PLURALIZE::RELATION_COMPANY")}"></ng-pluralize></span>
+</span>
+
+<span ng-if="relationsData.node._type === 'PURCHASE'">
+    <!-- закупки -->
+    <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'CUSTOMER_COMPANY'"><ng-pluralize count="count = relationsData.node._info.in['CUSTOMER_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_PARENTS")}"></ng-pluralize></span>
+
+    <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'PARTICIPANT_COMPANY'"><ng-pluralize count="count = relationsData.node._info.in['PARTICIPANT_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_PARENTS")}"></ng-pluralize></span>
+    <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'PARTICIPANT_INDIVIDUAL'"><ng-pluralize count="count = relationsData.node._info.in['PARTICIPANT_INDIVIDUAL']" when="::${_tr("NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_PARENTS")}"></ng-pluralize></span>
+
+    <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'COMMISSION_MEMBER'"><ng-pluralize count="count = relationsData.node._info.in['COMMISSION_MEMBER']" when="::${_tr("NG_PLURALIZE::RELATION_COMMISSION_MEMBER_PARENTS")}"></ng-pluralize></span>
 </span>

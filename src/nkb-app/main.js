@@ -7,7 +7,8 @@ var root = this;
 //
 root._APP_CONFIG = {
     lang: {
-        defaultLang: 'ru'
+        defaultLang: 'ru',
+        langs: ['ru', 'en']
     },
     meta: {
         // Параметр: Объём продаж за последний год
@@ -35,8 +36,6 @@ root._RESOURCES_CONFIG = {
         'purl':                 'external_components/purl/purl',
 
         'uuid':                 'external_components/node-uuid/uuid',
-
-        'i18n':                 'external_components/nullpointer-i18n/i18n',
 
         // nkbcomment
         'backbone':                     'external_components/backbone/backbone',
@@ -69,40 +68,43 @@ root._RESOURCES_CONFIG = {
         location: 'src/nkb-app/components/log',
         main: 'log'
     }, {
-        name: 'nkbcomment',
-        location: 'src/nkbcomment',
-        main: 'nkbcomment'
-    }, {
-        name: 'icons',
-        location: 'src/icons',
-        main: 'icons'
-    }, {
-        name: 'l10n',
-        location: 'src/l10n',
-        main: 'l10n'
-    }, {
-        name: 'resource',
-        location: 'src/resource',
-        main: 'resource'
-    }, {
-        name: 'user',
-        location: 'src/user',
-        main: 'user'
-    }, {
         name: 'rsearch',
         location: 'src/rsearch',
         main: 'rsearch'
+    },
+    /*
+     * external packages
+     *
+     */
+    {
+        name: 'nkb.comment',
+        location: 'src/comment',
+        main: 'comment'
+    }, {
+        name: 'nkb.user',
+        location: 'external_components/nullpointer-commons/nkb/user',
+        main: 'user'
+    }, {
+        name: 'nkb.icons',
+        location: 'external_components/nullpointer-commons/nkb/icons',
+        main: 'icons'
+    }, {
+        name: 'i18n',
+        location: 'external_components/nullpointer-i18n',
+        main: 'i18n'
+    }, {
+        name: 'l10n',
+        location: 'external_components/nullpointer-commons/angular/l10n',
+        main: 'l10n'
+    }, {
+        name: 'resource',
+        location: 'external_components/nullpointer-commons/angular/resource',
+        main: 'resource'
     }],
 
     shim: {
         'angular': {
             exports: 'angular'
-        },
-        'angular-locale_ru': {
-            deps: ['angular']
-        },
-        'angular-locale_en': {
-            deps: ['angular']
         },
         'ng-infinite-scroll': {
             deps: ['angular']
@@ -148,19 +150,40 @@ root._RESOURCES_CONFIG = {
     },
 
     config: {
-        'i18n': {
-            // Должны отличаться от общих настроек шаблонизатора (например, underscore),
-            // т.к. смысл шаблонизации i18n:
-            //   только перевести текст шаблона,
-            //   а далее использовать переведённый шаблон с шаблонизатором по умолчанию
-            templateSettings: {
-                evaluate:       '',
-                interpolate:    /\$\{([\s\S]+?)\}/g,
-                escape:         ''
+        'l10n/l10n': {
+            lang: root._APP_CONFIG.lang,
+            'i18n-component': {
+                // Должны отличаться от общих настроек шаблонизатора (например, underscore),
+                // т.к. смысл шаблонизации i18n:
+                //   только перевести текст шаблона,
+                //   а далее использовать переведённый шаблон с шаблонизатором по умолчанию
+                templateSettings: {
+                    evaluate:       '',
+                    interpolate:    /\$\{([\s\S]+?)\}/g,
+                    escape:         ''
+                },
+                escape: false
             },
-            escape: false
+            bundles: [
+                'text!src/l10n/ui/bundle.json',
+                'text!src/l10n/ui_keys/bundle.json',
+                'text!src/l10n/okato_region/bundle.json'
+            ]
         }
     },
+
+    modules: [{
+        name: 'app/main',
+        include: [
+            // i18n bundles
+            'text!src/l10n/ui/bundle.json',
+            'text!src/l10n/ui_keys/bundle.json',
+            'text!src/l10n/okato_region/bundle.json',
+            // locales
+            'text!angular-locale_ru.js',
+            'text!angular-locale_en.js'
+        ]
+    }],
 
     map: {
         '*': {
