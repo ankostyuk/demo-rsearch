@@ -150,6 +150,7 @@ define(function(require) {'use strict';
                     function doSearch(query) {
                         search.query = query;
 
+                        clearAutokad();
                         nodeFormView.hide();
                         clearBreadcrumbs();
                         clearNodeRelationsFilter();
@@ -274,6 +275,7 @@ define(function(require) {'use strict';
 
                         setSearchResult(nodeType, breadcrumb);
 
+                        clearAutokad();
                         nodeFormView.hide();
                         clearNodeRelationsFilter();
                         hideRelationsFilters();
@@ -366,11 +368,11 @@ define(function(require) {'use strict';
 
                             function complete() {
                                 nodeListView.clear();
+                                clearAutokad();
                                 clearNodeRelationsFilter();
                                 hideSearchFilters();
                                 hideRelationsFilters();
                                 clearMessages();
-                                $rootScope.$emit('np-autokad-do-clear');
 
                                 nodeFormView.setNode(node);
                                 nodeFormView.show(node);
@@ -383,15 +385,7 @@ define(function(require) {'use strict';
                                     checkNodeFormToHistory();
                                 }
 
-                                $timeout(function(){
-                                    $rootScope.$emit('np-autokad-do-search', {
-                                        search: {
-                                            name: node['nameshortsort'],
-                                            ogrn: node['ogrn'],
-                                            inn: node['inn']
-                                        }
-                                    });
-                                });
+                                showAutokad(node);
 
                                 $rootScope.$emit('np-rsearch-navigation-node-form', node);
 
@@ -419,6 +413,7 @@ define(function(require) {'use strict';
                     }
 
                     function showRelations(node, direction, relationType, key, breadcrumb, noHistory) {
+                        clearAutokad();
                         nodeFormView.hide();
                         setNodeRelationsFilter(node, direction, relationType);
                         hideSearchFilters();
@@ -1123,6 +1118,26 @@ define(function(require) {'use strict';
                             });
                         }
                     });
+
+                    /*
+                    * autokad
+                    *
+                    */
+                    function showAutokad(node) {
+                        $timeout(function(){
+                            $rootScope.$emit('np-autokad-do-search', {
+                                search: {
+                                    name: node['nameshortsort'],
+                                    ogrn: node['ogrn'],
+                                    inn: node['inn']
+                                }
+                            });
+                        });
+                    }
+
+                    function clearAutokad() {
+                        $rootScope.$emit('np-autokad-do-clear');
+                    }
 
                     /*
                      * scope
