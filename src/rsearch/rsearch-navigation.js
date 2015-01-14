@@ -1123,20 +1123,22 @@ define(function(require) {'use strict';
                     * autokad
                     *
                     */
+                    // @Deprecated
                     function showAutokad(node) {
-                        $timeout(function(){
-                            $rootScope.$emit('np-autokad-do-search', {
-                                search: {
-                                    name: node['nameshortsort'],
-                                    ogrn: node['ogrn'],
-                                    inn: node['inn']
-                                }
-                            });
-                        });
+                        // $timeout(function(){
+                        //     $rootScope.$emit('np-autokad-do-search', {
+                        //         search: {
+                        //             name: node['nameshortsort'],
+                        //             ogrn: node['ogrn'],
+                        //             inn: node['inn']
+                        //         }
+                        //     });
+                        // });
                     }
 
+                    // @Deprecated
                     function clearAutokad() {
-                        $rootScope.$emit('np-autokad-do-clear');
+                        // $rootScope.$emit('np-autokad-do-clear');
                     }
 
                     /*
