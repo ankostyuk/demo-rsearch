@@ -7,6 +7,10 @@
         "cldrFormat": "one{0}few{1}many{2}other{2}"
       }
     },
+    "NG_PLURALIZE::AUTOKAD_CASE_COUNT": [
+      null,
+      "{'0': 'Нет арбитражных дел', 'one': '{{count|number}} арбитражное дело', 'few': '{{count|number}} арбитражных дела', 'many': '{{count|number}} арбитражных дел', 'other': '{{count|number}} арбитражного дела'}"
+    ],
     "NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT": [
       null,
       "{'one': '{{count|number}} комментарий', 'few': '{{count|number}} комментария', 'many': '{{count|number}} комментариев', 'other': '{{count|number}} комментария'}"
@@ -255,6 +259,10 @@
       null,
       ""
     ],
+    "Иски и судебные решения": [
+      null,
+      ""
+    ],
     "Исторический профиль": [
       null,
       ""
@@ -340,6 +348,10 @@
       ""
     ],
     "Поиск": [
+      null,
+      ""
+    ],
+    "Поиск арбитражных дел...": [
       null,
       ""
     ],
@@ -512,6 +524,10 @@
         "cldrFormat": "one{0}other{1}"
       }
     },
+    "NG_PLURALIZE::AUTOKAD_CASE_COUNT": [
+      null,
+      "{'0': 'Нет арбитражных дел', 'one': '1 арбитражное дело', 'other': '{{count|number}} арбитражное дело'}"
+    ],
     "NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT": [
       null,
       "{'one': '1 comment', 'other': '{{count|number}} comments'}"
@@ -760,6 +776,10 @@
       null,
       "Search social networks"
     ],
+    "Иски и судебные решения": [
+      null,
+      ""
+    ],
     "Исторический профиль": [
       null,
       "Historical Report"
@@ -847,6 +867,10 @@
     "Поиск": [
       null,
       "Search"
+    ],
+    "Поиск арбитражных дел...": [
+      null,
+      ""
     ],
     "Пополнить": [
       null,

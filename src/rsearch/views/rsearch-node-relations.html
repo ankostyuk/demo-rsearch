@@ -38,11 +38,21 @@
         </ul>
     </div>
     <div class="relations-block" ng-show="node.__isPurchaseRelations">
-        <!--<h5 class="relations-block-header"><i class="icon large i-justice-2"></i> ${_tr("Закупки")}</h5>-->
         <h5 class="relations-block-header">${_tr("Закупки")}</h5>
         <ul class="unstyled">
             <li ng-show="node._info.out['CUSTOMER_COMPANY']" ng-class="{active: active === 'children::CUSTOMER_COMPANY'}"><a class="action" ng-click="relationsClick('children', 'CUSTOMER_COMPANY')"><ng-pluralize count="count = node._info.out['CUSTOMER_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_CHILDREN")}"></ng-pluralize></a></li>
             <li ng-show="node._info.out['PARTICIPANT_COMPANY']" ng-class="{active: active === 'children::PARTICIPANT_COMPANY'}"><a class="action" ng-click="relationsClick('children', 'PARTICIPANT_COMPANY')"><ng-pluralize count="count = node._info.out['PARTICIPANT_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_CHILDREN")}"></ng-pluralize></a></li>
+        </ul>
+    </div>
+    <div class="relations-block" ng-show="user.isAuthenticated()">
+        <h5 class="relations-block-header">${_tr("Иски и судебные решения")}</h5>
+        <ul class="unstyled">
+            <li ng-show="true">
+                <a class="action" ng-click="autokadClick()">
+                    <ng-pluralize count="count = autokad.getCaseCount()" when="::${_tr("NG_PLURALIZE::AUTOKAD_CASE_COUNT")}" ng-hide="autokad.isCaseCountPending()"></ng-pluralize>
+                    <span class="animate-pulsed-flash" ng-show="autokad.isCaseCountPending()">${_tr("Поиск арбитражных дел...")}</span>
+                </a>
+            </li>
         </ul>
     </div>
     <a class="action relations-product shadow-lift-lb-corner strong" ng-click="productClick('relations_find_related')">${_tr("Анализ аффилированных лиц")}</a>
@@ -58,11 +68,21 @@
         </ul>
     </div>
     <div class="relations-block" ng-show="node.__isPurchaseRelations">
-        <!--<h5 class="relations-block-header"><i class="icon large i-justice-2"></i> ${_tr("Закупки")}</h5>-->
         <h5 class="relations-block-header">${_tr("Закупки")}</h5>
         <ul class="unstyled">
             <li ng-show="node._info.out['PARTICIPANT_INDIVIDUAL']" ng-class="{active: active === 'children::PARTICIPANT_INDIVIDUAL'}"><a class="action" ng-click="relationsClick('children', 'PARTICIPANT_INDIVIDUAL')"><ng-pluralize count="count = node._info.out['PARTICIPANT_INDIVIDUAL']" when="::${_tr("NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_CHILDREN")}"></ng-pluralize></a></li>
             <li ng-show="node._info.out['COMMISSION_MEMBER']" ng-class="{active: active === 'children::COMMISSION_MEMBER'}"><a class="action" ng-click="relationsClick('children', 'COMMISSION_MEMBER')"><ng-pluralize count="count = node._info.out['COMMISSION_MEMBER']" when="::${_tr("NG_PLURALIZE::RELATION_COMMISSION_MEMBER_CHILDREN")}"></ng-pluralize></a></li>
+        </ul>
+    </div>
+    <div class="relations-block" ng-show="user.isAuthenticated()">
+        <h5 class="relations-block-header">${_tr("Иски и судебные решения")}</h5>
+        <ul class="unstyled">
+            <li ng-show="true">
+                <a class="action" ng-click="autokadClick()">
+                    <ng-pluralize count="count = autokad.getCaseCount()" when="::${_tr("NG_PLURALIZE::AUTOKAD_CASE_COUNT")}" ng-hide="autokad.isCaseCountPending()"></ng-pluralize>
+                    <span class="animate-pulsed-flash" ng-show="autokad.isCaseCountPending()">${_tr("Поиск арбитражных дел...")}</span>
+                </a>
+            </li>
         </ul>
     </div>
     <a class="action relations-product shadow-lift-lb-corner strong" ng-click="productClick('relations_find_related')">${_tr("Анализ аффилированных лиц")}</a>
