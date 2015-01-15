@@ -20,7 +20,7 @@ define(function(require) {'use strict';
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'nkbCommentHelper', 'npL10n', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, nkbCommentHelper, npL10n){
+        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'nkbCommentHelper', 'npL10n', 'NpRsearchAutokad', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, nkbCommentHelper, npL10n, NpRsearchAutokad){
             return {
                 restrict: 'A',
                 template: template,
@@ -31,6 +31,9 @@ define(function(require) {'use strict';
                         viewsElement    = element.find('.views'),
                         nodeListView    = npRsearchViews.createNodeListView(viewsElement, scope),
                         nodeFormView    = npRsearchViews.createNodeFormView(viewsElement, scope);
+
+                    var autokad = new NpRsearchAutokad();
+                    nodeFormView.setAutokad(autokad);
 
                     /*
                      * init
@@ -771,6 +774,7 @@ define(function(require) {'use strict';
 
                     var nodeRelationsFilter = {
                         node: null,
+                        autokad: autokad,
                         active: null,
                         relationsClick: function(direction, relationType) {
                             if (buildNodeRelationActiveKey(direction, relationType) === nodeRelationsFilter.active) {
@@ -791,6 +795,7 @@ define(function(require) {'use strict';
 
                     function setNodeRelationsFilter(node, direction, relationType) {
                         nodeRelationsFilter.node = node;
+                        autokad.setNode(node);
                         nodeRelationsFilter.active = buildNodeRelationActiveKey(direction, relationType);
                     }
 
@@ -1123,8 +1128,10 @@ define(function(require) {'use strict';
                     * autokad
                     *
                     */
-                    // @Deprecated
                     function showAutokad(node) {
+                        autokad.setNode(node);
+
+                        //
                         // $timeout(function(){
                         //     $rootScope.$emit('np-autokad-do-search', {
                         //         search: {
@@ -1136,8 +1143,9 @@ define(function(require) {'use strict';
                         // });
                     }
 
-                    // @Deprecated
                     function clearAutokad() {
+                        autokad.clear();
+
                         // $rootScope.$emit('np-autokad-do-clear');
                     }
 
@@ -1151,7 +1159,8 @@ define(function(require) {'use strict';
                         messages: messages,
                         breadcrumbs: breadcrumbs,
                         isBreadcrumbs: isBreadcrumbs,
-                        nodeRelationsFilter: nodeRelationsFilter
+                        nodeRelationsFilter: nodeRelationsFilter,
+                        autokad: autokad
                     });
 
                     function reset() {
@@ -1168,6 +1177,102 @@ define(function(require) {'use strict';
                     // Выполнить после отработки кода модуля
                     initPromise.then(initSuccess);
                 }
+            };
+        }])
+        .factory('NpRsearchAutokad', ['$log', 'npAutokadHelper', function($log, npAutokadHelper){
+
+            // Class
+            return function() {
+                var caseCountPending, caseCountRequest,
+                    node;
+
+                var byNodeType = {
+                    'COMPANY': {
+                        getCaseCountQuery: function() {
+                            return node.nameshortsort;
+                        }
+                    },
+                    'INDIVIDUAL': {
+                        getCaseCountQuery: function() {
+                            return node.name;
+                        }
+                    }
+                };
+
+                reset();
+
+                function reset() {
+                    caseCountPending = false;
+
+                    abortCaseCountRequest();
+                }
+
+                function abortCaseCountRequest() {
+                    if (caseCountRequest) {
+                        caseCountRequest.abort();
+                    }
+                }
+
+                function doGetCaseCount() {
+                    var query = byNodeType[node._type].getCaseCountQuery();
+
+                    caseCountPending = true;
+
+                    abortCaseCountRequest();
+
+                    caseCountRequest = npAutokadHelper.getCaseCount(
+                        query,
+                        function(result){
+                            node.__autokad.caseCount = result;
+                        },
+                        function(){
+                            $log.warn('getCaseCount... error');
+                            node.__autokad.caseCount = 0;
+                        });
+
+                    if (caseCountRequest) {
+                        caseCountRequest.completePromise.then(function(){
+                            caseCountPending = false;
+                        });
+                    }
+                }
+
+                function isNodeValid(n) {
+                    return !!byNodeType[n._type];
+                }
+
+                function setNode(n) {
+                    reset();
+
+                    if (!isNodeValid(n)) {
+                        return;
+                    }
+
+                    // кеширование ноды
+                    if (!node || node.__uid !== n.__uid) {
+                        node = n;
+                        node.__autokad = {
+                            caseCount: 0
+                        };
+                        doGetCaseCount();
+                    }
+                }
+
+                function isNodeWithAutokad() {
+                    return node && node.__autokad;
+                }
+
+                // API
+                return {
+                    setNode: setNode,
+                    clear: reset,
+                    isCaseCountPending: function() {
+                        return caseCountPending;
+                    },
+                    getCaseCount: function() {
+                        return isNodeWithAutokad() ? node.__autokad.caseCount : 0;
+                    }
+                };
             };
         }]);
     //

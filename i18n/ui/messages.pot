@@ -562,6 +562,18 @@ msgid "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_PARENTS"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Иски и судебные решения"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "NG_PLURALIZE::AUTOKAD_CASE_COUNT"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Поиск арбитражных дел..."
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Аффилированные лица"
 msgstr ""
 

@@ -90,6 +90,7 @@ define(function(require) {'use strict';
                 restrict: 'A',
                 scope: {
                     node: '=npRsearchNodeRelations',
+                    autokad: '=npRsearchNodeRelationsAutokad',
                     active: '=npRsearchNodeRelationsActive',
                     relationsClick: '=npRsearchNodeRelationsClick',
                     productClick: '=npRsearchNodeProductClick'
@@ -256,6 +257,9 @@ define(function(require) {'use strict';
                     _.extend(view, {
                         setNode: function(node){
                             scope.node = node;
+                        },
+                        setAutokad: function(autokad){
+                            scope.autokad = autokad;
                         }
                     });
 
