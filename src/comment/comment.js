@@ -15,7 +15,7 @@ define(function(require) {'use strict';
                                   require('css!../external_components/nkbcomment/nkbcomment-message-widget/css/message-widget.css');
                                   require('css!../external_components/nkbcomment/nkbcomment-comment-widget/css/comment-widget.css');
 
-    var template                = require('text!./views/nkbcomment.html');
+    var template                = require('text!./views/comment.html');
 
                   require('jquery');
                   require('underscore');
@@ -23,77 +23,72 @@ define(function(require) {'use strict';
         angular = require('angular');
 
     //
-    return angular.module('np.nkbcomment', [])
+    return angular.module('nkb.comment', [])
         //
-        .run(['appConfig', function(appConfig){
+        .run(['nkbCommentConfig', function(nkbCommentConfig){
             MessageWidgetSettings.templates = messageWidgetTemplates;
             CommentWidgetSettings.templates = commentWidgetTemplates;
-            CommentWidgetSettings.apiUrl = CommentUtils.API_URL = appConfig.resource['nkbcomment.api.url'];
+            CommentWidgetSettings.apiUrl = CommentUtils.API_URL = nkbCommentConfig.resource['api.url'];
             template = i18n.translateTemplate(template);
         }])
         //
-        .factory('npNkbCommentHelper', ['$log', '$q', '$rootScope', function($log, $q, $rootScope){
-            var initPromise = initComment();
+        .factory('nkbCommentHelper', ['$log', '$q', '$rootScope', function($log, $q, $rootScope){
 
-            $rootScope.$on('app-user-apply', function(e, change){
-                if (change.login) {
-                    initComment();
-                }
-            });
-
-            // TODO В CommentUtils.setupWidget `CommentUtils.USER_INFO = {}` при error
             function initComment() {
                 var defer = $q.defer();
 
-                CommentUtils.setupWidget('creditnet_ticket',
-                    function() {
-                        defer.resolve();
-                        $rootScope.$emit('np-nkbcomment-init');
-                    },
-                    function() {
-                        defer.resolve();
-                        $rootScope.$emit('np-nkbcomment-init');
-                    }
-                );
+                CommentUtils.setupWidget('creditnet_ticket', complete, complete);
+
+                function complete() {
+                    defer.resolve();
+                }
 
                 return defer.promise;
             }
 
             return {
-                initPromise: function() {
-                    return initPromise;
-                }
+                initComment: initComment
             };
         }])
         //
-        .directive('npNkbCommentWidget', ['$log', '$rootScope', 'npNkbCommentHelper', function($log, $rootScope, npNkbCommentHelper){
+        .directive('nkbCommentWidget', ['$log', '$rootScope', 'nkbCommentHelper', function($log, $rootScope, nkbCommentHelper){
             return {
                 restrict: 'A',
                 scope: {
-                    node: '=npNkbCommentWidget'
+                    node: '=nkbCommentWidget'
                 },
                 template: template,
                 link: function(scope, element, attrs) {
                     var commentWidgetContainer = element.find('.comment-widget-container'),
                         commentWidget;
 
-                    $rootScope.$on('np-nkbcomment-init', function(e){
-                        commentWidgetContainer.empty();
+                    initComment();
 
-                        commentWidget = new CommentWidget({
-                            container: commentWidgetContainer,
-                            onChange: function(data){
-                                scope.commentData = data;
-                                scope.$apply();
-                            }
-                        });
-
-                        checkComment(scope.node);
+                    $rootScope.$on('nkb-user-apply', function(e, change){
+                        if (change.login) {
+                            initComment();
+                        }
                     });
 
                     scope.$watch('node', function(newNode, oldNode) {
                         checkComment(newNode);
                     });
+
+                    function initComment() {
+                        nkbCommentHelper.initComment().then(function(){
+                            commentWidgetContainer.empty();
+
+                            commentWidget = new CommentWidget({
+                                container: commentWidgetContainer,
+                                onChange: function(data){
+                                    scope.commentData = data;
+                                    scope.$apply();
+                                }
+                            });
+
+                            checkComment(scope.node);
+                        });
+                    }
 
                     function checkComment(node) {
                         scope.commentData = null;

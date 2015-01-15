@@ -8,15 +8,15 @@ var fs      = require('fs-extra'),
 //
 module.exports = function(grunt) {
     //
-    var APP_LANGS = ['ru', 'en'];
-
-    //
     var buildInfo = {
         'nkb-app': {
             main: require('./src/nkb-app/main.js'),
             hash: null
         }
     };
+
+    //
+    var APP_LANGS = buildInfo['nkb-app'].main._APP_CONFIG.lang.langs;
 
     //
     grunt.initConfig({
@@ -92,11 +92,23 @@ module.exports = function(grunt) {
                     langs:          APP_LANGS
                 }
             },
+            'ui_keys': {
+                options: {
+                    mode:           'simple',
+                    pattern:        '**/*.txt',
+                    inputDir:       path.resolve(__dirname, 'i18n/ui_keys/src'),
+                    inputRootPath:  path.resolve(__dirname, ''),
+                    outputDir:      path.resolve(__dirname, 'i18n/ui_keys'),
+                    bundleDir:      path.resolve(__dirname, 'src/l10n/ui_keys'),
+                    baseLang:       APP_LANGS[0],
+                    langs:          APP_LANGS
+                }
+            },
             'okato_region': {
                 options: {
                     mode:           'simple',
                     pattern:        '**/*.txt',
-                    inputDir:       path.resolve(__dirname, 'i18n/okato_region'),
+                    inputDir:       path.resolve(__dirname, 'i18n/okato_region/src'),
                     inputRootPath:  path.resolve(__dirname, ''),
                     outputDir:      path.resolve(__dirname, 'i18n/okato_region'),
                     bundleDir:      path.resolve(__dirname, 'src/l10n/okato_region'),
@@ -141,9 +153,6 @@ module.exports = function(grunt) {
                     requirejs: _.extend({}, buildInfo['nkb-app'].main._RESOURCES_CONFIG, {
                         dir: path.resolve(__dirname, 'target/web-resources-build/nkb-app'),
                         baseUrl: path.resolve(__dirname, 'target/web-resources-process'),
-                        modules: [{
-                            name: 'app/main'
-                        }],
 
                         less: {
                             // TODO разобраться со статикой при деплое

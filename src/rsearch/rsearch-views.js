@@ -9,9 +9,13 @@ define(function(require) {'use strict';
                           require('underscore');
     var i18n            = require('i18n'),
         angular         = require('angular');
+
                           require('ng-infinite-scroll');
 
-                          require('user');
+    var extmodules = {
+        'autokad':      require('autokad'),
+        'nkb.user':     require('nkb.user')
+    };
 
     //
     var templates = {
@@ -27,7 +31,7 @@ define(function(require) {'use strict';
         'np-rsearch-node-form':                     require('text!./views/rsearch-node-form.html')
     };
 
-    return angular.module('np.rsearch-views', ['infinite-scroll', 'np.user'])
+    return angular.module('np.rsearch-views', _.pluck(extmodules, 'name').concat(['infinite-scroll']))
         //
         .run([function(){
             _.each(templates, function(template, name){
@@ -46,7 +50,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .directive('npRsearchNodePlain', ['$rootScope', 'npUser', function($rootScope, npUser) {
+        .directive('npRsearchNodePlain', ['$rootScope', 'nkbUser', function($rootScope, nkbUser) {
             return {
                 restrict: 'A',
                 scope: {
@@ -55,11 +59,12 @@ define(function(require) {'use strict';
                 },
                 template: templates['np-rsearch-node-plain'],
                 link: function(scope, element, attrs){
-                    scope.user = npUser.user();
-
-                    scope.toggleSelect = function(){
-                        $rootScope.$emit('np-rsearch-node-select', scope.node, element);
-                    };
+                    _.extend(scope, {
+                        user: nkbUser.user(),
+                        toggleSelect: function() {
+                            $rootScope.$emit('np-rsearch-node-select', scope.node, element);
+                        }
+                    }, i18n.translateFuncs);
                 }
             };
         }])
@@ -80,16 +85,21 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .directive('npRsearchNodeRelations', [function() {
+        .directive('npRsearchNodeRelations', ['nkbUser', function(nkbUser) {
             return {
                 restrict: 'A',
                 scope: {
                     node: '=npRsearchNodeRelations',
+                    autokad: '=npRsearchNodeRelationsAutokad',
                     active: '=npRsearchNodeRelationsActive',
                     relationsClick: '=npRsearchNodeRelationsClick',
-                    productClick: '=npRsearchNodeProductClick'
+                    productClick: '=npRsearchNodeProductClick',
+                    autokadClick: '=npRsearchNodeAutokadClick'
                 },
-                template: templates['np-rsearch-node-relations']
+                template: templates['np-rsearch-node-relations'],
+                link: function(scope, element, attrs){
+                    scope.user = nkbUser.user();
+                }
             };
         }])
         //
@@ -129,7 +139,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .factory('npRsearchViews', ['$log', '$compile', '$rootScope', '$timeout', '$window', 'npUser', function($log, $compile, $rootScope, $timeout, $window, npUser){
+        .factory('npRsearchViews', ['$log', '$compile', '$rootScope', '$timeout', '$window', 'nkbUser', function($log, $compile, $rootScope, $timeout, $window, nkbUser){
 
             var windowElement   = angular.element($window),
                 htmlbodyElement = $('html, body');
@@ -152,14 +162,14 @@ define(function(require) {'use strict';
                 return {
                     element: element,
                     scope: scope,
-                    remove: function(){
+                    remove: function() {
                         element.remove();
                         scope.$destroy();
                     },
-                    show: function(){
+                    show: function() {
                         element.show();
                     },
-                    hide: function(){
+                    hide: function() {
                         element.hide();
                     }
                 };
@@ -251,18 +261,27 @@ define(function(require) {'use strict';
                     _.extend(view, {
                         setNode: function(node){
                             scope.node = node;
+                        },
+                        setFormType: function(formType){
+                            scope.formType = formType;
+                        },
+                        setAutokad: function(autokad){
+                            scope.autokad = autokad;
                         }
                     });
 
                     _.extend(scope, {
-                        user: npUser.user(),
+                        user: nkbUser.user(),
                         relationsClick: function(direction, relationType){
                             $rootScope.$emit('np-rsearch-node-form-relations-click', scope.node, direction, relationType);
                         },
                         productClick: function(productName){
                             $rootScope.$emit('np-rsearch-node-form-product-click', productName, scope.node);
+                        },
+                        autokadClick: function(){
+                            $rootScope.$emit('np-rsearch-node-form-autokad-click', scope.node);
                         }
-                    });
+                    }, i18n.translateFuncs);
 
                     return view;
                 },

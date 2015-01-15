@@ -1,0 +1,116 @@
+{
+  "ru": {
+    "": {
+      "pluralForms": {
+        "count": 3,
+        "ruleCode": "n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2",
+        "cldrFormat": "one{0}few{1}many{2}other{2}"
+      }
+    },
+    "AFFILIATE_20_PERCENT": [
+      null,
+      "доля более 20%"
+    ],
+    "AFFILIATE_MEMBER_BOARD_DIRECTORS": [
+      null,
+      "член совета директоров"
+    ],
+    "AFFILIATE_SAME_GROUP": [
+      null,
+      "одна группа лиц"
+    ],
+    "AFFILIATE_SOLE_EXECUTIVE": [
+      null,
+      "единоличный исполнительный орган"
+    ],
+    "EUR": [
+      null,
+      "€"
+    ],
+    "FZ_223": [
+      null,
+      "223-ФЗ"
+    ],
+    "FZ_44": [
+      null,
+      "44-ФЗ"
+    ],
+    "GBP": [
+      null,
+      "£"
+    ],
+    "NOT_ADMITTED": [
+      null,
+      "не допущен"
+    ],
+    "RUB": [
+      null,
+      "руб."
+    ],
+    "USD": [
+      null,
+      "$"
+    ],
+    "WIN": [
+      null,
+      "победитель"
+    ]
+  },
+  "en": {
+    "": {
+      "pluralForms": {
+        "count": 2,
+        "ruleCode": "n != 1",
+        "cldrFormat": "one{0}other{1}"
+      }
+    },
+    "AFFILIATE_20_PERCENT": [
+      null,
+      ""
+    ],
+    "AFFILIATE_MEMBER_BOARD_DIRECTORS": [
+      null,
+      ""
+    ],
+    "AFFILIATE_SAME_GROUP": [
+      null,
+      ""
+    ],
+    "AFFILIATE_SOLE_EXECUTIVE": [
+      null,
+      ""
+    ],
+    "EUR": [
+      null,
+      "€"
+    ],
+    "FZ_223": [
+      null,
+      ""
+    ],
+    "FZ_44": [
+      null,
+      ""
+    ],
+    "GBP": [
+      null,
+      "£"
+    ],
+    "NOT_ADMITTED": [
+      null,
+      ""
+    ],
+    "RUB": [
+      null,
+      "rub."
+    ],
+    "USD": [
+      null,
+      "$"
+    ],
+    "WIN": [
+      null,
+      ""
+    ]
+  }
+}

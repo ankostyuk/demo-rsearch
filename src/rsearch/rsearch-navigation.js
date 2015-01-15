@@ -12,15 +12,15 @@ define(function(require) {'use strict';
     var i18n            = require('i18n'),
         angular         = require('angular');
 
-                          require('user');
+                          require('nkb.user');
 
-    return angular.module('np.rsearch-navigation', ['np.user'])
+    return angular.module('np.rsearch-navigation', ['nkb.user'])
         //
         .run([function(){
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'npUser', 'appConfig', 'npNkbCommentHelper', 'npL10n', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, npUser, appConfig, npNkbCommentHelper, npL10n){
+        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npL10n', 'NpRsearchAutokad', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npL10n, NpRsearchAutokad){
             return {
                 restrict: 'A',
                 template: template,
@@ -32,14 +32,17 @@ define(function(require) {'use strict';
                         nodeListView    = npRsearchViews.createNodeListView(viewsElement, scope),
                         nodeFormView    = npRsearchViews.createNodeFormView(viewsElement, scope);
 
+                    var autokad = new NpRsearchAutokad();
+                    nodeFormView.setAutokad(autokad);
+
                     /*
                      * init
                      *
                      */
                     var init                    = false,
                         l10n                    = npL10n.l10n(),
-                        user                    = npUser.user(),
-                        initPromise             = $q.all([npRsearchMetaHelper.initPromise(), npNkbCommentHelper.initPromise()]),
+                        user                    = nkbUser.user(),
+                        initPromise             = $q.all([npRsearchMetaHelper.initPromise()]),
                         initDeferredFunctions   = [];
 
                     function initSuccess() {
@@ -73,6 +76,10 @@ define(function(require) {'use strict';
                         search.byNodeTypes = {};
 
                         _.each(npRsearchMetaHelper.getNodeTypes(), function(data, nodeType){
+                            if (!data.search) {
+                                return;
+                            }
+
                             search.byNodeTypes[nodeType] = {
                                   nodeType: nodeType,
                                   resultPriority: data.searchResultPriority,
@@ -81,7 +88,7 @@ define(function(require) {'use strict';
                                   request: null,
                                   result: null,
                                   nodeList: null
-                              };
+                            };
                         });
                     }
 
@@ -146,6 +153,7 @@ define(function(require) {'use strict';
                     function doSearch(query) {
                         search.query = query;
 
+                        clearAutokad();
                         nodeFormView.hide();
                         clearBreadcrumbs();
                         clearNodeRelationsFilter();
@@ -270,6 +278,7 @@ define(function(require) {'use strict';
 
                         setSearchResult(nodeType, breadcrumb);
 
+                        clearAutokad();
                         nodeFormView.hide();
                         clearNodeRelationsFilter();
                         hideRelationsFilters();
@@ -318,7 +327,7 @@ define(function(require) {'use strict';
                     };
 
                     $rootScope.$on('np-rsearch-node-select', function(e, node){
-                        showNodeForm(node);
+                        showNodeForm('MINIREPORT', node);
                     });
 
                     function nodeFormEgrulList(node) {
@@ -345,14 +354,14 @@ define(function(require) {'use strict';
                         return nodeForm.egrulRequest.completePromise;
                     }
 
-                    function showNodeForm(node, breadcrumb, noHistory, noSearchHistory) {
+                    function showNodeForm(formType, node, breadcrumb, noHistory, noSearchHistory) {
                         if (!noHistory && !noSearchHistory) {
                             checkSearchToHistory();
                         }
 
                         loading(function(done){
                             // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
-                            npUser.fetchUser()
+                            nkbUser.fetchUser()
                                 .then(egrulList, egrulList)
                                 .then(complete, complete);
 
@@ -362,21 +371,25 @@ define(function(require) {'use strict';
 
                             function complete() {
                                 nodeListView.clear();
+                                clearAutokad();
                                 clearNodeRelationsFilter();
                                 hideSearchFilters();
                                 hideRelationsFilters();
                                 clearMessages();
 
                                 nodeFormView.setNode(node);
-                                nodeFormView.show(node);
+                                nodeFormView.setFormType(formType);
+                                nodeFormView.show();
 
-                                pushNodeFormBreadcrumb(node, breadcrumb);
+                                pushNodeFormBreadcrumb(formType, node, breadcrumb);
 
                                 npRsearchViews.scrollTop();
 
                                 if (!noHistory) {
                                     checkNodeFormToHistory();
                                 }
+
+                                showAutokad(formType, node);
 
                                 $rootScope.$emit('np-rsearch-navigation-node-form', node);
 
@@ -404,6 +417,7 @@ define(function(require) {'use strict';
                     }
 
                     function showRelations(node, direction, relationType, key, breadcrumb, noHistory) {
+                        clearAutokad();
                         nodeFormView.hide();
                         setNodeRelationsFilter(node, direction, relationType);
                         hideSearchFilters();
@@ -557,7 +571,7 @@ define(function(require) {'use strict';
                         return index;
                     }
 
-                    function pushNodeFormBreadcrumb(node, breadcrumb) {
+                    function pushNodeFormBreadcrumb(formType, node, breadcrumb) {
                         if (breadcrumb) {
                             return breadcrumb.index;
                         }
@@ -568,6 +582,7 @@ define(function(require) {'use strict';
                             index: index,
                             type: 'NODE_FORM',
                             data: {
+                                formType: formType,
                                 node: node,
                                 targetInfo: getLastTargetInfo()
                             }
@@ -611,7 +626,7 @@ define(function(require) {'use strict';
                             highlightNodeInListByBreadcrumb(nextBreadcrumb);
                         } else
                         if (breadcrumb.type === 'NODE_FORM') {
-                            showNodeForm(breadcrumb.data.node, breadcrumb);
+                            showNodeForm(breadcrumb.data.formType, breadcrumb.data.node, breadcrumb);
                         } else
                         if (breadcrumb.type === 'NODE_RELATIONS') {
                             showRelations(breadcrumb.data.node, breadcrumb.data.direction, breadcrumb.data.relationType, index, breadcrumb);
@@ -688,7 +703,7 @@ define(function(require) {'use strict';
                         }
 
                         setSearchResult(node._type);
-                        showNodeForm(node, null, false, true);
+                        showNodeForm('MINIREPORT', node, null, false, true);
 
                         return true;
                     }
@@ -704,7 +719,7 @@ define(function(require) {'use strict';
 
                         var node = byRelations.result.list[0];
 
-                        showNodeForm(node);
+                        showNodeForm('MINIREPORT', node);
 
                         return true;
                     }
@@ -761,6 +776,7 @@ define(function(require) {'use strict';
 
                     var nodeRelationsFilter = {
                         node: null,
+                        autokad: autokad,
                         active: null,
                         relationsClick: function(direction, relationType) {
                             if (buildNodeRelationActiveKey(direction, relationType) === nodeRelationsFilter.active) {
@@ -772,6 +788,9 @@ define(function(require) {'use strict';
                         },
                         productClick: function(productName) {
                             doProduct(productName, nodeRelationsFilter.node);
+                        },
+                        autokadClick: function(){
+                            doAutokad(nodeRelationsFilter.node);
                         }
                     };
 
@@ -781,6 +800,7 @@ define(function(require) {'use strict';
 
                     function setNodeRelationsFilter(node, direction, relationType) {
                         nodeRelationsFilter.node = node;
+                        autokad.setNode(node);
                         nodeRelationsFilter.active = buildNodeRelationActiveKey(direction, relationType);
                     }
 
@@ -1028,7 +1048,7 @@ define(function(require) {'use strict';
                                 highlightNodeInListByBreadcrumb(nextBreadcrumb);
                             } else
                             if (historyData.type === 'NODE_FORM') {
-                                showNodeForm(breadcrumb.data.node, breadcrumb, true);
+                                showNodeForm(breadcrumb.data.formType, breadcrumb.data.node, breadcrumb, true);
                             } else
                             if (historyData.type === 'NODE_RELATIONS') {
                                 showRelations(breadcrumb.data.node, breadcrumb.data.direction, breadcrumb.data.relationType, breadcrumb.index, breadcrumb, true);
@@ -1098,7 +1118,7 @@ define(function(require) {'use strict';
                      * user
                      *
                      */
-                    $rootScope.$on('app-user-apply', function(e){
+                    $rootScope.$on('nkb-user-apply', function(e){
                         var lastBreadcrumb = getLastBreadcrumb();
 
                         if (lastBreadcrumb && lastBreadcrumb.type === 'NODE_FORM') {
@@ -1110,6 +1130,30 @@ define(function(require) {'use strict';
                     });
 
                     /*
+                    * autokad
+                    *
+                    */
+                    $rootScope.$on('np-rsearch-node-form-autokad-click', function(e, node){
+                        doAutokad(node);
+                    });
+
+                    function showAutokad(formType, node) {
+                        autokad.setNode(node);
+
+                        if (formType === 'AUTOKAD') {
+                            autokad.showCases();
+                        }
+                    }
+
+                    function clearAutokad() {
+                        autokad.clear();
+                    }
+
+                    function doAutokad(node) {
+                        showNodeForm('AUTOKAD', node);
+                    }
+
+                    /*
                      * scope
                      *
                      */
@@ -1119,7 +1163,8 @@ define(function(require) {'use strict';
                         messages: messages,
                         breadcrumbs: breadcrumbs,
                         isBreadcrumbs: isBreadcrumbs,
-                        nodeRelationsFilter: nodeRelationsFilter
+                        nodeRelationsFilter: nodeRelationsFilter,
+                        autokad: autokad
                     });
 
                     function reset() {
@@ -1136,6 +1181,128 @@ define(function(require) {'use strict';
                     // Выполнить после отработки кода модуля
                     initPromise.then(initSuccess);
                 }
+            };
+        }])
+        .factory('NpRsearchAutokad', ['$log', '$rootScope', '$timeout', 'npAutokadHelper', function($log, $rootScope, $timeout, npAutokadHelper){
+
+            // Class
+            return function() {
+                var caseCountPending, caseCountRequest,
+                    node;
+
+                var byNodeType = {
+                    'COMPANY': {
+                        getCaseCountQuery: function() {
+                            return node['nameshortsort'];
+                        },
+                        getCaseSearch: function() {
+                            return {
+                                sources: [
+                                    {key: 'company_name', value: node['nameshortsort']},
+                                    {key: 'company_ogrn', value: node['ogrn']},
+                                    {key: 'company_inn', value: node['inn']}
+                                ]
+                            };
+                        }
+                    },
+                    'INDIVIDUAL': {
+                        getCaseCountQuery: function() {
+                            return node['name'];
+                        },
+                        getCaseSearch: function() {
+                            return {
+                                sources: [
+                                    {key: node.subtype === 'foreign' ? 'company_name' : 'individual_name', value: node['name']}
+                                ]
+                            };
+                        }
+                    }
+                };
+
+                reset();
+
+                function reset() {
+                    caseCountPending = false;
+
+                    abortCaseCountRequest();
+                }
+
+                function abortCaseCountRequest() {
+                    if (caseCountRequest) {
+                        caseCountRequest.abort();
+                    }
+                }
+
+                function doGetCaseCount() {
+                    var query = byNodeType[node._type].getCaseCountQuery();
+
+                    caseCountPending = true;
+
+                    abortCaseCountRequest();
+
+                    caseCountRequest = npAutokadHelper.getCaseCount(
+                        query,
+                        function(result){
+                            node.__autokad.caseCount = result;
+                        },
+                        function(){
+                            $log.warn('getCaseCount... error');
+                            node.__autokad.caseCount = 0;
+                        });
+
+                    if (caseCountRequest) {
+                        caseCountRequest.completePromise.then(function(){
+                            caseCountPending = false;
+                        });
+                    }
+                }
+
+                function isNodeValid(n) {
+                    return !!byNodeType[n._type];
+                }
+
+                function setNode(n) {
+                    reset();
+
+                    if (!isNodeValid(n)) {
+                        return;
+                    }
+
+                    // кеширование ноды
+                    if (!node || node.__uid !== n.__uid) {
+                        node = n;
+                        node.__autokad = {
+                            caseCount: 0
+                        };
+                        doGetCaseCount();
+                    }
+                }
+
+                function isNodeWithAutokad() {
+                    return node && node.__autokad;
+                }
+
+                // API
+                return {
+                    setNode: setNode,
+                    isCaseCountPending: function() {
+                        return caseCountPending;
+                    },
+                    getCaseCount: function() {
+                        return isNodeWithAutokad() ? node.__autokad.caseCount : 0;
+                    },
+                    showCases: function() {
+                        $timeout(function(){
+                            $rootScope.$emit('np-autokad-do-search', {
+                                search: byNodeType[node._type].getCaseSearch()
+                            });
+                        });
+                    },
+                    clear: function() {
+                        reset();
+                        $rootScope.$emit('np-autokad-do-clear');
+                    }
+                };
             };
         }]);
     //

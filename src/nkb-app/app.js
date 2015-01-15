@@ -9,7 +9,7 @@ define(function(require) {'use strict';
     var angular = require('angular'),
         uuid    = require('uuid');
 
-                  require('icons');
+                  require('nkb.icons');
                   require('css!../external_components/bootstrap/css/bootstrap');
                   require('less!./styles/app');
 
@@ -18,27 +18,35 @@ define(function(require) {'use strict';
         lang:           require('app.lang'),
         log:            require('app.log'),
         l10n:           require('l10n'),
-        nkbcomment:     require('nkbcomment'),
+        nkbcomment:     require('nkb.comment'),
         rsearch:        require('rsearch')
     };
 
     var app = angular.module('app', _.pluck(submodules, 'name'))
         //
+        .constant('nkbUserConfig', {
+            resource: {
+                'users.url':    '/siteapp/api/users',
+                'login.url':    '/siteapp/login',
+                'logout.url':   '/siteapp/logout'
+            }
+        })
+        .constant('nkbCommentConfig', {
+            resource: {
+                'api.url': '/nkbcomment/api'
+            }
+        })
         .constant('appConfig', {
             name: 'rsearch',
             uuid: uuid.v4(),
             meta: root._APP_CONFIG.meta,
             yandexMetrikaCounterName: 'yaCounter23296318',
             resource: {
-                'users.url':                '/siteapp/api/users',
-                'login.url':                '/siteapp/login',
-                'logout.url':               '/siteapp/logout',
                 'meta.url':                 '/nkbrelation/api/meta',
                 'search.url':               '/nkbrelation/api/nodes',
                 'relations.url':            '/nkbrelation/api/node',
                 'egrul.history.url':        '/siteapp/api/egrul/history',
-                'nkb.file.download.url':    '/reports/file.php',
-                'nkbcomment.api.url':       '/nkbcomment/api'
+                'nkb.file.download.url':    '/reports/file.php'
             },
             product: {
                 'market_profile_short': {
@@ -125,13 +133,13 @@ define(function(require) {'use strict';
             });
         }])
         //
-        .directive('appProvideSupport', ['$rootScope', '$timeout', 'npUser', function($rootScope, $timeout, npUser) {
+        .directive('appProvideSupport', ['$rootScope', '$timeout', 'nkbUser', function($rootScope, $timeout, nkbUser) {
             return {
                 restrict: 'A',
                 link: function(scope, element, attrs) {
-                    $rootScope.$on('app-user-apply', function() {
+                    $rootScope.$on('nkb-user-apply', function() {
                         var src = '//image.providesupport.com/js/nkb-trial/safe-standard.js?ps_h=Xase&ps_t=' + new Date().getTime();
-                        var user = npUser.user();
+                        var user = nkbUser.user();
                         if (user.isAuthenticated()) {
                             src += '&Client%20Login=' + user.getLogin();
                                     //'&Client%20Details=' +
@@ -155,10 +163,13 @@ define(function(require) {'use strict';
     //
 
     return {
+        // TODO promises: l10n, ...?
         init: function(parent) {
-            $(function() {
-                angular.bootstrap(parent, [app.name]);
-            });
+            _.delay(function(){
+                $(function() {
+                    angular.bootstrap(parent, [app.name]);
+                });
+            }, 0);
         }
     };
 });
