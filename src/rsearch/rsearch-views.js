@@ -93,7 +93,8 @@ define(function(require) {'use strict';
                     autokad: '=npRsearchNodeRelationsAutokad',
                     active: '=npRsearchNodeRelationsActive',
                     relationsClick: '=npRsearchNodeRelationsClick',
-                    productClick: '=npRsearchNodeProductClick'
+                    productClick: '=npRsearchNodeProductClick',
+                    autokadClick: '=npRsearchNodeAutokadClick'
                 },
                 template: templates['np-rsearch-node-relations'],
                 link: function(scope, element, attrs){
@@ -161,14 +162,14 @@ define(function(require) {'use strict';
                 return {
                     element: element,
                     scope: scope,
-                    remove: function(){
+                    remove: function() {
                         element.remove();
                         scope.$destroy();
                     },
-                    show: function(){
+                    show: function() {
                         element.show();
                     },
-                    hide: function(){
+                    hide: function() {
                         element.hide();
                     }
                 };
@@ -261,6 +262,9 @@ define(function(require) {'use strict';
                         setNode: function(node){
                             scope.node = node;
                         },
+                        setFormType: function(formType){
+                            scope.formType = formType;
+                        },
                         setAutokad: function(autokad){
                             scope.autokad = autokad;
                         }
@@ -273,6 +277,9 @@ define(function(require) {'use strict';
                         },
                         productClick: function(productName){
                             $rootScope.$emit('np-rsearch-node-form-product-click', productName, scope.node);
+                        },
+                        autokadClick: function(){
+                            $rootScope.$emit('np-rsearch-node-form-autokad-click', scope.node);
                         }
                     }, i18n.translateFuncs);
 
