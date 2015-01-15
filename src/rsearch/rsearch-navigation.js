@@ -20,7 +20,7 @@ define(function(require) {'use strict';
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'nkbCommentHelper', 'npL10n', 'NpRsearchAutokad', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, nkbCommentHelper, npL10n, NpRsearchAutokad){
+        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npL10n', 'NpRsearchAutokad', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npL10n, NpRsearchAutokad){
             return {
                 restrict: 'A',
                 template: template,
@@ -42,7 +42,7 @@ define(function(require) {'use strict';
                     var init                    = false,
                         l10n                    = npL10n.l10n(),
                         user                    = nkbUser.user(),
-                        initPromise             = $q.all([npRsearchMetaHelper.initPromise(), nkbCommentHelper.initPromise()]),
+                        initPromise             = $q.all([npRsearchMetaHelper.initPromise()]),
                         initDeferredFunctions   = [];
 
                     function initSuccess() {

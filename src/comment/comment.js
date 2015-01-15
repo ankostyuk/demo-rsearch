@@ -33,36 +33,21 @@ define(function(require) {'use strict';
         }])
         //
         .factory('nkbCommentHelper', ['$log', '$q', '$rootScope', function($log, $q, $rootScope){
-            var initPromise = initComment();
 
-            $rootScope.$on('nkb-user-apply', function(e, change){
-                if (change.login) {
-                    initComment();
-                }
-            });
-
-            // TODO В CommentUtils.setupWidget `CommentUtils.USER_INFO = {}` при error
             function initComment() {
                 var defer = $q.defer();
 
-                CommentUtils.setupWidget('creditnet_ticket',
-                    function() {
-                        defer.resolve();
-                        $rootScope.$emit('nkb-comment-init');
-                    },
-                    function() {
-                        defer.resolve();
-                        $rootScope.$emit('nkb-comment-init');
-                    }
-                );
+                CommentUtils.setupWidget('creditnet_ticket', complete, complete);
+
+                function complete() {
+                    defer.resolve();
+                }
 
                 return defer.promise;
             }
 
             return {
-                initPromise: function() {
-                    return initPromise;
-                }
+                initComment: initComment
             };
         }])
         //
@@ -77,23 +62,33 @@ define(function(require) {'use strict';
                     var commentWidgetContainer = element.find('.comment-widget-container'),
                         commentWidget;
 
-                    $rootScope.$on('nkb-comment-init', function(e){
-                        commentWidgetContainer.empty();
+                    initComment();
 
-                        commentWidget = new CommentWidget({
-                            container: commentWidgetContainer,
-                            onChange: function(data){
-                                scope.commentData = data;
-                                scope.$apply();
-                            }
-                        });
-
-                        checkComment(scope.node);
+                    $rootScope.$on('nkb-user-apply', function(e, change){
+                        if (change.login) {
+                            initComment();
+                        }
                     });
 
                     scope.$watch('node', function(newNode, oldNode) {
                         checkComment(newNode);
                     });
+
+                    function initComment() {
+                        nkbCommentHelper.initComment().then(function(){
+                            commentWidgetContainer.empty();
+
+                            commentWidget = new CommentWidget({
+                                container: commentWidgetContainer,
+                                onChange: function(data){
+                                    scope.commentData = data;
+                                    scope.$apply();
+                                }
+                            });
+
+                            checkComment(scope.node);
+                        });
+                    }
 
                     function checkComment(node) {
                         scope.commentData = null;
