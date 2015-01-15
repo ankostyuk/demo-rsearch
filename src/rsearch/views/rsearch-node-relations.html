@@ -44,7 +44,7 @@
             <li ng-show="node._info.out['PARTICIPANT_COMPANY']" ng-class="{active: active === 'children::PARTICIPANT_COMPANY'}"><a class="action" ng-click="relationsClick('children', 'PARTICIPANT_COMPANY')"><ng-pluralize count="count = node._info.out['PARTICIPANT_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_CHILDREN")}"></ng-pluralize></a></li>
         </ul>
     </div>
-    <div class="relations-block">
+    <div class="relations-block" ng-show="user.isAuthenticated()">
         <h5 class="relations-block-header">${_tr("Иски и судебные решения")}</h5>
         <ul class="unstyled">
             <li ng-show="true">
@@ -74,7 +74,7 @@
             <li ng-show="node._info.out['COMMISSION_MEMBER']" ng-class="{active: active === 'children::COMMISSION_MEMBER'}"><a class="action" ng-click="relationsClick('children', 'COMMISSION_MEMBER')"><ng-pluralize count="count = node._info.out['COMMISSION_MEMBER']" when="::${_tr("NG_PLURALIZE::RELATION_COMMISSION_MEMBER_CHILDREN")}"></ng-pluralize></a></li>
         </ul>
     </div>
-    <div class="relations-block">
+    <div class="relations-block" ng-show="user.isAuthenticated()">
         <h5 class="relations-block-header">${_tr("Иски и судебные решения")}</h5>
         <ul class="unstyled">
             <li ng-show="true">

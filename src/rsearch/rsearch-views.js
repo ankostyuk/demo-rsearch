@@ -85,7 +85,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .directive('npRsearchNodeRelations', [function() {
+        .directive('npRsearchNodeRelations', ['nkbUser', function(nkbUser) {
             return {
                 restrict: 'A',
                 scope: {
@@ -95,7 +95,10 @@ define(function(require) {'use strict';
                     relationsClick: '=npRsearchNodeRelationsClick',
                     productClick: '=npRsearchNodeProductClick'
                 },
-                template: templates['np-rsearch-node-relations']
+                template: templates['np-rsearch-node-relations'],
+                link: function(scope, element, attrs){
+                    scope.user = nkbUser.user();
+                }
             };
         }])
         //
