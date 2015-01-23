@@ -35,7 +35,7 @@
         <script src="./main.js?${nkb-app.build.id}"></script>
     </head>
 
-    <body>
+    <body ng-class="{'is-search': app.isSearch()}">
         <div class="app-state-indicator" ng-hide="isAppReady()"></div>
         <div class="container">
             <div class="header">
