@@ -34,6 +34,15 @@
 .footer .links-row {
     margin-bottom: 10px;
 }
+.footer .links-row .span4 {
+    width: 260px;
+}
+.footer .links-row .span3 {
+    width: 180px;
+}
+.footer .links-row .span2 {
+    width: 120px;
+}
 .footer .partners a {
     display: inline-block;
     height: 36px;
@@ -174,10 +183,19 @@
 }
 
 /* products */
-/* teaser */
-.products {
-    margin-left: 0;
+.products .links-row {
+    margin-bottom: 30px;
 }
+.products ul.inline {
+    margin: 0 0 0 -20px;
+    padding: 0;
+}
+.products ul.inline li {
+    margin: 0 0 0 20px;
+    padding: 0;
+}
+
+/* teaser */
 .products .teaser {
     position: relative;
     display: block;
@@ -195,22 +213,8 @@
 .products .teaser.shadow-lift-lb-corner:after {
     background-color: @defaultBackgroundColor;
 }
-/* product links */
-.products .product-links {
-    margin-bottom: 0;
-}
-.products .product-links li {
-    margin-bottom: 0;
-    padding: 0;
-}
-.products .product-links .sep {
-    height: 25px;
-    margin-bottom: 1px;
-    margin-left: 10px;
-    margin-right: 10px;
-    border-left: 1px solid @defaultLineColor;
-}
-.products .product-links .relations-info {
+
+.products .relations-info {
     width: 920px;
     height: 555px;
     margin-top: 40px;
