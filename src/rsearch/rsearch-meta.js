@@ -189,6 +189,10 @@ define(function(require) {'use strict';
                     // физическое лицо
                     if (node._type === 'INDIVIDUAL') {
                         // группы связей
+                        node.__isAffiliatedRelations = isRelations([
+                            ['AFFILIATED_INDIVIDUAL', 'out']
+                        ]);
+
                         node.__isPurchaseRelations = isRelations([
                             ['PARTICIPANT_INDIVIDUAL', 'out'],
                             ['COMMISSION_MEMBER', 'out']
