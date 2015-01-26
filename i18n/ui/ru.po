@@ -50,12 +50,12 @@ msgstr "{'one': 'Адрес', 'few': '{{count|number}} адреса', 'many': '{
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 msgid "NG_PLURALIZE::RELATION_AFFILIATED_CHILDREN"
-msgstr "{'one': '{{count|number}}  зависимая компания', 'few': '{{count|number}} зависимые компании', 'many': '{{count|number}} зависимых компаний', 'other': '{{count|number}} зависимой компании'}"
+msgstr "{'one': '{{count|number}} зависимая компания', 'few': '{{count|number}} зависимые компании', 'many': '{{count|number}} зависимых компаний', 'other': '{{count|number}} зависимой компании'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_CHILDREN"
-msgstr "{'one': '{{count|number}}  зависимая компания', 'few': '{{count|number}} зависимые компании', 'many': '{{count|number}} зависимых компаний', 'other': '{{count|number}} зависимой компании'}"
+msgstr "{'one': '{{count|number}} зависимая компания', 'few': '{{count|number}} зависимые компании', 'many': '{{count|number}} зависимых компаний', 'other': '{{count|number}} зависимой компании'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -65,7 +65,7 @@ msgstr "{'one': '{{count|number}} аффилированная компания'
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_CHILDREN"
-msgstr "{'one': '{{count|number}}  зависимая компания', 'few': '{{count|number}} зависимые компании', 'many': '{{count|number}} зависимых компаний', 'other': '{{count|number}} зависимой компании'}"
+msgstr "{'one': '{{count|number}} зависимая компания', 'few': '{{count|number}} зависимые компании', 'many': '{{count|number}} зависимых компаний', 'other': '{{count|number}} зависимой компании'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -84,13 +84,11 @@ msgstr "{'one': '{{count|number}} филиал', 'few': '{{count|number}} фил
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_CHILDREN"
 msgstr "{'one': '{{count|number}} закупочная комиссия', 'few': '{{count|number}} закупочные комиссии', 'many': '{{count|number}} закупочных комиссий', 'other': '{{count|number}} закупочных комиссий'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_PARENTS"
 msgstr "{'one': '{{count|number}} член комиссии', 'few': '{{count|number}} члена комиссии', 'many': '{{count|number}} членов комиссии', 'other': '{{count|number}} члена комиссии'}"
 
@@ -102,27 +100,23 @@ msgstr "{'one': '{{count|number}} компания', 'few': '{{count|number}} к
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_CHILDREN"
-msgstr "{'one': '{{count|number}}  закупка', 'few': '{{count|number}} закупки', 'many': '{{count|number}} закупок', 'other': '{{count|number}} закупки'}"
+msgstr "{'one': '{{count|number}} закупка', 'few': '{{count|number}} закупки', 'many': '{{count|number}} закупок', 'other': '{{count|number}} закупки'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_PARENTS"
 msgstr "{'one': 'Заказчик', 'few': '{{count|number}} заказчика', 'many': '{{count|number}} заказчиков', 'other': '{{count|number}} заказчика'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_EMPLOYEE_CHILDREN"
-msgstr "{'one': '1 организатор закупки', 'few': '{{count|number}} организатора закупок', 'many': '{{count|number}} организаторов закупок', 'other': '{{count|number}} организатора закупок'}"
+msgstr "{'one': '{{count|number}} организатор закупки', 'few': '{{count|number}} организатора закупок', 'many': '{{count|number}} организаторов закупок', 'other': '{{count|number}} организатора закупок'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_EMPLOYEE_PARENTS"
-msgstr "{'one': '1 контактное лицо', 'few': '{{count|number}} контактных лица', 'many': '{{count|number}} контактных лиц', 'other': '{{count|number}} контактных лица'}"
+msgstr "{'one': '{{count|number}} контактное лицо', 'few': '{{count|number}} контактных лица', 'many': '{{count|number}} контактных лиц', 'other': '{{count|number}} контактных лица'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -163,25 +157,21 @@ msgstr "{'one': '{{count|number}} руководимая компания', 'few
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_CHILDREN"
-msgstr "{'one': '{{count|number}}  участие в закупках', 'few': '{{count|number}} участия в закупках', 'many': '{{count|number}} участий в закупках', 'other': '{{count|number}} участий в закупках'}"
+msgstr "{'one': '{{count|number}} участие в закупках', 'few': '{{count|number}} участия в закупках', 'many': '{{count|number}} участий в закупках', 'other': '{{count|number}} участий в закупках'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_PARENTS"
-msgstr "{'one': '{{count|number}}  участник компания', 'few': '{{count|number}} участника компании', 'many': '{{count|number}} участников компаний', 'other': '{{count|number}} участника компании'}"
+msgstr "{'one': '{{count|number}} участник компания', 'few': '{{count|number}} участника компании', 'many': '{{count|number}} участников компаний', 'other': '{{count|number}} участника компании'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_CHILDREN"
-msgstr "{'one': '{{count|number}}  участие в закупках', 'few': '{{count|number}} участия в закупках', 'many': '{{count|number}} участий в закупках', 'other': '{{count|number}} участий в закупках'}"
+msgstr "{'one': '{{count|number}} участие в закупках', 'few': '{{count|number}} участия в закупках', 'many': '{{count|number}} участий в закупках', 'other': '{{count|number}} участий в закупках'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_PARENTS"
 msgstr "{'one': '{{count|number}} участник физическое лицо', 'few': '{{count|number}} участника физических лица', 'many': '{{count|number}} участников физических лиц', 'other': '{{count|number}} участника физического лица'}"
 

@@ -93,13 +93,13 @@ msgstr "{'one': '1 branch', 'other': '{{count|number}} branches'}"
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #, fuzzy
 msgid "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_CHILDREN"
-msgstr "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+msgstr "{'one': '1 закупочная комиссия', 'other': '{{count|number}} закупочная комиссия'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #, fuzzy
 msgid "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_PARENTS"
-msgstr "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+msgstr "{'one': '1 член комиссии', 'other': '{{count|number}} член комиссии'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
@@ -111,25 +111,25 @@ msgstr "{'one': '1 company', 'other': '{{count|number}} companies'}"
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #, fuzzy
 msgid "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_CHILDREN"
-msgstr "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+msgstr "{'one': '1 закупка', 'other': '{{count|number}} закупка'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #, fuzzy
 msgid "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_PARENTS"
-msgstr "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+msgstr "{'one': 'Заказчик', 'other': '{{count|number}} заказчик'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #, fuzzy
 msgid "NG_PLURALIZE::RELATION_EMPLOYEE_CHILDREN"
-msgstr "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+msgstr "{'one': '1 организатор закупки', 'other': '{{count|number}} организатор закупки'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #, fuzzy
 msgid "NG_PLURALIZE::RELATION_EMPLOYEE_PARENTS"
-msgstr "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+msgstr "{'one': '1 контактное лицо', 'other': '{{count|number}} контактное лицо'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -172,25 +172,25 @@ msgstr "{'one': '1 managed company', 'other': '{{count|number}} managed companie
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #, fuzzy
 msgid "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_CHILDREN"
-msgstr "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+msgstr "{'one': '1 участие в закупках', 'other': '{{count|number}} участие в закупках'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #, fuzzy
 msgid "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_PARENTS"
-msgstr "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+msgstr "{'one': '1 участник компания', 'other': '{{count|number}} участник компания'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #, fuzzy
 msgid "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_CHILDREN"
-msgstr "{'one': '1 аффилированное физическое лицо', 'other': '{{count|number}} аффилированное физическое лицо'}"
+msgstr "{'one': '1 участие в закупках', 'other': '{{count|number}} участие в закупках'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #, fuzzy
 msgid "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_PARENTS"
-msgstr "{'one': '1 аффилированное физическое лицо', 'other': '{{count|number}} аффилированное физическое лицо'}"
+msgstr "{'one': '1 участник физическое лицо', 'other': '{{count|number}} участник физическое лицо'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
