@@ -177,13 +177,13 @@ define(function(require) {'use strict';
 
                         node.__isContactsRelations = isRelations([
                             ['ADDRESS', 'in'],
-                            ['PHONE', 'in'],
-                            ['EMPLOYEE', 'in']
+                            ['PHONE', 'in']
                         ]);
 
                         node.__isPurchaseRelations = isRelations([
                             ['CUSTOMER_COMPANY', 'out'],
-                            ['PARTICIPANT_COMPANY', 'out']
+                            ['PARTICIPANT_COMPANY', 'out'],
+                            ['EMPLOYEE', 'in']
                         ]);
                     } else
                     // физическое лицо
