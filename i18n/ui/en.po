@@ -14,6 +14,11 @@ msgstr ""
 "CLDR_PLURAL_FORMS_FORMAT: one{0}other{1}\n"
 "X-Generator: Poedit 1.7.3\n"
 
+#: ../src/nkb-app/index.html:1
+msgid "API информационной системы"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #, fuzzy
 msgid "NG_PLURALIZE::AUTOKAD_CASE_COUNT"
@@ -220,12 +225,16 @@ msgstr "{'one': '1 established company', 'other': '{{count|number}} established 
 msgid "NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY"
 msgstr "{'one': '1 legal successor', 'other': '{{count|number}} legal successors'}"
 
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "Анализ аффилированных лиц"
-msgstr "Affiliated Network Analysis"
-
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
+msgid ""
+"Анализ\n"
+"аффилированных лиц"
+msgstr ""
+"Affiliated\n"
+"Network Analysis"
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Анализ аффилированных лиц"
 msgstr "Affiliated Network Analysis"
 
@@ -259,6 +268,15 @@ msgstr "Library"
 msgid "Бизнес профиль"
 msgstr "Business Report"
 
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid ""
+"Бизнес-справка\n"
+"по иностранной компании"
+msgstr ""
+"Report on\n"
+"Foreign Company"
+
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Бизнес-справки онлайн"
 msgstr "Online reports"
@@ -291,6 +309,24 @@ msgstr "Logout"
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Выписка"
 msgstr "Report"
+
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid ""
+"Выписка\n"
+"из ЕГРИП"
+msgstr ""
+"EGRIP\n"
+"Report"
+
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid ""
+"Выписка\n"
+"из ЕГРЮЛ"
+msgstr ""
+"EGRUL\n"
+"Report"
 
 #: ../src/nkb-app/components/login/views/login-form.html:1
 msgid "Демо-доступ"
@@ -389,6 +425,10 @@ msgstr "Any INN"
 msgid "Любой регион"
 msgstr "Any region"
 
+#: ../src/nkb-app/index.html:1
+msgid "НАЛПОИНТЕР"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-input.html:1
 msgid "Найти"
 msgstr "Search"
@@ -439,6 +479,12 @@ msgid "Отменён"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Отчеты на заказ"
+msgstr "Custom Reports"
+
+#: ../src/nkb-app/index.html:1
+#, fuzzy
+msgctxt "Продукты НКБ на главной странице"
 msgid "Отчеты на заказ"
 msgstr "Custom Reports"
 
@@ -494,9 +540,16 @@ msgid "Регистрация"
 msgstr "Registration"
 
 #: ../src/nkb-app/index.html:1
+#, fuzzy
 msgctxt "Продукты НКБ на главной странице"
-msgid "Связи между участниками закупок"
+msgid ""
+"Связи между\n"
+"участниками закупок"
 msgstr "Connections between participants of procurement"
+
+#: ../src/nkb-app/index.html:1
+msgid "Сделано в"
+msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
@@ -606,36 +659,8 @@ msgid "№"
 msgstr ""
 
 #~ msgctxt "Продукты НКБ на главной странице"
-#~ msgid ""
-#~ "Анализ\n"
-#~ "аффилированных лиц"
-#~ msgstr ""
-#~ "Affiliated\n"
-#~ "Network Analysis"
-
-#~ msgctxt "Продукты НКБ на главной странице"
-#~ msgid ""
-#~ "Бизнес-справка\n"
-#~ "по иностранной компании"
-#~ msgstr ""
-#~ "Report on\n"
-#~ "Foreign Company"
-
-#~ msgctxt "Продукты НКБ на главной странице"
-#~ msgid ""
-#~ "Выписка\n"
-#~ "из ЕГРИП"
-#~ msgstr ""
-#~ "EGRIP\n"
-#~ "Report"
-
-#~ msgctxt "Продукты НКБ на главной странице"
-#~ msgid ""
-#~ "Выписка\n"
-#~ "из ЕГРЮЛ"
-#~ msgstr ""
-#~ "EGRUL\n"
-#~ "Report"
+#~ msgid "Анализ аффилированных лиц"
+#~ msgstr "Affiliated Network Analysis"
 
 #~ msgctxt "Продукты НКБ на главной странице"
 #~ msgid ""

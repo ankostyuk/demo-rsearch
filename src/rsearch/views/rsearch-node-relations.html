@@ -63,7 +63,6 @@
         <ul class="unstyled">
             <li ng-show="node._info.out['FOUNDER_INDIVIDUAL']" ng-class="{active: active === 'children::FOUNDER_INDIVIDUAL'}"><a class="action" ng-click="relationsClick('children', 'FOUNDER_INDIVIDUAL')"><ng-pluralize count="count = node._info.out['FOUNDER_INDIVIDUAL']" when="::${_tr("NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY")}"></ng-pluralize></a></li>
             <li ng-show="node._info.out['EXECUTIVE_INDIVIDUAL']" ng-class="{active: active === 'children::EXECUTIVE_INDIVIDUAL'}"><a class="action" ng-click="relationsClick('children', 'EXECUTIVE_INDIVIDUAL')"><ng-pluralize count="count = node._info.out['EXECUTIVE_INDIVIDUAL']" when="::${_tr("NG_PLURALIZE::RELATION_LEAD_COMPANY")}"></ng-pluralize></a></li>
-            <li ng-show="node._info.out['EMPLOYEE']" ng-class="{active: active === 'children::EMPLOYEE'}"><a class="action" ng-click="relationsClick('children', 'EMPLOYEE')"><ng-pluralize count="count = node._info.out['EMPLOYEE']" when="::${_tr("NG_PLURALIZE::RELATION_EMPLOYEE_CHILDREN")}"></ng-pluralize></a></li>
         </ul>
     </div>
     <div class="relations-block" ng-show="node.__isAffiliatedRelations">
@@ -77,6 +76,7 @@
         <ul class="unstyled">
             <li ng-show="node._info.out['PARTICIPANT_INDIVIDUAL']" ng-class="{active: active === 'children::PARTICIPANT_INDIVIDUAL'}"><a class="action" ng-click="relationsClick('children', 'PARTICIPANT_INDIVIDUAL')"><ng-pluralize count="count = node._info.out['PARTICIPANT_INDIVIDUAL']" when="::${_tr("NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_CHILDREN")}"></ng-pluralize></a></li>
             <li ng-show="node._info.out['COMMISSION_MEMBER']" ng-class="{active: active === 'children::COMMISSION_MEMBER'}"><a class="action" ng-click="relationsClick('children', 'COMMISSION_MEMBER')"><ng-pluralize count="count = node._info.out['COMMISSION_MEMBER']" when="::${_tr("NG_PLURALIZE::RELATION_COMMISSION_MEMBER_CHILDREN")}"></ng-pluralize></a></li>
+            <li ng-show="node._info.out['EMPLOYEE']" ng-class="{active: active === 'children::EMPLOYEE'}"><a class="action" ng-click="relationsClick('children', 'EMPLOYEE')"><ng-pluralize count="count = node._info.out['EMPLOYEE']" when="::${_tr("NG_PLURALIZE::RELATION_EMPLOYEE_CHILDREN")}"></ng-pluralize></a></li>
         </ul>
     </div>
     <div class="relations-block" ng-show="user.isAuthenticated()">

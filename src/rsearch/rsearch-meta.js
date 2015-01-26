@@ -195,7 +195,8 @@ define(function(require) {'use strict';
 
                         node.__isPurchaseRelations = isRelations([
                             ['PARTICIPANT_INDIVIDUAL', 'out'],
-                            ['COMMISSION_MEMBER', 'out']
+                            ['COMMISSION_MEMBER', 'out'],
+                            ['EMPLOYEE', 'out']
                         ]);
                     }
 

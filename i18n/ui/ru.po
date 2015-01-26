@@ -14,6 +14,11 @@ msgstr ""
 "CLDR_PLURAL_FORMS_FORMAT: one{0}few{1}many{2}other{2}\n"
 "X-Generator: Poedit 1.7.3\n"
 
+#: ../src/nkb-app/index.html:1
+msgid "API информационной системы"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::AUTOKAD_CASE_COUNT"
 msgstr "{'0': 'Нет арбитражных дел', 'one': '{{count|number}} арбитражное дело', 'few': '{{count|number}} арбитражных дела', 'many': '{{count|number}} арбитражных дел', 'other': '{{count|number}} арбитражного дела'}"
@@ -111,13 +116,13 @@ msgstr "{'one': 'Заказчик', 'few': '{{count|number}} заказчика'
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #, fuzzy
 msgid "NG_PLURALIZE::RELATION_EMPLOYEE_CHILDREN"
-msgstr "{'one': 'Работодатель', 'few': '{{count|number}} работодателя', 'many': '{{count|number}} работодателей', 'other': '{{count|number}} работодателя'}"
+msgstr "{'one': '1 организатор закупки', 'few': '{{count|number}} организатора закупок', 'many': '{{count|number}} организаторов закупок', 'other': '{{count|number}} организатора закупок'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #, fuzzy
 msgid "NG_PLURALIZE::RELATION_EMPLOYEE_PARENTS"
-msgstr "{'one': '{{count|number}} контактное лицо', 'few': '{{count|number}} контактных лица', 'many': '{{count|number}} контактных лиц', 'other': '{{count|number}} контактных лица'}"
+msgstr "{'one': '1 контактное лицо', 'few': '{{count|number}} контактных лица', 'many': '{{count|number}} контактных лиц', 'other': '{{count|number}} контактных лица'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -213,12 +218,14 @@ msgstr "{'one': '{{count|number}} учреждённая компания', 'few
 msgid "NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY"
 msgstr "{'one': '{{count|number}} правопреемник', 'few': '{{count|number}} правопреемника', 'many': '{{count|number}} правопреемников', 'other': '{{count|number}} правопреемника'}"
 
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "Анализ аффилированных лиц"
-msgstr ""
-
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
+msgid ""
+"Анализ\n"
+"аффилированных лиц"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Анализ аффилированных лиц"
 msgstr ""
 
@@ -249,6 +256,13 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Бизнес профиль"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid ""
+"Бизнес-справка\n"
+"по иностранной компании"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -282,6 +296,20 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Выписка"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid ""
+"Выписка\n"
+"из ЕГРИП"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid ""
+"Выписка\n"
+"из ЕГРЮЛ"
 msgstr ""
 
 #: ../src/nkb-app/components/login/views/login-form.html:1
@@ -380,6 +408,10 @@ msgstr ""
 msgid "Любой регион"
 msgstr ""
 
+#: ../src/nkb-app/index.html:1
+msgid "НАЛПОИНТЕР"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-input.html:1
 msgid "Найти"
 msgstr ""
@@ -430,6 +462,11 @@ msgid "Отменён"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Отчеты на заказ"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
 msgid "Отчеты на заказ"
 msgstr ""
 
@@ -485,7 +522,13 @@ msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
-msgid "Связи между участниками закупок"
+msgid ""
+"Связи между\n"
+"участниками закупок"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgid "Сделано в"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
