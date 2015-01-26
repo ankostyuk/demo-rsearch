@@ -359,6 +359,10 @@ define(function(require) {'use strict';
                             checkSearchToHistory();
                         }
 
+                        if (checkAccentedResultByNodeForm(formType, node, breadcrumb)) {
+                            return;
+                        }
+
                         loading(function(done){
                             // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
                             nkbUser.fetchUser()
@@ -706,6 +710,20 @@ define(function(require) {'use strict';
                         showNodeForm('MINIREPORT', node, null, false, true);
 
                         return true;
+                    }
+
+                    function checkAccentedResultByNodeForm(formType, node, breadcrumb) {
+                        if (node._type === 'ADDRESS') {
+                            pushNodeFormBreadcrumb(formType, node, breadcrumb);
+                            showRelations(node, 'children', 'ADDRESS');
+                            return true;
+                        } else if (node._type === 'PHONE') {
+                            pushNodeFormBreadcrumb(formType, node, breadcrumb);
+                            showRelations(node, 'children', 'PHONE');
+                            return true;
+                        }
+
+                        return false;
                     }
 
                     function checkAccentedResultByRelations(byRelations) {
