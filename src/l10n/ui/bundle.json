@@ -15,6 +15,10 @@
       null,
       "{'0': 'Нет арбитражных дел', 'one': '{{count|number}} арбитражное дело', 'few': '{{count|number}} арбитражных дела', 'many': '{{count|number}} арбитражных дел', 'other': '{{count|number}} арбитражного дела'}"
     ],
+    "NG_PLURALIZE::EGRUL_LIST_MORE": [
+      null,
+      "{'one': 'ещё {{count|number}} выписка', 'few': 'ещё {{count|number}} выписки', 'many': 'ещё {{count|number}} выписок', 'other': 'ещё {{count|number}} выписки'}"
+    ],
     "NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT": [
       null,
       "{'one': '{{count|number}} комментарий', 'few': '{{count|number}} комментария', 'many': '{{count|number}} комментариев', 'other': '{{count|number}} комментария'}"
@@ -427,6 +431,10 @@
       null,
       ""
     ],
+    "ещё ": [
+      null,
+      ""
+    ],
     "основано": [
       null,
       ""
@@ -559,6 +567,10 @@
     "NG_PLURALIZE::AUTOKAD_CASE_COUNT": [
       null,
       "{'0': 'Нет арбитражных дел', 'one': '1 арбитражное дело', 'other': '{{count|number}} арбитражное дело'}"
+    ],
+    "NG_PLURALIZE::EGRUL_LIST_MORE": [
+      null,
+      "{'one': 'ещё 1 выписка', 'other': 'ещё {{count|number}} выписка'}"
     ],
     "NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT": [
       null,
@@ -969,6 +981,10 @@
       "share"
     ],
     "доля акций": [
+      null,
+      ""
+    ],
+    "ещё ": [
       null,
       ""
     ],

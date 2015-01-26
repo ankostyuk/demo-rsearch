@@ -24,6 +24,11 @@ msgstr ""
 msgid "NG_PLURALIZE::AUTOKAD_CASE_COUNT"
 msgstr "{'0': 'Нет арбитражных дел', 'one': '1 арбитражное дело', 'other': '{{count|number}} арбитражное дело'}"
 
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#, fuzzy
+msgid "NG_PLURALIZE::EGRUL_LIST_MORE"
+msgstr "{'one': 'ещё 1 выписка', 'other': 'ещё {{count|number}} выписка'}"
+
 #: ../src/comment/views/comment.html:1
 msgid "NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT"
 msgstr "{'one': '1 comment', 'other': '{{count|number}} comments'}"
@@ -603,6 +608,10 @@ msgstr ""
 msgctxt "доступность продукта"
 msgid "доступно"
 msgstr "available"
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "ещё "
+msgstr ""
 
 #: ../src/nkb-app/components/login/views/login-form.html:1
 #: ../src/rsearch/views/rsearch-user-product-limits-info.html:1

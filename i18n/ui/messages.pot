@@ -369,12 +369,22 @@ msgid "Заказать выписку ЕГРЮЛ"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Выписка"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
 msgctxt "от такой-то даты"
 msgid "от"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "ещё "
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "NG_PLURALIZE::EGRUL_LIST_MORE"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1

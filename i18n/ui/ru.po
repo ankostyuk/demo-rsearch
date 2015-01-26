@@ -23,6 +23,10 @@ msgstr ""
 msgid "NG_PLURALIZE::AUTOKAD_CASE_COUNT"
 msgstr "{'0': 'Нет арбитражных дел', 'one': '{{count|number}} арбитражное дело', 'few': '{{count|number}} арбитражных дела', 'many': '{{count|number}} арбитражных дел', 'other': '{{count|number}} арбитражного дела'}"
 
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "NG_PLURALIZE::EGRUL_LIST_MORE"
+msgstr "{'one': 'ещё {{count|number}} выписка', 'few': 'ещё {{count|number}} выписки', 'many': 'ещё {{count|number}} выписок', 'other': 'ещё {{count|number}} выписки'}"
+
 #: ../src/comment/views/comment.html:1
 msgid "NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT"
 msgstr "{'one': '{{count|number}} комментарий', 'few': '{{count|number}} комментария', 'many': '{{count|number}} комментариев', 'other': '{{count|number}} комментария'}"
@@ -570,6 +574,10 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-user-product-limits-info.html:1
 msgctxt "доступность продукта"
 msgid "доступно"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "ещё "
 msgstr ""
 
 #: ../src/nkb-app/components/login/views/login-form.html:1
