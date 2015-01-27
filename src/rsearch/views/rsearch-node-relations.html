@@ -95,7 +95,7 @@
 
 <!--
     Т.к. возможен только один тип связи и миниотчет не отображается,
-    а автоматически отображается список связанных (https://github.com/newpointer/rsearch/issues/73), 
+    а автоматически отображается список связанных (https://github.com/newpointer/rsearch/issues/73),
     то не показывать связи
 <div ng-if="node._type === 'ADDRESS'">
     <div class="relations-block">
@@ -125,4 +125,5 @@
             <li ng-show="node._info.in['COMMISSION_MEMBER']" ng-class="{active: active === 'parents::COMMISSION_MEMBER'}"><a class="action" ng-click="relationsClick('parents', 'COMMISSION_MEMBER')"><ng-pluralize count="count = node._info.in['COMMISSION_MEMBER']" when="::${_tr("NG_PLURALIZE::RELATION_COMMISSION_MEMBER_PARENTS")}"></ng-pluralize></a></li>
         </ul>
     </div>
+    <a class="action relations-product shadow-lift-lb-corner strong" ng-click="productClick('relations_find_related')">${_tr("Анализ аффилированных лиц")}</a>
 </div>
