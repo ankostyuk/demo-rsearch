@@ -807,7 +807,21 @@ define(function(require) {'use strict';
                         productClick: function(productName) {
                             doProduct(productName, nodeRelationsFilter.node);
                         },
-                        autokadClick: function(){
+                        getActiveRelation: function() {
+                            var active = nodeRelationsFilter.active;
+
+                            if (!active) {
+                                return {};
+                            }
+
+                            var s = active.split('::');
+
+                            return {
+                                relationDirection: s[0],
+                                relationType: s[1]
+                            };
+                        },
+                        autokadClick: function() {
                             doAutokad(nodeRelationsFilter.node);
                         }
                     };
@@ -939,10 +953,7 @@ define(function(require) {'use strict';
 
                     function doProduct(productName, node) {
                         if (user.isProductAvailable(productName)) {
-                            purchaseProduct(productName, {
-                                node: node,
-                                lang: l10n.getLang()
-                            });
+                            purchaseProduct(productName, getProductContext(productName, node));
                         } else {
                             showProductInfo(productName);
                         }
@@ -958,6 +969,21 @@ define(function(require) {'use strict';
                         var url = $interpolate(productConfig[productName]['purchase.url'])(context);
 
                         $window.open(url, '_blank');
+                    }
+
+                    function getProductContext(productName, node) {
+                        var base = {
+                            node: node,
+                            lang: l10n.getLang()
+                        };
+
+                        var ext;
+
+                        if (productName === 'relations_find_related') {
+                            ext = nodeRelationsFilter.getActiveRelation();
+                        }
+
+                        return _.extend(base, ext);
                     }
 
                     /*
