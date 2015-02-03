@@ -104,7 +104,11 @@ define(function(require) {'use strict';
                             return;
                         }
 
-                        commentWidget.show(0, 0, postId);
+                        var title = getTitle(node);
+
+                        $log.warn('title...', title);
+
+                        commentWidget.show(0, 0, postId, {title: title});
                     }
 
                     function getPostId(node) {
@@ -117,6 +121,21 @@ define(function(require) {'use strict';
                         } else
                         if (node._type === 'INDIVIDUAL' && !node.subtype) {
                             return _.clean(node.name).toUpperCase();
+                        }
+
+                        return null;
+                    }
+
+                    function getTitle(node) {
+                        if (!node) {
+                            return null;
+                        }
+
+                        if (node._type === 'COMPANY') {
+                            return node.nameshortsort || node.namesort;
+                        } else
+                        if (node._type === 'INDIVIDUAL' && !node.subtype) {
+                            return node.name;
                         }
 
                         return null;
