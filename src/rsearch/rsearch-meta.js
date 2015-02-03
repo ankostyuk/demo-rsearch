@@ -680,6 +680,13 @@ define(function(require) {'use strict';
         }])
         //
         // TODO перенести в commons
+        //
+        .filter('capitalizeFirst', [function(){
+            return function(text){
+                return text ? text.charAt(0).toUpperCase() + text.slice(1) : text;
+            };
+        }])
+        //
         .filter('share', ['$filter', function($filter){
             return function(number, maxFractionSize){
                 if (number > 100) {

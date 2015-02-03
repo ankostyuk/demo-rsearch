@@ -832,8 +832,8 @@ define(function(require) {'use strict';
 
                     function setNodeRelationsFilter(node, direction, relationType) {
                         nodeRelationsFilter.node = node;
-                        autokad.setNode(node);
                         nodeRelationsFilter.active = buildNodeRelationActiveKey(direction, relationType);
+                        autokad.setNode(node);
                     }
 
                     function clearNodeRelationsFilter() {
@@ -841,12 +841,14 @@ define(function(require) {'use strict';
                         nodeRelationsFilter.active = null;
                     }
 
-                    var relationsRegionFilterScope  = element.find('.relation-filters [np-rsearch-region-filter]').isolateScope(),
-                        relationsInnFilterScope     = element.find('.relation-filters [np-rsearch-inn-filter]').isolateScope();
+                    var relationsRegionFilterScope          = element.find('.relation-filters [np-rsearch-region-filter]').isolateScope(),
+                        relationsInnFilterScope             = element.find('.relation-filters [np-rsearch-inn-filter]').isolateScope(),
+                        relationsAffiliatedCauseFilterScope = element.find('.relation-filters [np-rsearch-affiliated-cause-filter]').isolateScope();
 
                     function hideRelationsFilters() {
                         relationsRegionFilterScope.toggle(false);
                         relationsInnFilterScope.toggle(false);
+                        relationsAffiliatedCauseFilterScope.toggle(false);
                     }
 
                     function initRelationsFilters(byRelations) {
@@ -863,7 +865,7 @@ define(function(require) {'use strict';
                                 values: byRelations.result.info.nodeFacet && byRelations.result.info.nodeFacet.region_code,
                                 value: null,
                                 total: total,
-                                callback: function(value){
+                                callback: function(value) {
                                     regionFilter.value = value;
                                     regionFilter.condition = {
                                         'node.region_code.equals': value
@@ -876,7 +878,7 @@ define(function(require) {'use strict';
                                 values: byRelations.result.info.relFacet && byRelations.result.info.relFacet.inn,
                                 value: null,
                                 total: total,
-                                callback: function(value){
+                                callback: function(value) {
                                     innFilter.value = value;
                                     innFilter.condition = {};
                                     if (value === false) {
@@ -888,9 +890,23 @@ define(function(require) {'use strict';
                                 }
                             };
 
+                            var affiliatedCauseFilter = {
+                                values: byRelations.result.info.relFacet && byRelations.result.info.relFacet['causes.name'],
+                                value: null,
+                                total: total,
+                                callback: function(value) {
+                                    affiliatedCauseFilter.value = value;
+                                    affiliatedCauseFilter.condition = {
+                                        'rel.causes.name.equals': value
+                                    };
+                                    doRelations(byRelations, false, true);
+                                }
+                            };
+
                             filters = {
                                 region: regionFilter,
-                                inn: innFilter
+                                inn: innFilter,
+                                affiliatedCause: affiliatedCauseFilter
                             };
 
                             byRelations.filters = filters;
@@ -904,6 +920,11 @@ define(function(require) {'use strict';
                         if (filters.inn.values) {
                             relationsInnFilterScope.setData(filters.inn);
                             relationsInnFilterScope.toggle(true);
+                        }
+
+                        if (filters.affiliatedCause.values) {
+                            relationsAffiliatedCauseFilterScope.setData(filters.affiliatedCause);
+                            relationsAffiliatedCauseFilterScope.toggle(true);
                         }
                     }
 
