@@ -32,30 +32,22 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.15/require.min.js"></script>
 
         <!-- nkb-app -->
-        <script src="./main.js?d560cdb5b988217fb1b451e9bd8b699119049d71"></script>
+        <script src="./main.js?c8fa5f7c9867cef1a4962da3c0039ce20a822ee9"></script>
     </head>
 
-    <body>
+    <body ng-class="{'is-search': app.isSearch()}">
         <div class="app-state-indicator" ng-hide="isAppReady()"></div>
         <div class="container">
             <div class="header">
                 <div class="row">
-                    <div class="span9">
-                        <ul class="inline header-links">
-                            <li><a href="/solid/">{{::_tr("Расширенный поиск")}}</a></li>
-                            <li><a href="/about/">{{::_tr("О проекте")}}</a></li>
-                            <li><a href="/examples/">{{::_tr("Продукты и услуги")}}</a></li>
-                            <li><a href="/contacts/">{{::_tr("Контакты")}}</a></li>
-                            <li><a href="/cc/library/">{{::_tr("Библиотека")}}</a></li>
-                            <li><a href="/reg/">{{::_tr("Регистрация")}}</a></li>
-                        </ul>
-                    </div>
+                    <div class="span9"></div>
                     <div class="span3" app-login-form></div>
                 </div>
                 <div class="row">
                     <div class="span3 nkb-logo"></div>
                     <div class="span6" np-rsearch-input></div>
                 </div>
+                <div class="right-links"><a href="/reg/">{{::_tr("Регистрация")}}</a></div>
                 <div app-lang></div>
                 <div class="providesupport-container" app-provide-support></div>
             </div>
@@ -81,32 +73,58 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row products">
-                                <ul class="inline product-links">
-                                    <li>
-                                        <a class="simple-row product-link large relations" href="/nkbrelation/report">
+                            <div class="products">
+                                <div class="row links-row">
+                                    <div class="span4">
+                                        <a class="product-link large relations" href="/nkbrelation/report">
                                             <span class="link-icon"><i class="icon i-graph-cluster"></i></span>
-                                            <span class="link-text">{{::_trc("Анализ аффилированных лиц", "Продукты НКБ на главной странице")}}</span>
+                                            <span class="link-text">{{::_trc("Анализ\nаффилированных лиц", "Продукты НКБ на главной странице")}}</span>
                                         </a>
-                                    </li>
-                                    <li class="sep"></li>
-                                    <li>
-                                        <a class="simple-row product-link large connections" href="/pages/connections/?utm_source=nkb&utm_medium=link&utm_campaign=nkb_search">
+                                    </div>
+                                    <div class="span4">
+                                        <a class="product-link large connections" href="/pages/connections/?utm_source=nkb&utm_medium=link&utm_campaign=nkb_search">
                                             <span class="link-icon"><i class="icon i-justice-2"></i></span>
-                                            <span class="link-text">{{::_trc("Связи между участниками закупок", "Продукты НКБ на главной странице")}}</span>
+                                            <span class="link-text">{{::_trc("Связи между\nучастниками закупок", "Продукты НКБ на главной странице")}}</span>
                                         </a>
-                                    </li>
-                                    <li class="sep"></li>
-                                    <li>
+                                    </div>
+                                    <div class="span4">
                                         <a class="simple-row product-link large comments" href="/help/comments/">
                                             <span class="link-icon"><i class="icon i-comments-2"></i></span>
                                             <span class="link-text">{{::_trc("Сервис комментариев", "Продукты НКБ на главной странице")}}</span>
                                         </a>
-                                    </li>
-                                    <li>
-                                        <a class="teaser shadow-lift-lb-corner strong relations-info" href="/search/relations/">{{::_tr("О системе графического анализа")}}</a>
-                                    </li>
-                                </ul>
+                                    </div>
+                                </div>
+                                <div class="row links-row">
+                                    <div class="span4">
+                                        <a class="product-link large offline-reports" href="/search/offlinea/">
+                                            <span class="link-icon"><i class="icon i-document-plus"></i></span>
+                                            <span class="link-text">{{_trc("Отчеты на заказ", "Продукты НКБ на главной странице")}}</span>
+                                        </a>
+                                    </div>
+                                    <div class="span4">
+                                        <a class="product-link large foreign" href="/search/offlined/">
+                                            <span class="link-icon"><i class="icon i-document-info"></i></span>
+                                            <span class="link-text">{{_trc("Бизнес-справка\nпо иностранной компании", "Продукты НКБ на главной странице")}}</span>
+                                        </a>
+                                    </div>
+                                    <div class="span4">
+                                        <ul class="inline">
+                                            <li>
+                                                <a class="simple-row product-link large egrul" href="/search/offlinee/">
+                                                    <span class="link-icon"><i class="icon i-document-stamp"></i></span>
+                                                    <span class="link-text">{{_trc("Выписка\nиз ЕГРЮЛ", "Продукты НКБ на главной странице")}}</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="simple-row product-link large egrip" href="/search/offlinep/">
+                                                    <span class="link-icon"><i class="icon i-document-stamp"></i></span>
+                                                    <span class="link-text">{{_trc("Выписка\nиз ЕГРИП", "Продукты НКБ на главной странице")}}</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <a class="teaser shadow-lift-lb-corner strong relations-info" href="/search/relations/">{{::_tr("О системе графического анализа")}}</a>
                             </div>
                         </div>
                         <div np-rsearch-navigation></div>
@@ -115,16 +133,29 @@
             </div>
             <div class="footer">
                 <hr>
-                <div class="row">
-                    <div class="span6 partners">
+                <div class="row links-row">
+                    <div class="span4"><a href="/solid/">{{::_tr("Расширенный поиск")}}</a></div>
+                    <div class="span3"><a href="/examples/">{{::_tr("Продукты и услуги")}}</a></div>
+                    <div class="span2"><a href="/about/">{{::_tr("О проекте")}}</a></div>
+                    <div class="muted align-right">
+                        ©&nbsp;2002—2015 <a class="underline" href="/" target="_blank">{{::_tr("Национальное кредитное бюро")}}</a>
+                    </div>
+                </div>
+                <div class="row links-row">
+                    <div class="span4"><a href="http://github.com/creditnet/api">{{::_tr("API информационной системы")}}</a></div>
+                    <div class="span3"><a href="/cc/library/">{{::_tr("Библиотека")}}</a></div>
+                    <div class="span2"><a href="/contacts/">{{::_tr("Контакты")}}</a></div>
+                    <div class="muted align-right">+7 495 229-67-47</div>
+                </div>
+                <hr>
+                <div class="row links-row">
+                    <div class="span8 muted nullpointer">{{::_tr("Сделано в")}} <a class="underline" title='{{::_tr("НАЛПОИНТЕР")}}' href="http://null-pointer.ru/" target="_blank">[nʌl'pɔintɘ]</a></div>
+                    <div class="partners align-right">
                         <a class="tpp" href="http://www.tpprf.ru/" target="_blank"></a>
                         <a class="fms" href="http://www.fms.gov.ru/" target="_blank"></a>
                         <a class="fas" href="http://www.fas.gov.ru/" target="_blank"></a>
                         <a class="stat" href="http://www.gmcgks.ru/" target="_blank"></a>
                         <a class="fns" href="http://www.nalog.ru/" target="_blank"></a>
-                    </div>
-                    <div class="muted align-right">
-                        ©&nbsp;2002—2015 <a class="underline" href="/" target="_blank">{{::_tr("Национальное кредитное бюро")}}</a>
                     </div>
                 </div>
             </div>

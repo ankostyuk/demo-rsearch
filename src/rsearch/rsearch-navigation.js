@@ -842,13 +842,12 @@ define(function(require) {'use strict';
                     }
 
                     var relationsRegionFilterScope          = element.find('.relation-filters [np-rsearch-region-filter]').isolateScope(),
-                        relationsInnFilterScope             = element.find('.relation-filters [np-rsearch-inn-filter]').isolateScope(),
-                        relationsAffiliatedCauseFilterScope = element.find('.relation-filters [np-rsearch-affiliated-cause-filter]').isolateScope();
+                        relationsInnFilterScope             = element.find('.relation-filters [np-rsearch-inn-filter]').isolateScope();
 
                     function hideRelationsFilters() {
                         relationsRegionFilterScope.toggle(false);
                         relationsInnFilterScope.toggle(false);
-                        relationsAffiliatedCauseFilterScope.toggle(false);
+                        hideAffiliatedCauseFilters();
                     }
 
                     function initRelationsFilters(byRelations) {
@@ -923,9 +922,22 @@ define(function(require) {'use strict';
                         }
 
                         if (filters.affiliatedCause.values) {
-                            relationsAffiliatedCauseFilterScope.setData(filters.affiliatedCause);
-                            relationsAffiliatedCauseFilterScope.toggle(true);
+                            $timeout(function(){
+                                var affiliatedCauseFilterElement    = element.find('.right-bar [np-rsearch-node-relations] .active [np-rsearch-affiliated-cause-filter]'),
+                                    affiliatedCauseFilterScope      = affiliatedCauseFilterElement.isolateScope();
+
+                                hideAffiliatedCauseFilters();
+
+                                affiliatedCauseFilterScope.setData(filters.affiliatedCause);
+                                affiliatedCauseFilterScope.toggle(true);
+                            });
                         }
+                    }
+
+                    function hideAffiliatedCauseFilters() {
+                        element.find('.right-bar [np-rsearch-node-relations] [np-rsearch-affiliated-cause-filter]').each(function(el){
+                            angular.element(this).isolateScope().toggle(false);
+                        });
                     }
 
                     /*
