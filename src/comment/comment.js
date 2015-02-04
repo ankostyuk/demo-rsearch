@@ -106,8 +106,6 @@ define(function(require) {'use strict';
 
                         var title = getTitle(node);
 
-                        $log.warn('title...', title);
-
                         commentWidget.show(0, 0, postId, {title: title});
                     }
 
