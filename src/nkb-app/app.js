@@ -117,7 +117,10 @@ define(function(require) {'use strict';
             _.extend($rootScope, {
                 app: {
                     isSearch: null,
-                    ready: false
+                    ready: false,
+                    reset: function() {
+                        $rootScope.$emit('np-rsearch-input-set-text', '', null);
+                    }
                 },
                 isAppReady: function() {
                     return $rootScope.app.ready;
