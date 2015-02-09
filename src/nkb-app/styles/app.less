@@ -10,7 +10,28 @@
 /* header */
 .header {
     position: relative;
-    padding: 15px 0 40px 0;
+    padding: 15px 0 45px 0;
+}
+
+.header .nkb-logo {
+    position: relative;
+}
+.header .nkb-logo a {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    cursor: default;
+}
+.is-search .header .nkb-logo a {
+    cursor: pointer;
+}
+.lang-ru .header .nkb-logo a {
+    right: 20px;
+}
+.lang-en .header .nkb-logo a {
+    right: 60px;
 }
 
 .header-links {
@@ -23,13 +44,30 @@
 
 /* footer */
 .footer {
-    padding: 0 0 20px 0;
+    padding: 20px 0 10px 0;
+}
+.footer .links-row {
+    margin-bottom: 10px;
+}
+.footer .links-row .span7 {
+    width: 460px;
+}
+.footer .links-row .span4 {
+    width: 260px;
+}
+.footer .links-row .span3 {
+    width: 180px;
+}
+.footer .links-row .span2 {
+    width: 120px;
+}
+.footer .partners {
+    padding-top: 7px;
 }
 .footer .partners a {
     display: inline-block;
     height: 36px;
     margin-left: 20px;
-    margin-top: -8px;
     background: transparent no-repeat 0 0 url("./i/partners.png");
 }
 .footer .partners a:first-child {
@@ -53,6 +91,9 @@
 .footer .partners a.fns {
     width: 36px;
     background-position: -480px 0;
+}
+.footer .nullpointer a {
+    padding-bottom: 1px;
 }
 
 /* app-login-form */
@@ -120,14 +161,25 @@
 }
 
 /* app-lang */
+.right-links {
+    position: absolute;
+    z-index: 10;
+
+    padding: 15px 0 0 20px;
+
+    left: 100%;
+    top: 0;
+}
+
+/* app-lang */
 [app-lang] {
     position: absolute;
     z-index: 10;
 
-    padding: 16px 0 0 20px;
+    padding: 0 0 0 20px;
 
     left: 100%;
-    top: 0;
+    top: 43px;
 }
 [app-lang] ul > li {
     margin-bottom: 7px;
@@ -141,7 +193,7 @@
     position: absolute;
     z-index: 10;
 
-    top: 97px;
+    top: 105px;
     left: 100%;
     width: 100px;
 
@@ -149,10 +201,19 @@
 }
 
 /* products */
-/* teaser */
-.products {
-    margin-left: 0;
+.products .links-row {
+    margin-bottom: 30px;
 }
+.products ul.inline {
+    margin: 0 0 0 -20px;
+    padding: 0;
+}
+.products ul.inline li {
+    margin: 0 0 0 20px;
+    padding: 0;
+}
+
+/* teaser */
 .products .teaser {
     position: relative;
     display: block;
@@ -170,22 +231,8 @@
 .products .teaser.shadow-lift-lb-corner:after {
     background-color: @defaultBackgroundColor;
 }
-/* product links */
-.products .product-links {
-    margin-bottom: 0;
-}
-.products .product-links li {
-    margin-bottom: 0;
-    padding: 0;
-}
-.products .product-links .sep {
-    height: 25px;
-    margin-bottom: 1px;
-    margin-left: 10px;
-    margin-right: 10px;
-    border-left: 1px solid @defaultLineColor;
-}
-.products .product-links .relations-info {
+
+.products .relations-info {
     width: 920px;
     height: 555px;
     margin-top: 40px;

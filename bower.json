@@ -24,7 +24,7 @@
     "backbone": "0.9.2",
     "jquery-file-upload": "9.7.1",
     "iso8601": "git://github.com/csnover/js-iso8601.git",
-    "nkbcomment": "git@repo.nkb:creditnet/comments.git#1.4.1",
+    "nkbcomment": "git@repo.nkb:creditnet/comments.git#master",
     "bootstrap": "http://getbootstrap.com/2.3.2/assets/bootstrap.zip"
   },
   "devDependencies": {},

@@ -177,21 +177,26 @@ define(function(require) {'use strict';
 
                         node.__isContactsRelations = isRelations([
                             ['ADDRESS', 'in'],
-                            ['PHONE', 'in'],
-                            ['EMPLOYEE', 'in']
+                            ['PHONE', 'in']
                         ]);
 
                         node.__isPurchaseRelations = isRelations([
                             ['CUSTOMER_COMPANY', 'out'],
-                            ['PARTICIPANT_COMPANY', 'out']
+                            ['PARTICIPANT_COMPANY', 'out'],
+                            ['EMPLOYEE', 'in']
                         ]);
                     } else
                     // физическое лицо
                     if (node._type === 'INDIVIDUAL') {
                         // группы связей
+                        node.__isAffiliatedRelations = isRelations([
+                            ['AFFILIATED_INDIVIDUAL', 'out']
+                        ]);
+
                         node.__isPurchaseRelations = isRelations([
                             ['PARTICIPANT_INDIVIDUAL', 'out'],
-                            ['COMMISSION_MEMBER', 'out']
+                            ['COMMISSION_MEMBER', 'out'],
+                            ['EMPLOYEE', 'out']
                         ]);
                     }
 
@@ -545,14 +550,6 @@ define(function(require) {'use strict';
                     var t = getRelationText(relation, [{
                         name: 'causes',
                         filter: function(causes) {
-                            //
-                            if (_.isArray(causes) || _.isObject(causes)) {
-                                throw new Error('// TODO hack - Улучшение #2715: Поддержка ObjectProperty для связей');
-                            } else {
-                                causes = angular.fromJson(causes);
-                            }
-                            //
-
                             var v = [];
 
                             _.each(causes, function(cause){
@@ -683,6 +680,13 @@ define(function(require) {'use strict';
         }])
         //
         // TODO перенести в commons
+        //
+        .filter('capitalizeFirst', [function(){
+            return function(text){
+                return text ? text.charAt(0).toUpperCase() + text.slice(1) : text;
+            };
+        }])
+        //
         .filter('share', ['$filter', function($filter){
             return function(number, maxFractionSize){
                 if (number > 100) {

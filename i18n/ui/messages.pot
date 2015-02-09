@@ -76,38 +76,17 @@ msgid "Поиск — НКБ"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
-msgid "Расширенный поиск"
-msgstr ""
-
-#: ../src/nkb-app/index.html:1
-msgid "О проекте"
-msgstr ""
-
-#: ../src/nkb-app/index.html:1
-msgid "Продукты и услуги"
-msgstr ""
-
-#: ../src/nkb-app/index.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "Контакты"
-msgstr ""
-
-#: ../src/nkb-app/index.html:1
-msgid "Библиотека"
-msgstr ""
-
-#: ../src/nkb-app/index.html:1
 msgid "Регистрация"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
-msgid "Анализ аффилированных лиц"
+msgid "Анализ\nаффилированных лиц"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
-msgid "Связи между участниками закупок"
+msgid "Связи между\nучастниками закупок"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
@@ -116,11 +95,64 @@ msgid "Сервис комментариев"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid "Отчеты на заказ"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid "Бизнес-справка\nпо иностранной компании"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid "Выписка\nиз ЕГРЮЛ"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid "Выписка\nиз ЕГРИП"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
 msgid "О системе графического анализа"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
+msgid "Расширенный поиск"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgid "Продукты и услуги"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgid "О проекте"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
 msgid "Национальное кредитное бюро"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgid "API информационной системы"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgid "Библиотека"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Контакты"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgid "Сделано в"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgid "НАЛПОИНТЕР"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
@@ -203,6 +235,12 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
 msgid "Поиск"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "NG_PLURALIZE::AUTOKAD_CASE_COUNT"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-navigation.html:1
@@ -331,12 +369,22 @@ msgid "Заказать выписку ЕГРЮЛ"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Выписка"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
 msgctxt "от такой-то даты"
 msgid "от"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "ещё "
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "NG_PLURALIZE::EGRUL_LIST_MORE"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -562,26 +610,23 @@ msgid "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_PARENTS"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "Иски и судебные решения"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::AUTOKAD_CASE_COUNT"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "Поиск арбитражных дел..."
-msgstr ""
-
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Аффилированные лица"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Закупки"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Иски и судебные решения"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Поиск арбитражных дел..."
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
