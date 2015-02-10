@@ -236,10 +236,6 @@ msgctxt "баланс пользователя"
 msgid "Баланс"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Банк данных исполнительных производств"
-msgstr ""
-
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 msgid "Без ИНН"
 msgstr ""
@@ -275,6 +271,7 @@ msgstr ""
 msgid "Войти"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-affiliated-cause-filter.html:1
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 #: ../src/rsearch/views/rsearch-region-filter.html:1
 msgid "Все"
@@ -364,6 +361,10 @@ msgid "Иски и судебные решения"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Исполнительные производства"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Исторический профиль"
 msgstr ""
 
@@ -392,6 +393,10 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgctxt "Лот закупки"
 msgid "Лот"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-affiliated-cause-filter.html:1
+msgid "Любое основание"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
@@ -574,10 +579,6 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-user-product-limits-info.html:1
 msgctxt "доступность продукта"
 msgid "доступно"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "ещё "
 msgstr ""
 
 #: ../src/nkb-app/components/login/views/login-form.html:1

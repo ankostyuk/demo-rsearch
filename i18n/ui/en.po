@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "CLDR_PLURAL_FORMS_FORMAT: one{0}other{1}\n"
-"X-Generator: Poedit 1.7.3\n"
+"X-Generator: Poedit 1.7.4\n"
 
 #: ../src/nkb-app/index.html:1
 msgid "API информационной системы"
@@ -257,10 +257,6 @@ msgctxt "баланс пользователя"
 msgid "Баланс"
 msgstr "Balance"
 
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Банк данных исполнительных производств"
-msgstr "Enforcement proceedings database"
-
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 msgid "Без ИНН"
 msgstr "No INN"
@@ -298,6 +294,7 @@ msgstr "Former manager"
 msgid "Войти"
 msgstr "Login"
 
+#: ../src/rsearch/views/rsearch-affiliated-cause-filter.html:1
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 #: ../src/rsearch/views/rsearch-region-filter.html:1
 msgid "Все"
@@ -391,6 +388,11 @@ msgid "Иски и судебные решения"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
+#, fuzzy
+msgid "Исполнительные производства"
+msgstr "Enforcement proceedings database"
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Исторический профиль"
 msgstr "Historical Report"
 
@@ -421,6 +423,11 @@ msgstr "Login"
 msgctxt "Лот закупки"
 msgid "Лот"
 msgstr "on"
+
+#: ../src/rsearch/views/rsearch-affiliated-cause-filter.html:1
+#, fuzzy
+msgid "Любое основание"
+msgstr "Former name"
 
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 msgid "Любой ИНН"
@@ -545,12 +552,13 @@ msgid "Регистрация"
 msgstr "Registration"
 
 #: ../src/nkb-app/index.html:1
-#, fuzzy
 msgctxt "Продукты НКБ на главной странице"
 msgid ""
 "Связи между\n"
 "участниками закупок"
-msgstr "Connections between participants of procurement"
+msgstr ""
+"Connections between\n"
+"participants of procurement"
 
 #: ../src/nkb-app/index.html:1
 msgid "Сделано в"
@@ -608,10 +616,6 @@ msgstr ""
 msgctxt "доступность продукта"
 msgid "доступно"
 msgstr "available"
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "ещё "
-msgstr ""
 
 #: ../src/nkb-app/components/login/views/login-form.html:1
 #: ../src/rsearch/views/rsearch-user-product-limits-info.html:1

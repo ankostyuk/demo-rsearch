@@ -96,7 +96,12 @@ msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
-msgid "Отчеты на заказ"
+msgid "Выписка\nиз ЕГРЮЛ"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid "Выписка\nиз ЕГРИП"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
@@ -106,12 +111,7 @@ msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
-msgid "Выписка\nиз ЕГРЮЛ"
-msgstr ""
-
-#: ../src/nkb-app/index.html:1
-msgctxt "Продукты НКБ на главной странице"
-msgid "Выписка\nиз ЕГРИП"
+msgid "Отчеты на заказ"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
@@ -123,19 +123,11 @@ msgid "Расширенный поиск"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
-msgid "Продукты и услуги"
-msgstr ""
-
-#: ../src/nkb-app/index.html:1
-msgid "О проекте"
-msgstr ""
-
-#: ../src/nkb-app/index.html:1
-msgid "Национальное кредитное бюро"
-msgstr ""
-
-#: ../src/nkb-app/index.html:1
 msgid "API информационной системы"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgid "Продукты и услуги"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
@@ -143,8 +135,16 @@ msgid "Библиотека"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
+msgid "О проекте"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Контакты"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgid "Национальное кредитное бюро"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
@@ -211,9 +211,14 @@ msgstr ""
 msgid "ИНН"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-affiliated-cause-filter.html:1
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 #: ../src/rsearch/views/rsearch-region-filter.html:1
 msgid "Все"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-affiliated-cause-filter.html:1
+msgid "Любое основание"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
@@ -325,6 +330,33 @@ msgid "Схема аффилированных лиц"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Заказать выписку ЕГРЮЛ"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Выписка"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "от такой-то даты"
+msgid "от"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "NG_PLURALIZE::EGRUL_LIST_MORE"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Страница эмитента"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Исполнительные производства"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "ЕГРЮЛ"
 msgstr ""
@@ -346,11 +378,6 @@ msgid "Искать в социальных сетях"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Банк данных исполнительных производств"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
 msgctxt "Заказ продукта НКБ на странице миниотчета"
 msgid "Заказать бизнес-справку\nпо иностранной компании"
 msgstr ""
@@ -362,33 +389,6 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgctxt "номер"
 msgid "№"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Заказать выписку ЕГРЮЛ"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Выписка"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgctxt "от такой-то даты"
-msgid "от"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "ещё "
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "NG_PLURALIZE::EGRUL_LIST_MORE"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Страница эмитента"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-history-info.html:1
@@ -629,6 +629,7 @@ msgstr ""
 msgid "Поиск арбитражных дел..."
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-relations.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Анализ аффилированных лиц"
