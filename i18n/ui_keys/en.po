@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: feedback@null-pointer.ru\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: ankostyuk <andrew.kostyuk@gmail.com>\n"
+"Last-Translator: Alexander Yastrebov <yastrebov.alex@gmail.com>\n"
 "Language-Team: NULLPOINTER <feedback@null-pointer.ru>\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
@@ -12,50 +12,43 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "CLDR_PLURAL_FORMS_FORMAT: one{0}other{1}\n"
-"X-Generator: Poedit 1.7.4\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: ../i18n/ui_keys/src/keys.txt:1
-#, fuzzy
 msgid "AFFILIATE_20_PERCENT"
-msgstr "доля более 20%"
+msgstr "share over 20%"
 
 #: ../i18n/ui_keys/src/keys.txt:1
-#, fuzzy
 msgid "AFFILIATE_MEMBER_BOARD_DIRECTORS"
-msgstr "член совета директоров"
+msgstr "board member"
 
 #: ../i18n/ui_keys/src/keys.txt:1
-#, fuzzy
 msgid "AFFILIATE_SAME_GROUP"
-msgstr "одна группа лиц"
+msgstr "same group"
 
 #: ../i18n/ui_keys/src/keys.txt:1
-#, fuzzy
 msgid "AFFILIATE_SOLE_EXECUTIVE"
-msgstr "единоличный исполнительный орган"
+msgstr "sole executive body"
 
 #: ../i18n/ui_keys/src/keys.txt:1
 msgid "EUR"
 msgstr "€"
 
 #: ../i18n/ui_keys/src/keys.txt:1
-#, fuzzy
 msgid "FZ_223"
-msgstr "223-ФЗ"
+msgstr "223-FL"
 
 #: ../i18n/ui_keys/src/keys.txt:1
-#, fuzzy
 msgid "FZ_44"
-msgstr "44-ФЗ"
+msgstr "44-FL"
 
 #: ../i18n/ui_keys/src/keys.txt:1
 msgid "GBP"
 msgstr "£"
 
 #: ../i18n/ui_keys/src/keys.txt:1
-#, fuzzy
 msgid "NOT_ADMITTED"
-msgstr "не допущен"
+msgstr "not admitted"
 
 #: ../i18n/ui_keys/src/keys.txt:1
 msgid "RUB"
@@ -66,6 +59,5 @@ msgid "USD"
 msgstr "$"
 
 #: ../i18n/ui_keys/src/keys.txt:1
-#, fuzzy
 msgid "WIN"
-msgstr "победитель"
+msgstr "winner"

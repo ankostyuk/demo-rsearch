@@ -66,19 +66,19 @@
     },
     "AFFILIATE_20_PERCENT": [
       null,
-      "доля более 20%"
+      "share over 20%"
     ],
     "AFFILIATE_MEMBER_BOARD_DIRECTORS": [
       null,
-      "член совета директоров"
+      "board member"
     ],
     "AFFILIATE_SAME_GROUP": [
       null,
-      "одна группа лиц"
+      "same group"
     ],
     "AFFILIATE_SOLE_EXECUTIVE": [
       null,
-      "единоличный исполнительный орган"
+      "sole executive body"
     ],
     "EUR": [
       null,
@@ -86,11 +86,11 @@
     ],
     "FZ_223": [
       null,
-      "223-ФЗ"
+      "223-FL"
     ],
     "FZ_44": [
       null,
-      "44-ФЗ"
+      "44-FL"
     ],
     "GBP": [
       null,
@@ -98,7 +98,7 @@
     ],
     "NOT_ADMITTED": [
       null,
-      "не допущен"
+      "not admitted"
     ],
     "RUB": [
       null,
@@ -110,7 +110,7 @@
     ],
     "WIN": [
       null,
-      "победитель"
+      "winner"
     ]
   }
 }
