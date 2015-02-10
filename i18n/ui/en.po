@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: feedback@null-pointer.ru\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: ankostyuk <andrew.kostyuk@gmail.com>\n"
+"Last-Translator: Alexander Yastrebov <yastrebov.alex@gmail.com>\n"
 "Language-Team: NULLPOINTER <feedback@null-pointer.ru>\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
@@ -12,12 +12,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "CLDR_PLURAL_FORMS_FORMAT: one{0}other{1}\n"
-"X-Generator: Poedit 1.7.3\n"
+"X-Generator: Poedit 1.5.4\n"
 
+#: ../src/nkb-app/index.html:1
+msgid "API информационной системы"
+msgstr "API"
+
+#: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::AUTOKAD_CASE_COUNT"
-msgstr "{'0': 'Нет арбитражных дел', 'one': '1 арбитражное дело', 'other': '{{count|number}} арбитражное дело'}"
+msgstr ""
+"{'0': 'No arbitration cases', 'one': '1 arbitration case', 'other': '{{count|"
+"number}} arbitration cases'}"
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "NG_PLURALIZE::EGRUL_LIST_MORE"
+msgstr "{'one': 'one more report', 'other': '{{count|number}} more reports'}"
 
 #: ../src/comment/views/comment.html:1
 msgid "NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT"
@@ -45,38 +55,42 @@ msgid "NG_PLURALIZE::RELATION_ADDRESS"
 msgstr "{'one': 'Address', 'other': '{{count|number}} addresses'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_AFFILIATED_CHILDREN"
-msgstr "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+msgstr ""
+"{'one': '1 dependent company', 'other': '{{count|number}} dependent "
+"companies'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_CHILDREN"
-msgstr "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+msgstr ""
+"{'one': '1 dependent company', 'other': '{{count|number}} dependent "
+"companies'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_PARENTS"
-msgstr "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+msgstr ""
+"{'one': '1 affiliated company', 'other': '{{count|number}} affiliated "
+"companies'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_CHILDREN"
-msgstr "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+msgstr ""
+"{'one': '1 dependent company', 'other': '{{count|number}} dependent "
+"companies'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_PARENTS"
-msgstr "{'one': '1 аффилированное физическое лицо', 'other': '{{count|number}} аффилированное физическое лицо'}"
+msgstr ""
+"{'one': '1 affiliated person', 'other': '{{count|number}} affiliated "
+"persons'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_AFFILIATED_PARENTS"
-msgstr "{'one': '1 аффилированное лицо', 'other': '{{count|number}} аффилированное лицо'}"
+msgstr "{'one': '1 affiliate', 'other': '{{count|number}} affiliates'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
@@ -86,15 +100,15 @@ msgstr "{'one': '1 branch', 'other': '{{count|number}} branches'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_CHILDREN"
-msgstr "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+msgstr "{'one': '1 commission', 'other': '{{count|number}} commissions'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_PARENTS"
-msgstr "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+msgstr ""
+"{'one': '1 commission member', 'other': '{{count|number}} commission "
+"members'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
@@ -104,32 +118,30 @@ msgstr "{'one': '1 company', 'other': '{{count|number}} companies'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_CHILDREN"
-msgstr "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+msgstr "{'one': '1 procurement', 'other': '{{count|number}} procurements'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_PARENTS"
-msgstr "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+msgstr "{'one': 'Customer', 'other': '{{count|number}} customers'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_EMPLOYEE_CHILDREN"
-msgstr "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+msgstr "{'one': '1 customer', 'other': '{{count|number}} customers'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_EMPLOYEE_PARENTS"
-msgstr "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+msgstr ""
+"{'one': '1 contact person', 'other': '{{count|number}} contact persons'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_EXECUTIVE_COMPANY"
-msgstr "{'one': '1 managing company', 'other': '{{count|number}} managing companies'}"
+msgstr ""
+"{'one': '1 managing company', 'other': '{{count|number}} managing companies'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -144,13 +156,17 @@ msgstr "{'one': '1 shareholder', 'other': '{{count|number}} shareholders'}"
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_FOUNDER_COMPANY"
-msgstr "{'one': '1 shareholder company', 'other': '{{count|number}} shareholder companies'}"
+msgstr ""
+"{'one': '1 shareholder company', 'other': '{{count|number}} shareholder "
+"companies'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL"
-msgstr "{'one': '1 individual shareholder', 'other': '{{count|number}} individual shareholders'}"
+msgstr ""
+"{'one': '1 individual shareholder', 'other': '{{count|number}} individual "
+"shareholders'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -161,31 +177,32 @@ msgstr "{'one': 'Head company', 'other': '{{count|number}} head companies'}"
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_LEAD_COMPANY"
-msgstr "{'one': '1 managed company', 'other': '{{count|number}} managed companies'}"
+msgstr ""
+"{'one': '1 managed company', 'other': '{{count|number}} managed companies'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_CHILDREN"
-msgstr "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+msgstr "{'one': '1 participation', 'other': '{{count|number}} participations'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_PARENTS"
-msgstr "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+msgstr ""
+"{'one': '1 participant company', 'other': '{{count|number}} participant "
+"companies'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_CHILDREN"
-msgstr "{'one': '1 аффилированное физическое лицо', 'other': '{{count|number}} аффилированное физическое лицо'}"
+msgstr "{'one': '1 participation', 'other': '{{count|number}} participations'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_PARENTS"
-msgstr "{'one': '1 аффилированное физическое лицо', 'other': '{{count|number}} аффилированное физическое лицо'}"
+msgstr ""
+"{'one': '1 participant person', 'other': '{{count|number}} participant "
+"persons'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -212,20 +229,27 @@ msgstr "{'one': '1 registrar', 'other': '{{count|number}} registrars'}"
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY"
-msgstr "{'one': '1 established company', 'other': '{{count|number}} established companies'}"
+msgstr ""
+"{'one': '1 established company', 'other': '{{count|number}} established "
+"companies'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY"
-msgstr "{'one': '1 legal successor', 'other': '{{count|number}} legal successors'}"
-
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "Анализ аффилированных лиц"
-msgstr "Affiliated Network Analysis"
+msgstr ""
+"{'one': '1 legal successor', 'other': '{{count|number}} legal successors'}"
 
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
+msgid ""
+"Анализ\n"
+"аффилированных лиц"
+msgstr ""
+"Affiliated\n"
+"Network Analysis"
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Анализ аффилированных лиц"
 msgstr "Affiliated Network Analysis"
 
@@ -234,18 +258,13 @@ msgid "Аналитический профиль"
 msgstr "Analytical Report"
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "Аффилированные лица"
-msgstr "Affiliated network diagram"
+msgstr "Affiliates"
 
 #: ../src/nkb-app/components/login/views/login-form.html:1
 msgctxt "баланс пользователя"
 msgid "Баланс"
 msgstr "Balance"
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Банк данных исполнительных производств"
-msgstr "Enforcement proceedings database"
 
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 msgid "Без ИНН"
@@ -258,6 +277,15 @@ msgstr "Library"
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Бизнес профиль"
 msgstr "Business Report"
+
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid ""
+"Бизнес-справка\n"
+"по иностранной компании"
+msgstr ""
+"Report on\n"
+"Foreign Company"
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Бизнес-справки онлайн"
@@ -275,6 +303,7 @@ msgstr "Former manager"
 msgid "Войти"
 msgstr "Login"
 
+#: ../src/rsearch/views/rsearch-affiliated-cause-filter.html:1
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 #: ../src/rsearch/views/rsearch-region-filter.html:1
 msgid "Все"
@@ -291,6 +320,24 @@ msgstr "Logout"
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Выписка"
 msgstr "Report"
+
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid ""
+"Выписка\n"
+"из ЕГРИП"
+msgstr ""
+"EGRIP\n"
+"Report"
+
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid ""
+"Выписка\n"
+"из ЕГРЮЛ"
+msgstr ""
+"EGRUL\n"
+"Report"
 
 #: ../src/nkb-app/components/login/views/login-form.html:1
 msgid "Демо-доступ"
@@ -330,7 +377,7 @@ msgstr "Order Established Companies list"
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Закупки"
-msgstr ""
+msgstr "Procurements"
 
 #: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
@@ -347,7 +394,11 @@ msgstr "Search social networks"
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Иски и судебные решения"
-msgstr ""
+msgstr "Claims and court decisions"
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Исполнительные производства"
+msgstr "Enforcement proceedings"
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Исторический профиль"
@@ -376,10 +427,13 @@ msgid "Логин"
 msgstr "Login"
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-#, fuzzy
 msgctxt "Лот закупки"
 msgid "Лот"
-msgstr "on"
+msgstr "Lot"
+
+#: ../src/rsearch/views/rsearch-affiliated-cause-filter.html:1
+msgid "Любое основание"
+msgstr "Any reason"
 
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 msgid "Любой ИНН"
@@ -388,6 +442,10 @@ msgstr "Any INN"
 #: ../src/rsearch/views/rsearch-region-filter.html:1
 msgid "Любой регион"
 msgstr "Any region"
+
+#: ../src/nkb-app/index.html:1
+msgid "НАЛПОИНТЕР"
+msgstr "NULLPOINTER"
 
 #: ../src/rsearch/views/rsearch-input.html:1
 msgid "Найти"
@@ -436,16 +494,20 @@ msgstr "Loading..."
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgctxt "Лот закупки"
 msgid "Отменён"
-msgstr ""
+msgstr "Cancelled"
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Отчеты на заказ"
 msgstr "Custom Reports"
 
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid "Отчеты на заказ"
+msgstr "Custom Reports"
+
 #: ../src/rsearch/views/rsearch-node-form.html:1
-#, fuzzy
 msgid "Официальная страница закупки"
-msgstr "Connections between participants of procurement"
+msgstr "Official procurement page"
 
 #: ../src/nkb-app/components/login/views/login-form.html:1
 msgid "Пароль"
@@ -457,7 +519,7 @@ msgstr "Search"
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Поиск арбитражных дел..."
-msgstr ""
+msgstr "Searching..."
 
 #: ../src/nkb-app/index.html:1
 msgctxt "Наименование приложения поиска"
@@ -495,8 +557,16 @@ msgstr "Registration"
 
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
-msgid "Связи между участниками закупок"
-msgstr "Connections between participants of procurement"
+msgid ""
+"Связи между\n"
+"участниками закупок"
+msgstr ""
+"Connections between\n"
+"participants of procurement"
+
+#: ../src/nkb-app/index.html:1
+msgid "Сделано в"
+msgstr "Created by"
 
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
@@ -505,7 +575,7 @@ msgstr "Comments"
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Страница эмитента"
-msgstr ""
+msgstr "Issuer page"
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Схема аффилированных лиц"
@@ -528,9 +598,8 @@ msgid "Формы отчетности за последний год"
 msgstr "Last year balance forms"
 
 #: ../src/rsearch/rsearch-meta.js:1
-#, fuzzy
 msgid "аффилированное лицо"
-msgstr "Affiliated network diagram"
+msgstr "affiliate"
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgctxt "Доля в учреждении компании"
@@ -538,13 +607,12 @@ msgid "доля"
 msgstr "share"
 
 #: ../src/rsearch/rsearch-meta.js:1
-#, fuzzy
 msgid "доля УК"
-msgstr "share"
+msgstr "capital share"
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "доля акций"
-msgstr ""
+msgstr "stock share"
 
 #: ../src/rsearch/views/rsearch-user-product-limits-info.html:1
 msgctxt "доступность продукта"
@@ -558,10 +626,9 @@ msgid "ие"
 msgstr "ie"
 
 #: ../src/rsearch/rsearch-meta.js:1
-#, fuzzy
 msgctxt "лот в закупке"
 msgid "лот"
-msgstr "on"
+msgstr "lot"
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "основано"
@@ -582,7 +649,7 @@ msgstr "manager"
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "сотрудник"
-msgstr ""
+msgstr "employee"
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "тыс. руб."
@@ -590,7 +657,7 @@ msgstr "thous. rub."
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "участник"
-msgstr ""
+msgstr "participant"
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "учредитель"
@@ -598,44 +665,16 @@ msgstr "founder"
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "член комиссии"
-msgstr ""
+msgstr "commission member"
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgctxt "номер"
 msgid "№"
-msgstr ""
+msgstr "#"
 
 #~ msgctxt "Продукты НКБ на главной странице"
-#~ msgid ""
-#~ "Анализ\n"
-#~ "аффилированных лиц"
-#~ msgstr ""
-#~ "Affiliated\n"
-#~ "Network Analysis"
-
-#~ msgctxt "Продукты НКБ на главной странице"
-#~ msgid ""
-#~ "Бизнес-справка\n"
-#~ "по иностранной компании"
-#~ msgstr ""
-#~ "Report on\n"
-#~ "Foreign Company"
-
-#~ msgctxt "Продукты НКБ на главной странице"
-#~ msgid ""
-#~ "Выписка\n"
-#~ "из ЕГРИП"
-#~ msgstr ""
-#~ "EGRIP\n"
-#~ "Report"
-
-#~ msgctxt "Продукты НКБ на главной странице"
-#~ msgid ""
-#~ "Выписка\n"
-#~ "из ЕГРЮЛ"
-#~ msgstr ""
-#~ "EGRUL\n"
-#~ "Report"
+#~ msgid "Анализ аффилированных лиц"
+#~ msgstr "Affiliated Network Analysis"
 
 #~ msgctxt "Продукты НКБ на главной странице"
 #~ msgid ""

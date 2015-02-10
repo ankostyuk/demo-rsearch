@@ -7,9 +7,17 @@
         "cldrFormat": "one{0}few{1}many{2}other{2}"
       }
     },
+    "API информационной системы": [
+      null,
+      ""
+    ],
     "NG_PLURALIZE::AUTOKAD_CASE_COUNT": [
       null,
       "{'0': 'Нет арбитражных дел', 'one': '{{count|number}} арбитражное дело', 'few': '{{count|number}} арбитражных дела', 'many': '{{count|number}} арбитражных дел', 'other': '{{count|number}} арбитражного дела'}"
+    ],
+    "NG_PLURALIZE::EGRUL_LIST_MORE": [
+      null,
+      "{'one': 'ещё {{count|number}} выписка', 'few': 'ещё {{count|number}} выписки', 'many': 'ещё {{count|number}} выписок', 'other': 'ещё {{count|number}} выписки'}"
     ],
     "NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT": [
       null,
@@ -37,11 +45,11 @@
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_CHILDREN": [
       null,
-      "{'one': '{{count|number}}  зависимая компания', 'few': '{{count|number}} зависимые компании', 'many': '{{count|number}} зависимых компаний', 'other': '{{count|number}} зависимой компании'}"
+      "{'one': '{{count|number}} зависимая компания', 'few': '{{count|number}} зависимые компании', 'many': '{{count|number}} зависимых компаний', 'other': '{{count|number}} зависимой компании'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_CHILDREN": [
       null,
-      "{'one': '{{count|number}}  зависимая компания', 'few': '{{count|number}} зависимые компании', 'many': '{{count|number}} зависимых компаний', 'other': '{{count|number}} зависимой компании'}"
+      "{'one': '{{count|number}} зависимая компания', 'few': '{{count|number}} зависимые компании', 'many': '{{count|number}} зависимых компаний', 'other': '{{count|number}} зависимой компании'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_PARENTS": [
       null,
@@ -49,7 +57,7 @@
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_CHILDREN": [
       null,
-      "{'one': '{{count|number}}  зависимая компания', 'few': '{{count|number}} зависимые компании', 'many': '{{count|number}} зависимых компаний', 'other': '{{count|number}} зависимой компании'}"
+      "{'one': '{{count|number}} зависимая компания', 'few': '{{count|number}} зависимые компании', 'many': '{{count|number}} зависимых компаний', 'other': '{{count|number}} зависимой компании'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_PARENTS": [
       null,
@@ -77,7 +85,7 @@
     ],
     "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_CHILDREN": [
       null,
-      "{'one': '{{count|number}}  закупка', 'few': '{{count|number}} закупки', 'many': '{{count|number}} закупок', 'other': '{{count|number}} закупки'}"
+      "{'one': '{{count|number}} закупка', 'few': '{{count|number}} закупки', 'many': '{{count|number}} закупок', 'other': '{{count|number}} закупки'}"
     ],
     "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_PARENTS": [
       null,
@@ -85,7 +93,7 @@
     ],
     "NG_PLURALIZE::RELATION_EMPLOYEE_CHILDREN": [
       null,
-      "{'one': 'Работодатель', 'few': '{{count|number}} работодателя', 'many': '{{count|number}} работодателей', 'other': '{{count|number}} работодателя'}"
+      "{'one': '{{count|number}} организатор закупки', 'few': '{{count|number}} организатора закупок', 'many': '{{count|number}} организаторов закупок', 'other': '{{count|number}} организатора закупок'}"
     ],
     "NG_PLURALIZE::RELATION_EMPLOYEE_PARENTS": [
       null,
@@ -121,15 +129,15 @@
     ],
     "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_CHILDREN": [
       null,
-      "{'one': '{{count|number}}  участие в закупках', 'few': '{{count|number}} участия в закупках', 'many': '{{count|number}} участий в закупках', 'other': '{{count|number}} участий в закупках'}"
+      "{'one': '{{count|number}} участие в закупках', 'few': '{{count|number}} участия в закупках', 'many': '{{count|number}} участий в закупках', 'other': '{{count|number}} участий в закупках'}"
     ],
     "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_PARENTS": [
       null,
-      "{'one': '{{count|number}}  участник компания', 'few': '{{count|number}} участника компании', 'many': '{{count|number}} участников компаний', 'other': '{{count|number}} участника компании'}"
+      "{'one': '{{count|number}} участник компания', 'few': '{{count|number}} участника компании', 'many': '{{count|number}} участников компаний', 'other': '{{count|number}} участника компании'}"
     ],
     "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_CHILDREN": [
       null,
-      "{'one': '{{count|number}}  участие в закупках', 'few': '{{count|number}} участия в закупках', 'many': '{{count|number}} участий в закупках', 'other': '{{count|number}} участий в закупках'}"
+      "{'one': '{{count|number}} участие в закупках', 'few': '{{count|number}} участия в закупках', 'many': '{{count|number}} участий в закупках', 'other': '{{count|number}} участий в закупках'}"
     ],
     "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_PARENTS": [
       null,
@@ -168,10 +176,6 @@
       ""
     ],
     "Аффилированные лица": [
-      null,
-      ""
-    ],
-    "Банк данных исполнительных производств": [
       null,
       ""
     ],
@@ -263,6 +267,10 @@
       null,
       ""
     ],
+    "Исполнительные производства": [
+      null,
+      ""
+    ],
     "Исторический профиль": [
       null,
       ""
@@ -283,11 +291,19 @@
       null,
       ""
     ],
+    "Любое основание": [
+      null,
+      ""
+    ],
     "Любой ИНН": [
       null,
       ""
     ],
     "Любой регион": [
+      null,
+      ""
+    ],
+    "НАЛПОИНТЕР": [
       null,
       ""
     ],
@@ -379,6 +395,10 @@
       null,
       ""
     ],
+    "Сделано в": [
+      null,
+      ""
+    ],
     "Страница эмитента": [
       null,
       ""
@@ -447,11 +467,27 @@
       null,
       ""
     ],
-    "Продукты НКБ на главной странице\u0004Анализ аффилированных лиц": [
+    "Продукты НКБ на главной странице\u0004Анализ\nаффилированных лиц": [
       null,
       ""
     ],
-    "Продукты НКБ на главной странице\u0004Связи между участниками закупок": [
+    "Продукты НКБ на главной странице\u0004Бизнес-справка\nпо иностранной компании": [
+      null,
+      ""
+    ],
+    "Продукты НКБ на главной странице\u0004Выписка\nиз ЕГРИП": [
+      null,
+      ""
+    ],
+    "Продукты НКБ на главной странице\u0004Выписка\nиз ЕГРЮЛ": [
+      null,
+      ""
+    ],
+    "Продукты НКБ на главной странице\u0004Отчеты на заказ": [
+      null,
+      ""
+    ],
+    "Продукты НКБ на главной странице\u0004Связи между\nучастниками закупок": [
       null,
       ""
     ],
@@ -524,9 +560,17 @@
         "cldrFormat": "one{0}other{1}"
       }
     },
+    "API информационной системы": [
+      null,
+      "API"
+    ],
     "NG_PLURALIZE::AUTOKAD_CASE_COUNT": [
       null,
-      "{'0': 'Нет арбитражных дел', 'one': '1 арбитражное дело', 'other': '{{count|number}} арбитражное дело'}"
+      "{'0': 'No arbitration cases', 'one': '1 arbitration case', 'other': '{{count|number}} arbitration cases'}"
+    ],
+    "NG_PLURALIZE::EGRUL_LIST_MORE": [
+      null,
+      "{'one': 'one more report', 'other': '{{count|number}} more reports'}"
     ],
     "NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT": [
       null,
@@ -554,27 +598,27 @@
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_CHILDREN": [
       null,
-      "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+      "{'one': '1 dependent company', 'other': '{{count|number}} dependent companies'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_CHILDREN": [
       null,
-      "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+      "{'one': '1 dependent company', 'other': '{{count|number}} dependent companies'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_PARENTS": [
       null,
-      "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+      "{'one': '1 affiliated company', 'other': '{{count|number}} affiliated companies'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_CHILDREN": [
       null,
-      "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+      "{'one': '1 dependent company', 'other': '{{count|number}} dependent companies'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_PARENTS": [
       null,
-      "{'one': '1 аффилированное физическое лицо', 'other': '{{count|number}} аффилированное физическое лицо'}"
+      "{'one': '1 affiliated person', 'other': '{{count|number}} affiliated persons'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_PARENTS": [
       null,
-      "{'one': '1 аффилированное лицо', 'other': '{{count|number}} аффилированное лицо'}"
+      "{'one': '1 affiliate', 'other': '{{count|number}} affiliates'}"
     ],
     "NG_PLURALIZE::RELATION_BRANCH_COMPANY": [
       null,
@@ -582,11 +626,11 @@
     ],
     "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_CHILDREN": [
       null,
-      "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+      "{'one': '1 commission', 'other': '{{count|number}} commissions'}"
     ],
     "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_PARENTS": [
       null,
-      "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+      "{'one': '1 commission member', 'other': '{{count|number}} commission members'}"
     ],
     "NG_PLURALIZE::RELATION_COMPANY": [
       null,
@@ -594,19 +638,19 @@
     ],
     "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_CHILDREN": [
       null,
-      "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+      "{'one': '1 procurement', 'other': '{{count|number}} procurements'}"
     ],
     "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_PARENTS": [
       null,
-      "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+      "{'one': 'Customer', 'other': '{{count|number}} customers'}"
     ],
     "NG_PLURALIZE::RELATION_EMPLOYEE_CHILDREN": [
       null,
-      "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+      "{'one': '1 customer', 'other': '{{count|number}} customers'}"
     ],
     "NG_PLURALIZE::RELATION_EMPLOYEE_PARENTS": [
       null,
-      "{'one': '1 аффилированная компания', 'other': '{{count|number}} аффилированная компания'}"
+      "{'one': '1 contact person', 'other': '{{count|number}} contact persons'}"
     ],
     "NG_PLURALIZE::RELATION_EXECUTIVE_COMPANY": [
       null,
@@ -638,19 +682,19 @@
     ],
     "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_CHILDREN": [
       null,
-      "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+      "{'one': '1 participation', 'other': '{{count|number}} participations'}"
     ],
     "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_PARENTS": [
       null,
-      "{'one': '1 зависимая компания', 'other': '{{count|number}} зависимая компания'}"
+      "{'one': '1 participant company', 'other': '{{count|number}} participant companies'}"
     ],
     "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_CHILDREN": [
       null,
-      "{'one': '1 аффилированное физическое лицо', 'other': '{{count|number}} аффилированное физическое лицо'}"
+      "{'one': '1 participation', 'other': '{{count|number}} participations'}"
     ],
     "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_PARENTS": [
       null,
-      "{'one': '1 аффилированное физическое лицо', 'other': '{{count|number}} аффилированное физическое лицо'}"
+      "{'one': '1 participant person', 'other': '{{count|number}} participant persons'}"
     ],
     "NG_PLURALIZE::RELATION_PHONE": [
       null,
@@ -686,11 +730,7 @@
     ],
     "Аффилированные лица": [
       null,
-      "Affiliated network diagram"
-    ],
-    "Банк данных исполнительных производств": [
-      null,
-      "Enforcement proceedings database"
+      "Affiliates"
     ],
     "Без ИНН": [
       null,
@@ -762,7 +802,7 @@
     ],
     "Закупки": [
       null,
-      ""
+      "Procurements"
     ],
     "ИНН": [
       null,
@@ -778,7 +818,11 @@
     ],
     "Иски и судебные решения": [
       null,
-      ""
+      "Claims and court decisions"
+    ],
+    "Исполнительные производства": [
+      null,
+      "Enforcement proceedings"
     ],
     "Исторический профиль": [
       null,
@@ -800,6 +844,10 @@
       null,
       "Login"
     ],
+    "Любое основание": [
+      null,
+      "Any reason"
+    ],
     "Любой ИНН": [
       null,
       "Any INN"
@@ -807,6 +855,10 @@
     "Любой регион": [
       null,
       "Any region"
+    ],
+    "НАЛПОИНТЕР": [
+      null,
+      "NULLPOINTER"
     ],
     "Найти": [
       null,
@@ -858,7 +910,7 @@
     ],
     "Официальная страница закупки": [
       null,
-      "Connections between participants of procurement"
+      "Official procurement page"
     ],
     "Пароль": [
       null,
@@ -870,7 +922,7 @@
     ],
     "Поиск арбитражных дел...": [
       null,
-      ""
+      "Searching..."
     ],
     "Пополнить": [
       null,
@@ -896,9 +948,13 @@
       null,
       "Registration"
     ],
+    "Сделано в": [
+      null,
+      "Created by"
+    ],
     "Страница эмитента": [
       null,
-      ""
+      "Issuer page"
     ],
     "Схема аффилированных лиц": [
       null,
@@ -922,15 +978,15 @@
     ],
     "аффилированное лицо": [
       null,
-      "Affiliated network diagram"
+      "affiliate"
     ],
     "доля УК": [
       null,
-      "share"
+      "capital share"
     ],
     "доля акций": [
       null,
-      ""
+      "stock share"
     ],
     "основано": [
       null,
@@ -946,7 +1002,7 @@
     ],
     "сотрудник": [
       null,
-      ""
+      "employee"
     ],
     "тыс. руб.": [
       null,
@@ -954,7 +1010,7 @@
     ],
     "участник": [
       null,
-      ""
+      "participant"
     ],
     "учредитель": [
       null,
@@ -962,15 +1018,31 @@
     ],
     "член комиссии": [
       null,
-      ""
+      "commission member"
     ],
-    "Продукты НКБ на главной странице\u0004Анализ аффилированных лиц": [
+    "Продукты НКБ на главной странице\u0004Анализ\nаффилированных лиц": [
       null,
-      "Affiliated Network Analysis"
+      "Affiliated\nNetwork Analysis"
     ],
-    "Продукты НКБ на главной странице\u0004Связи между участниками закупок": [
+    "Продукты НКБ на главной странице\u0004Бизнес-справка\nпо иностранной компании": [
       null,
-      "Connections between participants of procurement"
+      "Report on\nForeign Company"
+    ],
+    "Продукты НКБ на главной странице\u0004Выписка\nиз ЕГРИП": [
+      null,
+      "EGRIP\nReport"
+    ],
+    "Продукты НКБ на главной странице\u0004Выписка\nиз ЕГРЮЛ": [
+      null,
+      "EGRUL\nReport"
+    ],
+    "Продукты НКБ на главной странице\u0004Отчеты на заказ": [
+      null,
+      "Custom Reports"
+    ],
+    "Продукты НКБ на главной странице\u0004Связи между\nучастниками закупок": [
+      null,
+      "Connections between\nparticipants of procurement"
     ],
     "Продукты НКБ на главной странице\u0004Сервис комментариев": [
       null,
@@ -994,11 +1066,11 @@
     ],
     "Лот закупки\u0004Лот": [
       null,
-      "on"
+      "Lot"
     ],
     "Лот закупки\u0004Отменён": [
       null,
-      ""
+      "Cancelled"
     ],
     "Наименование приложения поиска\u0004Поиск — НКБ": [
       null,
@@ -1022,7 +1094,7 @@
     ],
     "лот в закупке\u0004лот": [
       null,
-      "on"
+      "lot"
     ],
     "от такой-то даты\u0004от": [
       null,
@@ -1030,7 +1102,7 @@
     ],
     "номер\u0004№": [
       null,
-      ""
+      "#"
     ]
   }
 }
