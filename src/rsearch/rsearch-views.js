@@ -28,6 +28,7 @@ define(function(require) {'use strict';
         'np-rsearch-navigation-breadcrumb':         require('text!./views/rsearch-navigation-breadcrumb.html'),
         'np-rsearch-node-list':                     require('text!./views/rsearch-node-list.html'),
         'np-rsearch-user-product-limits-info':      require('text!./views/rsearch-user-product-limits-info.html'),
+        'np-rsearch-autokad-info':                  require('text!./views/rsearch-autokad-info.html'),
         'np-rsearch-node-form':                     require('text!./views/rsearch-node-form.html')
     };
 
@@ -136,6 +137,19 @@ define(function(require) {'use strict';
                     info: '=npRsearchUserProductLimitsInfo'
                 },
                 template: templates['np-rsearch-user-product-limits-info']
+            };
+        }])
+        //
+        .directive('npRsearchAutokadInfo', [function() {
+            return {
+                restrict: 'A',
+                // require:
+                // {
+                //     autokadClick: Function,
+                //     autokad: Object
+                // }
+                scope: false,
+                template: templates['np-rsearch-autokad-info']
             };
         }])
         //
