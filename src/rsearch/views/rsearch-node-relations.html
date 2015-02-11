@@ -56,12 +56,7 @@
     <div class="relations-block" ng-show="user.isAuthenticated()">
         <h5 class="relations-block-header">${_tr("Иски и судебные решения")}</h5>
         <ul class="unstyled">
-            <li ng-show="true">
-                <a class="action" ng-click="autokadClick()">
-                    <ng-pluralize count="count = autokad.getCaseCount()" when="::${_tr("NG_PLURALIZE::AUTOKAD_CASE_COUNT")}" ng-hide="autokad.isCaseCountPending()"></ng-pluralize>
-                    <span class="animate-pulsed-flash" ng-show="autokad.isCaseCountPending()">${_tr("Поиск арбитражных дел...")}</span>
-                </a>
-            </li>
+            <li np-rsearch-autokad-info></li>
         </ul>
     </div>
     <a class="action relations-product shadow-lift-lb-corner strong" ng-click="productClick('relations_find_related')">${_tr("Анализ аффилированных лиц")}</a>
@@ -94,12 +89,7 @@
     <div class="relations-block" ng-show="user.isAuthenticated()">
         <h5 class="relations-block-header">${_tr("Иски и судебные решения")}</h5>
         <ul class="unstyled">
-            <li ng-show="true">
-                <a class="action" ng-click="autokadClick()">
-                    <ng-pluralize count="count = autokad.getCaseCount()" when="::${_tr("NG_PLURALIZE::AUTOKAD_CASE_COUNT")}" ng-hide="autokad.isCaseCountPending()"></ng-pluralize>
-                    <span class="animate-pulsed-flash" ng-show="autokad.isCaseCountPending()">${_tr("Поиск арбитражных дел...")}</span>
-                </a>
-            </li>
+            <li np-rsearch-autokad-info></li>
         </ul>
     </div>
     <a class="action relations-product shadow-lift-lb-corner strong" ng-click="productClick('relations_find_related')">${_tr("Анализ аффилированных лиц")}</a>
