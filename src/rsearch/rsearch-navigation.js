@@ -1321,10 +1321,12 @@ define(function(require) {'use strict';
                         query,
                         function(result){
                             node.__autokad.caseCount = result;
+                            node.__autokad.error = null;
                         },
                         function(){
                             $log.warn('getCaseCount... error');
                             node.__autokad.caseCount = 0;
+                            node.__autokad.error = true;
                         });
 
                     if (caseCountRequest) {
@@ -1349,7 +1351,8 @@ define(function(require) {'use strict';
                     if (!node || node.__uid !== n.__uid) {
                         node = n;
                         node.__autokad = {
-                            caseCount: 0
+                            caseCount: 0,
+                            error: null
                         };
                         doGetCaseCount();
                     }
@@ -1367,6 +1370,9 @@ define(function(require) {'use strict';
                     },
                     getCaseCount: function() {
                         return isNodeWithAutokad() ? node.__autokad.caseCount : 0;
+                    },
+                    hasError: function() {
+                        return isNodeWithAutokad() ? node.__autokad.error : null;
                     },
                     showCases: function() {
                         $timeout(function(){
