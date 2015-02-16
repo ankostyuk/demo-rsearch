@@ -18,8 +18,8 @@ msgstr ""
 msgid "API информационной системы"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-autokad-info.html:1
 #: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::AUTOKAD_CASE_COUNT"
 msgstr "{'0': 'Нет арбитражных дел', 'one': '{{count|number}} арбитражное дело', 'few': '{{count|number}} арбитражных дела', 'many': '{{count|number}} арбитражных дел', 'other': '{{count|number}} арбитражного дела'}"
 
@@ -481,8 +481,13 @@ msgstr ""
 msgid "Поиск"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-node-relations.html:1
+#: ../src/rsearch/views/rsearch-autokad-info.html:1
 msgid "Поиск арбитражных дел..."
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-autokad-info.html:1
+msgctxt "Поиск в картотеке арбитражных дел временно недоступен"
+msgid "Поиск в"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
@@ -563,6 +568,11 @@ msgstr ""
 msgid "аффилированное лицо"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-autokad-info.html:1
+msgctxt "Поиск в картотеке арбитражных дел временно недоступен"
+msgid "временно недоступен"
+msgstr ""
+
 #: ../src/rsearch/rsearch-meta.js:1
 msgctxt "Доля в учреждении компании"
 msgid "доля"
@@ -585,6 +595,11 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-user-product-limits-info.html:1
 msgctxt "валюта"
 msgid "ие"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-autokad-info.html:1
+msgctxt "Поиск в картотеке арбитражных дел временно недоступен"
+msgid "картотеке арбитражных дел"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1

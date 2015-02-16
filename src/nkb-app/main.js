@@ -6,12 +6,13 @@ var root = this;
  */
 // i18n
 var i18nBundles = [
+    // external
+    'text!external_components/nullpointer-autokad/l10n/ui/bundle.json',
+    'text!external_components/nullpointer-autokad/l10n/ui_keys/bundle.json',
+    // internal
     'text!src/l10n/ui/bundle.json',
     'text!src/l10n/ui_keys/bundle.json',
     'text!src/l10n/okato_region/bundle.json',
-    // external
-    'text!external_components/nullpointer-autokad/l10n/ui/bundle.json',
-    'text!external_components/nullpointer-autokad/l10n/ui_keys/bundle.json'
 ];
 
 //
@@ -40,7 +41,7 @@ root._RESOURCES_CONFIG = {
         'jquery':               'external_components/jquery/jquery',
         'jquery.cookie':        'external_components/jquery.cookie/jquery.cookie',
 
-        'underscore':           'external_components/underscore/underscore',
+        'lodash':               'external_components/lodash-compat/lodash',
         'underscore.string':    'external_components/underscore.string/underscore.string',
 
         'purl':                 'external_components/purl/purl',
@@ -129,29 +130,15 @@ root._RESOURCES_CONFIG = {
             deps: ['jquery']
         },
 
-        'underscore': {
-            exports: '_',
-            deps: ['underscore.string'],
-            init: function(UnderscoreString) {
-                _.templateSettings = {
-                    evaluate:       /\{%([\s\S]+?)%\}/g,
-                    interpolate:    /\{%=([\s\S]+?)%\}/g,
-                    escape:         /\{%-([\s\S]+?)%\}/g
-                };
-
-                _.mixin(UnderscoreString.exports());
-            }
-        },
-
         // nkbcomment
         'backbone': {
-            deps: ['underscore']
+            deps: ['lodash']
         },
         'dateformat': {
             deps: ['iso8601']
         },
         'nkbcomment-defaults': {
-            deps: ['backbone', 'underscore', 'jquery' /* + остальные зависимости для nkbcomment-comment */, 'jquery.cookie', 'jquery.fileupload', 'jquery.fileDownload', 'dateformat']
+            deps: ['backbone', 'lodash', 'jquery' /* + остальные зависимости для nkbcomment-comment */, 'jquery.cookie', 'jquery.fileupload', 'jquery.fileDownload', 'dateformat']
         },
         'nkbcomment-comment-utils': {
             deps: ['nkbcomment-defaults']
@@ -168,7 +155,7 @@ root._RESOURCES_CONFIG = {
         'l10n/l10n': {
             lang: root._APP_CONFIG.lang,
             'i18n-component': {
-                // Должны отличаться от общих настроек шаблонизатора (например, underscore),
+                // Должны отличаться от общих настроек шаблонизатора,
                 // т.к. смысл шаблонизации i18n:
                 //   только перевести текст шаблона,
                 //   а далее использовать переведённый шаблон с шаблонизатором по умолчанию
@@ -214,7 +201,18 @@ root._RESOURCES_CONFIG = {
 if (typeof define === 'function' && define.amd) {
     requirejs.config(root._RESOURCES_CONFIG);
 
-    require(['app'], function(app){
+    require(['lodash', 'underscore.string', 'app'], function(_, _s, app){
+        // lodash
+        _.templateSettings = {
+            evaluate:       /\{%([\s\S]+?)%\}/g,
+            interpolate:    /\{%=([\s\S]+?)%\}/g,
+            escape:         /\{%-([\s\S]+?)%\}/g
+        };
+
+        // lodash + underscore.string
+        _.mixin(_s.exports());
+
+        // init app
         app.init(document);
     });
 }

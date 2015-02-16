@@ -4,7 +4,7 @@
  */
 define(function(require) {'use strict';
 
-                          require('underscore');
+                          require('lodash');
         angular         = require('angular');
 
     var submodules = {
