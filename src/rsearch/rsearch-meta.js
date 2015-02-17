@@ -6,7 +6,7 @@
 // TODO объеденить код со "связями"
 define(function(require) {'use strict';
 
-                  require('underscore');
+                  require('lodash');
     var angular = require('angular'),
         i18n    = require('i18n');
 

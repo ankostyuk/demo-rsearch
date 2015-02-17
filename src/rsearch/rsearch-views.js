@@ -6,7 +6,7 @@
 define(function(require) {'use strict';
 
                           require('jquery');
-                          require('underscore');
+                          require('lodash');
     var i18n            = require('i18n'),
         angular         = require('angular');
 

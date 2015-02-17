@@ -221,6 +221,30 @@ msgstr ""
 msgid "Любое основание"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-autokad-info.html:1
+msgctxt "Поиск в картотеке арбитражных дел временно недоступен"
+msgid "Поиск в"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-autokad-info.html:1
+msgctxt "Поиск в картотеке арбитражных дел временно недоступен"
+msgid "картотеке арбитражных дел"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-autokad-info.html:1
+msgctxt "Поиск в картотеке арбитражных дел временно недоступен"
+msgid "временно недоступен"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-autokad-info.html:1
+#: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
+msgid "NG_PLURALIZE::AUTOKAD_CASE_COUNT"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-autokad-info.html:1
+msgid "Поиск арбитражных дел..."
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 msgid "Любой ИНН"
 msgstr ""
@@ -240,12 +264,6 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
 msgid "Поиск"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::AUTOKAD_CASE_COUNT"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-navigation.html:1
@@ -622,11 +640,6 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Иски и судебные решения"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "Поиск арбитражных дел..."
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
