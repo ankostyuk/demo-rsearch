@@ -13,159 +13,159 @@
     ],
     "NG_PLURALIZE::AUTOKAD_CASE_COUNT": [
       null,
-      "{'0': 'Нет арбитражных дел', 'one': '{{count|number}} арбитражное дело', 'few': '{{count|number}} арбитражных дела', 'many': '{{count|number}} арбитражных дел', 'other': '{{count|number}} арбитражного дела'}"
+      "{'0': 'Нет арбитражных дел', 'one': '{} арбитражное дело', 'few': '{} арбитражных дела', 'many': '{} арбитражных дел', 'other': '{} арбитражного дела'}"
     ],
     "NG_PLURALIZE::EGRUL_LIST_MORE": [
       null,
-      "{'one': 'ещё {{count|number}} выписка', 'few': 'ещё {{count|number}} выписки', 'many': 'ещё {{count|number}} выписок', 'other': 'ещё {{count|number}} выписки'}"
+      "{'one': 'ещё {} выписка', 'few': 'ещё {} выписки', 'many': 'ещё {} выписок', 'other': 'ещё {} выписки'}"
     ],
     "NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT": [
       null,
-      "{'one': '{{count|number}} комментарий', 'few': '{{count|number}} комментария', 'many': '{{count|number}} комментариев', 'other': '{{count|number}} комментария'}"
+      "{'one': '{} комментарий', 'few': '{} комментария', 'many': '{} комментариев', 'other': '{} комментария'}"
     ],
     "NG_PLURALIZE::NODE_ADDRESS": [
       null,
-      "{'one': '{{count|number}} адрес', 'few': '{{count|number}} адреса', 'many': '{{count|number}} адресов', 'other': '{{count|number}} адреса'}"
+      "{'one': '{} адрес', 'few': '{} адреса', 'many': '{} адресов', 'other': '{} адреса'}"
     ],
     "NG_PLURALIZE::NODE_COMPANY": [
       null,
-      "{'one': '{{count|number}} компания', 'few': '{{count|number}} компании', 'many': '{{count|number}} компаний', 'other': '{{count|number}} компании'}"
+      "{'one': '{} компания', 'few': '{} компании', 'many': '{} компаний', 'other': '{} компании'}"
     ],
     "NG_PLURALIZE::NODE_INDIVIDUAL": [
       null,
-      "{'one': '{{count|number}} физическое лицо', 'few': '{{count|number}} физических лица', 'many': '{{count|number}} физических лиц', 'other': '{{count|number}} физического лица'}"
+      "{'one': '{} физическое лицо', 'few': '{} физических лица', 'many': '{} физических лиц', 'other': '{} физического лица'}"
     ],
     "NG_PLURALIZE::NODE_PHONE": [
       null,
-      "{'one': '{{count|number}} телефон', 'few': '{{count|number}} телефона', 'many': '{{count|number}} телефонов', 'other': '{{count|number}} телефона'}"
+      "{'one': '{} телефон', 'few': '{} телефона', 'many': '{} телефонов', 'other': '{} телефона'}"
     ],
     "NG_PLURALIZE::RELATION_ADDRESS": [
       null,
-      "{'one': 'Адрес', 'few': '{{count|number}} адреса', 'many': '{{count|number}} адресов', 'other': '{{count|number}} адреса'}"
+      "{'one': 'Адрес', 'few': '{} адреса', 'many': '{} адресов', 'other': '{} адреса'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_CHILDREN": [
       null,
-      "{'one': '{{count|number}} зависимая компания', 'few': '{{count|number}} зависимые компании', 'many': '{{count|number}} зависимых компаний', 'other': '{{count|number}} зависимой компании'}"
+      "{'one': '{} зависимая компания', 'few': '{} зависимые компании', 'many': '{} зависимых компаний', 'other': '{} зависимой компании'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_CHILDREN": [
       null,
-      "{'one': '{{count|number}} зависимая компания', 'few': '{{count|number}} зависимые компании', 'many': '{{count|number}} зависимых компаний', 'other': '{{count|number}} зависимой компании'}"
+      "{'one': '{} зависимая компания', 'few': '{} зависимые компании', 'many': '{} зависимых компаний', 'other': '{} зависимой компании'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_PARENTS": [
       null,
-      "{'one': '{{count|number}} аффилированная компания', 'few': '{{count|number}} аффилированные компании', 'many': '{{count|number}} аффилированных компаний', 'other': '{{count|number}} аффилированной компании'}"
+      "{'one': '{} аффилированная компания', 'few': '{} аффилированные компании', 'many': '{} аффилированных компаний', 'other': '{} аффилированной компании'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_CHILDREN": [
       null,
-      "{'one': '{{count|number}} зависимая компания', 'few': '{{count|number}} зависимые компании', 'many': '{{count|number}} зависимых компаний', 'other': '{{count|number}} зависимой компании'}"
+      "{'one': '{} зависимая компания', 'few': '{} зависимые компании', 'many': '{} зависимых компаний', 'other': '{} зависимой компании'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_PARENTS": [
       null,
-      "{'one': '{{count|number}} аффилированное физическое лицо', 'few': '{{count|number}} аффилированных физических лица', 'many': '{{count|number}} аффилированных физических лиц', 'other': '{{count|number}} аффилированного физического лица'}"
+      "{'one': '{} аффилированное физическое лицо', 'few': '{} аффилированных физических лица', 'many': '{} аффилированных физических лиц', 'other': '{} аффилированного физического лица'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_PARENTS": [
       null,
-      "{'one': '{{count|number}} аффилированное лицо', 'few': '{{count|number}} аффилированных лица', 'many': '{{count|number}} аффилированных лиц', 'other': '{{count|number}} аффилированного лица'}"
+      "{'one': '{} аффилированное лицо', 'few': '{} аффилированных лица', 'many': '{} аффилированных лиц', 'other': '{} аффилированного лица'}"
     ],
     "NG_PLURALIZE::RELATION_BRANCH_COMPANY": [
       null,
-      "{'one': '{{count|number}} филиал', 'few': '{{count|number}} филиала', 'many': '{{count|number}} филиалов', 'other': '{{count|number}} филиала'}"
+      "{'one': '{} филиал', 'few': '{} филиала', 'many': '{} филиалов', 'other': '{} филиала'}"
     ],
     "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_CHILDREN": [
       null,
-      "{'one': '{{count|number}} закупочная комиссия', 'few': '{{count|number}} закупочные комиссии', 'many': '{{count|number}} закупочных комиссий', 'other': '{{count|number}} закупочных комиссий'}"
+      "{'one': '{} закупочная комиссия', 'few': '{} закупочные комиссии', 'many': '{} закупочных комиссий', 'other': '{} закупочных комиссий'}"
     ],
     "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_PARENTS": [
       null,
-      "{'one': '{{count|number}} член комиссии', 'few': '{{count|number}} члена комиссии', 'many': '{{count|number}} членов комиссии', 'other': '{{count|number}} члена комиссии'}"
+      "{'one': '{} член комиссии', 'few': '{} члена комиссии', 'many': '{} членов комиссии', 'other': '{} члена комиссии'}"
     ],
     "NG_PLURALIZE::RELATION_COMPANY": [
       null,
-      "{'one': '{{count|number}} компания', 'few': '{{count|number}} компании', 'many': '{{count|number}} компаний', 'other': '{{count|number}} компании'}"
+      "{'one': '{} компания', 'few': '{} компании', 'many': '{} компаний', 'other': '{} компании'}"
     ],
     "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_CHILDREN": [
       null,
-      "{'one': '{{count|number}} закупка', 'few': '{{count|number}} закупки', 'many': '{{count|number}} закупок', 'other': '{{count|number}} закупки'}"
+      "{'one': '{} закупка', 'few': '{} закупки', 'many': '{} закупок', 'other': '{} закупки'}"
     ],
     "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_PARENTS": [
       null,
-      "{'one': 'Заказчик', 'few': '{{count|number}} заказчика', 'many': '{{count|number}} заказчиков', 'other': '{{count|number}} заказчика'}"
+      "{'one': 'Заказчик', 'few': '{} заказчика', 'many': '{} заказчиков', 'other': '{} заказчика'}"
     ],
     "NG_PLURALIZE::RELATION_EMPLOYEE_CHILDREN": [
       null,
-      "{'one': '{{count|number}} организатор закупки', 'few': '{{count|number}} организатора закупок', 'many': '{{count|number}} организаторов закупок', 'other': '{{count|number}} организатора закупок'}"
+      "{'one': '{} организатор закупки', 'few': '{} организатора закупок', 'many': '{} организаторов закупок', 'other': '{} организатора закупок'}"
     ],
     "NG_PLURALIZE::RELATION_EMPLOYEE_PARENTS": [
       null,
-      "{'one': '{{count|number}} контактное лицо', 'few': '{{count|number}} контактных лица', 'many': '{{count|number}} контактных лиц', 'other': '{{count|number}} контактных лица'}"
+      "{'one': '{} контактное лицо', 'few': '{} контактных лица', 'many': '{} контактных лиц', 'other': '{} контактных лица'}"
     ],
     "NG_PLURALIZE::RELATION_EXECUTIVE_COMPANY": [
       null,
-      "{'one': '{{count|number}} управляющая компания', 'few': '{{count|number}} управляющие компании', 'many': '{{count|number}} управляющих компаний', 'other': '{{count|number}} управляющей компании'}"
+      "{'one': '{} управляющая компания', 'few': '{} управляющие компании', 'many': '{} управляющих компаний', 'other': '{} управляющей компании'}"
     ],
     "NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL": [
       null,
-      "{'one': 'Руководитель', 'few': '{{count|number}} руководителя', 'many': '{{count|number}} руководителей', 'other': '{{count|number}} руководителя'}"
+      "{'one': 'Руководитель', 'few': '{} руководителя', 'many': '{} руководителей', 'other': '{} руководителя'}"
     ],
     "NG_PLURALIZE::RELATION_FOUNDER": [
       null,
-      "{'one': '{{count|number}} учредитель', 'few': '{{count|number}} учредителя', 'many': '{{count|number}} учредителей', 'other': '{{count|number}} учредителя'}"
+      "{'one': '{} учредитель', 'few': '{} учредителя', 'many': '{} учредителей', 'other': '{} учредителя'}"
     ],
     "NG_PLURALIZE::RELATION_FOUNDER_COMPANY": [
       null,
-      "{'one': '{{count|number}} учредитель компания', 'few': '{{count|number}} учредителя компании', 'many': '{{count|number}} учредителей компаний', 'other': '{{count|number}} учредителя компании'}"
+      "{'one': '{} учредитель компания', 'few': '{} учредителя компании', 'many': '{} учредителей компаний', 'other': '{} учредителя компании'}"
     ],
     "NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL": [
       null,
-      "{'one': '{{count|number}} учредитель физическое лицо', 'few': '{{count|number}} учредителя физических лица', 'many': '{{count|number}} учредителей физических лиц', 'other': '{{count|number}} учредителя физического лица'}"
+      "{'one': '{} учредитель физическое лицо', 'few': '{} учредителя физических лица', 'many': '{} учредителей физических лиц', 'other': '{} учредителя физического лица'}"
     ],
     "NG_PLURALIZE::RELATION_HEAD_COMPANY": [
       null,
-      "{'one': 'Головная компания', 'few': '{{count|number}} головные компании', 'many': '{{count|number}} головных компаний', 'other': '{{count|number}} головной компании'}"
+      "{'one': 'Головная компания', 'few': '{} головные компании', 'many': '{} головных компаний', 'other': '{} головной компании'}"
     ],
     "NG_PLURALIZE::RELATION_LEAD_COMPANY": [
       null,
-      "{'one': '{{count|number}} руководимая компания', 'few': '{{count|number}} руководимые компании', 'many': '{{count|number}} руководимых компаний', 'other': '{{count|number}} руководимой компании'}"
+      "{'one': '{} руководимая компания', 'few': '{} руководимые компании', 'many': '{} руководимых компаний', 'other': '{} руководимой компании'}"
     ],
     "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_CHILDREN": [
       null,
-      "{'one': '{{count|number}} участие в закупках', 'few': '{{count|number}} участия в закупках', 'many': '{{count|number}} участий в закупках', 'other': '{{count|number}} участий в закупках'}"
+      "{'one': '{} участие в закупках', 'few': '{} участия в закупках', 'many': '{} участий в закупках', 'other': '{} участий в закупках'}"
     ],
     "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_PARENTS": [
       null,
-      "{'one': '{{count|number}} участник компания', 'few': '{{count|number}} участника компании', 'many': '{{count|number}} участников компаний', 'other': '{{count|number}} участника компании'}"
+      "{'one': '{} участник компания', 'few': '{} участника компании', 'many': '{} участников компаний', 'other': '{} участника компании'}"
     ],
     "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_CHILDREN": [
       null,
-      "{'one': '{{count|number}} участие в закупках', 'few': '{{count|number}} участия в закупках', 'many': '{{count|number}} участий в закупках', 'other': '{{count|number}} участий в закупках'}"
+      "{'one': '{} участие в закупках', 'few': '{} участия в закупках', 'many': '{} участий в закупках', 'other': '{} участий в закупках'}"
     ],
     "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_PARENTS": [
       null,
-      "{'one': '{{count|number}} участник физическое лицо', 'few': '{{count|number}} участника физических лица', 'many': '{{count|number}} участников физических лиц', 'other': '{{count|number}} участника физического лица'}"
+      "{'one': '{} участник физическое лицо', 'few': '{} участника физических лица', 'many': '{} участников физических лиц', 'other': '{} участника физического лица'}"
     ],
     "NG_PLURALIZE::RELATION_PHONE": [
       null,
-      "{'one': '{{count|number}} телефон', 'few': '{{count|number}} телефона', 'many': '{{count|number}} телефонов', 'other': '{{count|number}} телефона'}"
+      "{'one': '{} телефон', 'few': '{} телефона', 'many': '{} телефонов', 'other': '{} телефона'}"
     ],
     "NG_PLURALIZE::RELATION_PREDECESSOR_COMPANY": [
       null,
-      "{'one': '{{count|number}} предшественник', 'few': '{{count|number}} предшественника', 'many': '{{count|number}} предшественников', 'other': '{{count|number}} предшественника'}"
+      "{'one': '{} предшественник', 'few': '{} предшественника', 'many': '{} предшественников', 'other': '{} предшественника'}"
     ],
     "NG_PLURALIZE::RELATION_REGISTERED_HOLDER_COMPANY": [
       null,
-      "{'one': '{{count|number}} эмитент', 'few': '{{count|number}} эмитента', 'many': '{{count|number}} эмитентов', 'other': '{{count|number}} эмитента'}"
+      "{'one': '{} эмитент', 'few': '{} эмитента', 'many': '{} эмитентов', 'other': '{} эмитента'}"
     ],
     "NG_PLURALIZE::RELATION_REGISTER_HOLDER_COMPANY": [
       null,
-      "{'one': '{{count|number}} реестродержатель', 'few': '{{count|number}} реестродержателя', 'many': '{{count|number}} реестродержателей', 'other': '{{count|number}} реестродержателя'}"
+      "{'one': '{} реестродержатель', 'few': '{} реестродержателя', 'many': '{} реестродержателей', 'other': '{} реестродержателя'}"
     ],
     "NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY": [
       null,
-      "{'one': '{{count|number}} учреждённая компания', 'few': '{{count|number}} учреждённые компании', 'many': '{{count|number}} учреждённых компаний', 'other': '{{count|number}} учреждённой компании'}"
+      "{'one': '{} учреждённая компания', 'few': '{} учреждённые компании', 'many': '{} учреждённых компаний', 'other': '{} учреждённой компании'}"
     ],
     "NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY": [
       null,
-      "{'one': '{{count|number}} правопреемник', 'few': '{{count|number}} правопреемника', 'many': '{{count|number}} правопреемников', 'other': '{{count|number}} правопреемника'}"
+      "{'one': '{} правопреемник', 'few': '{} правопреемника', 'many': '{} правопреемников', 'other': '{} правопреемника'}"
     ],
     "Анализ аффилированных лиц": [
       null,
@@ -578,159 +578,159 @@
     ],
     "NG_PLURALIZE::AUTOKAD_CASE_COUNT": [
       null,
-      "{'0': 'No arbitration cases', 'one': '1 arbitration case', 'other': '{{count|number}} arbitration cases'}"
+      "{'0': 'No arbitration cases', 'one': '1 arbitration case', 'other': '{} arbitration cases'}"
     ],
     "NG_PLURALIZE::EGRUL_LIST_MORE": [
       null,
-      "{'one': 'one more report', 'other': '{{count|number}} more reports'}"
+      "{'one': 'one more report', 'other': '{} more reports'}"
     ],
     "NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT": [
       null,
-      "{'one': '1 comment', 'other': '{{count|number}} comments'}"
+      "{'one': '1 comment', 'other': '{} comments'}"
     ],
     "NG_PLURALIZE::NODE_ADDRESS": [
       null,
-      "{'one': '1 address', 'other': '{{count|number}} addresses'}"
+      "{'one': '1 address', 'other': '{} addresses'}"
     ],
     "NG_PLURALIZE::NODE_COMPANY": [
       null,
-      "{'one': '1 company', 'other': '{{count|number}} companies'}"
+      "{'one': '1 company', 'other': '{} companies'}"
     ],
     "NG_PLURALIZE::NODE_INDIVIDUAL": [
       null,
-      "{'one': '1 individual', 'other': '{{count|number}} individuals'}"
+      "{'one': '1 individual', 'other': '{} individuals'}"
     ],
     "NG_PLURALIZE::NODE_PHONE": [
       null,
-      "{'one': '1 phone', 'other': '{{count|number}} phones'}"
+      "{'one': '1 phone', 'other': '{} phones'}"
     ],
     "NG_PLURALIZE::RELATION_ADDRESS": [
       null,
-      "{'one': 'Address', 'other': '{{count|number}} addresses'}"
+      "{'one': 'Address', 'other': '{} addresses'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_CHILDREN": [
       null,
-      "{'one': '1 dependent company', 'other': '{{count|number}} dependent companies'}"
+      "{'one': '1 dependent company', 'other': '{} dependent companies'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_CHILDREN": [
       null,
-      "{'one': '1 dependent company', 'other': '{{count|number}} dependent companies'}"
+      "{'one': '1 dependent company', 'other': '{} dependent companies'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_PARENTS": [
       null,
-      "{'one': '1 affiliated company', 'other': '{{count|number}} affiliated companies'}"
+      "{'one': '1 affiliated company', 'other': '{} affiliated companies'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_CHILDREN": [
       null,
-      "{'one': '1 dependent company', 'other': '{{count|number}} dependent companies'}"
+      "{'one': '1 dependent company', 'other': '{} dependent companies'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_PARENTS": [
       null,
-      "{'one': '1 affiliated person', 'other': '{{count|number}} affiliated persons'}"
+      "{'one': '1 affiliated person', 'other': '{} affiliated persons'}"
     ],
     "NG_PLURALIZE::RELATION_AFFILIATED_PARENTS": [
       null,
-      "{'one': '1 affiliate', 'other': '{{count|number}} affiliates'}"
+      "{'one': '1 affiliate', 'other': '{} affiliates'}"
     ],
     "NG_PLURALIZE::RELATION_BRANCH_COMPANY": [
       null,
-      "{'one': '1 branch', 'other': '{{count|number}} branches'}"
+      "{'one': '1 branch', 'other': '{} branches'}"
     ],
     "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_CHILDREN": [
       null,
-      "{'one': '1 commission', 'other': '{{count|number}} commissions'}"
+      "{'one': '1 commission', 'other': '{} commissions'}"
     ],
     "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_PARENTS": [
       null,
-      "{'one': '1 commission member', 'other': '{{count|number}} commission members'}"
+      "{'one': '1 commission member', 'other': '{} commission members'}"
     ],
     "NG_PLURALIZE::RELATION_COMPANY": [
       null,
-      "{'one': '1 company', 'other': '{{count|number}} companies'}"
+      "{'one': '1 company', 'other': '{} companies'}"
     ],
     "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_CHILDREN": [
       null,
-      "{'one': '1 procurement', 'other': '{{count|number}} procurements'}"
+      "{'one': '1 procurement', 'other': '{} procurements'}"
     ],
     "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_PARENTS": [
       null,
-      "{'one': 'Customer', 'other': '{{count|number}} customers'}"
+      "{'one': 'Customer', 'other': '{} customers'}"
     ],
     "NG_PLURALIZE::RELATION_EMPLOYEE_CHILDREN": [
       null,
-      "{'one': '1 customer', 'other': '{{count|number}} customers'}"
+      "{'one': '1 customer', 'other': '{} customers'}"
     ],
     "NG_PLURALIZE::RELATION_EMPLOYEE_PARENTS": [
       null,
-      "{'one': '1 contact person', 'other': '{{count|number}} contact persons'}"
+      "{'one': '1 contact person', 'other': '{} contact persons'}"
     ],
     "NG_PLURALIZE::RELATION_EXECUTIVE_COMPANY": [
       null,
-      "{'one': '1 managing company', 'other': '{{count|number}} managing companies'}"
+      "{'one': '1 managing company', 'other': '{} managing companies'}"
     ],
     "NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL": [
       null,
-      "{'one': 'Director', 'other': '{{count|number}} directors'}"
+      "{'one': 'Director', 'other': '{} directors'}"
     ],
     "NG_PLURALIZE::RELATION_FOUNDER": [
       null,
-      "{'one': '1 shareholder', 'other': '{{count|number}} shareholders'}"
+      "{'one': '1 shareholder', 'other': '{} shareholders'}"
     ],
     "NG_PLURALIZE::RELATION_FOUNDER_COMPANY": [
       null,
-      "{'one': '1 shareholder company', 'other': '{{count|number}} shareholder companies'}"
+      "{'one': '1 shareholder company', 'other': '{} shareholder companies'}"
     ],
     "NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL": [
       null,
-      "{'one': '1 individual shareholder', 'other': '{{count|number}} individual shareholders'}"
+      "{'one': '1 individual shareholder', 'other': '{} individual shareholders'}"
     ],
     "NG_PLURALIZE::RELATION_HEAD_COMPANY": [
       null,
-      "{'one': 'Head company', 'other': '{{count|number}} head companies'}"
+      "{'one': 'Head company', 'other': '{} head companies'}"
     ],
     "NG_PLURALIZE::RELATION_LEAD_COMPANY": [
       null,
-      "{'one': '1 managed company', 'other': '{{count|number}} managed companies'}"
+      "{'one': '1 managed company', 'other': '{} managed companies'}"
     ],
     "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_CHILDREN": [
       null,
-      "{'one': '1 participation', 'other': '{{count|number}} participations'}"
+      "{'one': '1 participation', 'other': '{} participations'}"
     ],
     "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_PARENTS": [
       null,
-      "{'one': '1 participant company', 'other': '{{count|number}} participant companies'}"
+      "{'one': '1 participant company', 'other': '{} participant companies'}"
     ],
     "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_CHILDREN": [
       null,
-      "{'one': '1 participation', 'other': '{{count|number}} participations'}"
+      "{'one': '1 participation', 'other': '{} participations'}"
     ],
     "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_PARENTS": [
       null,
-      "{'one': '1 participant person', 'other': '{{count|number}} participant persons'}"
+      "{'one': '1 participant person', 'other': '{} participant persons'}"
     ],
     "NG_PLURALIZE::RELATION_PHONE": [
       null,
-      "{'one': '1 phone', 'other': '{{count|number}} phones'}"
+      "{'one': '1 phone', 'other': '{} phones'}"
     ],
     "NG_PLURALIZE::RELATION_PREDECESSOR_COMPANY": [
       null,
-      "{'one': '1 predecessor', 'other': '{{count|number}} predecessors'}"
+      "{'one': '1 predecessor', 'other': '{} predecessors'}"
     ],
     "NG_PLURALIZE::RELATION_REGISTERED_HOLDER_COMPANY": [
       null,
-      "{'one': '1 issuer', 'other': '{{count|number}} issuers'}"
+      "{'one': '1 issuer', 'other': '{} issuers'}"
     ],
     "NG_PLURALIZE::RELATION_REGISTER_HOLDER_COMPANY": [
       null,
-      "{'one': '1 registrar', 'other': '{{count|number}} registrars'}"
+      "{'one': '1 registrar', 'other': '{} registrars'}"
     ],
     "NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY": [
       null,
-      "{'one': '1 established company', 'other': '{{count|number}} established companies'}"
+      "{'one': '1 established company', 'other': '{} established companies'}"
     ],
     "NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY": [
       null,
-      "{'one': '1 legal successor', 'other': '{{count|number}} legal successors'}"
+      "{'one': '1 legal successor', 'other': '{} legal successors'}"
     ],
     "Анализ аффилированных лиц": [
       null,
