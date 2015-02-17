@@ -4,6 +4,6 @@
     ${_trc("временно недоступен", "Поиск в картотеке арбитражных дел временно недоступен")}
 </span>
 <a class="action" ng-click="autokadClick()">
-    <ng-pluralize count="count = autokad.getCaseCount()" when="::${_tr("NG_PLURALIZE::AUTOKAD_CASE_COUNT")}" ng-hide="autokad.isCaseCountPending() || autokad.hasError()"></ng-pluralize>
+    <np-pluralize count="autokad.getCaseCount()" when="::${_tr("NG_PLURALIZE::AUTOKAD_CASE_COUNT")}" ng-hide="autokad.isCaseCountPending() || autokad.hasError()"></np-pluralize>
     <span class="animate-pulsed-flash" ng-show="autokad.isCaseCountPending()">${_tr("Поиск арбитражных дел...")}</span>
 </a>

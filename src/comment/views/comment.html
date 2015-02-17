@@ -4,7 +4,7 @@
         <li class="nkbcomment-info">
             <i class="icon large i-comment-4"></i>
             <span ng-hide="commentData.commentCount">${_tr("Нет комментариев")}</span>
-            <ng-pluralize ng-show="commentData.commentCount" count="count = commentData.commentCount" when="::${_tr("NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT")}"></ng-pluralize>
+            <np-pluralize ng-show="commentData.commentCount" count="commentData.commentCount" when="::${_tr("NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT")}"></np-pluralize>
         </li>
         <li><a ng-click="addComment()">${_trc("Добавить", "Добавить комментарий")}</a></li>
         <li class="nkbcomment-groups">
