@@ -41,9 +41,6 @@ root._RESOURCES_CONFIG = {
         'jquery':               'external_components/jquery/jquery',
         'jquery.cookie':        'external_components/jquery.cookie/jquery.cookie',
 
-        'lodash':               'external_components/lodash-compat/lodash',
-        'underscore.string':    'external_components/underscore.string/underscore.string',
-
         'purl':                 'external_components/purl/purl',
         'moment':               'external_components/moment/moment',
 
@@ -93,6 +90,9 @@ root._RESOURCES_CONFIG = {
         location: 'src/comment',
         main: 'comment'
     }, {
+        name: 'lodash',
+        location: 'external_components/nullpointer-commons/lodash'
+    }, {
         name: 'nkb.user',
         location: 'external_components/nullpointer-commons/nkb/user',
         main: 'user'
@@ -101,21 +101,21 @@ root._RESOURCES_CONFIG = {
         location: 'external_components/nullpointer-commons/nkb/icons',
         main: 'icons'
     }, {
-        name: 'i18n',
-        location: 'external_components/nullpointer-i18n',
-        main: 'i18n'
-    }, {
         name: 'l10n',
         location: 'external_components/nullpointer-commons/angular/l10n',
         main: 'l10n'
+    }, {
+        name: 'resource',
+        location: 'external_components/nullpointer-commons/angular/resource',
+        main: 'resource'
     }, {
         name: 'autokad',
         location: 'external_components/nullpointer-autokad/autokad',
         main: 'autokad'
     }, {
-        name: 'resource',
-        location: 'external_components/nullpointer-commons/angular/resource',
-        main: 'resource'
+        name: 'i18n',
+        location: 'external_components/nullpointer-i18n',
+        main: 'i18n'
     }],
 
     shim: {
@@ -201,17 +201,7 @@ root._RESOURCES_CONFIG = {
 if (typeof define === 'function' && define.amd) {
     requirejs.config(root._RESOURCES_CONFIG);
 
-    require(['lodash', 'underscore.string', 'app'], function(_, _s, app){
-        // lodash
-        _.templateSettings = {
-            evaluate:       /\{%([\s\S]+?)%\}/g,
-            interpolate:    /\{%=([\s\S]+?)%\}/g,
-            escape:         /\{%-([\s\S]+?)%\}/g
-        };
-
-        // lodash + underscore.string
-        _.mixin(_s.exports());
-
+    require(['app'], function(app){
         // init app
         app.init(document);
     });
