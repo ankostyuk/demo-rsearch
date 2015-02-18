@@ -401,7 +401,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .filter('targetRelationsInfo', ['$filter', function($filter){
+        .filter('targetRelationsInfo', ['$filter', 'appConfig', function($filter, appConfig){
             // COMPANY-COMPANY
             //      FOUNDER_COMPANY
             //          <доля %>
@@ -608,7 +608,7 @@ define(function(require) {'use strict';
                     }, {
                         name: 'price',
                         filter: function(v) {
-                            return $filter('number')(v, 0) + nbsp + _tr(data.node.currency || node.currency);
+                            return $filter('number')(v, 0) + nbsp + _tr(data.node.currency || node.currency || appConfig.meta.defaultCurrency);
                         }
                     }, {
                         name: 'lot',
