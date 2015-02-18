@@ -2,7 +2,7 @@
     <div class="mask"><div class="message-box"><span class="message">${_tr("Ожидайте...")}</span></div></div>
     <div class="navigation-content">
         <div class="nav">
-                <ul class="breadcrumb" ng-show="true || isBreadcrumbs()">
+                <ul class="breadcrumb">
                     <li class="search-result" ng-show="search.isEmptyResult()">${_tr("Не найдено")}</li>
                     <li class="search-result" ng-show="!search.isEmptyResult() && search.getTotalByNodeType('COMPANY')"><a class="action" ng-class="{active: search.activeResult === 'COMPANY'}" ng-click="search.showResult('COMPANY')"><np-pluralize count="search.getTotalByNodeType('COMPANY')" when="::${_tr("NG_PLURALIZE::NODE_COMPANY")}"></np-pluralize></a></li>
                     <li class="search-result" ng-show="!search.isEmptyResult() && search.getTotalByNodeType('INDIVIDUAL')"><a class="action" ng-class="{active: search.activeResult === 'INDIVIDUAL'}" ng-click="search.showResult('INDIVIDUAL')"><np-pluralize count="search.getTotalByNodeType('INDIVIDUAL')" when="::${_tr("NG_PLURALIZE::NODE_INDIVIDUAL")}"></np-pluralize></a></li>
