@@ -1,6 +1,6 @@
 {
     "name": "rsearch",
-    "version": "2.3.1",
+    "version": "2.4.0",
     "description": "rsearch frontend",
 
     "author": {
@@ -22,7 +22,7 @@
         "grunt-bower-task": "~0.4",
 
         "fs-extra": "0.8.x",
-        "underscore": "1.4.x",
+        "lodash": "3.*",
 
         "nullpointer-i18n-bin": "newpointer/i18n-bin.git",
         "nullpointer-web-bin": "newpointer/web-bin.git"

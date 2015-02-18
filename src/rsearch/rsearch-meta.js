@@ -6,7 +6,7 @@
 // TODO объеденить код со "связями"
 define(function(require) {'use strict';
 
-                  require('underscore');
+                  require('lodash');
     var angular = require('angular'),
         i18n    = require('i18n');
 
@@ -401,7 +401,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .filter('targetRelationsInfo', ['$filter', function($filter){
+        .filter('targetRelationsInfo', ['$filter', 'appConfig', function($filter, appConfig){
             // COMPANY-COMPANY
             //      FOUNDER_COMPANY
             //          <доля %>
@@ -608,7 +608,7 @@ define(function(require) {'use strict';
                     }, {
                         name: 'price',
                         filter: function(v) {
-                            return $filter('number')(v, 0) + nbsp + _tr(data.node.currency || node.currency);
+                            return $filter('number')(v, 0) + nbsp + _tr(data.node.currency || node.currency || appConfig.meta.defaultCurrency);
                         }
                     }, {
                         name: 'lot',
@@ -676,33 +676,6 @@ define(function(require) {'use strict';
                 }
 
                 return _.capitalize(texts.join(', '));
-            };
-        }])
-        //
-        // TODO перенести в commons
-        //
-        .filter('capitalizeFirst', [function(){
-            return function(text){
-                return text ? text.charAt(0).toUpperCase() + text.slice(1) : text;
-            };
-        }])
-        //
-        .filter('share', ['$filter', function($filter){
-            return function(number, maxFractionSize){
-                if (number > 100) {
-                    return $filter('number')(number, maxFractionSize);
-                }
-
-                var numberText = $filter('number')(
-                    number,
-                    maxFractionSize === 0 ? 0 : maxFractionSize || 10
-                );
-
-                var text = /[.,]/.test(numberText) ?
-                    numberText.replace(/[0]+$/, '').replace(/[.,]$/, '') :
-                    numberText;
-
-                return text;
             };
         }]);
     //

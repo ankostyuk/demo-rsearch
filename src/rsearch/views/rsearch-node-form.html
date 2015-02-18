@@ -48,7 +48,7 @@
                                 <ul class="unstyled actions-list">
                                     <li ng-if="node.__egrulList[0]" ng-init="egrul = node.__egrulList[0]; egrulCount = node.__egrulList.length; moreCount = 1">
                                         <a class="action" ng-href="{{egrul._link}}" download="{{egrul._downloadName}}" target="_self">${_tr("Выписка")} ${_trc("от", "от такой-то даты")} {{egrul.fileDate | date:'dd.MM.yyyy'}}</a>
-                                        <span class="more" ng-show="egrulCount > moreCount"><a ng-click="more = !more"><ng-pluralize count="count = egrulCount - moreCount" when="::${_tr("NG_PLURALIZE::EGRUL_LIST_MORE")}"></ng-pluralize></a></span>
+                                        <span class="more" ng-show="egrulCount > moreCount"><a ng-click="more = !more"><np-pluralize count="egrulCount - moreCount" when="::${_tr("NG_PLURALIZE::EGRUL_LIST_MORE")}"></np-pluralize></a></span>
                                         <ul class="unstyled" ng-show="egrulCount > moreCount && more">
                                             <li ng-repeat="egrul in node.__egrulList" ng-hide="$index < moreCount"><a class="action" ng-href="{{egrul._link}}" download="{{egrul._downloadName}}" target="_self">${_tr("Выписка")} ${_trc("от", "от такой-то даты")} {{egrul.fileDate | date:'dd.MM.yyyy'}}</a></li>
                                         </ul>

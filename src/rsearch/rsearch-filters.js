@@ -10,7 +10,7 @@ define(function(require) {'use strict';
         affiliatedCauseFilterTemplate   = require('text!./views/rsearch-affiliated-cause-filter.html');
 
                           require('jquery');
-                          require('underscore');
+                          require('lodash');
     var i18n            = require('i18n'),
         angular         = require('angular');
 

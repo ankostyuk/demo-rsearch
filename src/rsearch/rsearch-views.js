@@ -6,13 +6,15 @@
 define(function(require) {'use strict';
 
                           require('jquery');
-                          require('underscore');
+                          require('lodash');
     var i18n            = require('i18n'),
         angular         = require('angular');
 
                           require('ng-infinite-scroll');
 
     var extmodules = {
+        'directives':   require('directives'),
+        'filters':      require('filters'),
         'autokad':      require('autokad'),
         'nkb.user':     require('nkb.user')
     };
