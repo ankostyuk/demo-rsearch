@@ -102,6 +102,10 @@ root._RESOURCES_CONFIG = {
         location: 'external_components/nullpointer-commons/nkb/icons',
         main: 'icons'
     }, {
+        name: 'nkb.filters',
+        location: 'external_components/nullpointer-commons/nkb/filters',
+        main: 'filters'
+    }, {
         name: 'directives',
         location: 'external_components/nullpointer-commons/angular/directives',
         main: 'directives'
