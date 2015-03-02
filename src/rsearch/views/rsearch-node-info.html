@@ -2,15 +2,15 @@
     <div ng-if="node._type === 'COMPANY'">
         <div class="row">
             <div class="span6 node-header" data-node-id="{{node._id}}">{{node.nameshortsort || node.namesort}}</div>
-            <div class="align-right" ng-show="node.founded_dt">${_tr("основано")} {{node.founded_dt | date:'dd.MM.yyyy'}}</div>
+            <div class="align-right" ng-show="node.founded_dt">${_tr("основано")} {{node.founded_dt | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
         </div>
         <div class="row node-entry reg-state" ng-show="node._reg.state">
             <div class="span6">{{node._reg.state.type}}</div>
-            <div class="align-right">{{node._reg.state._since | date:'dd.MM.yyyy'}}</div>
+            <div class="align-right">{{node._reg.state._since | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
         </div>
         <div class="row node-entry liquidate-state">
             <div class="span6">{{node._liquidate.state.type}}</div>
-            <div class="align-right">{{node._liquidate.state._since | date:'dd.MM.yyyy'}}</div>
+            <div class="align-right">{{node._liquidate.state._since | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
         </div>
         <div class="node-entry" ng-show="node.name_diff">{{node.namesort}}</div>
         <div class="node-entry">{{node | OKVED}}</div>
@@ -42,7 +42,7 @@
     <div ng-if="node._type === 'PURCHASE'">
         <div class="row">
             <div class="span7 node-header" data-node-id="{{node._id}}">{{node.form}}</div>
-            <div class="align-right" ng-show="node.date">{{node.date | date:'dd.MM.yyyy'}}</div>
+            <div class="align-right" ng-show="node.date">{{node.date | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
         </div>
         <div class="row">
             <div class="span8">

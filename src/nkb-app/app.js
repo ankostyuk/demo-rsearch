@@ -3,26 +3,31 @@ define(function(require) {'use strict';
     var root = window;
 
     //
-                  require('jquery');
-                  require('lodash');
+                            require('jquery');
+                            require('lodash');
 
-    var angular = require('angular'),
-        uuid    = require('uuid');
+    var angular           = require('angular'),
+        uuid              = require('uuid');
 
-                  require('nkb.icons');
-                  require('css!../external_components/bootstrap/css/bootstrap');
-                  require('less!./styles/app');
+                            require('nkb.icons');
+                            require('css!../external_components/bootstrap/css/bootstrap');
+                            require('less!./styles/app');
 
-    var submodules = {
-        login:          require('app.login'),
-        lang:           require('app.lang'),
-        log:            require('app.log'),
-        l10n:           require('l10n'),
-        nkbcomment:     require('nkb.comment'),
-        rsearch:        require('rsearch')
+                            require('moment');
+                            require('moment-timezone');
+
+    var angularModules = {
+        'angular-moment':   require('angular-moment'),
+
+        l10n:               require('l10n'),
+        login:              require('app.login'),
+        lang:               require('app.lang'),
+        log:                require('app.log'),
+        nkbcomment:         require('nkb.comment'),
+        rsearch:            require('rsearch')
     };
 
-    var app = angular.module('app', _.pluck(submodules, 'name'))
+    var app = angular.module('app', _.pluck(angularModules, 'name'))
         //
         .constant('nkbUserConfig', {
             resource: {
@@ -106,6 +111,10 @@ define(function(require) {'use strict';
                     'purchase.url': '/search/offlined/'
                 }
             }
+        })
+        //
+        .constant('angularMomentConfig', {
+            timezone: 'Europe/Moscow'
         })
         //
         .config(['$logProvider', function($logProvider){

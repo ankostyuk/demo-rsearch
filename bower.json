@@ -16,6 +16,8 @@
         "ngInfiniteScroll": "1.2.*",
         "purl": "2.3.*",
         "moment": "2.8.*",
+        "moment-timezone": "0.3.*",
+        "angular-moment": "0.9.*",
         "node-uuid": "1.4.1",
         "nullpointer-i18n": "git://github.com/newpointer/i18n-js.git",
         "nullpointer-commons": "git://github.com/newpointer/commons-js.git",
@@ -56,6 +58,9 @@
         },
         "nullpointer-i18n": {
             "": "i18n.js"
+        },
+        "moment-timezone": {
+            "": "builds/moment-timezone-with-data.js"
         },
         "nullpointer-commons": {
             "lodash": "src/lodash",

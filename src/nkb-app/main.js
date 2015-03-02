@@ -43,7 +43,10 @@ root._RESOURCES_CONFIG = {
         'jquery.cookie':        'external_components/jquery.cookie/jquery.cookie',
 
         'purl':                 'external_components/purl/purl',
+
         'moment':               'external_components/moment/moment',
+        'moment-timezone':      'external_components/moment-timezone/moment-timezone-with-data',
+        'angular-moment':       'external_components/angular-moment/angular-moment',
 
         'uuid':                 'external_components/node-uuid/uuid',
 
