@@ -6,7 +6,7 @@
         </div>
         <div class="controls">
             <input class="span-x input-mini" type="password" placeholder='${_tr("Пароль")}' name="password" ng-model="formData.password" ng-disabled="loginInfo.pending" ng-focus="reset()">
-            <button class="btn btn-mini" type="submit" ng-disabled="loginInfo.pending" ng-focus="reset()">${_tr("Войти")}</button>
+            <button class="btn flat btn-mini" type="submit" ng-disabled="loginInfo.pending" ng-focus="reset()">${_tr("Войти")}</button>
         </div>
 
         <div class="login-error-message small text-error" ng-show="loginInfo.hasError">
@@ -17,7 +17,7 @@
     <div class="user-info small" ng-show="user.isAuthenticated()">
         <div class="row">
             <p class="span2 text-ellipsis"><a class="underline" href="/stat/reports/" target="_blank">{{user.getName()}}</a></p>
-            <p class="align-right"><button class="btn btn-mini" type="button" ng-click="logout()" ng-disabled="loginInfo.pending">${_tr("Выйти")}</button></p>
+            <p class="align-right"><button class="btn flat btn-mini" type="button" ng-click="logout()" ng-disabled="loginInfo.pending">${_tr("Выйти")}</button></p>
         </div>
         <div class="row credit-info">
             <p class="span2 text-ellipsis">${_trc("Баланс", "баланс пользователя")}: {{user.getBalance() | number}} ${_trc("ие", "валюта")}</p>
