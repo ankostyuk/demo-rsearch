@@ -29,18 +29,6 @@ define(function(require) {'use strict';
 
     var app = angular.module('app', _.pluck(angularModules, 'name'))
         //
-        .constant('nkbUserConfig', {
-            resource: {
-                'users.url':    '/siteapp/api/users',
-                'login.url':    '/siteapp/login',
-                'logout.url':   '/siteapp/logout'
-            }
-        })
-        .constant('nkbCommentConfig', {
-            resource: {
-                'api.url': '/nkbcomment/api'
-            }
-        })
         .constant('appConfig', {
             name: 'rsearch',
             uuid: uuid.v4(),
@@ -110,6 +98,20 @@ define(function(require) {'use strict';
                     'info.url': '/dnb/profile/',
                     'purchase.url': '/search/offlined/'
                 }
+            }
+        })
+        //
+        .constant('nkbUserConfig', {
+            resource: {
+                'users.url':    '/siteapp/api/users',
+                'login.url':    '/siteapp/login',
+                'logout.url':   '/siteapp/logout'
+            }
+        })
+        //
+        .constant('nkbCommentConfig', {
+            resource: {
+                'api.url': '/nkbcomment/api'
             }
         })
         //
