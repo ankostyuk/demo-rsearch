@@ -23,10 +23,15 @@ define(function(require) {'use strict';
             return {
                 restrict: 'A',
                 template: template,
-                scope: {},
+                scope: {
+                    npRsearchInputUrlWatch: '=',
+                    npRsearchInputFocusable: '='
+                },
                 link: function(scope, element, attrs) {
 
-                    var inputElement = element.find('input');
+                    var urlWatch        = _.isString(scope.npRsearchInputUrlWatch) || _.isBoolean(scope.npRsearchInputUrlWatch) ? scope.npRsearchInputUrlWatch : 'q',
+                        focusable       = _.isBoolean(scope.npRsearchInputFocusable) ? scope.npRsearchInputFocusable : true,
+                        inputElement    = element.find('input');
 
                     inputElement.bind('keydown', function(e){
                         // Отключить дефолтное поведение
@@ -71,12 +76,13 @@ define(function(require) {'use strict';
 
                     //
                     $timeout(function(){
-                        var locationSearch = purl().param();
+                        var locationSearch  = purl().param(),
+                            q               = locationSearch[urlWatch];
 
-                        if (locationSearch.q) {
+                        if (q) {
                             // Поиск из URL
-                            scope.text = locationSearch.q;
-                        } else {
+                            scope.text = q;
+                        } else if (focusable) {
                             // Фокус на поиске
                             inputElement.focus();
                         }
