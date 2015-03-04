@@ -161,7 +161,10 @@ define(function(require) {'use strict';
                         hideRelationsFilters();
                         clearMessages();
 
-                        if (!isSearch()) {
+                        if (isSearch()) {
+                            $rootScope.$emit('np-rsearch-navigation-do-search', query);
+                        } else {
+                            $rootScope.$emit('np-rsearch-navigation-clear-search');
                             reset();
                             return;
                         }
