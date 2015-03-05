@@ -7,7 +7,8 @@ define(function(require) {'use strict';
                             require('lodash');
 
     var angular           = require('angular'),
-        uuid              = require('uuid');
+        uuid              = require('uuid'),
+        l10n              = require('l10n');
 
                             require('nkb.icons');
                             require('css!../external_components/bootstrap/css/bootstrap');
@@ -19,7 +20,7 @@ define(function(require) {'use strict';
     var angularModules = {
         'angular-moment':   require('angular-moment'),
 
-        l10n:               require('l10n'),
+        'np.l10n':          require('l10n/np.l10n'),
         login:              require('app.login'),
         lang:               require('app.lang'),
         log:                require('app.log'),
@@ -177,13 +178,12 @@ define(function(require) {'use strict';
     //
 
     return {
-        // TODO promises: l10n, ...?
         init: function(parent) {
-            _.delay(function(){
-                $(function() {
+            $(function() {
+                l10n.initPromise.done(function(){
                     angular.bootstrap(parent, [app.name]);
                 });
-            }, 0);
+            });
         }
     };
 });

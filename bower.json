@@ -21,7 +21,7 @@
         "node-uuid": "1.4.1",
         "nullpointer-i18n": "git://github.com/newpointer/i18n-js.git",
         "nullpointer-commons": "git://github.com/newpointer/commons-js.git",
-        "nullpointer-autokad": "git://github.com/newpointer/autokad.git#1.1.0",
+        "nullpointer-autokad": "git://github.com/newpointer/autokad.git#master",
         "backbone": "0.9.2",
         "jquery-file-upload": "9.7.1",
         "iso8601": "git://github.com/csnover/js-iso8601.git",

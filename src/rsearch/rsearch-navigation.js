@@ -1272,9 +1272,6 @@ define(function(require) {'use strict';
 
                 var byNodeType = {
                     'COMPANY': {
-                        getCaseCountQuery: function() {
-                            return node['nameshortsort'];
-                        },
                         getCaseSearch: function() {
                             return {
                                 sources: [
@@ -1286,9 +1283,6 @@ define(function(require) {'use strict';
                         }
                     },
                     'INDIVIDUAL': {
-                        getCaseCountQuery: function() {
-                            return node['name'];
-                        },
                         getCaseSearch: function() {
                             return {
                                 sources: [
@@ -1314,29 +1308,28 @@ define(function(require) {'use strict';
                 }
 
                 function doGetCaseCount() {
-                    var query = byNodeType[node._type].getCaseCountQuery();
+                    var caseSearch = byNodeType[node._type].getCaseSearch();
 
                     caseCountPending = true;
 
                     abortCaseCountRequest();
 
                     caseCountRequest = npAutokadHelper.getCaseCount(
-                        query,
-                        function(result){
+                        caseSearch,
+                        function(result, source){
                             node.__autokad.caseCount = result;
+                            node.__autokad.searchSource = source;
                             node.__autokad.error = null;
                         },
                         function(){
                             $log.warn('getCaseCount... error');
                             node.__autokad.caseCount = 0;
+                            node.__autokad.searchSource = null;
                             node.__autokad.error = true;
-                        });
-
-                    if (caseCountRequest) {
-                        caseCountRequest.completePromise.then(function(){
+                        },
+                        function(){
                             caseCountPending = false;
                         });
-                    }
                 }
 
                 function isNodeValid(n) {
@@ -1380,7 +1373,8 @@ define(function(require) {'use strict';
                     showCases: function() {
                         $timeout(function(){
                             $rootScope.$emit('np-autokad-do-search', {
-                                search: byNodeType[node._type].getCaseSearch()
+                                search: byNodeType[node._type].getCaseSearch(),
+                                searchSource: node.__autokad.searchSource
                             });
                         });
                     },
