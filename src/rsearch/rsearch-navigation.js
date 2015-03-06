@@ -1202,10 +1202,8 @@ define(function(require) {'use strict';
                         var lastBreadcrumb = getLastBreadcrumb();
 
                         if (lastBreadcrumb && lastBreadcrumb.type === 'NODE_FORM') {
-                            loading(function(done){
-                                // Перезапросить список выписок ЕГРЮЛ
-                                nodeFormEgrulList(lastBreadcrumb.data.node).then(done, done);
-                            });
+                            // Перезапросить список выписок ЕГРЮЛ
+                            nodeFormEgrulList(lastBreadcrumb.data.node);
                         }
                     });
 
