@@ -124,7 +124,7 @@ define(function(require) {'use strict';
             $logProvider.debugEnabled(false);
         }])
         //
-        .run(['$log', '$rootScope', function($log, $rootScope){
+        .run(['$log', '$rootScope', 'npL10n', function($log, $rootScope, npL10n){
             //
             _.extend($rootScope, {
                 app: {
