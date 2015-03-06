@@ -1341,15 +1341,12 @@ define(function(require) {'use strict';
                         return;
                     }
 
-                    // кеширование ноды
-                    if (!node || node.__uid !== n.__uid) {
-                        node = n;
-                        node.__autokad = {
-                            caseCount: 0,
-                            error: null
-                        };
-                        doGetCaseCount();
-                    }
+                    node = n;
+                    node.__autokad = {
+                        caseCount: 0,
+                        error: null
+                    };
+                    doGetCaseCount();
                 }
 
                 function isNodeWithAutokad() {
