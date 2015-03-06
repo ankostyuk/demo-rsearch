@@ -4,13 +4,7 @@
  * @author ankostyuk
  */
 define(function(require) {'use strict';
-
-    var template        = require('text!./views/rsearch.html');
-
-                          require('jquery');
-                          require('lodash');
-    var i18n            = require('i18n'),
-        angular         = require('angular');
+    var angular           = require('angular');
 
     var submodules = {
         rsearchInput:       require('./rsearch-input'),
@@ -21,20 +15,5 @@ define(function(require) {'use strict';
         rsearchMeta:        require('./rsearch-meta')
     };
 
-    return angular.module('np.rsearch', _.pluck(submodules, 'name'))
-        //
-        .run([function(){
-            template = i18n.translateTemplate(template);
-        }])
-        //
-        .directive('npRsearch', ['$log', function($log){
-            return {
-                restrict: 'A',
-                template: template,
-                scope: {},
-                link: function(scope, element, attrs) {
-                }
-            };
-        }]);
-    //
+    return angular.module('np.rsearch', _.pluck(submodules, 'name'));
 });

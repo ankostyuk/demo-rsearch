@@ -161,7 +161,10 @@ define(function(require) {'use strict';
                         hideRelationsFilters();
                         clearMessages();
 
-                        if (!isSearch()) {
+                        if (isSearch()) {
+                            $rootScope.$emit('np-rsearch-navigation-do-search', query);
+                        } else {
+                            $rootScope.$emit('np-rsearch-navigation-clear-search');
                             reset();
                             return;
                         }
@@ -1199,10 +1202,8 @@ define(function(require) {'use strict';
                         var lastBreadcrumb = getLastBreadcrumb();
 
                         if (lastBreadcrumb && lastBreadcrumb.type === 'NODE_FORM') {
-                            loading(function(done){
-                                // Перезапросить список выписок ЕГРЮЛ
-                                nodeFormEgrulList(lastBreadcrumb.data.node).then(done, done);
-                            });
+                            // Перезапросить список выписок ЕГРЮЛ
+                            nodeFormEgrulList(lastBreadcrumb.data.node);
                         }
                     });
 
@@ -1269,9 +1270,6 @@ define(function(require) {'use strict';
 
                 var byNodeType = {
                     'COMPANY': {
-                        getCaseCountQuery: function() {
-                            return node['nameshortsort'];
-                        },
                         getCaseSearch: function() {
                             return {
                                 sources: [
@@ -1283,9 +1281,6 @@ define(function(require) {'use strict';
                         }
                     },
                     'INDIVIDUAL': {
-                        getCaseCountQuery: function() {
-                            return node['name'];
-                        },
                         getCaseSearch: function() {
                             return {
                                 sources: [
@@ -1311,29 +1306,28 @@ define(function(require) {'use strict';
                 }
 
                 function doGetCaseCount() {
-                    var query = byNodeType[node._type].getCaseCountQuery();
+                    var caseSearch = byNodeType[node._type].getCaseSearch();
 
                     caseCountPending = true;
 
                     abortCaseCountRequest();
 
                     caseCountRequest = npAutokadHelper.getCaseCount(
-                        query,
-                        function(result){
+                        caseSearch,
+                        function(result, source){
                             node.__autokad.caseCount = result;
+                            node.__autokad.searchSource = source;
                             node.__autokad.error = null;
                         },
                         function(){
                             $log.warn('getCaseCount... error');
                             node.__autokad.caseCount = 0;
+                            node.__autokad.searchSource = null;
                             node.__autokad.error = true;
-                        });
-
-                    if (caseCountRequest) {
-                        caseCountRequest.completePromise.then(function(){
+                        },
+                        function(){
                             caseCountPending = false;
                         });
-                    }
                 }
 
                 function isNodeValid(n) {
@@ -1347,15 +1341,12 @@ define(function(require) {'use strict';
                         return;
                     }
 
-                    // кеширование ноды
-                    if (!node || node.__uid !== n.__uid) {
-                        node = n;
-                        node.__autokad = {
-                            caseCount: 0,
-                            error: null
-                        };
-                        doGetCaseCount();
-                    }
+                    node = n;
+                    node.__autokad = {
+                        caseCount: 0,
+                        error: null
+                    };
+                    doGetCaseCount();
                 }
 
                 function isNodeWithAutokad() {
@@ -1377,7 +1368,8 @@ define(function(require) {'use strict';
                     showCases: function() {
                         $timeout(function(){
                             $rootScope.$emit('np-autokad-do-search', {
-                                search: byNodeType[node._type].getCaseSearch()
+                                search: byNodeType[node._type].getCaseSearch(),
+                                searchSource: node.__autokad.searchSource
                             });
                         });
                     },
