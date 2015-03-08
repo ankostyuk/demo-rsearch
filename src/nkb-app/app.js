@@ -8,7 +8,7 @@ define(function(require) {'use strict';
 
     var angular           = require('angular'),
         uuid              = require('uuid'),
-        l10n              = require('l10n');
+        l10n              = require('np.l10n');
 
                             require('nkb.icons');
                             require('css!../external_components/bootstrap/css/bootstrap');
@@ -20,7 +20,7 @@ define(function(require) {'use strict';
     var angularModules = {
         'angular-moment':   require('angular-moment'),
 
-        'np.l10n':          require('l10n/np.l10n'),
+        'np.l10n':          require('np.l10n/np.l10n'),
         login:              require('app.login'),
         lang:               require('app.lang'),
         log:                require('app.log'),

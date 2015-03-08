@@ -90,12 +90,12 @@ root._RESOURCES_CONFIG = {
      *
      */
     {
+        name: 'lodash',
+        location: 'external_components/nullpointer-commons/lodash'
+    }, {
         name: 'nkb.comment',
         location: 'src/comment',
         main: 'comment'
-    }, {
-        name: 'lodash',
-        location: 'external_components/nullpointer-commons/lodash'
     }, {
         name: 'nkb.user',
         location: 'external_components/nullpointer-commons/nkb/user',
@@ -109,19 +109,19 @@ root._RESOURCES_CONFIG = {
         location: 'external_components/nullpointer-commons/nkb/filters',
         main: 'filters'
     }, {
-        name: 'directives',
+        name: 'np.directives',
         location: 'external_components/nullpointer-commons/angular/directives',
         main: 'directives'
     }, {
-        name: 'filters',
+        name: 'np.filters',
         location: 'external_components/nullpointer-commons/angular/filters',
         main: 'filters'
     }, {
-        name: 'l10n',
+        name: 'np.l10n',
         location: 'external_components/nullpointer-commons/angular/l10n',
         main: 'l10n'
     }, {
-        name: 'resource',
+        name: 'np.resource',
         location: 'external_components/nullpointer-commons/angular/resource',
         main: 'resource'
     }, {
@@ -168,7 +168,7 @@ root._RESOURCES_CONFIG = {
     },
 
     config: {
-        'l10n/l10n': {
+        'np.l10n/l10n': {
             lang: root._APP_CONFIG.lang,
             'i18n-component': {
                 // Должны отличаться от общих настроек шаблонизатора,

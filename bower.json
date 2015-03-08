@@ -4,10 +4,10 @@
     "description": "rsearch frontend",
 
     "dependencies": {
-        "requirejs": "2.1.15",
-        "requirejs-text": "2.0.12",
-        "require-css": "0.1.2",
-        "require-less": "0.1.2",
+        "requirejs": "2.1.16",
+        "requirejs-text": "2.0.*",
+        "require-css": "0.1.*",
+        "require-less": "0.1.*",
         "jquery": "2.1.*",
         "jquery.cookie": "1.4.1",
         "jquery.fileDownload": "1.4.2",
@@ -98,6 +98,7 @@
     "private": true,
 
     "resolutions": {
+        "requirejs": "2.1.16",
         "jquery": "2.1.*"
     }
 }

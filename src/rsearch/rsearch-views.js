@@ -13,10 +13,10 @@ define(function(require) {'use strict';
                           require('ng-infinite-scroll');
 
     var extmodules = {
-        'directives':   require('directives'),
-        'filters':      require('filters'),
-        'autokad':      require('autokad'),
-        'nkb.user':     require('nkb.user')
+        'np.directives':  require('np.directives'),
+        'np.filters':     require('np.filters'),
+        'nkb.user':       require('nkb.user'),
+        'autokad':        require('autokad')
     };
 
     //
