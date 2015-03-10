@@ -825,6 +825,7 @@ define(function(require) {'use strict';
                             };
                         },
                         autokadClick: function() {
+                            clearLastBreadcrumb();
                             doAutokad(nodeRelationsFilter.node);
                         }
                     };
