@@ -114,15 +114,14 @@
     margin: 0;
 }
 [np-rsearch-navigation] .breadcrumb {
-    margin: 3px 0 5px 0;
+    margin: 1px 0 23px 0;
     padding: 0;
     background-color: transparent;
 }
 [np-rsearch-navigation] .breadcrumb > li {
     display: inline-block;
     padding-right: 5px;
-    height: 35px;
-    line-height: 15px;
+    line-height: 18px;
     vertical-align: top;
 }
 [np-rsearch-navigation] .breadcrumb > li.search-result {
@@ -140,18 +139,20 @@
 [np-rsearch-navigation] .breadcrumb [np-rsearch-navigation-breadcrumb],
 [np-rsearch-navigation] .breadcrumb [np-rsearch-navigation-breadcrumb] > span {
     display: inline-block;
-    vertical-align: top;
+    vertical-align: 0px;
 }
 [np-rsearch-navigation] .breadcrumb [np-rsearch-navigation-breadcrumb] a,
 [np-rsearch-navigation] .breadcrumb [np-rsearch-navigation-breadcrumb] a > span {
     display: block;
+}
+[np-rsearch-navigation] .breadcrumb [np-rsearch-navigation-breadcrumb] [np-rsearch-node-simple] > span {
+    white-space: pre;
 }
 [np-rsearch-navigation] .breadcrumb .target-relations-info {
     display: block;
     font-size: 80%;
 }
 [np-rsearch-navigation] .breadcrumb .node-form .target-relations-info {
-    padding-top: 1px;
     font-weight: normal;
     color: @defaultHeaderLightColor;
 }
