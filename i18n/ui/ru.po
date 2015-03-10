@@ -19,7 +19,6 @@ msgid "API информационной системы"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-autokad-info.html:1
-#: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
 msgid "NG_PLURALIZE::AUTOKAD_CASE_COUNT"
 msgstr "{'0': 'Нет арбитражных дел', 'one': '{} арбитражное дело', 'few': '{} арбитражных дела', 'many': '{} арбитражных дел', 'other': '{} арбитражного дела'}"
 
@@ -231,6 +230,10 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Аналитический профиль"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
+msgid "Арбитражные дела"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1

@@ -19,7 +19,6 @@ msgid "API информационной системы"
 msgstr "API"
 
 #: ../src/rsearch/views/rsearch-autokad-info.html:1
-#: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
 msgid "NG_PLURALIZE::AUTOKAD_CASE_COUNT"
 msgstr "{'0': 'No arbitration cases', 'one': '1 arbitration case', 'other': '{} arbitration cases'}"
 
@@ -234,6 +233,10 @@ msgstr "Affiliated Network Analysis"
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Аналитический профиль"
 msgstr "Analytical Report"
+
+#: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
+msgid "Арбитражные дела"
+msgstr "Arbitration cases"
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Аффилированные лица"

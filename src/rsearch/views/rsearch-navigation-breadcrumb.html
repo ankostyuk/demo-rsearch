@@ -3,9 +3,7 @@
 
     <a ng-if="breadcrumb.type === 'NODE_FORM' && breadcrumb.data.formType === 'MINIREPORT'" class="action node-form" np-rsearch-node-simple="breadcrumb.data.node" np-rsearch-node-target-info="breadcrumb.data.targetInfo"></a>
 
-    <a ng-if="breadcrumb.type === 'NODE_FORM' && breadcrumb.data.formType === 'AUTOKAD'" class="action node-form">
-        <np-pluralize count="breadcrumb.data.node.__autokad.caseCount" when="::${_tr("NG_PLURALIZE::AUTOKAD_CASE_COUNT")}"></np-pluralize>
-    </a>
+    <a ng-if="breadcrumb.type === 'NODE_FORM' && breadcrumb.data.formType === 'AUTOKAD'" class="action node-form">${_tr("Арбитражные дела")}</a>
 
     <a ng-if="breadcrumb.type === 'NODE_RELATIONS'" class="action" np-rsearch-node-relations-header="breadcrumb.data"></a>
 </span>

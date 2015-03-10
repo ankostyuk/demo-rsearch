@@ -1217,9 +1217,9 @@ define(function(require) {'use strict';
                     });
 
                     function showAutokad(formType, node) {
-                        autokad.setNode(node);
-
-                        if (formType === 'AUTOKAD') {
+                        if (formType === 'MINIREPORT') {
+                            autokad.setNode(node);
+                        } else if (formType === 'AUTOKAD') {
                             autokad.showCases();
                         }
                     }
