@@ -20,7 +20,7 @@ define(function(require) {'use strict';
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npL10n', 'NpRsearchAutokad', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npL10n, NpRsearchAutokad){
+        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npL10n', 'NpRsearchAutokad', 'npRsearchAutokadConfig', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npL10n, NpRsearchAutokad, npRsearchAutokadConfig){
             return {
                 restrict: 'A',
                 template: template,
@@ -1262,7 +1262,7 @@ define(function(require) {'use strict';
                 }
             };
         }])
-        .factory('NpRsearchAutokad', ['$log', '$rootScope', '$timeout', 'npAutokadHelper', function($log, $rootScope, $timeout, npAutokadHelper){
+        .factory('NpRsearchAutokad', ['$log', '$rootScope', '$timeout', 'npAutokadHelper', 'npRsearchAutokadConfig', function($log, $rootScope, $timeout, npAutokadHelper, npRsearchAutokadConfig){
 
             // Class
             return function() {
@@ -1347,7 +1347,10 @@ define(function(require) {'use strict';
                         caseCount: 0,
                         error: null
                     };
-                    doGetCaseCount();
+
+                    if (npRsearchAutokadConfig.gettingCaseCount) {
+                        doGetCaseCount();
+                    }
                 }
 
                 function isNodeWithAutokad() {
@@ -1357,6 +1360,9 @@ define(function(require) {'use strict';
                 // API
                 return {
                     setNode: setNode,
+                    gettingCaseCount: function() {
+                        return npRsearchAutokadConfig.gettingCaseCount;
+                    },
                     isCaseCountPending: function() {
                         return caseCountPending;
                     },
