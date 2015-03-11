@@ -116,6 +116,10 @@ define(function(require) {'use strict';
             }
         })
         //
+        .constant('npRsearchAutokadConfig', {
+            gettingCaseCount: false
+        })
+        //
         .constant('angularMomentConfig', {
             timezone: 'Europe/Moscow'
         })
