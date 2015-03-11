@@ -64,8 +64,21 @@ define(function(require) {'use strict';
                 link: function(scope, element, attrs){
                     _.extend(scope, {
                         user: nkbUser.user(),
-                        toggleSelect: function() {
-                            $rootScope.$emit('np-rsearch-node-select', scope.node, element);
+                        nodeClick: function(event) {
+                            $rootScope.$emit('np-rsearch-node-click', {
+                                node: scope.node,
+                                element: element,
+                                event: event,
+                                ui: 'npRsearchNodePlain'
+                            });
+                        },
+                        nodeHeaderClick: function() {
+                            $rootScope.$emit('np-rsearch-node-header-click', {
+                                node: scope.node,
+                                element: element,
+                                event: event,
+                                ui: 'npRsearchNodePlain'
+                            });
                         }
                     }, i18n.translateFuncs);
                 }

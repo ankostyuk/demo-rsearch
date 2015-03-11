@@ -20,12 +20,40 @@ define(function(require) {'use strict';
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npL10n', 'NpRsearchAutokad', 'npRsearchAutokadConfig', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npL10n, NpRsearchAutokad, npRsearchAutokadConfig){
+        .factory('npRsearchNavigationHelper', ['$log', function($log){
+            //
+            var navigationProxy = {
+                //
+                nodeHeaderClick: function(info) {
+                    return false;
+                },
+                //
+                nodeClick: function(info) {
+                    return true;
+                }
+            };
+
+            // API
+            return {
+                getNavigationProxy: function() {
+                    return navigationProxy;
+                },
+
+                setNavigationProxy: function(proxy) {
+                    navigationProxy = proxy;
+                }
+            };
+        }])
+        //
+        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npL10n', 'NpRsearchAutokad', 'npRsearchAutokadConfig', 'npRsearchNavigationHelper', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npL10n, NpRsearchAutokad, npRsearchAutokadConfig, npRsearchNavigationHelper){
             return {
                 restrict: 'A',
                 template: template,
                 scope: {},
                 link: function(scope, element, attrs) {
+                    //
+                    var navigationProxy = npRsearchNavigationHelper.getNavigationProxy();
+
                     //
                     var windowElement   = angular.element($window),
                         viewsElement    = element.find('.views'),
@@ -329,8 +357,16 @@ define(function(require) {'use strict';
                         egrulRequest: null
                     };
 
-                    $rootScope.$on('np-rsearch-node-select', function(e, node){
-                        showNodeForm('MINIREPORT', node);
+                    $rootScope.$on('np-rsearch-node-header-click', function(e, info){
+                        if (navigationProxy.nodeHeaderClick(info) !== false) {
+                            showNodeForm('MINIREPORT', info.node);
+                        }
+                    });
+
+                    $rootScope.$on('np-rsearch-node-click', function(e, info){
+                        if (navigationProxy.nodeClick(info) !== false) {
+                            showNodeForm('MINIREPORT', info.node);
+                        }
                     });
 
                     function nodeFormEgrulList(node) {

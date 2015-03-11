@@ -1,7 +1,7 @@
 <div class="body" ng-class="{'liquidate': node._liquidate, 'liquidate-intermediate': node._liquidate.state.intermediate}">
     <div ng-if="node._type === 'COMPANY'">
         <div class="row">
-            <div class="span6 node-header" data-node-id="{{node._id}}">{{node.nameshortsort || node.namesort}}</div>
+            <div class="span6 node-header" data-node-id="{{node._id}}" ng-click="nodeHeaderClick($event)">{{node.nameshortsort || node.namesort}}</div>
             <div class="align-right" ng-show="node.founded_dt">${_tr("основано")} {{node.founded_dt | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
         </div>
         <div class="row node-entry reg-state" ng-show="node._reg.state">
