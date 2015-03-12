@@ -1,5 +1,5 @@
-<span ng-if="node._type === 'COMPANY'">{{node.nameshortsort || node.namesort}}<span class="target-relations-info">{{targetInfo | targetRelationsInfo:node}}</span></span>
-<span ng-if="node._type === 'INDIVIDUAL'">{{node.name}}<span class="target-relations-info">{{targetInfo | targetRelationsInfo:node}}</span></span>
-<span ng-if="node._type === 'ADDRESS'">{{node.value}}</span>
-<span ng-if="node._type === 'PHONE'">{{node.value}}</span>
-<span ng-if="node._type === 'PURCHASE'">{{node.form}}<span class="target-relations-info">{{targetInfo | targetRelationsInfo:node}}</span></span>
+<span ng-if="node._type === 'COMPANY'">{{(node.nameshortsort || node.namesort) | multiline:'line':60}}<span class="target-relations-info">{{targetInfo | targetRelationsInfo:node}}</span></span>
+<span ng-if="node._type === 'INDIVIDUAL'">{{node.name | multiline:'line':60}}<span class="target-relations-info">{{targetInfo | targetRelationsInfo:node}}</span></span>
+<span ng-if="node._type === 'ADDRESS'">{{node.value | multiline:'line':60}}</span>
+<span ng-if="node._type === 'PHONE'">{{node.value | multiline:'line':60}}</span>
+<span ng-if="node._type === 'PURCHASE'">{{node.form | multiline:'line':60}}<span class="target-relations-info">{{targetInfo | targetRelationsInfo:node}}</span></span>

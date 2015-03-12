@@ -20,7 +20,7 @@
                     <div ng-if="node._type === 'COMPANY'">
                         <div class="row actions-row">
                             <div class="span5">
-                                <div class="product-panel shadow-lift-lb-corner strong">
+                                <div class="product-panel shadow-lift-lb-corner shadow-strong">
                                     <h5 class="product-panel-label"><i class="icon big i-document-ok"></i> ${_tr("Бизнес-справки онлайн")}</h5>
                                     <ul class="unstyled product-list">
                                         <li><a class="action" ng-click="productClick('ext_history_profile')">${_tr("Исторический профиль")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('ext_history_profile')"></span></li>
@@ -33,7 +33,7 @@
                                 </div>
                             </div>
                             <div class="span4">
-                                <div class="product-panel shadow-lift-lb-corner strong">
+                                <div class="product-panel shadow-lift-lb-corner shadow-strong">
                                     <h5 class="product-panel-label"><i class="icon big i-document-plus"></i> ${_tr("Отчеты на заказ")}</h5>
                                     <ul class="unstyled product-list">
                                         <li><a class="action" ng-click="productClick('extended_research')">${_tr("Расширенное исследование")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('extended_research')"></span></li>
@@ -47,10 +47,10 @@
                                 <p><a class="action with-icon" ng-click="productClick('egrulCompanyReport')"><i class="icon large i-document-stamp"></i> <span class="text">${_tr("Заказать выписку ЕГРЮЛ")}</span></a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('egrulCompanyReport')"></span></p>
                                 <ul class="unstyled actions-list">
                                     <li ng-if="node.__egrulList[0]" ng-init="egrul = node.__egrulList[0]; egrulCount = node.__egrulList.length; moreCount = 1">
-                                        <a class="action" ng-href="{{egrul._link}}" download="{{egrul._downloadName}}" target="_self">${_tr("Выписка")} ${_trc("от", "от такой-то даты")} {{egrul.fileDate | date:'dd.MM.yyyy'}}</a>
+                                        <a class="action" ng-href="{{egrul._link}}" download="{{egrul._downloadName}}" target="_self">${_tr("Выписка")} ${_trc("от", "от такой-то даты")} {{egrul.fileDate | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</a>
                                         <span class="more" ng-show="egrulCount > moreCount"><a ng-click="more = !more"><np-pluralize count="egrulCount - moreCount" when="::${_tr("NG_PLURALIZE::EGRUL_LIST_MORE")}"></np-pluralize></a></span>
                                         <ul class="unstyled" ng-show="egrulCount > moreCount && more">
-                                            <li ng-repeat="egrul in node.__egrulList" ng-hide="$index < moreCount"><a class="action" ng-href="{{egrul._link}}" download="{{egrul._downloadName}}" target="_self">${_tr("Выписка")} ${_trc("от", "от такой-то даты")} {{egrul.fileDate | date:'dd.MM.yyyy'}}</a></li>
+                                            <li ng-repeat="egrul in node.__egrulList" ng-hide="$index < moreCount"><a class="action" ng-href="{{egrul._link}}" download="{{egrul._downloadName}}" target="_self">${_tr("Выписка")} ${_trc("от", "от такой-то даты")} {{egrul.fileDate | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -91,7 +91,7 @@
                                 <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('ForeignCompanyReport')"></span>
                             </div>
                             <div class="span4">
-                                <div class="product-panel shadow-lift-lb-corner strong">
+                                <div class="product-panel shadow-lift-lb-corner shadow-strong">
                                     <h5 class="product-panel-label"><i class="icon big i-document-plus"></i> ${_tr("Отчеты на заказ")}</h5>
                                     <ul class="unstyled product-list">
                                         <li><a class="action" ng-click="productClick('extended_research')">${_tr("Расширенное исследование")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('extended_research')"></span></li>
@@ -117,7 +117,7 @@
         </div>
     </div>
 
-    <div class="span12" ng-if="formType === 'AUTOKAD'">
+    <div class="span12" ng-show="formType === 'AUTOKAD'">
         <div np-autokad></div>
     </div>
 

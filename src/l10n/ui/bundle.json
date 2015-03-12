@@ -175,6 +175,10 @@
       null,
       ""
     ],
+    "Арбитражные дела": [
+      null,
+      ""
+    ],
     "Аффилированные лица": [
       null,
       ""
@@ -467,6 +471,10 @@
       null,
       ""
     ],
+    "Формат даты: http://momentjs.com/docs/#/displaying/format/\u0004mediumDate": [
+      null,
+      "DD.MM.YYYY"
+    ],
     "Продукты НКБ на главной странице\u0004Анализ\nаффилированных лиц": [
       null,
       ""
@@ -739,6 +747,10 @@
     "Аналитический профиль": [
       null,
       "Analytical Report"
+    ],
+    "Арбитражные дела": [
+      null,
+      "Arbitration cases"
     ],
     "Аффилированные лица": [
       null,
@@ -1031,6 +1043,10 @@
     "член комиссии": [
       null,
       "commission member"
+    ],
+    "Формат даты: http://momentjs.com/docs/#/displaying/format/\u0004mediumDate": [
+      null,
+      "MMM D, YYYY"
     ],
     "Продукты НКБ на главной странице\u0004Анализ\nаффилированных лиц": [
       null,

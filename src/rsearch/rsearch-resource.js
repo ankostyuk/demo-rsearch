@@ -8,7 +8,7 @@ define(function(require) {'use strict';
                   require('lodash');
     var angular = require('angular');
 
-                  require('resource');
+                  require('np.resource');
                   require('./rsearch-meta');
 
     return angular.module('np.rsearch-resource', ['np.resource'])

@@ -1,9 +1,12 @@
-<span class="action-info" ng-show="!autokad.isCaseCountPending() && autokad.hasError()">
-    ${_trc("Поиск в", "Поиск в картотеке арбитражных дел временно недоступен")}
-    <a class="underline" href="http://kad.arbitr.ru/" target="_blank">${_trc("картотеке арбитражных дел", "Поиск в картотеке арбитражных дел временно недоступен")}</a></br>
-    ${_trc("временно недоступен", "Поиск в картотеке арбитражных дел временно недоступен")}
+<span ng-if="autokad.gettingCaseCount()">
+    <span class="action-info" ng-show="!autokad.isCaseCountPending() && autokad.hasError()">
+        ${_trc("Поиск в", "Поиск в картотеке арбитражных дел временно недоступен")}
+        <a class="underline" href="http://kad.arbitr.ru/" target="_blank">${_trc("картотеке арбитражных дел", "Поиск в картотеке арбитражных дел временно недоступен")}</a></br>
+        ${_trc("временно недоступен", "Поиск в картотеке арбитражных дел временно недоступен")}
+    </span>
+    <a class="action" ng-click="autokadClick()">
+        <np-pluralize count="autokad.getCaseCount()" when="::${_tr("NG_PLURALIZE::AUTOKAD_CASE_COUNT")}" ng-hide="autokad.isCaseCountPending() || autokad.hasError()"></np-pluralize>
+        <span class="animate-pulsed-flash" ng-show="autokad.isCaseCountPending()">${_tr("Поиск арбитражных дел...")}</span>
+    </a>
 </span>
-<a class="action" ng-click="autokadClick()">
-    <np-pluralize count="autokad.getCaseCount()" when="::${_tr("NG_PLURALIZE::AUTOKAD_CASE_COUNT")}" ng-hide="autokad.isCaseCountPending() || autokad.hasError()"></np-pluralize>
-    <span class="animate-pulsed-flash" ng-show="autokad.isCaseCountPending()">${_tr("Поиск арбитражных дел...")}</span>
-</a>
+<a class="action" ng-click="autokadClick()" ng-if="!autokad.gettingCaseCount()">${_tr("Найти арбитражные дела")}</a>
