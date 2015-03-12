@@ -64,19 +64,19 @@ define(function(require) {'use strict';
                 link: function(scope, element, attrs){
                     _.extend(scope, {
                         user: nkbUser.user(),
-                        nodeClick: function(event) {
+                        nodeClick: function(e) {
                             $rootScope.$emit('np-rsearch-node-click', {
                                 node: scope.node,
                                 element: element,
-                                event: event,
+                                event: e,
                                 ui: 'npRsearchNodePlain'
                             });
                         },
-                        nodeHeaderClick: function() {
+                        nodeHeaderClick: function(e) {
                             $rootScope.$emit('np-rsearch-node-header-click', {
                                 node: scope.node,
                                 element: element,
-                                event: event,
+                                event: e,
                                 ui: 'npRsearchNodePlain'
                             });
                         }
@@ -207,7 +207,7 @@ define(function(require) {'use strict';
             //
             return {
 
-                createNodeListView: function(parent, parentScope, options) {
+                createNodeListView: function(parent, parentScope, proxy) {
                     var view                = createView('np-rsearch-node-list', parent, parentScope),
                         scope               = view.scope,
                         internalDisabled    = false,
@@ -216,7 +216,7 @@ define(function(require) {'use strict';
                         scrollMargin        = 5; // TODO взять из CSS
 
                     _.extend(view, {
-                        reset: function(nodeList, noMore, pageHandler){
+                        reset: function(nodeList, noMore, pageHandler) {
                             scope.nodeList = nodeList;
                             scope.targetInfo = null;
 
@@ -226,14 +226,14 @@ define(function(require) {'use strict';
 
                             refresh();
                         },
-                        clear: function(){
+                        clear: function() {
                             scope.nodeList = null;
 
                             internalDisabled = false;
                             noNextPage = false;
                             nextPageHandler = null;
                         },
-                        scrollToNode: function(node){
+                        scrollToNode: function(node) {
                             $timeout(function(){
                                 var nodeElement = view.element.find('[node-id="' + node._id + '"]');
 
@@ -246,10 +246,10 @@ define(function(require) {'use strict';
                                 }, 200);
                             });
                         },
-                        showItemNumber: function(show){
+                        showItemNumber: function(show) {
                             scope.showItemNumber = show;
                         },
-                        setTargetInfo: function(targetInfo){
+                        setTargetInfo: function(targetInfo) {
                             scope.targetInfo = targetInfo;
                         }
                     });
@@ -257,8 +257,9 @@ define(function(require) {'use strict';
                     _.extend(scope, {
                         nodeList: null,
                         targetInfo: null,
+                        scrollContainer: proxy.getScrollContainer(),
                         pager: {
-                            nextPage: function(){
+                            nextPage: function() {
                                 if (!isDisabled() && nextPageHandler) {
                                     internalDisabled = true;
 
@@ -288,26 +289,26 @@ define(function(require) {'use strict';
                         scope   = view.scope;
 
                     _.extend(view, {
-                        setNode: function(node){
+                        setNode: function(node) {
                             scope.node = node;
                         },
-                        setFormType: function(formType){
+                        setFormType: function(formType) {
                             scope.formType = formType;
                         },
-                        setAutokad: function(autokad){
+                        setAutokad: function(autokad) {
                             scope.autokad = autokad;
                         }
                     });
 
                     _.extend(scope, {
                         user: nkbUser.user(),
-                        relationsClick: function(direction, relationType){
+                        relationsClick: function(direction, relationType) {
                             $rootScope.$emit('np-rsearch-node-form-relations-click', scope.node, direction, relationType);
                         },
-                        productClick: function(productName){
+                        productClick: function(productName) {
                             $rootScope.$emit('np-rsearch-node-form-product-click', productName, scope.node);
                         },
-                        autokadClick: function(){
+                        autokadClick: function() {
                             $rootScope.$emit('np-rsearch-node-form-autokad-click', scope.node);
                         }
                     }, i18n.translateFuncs);

@@ -24,6 +24,10 @@ define(function(require) {'use strict';
             //
             var navigationProxy = {
                 //
+                getScrollContainer: function() {
+                    return null;
+                },
+                //
                 nodeHeaderClick: function(info) {
                     return false;
                 },
@@ -57,7 +61,7 @@ define(function(require) {'use strict';
                     //
                     var windowElement   = angular.element($window),
                         viewsElement    = element.find('.views'),
-                        nodeListView    = npRsearchViews.createNodeListView(viewsElement, scope),
+                        nodeListView    = npRsearchViews.createNodeListView(viewsElement, scope, navigationProxy),
                         nodeFormView    = npRsearchViews.createNodeFormView(viewsElement, scope);
 
                     var autokad = new NpRsearchAutokad();
