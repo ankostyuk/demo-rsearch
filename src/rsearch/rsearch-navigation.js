@@ -28,6 +28,12 @@ define(function(require) {'use strict';
                     return null;
                 },
                 //
+                resetNodeList: function(nodeListView) {
+                },
+                //
+                showNodeList: function(nodeList, addNodeList, nodeListView) {
+                },
+                //
                 nodeHeaderClick: function(info) {
                     return false;
                 },
@@ -149,10 +155,12 @@ define(function(require) {'use strict';
 
                     function pushNodeList(object, callback) {
                         if (object.result) {
+                            var pushNodeList = [];
                             _.each(object.result.list, function(node){
+                                pushNodeList.push(node);
                                 object.nodeList.push(node);
                             });
-                            callback(noMore(object.result));
+                            callback(noMore(object.result), pushNodeList);
                         } else {
                             callback(true);
                         }

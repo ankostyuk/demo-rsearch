@@ -225,6 +225,9 @@ define(function(require) {'use strict';
                             nextPageHandler = pageHandler;
 
                             refresh();
+
+                            resetNodeListProxy();
+                            showNodeListProxy(scope.nodeList, scope.nodeList);
                         },
                         clear: function() {
                             scope.nodeList = null;
@@ -233,11 +236,15 @@ define(function(require) {'use strict';
                             noNextPage = false;
                             nextPageHandler = null;
                         },
+                        getNodeElement: function(node) {
+                            var nodeElement = view.element.find('[node-id="' + node._id + '"]').parent();
+                            return nodeElement.length === 1 ? nodeElement : null;
+                        },
                         scrollToNode: function(node) {
                             $timeout(function(){
-                                var nodeElement = view.element.find('[node-id="' + node._id + '"]');
+                                var nodeElement = view.getNodeElement(node);
 
-                                if (nodeElement.length !== 1) {
+                                if (!nodeElement) {
                                     return;
                                 }
 
@@ -263,9 +270,11 @@ define(function(require) {'use strict';
                                 if (!isDisabled() && nextPageHandler) {
                                     internalDisabled = true;
 
-                                    nextPageHandler(function(noMore){
+                                    nextPageHandler(function(noMore, pushNodeList){
                                         internalDisabled = false;
                                         noNextPage = noMore;
+
+                                        showNodeListProxy(scope.nodeList, pushNodeList);
                                     });
                                 }
                             },
@@ -279,6 +288,16 @@ define(function(require) {'use strict';
 
                     function refresh() {
                         //windowElement.trigger('scroll');
+                    }
+
+                    function resetNodeListProxy() {
+                            proxy.resetNodeList(view);
+                    }
+
+                    function showNodeListProxy(nodeList, addNodeList) {
+                        $timeout(function(){
+                            proxy.showNodeList(nodeList, addNodeList, view);
+                        });
                     }
 
                     return view;
