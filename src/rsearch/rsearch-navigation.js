@@ -34,6 +34,9 @@ define(function(require) {'use strict';
                 showNodeList: function(nodeList, addNodeList, nodeListView) {
                 },
                 //
+                showNodeForm: function(node, formType, nodeFormView) {
+                },
+                //
                 nodeHeaderClick: function(info) {
                     return false;
                 },
@@ -70,7 +73,7 @@ define(function(require) {'use strict';
                     var windowElement   = angular.element($window),
                         viewsElement    = element.find('.views'),
                         nodeListView    = npRsearchViews.createNodeListView(viewsElement, scope, navigationProxy),
-                        nodeFormView    = npRsearchViews.createNodeFormView(viewsElement, scope),
+                        nodeFormView    = npRsearchViews.createNodeFormView(viewsElement, scope, navigationProxy),
                         browserHistory  = _.isBoolean(scope.npRsearchNavigationBrowserHistory) ? scope.npRsearchNavigationBrowserHistory : true;
 
                     var autokad = new NpRsearchAutokad();
@@ -435,8 +438,8 @@ define(function(require) {'use strict';
                                 hideRelationsFilters();
                                 clearMessages();
 
-                                nodeFormView.setNode(node);
                                 nodeFormView.setFormType(formType);
+                                nodeFormView.setNode(node);
                                 nodeFormView.show();
 
                                 pushNodeFormBreadcrumb(formType, node, breadcrumb);

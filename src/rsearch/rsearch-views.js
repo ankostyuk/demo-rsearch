@@ -303,19 +303,24 @@ define(function(require) {'use strict';
                     return view;
                 },
 
-                createNodeFormView: function(parent, parentScope) {
+                createNodeFormView: function(parent, parentScope, proxy) {
                     var view    = createView('np-rsearch-node-form', parent, parentScope),
                         scope   = view.scope;
 
                     _.extend(view, {
                         setNode: function(node) {
                             scope.node = node;
+                            showNodeFormProxy(scope.node, scope.formType);
                         },
                         setFormType: function(formType) {
                             scope.formType = formType;
                         },
                         setAutokad: function(autokad) {
                             scope.autokad = autokad;
+                        },
+                        getNodeElement: function(node) {
+                            var nodeElement = view.element.find('[np-rsearch-node-info]');
+                            return nodeElement.length === 1 ? nodeElement : null;
                         }
                     });
 
@@ -331,6 +336,12 @@ define(function(require) {'use strict';
                             $rootScope.$emit('np-rsearch-node-form-autokad-click', scope.node);
                         }
                     }, i18n.translateFuncs);
+
+                    function showNodeFormProxy(node, formType) {
+                        $timeout(function(){
+                            proxy.showNodeForm(node, formType, view);
+                        });
+                    }
 
                     return view;
                 },
