@@ -59,7 +59,9 @@ define(function(require) {'use strict';
             return {
                 restrict: 'A',
                 template: template,
-                scope: {},
+                scope: {
+                    npRsearchNavigationBrowserHistory: '='
+                },
                 link: function(scope, element, attrs) {
                     //
                     var navigationProxy = npRsearchNavigationHelper.getNavigationProxy();
@@ -68,7 +70,8 @@ define(function(require) {'use strict';
                     var windowElement   = angular.element($window),
                         viewsElement    = element.find('.views'),
                         nodeListView    = npRsearchViews.createNodeListView(viewsElement, scope, navigationProxy),
-                        nodeFormView    = npRsearchViews.createNodeFormView(viewsElement, scope);
+                        nodeFormView    = npRsearchViews.createNodeFormView(viewsElement, scope),
+                        browserHistory  = _.isBoolean(scope.npRsearchNavigationBrowserHistory) ? scope.npRsearchNavigationBrowserHistory : true;
 
                     var autokad = new NpRsearchAutokad();
                     nodeFormView.setAutokad(autokad);
@@ -1093,7 +1096,7 @@ define(function(require) {'use strict';
                      */
                     var History = function() {
                         var windowHistory   = $window.history,
-                            isHistory       = windowHistory && windowHistory.pushState,
+                            isHistory       = browserHistory && windowHistory && windowHistory.pushState,
                             // historyId -
                             // Для идентификации истории в контексте только данного приложения,
                             // если в браузерной истории есть состояния от предыдущего выполнения приложения,
