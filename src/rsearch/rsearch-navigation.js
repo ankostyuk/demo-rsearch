@@ -197,6 +197,8 @@ define(function(require) {'use strict';
                     }
 
                     function doSearch(query) {
+                        scope.mode = 'SEARCH';
+
                         search.query = query;
 
                         clearAutokad();
@@ -420,43 +422,75 @@ define(function(require) {'use strict';
                             return;
                         }
 
-                        loading(function(done){
-                            // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
-                            nkbUser.fetchUser()
-                                .then(egrulList, egrulList)
-                                .then(complete, complete);
+                        nodeListView.clear();
+                        clearAutokad();
+                        clearNodeRelationsFilter();
+                        hideSearchFilters();
+                        hideRelationsFilters();
+                        clearMessages();
 
-                            function egrulList() {
-                                nodeFormEgrulList(node);
-                            }
+                        nodeFormView.setFormType(formType);
+                        nodeFormView.setNode(node);
+                        nodeFormView.show();
 
-                            function complete() {
-                                nodeListView.clear();
-                                clearAutokad();
-                                clearNodeRelationsFilter();
-                                hideSearchFilters();
-                                hideRelationsFilters();
-                                clearMessages();
+                        pushNodeFormBreadcrumb(formType, node, breadcrumb);
 
-                                nodeFormView.setFormType(formType);
-                                nodeFormView.setNode(node);
-                                nodeFormView.show();
+                        npRsearchViews.scrollTop();
 
-                                pushNodeFormBreadcrumb(formType, node, breadcrumb);
+                        if (!noHistory) {
+                            checkNodeFormToHistory();
+                        }
 
-                                npRsearchViews.scrollTop();
+                        showAutokad(formType, node);
 
-                                if (!noHistory) {
-                                    checkNodeFormToHistory();
-                                }
+                        $rootScope.$emit('np-rsearch-navigation-node-form', node);
 
-                                showAutokad(formType, node);
+                        //
+                        // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
+                        nkbUser.fetchUser().then(egrulList, egrulList);
 
-                                $rootScope.$emit('np-rsearch-navigation-node-form', node);
+                        function egrulList() {
+                            nodeFormEgrulList(node);
+                        }
 
-                                done();
-                            }
-                        });
+                        // @Deprecated
+                        // loading(function(done){
+                        //     // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
+                        //     nkbUser.fetchUser()
+                        //         .then(egrulList, egrulList)
+                        //         .then(complete, complete);
+                        //
+                        //     function egrulList() {
+                        //         nodeFormEgrulList(node);
+                        //     }
+                        //
+                        //     function complete() {
+                        //         nodeListView.clear();
+                        //         clearAutokad();
+                        //         clearNodeRelationsFilter();
+                        //         hideSearchFilters();
+                        //         hideRelationsFilters();
+                        //         clearMessages();
+                        //
+                        //         nodeFormView.setFormType(formType);
+                        //         nodeFormView.setNode(node);
+                        //         nodeFormView.show();
+                        //
+                        //         pushNodeFormBreadcrumb(formType, node, breadcrumb);
+                        //
+                        //         npRsearchViews.scrollTop();
+                        //
+                        //         if (!noHistory) {
+                        //             checkNodeFormToHistory();
+                        //         }
+                        //
+                        //         showAutokad(formType, node);
+                        //
+                        //         $rootScope.$emit('np-rsearch-navigation-node-form', node);
+                        //
+                        //         done();
+                        //     }
+                        // });
                     }
 
                     /*
@@ -1291,6 +1325,7 @@ define(function(require) {'use strict';
                      *
                      */
                     _.extend(scope, {
+                        mode: null, // 'SEARCH'|'NODE'
                         search: search,
                         isSearch: isSearch,
                         messages: messages,
@@ -1310,6 +1345,20 @@ define(function(require) {'use strict';
 
                         nodeListView.clear();
                     }
+
+                    $rootScope.$on('np-rsearch-navigation-set-node', function(e, node){
+                        scope.mode = 'NODE';
+
+                        clearAutokad();
+                        nodeFormView.hide();
+                        clearBreadcrumbs();
+                        clearNodeRelationsFilter();
+                        hideSearchFilters();
+                        hideRelationsFilters();
+                        clearMessages();
+
+                        showNodeForm('MINIREPORT', node, null, true, true);
+                    });
 
                     // Выполнить после отработки кода модуля
                     initPromise.then(initSuccess);

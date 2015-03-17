@@ -2,7 +2,7 @@
     <div ng-if="node._type === 'COMPANY'">
         <div class="row">
             <div class="span6 node-header" data-node-id="{{node._id}}"><span ng-click="nodeHeaderClick($event)">{{node.nameshortsort || node.namesort}}</span></div>
-            <div class="align-right" ng-show="node.founded_dt">${_tr("основано")} {{node.founded_dt | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
+            <div class="node-header-small align-right" ng-show="node.founded_dt">${_tr("основано")} {{node.founded_dt | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
         </div>
         <div class="row node-entry reg-state" ng-show="node._reg.state">
             <div class="span6">{{node._reg.state.type}}</div>
@@ -41,8 +41,8 @@
 
     <div ng-if="node._type === 'PURCHASE'">
         <div class="row">
-            <div class="span7 node-header" data-node-id="{{node._id}}">{{node.form}}</div>
-            <div class="align-right" ng-show="node.date">{{node.date | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
+            <div class="span7 node-header" data-node-id="{{node._id}}"><span ng-click="nodeHeaderClick($event)">{{node.form}}</span></div>
+            <div class="node-header-small align-right" ng-show="node.date">{{node.date | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
         </div>
         <div class="row">
             <div class="span8">
