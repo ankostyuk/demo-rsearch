@@ -1,4 +1,4 @@
-<div ng-show="isSearch()">
+<div ng-show="mode !== 'SEARCH' || isSearch()">
     <div class="mask"><div class="message-box"><span class="message">${_tr("Ожидайте...")}</span></div></div>
     <div class="navigation-content">
         <div class="nav">

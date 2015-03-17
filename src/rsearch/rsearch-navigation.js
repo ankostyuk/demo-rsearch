@@ -28,6 +28,10 @@ define(function(require) {'use strict';
                     return null;
                 },
                 //
+                rsearchInputRefresh: function(text, ui) {
+                    return true;
+                },
+                //
                 resetNodeList: function(nodeListView) {
                 },
                 //
@@ -186,7 +190,11 @@ define(function(require) {'use strict';
                         showResult: showSearchResult
                     };
 
-                    $rootScope.$on('np-rsearch-input-refresh', function(e, text, initiator){
+                    $rootScope.$on('np-rsearch-input-refresh', function(e, text, initiator, ui){
+                        if (navigationProxy.rsearchInputRefresh(text, ui) === false) {
+                            return;
+                        }
+
                         if (initiator !== history) {
                             functionAfterInit(doSearch, [text]);
                         }
@@ -1347,7 +1355,9 @@ define(function(require) {'use strict';
                         search.total = null;
 
                         _.each(search.byNodeTypes, function(byNodeType, nodeType){
-                            byNodeType.request.abort();
+                            if (byNodeType.request) {
+                                byNodeType.request.abort();
+                            }
                             byNodeType.total = null;
                         });
 

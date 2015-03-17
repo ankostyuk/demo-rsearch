@@ -54,7 +54,7 @@ define(function(require) {'use strict';
                         },
 
                         searchBtnClick: function(){
-                            fireRefresh();
+                            fireRefresh('SEARCH_BUTTON');
                         }
                     });
 
@@ -62,7 +62,7 @@ define(function(require) {'use strict';
                         // Не всегда (newValue != oldValue), например, при инициализации scope.
                         // Поэтому приходится сравнивать, чтобы исключить ложные срабатывания.
                         if (newValue !== oldValue) {
-                            fireRefresh();
+                            fireRefresh('SEARCH_INPUT');
                         }
                     });
 
@@ -72,8 +72,8 @@ define(function(require) {'use strict';
                     });
 
                     //
-                    function fireRefresh() {
-                        $rootScope.$emit('np-rsearch-input-refresh', scope.text, scope.initiator);
+                    function fireRefresh(ui) {
+                        $rootScope.$emit('np-rsearch-input-refresh', scope.text, scope.initiator, ui);
                         scope.initiator = null;
                     }
 
