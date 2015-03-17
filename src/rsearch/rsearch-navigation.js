@@ -325,7 +325,8 @@ define(function(require) {'use strict';
                     }
 
                     function showSearchResult(nodeType, breadcrumb) {
-                        var byNodeType = search.byNodeTypes[nodeType];
+                        var byNodeType      = search.byNodeTypes[nodeType],
+                            lastBreadcrumb  = getLastBreadcrumb();
 
                         setSearchResult(nodeType, breadcrumb);
 
@@ -336,6 +337,10 @@ define(function(require) {'use strict';
                         clearMessages();
 
                         resetSearchNodeListView(byNodeType);
+
+                        highlightNodeInListByBreadcrumb(lastBreadcrumb, function(node){
+                            return nodeType === node._type;
+                        });
                     }
 
                     function resetSearchNodeListView(byNodeType) {
@@ -435,7 +440,7 @@ define(function(require) {'use strict';
 
                         pushNodeFormBreadcrumb(formType, node, breadcrumb);
 
-                        npRsearchViews.scrollTop();
+                        nodeFormView.scrollTop();
 
                         if (!noHistory) {
                             checkNodeFormToHistory();
@@ -769,8 +774,11 @@ define(function(require) {'use strict';
                         } : null;
                     }
 
-                    function highlightNodeInListByBreadcrumb(breadcrumb) {
+                    function highlightNodeInListByBreadcrumb(breadcrumb, predicate) {
                         if (breadcrumb && breadcrumb.type === 'NODE_FORM') {
+                            if (_.isFunction(predicate) && !predicate(breadcrumb.data.node)) {
+                                return;
+                            }
                             // TODO Не прокручивать до ноды,
                             // а прокрутить до сохраненного положения прокрутки
                             // и выделить ноду?

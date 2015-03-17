@@ -170,8 +170,7 @@ define(function(require) {'use strict';
         //
         .factory('npRsearchViews', ['$log', '$compile', '$rootScope', '$timeout', '$window', 'nkbUser', function($log, $compile, $rootScope, $timeout, $window, nkbUser){
 
-            var windowElement   = angular.element($window),
-                htmlbodyElement = $('html, body');
+            var htmlbodyElement = $('html, body');
 
             function createView(name, parent, parentScope, scopeData) {
                 var scope = parentScope.$new(true);
@@ -213,7 +212,8 @@ define(function(require) {'use strict';
                         internalDisabled    = false,
                         noNextPage          = false,
                         nextPageHandler     = null,
-                        scrollMargin        = 5; // TODO взять из CSS
+                        scrollMargin        = 5, // TODO взять из CSS
+                        scrollDuration      = 200;
 
                     _.extend(view, {
                         reset: function(nodeList, noMore, pageHandler) {
@@ -223,8 +223,6 @@ define(function(require) {'use strict';
                             internalDisabled = false;
                             noNextPage = noMore;
                             nextPageHandler = pageHandler;
-
-                            refresh();
 
                             resetNodeListProxy();
                             showNodeListProxy(scope.nodeList, scope.nodeList);
@@ -248,9 +246,12 @@ define(function(require) {'use strict';
                                     return;
                                 }
 
-                                htmlbodyElement.animate({
-                                    scrollTop: nodeElement.offset().top - scrollMargin
-                                }, 200);
+                                var scrollContainer = scope.scrollContainer || htmlbodyElement,
+                                    top             = scope.scrollContainer ? (nodeElement.offset().top - scope.scrollContainer.offset().top) : nodeElement.offset().top;
+
+                                scrollContainer.animate({
+                                    scrollTop: top - scrollMargin
+                                }, scrollDuration);
                             });
                         },
                         showItemNumber: function(show) {
@@ -286,10 +287,6 @@ define(function(require) {'use strict';
                         return internalDisabled || noNextPage || !nextPageHandler;
                     }
 
-                    function refresh() {
-                        //windowElement.trigger('scroll');
-                    }
-
                     function resetNodeListProxy() {
                             proxy.resetNodeList(view);
                     }
@@ -321,11 +318,17 @@ define(function(require) {'use strict';
                         getNodeElement: function(node) {
                             var nodeElement = view.element.find('[np-rsearch-node-info]');
                             return nodeElement.length === 1 ? nodeElement : null;
+                        },
+                        scrollTop: function() {
+                            $timeout(function(){
+                                (scope.scrollContainer || htmlbodyElement).scrollTop(0);
+                            });
                         }
                     });
 
                     _.extend(scope, {
                         user: nkbUser.user(),
+                        scrollContainer: proxy.getScrollContainer(),
                         relationsClick: function(direction, relationType) {
                             $rootScope.$emit('np-rsearch-node-form-relations-click', scope.node, direction, relationType);
                         },
@@ -344,12 +347,6 @@ define(function(require) {'use strict';
                     }
 
                     return view;
-                },
-
-                scrollTop: function() {
-                    $timeout(function(){
-                        htmlbodyElement.scrollTop(0);
-                    });
                 }
             };
         }]);
