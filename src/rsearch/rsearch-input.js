@@ -45,9 +45,12 @@ define(function(require) {'use strict';
                         text: null,
                         initiator: null,
 
-                        // TODO Реализовать
-                        searchInputEnter: function(){
-                            fireRefresh();
+                        searchInputFocus: function(){
+                            $rootScope.$emit('np-rsearch-input-focus', scope.text);
+                        },
+
+                        searchInputBlur: function(){
+                            $rootScope.$emit('np-rsearch-input-blur', scope.text);
                         },
 
                         searchBtnClick: function(){
