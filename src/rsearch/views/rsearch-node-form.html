@@ -44,7 +44,7 @@
                         </div>
                         <div class="row actions-row">
                             <div class="span5 egrul-products">
-                                <p><a class="action with-icon" ng-click="productClick('egrulCompanyReport')"><i class="icon large i-document-stamp"></i> <span class="text">${_tr("Заказать выписку ЕГРЮЛ")}</span></a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('egrulCompanyReport')"></span></p>
+                                <p class="egrul-order"><a class="action with-icon" ng-click="productClick('egrulCompanyReport')"><i class="icon large i-document-stamp"></i> <span class="text">${_tr("Заказать выписку ЕГРЮЛ")}</span></a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('egrulCompanyReport')"></span></p>
                                 <ul class="unstyled actions-list">
                                     <li ng-if="node.__egrulList[0]" ng-init="egrul = node.__egrulList[0]; egrulCount = node.__egrulList.length; moreCount = 1">
                                         <a class="action" ng-href="{{egrul._link}}" download="{{egrul._downloadName}}" target="_self">${_tr("Выписка")} ${_trc("от", "от такой-то даты")} {{egrul.fileDate | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</a>
@@ -66,8 +66,8 @@
                             <div class="span4 egrul-products">
                                 <h5 class="actions-label"><i class="icon large i-document-stamp"></i> ${_tr("ЕГРЮЛ")}</h5>
                                 <ul class="unstyled actions-list">
-                                    <li><a class="action" ng-click="productClick('egrulChiefReport')">${_tr("Заказать список руководимых компаний")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('egrulChiefReport')"></span></li>
-                                    <li><a class="action" ng-click="productClick('egrulFounderPersonReport')">${_tr("Заказать список учрежденных компаний")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('egrulFounderPersonReport')"></span></li>
+                                    <li class="egrul-executive-order"><a class="action" ng-click="productClick('egrulChiefReport')">${_tr("Заказать список руководимых компаний")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('egrulChiefReport')"></span></li>
+                                    <li class="egrul-founder-order"><a class="action" ng-click="productClick('egrulFounderPersonReport')">${_tr("Заказать список учрежденных компаний")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('egrulFounderPersonReport')"></span></li>
                                     <li><a class="action" ng-click="productClick('egripReport')">${_tr("Заказать выписку ЕГРИП")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('egripReport')"></span></li>
                                 </ul>
                             </div>
