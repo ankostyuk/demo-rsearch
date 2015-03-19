@@ -21,6 +21,22 @@ define(function(require) {'use strict';
         }])
         //
         .factory('npRsearchNavigationHelper', ['$log', function($log){
+
+            var SIMPLE_NODE_FORM = {
+                'ADDRESS': {
+                    relation: {
+                        type: 'ADDRESS',
+                        direction: 'children'
+                    }
+                },
+                'PHONE': {
+                    relation: {
+                        type: 'PHONE',
+                        direction: 'children'
+                    }
+                }
+            };
+
             //
             var navigationProxy = {
                 //
@@ -58,6 +74,14 @@ define(function(require) {'use strict';
 
                 setNavigationProxy: function(proxy) {
                     navigationProxy = proxy;
+                },
+
+                isSimpleNodeForm: function(node) {
+                    return _.has(SIMPLE_NODE_FORM, node._type);
+                },
+
+                getSimpleNodeFormRelation: function(node) {
+                    return SIMPLE_NODE_FORM[node._type].relation;
                 }
             };
         }])
@@ -820,17 +844,16 @@ define(function(require) {'use strict';
                     }
 
                     function checkAccentedResultByNodeForm(formType, node, breadcrumb) {
-                        if (node._type === 'ADDRESS') {
-                            pushNodeFormBreadcrumb(formType, node, breadcrumb);
-                            showRelations(node, 'children', 'ADDRESS');
-                            return true;
-                        } else if (node._type === 'PHONE') {
-                            pushNodeFormBreadcrumb(formType, node, breadcrumb);
-                            showRelations(node, 'children', 'PHONE');
-                            return true;
+                        if (!npRsearchNavigationHelper.isSimpleNodeForm(node)) {
+                            return false;
                         }
 
-                        return false;
+                        var relation = npRsearchNavigationHelper.getSimpleNodeFormRelation(node);
+
+                        pushNodeFormBreadcrumb(formType, node, breadcrumb);
+                        showRelations(node, relation.direction, relation.type);
+
+                        return true;
                     }
 
                     function checkAccentedResultByRelations(byRelations) {
@@ -1364,7 +1387,7 @@ define(function(require) {'use strict';
                         nodeListView.clear();
                     }
 
-                    $rootScope.$on('np-rsearch-navigation-set-node', function(e, node){
+                    $rootScope.$on('np-rsearch-navigation-set-node', function(e, node, relation){
                         scope.mode = 'NODE';
 
                         clearAutokad();
@@ -1376,6 +1399,10 @@ define(function(require) {'use strict';
                         clearMessages();
 
                         showNodeForm('MINIREPORT', node, null, true, true);
+
+                        if (relation && !npRsearchNavigationHelper.isSimpleNodeForm(node)) {
+                            showRelations(node, relation.direction, relation.type);
+                        }
                     });
 
                     // Выполнить после отработки кода модуля
