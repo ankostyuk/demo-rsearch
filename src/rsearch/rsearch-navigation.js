@@ -165,12 +165,12 @@ define(function(require) {'use strict';
 
                     function pushNodeList(object, callback) {
                         if (object.result) {
-                            var pushNodeList = [];
+                            var _pushNodeList = [];
                             _.each(object.result.list, function(node){
-                                pushNodeList.push(node);
+                                _pushNodeList.push(node);
                                 object.nodeList.push(node);
                             });
-                            callback(noMore(object.result), pushNodeList);
+                            callback(noMore(object.result), _pushNodeList);
                         } else {
                             callback(true);
                         }
