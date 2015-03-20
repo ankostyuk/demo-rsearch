@@ -434,11 +434,13 @@
     padding-left: 20px;
 }
 [np-rsearch-node-form] .INDIVIDUAL .egrul-products {
-    width: 330px;
+    width: 380px;
+}
+[np-rsearch-node-form] .INDIVIDUAL .egrul-products ul.actions-list > li {
+    margin-bottom: 10px;
 }
 [np-rsearch-node-form] .INDIVIDUAL .extra-search {
-    padding-top: 10px;
-    width: 330px;
+    width: 280px;
     white-space: nowrap;
 }
 
@@ -758,5 +760,18 @@
     color: @defaultDisabledLightColor;
 }
 [np-rsearch-user-product-limits-info] .info {
+    color: @defaultDisabledColor;
+}
+
+/* np-rsearch-egrul-data-update */
+[np-rsearch-egrul-data-update] .pending-info {
+    display: none;
+    padding-left: 10px;
+    color: @defaultDisabledColor;
+}
+[np-rsearch-egrul-data-update] .PENDING .pending-info {
+    display: inline;
+}
+[np-rsearch-egrul-data-update] .actual-info {
     color: @defaultDisabledColor;
 }

@@ -31,6 +31,7 @@ define(function(require) {'use strict';
         'np-rsearch-node-list':                     require('text!./views/rsearch-node-list.html'),
         'np-rsearch-user-product-limits-info':      require('text!./views/rsearch-user-product-limits-info.html'),
         'np-rsearch-autokad-info':                  require('text!./views/rsearch-autokad-info.html'),
+        'np-rsearch-egrul-data-update':             require('text!./views/rsearch-egrul-data-update.html'),
         'np-rsearch-node-form':                     require('text!./views/rsearch-node-form.html')
     };
 
@@ -165,6 +166,19 @@ define(function(require) {'use strict';
                 // }
                 scope: false,
                 template: templates['np-rsearch-autokad-info']
+            };
+        }])
+        //
+        .directive('npRsearchEgrulDataUpdate', [function() {
+            return {
+                restrict: 'A',
+                // require:
+                // {
+                //     dataUpdateHelper: Object,
+                //     node: Object
+                // }
+                scope: false,
+                template: templates['np-rsearch-egrul-data-update']
             };
         }])
         //
@@ -329,6 +343,7 @@ define(function(require) {'use strict';
                     _.extend(scope, {
                         user: nkbUser.user(),
                         scrollContainer: proxy.getScrollContainer(),
+                        dataUpdateHelper: proxy.getDataUpdateHelper(),
                         relationsClick: function(direction, relationType) {
                             $rootScope.$emit('np-rsearch-node-form-relations-click', scope.node, direction, relationType);
                         },

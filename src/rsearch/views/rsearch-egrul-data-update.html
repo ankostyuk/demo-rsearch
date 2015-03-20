@@ -1,0 +1,5 @@
+<span class="{{dataUpdateHelper.getEgrulUpdateStatus(node)}}">
+    <a class="action with-icon" ng-class="{disabled: !dataUpdateHelper.isEgrulUpdateEnabled(node)}" ng-click="dataUpdateHelper.doEgrulDataUpdate(node)"><i class="icon large i-document-stamp"></i> <span class="text">${_tr("Обновить данные из ЕГРЮЛ")}</span></a>
+    <span class="pending-info">${_trc("обрабатывается...", "обработка заказа (запроса)")}</span>
+    <span class="actual-info" ng-show="dataUpdateHelper.getEgrulUpdatedDate(node)"><br>${_trc("последняя актуализация", "актуализация данных")} {{dataUpdateHelper.getEgrulUpdatedDate(node) | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</span>
+</span>

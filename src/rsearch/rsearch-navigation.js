@@ -44,6 +44,10 @@ define(function(require) {'use strict';
                     return null;
                 },
                 //
+                getDataUpdateHelper: function() {
+                    return null;
+                },
+                //
                 rsearchInputRefresh: function(text, ui) {
                     return true;
                 },
