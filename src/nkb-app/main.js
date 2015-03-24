@@ -97,6 +97,9 @@ root._RESOURCES_CONFIG = {
         location: 'src/comment',
         main: 'comment'
     }, {
+        name: 'nkb.extraneous',
+        location: 'src/extraneous'
+    }, {
         name: 'nkb.user',
         location: 'external_components/nullpointer-commons/nkb/user',
         main: 'user'
