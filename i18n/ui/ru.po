@@ -424,6 +424,10 @@ msgstr ""
 msgid "Найти"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-autokad-info.html:1
+msgid "Найти арбитражные дела"
+msgstr ""
+
 #: ../src/nkb-app/index.html:1
 msgid "Национальное кредитное бюро"
 msgstr ""
@@ -612,6 +616,10 @@ msgid "картотеке арбитражных дел"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+msgid "контактное лицо"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
 msgctxt "лот в закупке"
 msgid "лот"
 msgstr ""
@@ -631,10 +639,6 @@ msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "руководитель"
-msgstr ""
-
-#: ../src/rsearch/rsearch-meta.js:1
-msgid "сотрудник"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1

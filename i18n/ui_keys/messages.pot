@@ -54,6 +54,10 @@ msgid "FZ_223"
 msgstr ""
 
 #: ../i18n/ui_keys/src/keys.txt:1
+msgid "FZ_94"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
 msgid "WIN"
 msgstr ""
 

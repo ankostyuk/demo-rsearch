@@ -205,6 +205,7 @@ define(function(require) {'use strict';
                     } else
                     // закупка
                     if (node._type === 'PURCHASE') {
+                        node.currency = node.currency || appConfig.meta.defaultCurrency;
                         node.__lotMap = _.indexBy(node.lots, 'lot');
                     }
 
@@ -482,8 +483,7 @@ define(function(require) {'use strict';
                     }
 
                     // TODO проверить возникает такая ситуация?
-                    // TODO "сотрудник" -> "контактное лицо"
-                    return isTargetRelation(relation) ? '' : _tr("сотрудник");
+                    return isTargetRelation(relation) ? '' : _tr("контактное лицо");
                 }
 
                 function getParticipantText(relation) {
@@ -506,7 +506,7 @@ define(function(require) {'use strict';
                             name: 'price',
                             alternateData: alternateData,
                             filter: function(v) {
-                                return $filter('number')(v, 0) + nbsp + _tr(purchaseNode.currency || appConfig.meta.defaultCurrency);
+                                return $filter('number')(v, 0) + nbsp + _tr(purchaseNode.currency);
                             }
                         }, {
                             name: 'lot',
