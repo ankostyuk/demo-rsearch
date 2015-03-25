@@ -55,6 +55,11 @@ msgid "NOT_ADMITTED"
 msgstr "not admitted"
 
 #: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
+msgid "PARTICIPANT"
+msgstr "участник"
+
+#: ../i18n/ui_keys/src/keys.txt:1
 msgid "RUB"
 msgstr "rub."
 

@@ -489,41 +489,63 @@ define(function(require) {'use strict';
                 function getParticipantText(relation) {
                     var purchaseNode = (data.node._type === 'PURCHASE' ? data.node : (node._type === 'PURCHASE' ? node : null));
 
+                    var statusOrder = {
+                        'WIN': 0,
+                        'PARTICIPANT': 1,
+                        'NOT_ADMITTED': 2
+                    };
+
                     var ts = [],
-                        alternateData, t;
+                        byStatusMap = {},
+                        alternateData, t,
+                        byStatus, status, byStatusList,
+                        price, lotNumber;
 
                     _.each(relation.lots, function(lot){
-                        alternateData =
+                        alternateData = (
                             purchaseNode.__lotMap[lot.lot] &&
                             purchaseNode.__lotMap[lot.lot].applications &&
-                            purchaseNode.__lotMap[lot.lot].applications[lot.application];
+                            purchaseNode.__lotMap[lot.lot].applications[lot.application]
+                        ) || {};
 
-                        t = getRelationText(lot, [{
-                            name: 'status',
-                            alternateData: alternateData,
-                            filter: _tr
-                        }, {
-                            name: 'price',
-                            alternateData: alternateData,
-                            filter: function(v) {
-                                return $filter('number')(v, 0) + nbsp + _tr(purchaseNode.currency);
-                            }
-                        }, {
-                            name: 'lot',
-                            filter: function(v) {
-                                return _trc("лот", "лот в закупке") + nbsp + v;
-                            }
-                        }], nbsp);
+                        status      = lot['status'] || alternateData['status'] || 'PARTICIPANT';
+                        price       = lot['price'] || alternateData['price'] || 0;
+                        lotNumber   = lot['lot'];
 
-                        ts.push(t);
+                        byStatus = byStatusMap[status];
+
+                        if (byStatus) {
+                            byStatus.totalPrice += price;
+                            byStatus.lots.push(lotNumber);
+                        } else {
+                            byStatusMap[status] = {
+                                status: status,
+                                totalPrice: price,
+                                lots: [lotNumber]
+                            };
+                        }
                     });
 
-                    if (_.size(ts)) {
-                        return ts.join(separator);
-                    }
+                    byStatusList = _.sortBy(byStatusMap, function(s, k){
+                        return statusOrder[k];
+                    });
 
-                    // TODO проверить возникает такая ситуация?
-                    return isTargetRelation(relation) ? '' : _tr("участник");
+                    _.each(byStatusList, function(s){
+                        t = [_tr(s.status)];
+
+                        if (s.totalPrice) {
+                            t.push($filter('number')(s.totalPrice, 0) + nbsp + _tr(purchaseNode.currency));
+                        }
+
+                        t.push(
+                            (_.size(s.lots) === 1 ? _trc("лот", "лот в закупке") : _trc("лоты", "лот в закупке")) +
+                            nbsp + s.lots.join(separator)
+                        );
+
+                        ts.push(t.join(nbsp));
+                    });
+
+                    return ts.join(separator);
                 }
 
                 function getCommissionMemberText(relation) {

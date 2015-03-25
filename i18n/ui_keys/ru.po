@@ -55,6 +55,10 @@ msgid "NOT_ADMITTED"
 msgstr "не допущен"
 
 #: ../i18n/ui_keys/src/keys.txt:1
+msgid "PARTICIPANT"
+msgstr "участник"
+
+#: ../i18n/ui_keys/src/keys.txt:1
 msgid "RUB"
 msgstr "руб."
 

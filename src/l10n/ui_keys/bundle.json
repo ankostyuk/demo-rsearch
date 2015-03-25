@@ -47,6 +47,10 @@
       null,
       "не допущен"
     ],
+    "PARTICIPANT": [
+      null,
+      "участник"
+    ],
     "RUB": [
       null,
       "руб."
@@ -107,6 +111,10 @@
     "NOT_ADMITTED": [
       null,
       "not admitted"
+    ],
+    "PARTICIPANT": [
+      null,
+      "участник"
     ],
     "RUB": [
       null,

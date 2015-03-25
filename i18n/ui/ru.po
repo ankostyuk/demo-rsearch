@@ -624,6 +624,11 @@ msgctxt "лот в закупке"
 msgid "лот"
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
+msgctxt "лот в закупке"
+msgid "лоты"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "основано"
 msgstr ""

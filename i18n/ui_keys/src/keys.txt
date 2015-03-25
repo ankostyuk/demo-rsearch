@@ -28,3 +28,4 @@ FZ_94
 # Статусы участника закупки
 WIN
 NOT_ADMITTED
+PARTICIPANT

@@ -64,3 +64,7 @@ msgstr ""
 #: ../i18n/ui_keys/src/keys.txt:1
 msgid "NOT_ADMITTED"
 msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "PARTICIPANT"
+msgstr ""

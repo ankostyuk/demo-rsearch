@@ -194,8 +194,14 @@ msgid "контактное лицо"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
 msgctxt "лот в закупке"
 msgid "лот"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgctxt "лот в закупке"
+msgid "лоты"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
