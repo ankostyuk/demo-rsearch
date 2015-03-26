@@ -280,7 +280,7 @@ msgid "руководитель"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
-msgid "сотрудник"
+msgid "контактное лицо"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
@@ -289,7 +289,8 @@ msgid "лот"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
-msgid "участник"
+msgctxt "лот в закупке"
+msgid "лоты"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1

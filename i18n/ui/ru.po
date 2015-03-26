@@ -715,8 +715,17 @@ msgid "картотеке арбитражных дел"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+msgid "контактное лицо"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
 msgctxt "лот в закупке"
 msgid "лот"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgctxt "лот в закупке"
+msgid "лоты"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
@@ -736,16 +745,8 @@ msgstr ""
 msgid "руководитель"
 msgstr ""
 
-#: ../src/rsearch/rsearch-meta.js:1
-msgid "сотрудник"
-msgstr ""
-
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "тыс. руб."
-msgstr ""
-
-#: ../src/rsearch/rsearch-meta.js:1
-msgid "участник"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1

@@ -35,6 +35,10 @@
       null,
       "44-ФЗ"
     ],
+    "FZ_94": [
+      null,
+      "94-ФЗ"
+    ],
     "GBP": [
       null,
       "£"
@@ -42,6 +46,10 @@
     "NOT_ADMITTED": [
       null,
       "не допущен"
+    ],
+    "PARTICIPANT": [
+      null,
+      "участник"
     ],
     "RUB": [
       null,
@@ -92,6 +100,10 @@
       null,
       "44-FL"
     ],
+    "FZ_94": [
+      null,
+      "94-FL"
+    ],
     "GBP": [
       null,
       "£"
@@ -99,6 +111,10 @@
     "NOT_ADMITTED": [
       null,
       "not admitted"
+    ],
+    "PARTICIPANT": [
+      null,
+      "участник"
     ],
     "RUB": [
       null,

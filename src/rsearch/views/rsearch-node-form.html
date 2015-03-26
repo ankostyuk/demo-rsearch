@@ -6,12 +6,12 @@
                 <div np-rsearch-node-info></div>
                 <div ng-if="node._type === 'PURCHASE'">
                     <div class="lot-list">
-                        <div class="lot" ng-repeat="(number, lot) in node.lots track by number">
+                        <div class="lot" ng-repeat="lot in node.lots track by $index">
                             <div class="row lot-header">
-                                <div class="span7 lot-number">${_trc("Лот", "Лот закупки")}&nbsp;{{number}}</div>
+                                <div class="span7 lot-number">${_trc("Лот", "Лот закупки")}&nbsp;{{lot.lot}}</div>
                                 <div class="align-right lot-abandoned" ng-show="lot.abandoned">${_trc("Отменён", "Лот закупки")}</div>
                             </div>
-                            <div class="lot-price">{{lot.price | number:0}} {{_tr(node.currency)}}</div>
+                            <div class="lot-price" ng-show="lot.price">{{lot.price | number:0}} {{_tr(node.currency)}}</div>
                             <div class="lot-info">{{lot.name}}</div>
                         </div>
                     </div>
