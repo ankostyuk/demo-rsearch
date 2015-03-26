@@ -226,6 +226,6 @@ define(function(require) {'use strict';
                     }, i18n.translateFuncs);
                 }
             };
-        }])
+        }]);
     //
 });
