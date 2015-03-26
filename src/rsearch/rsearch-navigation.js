@@ -20,7 +20,7 @@ define(function(require) {'use strict';
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npL10n', 'NpRsearchAutokad', 'npRsearchAutokadConfig', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npL10n, NpRsearchAutokad, npRsearchAutokadConfig){
+        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npL10n', 'NpRsearchAutokad', 'NpRsearchFnsRegDocsCompany', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npL10n, NpRsearchAutokad, NpRsearchFnsRegDocsCompany){
             return {
                 restrict: 'A',
                 template: template,
@@ -34,6 +34,9 @@ define(function(require) {'use strict';
 
                     var autokad = new NpRsearchAutokad();
                     nodeFormView.setAutokad(autokad);
+
+                    var fnsRegDocs = new NpRsearchFnsRegDocsCompany();
+                    nodeFormView.setFnsRegDocs(fnsRegDocs);
 
                     /*
                      * init
@@ -154,6 +157,7 @@ define(function(require) {'use strict';
                         search.query = query;
 
                         clearAutokad();
+                        clearFnsRegDocs();
                         nodeFormView.hide();
                         clearBreadcrumbs();
                         clearNodeRelationsFilter();
@@ -282,6 +286,7 @@ define(function(require) {'use strict';
                         setSearchResult(nodeType, breadcrumb);
 
                         clearAutokad();
+                        clearFnsRegDocs();
                         nodeFormView.hide();
                         clearNodeRelationsFilter();
                         hideRelationsFilters();
@@ -379,6 +384,7 @@ define(function(require) {'use strict';
                             function complete() {
                                 nodeListView.clear();
                                 clearAutokad();
+                                clearFnsRegDocs();
                                 clearNodeRelationsFilter();
                                 hideSearchFilters();
                                 hideRelationsFilters();
@@ -397,6 +403,7 @@ define(function(require) {'use strict';
                                 }
 
                                 showAutokad(formType, node);
+                                showFnsRegDocs(formType, node);
 
                                 $rootScope.$emit('np-rsearch-navigation-node-form', node);
 
@@ -425,6 +432,7 @@ define(function(require) {'use strict';
 
                     function showRelations(node, direction, relationType, key, breadcrumb, noHistory) {
                         clearAutokad();
+                        clearFnsRegDocs();
                         nodeFormView.hide();
                         setNodeRelationsFilter(node, direction, relationType);
                         hideSearchFilters();
@@ -798,6 +806,7 @@ define(function(require) {'use strict';
                     var nodeRelationsFilter = {
                         node: null,
                         autokad: autokad,
+                        fnsRegDocs: fnsRegDocs,
                         active: null,
                         relationsClick: function(direction, relationType) {
                             if (buildNodeRelationActiveKey(direction, relationType) === nodeRelationsFilter.active) {
@@ -827,6 +836,10 @@ define(function(require) {'use strict';
                         autokadClick: function() {
                             clearLastBreadcrumb();
                             doAutokad(nodeRelationsFilter.node);
+                        },
+                        fnsRegDocsClick: function() {
+                            clearLastBreadcrumb();
+                            doFnsRegDocs(nodeRelationsFilter.node);
                         }
                     };
 
@@ -838,6 +851,7 @@ define(function(require) {'use strict';
                         nodeRelationsFilter.node = node;
                         nodeRelationsFilter.active = buildNodeRelationActiveKey(direction, relationType);
                         autokad.setNode(node);
+                        fnsRegDocs.setNode(node);
                     }
 
                     function clearNodeRelationsFilter() {
@@ -1233,6 +1247,30 @@ define(function(require) {'use strict';
                     }
 
                     /*
+                    * fnsRegDocs
+                    *
+                    */
+                    $rootScope.$on('np-rsearch-node-form-fns-reg-docs-click', function(e, node){
+                        doFnsRegDocs(node);
+                    });
+
+                    function showFnsRegDocs(formType, node) {
+                        if (formType === 'MINIREPORT') {
+                            fnsRegDocs.setNode(node);
+                        } else if (formType === 'FNS_REG_DOCS') {
+                            fnsRegDocs.showDocs();
+                        }
+                    }
+
+                    function clearFnsRegDocs() {
+                        fnsRegDocs.clear();
+                    }
+
+                    function doFnsRegDocs(node) {
+                        showNodeForm('FNS_REG_DOCS', node);
+                    }
+
+                    /*
                      * scope
                      *
                      */
@@ -1243,7 +1281,8 @@ define(function(require) {'use strict';
                         breadcrumbs: breadcrumbs,
                         isBreadcrumbs: isBreadcrumbs,
                         nodeRelationsFilter: nodeRelationsFilter,
-                        autokad: autokad
+                        autokad: autokad,
+                        fnsRegDocs: fnsRegDocs
                     });
 
                     function reset() {
@@ -1262,6 +1301,7 @@ define(function(require) {'use strict';
                 }
             };
         }])
+        //
         .factory('NpRsearchAutokad', ['$log', '$rootScope', '$timeout', 'npAutokadHelper', 'npRsearchAutokadConfig', function($log, $rootScope, $timeout, npAutokadHelper, npRsearchAutokadConfig){
 
             // Class
@@ -1383,6 +1423,110 @@ define(function(require) {'use strict';
                     clear: function() {
                         reset();
                         $rootScope.$emit('np-autokad-do-clear');
+                    }
+                };
+            };
+        }])
+        //
+        .factory('NpRsearchFnsRegDocsCompany', ['$log', '$rootScope', '$timeout', 'npExtraneousFnsRegDocsCompanyHelper', 'npRsearchFnsRegDocsConfig', function($log, $rootScope, $timeout, npExtraneousFnsRegDocsCompanyHelper, npRsearchFnsRegDocsConfig){
+
+            // Class
+            return function() {
+                var docCountPending, docCountRequest,
+                    node;
+
+                reset();
+
+                function getDocSearch() {
+                    return {
+                        'ogrn': node['ogrn']
+                    };
+                }
+
+                function reset() {
+                    docCountPending = false;
+
+                    abortDocCountRequest();
+                }
+
+                function abortDocCountRequest() {
+                    if (docCountRequest) {
+                        docCountRequest.abort();
+                    }
+                }
+
+                function doGetDocCount() {
+                    var docSearch = getDocSearch();
+
+                    docCountPending = true;
+
+                    abortDocCountRequest();
+
+                    docCountRequest = npExtraneousFnsRegDocsCompanyHelper.getDocCount(
+                        docSearch,
+                        function(result){
+                            node.__fnsRegDocs.docCount = result;
+                            node.__fnsRegDocs.error = null;
+                            docCountPending = false;
+                        },
+                        function(){
+                            node.__fnsRegDocs.docCount = 0;
+                            node.__fnsRegDocs.error = true;
+                            docCountPending = false;
+                        });
+                }
+
+                function isNodeValid(n) {
+                    return n._type === 'COMPANY';
+                }
+
+                function setNode(n) {
+                    reset();
+
+                    if (!isNodeValid(n)) {
+                        return;
+                    }
+
+                    node = n;
+                    node.__fnsRegDocs = {
+                        docCount: 0,
+                        error: null
+                    };
+
+                    if (npRsearchFnsRegDocsConfig.gettingDocCount) {
+                        doGetDocCount();
+                    }
+                }
+
+                function isNodeWithData() {
+                    return node && node.__fnsRegDocs;
+                }
+
+                // API
+                return {
+                    setNode: setNode,
+                    gettingDocCount: function() {
+                        return npRsearchFnsRegDocsConfig.gettingDocCount;
+                    },
+                    isDocCountPending: function() {
+                        return docCountPending;
+                    },
+                    getDocCount: function() {
+                        return isNodeWithData() ? node.__fnsRegDocs.docCount : 0;
+                    },
+                    hasError: function() {
+                        return isNodeWithData() ? node.__fnsRegDocs.error : null;
+                    },
+                    showDocs: function() {
+                        $timeout(function(){
+                            $rootScope.$emit('np-extraneous-fns-reg-docs-company-do-search', {
+                                search: getDocSearch()
+                            });
+                        });
+                    },
+                    clear: function() {
+                        reset();
+                        $rootScope.$emit('np-extraneous-fns-reg-docs-company-do-clear');
                     }
                 };
             };

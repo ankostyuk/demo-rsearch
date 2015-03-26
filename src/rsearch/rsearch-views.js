@@ -16,7 +16,8 @@ define(function(require) {'use strict';
         'np.directives':  require('np.directives'),
         'np.filters':     require('np.filters'),
         'nkb.user':       require('nkb.user'),
-        'autokad':        require('autokad')
+        'autokad':        require('autokad'),
+        'fnsRegDocs':     require('nkb.extraneous/fns/reg_docs/company/main')
     };
 
     //
@@ -31,6 +32,7 @@ define(function(require) {'use strict';
         'np-rsearch-node-list':                     require('text!./views/rsearch-node-list.html'),
         'np-rsearch-user-product-limits-info':      require('text!./views/rsearch-user-product-limits-info.html'),
         'np-rsearch-autokad-info':                  require('text!./views/rsearch-autokad-info.html'),
+        'np-rsearch-fns-reg-docs-info':             require('text!./views/rsearch-fns-reg-docs-info.html'),
         'np-rsearch-node-form':                     require('text!./views/rsearch-node-form.html')
     };
 
@@ -93,11 +95,13 @@ define(function(require) {'use strict';
                 restrict: 'A',
                 scope: {
                     node: '=npRsearchNodeRelations',
-                    autokad: '=npRsearchNodeRelationsAutokad',
                     active: '=npRsearchNodeRelationsActive',
                     relationsClick: '=npRsearchNodeRelationsClick',
                     productClick: '=npRsearchNodeProductClick',
-                    autokadClick: '=npRsearchNodeAutokadClick'
+                    autokad: '=npRsearchNodeRelationsAutokad',
+                    autokadClick: '=npRsearchNodeAutokadClick',
+                    fnsRegDocs: '=npRsearchNodeRelationsFnsRegDocs',
+                    fnsRegDocsClick: '=npRsearchNodeFnsRegDocsClick'
                 },
                 template: templates['np-rsearch-node-relations'],
                 link: function(scope, element, attrs){
@@ -152,6 +156,19 @@ define(function(require) {'use strict';
                 // }
                 scope: false,
                 template: templates['np-rsearch-autokad-info']
+            };
+        }])
+        //
+        .directive('npRsearchFnsRegDocsInfo', [function() {
+            return {
+                restrict: 'A',
+                // require:
+                // {
+                //     fnsRegDocsClick: Function,
+                //     fnsRegDocs: Object
+                // }
+                scope: false,
+                template: templates['np-rsearch-fns-reg-docs-info']
             };
         }])
         //
@@ -283,6 +300,9 @@ define(function(require) {'use strict';
                         },
                         setAutokad: function(autokad){
                             scope.autokad = autokad;
+                        },
+                        setFnsRegDocs: function(fnsRegDocs){
+                            scope.fnsRegDocs = fnsRegDocs;
                         }
                     });
 
@@ -296,6 +316,9 @@ define(function(require) {'use strict';
                         },
                         autokadClick: function(){
                             $rootScope.$emit('np-rsearch-node-form-autokad-click', scope.node);
+                        },
+                        fnsRegDocsClick: function(){
+                            $rootScope.$emit('np-rsearch-node-form-fns-reg-docs-click', scope.node);
                         }
                     }, i18n.translateFuncs);
 
