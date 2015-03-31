@@ -31,6 +31,96 @@ msgctxt "Прямой эфир Системы комментариев"
 msgid "Прямой эфир"
 msgstr ""
 
+#: ../src/extraneous/fns/reg_docs/company/views/view.html:1
+#: ../src/rsearch/views/rsearch-navigation.html:1
+msgid "Ожидайте..."
+msgstr ""
+
+#: ../src/extraneous/fns/reg_docs/company/views/view.html:1
+#: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
+msgid "NG_PLURALIZE::FNS_REG_DOC_COUNT"
+msgstr ""
+
+#: ../src/extraneous/fns/reg_docs/company/views/view.html:1
+msgid "Поиск документов..."
+msgstr ""
+
+#: ../src/extraneous/fns/reg_docs/company/views/view.html:1
+msgid "Поиск на сайте ФНС"
+msgstr ""
+
+#: ../src/extraneous/fns/reg_docs/company/views/view.html:1
+msgctxt "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
+msgid "Сведения о юридическом лице"
+msgstr ""
+
+#: ../src/extraneous/fns/reg_docs/company/views/view.html:1
+msgctxt "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
+msgid "Сведения о поданном заявлении"
+msgstr ""
+
+#: ../src/extraneous/fns/reg_docs/company/views/view.html:1
+msgctxt "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
+msgid "Сведения о представлении документов"
+msgstr ""
+
+#: ../src/extraneous/fns/reg_docs/company/views/view.html:1
+msgctxt "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
+msgid "Наименование налогового органа"
+msgstr ""
+
+#: ../src/extraneous/fns/reg_docs/company/views/view.html:1
+msgctxt "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
+msgid "Сведения о решении"
+msgstr ""
+
+#: ../src/extraneous/fns/reg_docs/company/views/view.html:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgid "ОГРН"
+msgstr ""
+
+#: ../src/extraneous/fns/reg_docs/company/views/view.html:1
+msgctxt "Сведения о поданном заявлении. ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
+msgid "Форма заявления"
+msgstr ""
+
+#: ../src/extraneous/fns/reg_docs/company/views/view.html:1
+msgctxt "Сведения о поданном заявлении. ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
+msgid "Вид изменений"
+msgstr ""
+
+#: ../src/extraneous/fns/reg_docs/company/views/view.html:1
+msgctxt "Сведения о представлении документов. ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
+msgid "Способ представления"
+msgstr ""
+
+#: ../src/extraneous/fns/reg_docs/company/views/view.html:1
+msgctxt "Сведения о представлении документов. ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
+msgid "Входящий номер"
+msgstr ""
+
+#: ../src/extraneous/fns/reg_docs/company/views/view.html:1
+msgid "Документов для государственной регистрации не найдено"
+msgstr ""
+
+#: ../src/extraneous/fns/reg_docs/company/views/view.html:1
+#: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
+msgctxt "Поиск в ФНС"
+msgid "Поиск"
+msgstr ""
+
+#: ../src/extraneous/fns/reg_docs/company/views/view.html:1
+#: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
+msgctxt "Поиск в ФНС"
+msgid "документов для государственной регистрации"
+msgstr ""
+
+#: ../src/extraneous/fns/reg_docs/company/views/view.html:1
+#: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
+msgctxt "Поиск в ФНС"
+msgid "временно недоступен"
+msgstr ""
+
 #: ../src/nkb-app/components/login/views/login-form.html:1
 msgid "Логин"
 msgstr ""
@@ -190,7 +280,7 @@ msgid "руководитель"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
-msgid "сотрудник"
+msgid "контактное лицо"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
@@ -199,7 +289,8 @@ msgid "лот"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
-msgid "участник"
+msgctxt "лот в закупке"
+msgid "лоты"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
@@ -244,6 +335,18 @@ msgstr ""
 msgid "Поиск арбитражных дел..."
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-autokad-info.html:1
+msgid "Найти арбитражные дела"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
+msgid "Поиск документов для государственной регистрации..."
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
+msgid "Найти документы для государственной регистрации"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 msgid "Любой ИНН"
 msgstr ""
@@ -269,8 +372,8 @@ msgstr ""
 msgid "Арбитражные дела"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-navigation.html:1
-msgid "Ожидайте..."
+#: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
+msgid "Документы для государственной регистрации"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-navigation.html:1
@@ -432,10 +535,6 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "основано"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-info.html:1
-msgid "ОГРН"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
@@ -653,6 +752,11 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Иски и судебные решения"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgctxt "Федеральная налоговая служба"
+msgid "ФНС"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1

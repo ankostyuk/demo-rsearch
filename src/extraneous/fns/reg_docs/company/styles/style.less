@@ -1,0 +1,67 @@
+/*
+ */
+
+ @import './config.less';
+
+[np-extraneous-fns-reg-docs-company] {
+    position: relative;
+}
+
+[np-extraneous-fns-reg-docs-company] .mask {
+    position: absolute;
+    z-index: 10;
+    display: none;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+}
+[np-extraneous-fns-reg-docs-company] .mask .message-box {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+}
+[np-extraneous-fns-reg-docs-company] .mask .message {
+    margin-left: -100%;
+}
+[np-extraneous-fns-reg-docs-company].loading .mask {
+    display: block;
+}
+[np-extraneous-fns-reg-docs-company].loading .content {
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+}
+
+[np-extraneous-fns-reg-docs-company] .filters {
+    padding: 10px 0 20px 0;
+}
+[np-extraneous-fns-reg-docs-company] .filters .search-header {
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+[np-extraneous-fns-reg-docs-company] .filters .link-box {
+    padding-top: 5px;
+}
+
+[np-extraneous-fns-reg-docs-company] .search-result table thead th {
+    vertical-align: top;
+}
+/*[np-extraneous-fns-reg-docs-company] .search-result th.col1 {
+    width: 200px;
+}*/
+[np-extraneous-fns-reg-docs-company] .search-result th.col3 {
+    /*width: 130px;*/
+    width: 200px;
+}
+[np-extraneous-fns-reg-docs-company] .search-result th.col4 {
+    /*width: 120px;*/
+    width: 140px;
+}
+[np-extraneous-fns-reg-docs-company] .search-result th.col5 {
+    width: 200px;
+}
+
+[np-extraneous-fns-reg-docs-company] .search-result .empty-result {
+    padding-top: 20px;
+}

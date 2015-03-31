@@ -16,7 +16,8 @@ define(function(require) {'use strict';
         'np.directives':  require('np.directives'),
         'np.filters':     require('np.filters'),
         'nkb.user':       require('nkb.user'),
-        'autokad':        require('autokad')
+        'autokad':        require('autokad'),
+        'fnsRegDocs':     require('nkb.extraneous/fns/reg_docs/company/main')
     };
 
     //
@@ -31,6 +32,7 @@ define(function(require) {'use strict';
         'np-rsearch-node-list':                     require('text!./views/rsearch-node-list.html'),
         'np-rsearch-user-product-limits-info':      require('text!./views/rsearch-user-product-limits-info.html'),
         'np-rsearch-autokad-info':                  require('text!./views/rsearch-autokad-info.html'),
+        'np-rsearch-fns-reg-docs-info':             require('text!./views/rsearch-fns-reg-docs-info.html'),
         'np-rsearch-node-form':                     require('text!./views/rsearch-node-form.html')
     };
 
@@ -93,11 +95,13 @@ define(function(require) {'use strict';
                 restrict: 'A',
                 scope: {
                     node: '=npRsearchNodeRelations',
-                    autokad: '=npRsearchNodeRelationsAutokad',
                     active: '=npRsearchNodeRelationsActive',
                     relationsClick: '=npRsearchNodeRelationsClick',
                     productClick: '=npRsearchNodeProductClick',
-                    autokadClick: '=npRsearchNodeAutokadClick'
+                    autokad: '=npRsearchNodeRelationsAutokad',
+                    autokadClick: '=npRsearchNodeAutokadClick',
+                    fnsRegDocs: '=npRsearchNodeRelationsFnsRegDocs',
+                    fnsRegDocsClick: '=npRsearchNodeFnsRegDocsClick'
                 },
                 template: templates['np-rsearch-node-relations'],
                 link: function(scope, element, attrs){
@@ -155,6 +159,19 @@ define(function(require) {'use strict';
             };
         }])
         //
+        .directive('npRsearchFnsRegDocsInfo', [function() {
+            return {
+                restrict: 'A',
+                // require:
+                // {
+                //     fnsRegDocsClick: Function,
+                //     fnsRegDocs: Object
+                // }
+                scope: false,
+                template: templates['np-rsearch-fns-reg-docs-info']
+            };
+        }])
+        //
         .factory('npRsearchViews', ['$log', '$compile', '$rootScope', '$timeout', '$window', 'nkbUser', function($log, $compile, $rootScope, $timeout, $window, nkbUser){
 
             var windowElement   = angular.element($window),
@@ -203,7 +220,7 @@ define(function(require) {'use strict';
                         scrollMargin        = 5; // TODO взять из CSS
 
                     _.extend(view, {
-                        reset: function(nodeList, noMore, pageHandler){
+                        reset: function(nodeList, noMore, pageHandler) {
                             scope.nodeList = nodeList;
                             scope.targetInfo = null;
 
@@ -213,14 +230,14 @@ define(function(require) {'use strict';
 
                             refresh();
                         },
-                        clear: function(){
+                        clear: function() {
                             scope.nodeList = null;
 
                             internalDisabled = false;
                             noNextPage = false;
                             nextPageHandler = null;
                         },
-                        scrollToNode: function(node){
+                        scrollToNode: function(node) {
                             $timeout(function(){
                                 var nodeElement = view.element.find('[node-id="' + node._id + '"]');
 
@@ -233,10 +250,10 @@ define(function(require) {'use strict';
                                 }, 200);
                             });
                         },
-                        showItemNumber: function(show){
+                        showItemNumber: function(show) {
                             scope.showItemNumber = show;
                         },
-                        setTargetInfo: function(targetInfo){
+                        setTargetInfo: function(targetInfo) {
                             scope.targetInfo = targetInfo;
                         }
                     });
@@ -275,27 +292,33 @@ define(function(require) {'use strict';
                         scope   = view.scope;
 
                     _.extend(view, {
-                        setNode: function(node){
+                        setNode: function(node) {
                             scope.node = node;
                         },
-                        setFormType: function(formType){
+                        setFormType: function(formType) {
                             scope.formType = formType;
                         },
-                        setAutokad: function(autokad){
+                        setAutokad: function(autokad) {
                             scope.autokad = autokad;
+                        },
+                        setFnsRegDocs: function(fnsRegDocs){
+                            scope.fnsRegDocs = fnsRegDocs;
                         }
                     });
 
                     _.extend(scope, {
                         user: nkbUser.user(),
-                        relationsClick: function(direction, relationType){
+                        relationsClick: function(direction, relationType) {
                             $rootScope.$emit('np-rsearch-node-form-relations-click', scope.node, direction, relationType);
                         },
-                        productClick: function(productName){
+                        productClick: function(productName) {
                             $rootScope.$emit('np-rsearch-node-form-product-click', productName, scope.node);
                         },
-                        autokadClick: function(){
+                        autokadClick: function() {
                             $rootScope.$emit('np-rsearch-node-form-autokad-click', scope.node);
+                        },
+                        fnsRegDocsClick: function(){
+                            $rootScope.$emit('np-rsearch-node-form-fns-reg-docs-click', scope.node);
                         }
                     }, i18n.translateFuncs);
 

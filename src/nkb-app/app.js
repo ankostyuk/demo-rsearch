@@ -120,6 +120,10 @@ define(function(require) {'use strict';
             gettingCaseCount: false
         })
         //
+        .constant('npRsearchFnsRegDocsConfig', {
+            gettingDocCount: true
+        })
+        //
         .constant('angularMomentConfig', {
             timezone: 'Europe/Moscow'
         })

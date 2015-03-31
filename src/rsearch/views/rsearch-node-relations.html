@@ -59,6 +59,12 @@
             <li np-rsearch-autokad-info></li>
         </ul>
     </div>
+    <div class="relations-block" ng-show="user.isAuthenticated()">
+        <h5 class="relations-block-header">${_trc("ФНС", "Федеральная налоговая служба")}</h5>
+        <ul class="unstyled">
+            <li np-rsearch-fns-reg-docs-info></li>
+        </ul>
+    </div>
     <a class="action relations-product shadow-lift-lb-corner shadow-strong" ng-click="productClick('relations_find_related')">${_tr("Анализ аффилированных лиц")}</a>
 </div>
 

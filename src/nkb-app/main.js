@@ -13,6 +13,7 @@ var i18nBundles = [
     'text!src/l10n/ui/bundle.json',
     'text!src/l10n/ui_keys/bundle.json',
     'text!src/l10n/okato_region/bundle.json',
+    'text!src/l10n/fns_company_application_form/bundle.json'
 ];
 
 //
@@ -96,6 +97,9 @@ root._RESOURCES_CONFIG = {
         name: 'nkb.comment',
         location: 'src/comment',
         main: 'comment'
+    }, {
+        name: 'nkb.extraneous',
+        location: 'src/extraneous'
     }, {
         name: 'nkb.user',
         location: 'external_components/nullpointer-commons/nkb/user',

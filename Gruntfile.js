@@ -41,6 +41,16 @@ module.exports = function(grunt) {
         baseLang:       buildMeta.langs[0],
         langs:          buildMeta.langs
     });
+    _.deepSet(gruntConfig, 'i18n.fns_company_application_form.options', {
+        mode:           'simple',
+        pattern:        '**/*.txt',
+        inputDir:       path.resolve(__dirname, 'src/extraneous/fns/i18n/company_application_form/src'),
+        inputRootPath:  path.resolve(__dirname, ''),
+        outputDir:      path.resolve(__dirname, 'src/extraneous/fns/i18n/company_application_form'),
+        bundleDir:      path.resolve(__dirname, 'src/l10n/fns_company_application_form'),
+        baseLang:       buildMeta.langs[0],
+        langs:          buildMeta.langs
+    });
 
     webapp.initGrunt(grunt, gruntConfig);
 };

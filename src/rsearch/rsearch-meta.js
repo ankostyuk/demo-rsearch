@@ -202,6 +202,11 @@ define(function(require) {'use strict';
                             ['COMMISSION_MEMBER', 'out'],
                             ['EMPLOYEE', 'out']
                         ]);
+                    } else
+                    // закупка
+                    if (node._type === 'PURCHASE') {
+                        node.currency = node.currency || appConfig.meta.defaultCurrency;
+                        node.__lotMap = _.indexBy(node.lots, 'lot');
                     }
 
                     // история?
@@ -276,7 +281,7 @@ define(function(require) {'use strict';
             return metaHelper;
         }])
         //
-        .filter('targetRelationsInfo', ['$filter', 'appConfig', function($filter, appConfig){
+        .filter('targetRelationsInfo', ['$log', '$filter', 'appConfig', function($log, $filter, appConfig){
             // COMPANY-COMPANY
             //      FOUNDER_COMPANY
             //          <доля %>
@@ -320,7 +325,8 @@ define(function(require) {'use strict';
                     return null;
                 }
 
-                var nbsp = ' ';
+                var nbsp    = ' ',
+                    separator     = ', ';
 
                 var SHOW_TYPES = {
                     'FOUNDER_COMPANY': {
@@ -395,19 +401,22 @@ define(function(require) {'use strict';
                     return relation._type === data.relationInfo.relationType;
                 }
 
-                function getRelationText(relation, properties) {
-                    var t = [];
+                function getRelationText(relation, properties, sep) {
+                    var t = [],
+                        value, v;
 
                     _.each(properties, function(p){
-                        if (relation[p.name]) {
-                            var v = p.filter ? p.filter(relation[p.name]) : relation[p.name];
+                        value = relation[p.name] || (p.alternateData && p.alternateData[p.name]);
+
+                        if (value) {
+                            v = p.filter ? p.filter(value) : value;
                             if (v) {
                                 t.push(v);
                             }
                         }
                     });
 
-                    return t.join(', ');
+                    return t.join(sep || separator);
                 }
 
                 function getFounderText(relation) {
@@ -433,7 +442,7 @@ define(function(require) {'use strict';
                                 }
                             });
 
-                            return v.join(', ');
+                            return v.join(separator);
                         }
                     }, {
                         name: 'shareCapital',
@@ -473,30 +482,70 @@ define(function(require) {'use strict';
                         return t;
                     }
 
-                    return isTargetRelation(relation) ? '' : _tr("сотрудник");
+                    // TODO проверить возникает такая ситуация?
+                    return isTargetRelation(relation) ? '' : _tr("контактное лицо");
                 }
 
                 function getParticipantText(relation) {
-                    var t = getRelationText(relation, [{
-                        name: 'status',
-                        filter: _tr
-                    }, {
-                        name: 'price',
-                        filter: function(v) {
-                            return $filter('number')(v, 0) + nbsp + _tr(data.node.currency || node.currency || appConfig.meta.defaultCurrency);
-                        }
-                    }, {
-                        name: 'lot',
-                        filter: function(v) {
-                            return _trc("лот", "лот в закупке") + nbsp + v;
-                        }
-                    }]);
+                    var purchaseNode = (data.node._type === 'PURCHASE' ? data.node : (node._type === 'PURCHASE' ? node : null));
 
-                    if (t) {
-                        return t;
-                    }
+                    var statusOrder = {
+                        'WIN': 0,
+                        'PARTICIPANT': 1,
+                        'NOT_ADMITTED': 2
+                    };
 
-                    return isTargetRelation(relation) ? '' : _tr("участник");
+                    var ts = [],
+                        byStatusMap = {},
+                        alternateData, t,
+                        byStatus, status, byStatusList,
+                        price, lotNumber;
+
+                    _.each(relation.lots, function(lot){
+                        alternateData = (
+                            purchaseNode.__lotMap[lot.lot] &&
+                            purchaseNode.__lotMap[lot.lot].applications &&
+                            purchaseNode.__lotMap[lot.lot].applications[lot.application]
+                        ) || {};
+
+                        status      = lot['status'] || alternateData['status'] || 'PARTICIPANT';
+                        price       = lot['price'] || alternateData['price'] || 0;
+                        lotNumber   = lot['lot'];
+
+                        byStatus = byStatusMap[status];
+
+                        if (byStatus) {
+                            byStatus.totalPrice += price;
+                            byStatus.lots.push(lotNumber);
+                        } else {
+                            byStatusMap[status] = {
+                                status: status,
+                                totalPrice: price,
+                                lots: [lotNumber]
+                            };
+                        }
+                    });
+
+                    byStatusList = _.sortBy(byStatusMap, function(s, k){
+                        return statusOrder[k];
+                    });
+
+                    _.each(byStatusList, function(s){
+                        t = [_tr(s.status)];
+
+                        if (s.totalPrice) {
+                            t.push($filter('number')(s.totalPrice, 0) + nbsp + _tr(purchaseNode.currency));
+                        }
+
+                        t.push(
+                            (_.size(s.lots) === 1 ? _trc("лот", "лот в закупке") : _trc("лоты", "лот в закупке")) +
+                            nbsp + s.lots.join(separator)
+                        );
+
+                        ts.push(t.join(nbsp));
+                    });
+
+                    return ts.join(separator);
                 }
 
                 function getCommissionMemberText(relation) {
@@ -550,7 +599,7 @@ define(function(require) {'use strict';
                     texts.push(getInnText(inn));
                 }
 
-                return _.capitalize(texts.join(', '));
+                return _.capitalize(texts.join(separator));
             };
         }]);
     //

@@ -1,0 +1,95 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: i18n\n"
+"Report-Msgid-Bugs-To: feedback@null-pointer.ru\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: ankostyuk <andrew.kostyuk@gmail.com>\n"
+"Language-Team: NULLPOINTER <feedback@null-pointer.ru>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"CLDR_PLURAL_FORMS_FORMAT: one{0}other{1}\n"
+"X-Generator: Poedit 1.7.4\n"
+
+#: ../src/extraneous/fns/i18n/company_application_form/src/keys.txt:1
+#, fuzzy
+msgid "Р11001"
+msgstr "Заявление о создании ЮЛ"
+
+#: ../src/extraneous/fns/i18n/company_application_form/src/keys.txt:1
+#, fuzzy
+msgid "Р12001"
+msgstr "Заявление о создании ЮЛ при реорганизации"
+
+#: ../src/extraneous/fns/i18n/company_application_form/src/keys.txt:1
+#, fuzzy
+msgid "Р12002"
+msgstr "Заявление о гос. регистрации АО, создаваемого путем реорганизации в форме разделения или выделения"
+
+#: ../src/extraneous/fns/i18n/company_application_form/src/keys.txt:1
+#, fuzzy
+msgid "Р12003"
+msgstr "Заявление-уведомление о начале процедуры реорганизации"
+
+#: ../src/extraneous/fns/i18n/company_application_form/src/keys.txt:1
+#, fuzzy
+msgid "Р13001"
+msgstr "Заявление об изменениях, вносимых в учредительные документы"
+
+#: ../src/extraneous/fns/i18n/company_application_form/src/keys.txt:1
+#, fuzzy
+msgid "Р13002"
+msgstr "Уведомление о внесении изменений в учредительные документы"
+
+#: ../src/extraneous/fns/i18n/company_application_form/src/keys.txt:1
+#, fuzzy
+msgid "Р14001"
+msgstr "Заявление об изменении сведений, не связанных с изменением учредительных документов"
+
+#: ../src/extraneous/fns/i18n/company_application_form/src/keys.txt:1
+#, fuzzy
+msgid "Р14002"
+msgstr "Заявление о нахождении АО в процессе уменьшения УК и/или о стоимости чистых активов АО"
+
+#: ../src/extraneous/fns/i18n/company_application_form/src/keys.txt:1
+#, fuzzy
+msgid "Р15001"
+msgstr "Уведомление о принятии решения о ликвидации ЮЛ"
+
+#: ../src/extraneous/fns/i18n/company_application_form/src/keys.txt:1
+#, fuzzy
+msgid "Р15002"
+msgstr "Уведомление о формировании ликвидационной комиссии, назначении ликвидатора"
+
+#: ../src/extraneous/fns/i18n/company_application_form/src/keys.txt:1
+#, fuzzy
+msgid "Р15003"
+msgstr "Уведомление о составлении промежуточного ликвидационного баланса"
+
+#: ../src/extraneous/fns/i18n/company_application_form/src/keys.txt:1
+#, fuzzy
+msgid "Р16001"
+msgstr "Заявление о ликвидации"
+
+#: ../src/extraneous/fns/i18n/company_application_form/src/keys.txt:1
+#, fuzzy
+msgid "Р16002"
+msgstr "Заявление о прекращении унитарного предприятия"
+
+#: ../src/extraneous/fns/i18n/company_application_form/src/keys.txt:1
+#, fuzzy
+msgid "Р16003"
+msgstr "Заявление о прекращении деятельности при присоединении"
+
+#: ../src/extraneous/fns/i18n/company_application_form/src/keys.txt:1
+#, fuzzy
+msgid "Р17001"
+msgstr "Сообщение о ЮЛ, созданном до 01.07.2002"
+
+#: ../src/extraneous/fns/i18n/company_application_form/src/keys.txt:1
+#, fuzzy
+msgid "Р18001"
+msgstr "Перерегистрация компаний Крыма и Севастополя"

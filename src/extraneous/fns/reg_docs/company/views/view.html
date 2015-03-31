@@ -1,0 +1,56 @@
+<div class="mask"><div class="message-box"><span class="message">${_tr("Ожидайте...")}</span></div></div>
+<div class="content">
+    <div class="row filters">
+        <h5 class="span7 search-header nowrap">
+            <div ng-hide="search.isEmptyResult()"><np-pluralize count="search.getTotal()" when="::${_tr("NG_PLURALIZE::FNS_REG_DOC_COUNT")}"></np-pluralize></div>
+            <div ng-show="search.isEmptyResult()">${_tr("Поиск документов...")}</div>
+        </h5>
+        <div class="align-right link-box nowrap">
+            <a class="underline" href="https://service.nalog.ru/uwsfind.do" target="_blank">${_tr("Поиск на сайте ФНС")}</a>
+        </div>
+    </div>
+    <div class="search-result">
+        <table class="table table-striped" ng-hide="search.isEmptyResult()">
+            <thead>
+                <tr>
+                    <!--<th class="col1">${_trc("Сведения о юридическом лице", "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации")}</th>-->
+                    <th class="col2">${_trc("Сведения о поданном заявлении", "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации")}</th>
+                    <th class="col3">${_trc("Сведения о представлении документов", "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации")}</th>
+                    <th class="col4">${_trc("Наименование налогового органа", "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации")}</th>
+                    <th class="col5">${_trc("Сведения о решении", "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации")}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in search.result.list track by $index">
+                    <!--<td>
+                        {{item.name}}<br>
+                        ${_tr("ОГРН")} {{item.ogrn}}
+                    </td>-->
+                    <td>
+                        ${_trc("Форма заявления", "Сведения о поданном заявлении. ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации")}: {{item.form}}<br>
+                        <span ng-hide="item.type">{{_tr(item.form)}}</span>
+                        <span ng-show="item.type">${_trc("Вид изменений", "Сведения о поданном заявлении. ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации")}: {{item.type}}</span>
+                    </td>
+                    <td>
+                        {{item.submissionDate}}<br>
+                        ${_trc("Способ представления", "Сведения о представлении документов. ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации")}: {{item.submissionType}}<br>
+                        ${_trc("Входящий номер", "Сведения о представлении документов. ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации")}: {{item.submissionId}}
+                    </td>
+                    <td>
+                        {{item.ifns}}
+                    </td>
+                    <td>
+                        {{item.readyDate}}<br>
+                        {{item.decision}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="align-center empty-result muted" ng-show="!search.isNoResult() && search.isEmptyResult() && !search.hasError()">${_tr("Документов для государственной регистрации не найдено")}</div>
+        <div class="align-center empty-result" ng-show="search.hasError()">
+            ${_trc("Поиск", "Поиск в ФНС")}
+            <a class="underline" href="https://service.nalog.ru/uwsfind.do" target="_blank">${_trc("документов для государственной регистрации", "Поиск в ФНС")}</a></br>
+            ${_trc("временно недоступен", "Поиск в ФНС")}
+        </div>
+    </div>
+</div>
