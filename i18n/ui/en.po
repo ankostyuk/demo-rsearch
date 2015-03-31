@@ -461,9 +461,8 @@ msgid "Найти"
 msgstr "Search"
 
 #: ../src/rsearch/views/rsearch-autokad-info.html:1
-#, fuzzy
 msgid "Найти арбитражные дела"
-msgstr "Arbitration cases"
+msgstr ""
 
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
 msgid "Найти документы для государственной регистрации"
@@ -539,10 +538,9 @@ msgstr "Search"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
-#, fuzzy
 msgctxt "Поиск в ФНС"
 msgid "Поиск"
-msgstr "Search"
+msgstr ""
 
 #: ../src/rsearch/views/rsearch-autokad-info.html:1
 msgid "Поиск арбитражных дел..."
@@ -558,14 +556,12 @@ msgid "Поиск документов для государственной р�
 msgstr ""
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-#, fuzzy
 msgid "Поиск документов..."
-msgstr "Searching..."
+msgstr ""
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-#, fuzzy
 msgid "Поиск на сайте ФНС"
-msgstr "Searching..."
+msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgctxt "Наименование приложения поиска"
@@ -612,16 +608,14 @@ msgid "Сведения о представлении документов"
 msgstr ""
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-#, fuzzy
 msgctxt "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
 msgid "Сведения о решении"
-msgstr "Claims and court decisions"
+msgstr ""
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-#, fuzzy
 msgctxt "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
 msgid "Сведения о юридическом лице"
-msgstr "Founder — person"
+msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
@@ -663,10 +657,9 @@ msgid "Учредитель — физическое лицо"
 msgstr "Founder — person"
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgctxt "Федеральная налоговая служба"
 msgid "ФНС"
-msgstr "INN"
+msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "Финансовая отчётность"
@@ -687,10 +680,9 @@ msgstr "affiliate"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
-#, fuzzy
 msgctxt "Поиск в ФНС"
 msgid "временно недоступен"
-msgstr "Login temporarily unavailable"
+msgstr ""
 
 #: ../src/rsearch/views/rsearch-autokad-info.html:1
 msgctxt "Поиск в картотеке арбитражных дел временно недоступен"
@@ -733,9 +725,8 @@ msgid "картотеке арбитражных дел"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
-#, fuzzy
 msgid "контактное лицо"
-msgstr "affiliate"
+msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgctxt "лот в закупке"
