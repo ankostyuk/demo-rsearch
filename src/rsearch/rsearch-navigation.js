@@ -468,45 +468,38 @@ define(function(require) {'use strict';
                             return;
                         }
 
-                        loading(function(done){
-                            // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
-                            nkbUser.fetchUser()
-                                .then(egrulList, egrulList)
-                                .then(complete, complete);
+                        nodeListView.clear();
+                        clearAutokad();
+                        clearFnsRegDocs();
+                        clearNodeRelationsFilter();
+                        hideSearchFilters();
+                        hideRelationsFilters();
+                        clearMessages();
 
-                            function egrulList() {
-                                nodeFormEgrulList(node);
-                            }
+                        nodeFormView.setFormType(formType);
+                        nodeFormView.setNode(node);
+                        nodeFormView.show();
 
-                            function complete() {
-                                nodeListView.clear();
-                                clearAutokad();
-                                clearFnsRegDocs();
-                                clearNodeRelationsFilter();
-                                hideSearchFilters();
-                                hideRelationsFilters();
-                                clearMessages();
+                        pushNodeFormBreadcrumb(formType, node, breadcrumb);
 
-                                nodeFormView.setNode(node);
-                                nodeFormView.setFormType(formType);
-                                nodeFormView.show();
+                        nodeFormView.scrollTop();
 
-                                pushNodeFormBreadcrumb(formType, node, breadcrumb);
+                        if (!noHistory) {
+                            checkNodeFormToHistory();
+                        }
 
-                                nodeFormView.scrollTop();
+                        showAutokad(formType, node);
+                        showFnsRegDocs(formType, node);
 
-                                if (!noHistory) {
-                                    checkNodeFormToHistory();
-                                }
+                        $rootScope.$emit('np-rsearch-navigation-node-form', node);
 
-                                showAutokad(formType, node);
-                                showFnsRegDocs(formType, node);
+                        //
+                        // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
+                        nkbUser.fetchUser().then(egrulList, egrulList);
 
-                                $rootScope.$emit('np-rsearch-navigation-node-form', node);
-
-                                done();
-                            }
-                        });
+                        function egrulList() {
+                            nodeFormEgrulList(node);
+                        }
                     }
 
                     /*
