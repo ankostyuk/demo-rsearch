@@ -52,6 +52,10 @@ define(function(require) {'use strict';
                     return true;
                 },
                 //
+                hasCheckAccentedResult: function(target, mode) {
+                    return true;
+                },
+                //
                 resetNodeList: function(nodeListView) {
                 },
                 //
@@ -796,6 +800,10 @@ define(function(require) {'use strict';
                      *
                      */
                     function checkAccentedResultBySearch(activeResult) {
+                        if (!navigationProxy.hasCheckAccentedResult('bySearch', scope.mode)) {
+                            return false;
+                        }
+
                         var individualResult = search.byNodeTypes['INDIVIDUAL'].result,
                             node;
 
@@ -817,6 +825,10 @@ define(function(require) {'use strict';
                     }
 
                     function checkAccentedResultByNodeForm(formType, node, breadcrumb) {
+                        if (!navigationProxy.hasCheckAccentedResult('byNodeForm', scope.mode)) {
+                            return false;
+                        }
+
                         if (!npRsearchNavigationHelper.isSimpleNodeForm(node)) {
                             return false;
                         }
@@ -830,6 +842,10 @@ define(function(require) {'use strict';
                     }
 
                     function checkAccentedResultByRelations(byRelations) {
+                        if (!navigationProxy.hasCheckAccentedResult('byRelations', scope.mode)) {
+                            return false;
+                        }
+
                         if (!byRelations.result) {
                             return null;
                         }
