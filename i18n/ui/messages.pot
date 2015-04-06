@@ -339,6 +339,31 @@ msgstr ""
 msgid "Найти арбитражные дела"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-egrul-data-update.html:1
+msgid "Обновить данные из ЕГРЮЛ"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-egrul-data-update.html:1
+msgctxt "обработка заказа (запроса)"
+msgid "обрабатывается..."
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-egrul-data-update.html:1
+msgctxt "актуализация данных"
+msgid "последняя актуализация"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-egrul-data-update.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgctxt "Формат даты: http://momentjs.com/docs/#/displaying/format/"
+msgid "mediumDate"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
 msgid "Поиск документов для государственной регистрации..."
 msgstr ""
@@ -469,16 +494,6 @@ msgid "от"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-#: ../src/rsearch/views/rsearch-node-form.html:1
-#: ../src/rsearch/views/rsearch-node-info.html:1
-#: ../src/rsearch/views/rsearch-node-info.html:1
-#: ../src/rsearch/views/rsearch-node-info.html:1
-#: ../src/rsearch/views/rsearch-node-info.html:1
-msgctxt "Формат даты: http://momentjs.com/docs/#/displaying/format/"
-msgid "mediumDate"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "NG_PLURALIZE::EGRUL_LIST_MORE"
 msgstr ""
 
@@ -489,10 +504,6 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-node-form.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Исполнительные производства"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "ЕГРЮЛ"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1

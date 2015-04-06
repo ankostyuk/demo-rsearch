@@ -216,6 +216,7 @@ msgstr "{'one': '{} учреждённая компания', 'few': '{} учр�
 msgid "NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY"
 msgstr "{'one': '{} правопреемник', 'few': '{} правопреемника', 'many': '{} правопреемников', 'other': '{} правопреемника'}"
 
+#: ../src/rsearch/views/rsearch-egrul-data-update.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgctxt "Формат даты: http://momentjs.com/docs/#/displaying/format/"
@@ -342,10 +343,6 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
 msgid "Документы для государственной регистрации"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "ЕГРЮЛ"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -491,6 +488,10 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ОКПО"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-egrul-data-update.html:1
+msgid "Обновить данные из ЕГРЮЛ"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
@@ -728,6 +729,11 @@ msgctxt "лот в закупке"
 msgid "лоты"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-egrul-data-update.html:1
+msgctxt "обработка заказа (запроса)"
+msgid "обрабатывается..."
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "основано"
 msgstr ""
@@ -735,6 +741,11 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgctxt "от такой-то даты"
 msgid "от"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-egrul-data-update.html:1
+msgctxt "актуализация данных"
+msgid "последняя актуализация"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1

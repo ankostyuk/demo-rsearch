@@ -3,7 +3,7 @@
  * @desc RequireJS/Angular module
  * @author ankostyuk
  */
-// TODO объеденить код со "связями"
+// TODO объеденить relation/.../meta.js и rsearch-meta.js
 define(function(require) {'use strict';
 
                   require('lodash');

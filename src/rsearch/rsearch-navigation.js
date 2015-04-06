@@ -20,17 +20,93 @@ define(function(require) {'use strict';
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npL10n', 'NpRsearchAutokad', 'NpRsearchFnsRegDocsCompany', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npL10n, NpRsearchAutokad, NpRsearchFnsRegDocsCompany){
+        .factory('npRsearchNavigationHelper', ['$log', function($log){
+
+            var SIMPLE_NODE_FORM = {
+                'ADDRESS': {
+                    relation: {
+                        type: 'ADDRESS',
+                        direction: 'children'
+                    }
+                },
+                'PHONE': {
+                    relation: {
+                        type: 'PHONE',
+                        direction: 'children'
+                    }
+                }
+            };
+
+            //
+            var navigationProxy = {
+                //
+                getScrollContainer: function() {
+                    return null;
+                },
+                //
+                getDataUpdateHelper: function() {
+                    return null;
+                },
+                //
+                rsearchInputRefresh: function(text, ui) {
+                    return true;
+                },
+                //
+                resetNodeList: function(nodeListView) {
+                },
+                //
+                showNodeList: function(nodeList, addNodeList, nodeListView) {
+                },
+                //
+                showNodeForm: function(node, formType, nodeFormView) {
+                },
+                //
+                nodeHeaderClick: function(info) {
+                    return false;
+                },
+                //
+                nodeClick: function(info) {
+                    return true;
+                }
+            };
+
+            // API
+            return {
+                getNavigationProxy: function() {
+                    return navigationProxy;
+                },
+
+                setNavigationProxy: function(proxy) {
+                    navigationProxy = proxy;
+                },
+
+                isSimpleNodeForm: function(node) {
+                    return _.has(SIMPLE_NODE_FORM, node._type);
+                },
+
+                getSimpleNodeFormRelation: function(node) {
+                    return SIMPLE_NODE_FORM[node._type].relation;
+                }
+            };
+        }])
+        //
+        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npL10n', 'NpRsearchAutokad', 'NpRsearchFnsRegDocsCompany', 'npRsearchNavigationHelper', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npL10n, NpRsearchAutokad, NpRsearchFnsRegDocsCompany, npRsearchNavigationHelper){
             return {
                 restrict: 'A',
                 template: template,
-                scope: {},
+                scope: {
+                    npRsearchNavigationBrowserHistory: '='
+                },
                 link: function(scope, element, attrs) {
+                    //
+                    var navigationProxy = npRsearchNavigationHelper.getNavigationProxy();
+
                     //
                     var windowElement   = angular.element($window),
                         viewsElement    = element.find('.views'),
-                        nodeListView    = npRsearchViews.createNodeListView(viewsElement, scope),
-                        nodeFormView    = npRsearchViews.createNodeFormView(viewsElement, scope);
+                        nodeListView    = npRsearchViews.createNodeListView(viewsElement, scope, navigationProxy),
+                        nodeFormView    = npRsearchViews.createNodeFormView(viewsElement, scope, navigationProxy),
+                        browserHistory  = _.isBoolean(scope.npRsearchNavigationBrowserHistory) ? scope.npRsearchNavigationBrowserHistory : true;
 
                     var autokad = new NpRsearchAutokad();
                     nodeFormView.setAutokad(autokad);
@@ -120,10 +196,12 @@ define(function(require) {'use strict';
 
                     function pushNodeList(object, callback) {
                         if (object.result) {
+                            var _pushNodeList = [];
                             _.each(object.result.list, function(node){
+                                _pushNodeList.push(node);
                                 object.nodeList.push(node);
                             });
-                            callback(noMore(object.result));
+                            callback(noMore(object.result), _pushNodeList);
                         } else {
                             callback(true);
                         }
@@ -143,7 +221,11 @@ define(function(require) {'use strict';
                         showResult: showSearchResult
                     };
 
-                    $rootScope.$on('np-rsearch-input-refresh', function(e, text, initiator){
+                    $rootScope.$on('np-rsearch-input-refresh', function(e, text, initiator, ui){
+                        if (navigationProxy.rsearchInputRefresh(text, ui) === false) {
+                            return;
+                        }
+
                         if (initiator !== history) {
                             functionAfterInit(doSearch, [text]);
                         }
@@ -154,6 +236,8 @@ define(function(require) {'use strict';
                     }
 
                     function doSearch(query) {
+                        scope.mode = 'SEARCH';
+
                         search.query = query;
 
                         clearAutokad();
@@ -281,7 +365,8 @@ define(function(require) {'use strict';
                     }
 
                     function showSearchResult(nodeType, breadcrumb) {
-                        var byNodeType = search.byNodeTypes[nodeType];
+                        var byNodeType      = search.byNodeTypes[nodeType],
+                            lastBreadcrumb  = getLastBreadcrumb();
 
                         setSearchResult(nodeType, breadcrumb);
 
@@ -293,6 +378,10 @@ define(function(require) {'use strict';
                         clearMessages();
 
                         resetSearchNodeListView(byNodeType);
+
+                        highlightNodeInListByBreadcrumb(lastBreadcrumb, function(node){
+                            return nodeType === node._type;
+                        });
                     }
 
                     function resetSearchNodeListView(byNodeType) {
@@ -334,8 +423,16 @@ define(function(require) {'use strict';
                         egrulRequest: null
                     };
 
-                    $rootScope.$on('np-rsearch-node-select', function(e, node){
-                        showNodeForm('MINIREPORT', node);
+                    $rootScope.$on('np-rsearch-node-header-click', function(e, info){
+                        if (navigationProxy.nodeHeaderClick(info) !== false) {
+                            showNodeForm('MINIREPORT', info.node);
+                        }
+                    });
+
+                    $rootScope.$on('np-rsearch-node-click', function(e, info){
+                        if (navigationProxy.nodeClick(info) !== false) {
+                            showNodeForm('MINIREPORT', info.node);
+                        }
                     });
 
                     function nodeFormEgrulList(node) {
@@ -396,7 +493,7 @@ define(function(require) {'use strict';
 
                                 pushNodeFormBreadcrumb(formType, node, breadcrumb);
 
-                                npRsearchViews.scrollTop();
+                                nodeFormView.scrollTop();
 
                                 if (!noHistory) {
                                     checkNodeFormToHistory();
@@ -689,8 +786,11 @@ define(function(require) {'use strict';
                         } : null;
                     }
 
-                    function highlightNodeInListByBreadcrumb(breadcrumb) {
+                    function highlightNodeInListByBreadcrumb(breadcrumb, predicate) {
                         if (breadcrumb && breadcrumb.type === 'NODE_FORM') {
+                            if (_.isFunction(predicate) && !predicate(breadcrumb.data.node)) {
+                                return;
+                            }
                             // TODO Не прокручивать до ноды,
                             // а прокрутить до сохраненного положения прокрутки
                             // и выделить ноду?
@@ -724,17 +824,16 @@ define(function(require) {'use strict';
                     }
 
                     function checkAccentedResultByNodeForm(formType, node, breadcrumb) {
-                        if (node._type === 'ADDRESS') {
-                            pushNodeFormBreadcrumb(formType, node, breadcrumb);
-                            showRelations(node, 'children', 'ADDRESS');
-                            return true;
-                        } else if (node._type === 'PHONE') {
-                            pushNodeFormBreadcrumb(formType, node, breadcrumb);
-                            showRelations(node, 'children', 'PHONE');
-                            return true;
+                        if (!npRsearchNavigationHelper.isSimpleNodeForm(node)) {
+                            return false;
                         }
 
-                        return false;
+                        var relation = npRsearchNavigationHelper.getSimpleNodeFormRelation(node);
+
+                        pushNodeFormBreadcrumb(formType, node, breadcrumb);
+                        showRelations(node, relation.direction, relation.type);
+
+                        return true;
                     }
 
                     function checkAccentedResultByRelations(byRelations) {
@@ -1059,7 +1158,7 @@ define(function(require) {'use strict';
                      */
                     var History = function() {
                         var windowHistory   = $window.history,
-                            isHistory       = windowHistory && windowHistory.pushState,
+                            isHistory       = browserHistory && windowHistory && windowHistory.pushState,
                             // historyId -
                             // Для идентификации истории в контексте только данного приложения,
                             // если в браузерной истории есть состояния от предыдущего выполнения приложения,
@@ -1275,6 +1374,7 @@ define(function(require) {'use strict';
                      *
                      */
                     _.extend(scope, {
+                        mode: null, // 'SEARCH'|'NODE'
                         search: search,
                         isSearch: isSearch,
                         messages: messages,
@@ -1289,12 +1389,33 @@ define(function(require) {'use strict';
                         search.total = null;
 
                         _.each(search.byNodeTypes, function(byNodeType, nodeType){
-                            byNodeType.request.abort();
+                            if (byNodeType.request) {
+                                byNodeType.request.abort();
+                            }
                             byNodeType.total = null;
                         });
 
                         nodeListView.clear();
                     }
+
+                    $rootScope.$on('np-rsearch-navigation-set-node', function(e, node, relation){
+                        scope.mode = 'NODE';
+
+                        clearAutokad();
+                        clearFnsRegDocs();
+                        nodeFormView.hide();
+                        clearBreadcrumbs();
+                        clearNodeRelationsFilter();
+                        hideSearchFilters();
+                        hideRelationsFilters();
+                        clearMessages();
+
+                        showNodeForm('MINIREPORT', node, null, true, true);
+
+                        if (relation && !npRsearchNavigationHelper.isSimpleNodeForm(node)) {
+                            showRelations(node, relation.direction, relation.type);
+                        }
+                    });
 
                     // Выполнить после отработки кода модуля
                     initPromise.then(initSuccess);

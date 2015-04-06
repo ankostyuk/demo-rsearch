@@ -114,7 +114,7 @@
     margin: 0;
 }
 [np-rsearch-navigation] .breadcrumb {
-    margin: 1px 0 23px 0;
+    margin: 0 0 10px 0;
     padding: 0;
     background-color: transparent;
 }
@@ -165,7 +165,7 @@
 }
 [np-rsearch-navigation] [np-rsearch-node-relations] {
     margin-bottom: 25px;
-    padding-top: 15px;
+    padding-top: 13px;
 }
 [np-rsearch-navigation] [np-rsearch-node-relations] .active {
     font-weight: bold;
@@ -354,13 +354,13 @@
 /* np-rsearch-node-form */
 [np-rsearch-node-form] {
     position: relative;
-    padding-top: 10px;
 }
 [np-rsearch-node-form] [np-rsearch-node-history-info] .history-labels {
-    padding: 0 5px 5px 5px;
+    margin-left: -2px;
+    padding: 0 5px 5px 0;
 }
 [np-rsearch-node-form] [np-rsearch-node-info] {
-    padding-bottom: 20px;
+    margin-bottom: 20px;
 }
 [np-rsearch-node-form] [np-rsearch-node-info] .body {
     padding: 5px 7px 0 0;
@@ -369,11 +369,14 @@
     font-size: 150%;
     line-height: 150%;
 }
+[np-rsearch-node-form] [np-rsearch-node-info] .node-header-small {
+    padding-top: 8px;
+}
 [np-rsearch-node-form] [np-rsearch-node-info] .reg-state {
     display: block;
 }
 [np-rsearch-node-form] [np-rsearch-node-relations] {
-    padding: 5px 0 0 0;
+    padding: 13px 0 0 0;
 }
 [np-rsearch-node-form] .np-rsearch-node-info {
     padding: 0 7px 20px 7px;
@@ -431,16 +434,18 @@
     padding-left: 20px;
 }
 [np-rsearch-node-form] .INDIVIDUAL .egrul-products {
-    width: 330px;
+    width: 380px;
+}
+[np-rsearch-node-form] .INDIVIDUAL .egrul-products ul.actions-list > li {
+    margin-bottom: 10px;
 }
 [np-rsearch-node-form] .INDIVIDUAL .extra-search {
-    padding-top: 10px;
-    width: 330px;
+    width: 280px;
     white-space: nowrap;
 }
 
 [np-rsearch-node-form] .PURCHASE [np-rsearch-node-info] {
-    padding-bottom: 0;
+    margin-bottom: 0;
 }
 [np-rsearch-node-form] .PURCHASE .lot-list {
     margin-bottom: 20px;
@@ -757,5 +762,18 @@
     color: @defaultDisabledLightColor;
 }
 [np-rsearch-user-product-limits-info] .info {
+    color: @defaultDisabledColor;
+}
+
+/* np-rsearch-egrul-data-update */
+[np-rsearch-egrul-data-update] .pending-info {
+    display: none;
+    padding-left: 10px;
+    color: @defaultDisabledColor;
+}
+[np-rsearch-egrul-data-update] .PENDING .pending-info {
+    display: inline;
+}
+[np-rsearch-egrul-data-update] .actual-info {
     color: @defaultDisabledColor;
 }

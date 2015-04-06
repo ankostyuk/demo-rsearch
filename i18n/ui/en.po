@@ -216,6 +216,7 @@ msgstr "{'one': '1 established company', 'other': '{} established companies'}"
 msgid "NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY"
 msgstr "{'one': '1 legal successor', 'other': '{} legal successors'}"
 
+#: ../src/rsearch/views/rsearch-egrul-data-update.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgctxt "Формат даты: http://momentjs.com/docs/#/displaying/format/"
@@ -351,10 +352,6 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
 msgid "Документы для государственной регистрации"
 msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "ЕГРЮЛ"
-msgstr "EGRUL"
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgctxt "Заказ продукта НКБ на странице миниотчета"
@@ -500,6 +497,11 @@ msgstr "OGRN"
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ОКПО"
 msgstr "OKPO"
+
+#: ../src/rsearch/views/rsearch-egrul-data-update.html:1
+#, fuzzy
+msgid "Обновить данные из ЕГРЮЛ"
+msgstr "Order EGRUL Report"
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "Объём продаж за последний год"
@@ -738,6 +740,11 @@ msgctxt "лот в закупке"
 msgid "лоты"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-egrul-data-update.html:1
+msgctxt "обработка заказа (запроса)"
+msgid "обрабатывается..."
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "основано"
 msgstr "Est."
@@ -746,6 +753,11 @@ msgstr "Est."
 msgctxt "от такой-то даты"
 msgid "от"
 msgstr "on"
+
+#: ../src/rsearch/views/rsearch-egrul-data-update.html:1
+msgctxt "актуализация данных"
+msgid "последняя актуализация"
+msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "руб."
@@ -775,6 +787,9 @@ msgstr "#"
 #~ msgctxt "Продукты НКБ на главной странице"
 #~ msgid "Анализ аффилированных лиц"
 #~ msgstr "Affiliated Network Analysis"
+
+#~ msgid "ЕГРЮЛ"
+#~ msgstr "EGRUL"
 
 #~ msgctxt "Продукты НКБ на главной странице"
 #~ msgid ""

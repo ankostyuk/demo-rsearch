@@ -33,6 +33,7 @@ define(function(require) {'use strict';
         'np-rsearch-user-product-limits-info':      require('text!./views/rsearch-user-product-limits-info.html'),
         'np-rsearch-autokad-info':                  require('text!./views/rsearch-autokad-info.html'),
         'np-rsearch-fns-reg-docs-info':             require('text!./views/rsearch-fns-reg-docs-info.html'),
+        'np-rsearch-egrul-data-update':             require('text!./views/rsearch-egrul-data-update.html'),
         'np-rsearch-node-form':                     require('text!./views/rsearch-node-form.html')
     };
 
@@ -66,8 +67,21 @@ define(function(require) {'use strict';
                 link: function(scope, element, attrs){
                     _.extend(scope, {
                         user: nkbUser.user(),
-                        toggleSelect: function() {
-                            $rootScope.$emit('np-rsearch-node-select', scope.node, element);
+                        nodeClick: function(e) {
+                            $rootScope.$emit('np-rsearch-node-click', {
+                                node: scope.node,
+                                element: element,
+                                event: e,
+                                ui: 'npRsearchNodePlain'
+                            });
+                        },
+                        nodeHeaderClick: function(e) {
+                            $rootScope.$emit('np-rsearch-node-header-click', {
+                                node: scope.node,
+                                element: element,
+                                event: e,
+                                ui: 'npRsearchNodePlain'
+                            });
                         }
                     }, i18n.translateFuncs);
                 }
@@ -172,10 +186,22 @@ define(function(require) {'use strict';
             };
         }])
         //
+        .directive('npRsearchEgrulDataUpdate', [function() {
+            return {
+                restrict: 'A',
+                // require:
+                // {
+                //     dataUpdateHelper: Object,
+                //     node: Object
+                // }
+                scope: false,
+                template: templates['np-rsearch-egrul-data-update']
+            };
+        }])
+        //
         .factory('npRsearchViews', ['$log', '$compile', '$rootScope', '$timeout', '$window', 'nkbUser', function($log, $compile, $rootScope, $timeout, $window, nkbUser){
 
-            var windowElement   = angular.element($window),
-                htmlbodyElement = $('html, body');
+            var htmlbodyElement = $('html, body');
 
             function createView(name, parent, parentScope, scopeData) {
                 var scope = parentScope.$new(true);
@@ -211,13 +237,14 @@ define(function(require) {'use strict';
             //
             return {
 
-                createNodeListView: function(parent, parentScope, options) {
+                createNodeListView: function(parent, parentScope, proxy) {
                     var view                = createView('np-rsearch-node-list', parent, parentScope),
                         scope               = view.scope,
                         internalDisabled    = false,
                         noNextPage          = false,
                         nextPageHandler     = null,
-                        scrollMargin        = 5; // TODO взять из CSS
+                        scrollMargin        = 5, // TODO взять из CSS
+                        scrollDuration      = 200;
 
                     _.extend(view, {
                         reset: function(nodeList, noMore, pageHandler) {
@@ -228,7 +255,8 @@ define(function(require) {'use strict';
                             noNextPage = noMore;
                             nextPageHandler = pageHandler;
 
-                            refresh();
+                            resetNodeListProxy();
+                            showNodeListProxy(scope.nodeList, scope.nodeList);
                         },
                         clear: function() {
                             scope.nodeList = null;
@@ -237,17 +265,24 @@ define(function(require) {'use strict';
                             noNextPage = false;
                             nextPageHandler = null;
                         },
+                        getNodeElement: function(node) {
+                            var nodeElement = view.element.find('[node-id="' + node._id + '"]').parent();
+                            return nodeElement.length === 1 ? nodeElement : null;
+                        },
                         scrollToNode: function(node) {
                             $timeout(function(){
-                                var nodeElement = view.element.find('[node-id="' + node._id + '"]');
+                                var nodeElement = view.getNodeElement(node);
 
-                                if (nodeElement.length !== 1) {
+                                if (!nodeElement) {
                                     return;
                                 }
 
-                                htmlbodyElement.animate({
-                                    scrollTop: nodeElement.offset().top - scrollMargin
-                                }, 200);
+                                var scrollContainer = scope.scrollContainer || htmlbodyElement,
+                                    top             = scope.scrollContainer ? (nodeElement.offset().top - scope.scrollContainer.offset().top) : nodeElement.offset().top;
+
+                                scrollContainer.animate({
+                                    scrollTop: top - scrollMargin
+                                }, scrollDuration);
                             });
                         },
                         showItemNumber: function(show) {
@@ -261,14 +296,17 @@ define(function(require) {'use strict';
                     _.extend(scope, {
                         nodeList: null,
                         targetInfo: null,
+                        scrollContainer: proxy.getScrollContainer(),
                         pager: {
-                            nextPage: function(){
+                            nextPage: function() {
                                 if (!isDisabled() && nextPageHandler) {
                                     internalDisabled = true;
 
-                                    nextPageHandler(function(noMore){
+                                    nextPageHandler(function(noMore, pushNodeList){
                                         internalDisabled = false;
                                         noNextPage = noMore;
+
+                                        showNodeListProxy(scope.nodeList, pushNodeList);
                                     });
                                 }
                             },
@@ -280,20 +318,27 @@ define(function(require) {'use strict';
                         return internalDisabled || noNextPage || !nextPageHandler;
                     }
 
-                    function refresh() {
-                        //windowElement.trigger('scroll');
+                    function resetNodeListProxy() {
+                            proxy.resetNodeList(view);
+                    }
+
+                    function showNodeListProxy(nodeList, addNodeList) {
+                        $timeout(function(){
+                            proxy.showNodeList(nodeList, addNodeList, view);
+                        });
                     }
 
                     return view;
                 },
 
-                createNodeFormView: function(parent, parentScope) {
+                createNodeFormView: function(parent, parentScope, proxy) {
                     var view    = createView('np-rsearch-node-form', parent, parentScope),
                         scope   = view.scope;
 
                     _.extend(view, {
                         setNode: function(node) {
                             scope.node = node;
+                            showNodeFormProxy(scope.node, scope.formType);
                         },
                         setFormType: function(formType) {
                             scope.formType = formType;
@@ -301,13 +346,24 @@ define(function(require) {'use strict';
                         setAutokad: function(autokad) {
                             scope.autokad = autokad;
                         },
-                        setFnsRegDocs: function(fnsRegDocs){
+                        setFnsRegDocs: function(fnsRegDocs) {
                             scope.fnsRegDocs = fnsRegDocs;
+                        },
+                        getNodeElement: function(node) {
+                            var nodeElement = view.element.find('[np-rsearch-node-info]');
+                            return nodeElement.length === 1 ? nodeElement : null;
+                        },
+                        scrollTop: function() {
+                            $timeout(function(){
+                                (scope.scrollContainer || htmlbodyElement).scrollTop(0);
+                            });
                         }
                     });
 
                     _.extend(scope, {
                         user: nkbUser.user(),
+                        scrollContainer: proxy.getScrollContainer(),
+                        dataUpdateHelper: proxy.getDataUpdateHelper(),
                         relationsClick: function(direction, relationType) {
                             $rootScope.$emit('np-rsearch-node-form-relations-click', scope.node, direction, relationType);
                         },
@@ -322,13 +378,13 @@ define(function(require) {'use strict';
                         }
                     }, i18n.translateFuncs);
 
-                    return view;
-                },
+                    function showNodeFormProxy(node, formType) {
+                        $timeout(function(){
+                            proxy.showNodeForm(node, formType, view);
+                        });
+                    }
 
-                scrollTop: function() {
-                    $timeout(function(){
-                        htmlbodyElement.scrollTop(0);
-                    });
+                    return view;
                 }
             };
         }]);

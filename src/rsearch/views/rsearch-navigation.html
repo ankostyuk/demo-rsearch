@@ -1,14 +1,14 @@
-<div ng-show="isSearch()">
+<div ng-show="mode !== 'SEARCH' || isSearch()">
     <div class="mask"><div class="message-box"><span class="message">${_tr("Ожидайте...")}</span></div></div>
     <div class="navigation-content">
         <div class="nav">
                 <ul class="breadcrumb">
-                    <li class="search-result" ng-show="search.isEmptyResult()">${_tr("Не найдено")}</li>
-                    <li class="search-result" ng-show="!search.isEmptyResult() && search.getTotalByNodeType('COMPANY')"><a class="action" ng-class="{active: search.activeResult === 'COMPANY'}" ng-click="search.showResult('COMPANY')"><np-pluralize count="search.getTotalByNodeType('COMPANY')" when="::${_tr("NG_PLURALIZE::NODE_COMPANY")}"></np-pluralize></a></li>
-                    <li class="search-result" ng-show="!search.isEmptyResult() && search.getTotalByNodeType('INDIVIDUAL')"><a class="action" ng-class="{active: search.activeResult === 'INDIVIDUAL'}" ng-click="search.showResult('INDIVIDUAL')"><np-pluralize count="search.getTotalByNodeType('INDIVIDUAL')" when="::${_tr("NG_PLURALIZE::NODE_INDIVIDUAL")}"></np-pluralize></a></li>
-                    <li class="search-result" ng-show="!search.isEmptyResult() && search.getTotalByNodeType('ADDRESS')"><a class="action" ng-class="{active: search.activeResult === 'ADDRESS'}" ng-click="search.showResult('ADDRESS')"><np-pluralize count="search.getTotalByNodeType('ADDRESS')" when="::${_tr("NG_PLURALIZE::NODE_ADDRESS")}"></np-pluralize></a></li>
-                    <li class="search-result" ng-show="!search.isEmptyResult() && search.getTotalByNodeType('PHONE')"><a class="action" ng-class="{active: search.activeResult === 'PHONE'}" ng-click="search.showResult('PHONE')"><np-pluralize count="search.getTotalByNodeType('PHONE')" when="::${_tr("NG_PLURALIZE::NODE_PHONE")}"></np-pluralize></a></li>
-                    <li ng-repeat="breadcrumb in breadcrumbs.list track by $index" ng-hide="$index === 0"><span class="divider">/</span><span np-rsearch-navigation-breadcrumb="breadcrumb" np-rsearch-navigation-breadcrumb-active="$last"></span></li>
+                    <li class="search-result" ng-show="mode === 'SEARCH' && search.isEmptyResult()">${_tr("Не найдено")}</li>
+                    <li class="search-result" ng-show="mode === 'SEARCH' && !search.isEmptyResult() && search.getTotalByNodeType('COMPANY')"><a class="action" ng-class="{active: search.activeResult === 'COMPANY'}" ng-click="search.showResult('COMPANY')"><np-pluralize count="search.getTotalByNodeType('COMPANY')" when="::${_tr("NG_PLURALIZE::NODE_COMPANY")}"></np-pluralize></a></li>
+                    <li class="search-result" ng-show="mode === 'SEARCH' && !search.isEmptyResult() && search.getTotalByNodeType('INDIVIDUAL')"><a class="action" ng-class="{active: search.activeResult === 'INDIVIDUAL'}" ng-click="search.showResult('INDIVIDUAL')"><np-pluralize count="search.getTotalByNodeType('INDIVIDUAL')" when="::${_tr("NG_PLURALIZE::NODE_INDIVIDUAL")}"></np-pluralize></a></li>
+                    <li class="search-result" ng-show="mode === 'SEARCH' && !search.isEmptyResult() && search.getTotalByNodeType('ADDRESS')"><a class="action" ng-class="{active: search.activeResult === 'ADDRESS'}" ng-click="search.showResult('ADDRESS')"><np-pluralize count="search.getTotalByNodeType('ADDRESS')" when="::${_tr("NG_PLURALIZE::NODE_ADDRESS")}"></np-pluralize></a></li>
+                    <li class="search-result" ng-show="mode === 'SEARCH' && !search.isEmptyResult() && search.getTotalByNodeType('PHONE')"><a class="action" ng-class="{active: search.activeResult === 'PHONE'}" ng-click="search.showResult('PHONE')"><np-pluralize count="search.getTotalByNodeType('PHONE')" when="::${_tr("NG_PLURALIZE::NODE_PHONE")}"></np-pluralize></a></li>
+                    <li ng-repeat="breadcrumb in breadcrumbs.list track by $index" ng-hide="mode === 'SEARCH' && $index === 0"><span class="divider">/</span><span np-rsearch-navigation-breadcrumb="breadcrumb" np-rsearch-navigation-breadcrumb-active="$last"></span></li>
                 </ul>
         </div>
         <div class="row">
