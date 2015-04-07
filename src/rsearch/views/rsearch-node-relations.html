@@ -1,4 +1,4 @@
-<div ng-if="node._type === 'COMPANY'">
+<div ng-if="node._type === 'COMPANY' && proxy.hasShowRelations(node, active)">
     <div class="relations-block">
         <ul class="unstyled">
             <li ng-show="node._info.in['FOUNDER_COMPANY']" ng-class="{active: active === 'parents::FOUNDER_COMPANY'}"><a class="action" ng-click="relationsClick('parents', 'FOUNDER_COMPANY')"><np-pluralize count="node._info.in['FOUNDER_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_FOUNDER_COMPANY")}"></np-pluralize></a></li>
@@ -68,7 +68,7 @@
     <a class="action relations-product shadow-lift-lb-corner shadow-strong" ng-click="productClick('relations_find_related')">${_tr("Анализ аффилированных лиц")}</a>
 </div>
 
-<div ng-if="node._type === 'INDIVIDUAL'">
+<div ng-if="node._type === 'INDIVIDUAL' && proxy.hasShowRelations(node, active)">
     <div class="relations-block">
         <ul class="unstyled">
             <li ng-show="node._info.out['FOUNDER_INDIVIDUAL']" ng-class="{active: active === 'children::FOUNDER_INDIVIDUAL'}"><a class="action" ng-click="relationsClick('children', 'FOUNDER_INDIVIDUAL')"><np-pluralize count="node._info.out['FOUNDER_INDIVIDUAL']" when="::${_tr("NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY")}"></np-pluralize></a></li>
@@ -101,11 +101,7 @@
     <a class="action relations-product shadow-lift-lb-corner shadow-strong" ng-click="productClick('relations_find_related')">${_tr("Анализ аффилированных лиц")}</a>
 </div>
 
-<!--
-    Т.к. возможен только один тип связи и миниотчет не отображается,
-    а автоматически отображается список связанных (https://github.com/newpointer/rsearch/issues/73),
-    то не показывать связи
-<div ng-if="node._type === 'ADDRESS'">
+<div ng-if="node._type === 'ADDRESS' && proxy.hasShowRelations(node, active)">
     <div class="relations-block">
         <ul class="unstyled">
             <li ng-show="node._info.out['ADDRESS']" ng-class="{active: active === 'children::ADDRESS'}"><a class="action" ng-click="relationsClick('children', 'ADDRESS')"><np-pluralize count="node._info.out['ADDRESS']" when="::${_tr("NG_PLURALIZE::RELATION_COMPANY")}"></np-pluralize></a></li>
@@ -113,16 +109,15 @@
     </div>
 </div>
 
-<div ng-if="node._type === 'PHONE'">
+<div ng-if="node._type === 'PHONE' && proxy.hasShowRelations(node, active)">
     <div class="relations-block">
         <ul class="unstyled">
             <li ng-show="node._info.out['PHONE']" ng-class="{active: active === 'children::PHONE'}"><a class="action" ng-click="relationsClick('children', 'PHONE')"><np-pluralize count="node._info.out['PHONE']" when="::${_tr("NG_PLURALIZE::RELATION_COMPANY")}"></np-pluralize></a></li>
         </ul>
     </div>
 </div>
--->
 
-<div ng-if="node._type === 'PURCHASE'">
+<div ng-if="node._type === 'PURCHASE' && proxy.hasShowRelations(node, active)">
     <div class="relations-block">
         <ul class="unstyled">
             <li ng-show="node._info.in['CUSTOMER_COMPANY']" ng-class="{active: active === 'parents::CUSTOMER_COMPANY'}"><a class="action" ng-click="relationsClick('parents', 'CUSTOMER_COMPANY')"><np-pluralize count="node._info.in['CUSTOMER_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_PARENTS")}"></np-pluralize></a></li>

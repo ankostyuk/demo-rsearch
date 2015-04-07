@@ -109,6 +109,7 @@ define(function(require) {'use strict';
                 restrict: 'A',
                 scope: {
                     node: '=npRsearchNodeRelations',
+                    proxy: '=npRsearchNodeRelationsProxy',
                     active: '=npRsearchNodeRelationsActive',
                     relationsClick: '=npRsearchNodeRelationsClick',
                     productClick: '=npRsearchNodeProductClick',
@@ -364,6 +365,7 @@ define(function(require) {'use strict';
                         user: nkbUser.user(),
                         scrollContainer: proxy.getScrollContainer(),
                         dataUpdateHelper: proxy.getDataUpdateHelper(),
+                        proxy: proxy,
                         relationsClick: function(direction, relationType) {
                             $rootScope.$emit('np-rsearch-node-form-relations-click', scope.node, direction, relationType);
                         },

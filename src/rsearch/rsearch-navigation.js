@@ -37,6 +37,10 @@ define(function(require) {'use strict';
                 }
             };
 
+            function isSimpleNodeForm(node) {
+                return _.has(SIMPLE_NODE_FORM, node._type);
+            }
+
             //
             var navigationProxy = {
                 //
@@ -50,6 +54,12 @@ define(function(require) {'use strict';
                 //
                 rsearchInputRefresh: function(text, ui) {
                     return true;
+                },
+                //
+                isSimpleNodeForm: isSimpleNodeForm,
+                //
+                hasShowRelations: function(node, active) {
+                    return node && !navigationProxy.isSimpleNodeForm(node);
                 },
                 //
                 hasCheckAccentedResult: function(target, mode) {
@@ -84,9 +94,7 @@ define(function(require) {'use strict';
                     navigationProxy = proxy;
                 },
 
-                isSimpleNodeForm: function(node) {
-                    return _.has(SIMPLE_NODE_FORM, node._type);
-                },
+                isSimpleNodeForm: isSimpleNodeForm,
 
                 getSimpleNodeFormRelation: function(node) {
                     return SIMPLE_NODE_FORM[node._type].relation;
@@ -913,6 +921,7 @@ define(function(require) {'use strict';
 
                     var nodeRelationsFilter = {
                         node: null,
+                        proxy: navigationProxy,
                         autokad: autokad,
                         fnsRegDocs: fnsRegDocs,
                         active: null,
@@ -1421,7 +1430,8 @@ define(function(require) {'use strict';
 
                         showNodeForm('MINIREPORT', node, null, true, true);
 
-                        if (relation && !npRsearchNavigationHelper.isSimpleNodeForm(node)) {
+                        // if (relation && !npRsearchNavigationHelper.isSimpleNodeForm(node)) {
+                        if (relation && navigationProxy.hasShowRelations(node)) {
                             showRelations(node, relation.direction, relation.type);
                         }
                     });
