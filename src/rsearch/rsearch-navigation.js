@@ -51,12 +51,16 @@ define(function(require) {'use strict';
                 getDataUpdateHelper: function() {
                     return null;
                 },
-                //
+                // @Deprecated
                 rsearchInputRefresh: function(text, ui) {
                     return true;
                 },
                 //
                 isSimpleNodeForm: isSimpleNodeForm,
+                //
+                isLightForm: function(node) {
+                    return false;
+                },
                 //
                 hasShowRelations: function(node, active) {
                     return node && !navigationProxy.isSimpleNodeForm(node);
@@ -74,11 +78,10 @@ define(function(require) {'use strict';
                 //
                 showNodeForm: function(node, formType, nodeFormView) {
                 },
-                //
+                // @Deprecated
                 nodeHeaderClick: function(info) {
                     return false;
                 },
-                //
                 nodeClick: function(info) {
                     return true;
                 }

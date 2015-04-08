@@ -18,7 +18,7 @@
                 </div>
                 <div class="actions">
                     <div ng-if="node._type === 'COMPANY'">
-                        <div class="row actions-row">
+                        <div class="row actions-row" ng-hide="proxy.isLightForm(node)">
                             <div class="span5">
                                 <div class="product-panel shadow-lift-lb-corner shadow-strong">
                                     <h5 class="product-panel-label"><i class="icon big i-document-ok"></i> ${_tr("Бизнес-справки онлайн")}</h5>
@@ -58,7 +58,8 @@
                             </div>
                             <div class="span4 extra-search">
                                 <p ng-show="node.disclosure_type === 'interfax'"><a class="underline with-icon" ng-href="http://disclosure.interfax.ru/portal/files.aspx?id={{node.disclosure_id}}&type=6" target="_blank"><i class="icon large i-document-info"></i> <span class="text">${_tr("Страница эмитента")}</span></a></p>
-                                <p><a class="underline with-icon" ng-href="http://fssprus.ru/iss/ip/" target="_blank"><i class="icon large i-justice-1"></i> <span class="text">${_tr("Исполнительные производства")}</span></a></p>
+                                <p ng-hide="proxy.isLightForm(node)"><a class="underline with-icon" ng-href="http://fssprus.ru/iss/ip/" target="_blank"><i class="icon large i-justice-1"></i> <span class="text">${_tr("Исполнительные производства")}</span></a></p>
+                                <p ng-show="proxy.isLightForm(node)"><a class="action with-icon" ng-click="productClick('ext_history_profile')"><i class="icon large i-document-ok"></i> <span class="text">${_tr("Исторический профиль")}</span></a></p>
                             </div>
                         </div>
                     </div>
@@ -72,7 +73,7 @@
                                     <li><a class="action" ng-click="productClick('egripReport')"><i class="icon large i-document-stamp"></i> <span class="text">${_tr("Заказать выписку ЕГРИП")}</span></a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('egripReport')"></span></li>
                                 </ul>
                             </div>
-                            <div class="span5 extra-search">
+                            <div class="span5 extra-search" ng-hide="proxy.isLightForm(node)">
                                 <p>
                                     <a class="underline with-icon" ng-href="https://yandex.ru/yandsearch?text={{node.name}}&filter=people" target="_blank"><i class="icon large i-global-search-1"></i> <span class="text">${_tr("Искать в социальных сетях")}</span></a>
                                 </p>
@@ -91,7 +92,7 @@
                                 </a>
                                 <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('ForeignCompanyReport')"></span>
                             </div>
-                            <div class="span4">
+                            <div class="span4" ng-hide="proxy.isLightForm(node)">
                                 <div class="product-panel shadow-lift-lb-corner shadow-strong">
                                     <h5 class="product-panel-label"><i class="icon big i-document-plus"></i> ${_tr("Отчеты на заказ")}</h5>
                                     <ul class="unstyled product-list">
