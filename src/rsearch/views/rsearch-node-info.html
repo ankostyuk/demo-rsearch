@@ -14,8 +14,8 @@
         </div>
         <div class="node-entry" ng-show="node.name_diff">{{node.namesort}}</div>
         <div class="node-entry">{{node | OKVED}}</div>
-        <div class="node-entry" ng-show="node.chief_name"><a class="action" ng-click="relationsClick('parents', 'EXECUTIVE_INDIVIDUAL')"><i class="icon i-user small {{node.chief_gender}}"></i> {{node.chief_name}}</a></div>
-        <div class="node-entry" ng-show="node.addresssort"><a class="action" ng-click="relationsClick('parents', 'ADDRESS')"><i class="icon i-map-marker small"></i> {{node.addresssort}}</a></div>
+        <div class="node-entry" ng-show="node.chief_name"><a class="action" ng-click="relationsClick('parents', 'EXECUTIVE_INDIVIDUAL', node, $event)"><i class="icon i-user small {{node.chief_gender}}"></i> {{node.chief_name}}</a></div>
+        <div class="node-entry" ng-show="node.addresssort"><a class="action" ng-click="relationsClick('parents', 'ADDRESS', node, $event)"><i class="icon i-map-marker small"></i> {{node.addresssort}}</a></div>
         <ul class="inline">
             <li ng-show="node.ogrn"><span class="value-label">${_tr("ОГРН")}</span> {{node.ogrn}}</li>
             <li ng-show="node.inn"><span class="value-label">${_tr("ИНН")}</span> {{node.inn}}</li>

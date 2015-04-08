@@ -474,7 +474,7 @@ define(function(require) {'use strict';
                         return nodeForm.egrulRequest.completePromise;
                     }
 
-                    function showNodeForm(formType, node, breadcrumb, noHistory, noSearchHistory) {
+                    function showNodeForm(formType, node, breadcrumb, noHistory, noSearchHistory, passing) {
                         if (!noHistory && !noSearchHistory) {
                             checkSearchToHistory();
                         }
@@ -497,11 +497,15 @@ define(function(require) {'use strict';
 
                         pushNodeFormBreadcrumb(formType, node, breadcrumb);
 
-                        nodeFormView.scrollTop();
-
                         if (!noHistory) {
                             checkNodeFormToHistory();
                         }
+
+                        if (passing) {
+                            return;
+                        }
+
+                        nodeFormView.scrollTop();
 
                         showAutokad(formType, node);
                         showFnsRegDocs(formType, node);
@@ -524,6 +528,11 @@ define(function(require) {'use strict';
                     var byRelationsStore = {};
 
                     $rootScope.$on('np-rsearch-node-form-relations-click', function(e, node, direction, relationType){
+                        relationsClick(node, direction, relationType);
+                    });
+
+                    $rootScope.$on('np-rsearch-node-list-relations-click', function(e, node, direction, relationType){
+                        showNodeForm('MINIREPORT', node, null, false, false, true);
                         relationsClick(node, direction, relationType);
                     });
 

@@ -61,7 +61,8 @@ define(function(require) {'use strict';
                 restrict: 'A',
                 scope: {
                     node: '=npRsearchNodePlain',
-                    targetInfo: '=npRsearchNodeTargetInfo'
+                    targetInfo: '=npRsearchNodeTargetInfo',
+                    relationsClick: '=npRsearchNodeRelationsClick'
                 },
                 template: templates['np-rsearch-node-plain'],
                 link: function(scope, element, attrs){
@@ -298,6 +299,10 @@ define(function(require) {'use strict';
                         nodeList: null,
                         targetInfo: null,
                         scrollContainer: proxy.getScrollContainer(),
+                        relationsClick: function(direction, relationType, node, e) {
+                            e.stopPropagation();
+                            $rootScope.$emit('np-rsearch-node-list-relations-click', node, direction, relationType);
+                        },
                         pager: {
                             nextPage: function() {
                                 if (!isDisabled() && nextPageHandler) {
