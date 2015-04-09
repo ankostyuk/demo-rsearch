@@ -1,8 +1,8 @@
 <div ng-if="node._type === 'COMPANY' && proxy.hasShowRelations(node, active)">
     <div class="relations-block">
         <ul class="unstyled">
-            <li ng-show="node._info.in['FOUNDER_COMPANY']" ng-class="{active: active === 'parents::FOUNDER_COMPANY'}"><a class="action" ng-click="relationsClick('parents', 'FOUNDER_COMPANY')"><np-pluralize count="node._info.in['FOUNDER_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_FOUNDER_COMPANY")}"></np-pluralize></a></li>
             <li ng-show="node._info.in['FOUNDER_INDIVIDUAL']" ng-class="{active: active === 'parents::FOUNDER_INDIVIDUAL'}"><a class="action" ng-click="relationsClick('parents', 'FOUNDER_INDIVIDUAL')"><np-pluralize count="node._info.in['FOUNDER_INDIVIDUAL']" when="::${_tr("NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL")}"></np-pluralize></a></li>
+            <li ng-show="node._info.in['FOUNDER_COMPANY']" ng-class="{active: active === 'parents::FOUNDER_COMPANY'}"><a class="action" ng-click="relationsClick('parents', 'FOUNDER_COMPANY')"><np-pluralize count="node._info.in['FOUNDER_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_FOUNDER_COMPANY")}"></np-pluralize></a></li>
             <li ng-show="node._info.out['FOUNDER_COMPANY']" ng-class="{active: active === 'children::FOUNDER_COMPANY'}"><a class="action" ng-click="relationsClick('children', 'FOUNDER_COMPANY')"><np-pluralize count="node._info.out['FOUNDER_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY")}"></np-pluralize></a></li>
 
             <li ng-show="node._info.out['HEAD_COMPANY']" ng-class="{active: active === 'children::HEAD_COMPANY'}"><a class="action" ng-click="relationsClick('children', 'HEAD_COMPANY')"><np-pluralize count="node._info.out['HEAD_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_BRANCH_COMPANY")}"></np-pluralize></a></li>
@@ -24,12 +24,12 @@
     <div class="relations-block" ng-show="node.__isAffiliatedRelations">
         <h5 class="relations-block-header">${_tr("Аффилированные лица")}</h5>
         <ul class="unstyled">
-            <li ng-show="node._info.in['AFFILIATED_COMPANY']" ng-class="{active: active === 'parents::AFFILIATED_COMPANY'}">
-                <a class="action" ng-click="relationsClick('parents', 'AFFILIATED_COMPANY')"><np-pluralize count="node._info.in['AFFILIATED_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_PARENTS")}"></np-pluralize></a>
-                <div np-rsearch-affiliated-cause-filter></div>
-            </li>
             <li ng-show="node._info.in['AFFILIATED_INDIVIDUAL']" ng-class="{active: active === 'parents::AFFILIATED_INDIVIDUAL'}">
                 <a class="action" ng-click="relationsClick('parents', 'AFFILIATED_INDIVIDUAL')"><np-pluralize count="node._info.in['AFFILIATED_INDIVIDUAL']" when="::${_tr("NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_PARENTS")}"></np-pluralize></a>
+                <div np-rsearch-affiliated-cause-filter></div>
+            </li>
+            <li ng-show="node._info.in['AFFILIATED_COMPANY']" ng-class="{active: active === 'parents::AFFILIATED_COMPANY'}">
+                <a class="action" ng-click="relationsClick('parents', 'AFFILIATED_COMPANY')"><np-pluralize count="node._info.in['AFFILIATED_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_PARENTS")}"></np-pluralize></a>
                 <div np-rsearch-affiliated-cause-filter></div>
             </li>
             <li ng-show="node._info.out['AFFILIATED_COMPANY']" ng-class="{active: active === 'children::AFFILIATED_COMPANY'}">
@@ -122,8 +122,8 @@
         <ul class="unstyled">
             <li ng-show="node._info.in['CUSTOMER_COMPANY']" ng-class="{active: active === 'parents::CUSTOMER_COMPANY'}"><a class="action" ng-click="relationsClick('parents', 'CUSTOMER_COMPANY')"><np-pluralize count="node._info.in['CUSTOMER_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_PARENTS")}"></np-pluralize></a></li>
 
-            <li ng-show="node._info.in['PARTICIPANT_COMPANY']" ng-class="{active: active === 'parents::PARTICIPANT_COMPANY'}"><a class="action" ng-click="relationsClick('parents', 'PARTICIPANT_COMPANY')"><np-pluralize count="node._info.in['PARTICIPANT_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_PARENTS")}"></np-pluralize></a></li>
             <li ng-show="node._info.in['PARTICIPANT_INDIVIDUAL']" ng-class="{active: active === 'parents::PARTICIPANT_INDIVIDUAL'}"><a class="action" ng-click="relationsClick('parents', 'PARTICIPANT_INDIVIDUAL')"><np-pluralize count="node._info.in['PARTICIPANT_INDIVIDUAL']" when="::${_tr("NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_PARENTS")}"></np-pluralize></a></li>
+            <li ng-show="node._info.in['PARTICIPANT_COMPANY']" ng-class="{active: active === 'parents::PARTICIPANT_COMPANY'}"><a class="action" ng-click="relationsClick('parents', 'PARTICIPANT_COMPANY')"><np-pluralize count="node._info.in['PARTICIPANT_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_PARENTS")}"></np-pluralize></a></li>
 
             <li ng-show="node._info.in['COMMISSION_MEMBER']" ng-class="{active: active === 'parents::COMMISSION_MEMBER'}"><a class="action" ng-click="relationsClick('parents', 'COMMISSION_MEMBER')"><np-pluralize count="node._info.in['COMMISSION_MEMBER']" when="::${_tr("NG_PLURALIZE::RELATION_COMMISSION_MEMBER_PARENTS")}"></np-pluralize></a></li>
         </ul>
