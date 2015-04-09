@@ -111,6 +111,7 @@ msgstr "{'one': '1 company', 'other': '{} companies'}"
 msgid "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_CHILDREN"
 msgstr "{'one': '1 procurement', 'other': '{} procurements'}"
 
+#: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_PARENTS"
@@ -182,6 +183,11 @@ msgstr "{'one': '1 participation', 'other': '{} participations'}"
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_PARENTS"
 msgstr "{'one': '1 participant person', 'other': '{} participant persons'}"
+
+#: ../src/rsearch/views/rsearch-node-plain.html:1
+#, fuzzy
+msgid "NG_PLURALIZE::RELATION_PARTICIPANT_PARENTS"
+msgstr "{'one': '1 participant', 'other': '{} participants'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -501,11 +507,7 @@ msgstr "OKPO"
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
 #, fuzzy
 msgid "Обновить данные из ЕГРЮЛ"
-msgstr "Order EGRUL Report"
-
-#: ../src/rsearch/views/rsearch-node-info.html:1
-msgid "Объём продаж за последний год"
-msgstr "Last year sales volume"
+msgstr "Обновить данные из ЕГРЮЛ"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-navigation.html:1
@@ -672,10 +674,6 @@ msgctxt "Сведения о поданном заявлении. ФНС. Све
 msgid "Форма заявления"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-node-info.html:1
-msgid "Формы отчетности за последний год"
-msgstr "Last year balance forms"
-
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "аффилированное лицо"
 msgstr "affiliate"
@@ -746,6 +744,10 @@ msgid "обрабатывается..."
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
+msgid "объём продаж за последний год"
+msgstr "last year sales volume"
+
+#: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "основано"
 msgstr "Est."
 
@@ -775,6 +777,11 @@ msgstr "thous. rub."
 msgid "учредитель"
 msgstr "founder"
 
+#: ../src/rsearch/views/rsearch-node-info.html:1
+#, fuzzy
+msgid "формы за последний год"
+msgstr "формы за последний год"
+
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "член комиссии"
 msgstr "commission member"
@@ -798,6 +805,9 @@ msgstr "#"
 #~ msgstr ""
 #~ "Custom\n"
 #~ "Reports"
+
+#~ msgid "Формы отчетности за последний год"
+#~ msgstr "Last year balance forms"
 
 #~ msgid "сотрудник"
 #~ msgstr "employee"

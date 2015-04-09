@@ -479,7 +479,7 @@ define(function(require) {'use strict';
                             checkSearchToHistory();
                         }
 
-                        if (checkAccentedResultByNodeForm(formType, node, breadcrumb)) {
+                        if (!passing && checkAccentedResultByNodeForm(formType, node, breadcrumb)) {
                             return;
                         }
 
@@ -533,18 +533,18 @@ define(function(require) {'use strict';
 
                     $rootScope.$on('np-rsearch-node-list-relations-click', function(e, node, direction, relationType){
                         showNodeForm('MINIREPORT', node, null, false, false, true);
-                        relationsClick(node, direction, relationType);
+                        relationsClick(node, direction, relationType, true);
                     });
 
-                    function relationsClick(node, direction, relationType) {
+                    function relationsClick(node, direction, relationType, noCheckAccentedResult) {
                         if (user.isProductAvailable('relations_find_related')) {
-                            showRelations(node, direction, relationType);
+                            showRelations(node, direction, relationType, null, null, false, noCheckAccentedResult);
                         } else {
                             showProductInfo('relations_find_related');
                         }
                     }
 
-                    function showRelations(node, direction, relationType, key, breadcrumb, noHistory) {
+                    function showRelations(node, direction, relationType, key, breadcrumb, noHistory, noCheckAccentedResult) {
                         clearAutokad();
                         clearFnsRegDocs();
                         nodeFormView.hide();
@@ -574,7 +574,7 @@ define(function(require) {'use strict';
                                 nodeList: null
                             };
 
-                            doRelations(byRelations, true, noHistory);
+                            doRelations(byRelations, !noCheckAccentedResult, noHistory);
                         }
 
                         $rootScope.$emit('np-rsearch-navigation-node-relations', node, relationType);
@@ -635,6 +635,8 @@ define(function(require) {'use strict';
                         nodeListView.setTargetInfo(getLastTargetInfo());
 
                         initRelationsFilters(byRelations);
+
+                        nodeListView.scrollTop();
                     }
 
                     function relationsRequest(byRelations) {

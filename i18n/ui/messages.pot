@@ -440,6 +440,7 @@ msgid "Бизнес-справки онлайн"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Исторический профиль"
 msgstr ""
 
@@ -553,19 +554,19 @@ msgid "ОКПО"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
-msgid "Финансовая отчётность"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-info.html:1
-msgid "Объём продаж за последний год"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "тыс. руб."
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
-msgid "Формы отчетности за последний год"
+msgid "объём продаж за последний год"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgid "Финансовая отчётность"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgid "формы за последний год"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
@@ -643,6 +644,16 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_COMPANY"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-plain.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_PARENTS"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-plain.html:1
+msgid "NG_PLURALIZE::RELATION_PARTICIPANT_PARENTS"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
@@ -728,11 +739,6 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_EMPLOYEE_CHILDREN"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_PARENTS"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1

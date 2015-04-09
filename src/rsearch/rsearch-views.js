@@ -287,6 +287,9 @@ define(function(require) {'use strict';
                                 }, scrollDuration);
                             });
                         },
+                        scrollTop: function() {
+                            (scope.scrollContainer || htmlbodyElement).scrollTop(0);
+                        },
                         showItemNumber: function(show) {
                             scope.showItemNumber = show;
                         },
@@ -360,9 +363,7 @@ define(function(require) {'use strict';
                             return nodeElement.length === 1 ? nodeElement : null;
                         },
                         scrollTop: function() {
-                            $timeout(function(){
-                                (scope.scrollContainer || htmlbodyElement).scrollTop(0);
-                            });
+                            (scope.scrollContainer || htmlbodyElement).scrollTop(0);
                         }
                     });
 
