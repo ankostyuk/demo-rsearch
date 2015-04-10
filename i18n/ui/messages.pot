@@ -110,7 +110,6 @@ msgid "Поиск"
 msgstr ""
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-#: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
 msgctxt "Поиск в ФНС"
 msgid "документов для государственной регистрации"
 msgstr ""
@@ -365,11 +364,16 @@ msgid "mediumDate"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
-msgid "Поиск документов для государственной регистрации..."
+msgctxt "Поиск в ФНС"
+msgid "документов\nдля государственной регистрации"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
-msgid "Найти документы для государственной регистрации"
+msgid "Поиск документов\nдля государственной регистрации..."
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
+msgid "Найти документы\nдля государственной регистрации"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-inn-filter.html:1

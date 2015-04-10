@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "CLDR_PLURAL_FORMS_FORMAT: one{0}few{1}many{2}other{2}\n"
-"X-Generator: Poedit 1.7.4\n"
+"X-Generator: Poedit 1.7.5\n"
 
 #: ../src/nkb-app/index.html:1
 msgid "API информационной системы"
@@ -29,7 +29,13 @@ msgstr "{'one': 'ещё {} выписка', 'few': 'ещё {} выписки', '
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
 msgid "NG_PLURALIZE::FNS_REG_DOC_COUNT"
-msgstr "{'0': 'Нет документов для государственной регистрации', 'one': '{} документ для государственной регистрации', 'few': '{} документа для государственной регистрации', 'many': '{} документов для государственной регистрации', 'other': '{} документа для государственной регистрации'}"
+msgstr ""
+"{'0': 'Нет документов\n"
+"для государственной регистрации', 'one': '{} документ\n"
+"для государственной регистрации', 'few': '{} документа\n"
+"для государственной регистрации', 'many': '{} документов\n"
+"для государственной регистрации', 'other': '{} документа\n"
+"для государственной регистрации'}"
 
 #: ../src/comment/views/comment.html:1
 msgid "NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT"
@@ -459,7 +465,9 @@ msgid "Найти арбитражные дела"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
-msgid "Найти документы для государственной регистрации"
+msgid ""
+"Найти документы\n"
+"для государственной регистрации"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
@@ -546,7 +554,9 @@ msgid "Поиск в"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
-msgid "Поиск документов для государственной регистрации..."
+msgid ""
+"Поиск документов\n"
+"для государственной регистрации..."
 msgstr ""
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
@@ -677,8 +687,14 @@ msgctxt "Поиск в картотеке арбитражных дел врем
 msgid "временно недоступен"
 msgstr ""
 
-#: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
+msgctxt "Поиск в ФНС"
+msgid ""
+"документов\n"
+"для государственной регистрации"
+msgstr ""
+
+#: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 msgctxt "Поиск в ФНС"
 msgid "документов для государственной регистрации"
 msgstr ""
