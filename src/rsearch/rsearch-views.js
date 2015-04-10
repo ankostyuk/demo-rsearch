@@ -249,6 +249,7 @@ define(function(require) {'use strict';
                         scrollDuration      = 200;
 
                     _.extend(view, {
+                        type: 'NODE_LIST',
                         reset: function(nodeList, noMore, pageHandler) {
                             scope.nodeList = nodeList;
                             scope.targetInfo = null;
@@ -345,6 +346,7 @@ define(function(require) {'use strict';
                         scope   = view.scope;
 
                     _.extend(view, {
+                        type: 'NODE_FORM',
                         setNode: function(node) {
                             scope.node = node;
                             showNodeFormProxy(scope.node, scope.formType);
