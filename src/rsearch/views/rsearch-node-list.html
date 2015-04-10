@@ -1,6 +1,10 @@
 <div infinite-scroll="pager.nextPage()" infinite-scroll-disabled="pager.isDisabled()" infinite-scroll-distance="0" infinite-scroll-container="scrollContainer">
     <div class="node-list-item" ng-repeat="node in nodeList track by $index">
-        <div class="item-number" ng-show="showItemNumber">{{node.__index + 1 | number}}.</div>
+        <div class="item-info">
+            <div class="item-info-entry item-number" ng-show="showItemNumber">{{node.__index + 1 | number}}.</div>
+            <!-- TODO при наличии других статусов: динамическое обновление сообщения о статусе -->
+            <div class="item-info-entry node-status">${_trc("в отчете", "объект в отчете")}</div>
+        </div>
         <div class="shadow-lift-lb-corner" np-rsearch-node-plain="node" np-rsearch-node-target-info="targetInfo" np-rsearch-node-relations-click="relationsClick"></div>
     </div>
 </div>

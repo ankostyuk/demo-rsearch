@@ -1,3 +1,7 @@
+<div class="node-info">
+    <!-- TODO при наличии других статусов: динамическое обновление сообщения о статусе -->
+    <div class="node-info-entry node-status">${_trc("в отчете", "объект в отчете")}</div>
+</div>
 <div class="body" ng-class="{'liquidate': node._liquidate, 'liquidate-intermediate': node._liquidate.state.intermediate}">
     <div ng-if="node._type === 'COMPANY'">
         <div class="row">
