@@ -33,9 +33,9 @@ define(function(require) {'use strict';
                         focusable       = _.isBoolean(scope.npRsearchInputFocusable) ? scope.npRsearchInputFocusable : true,
                         inputElement    = element.find('input');
 
-                    inputElement.bind('keydown', function(e){
-                        // Отключить дефолтное поведение
+                    inputElement.bind('keyup', function(e){
                         if (e.keyCode === 13) {
+                            fireRefresh('SEARCH_INPUT');
                             return false;
                         }
                     });
