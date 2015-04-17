@@ -1,6 +1,6 @@
 <div ng-show="mode === 'NODE' || isSearch()">
     <div class="mask"><div class="message-box"><span class="message">${_tr("Ожидайте...")}</span></div></div>
-    <div class="navigation-content">
+    <div class="navigation-content" ng-class="{'empty-search-result': mode === 'SEARCH' && search.isEmptyResult()}">
         <div class="nav">
                 <ul class="breadcrumb">
                     <li class="search-result" ng-show="mode === 'SEARCH' && search.isEmptyResult()">${_tr("Не найдено")}</li>
@@ -11,7 +11,7 @@
                     <li ng-repeat="breadcrumb in breadcrumbs.list track by $index" ng-hide="mode === 'SEARCH' && $index === 0"><span class="divider">/</span><span np-rsearch-navigation-breadcrumb="breadcrumb" np-rsearch-navigation-breadcrumb-active="$last"></span></li>
                 </ul>
         </div>
-        <div class="row">
+        <div class="row" ng-hide="mode === 'SEARCH' && search.isEmptyResult()">
             <div class="span9">
                 <div class="views">
                     <div class="messages">
