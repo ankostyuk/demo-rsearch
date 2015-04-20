@@ -933,20 +933,7 @@ define(function(require) {'use strict';
                     var nodeRelationsFilter = {
                         node: null,
                         proxy: navigationProxy,
-                        autokad: autokad,
-                        fnsRegDocs: fnsRegDocs,
                         active: null,
-                        relationsClick: function(direction, relationType) {
-                            if (buildNodeRelationActiveKey(direction, relationType) === nodeRelationsFilter.active) {
-                                return;
-                            }
-
-                            clearLastBreadcrumb();
-                            relationsClick(nodeRelationsFilter.node, direction, relationType);
-                        },
-                        productClick: function(productName) {
-                            doProduct(productName, nodeRelationsFilter.node);
-                        },
                         getActiveRelation: function() {
                             var active = nodeRelationsFilter.active;
 
@@ -961,13 +948,30 @@ define(function(require) {'use strict';
                                 relationType: s[1]
                             };
                         },
-                        autokadClick: function() {
-                            clearLastBreadcrumb();
-                            doAutokad(nodeRelationsFilter.node);
-                        },
-                        fnsRegDocsClick: function() {
-                            clearLastBreadcrumb();
-                            doFnsRegDocs(nodeRelationsFilter.node);
+                        actions: {
+                            relationsClick: function(direction, relationType) {
+                                if (buildNodeRelationActiveKey(direction, relationType) === nodeRelationsFilter.active) {
+                                    return;
+                                }
+
+                                clearLastBreadcrumb();
+                                relationsClick(nodeRelationsFilter.node, direction, relationType);
+                            },
+                            productClick: function(productName) {
+                                doProduct(productName, nodeRelationsFilter.node);
+                            },
+
+                            autokad: autokad,
+                            autokadClick: function() {
+                                clearLastBreadcrumb();
+                                doAutokad(nodeRelationsFilter.node);
+                            },
+
+                            fnsRegDocs: fnsRegDocs,
+                            fnsRegDocsClick: function() {
+                                clearLastBreadcrumb();
+                                doFnsRegDocs(nodeRelationsFilter.node);
+                            }
                         }
                     };
 

@@ -62,7 +62,7 @@ define(function(require) {'use strict';
                 scope: {
                     node: '=npRsearchNodePlain',
                     targetInfo: '=npRsearchNodeTargetInfo',
-                    relationsClick: '=npRsearchNodeRelationsClick'
+                    actions: '=npRsearchNodeRelationsActions'
                 },
                 template: templates['np-rsearch-node-plain'],
                 link: function(scope, element, attrs){
@@ -111,13 +111,8 @@ define(function(require) {'use strict';
                 scope: {
                     node: '=npRsearchNodeRelations',
                     proxy: '=npRsearchNodeRelationsProxy',
-                    active: '=npRsearchNodeRelationsActive',
-                    relationsClick: '=npRsearchNodeRelationsClick',
-                    productClick: '=npRsearchNodeProductClick',
-                    autokad: '=npRsearchNodeRelationsAutokad',
-                    autokadClick: '=npRsearchNodeAutokadClick',
-                    fnsRegDocs: '=npRsearchNodeRelationsFnsRegDocs',
-                    fnsRegDocsClick: '=npRsearchNodeFnsRegDocsClick'
+                    actions: '=npRsearchNodeRelationsActions',
+                    active: '=npRsearchNodeRelationsActive'
                 },
                 template: templates['np-rsearch-node-relations'],
                 link: function(scope, element, attrs){
@@ -165,12 +160,10 @@ define(function(require) {'use strict';
         .directive('npRsearchAutokadInfo', [function() {
             return {
                 restrict: 'A',
-                // require:
-                // {
-                //     autokadClick: Function,
-                //     autokad: Object
-                // }
-                scope: false,
+                scope: {
+                    autokad: '=npRsearchAutokadInfo',
+                    autokadClick: '=npRsearchAutokadClick'
+                },
                 template: templates['np-rsearch-autokad-info']
             };
         }])
@@ -178,12 +171,10 @@ define(function(require) {'use strict';
         .directive('npRsearchFnsRegDocsInfo', [function() {
             return {
                 restrict: 'A',
-                // require:
-                // {
-                //     fnsRegDocsClick: Function,
-                //     fnsRegDocs: Object
-                // }
-                scope: false,
+                scope: {
+                    fnsRegDocs: '=npRsearchFnsRegDocsInfo',
+                    fnsRegDocsClick: '=npRsearchFnsRegDocsClick'
+                },
                 template: templates['np-rsearch-fns-reg-docs-info']
             };
         }])
@@ -303,9 +294,11 @@ define(function(require) {'use strict';
                         nodeList: null,
                         targetInfo: null,
                         scrollContainer: proxy.getScrollContainer(),
-                        relationsClick: function(direction, relationType, node, e) {
-                            e.stopPropagation();
-                            $rootScope.$emit('np-rsearch-node-list-relations-click', node, direction, relationType);
+                        actions: {
+                            relationsClick: function(direction, relationType, node, e) {
+                                e.stopPropagation();
+                                $rootScope.$emit('np-rsearch-node-list-relations-click', node, direction, relationType);
+                            }
                         },
                         pager: {
                             nextPage: function() {
@@ -355,10 +348,10 @@ define(function(require) {'use strict';
                             scope.formType = formType;
                         },
                         setAutokad: function(autokad) {
-                            scope.autokad = autokad;
+                            scope.actions.autokad = autokad;
                         },
                         setFnsRegDocs: function(fnsRegDocs) {
-                            scope.fnsRegDocs = fnsRegDocs;
+                            scope.actions.fnsRegDocs = fnsRegDocs;
                         },
                         getNodeElement: function(node) {
                             var nodeElement = view.element.find('[np-rsearch-node-info]');
@@ -374,17 +367,19 @@ define(function(require) {'use strict';
                         scrollContainer: proxy.getScrollContainer(),
                         dataUpdateHelper: proxy.getDataUpdateHelper(),
                         proxy: proxy,
-                        relationsClick: function(direction, relationType) {
-                            $rootScope.$emit('np-rsearch-node-form-relations-click', scope.node, direction, relationType);
-                        },
-                        productClick: function(productName) {
-                            $rootScope.$emit('np-rsearch-node-form-product-click', productName, scope.node);
-                        },
-                        autokadClick: function() {
-                            $rootScope.$emit('np-rsearch-node-form-autokad-click', scope.node);
-                        },
-                        fnsRegDocsClick: function(){
-                            $rootScope.$emit('np-rsearch-node-form-fns-reg-docs-click', scope.node);
+                        actions: {
+                            relationsClick: function(direction, relationType) {
+                                $rootScope.$emit('np-rsearch-node-form-relations-click', scope.node, direction, relationType);
+                            },
+                            productClick: function(productName) {
+                                $rootScope.$emit('np-rsearch-node-form-product-click', productName, scope.node);
+                            },
+                            autokadClick: function() {
+                                $rootScope.$emit('np-rsearch-node-form-autokad-click', scope.node);
+                            },
+                            fnsRegDocsClick: function() {
+                                $rootScope.$emit('np-rsearch-node-form-fns-reg-docs-click', scope.node);
+                            }
                         }
                     }, i18n.translateFuncs);
 
