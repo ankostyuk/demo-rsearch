@@ -151,6 +151,9 @@
 [np-rsearch-navigation] .breadcrumb [np-rsearch-navigation-breadcrumb] a > span {
     display: block;
 }
+[np-rsearch-navigation] .breadcrumb [np-rsearch-navigation-breadcrumb] [np-rsearch-node-simple] .icon {
+    display: none;
+}
 [np-rsearch-navigation] .breadcrumb [np-rsearch-navigation-breadcrumb] [np-rsearch-node-simple] > span {
     white-space: pre;
 }
@@ -310,7 +313,8 @@
 }
 
 /* np-rsearch-node-simple */
-[np-rsearch-node-simple] {
+[np-rsearch-node-simple] .icon {
+    margin-right: 5px;
 }
 
 /* np-rsearch-node-plain */
