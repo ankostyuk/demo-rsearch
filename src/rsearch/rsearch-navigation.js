@@ -137,11 +137,10 @@ define(function(require) {'use strict';
                         l10n                    = npL10n.l10n(),
                         user                    = nkbUser.user(),
                         initPromise             = $q.all([npRsearchMetaHelper.initPromise()]),
-                        initDeferredFunctions   = [];
+                        initDeferredFunctions   = [],
+                        _this                   = this;
 
                     function initSuccess() {
-                        var me = this;
-
                         init = true;
 
                         initByMeta();
@@ -149,15 +148,13 @@ define(function(require) {'use strict';
                         $rootScope.$emit('np-rsearch-navigation-init', scope);
 
                         _.each(initDeferredFunctions, function(f){
-                            f.func.apply(me, f.args);
+                            f.func.apply(_this, f.args);
                         });
                     }
 
                     function functionAfterInit(func, args) {
-                        var me = this;
-
                         if (init) {
-                            func.apply(me, args);
+                            func.apply(_this, args);
                         } else {
                             initDeferredFunctions.push({
                                 func: func,
