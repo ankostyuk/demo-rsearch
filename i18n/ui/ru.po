@@ -227,6 +227,10 @@ msgstr "{'one': '{} учреждённая компания', 'few': '{} учр�
 msgid "NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY"
 msgstr "{'one': '{} правопреемник', 'few': '{} правопреемника', 'many': '{} правопреемников', 'other': '{} правопреемника'}"
 
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "NG_PLURALIZE::kinsmen"
+msgstr "{'0': 'Нет однофамильцев', 'one': '{} однофамилец', 'few': '{} однофамильца', 'many': '{} однофамильцев', 'other': '{} однофамильца'}"
+
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
@@ -249,6 +253,7 @@ msgstr ""
 msgid "Аналитический профиль"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-autokad-info.html:1
 #: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
 msgid "Арбитражные дела"
 msgstr ""
@@ -264,6 +269,10 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 msgid "Без ИНН"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Бенефициары"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
@@ -350,6 +359,12 @@ msgstr ""
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 msgid "Документов для государственной регистрации не найдено"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
+msgid ""
+"Документы\n"
+"для государственной регистрации"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
@@ -460,16 +475,6 @@ msgstr ""
 msgid "Найти"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-autokad-info.html:1
-msgid "Найти арбитражные дела"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
-msgid ""
-"Найти документы\n"
-"для государственной регистрации"
-msgstr ""
-
 #: ../src/nkb-app/index.html:1
 msgid "Национальное кредитное бюро"
 msgstr ""
@@ -505,6 +510,10 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
 msgid "Обновить данные из ЕГРЮЛ"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Однофамильцы"
 msgstr ""
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
@@ -621,6 +630,11 @@ msgctxt "ФНС. Сведения о юридических лицах и инд
 msgid "Сведения о юридическом лице"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Связанные однофамильцы"
+msgstr ""
+
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
 msgid ""
@@ -676,6 +690,21 @@ msgstr ""
 msgid "аффилированное лицо"
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "брат"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-info.html:1
+#: ../src/rsearch/views/rsearch-node-list.html:1
+msgctxt "объект в отчете"
+msgid "в отчете"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgctxt "возможно жена, сестра или мать"
+msgid "возможно"
+msgstr ""
+
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
 msgctxt "Поиск в ФНС"
@@ -717,10 +746,19 @@ msgctxt "доступность продукта"
 msgid "доступно"
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "дочь"
+msgstr ""
+
 #: ../src/nkb-app/components/login/views/login-form.html:1
 #: ../src/rsearch/views/rsearch-user-product-limits-info.html:1
 msgctxt "валюта"
 msgid "ие"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgctxt "возможно жена, сестра или мать"
+msgid "или"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-autokad-info.html:1
@@ -760,6 +798,10 @@ msgctxt "от такой-то даты"
 msgid "от"
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "отец"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
 msgctxt "актуализация данных"
 msgid "последняя актуализация"
@@ -771,6 +813,18 @@ msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "руководитель"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "сестра"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "супруга"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "сын"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1

@@ -17,13 +17,17 @@ define(function(require) {'use strict';
 
             var config = appConfig.resource || {};
 
-            function nodeListProcess(data) {
+            function nodeListProcess(data, nodeIterator) {
                 var npRsearchMetaHelper = $injector.get('npRsearchMetaHelper'),
                     baseIndex           = data.pageSize * (data.pageNumber - 1);
 
                 _.each(data.list, function(node, i){
                     npRsearchMetaHelper.buildNodeExtraMeta(node);
                     node.__index = baseIndex + i;
+
+                    if (_.isFunction(nodeIterator)) {
+                        nodeIterator(node, i);
+                    }
                 });
 
                 return data;
@@ -69,6 +73,20 @@ define(function(require) {'use strict';
                         params: params
                     }, {
                         responseProcess: nodeListProcess
+                    }, options);
+                },
+
+                kinsmen: function(options) {
+                    var params = _.extend({}, options.pageConfig);
+
+                    return npResource.request({
+                        method: 'GET',
+                        url: config['relations.url'] + '/INDIVIDUAL/' + options.node.name + '/kinsmen',
+                        params: params
+                    }, {
+                        responseProcess: function(data) {
+                            return nodeListProcess(data, options.nodeIterator);
+                        }
                     }, options);
                 },
 

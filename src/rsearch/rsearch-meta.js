@@ -258,7 +258,7 @@ define(function(require) {'use strict';
                             var nodeUID     = conf[0],
                                 direction   = conf[1];
 
-                            // Только связи с другими нодями и "кольцевые" связи
+                            // Только связи с другими нодами и "кольцевые" связи
                             if (nodeUID === node.__uid && srcNodeUID !== dstNodeUID) {
                                 return;
                             }
@@ -275,6 +275,26 @@ define(function(require) {'use strict';
                     });
 
                     return relationMap;
+                },
+
+                addToRelationMap: function(relationMap, srcNode, dstNode, direction, relation) {
+                    relationMap[dstNode.__uid] = relationMap[dstNode.__uid] || {};
+                    relationMap[dstNode.__uid][direction] = relationMap[dstNode.__uid][direction] || {};
+                    relationMap[dstNode.__uid][direction][relation._type] = relation;
+                },
+
+                buildRelationInfo: function(node, relationType, data) {
+                    node.__info = node.__info || {};
+                    node.__info[relationType] = data.count;
+                },
+
+                buildKinsmenRelation: function(srcNode, dstNode) {
+                    return {
+                        _type: 'kinsmen',
+                        _srcId: srcNode._id,
+                        _dstId: dstNode._id,
+                        kinship: dstNode._kinship
+                    };
                 }
             };
 
@@ -325,8 +345,8 @@ define(function(require) {'use strict';
                     return null;
                 }
 
-                var nbsp    = ' ',
-                    separator     = ', ';
+                var nbsp        = ' ',
+                    separator   = ', ';
 
                 var SHOW_TYPES = {
                     'FOUNDER_COMPANY': {
@@ -393,6 +413,27 @@ define(function(require) {'use strict';
                         order: 501,
                         text: function(relation){
                             return getCommissionMemberText(relation);
+                        }
+                    },
+
+                    'kinsmen': {
+                        order: 601,
+                        data: {
+                            availableKinship: {
+                                'FATHER':            _tr("отец"),
+                                //'LASTNAME':          null,
+                                //'MALE_LASTNAME':     null,
+                                'FEMALE_LASTNAME':   _tr("супруга"),
+                                //'SIBLING':           null,
+                                'BROTHER':           _tr("брат"),
+                                'SISTER':            _tr("сестра"),
+                                //'CHILD':             null,
+                                'SON':               _tr("сын"),
+                                'DAUGHTER':          _tr("дочь")
+                            }
+                        },
+                        text: function(relation){
+                            return getKinsmenText(relation);
                         }
                     }
                 };
@@ -554,6 +595,22 @@ define(function(require) {'use strict';
                     }
 
                     return isTargetRelation(relation) ? '' : _tr("член комиссии");
+                }
+
+                function getKinsmenText(relation) {
+                    var ts = [], k;
+
+                    _.each(relation.kinship, function(t){
+                        k = SHOW_TYPES['kinsmen'].data.availableKinship[t];
+
+                        if (k) {
+                            ts.push(_tr(k));
+                        }
+                    });
+
+                    return _.size(ts) ?
+                        _trc("возможно", "возможно жена, сестра или мать") + nbsp + _.toSentence(ts, separator, nbsp + _trc("или", "возможно жена, сестра или мать") + nbsp) :
+                        null;
                 }
 
                 function getInnText(inn) {

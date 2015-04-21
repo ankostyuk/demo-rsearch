@@ -28,6 +28,7 @@ msgstr "{'one': 'one more report', 'other': '{} more reports'}"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
+#, fuzzy
 msgid "NG_PLURALIZE::FNS_REG_DOC_COUNT"
 msgstr ""
 "{'0': 'Нет документов\n"
@@ -226,6 +227,11 @@ msgstr "{'one': '1 established company', 'other': '{} established companies'}"
 msgid "NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY"
 msgstr "{'one': '1 legal successor', 'other': '{} legal successors'}"
 
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#, fuzzy
+msgid "NG_PLURALIZE::kinsmen"
+msgstr "{'0': 'Нет однофамильцев', 'one': '1 однофамилец', 'other': '{} однофамильцев'}"
+
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
@@ -250,6 +256,7 @@ msgstr "Affiliated Network Analysis"
 msgid "Аналитический профиль"
 msgstr "Analytical Report"
 
+#: ../src/rsearch/views/rsearch-autokad-info.html:1
 #: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
 msgid "Арбитражные дела"
 msgstr "Arbitration cases"
@@ -266,6 +273,10 @@ msgstr "Balance"
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 msgid "Без ИНН"
 msgstr "No INN"
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Бенефициары"
+msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgid "Библиотека"
@@ -357,6 +368,12 @@ msgstr "Add"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 msgid "Документов для государственной регистрации не найдено"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
+msgid ""
+"Документы\n"
+"для государственной регистрации"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
@@ -467,16 +484,6 @@ msgstr ""
 msgid "Найти"
 msgstr "Search"
 
-#: ../src/rsearch/views/rsearch-autokad-info.html:1
-msgid "Найти арбитражные дела"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
-msgid ""
-"Найти документы\n"
-"для государственной регистрации"
-msgstr ""
-
 #: ../src/nkb-app/index.html:1
 msgid "Национальное кредитное бюро"
 msgstr "National Credit Bureau"
@@ -514,6 +521,10 @@ msgstr "OKPO"
 #, fuzzy
 msgid "Обновить данные из ЕГРЮЛ"
 msgstr "Обновить данные из ЕГРЮЛ"
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Однофамильцы"
+msgstr ""
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-navigation.html:1
@@ -629,6 +640,11 @@ msgctxt "ФНС. Сведения о юридических лицах и инд
 msgid "Сведения о юридическом лице"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Связанные однофамильцы"
+msgstr ""
+
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
 msgid ""
@@ -686,6 +702,21 @@ msgstr ""
 msgid "аффилированное лицо"
 msgstr "affiliate"
 
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "брат"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-info.html:1
+#: ../src/rsearch/views/rsearch-node-list.html:1
+msgctxt "объект в отчете"
+msgid "в отчете"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgctxt "возможно жена, сестра или мать"
+msgid "возможно"
+msgstr ""
+
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
 msgctxt "Поиск в ФНС"
@@ -727,11 +758,20 @@ msgctxt "доступность продукта"
 msgid "доступно"
 msgstr "available"
 
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "дочь"
+msgstr ""
+
 #: ../src/nkb-app/components/login/views/login-form.html:1
 #: ../src/rsearch/views/rsearch-user-product-limits-info.html:1
 msgctxt "валюта"
 msgid "ие"
 msgstr "ie"
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgctxt "возможно жена, сестра или мать"
+msgid "или"
+msgstr ""
 
 #: ../src/rsearch/views/rsearch-autokad-info.html:1
 msgctxt "Поиск в картотеке арбитражных дел временно недоступен"
@@ -770,6 +810,10 @@ msgctxt "от такой-то даты"
 msgid "от"
 msgstr "on"
 
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "отец"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
 msgctxt "актуализация данных"
 msgid "последняя актуализация"
@@ -782,6 +826,18 @@ msgstr "rub."
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "руководитель"
 msgstr "manager"
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "сестра"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "супруга"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "сын"
+msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "тыс. руб."

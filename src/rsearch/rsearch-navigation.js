@@ -639,24 +639,48 @@ define(function(require) {'use strict';
                     function relationsRequest(byRelations) {
                         var filter = {};
 
-                        _.each(byRelations.filters, function(f){
-                            _.extend(filter, f.condition);
-                        });
+                        if (byRelations.relationType === 'kinsmen') {
+                            byRelations.request = npRsearchResource.kinsmen({
+                                node: byRelations.node,
+                                pageConfig: byRelations.pageConfig,
+                                previousRequest: byRelations.request,
+                                nodeIterator: function(node, i) {
+                                    npRsearchMetaHelper.addToRelationMap(
+                                        byRelations.relationMap, byRelations.node, node, byRelations.direction,
+                                        npRsearchMetaHelper.buildKinsmenRelation(byRelations.node, node)
+                                    );
+                                },
+                                success: function(data, status){
+                                    npRsearchMetaHelper.buildRelationInfo(byRelations.node, 'kinsmen', {
+                                        count: data.total
+                                    });
 
-                        byRelations.request = npRsearchResource.relations({
-                            node: byRelations.node,
-                            direction: byRelations.direction,
-                            relationType: byRelations.relationType,
-                            pageConfig: byRelations.pageConfig,
-                            filter: filter,
-                            previousRequest: byRelations.request,
-                            success: function(data, status){
-                                complete(data);
-                            },
-                            error: function(data, status){
-                                complete(null);
-                            }
-                        });
+                                    complete(data);
+                                },
+                                error: function(data, status){
+                                    complete(null);
+                                }
+                            });
+                        } else {
+                            _.each(byRelations.filters, function(f){
+                                _.extend(filter, f.condition);
+                            });
+
+                            byRelations.request = npRsearchResource.relations({
+                                node: byRelations.node,
+                                direction: byRelations.direction,
+                                relationType: byRelations.relationType,
+                                pageConfig: byRelations.pageConfig,
+                                filter: filter,
+                                previousRequest: byRelations.request,
+                                success: function(data, status){
+                                    complete(data);
+                                },
+                                error: function(data, status){
+                                    complete(null);
+                                }
+                            });
+                        }
 
                         function complete(result) {
                             byRelations.result = result;
