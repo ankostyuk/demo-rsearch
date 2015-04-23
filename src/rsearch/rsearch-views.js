@@ -15,6 +15,7 @@ define(function(require) {'use strict';
     var extmodules = {
         'np.directives':  require('np.directives'),
         'np.filters':     require('np.filters'),
+        'np.utils':       require('np.utils'),
         'nkb.user':       require('nkb.user'),
         'autokad':        require('autokad'),
         'fnsRegDocs':     require('nkb.extraneous/fns/reg_docs/company/main')
@@ -30,6 +31,7 @@ define(function(require) {'use strict';
         'np-rsearch-node-relations-header':         require('text!./views/rsearch-node-relations-header.html'),
         'np-rsearch-navigation-breadcrumb':         require('text!./views/rsearch-navigation-breadcrumb.html'),
         'np-rsearch-node-list':                     require('text!./views/rsearch-node-list.html'),
+        'np-rsearch-node-traces':                   require('text!./views/rsearch-node-traces.html'),
         'np-rsearch-user-product-limits-info':      require('text!./views/rsearch-user-product-limits-info.html'),
         'np-rsearch-autokad-info':                  require('text!./views/rsearch-autokad-info.html'),
         'np-rsearch-fns-reg-docs-info':             require('text!./views/rsearch-fns-reg-docs-info.html'),
@@ -192,7 +194,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .factory('npRsearchViews', ['$log', '$compile', '$rootScope', '$timeout', '$window', 'nkbUser', function($log, $compile, $rootScope, $timeout, $window, nkbUser){
+        .factory('npRsearchViews', ['$log', '$compile', '$rootScope', '$timeout', '$window', 'SimplePager', 'nkbUser', 'npRsearchMetaHelper', function($log, $compile, $rootScope, $timeout, $window, SimplePager, nkbUser, npRsearchMetaHelper){
 
             var htmlbodyElement = $('html, body');
 
@@ -329,6 +331,194 @@ define(function(require) {'use strict';
                         $timeout(function(){
                             proxy.showNodeList(nodeList, addNodeList, view);
                         });
+                    }
+
+                    return view;
+                },
+
+                createNodeTracesView: function(parent, parentScope, proxy) {
+                    var view    = createView('np-rsearch-node-traces', parent, parentScope),
+                        scope   = view.scope;
+
+                    _.extend(view, {
+                        type: 'NODE_TRACES',
+                        setNodes: function(nodes) {
+                            scope.nodes = _.isArray(nodes) ? nodes : [];
+                            scope.currentTrace = null;
+                        },
+                        getNodes: function(nodes) {
+                            return scope.nodes;
+                        },
+                        setFilters: function(filters) {
+                            if (_.isObject(filters)) {
+                                _.extend(scope.filters, filters);
+                            }
+                        },
+                        setDataSource: function(dataSource) {
+                            // ? TODO reset prev dataSource
+                            // if (scope.dataSource) {
+                            // }
+
+                            scope.dataSource = dataSource;
+                            scope.filters.depths = dataSource.depths;
+                            reset();
+                        },
+                        setResult: function(nodes, filters, result, traceIndex, silent) {
+                            view.setNodes(nodes);
+                            view.setFilters(filters);
+                            applyResult(result, traceIndex, silent);
+                            doTrace(silent);
+                        },
+                        reset: reset,
+                        scrollTop: function() {
+                            (scope.scrollContainer || htmlbodyElement).scrollTop(0);
+                        }
+                    });
+
+                    _.extend(scope, {
+                        scrollContainer: proxy.getScrollContainer(),
+                        proxy: proxy,
+                        nodes: [],
+                        filters: {
+                            depths: null,
+                            depth: null,
+                        },
+                        dataSource: null,
+                        result: null,
+                        traceIndex: 0,
+                        traceCount: null,
+                        currentTrace: null,
+                        pager: new SimplePager({
+                            prevPage: function(pageNumber) {
+                                scope.traceIndex--;
+                                doTrace();
+                            },
+                            nextPage: function(pageNumber) {
+                                scope.traceIndex++;
+                                doTrace();
+                            }
+                        }),
+                        nodeClick: function(e, tracePart) {
+                            scope.dataSource.nodeClick(tracePart, {
+                                node: tracePart.node,
+                                element: null,
+                                event: e,
+                                ui: 'npRsearchNodeTraces'
+                            });
+                        },
+                        doTraces: function() {
+                            if (!scope.dataSource) {
+                                return;
+                            }
+
+                            scope.traceCount = null;
+                            // scope.currentTrace = null; // ? TODO Очищать перед запросом
+
+                            scope.dataSource.tracesRequest({
+                                nodes: scope.nodes,
+                                filters: scope.filters
+                            }, function(result){
+                                if (scope.dataSource.reverse && result && result.traces) {
+                                    _.each(result.traces, function(trace){
+                                        trace.nodes.reverse();
+                                        trace.relations.reverse();
+                                    });
+                                }
+
+                                applyResult(result);
+                                doTrace();
+                            });
+                        },
+                        actions: {
+                        }
+                    });
+
+                    function reset() {
+                        scope.filters.depth = null;
+                        scope.result = null;
+                        scope.traceIndex = 0;
+                        scope.traceCount = null;
+                        scope.currentTrace = null;
+                        scope.pager.reset();
+                    }
+
+                    function applyResult(result, traceIndex, silent) {
+                        scope.result = result || {};
+                        scope.traceIndex = traceIndex || 0;
+
+                        scope.traceCount = _.size(scope.result.traces);
+
+                        scope.pager.reset({
+                            pageCount: scope.traceCount,
+                            pageNumber: scope.traceIndex + 1
+                        });
+
+                        if (!silent && _.isFunction(scope.dataSource.applyResult)) {
+                            scope.dataSource.applyResult(_.clone(scope.nodes), _.cloneDeep(scope.filters), scope.result);
+                        }
+                    }
+
+                    function doTrace(silent) {
+                        if (!silent && _.isFunction(scope.dataSource.doTrace)) {
+                            scope.dataSource.doTrace(scope.traceIndex);
+                        }
+
+                        if (scope.traceCount < 1) {
+                            scope.currentTrace = null;
+                            return;
+                        }
+
+                        var trace           = scope.result.traces[scope.traceIndex],
+                            nodes           = scope.result.nodes,
+                            relations       = scope.result.relations,
+                            relationIndexes = trace.relations,
+                            nodeIndexes     = trace.nodes,
+                            nodeCount       = _.size(nodeIndexes),
+                            currentTrace    = new Array(nodeCount),
+                            isLast, node, relation, direction, relationMap, targetInfo, isSrcNode;
+
+                        _.each(nodeIndexes, function(nodeIndex, i){
+                            isLast      = (i === nodeCount - 1);
+                            node        = nodes[nodeIndex];
+                            relationMap = {};
+
+                            // Именно при отображении цепочки,
+                            // а не в ответе запроса relatedKinsmen,
+                            // т.к. ответ может быть "жирным" - оптимизация
+                            npRsearchMetaHelper.buildNodeExtraMeta(node);
+
+                            isSrcNode = !!_.find(scope.nodes, function(n){
+                                return n.__uid === node.__uid;
+                            });
+
+                            if (isLast) {
+                                relation    = null;
+                                direction   = null;
+                                targetInfo  = null;
+                            } else {
+                                relation    = relations[relationIndexes[i]];
+                                direction   = relation._srcId === node._id ? 'parents' : 'children';
+                                npRsearchMetaHelper.addToRelationMap(relationMap, null, node, direction, relation);
+                                targetInfo = {
+                                    node: nodes[nodeIndexes[i + 1]],
+                                    relationInfo: {
+                                        direction: direction,
+                                        relationType: relation._type,
+                                        relationMap: relationMap
+                                    }
+                                };
+                            }
+
+                            currentTrace[i] = {
+                                isLast: isLast,
+                                inTrace: isSrcNode ? scope.dataSource.srcInTrace : true,
+                                node: node,
+                                targetInfo: targetInfo,
+                                direction: direction
+                            };
+                        });
+
+                        scope.currentTrace = currentTrace;
                     }
 
                     return view;

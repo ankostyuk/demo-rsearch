@@ -120,6 +120,7 @@ define(function(require) {'use strict';
                     var windowElement   = angular.element($window),
                         viewsElement    = element.find('.views'),
                         nodeListView    = npRsearchViews.createNodeListView(viewsElement, scope, navigationProxy),
+                        nodeTracesView  = npRsearchViews.createNodeTracesView(viewsElement, scope, navigationProxy),
                         nodeFormView    = npRsearchViews.createNodeFormView(viewsElement, scope, navigationProxy),
                         browserHistory  = _.isBoolean(scope.npRsearchNavigationBrowserHistory) ? scope.npRsearchNavigationBrowserHistory : true;
 
@@ -254,6 +255,7 @@ define(function(require) {'use strict';
 
                         clearAutokad();
                         clearFnsRegDocs();
+                        nodeTracesView.hide();
                         nodeFormView.hide();
                         clearBreadcrumbs();
                         clearNodeRelationsFilter();
@@ -384,6 +386,7 @@ define(function(require) {'use strict';
 
                         clearAutokad();
                         clearFnsRegDocs();
+                        nodeTracesView.hide();
                         nodeFormView.hide();
                         clearNodeRelationsFilter();
                         hideRelationsFilters();
@@ -481,6 +484,7 @@ define(function(require) {'use strict';
                         }
 
                         nodeListView.clear();
+                        nodeTracesView.hide();
                         clearAutokad();
                         clearFnsRegDocs();
                         clearNodeRelationsFilter();
@@ -541,9 +545,200 @@ define(function(require) {'use strict';
                         }
                     }
 
+                    function buildRelations(node, direction, relationType) {
+                        return {
+                            node: node,
+                            direction: direction,
+                            relationType: relationType,
+                            relationMap: npRsearchMetaHelper.buildRelationMap(node),
+                            request: null,
+                            result: null
+                        };
+                    }
+
+                    function buildListRelations(node, direction, relationType) {
+                        return _.extend(buildRelations(node, direction, relationType), {
+                            pageConfig: null,
+                            nodeList: null,
+                            reset: function(byRelations) {
+                                nodeTracesView.hide();
+                                resetRelationsNodeListView(byRelations);
+                            },
+                            doRelations: function(byRelations, checkAccentedResult, noHistory) {
+                                nodeTracesView.hide();
+
+                                loading(function(done){
+                                    clearMessages();
+
+                                    byRelations.pageConfig = resetPageConfig();
+
+                                    listRelationsRequest(byRelations);
+
+                                    // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
+                                    byRelations.request.promise.then(complete, complete);
+
+                                    function complete() {
+                                        setNodeList(byRelations);
+
+                                        var accentedResult = checkAccentedResult && checkAccentedResultByRelations(byRelations);
+
+                                        if (!accentedResult) {
+                                            resetRelationsNodeListView(byRelations);
+
+                                            if (!noHistory) {
+                                                checkNodeRelationsToHistory();
+                                            }
+                                        }
+
+                                        done();
+                                    }
+                                });
+                            }
+                        });
+                    }
+
+                    function buildTracesRelations(node, direction, relationType, options) {
+                        return _.extend(buildRelations(node, direction, relationType), {
+                            reset: function(byRelations) {
+                                nodeListView.clear();
+
+                                if (byRelations.result) {
+                                    nodeTracesView.setResult(byRelations.nodes, byRelations.filters, byRelations.result, byRelations.traceIndex, true);
+                                } else {
+                                    nodeTracesView.setNodes([byRelations.node]);
+                                    nodeTracesView.reset();
+                                }
+
+                                nodeTracesView.show();
+                            },
+                            doRelations: function(byRelations, checkAccentedResult, noHistory) {
+                                nodeListView.clear();
+
+                                options.dataSource.setInfo({
+                                    byRelations: byRelations
+                                });
+                                nodeTracesView.setNodes([byRelations.node]);
+                                nodeTracesView.setDataSource(options.dataSource);
+
+                                nodeTracesView.show();
+
+                                if (!noHistory) {
+                                    checkNodeRelationsToHistory();
+                                }
+                            }
+                        });
+                    }
+
+                    function buildRelatedKinsmenTracesRelations(node, direction, relationType) {
+                        return buildTracesRelations(node, direction, relationType, {
+                            dataSource: relatedKinsmenTracesDataSource
+                        });
+                    }
+
+                    function buildBeneficiaryTracesRelations(node, direction, relationType) {
+                        return buildTracesRelations(node, direction, relationType, {
+                            dataSource: beneficiaryTracesDataSource
+                        });
+                    }
+
+                    function getDefaultTracesDataSource() {
+                        return {
+                            reverse: true,
+                            srcInTrace: false,
+                            nodeClick: function(tracePart, info) {
+                                if (tracePart.inTrace) {
+                                    $rootScope.$emit('np-rsearch-node-click', info);
+                                }
+                            },
+                            setInfo: function(info) {
+                                this.info = info;
+                            },
+                            applyResult: function(nodes, filters, result) {
+                                _.extend(this.info.byRelations, {
+                                    nodes: nodes,
+                                    filters: filters,
+                                    result: result
+                                });
+                            },
+                            doTrace: function(traceIndex) {
+                                this.info.byRelations.traceIndex = traceIndex;
+                            }
+                        };
+                    }
+
+                    function RelatedKinsmenTracesDataSource() {
+                        return _.extend({}, getDefaultTracesDataSource(), {
+                            depths: _.range(2, 5),
+                            tracesRequest: function(data, callback) {
+                                loading(function(done){
+                                    var request = npRsearchResource.relatedKinsmen({
+                                        node: data.nodes[0],
+                                        filter: {
+                                            maxDepth: data.filters.depth
+                                        },
+                                        previousRequest: null,
+                                        success: function(data, status){
+                                            complete(data);
+                                        },
+                                        error: function(data, status){
+                                            complete(null);
+                                        }
+                                    });
+
+                                    function complete(result) {
+                                        callback(result);
+                                        done();
+                                    }
+                                });
+                            }
+                        });
+                    }
+                    var relatedKinsmenTracesDataSource = new RelatedKinsmenTracesDataSource();
+
+                    function BeneficiaryTracesDataSource() {
+                        return _.extend({}, getDefaultTracesDataSource(), {
+                            depths: _.range(1, 11),
+                            tracesRequest: function(data, callback) {
+                                loading(function(done){
+                                    var request = npRsearchResource.beneficiary({
+                                        node: data.nodes[0],
+                                        filter: {
+                                            maxDepth: data.filters.depth
+                                        },
+                                        previousRequest: null,
+                                        success: function(data, status){
+                                            complete(data);
+                                        },
+                                        error: function(data, status){
+                                            complete(null);
+                                        }
+                                    });
+
+                                    function complete(result) {
+                                        callback(result);
+                                        done();
+                                    }
+                                });
+                            }
+                        });
+                    }
+                    var beneficiaryTracesDataSource = new BeneficiaryTracesDataSource();
+
+                    function buildByRelations(node, direction, relationType) {
+                        if (relationType === 'related_kinsmen') {
+                            return buildRelatedKinsmenTracesRelations(node, direction, relationType);
+                        } else
+                        if (relationType === 'beneficiary') {
+                            return buildBeneficiaryTracesRelations(node, direction, relationType);
+                        } else {
+                            return buildListRelations(node, direction, relationType);
+                        }
+                    }
+
                     function showRelations(node, direction, relationType, key, breadcrumb, noHistory, noCheckAccentedResult) {
                         clearAutokad();
                         clearFnsRegDocs();
+                        nodeTracesView.hide();
                         nodeFormView.hide();
                         setNodeRelationsFilter(node, direction, relationType);
                         hideSearchFilters();
@@ -554,23 +749,13 @@ define(function(require) {'use strict';
                             byRelations = byRelationsStore[key];
 
                         if (byRelations) {
-                            resetRelationsNodeListView(byRelations);
+                            byRelations.reset(byRelations);
 
                             if (!noHistory) {
                                 checkNodeRelationsToHistory();
                             }
                         } else {
-                            byRelations = byRelationsStore[index] = {
-                                node: node,
-                                direction: direction,
-                                relationType: relationType,
-                                relationMap: npRsearchMetaHelper.buildRelationMap(node),
-                                pageConfig: null,
-                                request: null,
-                                result: null,
-                                nodeList: null
-                            };
-
+                            byRelations = byRelationsStore[index] = buildByRelations(node, direction, relationType);
                             doRelations(byRelations, !noCheckAccentedResult, noHistory);
                         }
 
@@ -578,32 +763,7 @@ define(function(require) {'use strict';
                     }
 
                     function doRelations(byRelations, checkAccentedResult, noHistory) {
-                        loading(function(done){
-                            clearMessages();
-
-                            byRelations.pageConfig = resetPageConfig();
-
-                            relationsRequest(byRelations);
-
-                            // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
-                            byRelations.request.promise.then(complete, complete);
-
-                            function complete() {
-                                setNodeList(byRelations);
-
-                                var accentedResult = checkAccentedResult && checkAccentedResultByRelations(byRelations);
-
-                                if (!accentedResult) {
-                                    resetRelationsNodeListView(byRelations);
-
-                                    if (!noHistory) {
-                                        checkNodeRelationsToHistory();
-                                    }
-                                }
-
-                                done();
-                            }
-                        });
+                        byRelations.doRelations(byRelations, checkAccentedResult, noHistory);
                     }
 
                     function resetRelationsNodeListView(byRelations) {
@@ -617,7 +777,7 @@ define(function(require) {'use strict';
                             loading(function(done){
                                 byRelations.pageConfig.page++;
 
-                                relationsRequest(byRelations);
+                                listRelationsRequest(byRelations);
 
                                 // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
                                 byRelations.request.promise.then(complete, complete);
@@ -636,7 +796,7 @@ define(function(require) {'use strict';
                         nodeListView.scrollTop();
                     }
 
-                    function relationsRequest(byRelations) {
+                    function listRelationsRequest(byRelations) {
                         var filter = {};
 
                         if (byRelations.relationType === 'kinsmen') {
@@ -1460,6 +1620,7 @@ define(function(require) {'use strict';
 
                         clearAutokad();
                         clearFnsRegDocs();
+                        nodeTracesView.hide();
                         nodeFormView.hide();
                         clearBreadcrumbs();
                         clearNodeRelationsFilter();
@@ -1469,7 +1630,6 @@ define(function(require) {'use strict';
 
                         showNodeForm('MINIREPORT', node, null, true, true);
 
-                        // if (relation && !npRsearchNavigationHelper.isSimpleNodeForm(node)) {
                         if (relation && navigationProxy.hasShowRelations(node)) {
                             showRelations(node, relation.direction, relation.type);
                         }

@@ -28,6 +28,8 @@
     <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'PARTICIPANT_COMPANY'"><np-pluralize count="relationsData.node._info.out['PARTICIPANT_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_CHILDREN")}"></np-pluralize></span>
 
     <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'EMPLOYEE'"><np-pluralize count="relationsData.node._info.in['EMPLOYEE']" when="::${_tr("NG_PLURALIZE::RELATION_EMPLOYEE_PARENTS")}"></np-pluralize></span>
+
+    <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'beneficiary'">${_tr("Бенефициары")}</span>
 </span>
 
 <span ng-if="relationsData.node._type === 'INDIVIDUAL'">

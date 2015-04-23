@@ -65,11 +65,11 @@
             <li np-rsearch-fns-reg-docs-info="actions.fnsRegDocs" np-rsearch-fns-reg-docs-click="actions.fnsRegDocsClick"></li>
         </ul>
     </div>
-    <!--<div class="relations-block" ng-show="user.isAuthenticated()">
+    <div class="relations-block" ng-show="user.isAuthenticated()">
         <ul class="unstyled">
-            <li><a class="action">${_tr("Бенефициары")}</a></li>
+            <li ng-class="{active: active === 'parents::beneficiary'}"><a class="action" ng-click="actions.relationsClick('parents', 'beneficiary')">${_tr("Бенефициары")}</a></li>
         </ul>
-    </div>-->
+    </div>
     <a class="action relations-product shadow-lift-lb-corner shadow-strong" ng-click="actions.productClick('relations_find_related')">${_tr("Анализ аффилированных лиц")}</a>
 </div>
 
@@ -103,10 +103,10 @@
             <li np-rsearch-autokad-info="actions.autokad" np-rsearch-autokad-click="actions.autokadClick"></li>
         </ul>
     </div>
-    <div class="relations-block" ng-show="user.isAuthenticated()">
+    <div class="relations-block" ng-show="!node.subtype && user.isAuthenticated()">
         <ul class="unstyled">
             <li ng-class="{active: active === 'sibling::kinsmen'}"><a class="action" ng-click="actions.relationsClick('sibling', 'kinsmen')">${_tr("Однофамильцы")}</a></li>
-            <!--<li ng-class="{active: active === 'sibling::related_kinsmen'}"><a class="action" ng-click="actions.relationsClick('sibling', 'related_kinsmen')">${_tr("Связанные однофамильцы")}</a></li>-->
+            <li ng-class="{active: active === 'sibling::related_kinsmen'}"><a class="action" ng-click="actions.relationsClick('sibling', 'related_kinsmen')">${_tr("Связанные однофамильцы")}</a></li>
         </ul>
     </div>
     <a class="action relations-product shadow-lift-lb-corner shadow-strong" ng-click="actions.productClick('relations_find_related')">${_tr("Анализ аффилированных лиц")}</a>

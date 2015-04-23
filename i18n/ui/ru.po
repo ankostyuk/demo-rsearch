@@ -271,6 +271,7 @@ msgstr ""
 msgid "Без ИНН"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Бенефициары"
 msgstr ""
@@ -292,6 +293,12 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Бизнес-справки онлайн"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgid ""
+"Будут найдены все возможные цепочки связей\n"
+"до указанного уровня"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-history-info.html:1
@@ -480,6 +487,7 @@ msgid "Национальное кредитное бюро"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-navigation.html:1
+#: ../src/rsearch/views/rsearch-node-traces.html:1
 msgid "Не найдено"
 msgstr ""
 
@@ -510,6 +518,11 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
 msgid "Обновить данные из ЕГРЮЛ"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Одна единственная цепочка связанных объектов"
+msgid "Одна цепочка"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -664,6 +677,11 @@ msgstr ""
 msgid "Схема аффилированных лиц"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Уровень (глубина) поиска связанных объектов"
+msgid "Укажите уровень..."
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 msgid "Учредитель — компания"
 msgstr ""
@@ -756,6 +774,11 @@ msgctxt "валюта"
 msgid "ие"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "из такого-то количества"
+msgid "из"
+msgstr ""
+
 #: ../src/rsearch/rsearch-meta.js:1
 msgctxt "возможно жена, сестра или мать"
 msgid "или"
@@ -831,12 +854,22 @@ msgstr ""
 msgid "тыс. руб."
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Уровень (глубина) поиска цепочек"
+msgid "уровень"
+msgstr ""
+
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "учредитель"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "формы за последний год"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "цепочка связанных объектов"
+msgid "цепочка"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1

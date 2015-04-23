@@ -437,6 +437,7 @@ msgid "Документы для государственной регистра
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-navigation.html:1
+#: ../src/rsearch/views/rsearch-node-traces.html:1
 msgid "Не найдено"
 msgstr ""
 
@@ -764,6 +765,11 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Бенефициары"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_CHILDREN"
 msgstr ""
 
@@ -827,10 +833,6 @@ msgid "ФНС"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "Бенефициары"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Анализ аффилированных лиц"
@@ -838,6 +840,35 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Однофамильцы"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Уровень (глубина) поиска связанных объектов"
+msgid "Укажите уровень..."
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Уровень (глубина) поиска цепочек"
+msgid "уровень"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgid "Будут найдены все возможные цепочки связей\nдо указанного уровня"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Одна единственная цепочка связанных объектов"
+msgid "Одна цепочка"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "цепочка связанных объектов"
+msgid "цепочка"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "из такого-то количества"
+msgid "из"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-region-filter.html:1

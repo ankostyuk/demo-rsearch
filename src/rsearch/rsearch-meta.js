@@ -295,6 +295,14 @@ define(function(require) {'use strict';
                         _dstId: dstNode._id,
                         kinship: dstNode._kinship
                     };
+                },
+
+                isNodeEquals: function(node1, node2) {
+                    if (!node1 || !node2) {
+                        return null;
+                    }
+
+                    return node1.__uid === node2.__uid;
                 }
             };
 
@@ -340,8 +348,8 @@ define(function(require) {'use strict';
             //      COMMISSION_MEMBER
             //          <role>
             //
-            return function(data, node){
-                if (!data) {
+            return function(data, node, anyway){
+                if (!data || !node) {
                     return null;
                 }
 
@@ -468,7 +476,7 @@ define(function(require) {'use strict';
                             (relation.shareAmount ? $filter('number')(relation.shareAmount) + nbsp + _tr("руб.") : '');
                     }
 
-                    return isTargetRelation(relation) ? '' : _tr("учредитель");
+                    return !isTargetRelation(relation) || anyway ? _tr("учредитель") : '';
                 }
 
                 function getAffiliatedText(relation) {
@@ -501,7 +509,7 @@ define(function(require) {'use strict';
                         return t;
                     }
 
-                    return isTargetRelation(relation) ? '' : _tr("аффилированное лицо");
+                    return !isTargetRelation(relation) || anyway ? _tr("аффилированное лицо") : '';
                 }
 
                 function getExecutiveText(relation) {
@@ -509,7 +517,7 @@ define(function(require) {'use strict';
                         return relation.position;
                     }
 
-                    return isTargetRelation(relation) ? '' : _tr("руководитель");
+                    return !isTargetRelation(relation) || anyway ? _tr("руководитель") : '';
                 }
 
                 function getEmployeeText(relation) {
@@ -523,8 +531,7 @@ define(function(require) {'use strict';
                         return t;
                     }
 
-                    // TODO проверить возникает такая ситуация?
-                    return isTargetRelation(relation) ? '' : _tr("контактное лицо");
+                    return !isTargetRelation(relation) || anyway ? _tr("контактное лицо") : '';
                 }
 
                 function getParticipantText(relation) {
@@ -594,7 +601,7 @@ define(function(require) {'use strict';
                         return relation.role;
                     }
 
-                    return isTargetRelation(relation) ? '' : _tr("член комиссии");
+                    return !isTargetRelation(relation) || anyway ? _tr("член комиссии") : '';
                 }
 
                 function getKinsmenText(relation) {
@@ -617,7 +624,7 @@ define(function(require) {'use strict';
                     return _tr("ИНН") + nbsp + inn;
                 }
 
-                var relations   = data.relationInfo.relationMap[node.__uid][data.relationInfo.direction],
+                var relations   = data.relationInfo.relationMap[node.__uid] && data.relationInfo.relationMap[node.__uid][data.relationInfo.direction],
                     list        = [];
 
                 _.each(relations, function(relation, type){

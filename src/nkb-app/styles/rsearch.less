@@ -120,12 +120,13 @@
     margin: 0;
 }
 [np-rsearch-navigation] .breadcrumb {
-    margin: 0 0 10px 0;
+    margin: 0 0 15px 0;
     padding: 0;
     background-color: transparent;
 }
 [np-rsearch-navigation] .breadcrumb > li {
     display: inline-block;
+    margin-bottom: 10px;
     padding-right: 5px;
     line-height: 18px;
     vertical-align: top;
@@ -315,6 +316,7 @@
 /* np-rsearch-node-simple */
 [np-rsearch-node-simple] .icon {
     margin-right: 5px;
+    vertical-align: 1px;
 }
 
 /* np-rsearch-node-plain */
@@ -408,6 +410,91 @@
 [np-rsearch-node-list] [np-rsearch-node-info] .balance-forms,
 [np-rsearch-node-list] [np-rsearch-node-info] .okfs {
     display: none;
+}
+
+/* np-rsearch-node-traces */
+[np-rsearch-node-traces] {
+    padding-top: 10px;
+}
+[np-rsearch-node-traces] .tools {
+    padding-bottom: 15px;
+}
+[np-rsearch-node-traces] .filters .depth {
+    width: 180px;
+}
+[np-rsearch-node-traces] .filters-message {
+    padding-top: 5px;
+    color: @defaultDisabledColor;
+}
+[np-rsearch-node-traces] .trace-pager .page-prev,
+[np-rsearch-node-traces] .trace-pager .page-next {
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+[np-rsearch-node-traces] .trace-pager .page-info {
+    color: @defaultHeaderLightColor !important;
+    background-color: @defaultBackgroundColor !important;
+    cursor: default !important;
+}
+[np-rsearch-node-traces] .trace-result {
+    padding: 5px;
+}
+[np-rsearch-node-traces] .trace-result .empty-result {
+    color: @defaultDisabledColor;
+}
+[np-rsearch-node-traces] .trace-result .relation {
+    position: relative;
+    height: 25px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid @defaultBorderColor;
+}
+[np-rsearch-node-traces] .trace-result .relation .target-relations-info {
+    position: absolute;
+    top: 15px;
+    left: 30px;
+    padding: 0 5px;
+    color: @defaultHeaderLightColor;
+    background-color: @defaultBackgroundColor;
+}
+
+
+[np-rsearch-node-traces] .trace-result .relation.parents:before,
+[np-rsearch-node-traces] .trace-result .relation.parents:after {
+    content: "";
+    display: block;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    position: absolute;
+    left: 10px;
+}
+[np-rsearch-node-traces] .trace-result .relation.parents:before {
+    border-top: 5px solid @defaultBorderColor;
+    top: 26px;
+}
+[np-rsearch-node-traces] .trace-result .relation.parents:after {
+    border-top: 5px solid @defaultBackgroundColor;
+    top: 25px;
+}
+
+[np-rsearch-node-traces] .trace-result .relation.children:before {
+  content: "";
+  display: block;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid @defaultBorderColor;
+  position: absolute;
+  top: 20px;
+  left: 9px;
+}
+[np-rsearch-node-traces] .trace-result .relation.children:after {
+  content: "";
+  display: block;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid @defaultBackgroundColor;
+  position: absolute;
+  top: 21px;
+  left: 10px;
 }
 
 /* np-rsearch-node-form */

@@ -90,6 +90,30 @@ define(function(require) {'use strict';
                     }, options);
                 },
 
+                relatedKinsmen: function(options) {
+                    var params = _.extend({}, options.filter, {
+                        individualId: options.node._id
+                    });
+
+                    return npResource.request({
+                        method: 'GET',
+                        url: config['algo.url'] + '/kinsmen',
+                        params: params
+                    }, null, options);
+                },
+
+                beneficiary: function(options) {
+                    var params = _.extend({}, options.filter, {
+                        companyId: options.node._id
+                    });
+
+                    return npResource.request({
+                        method: 'GET',
+                        url: config['algo.url'] + '/individualBeneficiary',
+                        params: params
+                    }, null, options);
+                },
+
                 egrulList: function(options) {
                     return npResource.request({
                         method: 'GET',
