@@ -16,7 +16,7 @@
     </div>
 </div>
 <div class="trace-result">
-    <div class="empty-result align-center" ng-show="traceCount === 0">${_tr("Не найдено")}</div>
+    <div class="empty-result align-center" ng-show="traceCount === 0">${_tr("Цепочек связей не найдено")}</div>
     <div ng-repeat="tracePart in currentTrace track by $index" ng-class="{'active': !tracePart.inTrace}">
         <div class="node">
             <a class="action" np-rsearch-node-simple="tracePart.node" ng-click="nodeClick($event, tracePart)"></a>

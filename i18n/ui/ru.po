@@ -487,7 +487,6 @@ msgid "Национальное кредитное бюро"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-navigation.html:1
-#: ../src/rsearch/views/rsearch-node-traces.html:1
 msgid "Не найдено"
 msgstr ""
 
@@ -702,6 +701,10 @@ msgstr ""
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 msgctxt "Сведения о поданном заявлении. ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
 msgid "Форма заявления"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgid "Цепочек связей не найдено"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1

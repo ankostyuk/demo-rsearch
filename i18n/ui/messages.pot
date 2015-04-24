@@ -437,7 +437,6 @@ msgid "Документы для государственной регистра
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-navigation.html:1
-#: ../src/rsearch/views/rsearch-node-traces.html:1
 msgid "Не найдено"
 msgstr ""
 
@@ -869,6 +868,10 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-node-traces.html:1
 msgctxt "из такого-то количества"
 msgid "из"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgid "Цепочек связей не найдено"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-region-filter.html:1
