@@ -29,3 +29,12 @@ FZ_94
 WIN
 NOT_ADMITTED
 PARTICIPANT
+
+# Источники связей
+rosstat
+egrul
+egrul_individual_founder
+egrul_individual_executive
+eaf
+disclosure
+purchases

@@ -248,7 +248,8 @@ define(function(require) {'use strict';
 
                 buildRelationMap: function(node) {
                     var relationMap = {},
-                        byNodes     = {};
+                        byNodes     = {},
+                        byRelations = {};
 
                     _.each(node._relations, function(relation){
                         var relationType    = relationTypesMeta[relation._type],
@@ -264,20 +265,38 @@ define(function(require) {'use strict';
                                 return;
                             }
 
-                            var relationInfo = byNodes[nodeUID] || {
+                            // byNodes
+                            var relationInfoByNodes = byNodes[nodeUID] || {
                                 'parents': {},
                                 'children': {}
                             };
 
-                            relationInfo[direction][relation._type] = relation;
+                            relationInfoByNodes[direction][relation._type] = relation;
 
-                            byNodes[nodeUID] = relationInfo;
+                            byNodes[nodeUID] = relationInfoByNodes;
+
+                            // byRelations
+                            var relationInfoByRelations = byRelations[relation._type] || {
+                                'parents': {},
+                                'children': {}
+                            };
+
+                            var bySources = relationInfoByRelations[direction]['bySources'] || {};
+
+                            if (relation._source) {
+                                var source = bySources[relation._source] || {};
+                                // Пока пустой объект: только фиксируем количество источников.
+                                bySources[relation._source] = source;
+                            }
+
+                            relationInfoByRelations[direction]['bySources'] = bySources;
+
+                            byRelations[relation._type] = relationInfoByRelations;
                         });
                     });
 
                     relationMap.byNodes = byNodes;
-
-                    // $log.info('buildRelationMap...', relationMap);
+                    relationMap.byRelations = byRelations;
 
                     return relationMap;
                 },
@@ -362,8 +381,9 @@ define(function(require) {'use strict';
                     return null;
                 }
 
-                var nbsp        = ' ',
-                    separator   = ', ';
+                var nbsp        = ' ',      // &nbsp
+                    separator   = ', ',     // , + space
+                    dash        = ' — ';    // space + dash + &nbsp
 
                 var SHOW_TYPES = {
                     'FOUNDER_COMPANY': {
@@ -478,14 +498,17 @@ define(function(require) {'use strict';
                 }
 
                 function getFounderText(relation) {
+                    var sourceText = buildSourceText(relation);
+
                     if (relation.sharePercent || relation.shareAmount) {
                         return _trc("доля", "Доля в учреждении компании") + nbsp +
                             (relation.sharePercent ? $filter('share')(relation.sharePercent, 2) + '%' : '') +
                             (relation.sharePercent && relation.shareAmount ? nbsp + nbsp : '') +
-                            (relation.shareAmount ? $filter('number')(relation.shareAmount) + nbsp + _tr("руб.") : '');
+                            (relation.shareAmount ? $filter('number')(relation.shareAmount) + nbsp + _tr("руб.") : '') +
+                            sourceText;
                     }
 
-                    return !isTargetRelation(relation) || anyway ? _tr("учредитель") : '';
+                    return !isTargetRelation(relation) || anyway ? _tr("учредитель") + sourceText : '';
                 }
 
                 function getAffiliatedText(relation) {
@@ -627,6 +650,28 @@ define(function(require) {'use strict';
                     return _.size(ts) ?
                         _trc("возможно", "возможно жена, сестра или мать") + nbsp + _.toSentence(ts, separator, nbsp + _trc("или", "возможно жена, сестра или мать") + nbsp) :
                         null;
+                }
+
+                function getSourceCount(relation) {
+                    return _.size(
+                        data.relationInfo.relationMap.byRelations &&
+                        data.relationInfo.relationMap.byRelations[data.relationInfo.relationType] &&
+                        data.relationInfo.relationMap.byRelations[data.relationInfo.relationType][data.relationInfo.direction]['bySources']
+                    );
+                }
+
+                function getSourceText(relation) {
+                    if (!relation._actual || !relation._source) {
+                        return '';
+                    }
+
+                    return dash + _tr(relation._source) +
+                        nbsp + _trc("от", "от такой-то даты") + nbsp +
+                        $filter('amDateFormat')(relation._actual, _trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/"));
+                }
+
+                function buildSourceText(relation) {
+                    return getSourceCount(relation) > 1 ? getSourceText(relation) : '';
                 }
 
                 function getInnText(inn) {

@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "CLDR_PLURAL_FORMS_FORMAT: one{0}other{1}\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.7.6\n"
 
 #: ../i18n/ui_keys/src/keys.txt:1
 msgid "AFFILIATE_20_PERCENT"
@@ -70,6 +70,41 @@ msgstr "$"
 #: ../i18n/ui_keys/src/keys.txt:1
 msgid "WIN"
 msgstr "winner"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
+msgid "disclosure"
+msgstr "Список аффилированных лиц"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
+msgid "eaf"
+msgstr "Архив ЕГРЮЛ"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
+msgid "egrul"
+msgstr "ЕГРЮЛ"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
+msgid "egrul_individual_executive"
+msgstr "ЕГРЮЛ"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
+msgid "egrul_individual_founder"
+msgstr "ЕГРЮЛ"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
+msgid "purchases"
+msgstr "Закупки"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
+msgid "rosstat"
+msgstr "Росстат"
 
 #, fuzzy
 #~ msgid "BROTHER"

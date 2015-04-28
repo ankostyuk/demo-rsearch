@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "CLDR_PLURAL_FORMS_FORMAT: one{0}other{1}\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.7.6\n"
 
 #: ../src/nkb-app/index.html:1
 msgid "API информационной системы"
@@ -232,6 +232,7 @@ msgstr "{'one': '1 legal successor', 'other': '{} legal successors'}"
 msgid "NG_PLURALIZE::kinsmen"
 msgstr "{'0': 'Нет однофамильцев', 'one': '1 однофамилец', 'other': '{} однофамильцев'}"
 
+#: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
@@ -729,6 +730,7 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
 #: ../src/rsearch/views/rsearch-node-list.html:1
+#: ../src/rsearch/views/rsearch-node-traces.html:1
 msgctxt "объект в отчете"
 msgid "в отчете"
 msgstr ""
@@ -832,7 +834,9 @@ msgstr "last year sales volume"
 msgid "основано"
 msgstr "Est."
 
+#: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
+#, fuzzy
 msgctxt "от такой-то даты"
 msgid "от"
 msgstr "on"

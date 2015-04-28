@@ -331,6 +331,25 @@ msgid "или"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "от такой-то даты"
+msgid "от"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/views/rsearch-egrul-data-update.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgctxt "Формат даты: http://momentjs.com/docs/#/displaying/format/"
+msgid "mediumDate"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ИНН"
 msgstr ""
@@ -385,17 +404,6 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
 msgctxt "актуализация данных"
 msgid "последняя актуализация"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-egrul-data-update.html:1
-#: ../src/rsearch/views/rsearch-node-form.html:1
-#: ../src/rsearch/views/rsearch-node-form.html:1
-#: ../src/rsearch/views/rsearch-node-info.html:1
-#: ../src/rsearch/views/rsearch-node-info.html:1
-#: ../src/rsearch/views/rsearch-node-info.html:1
-#: ../src/rsearch/views/rsearch-node-info.html:1
-msgctxt "Формат даты: http://momentjs.com/docs/#/displaying/format/"
-msgid "mediumDate"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
@@ -524,12 +532,6 @@ msgid "Выписка"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgctxt "от такой-то даты"
-msgid "от"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "NG_PLURALIZE::EGRUL_LIST_MORE"
 msgstr ""
 
@@ -582,6 +584,7 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
 #: ../src/rsearch/views/rsearch-node-list.html:1
+#: ../src/rsearch/views/rsearch-node-traces.html:1
 msgctxt "объект в отчете"
 msgid "в отчете"
 msgstr ""

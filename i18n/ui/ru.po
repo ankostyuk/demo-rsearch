@@ -231,6 +231,7 @@ msgstr "{'one': '{} правопреемник', 'few': '{} правопреем
 msgid "NG_PLURALIZE::kinsmen"
 msgstr "{'0': 'Нет однофамильцев', 'one': '{} однофамилец', 'few': '{} однофамильца', 'many': '{} однофамильцев', 'other': '{} однофамильца'}"
 
+#: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
@@ -717,6 +718,7 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
 #: ../src/rsearch/views/rsearch-node-list.html:1
+#: ../src/rsearch/views/rsearch-node-traces.html:1
 msgctxt "объект в отчете"
 msgid "в отчете"
 msgstr ""
@@ -819,6 +821,7 @@ msgstr ""
 msgid "основано"
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgctxt "от такой-то даты"
 msgid "от"

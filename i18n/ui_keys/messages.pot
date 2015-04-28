@@ -68,3 +68,31 @@ msgstr ""
 #: ../i18n/ui_keys/src/keys.txt:1
 msgid "PARTICIPANT"
 msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "rosstat"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "egrul"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "egrul_individual_founder"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "egrul_individual_executive"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "eaf"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "disclosure"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "purchases"
+msgstr ""
