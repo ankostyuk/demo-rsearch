@@ -247,7 +247,8 @@ define(function(require) {'use strict';
                 },
 
                 buildRelationMap: function(node) {
-                    var relationMap = {};
+                    var relationMap = {},
+                        byNodes     = {};
 
                     _.each(node._relations, function(relation){
                         var relationType    = relationTypesMeta[relation._type],
@@ -263,24 +264,32 @@ define(function(require) {'use strict';
                                 return;
                             }
 
-                            var relationInfo = relationMap[nodeUID] || {
+                            var relationInfo = byNodes[nodeUID] || {
                                 'parents': {},
                                 'children': {}
                             };
 
                             relationInfo[direction][relation._type] = relation;
 
-                            relationMap[nodeUID] = relationInfo;
+                            byNodes[nodeUID] = relationInfo;
                         });
                     });
+
+                    relationMap.byNodes = byNodes;
+
+                    // $log.info('buildRelationMap...', relationMap);
 
                     return relationMap;
                 },
 
                 addToRelationMap: function(relationMap, srcNode, dstNode, direction, relation) {
-                    relationMap[dstNode.__uid] = relationMap[dstNode.__uid] || {};
-                    relationMap[dstNode.__uid][direction] = relationMap[dstNode.__uid][direction] || {};
-                    relationMap[dstNode.__uid][direction][relation._type] = relation;
+                    relationMap.byNodes = relationMap.byNodes || {};
+
+                    var byNodes = relationMap.byNodes;
+
+                    byNodes[dstNode.__uid] = byNodes[dstNode.__uid] || {};
+                    byNodes[dstNode.__uid][direction] = byNodes[dstNode.__uid][direction] || {};
+                    byNodes[dstNode.__uid][direction][relation._type] = relation;
                 },
 
                 buildRelationInfo: function(node, relationType, data) {
@@ -624,7 +633,7 @@ define(function(require) {'use strict';
                     return _tr("ИНН") + nbsp + inn;
                 }
 
-                var relations   = data.relationInfo.relationMap[node.__uid] && data.relationInfo.relationMap[node.__uid][data.relationInfo.direction],
+                var relations   = data.relationInfo.relationMap.byNodes && data.relationInfo.relationMap.byNodes[node.__uid] && data.relationInfo.relationMap.byNodes[node.__uid][data.relationInfo.direction],
                     list        = [];
 
                 _.each(relations, function(relation, type){
