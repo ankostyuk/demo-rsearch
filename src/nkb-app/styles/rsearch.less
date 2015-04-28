@@ -414,7 +414,7 @@
 
 /* np-rsearch-node-traces */
 [np-rsearch-node-traces] {
-    padding-top: 10px;
+    padding: 10px 0 20px 0;
 }
 [np-rsearch-node-traces] .tools {
     padding-bottom: 15px;
@@ -436,19 +436,34 @@
     background-color: @defaultBackgroundColor !important;
     cursor: default !important;
 }
-[np-rsearch-node-traces] .trace-result {
-    padding: 5px;
-}
 [np-rsearch-node-traces] .trace-result .empty-result {
     color: @defaultDisabledColor;
 }
-[np-rsearch-node-traces] .trace-result .relation {
+[np-rsearch-node-traces] .trace-result .traces {
+    padding: 5px;
+}
+[np-rsearch-node-traces] .trace-part {
+    position: relative;
+}
+[np-rsearch-node-traces] .trace-part-info {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    padding: 0px 18px 0 0;
+    text-align: right;
+    white-space: nowrap;
+    color: @defaultDisabledColor;
+}
+[np-rsearch-node-traces] .trace-part-info .trace-part-info-entry.node-status {
+    display: none;
+}
+[np-rsearch-node-traces] .traces .relation {
     position: relative;
     height: 25px;
     margin-bottom: 25px;
     border-bottom: 1px solid @defaultBorderColor;
 }
-[np-rsearch-node-traces] .trace-result .relation .target-relations-info {
+[np-rsearch-node-traces] .traces .relation .target-relations-info {
     position: absolute;
     top: 15px;
     left: 30px;
@@ -456,7 +471,6 @@
     color: @defaultHeaderLightColor;
     background-color: @defaultBackgroundColor;
 }
-
 
 [np-rsearch-node-traces] .trace-result .relation.parents:before,
 [np-rsearch-node-traces] .trace-result .relation.parents:after {
@@ -477,24 +491,24 @@
 }
 
 [np-rsearch-node-traces] .trace-result .relation.children:before {
-  content: "";
-  display: block;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-bottom: 6px solid @defaultBorderColor;
-  position: absolute;
-  top: 20px;
-  left: 9px;
+    content: "";
+    display: block;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid @defaultBorderColor;
+    position: absolute;
+    top: 20px;
+    left: 9px;
 }
 [np-rsearch-node-traces] .trace-result .relation.children:after {
-  content: "";
-  display: block;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-bottom: 5px solid @defaultBackgroundColor;
-  position: absolute;
-  top: 21px;
-  left: 10px;
+    content: "";
+    display: block;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid @defaultBackgroundColor;
+    position: absolute;
+    top: 21px;
+    left: 10px;
 }
 
 /* np-rsearch-node-form */

@@ -324,7 +324,7 @@ define(function(require) {'use strict';
                     }
 
                     function resetNodeListProxy() {
-                            proxy.resetNodeList(view);
+                        proxy.resetNodeList(view);
                     }
 
                     function showNodeListProxy(nodeList, addNodeList) {
@@ -337,8 +337,9 @@ define(function(require) {'use strict';
                 },
 
                 createNodeTracesView: function(parent, parentScope, proxy) {
-                    var view    = createView('np-rsearch-node-traces', parent, parentScope),
-                        scope   = view.scope;
+                    var view            = createView('np-rsearch-node-traces', parent, parentScope),
+                        tracesElement   = view.element.find('.traces'),
+                        scope           = view.scope;
 
                     _.extend(view, {
                         type: 'NODE_TRACES',
@@ -370,6 +371,13 @@ define(function(require) {'use strict';
                             doTrace(silent);
                         },
                         reset: reset,
+                        getTracesElement: function() {
+                            return tracesElement;
+                        },
+                        getNodeElement: function(node) {
+                            var nodeElement = view.element.find('[node-uid="' + node.__uid + '"]');
+                            return nodeElement.length === 1 ? nodeElement : null;
+                        },
                         scrollTop: function() {
                             (scope.scrollContainer || htmlbodyElement).scrollTop(0);
                         }
@@ -519,6 +527,14 @@ define(function(require) {'use strict';
                         });
 
                         scope.currentTrace = currentTrace;
+
+                        showTraceProxy(scope.currentTrace);
+                    }
+
+                    function showTraceProxy(trace) {
+                        $timeout(function(){
+                            proxy.showTrace(trace, view);
+                        });
                     }
 
                     return view;

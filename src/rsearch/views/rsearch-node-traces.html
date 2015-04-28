@@ -17,12 +17,18 @@
 </div>
 <div class="trace-result">
     <div class="empty-result align-center" ng-show="traceCount === 0">${_tr("Цепочек связей не найдено")}</div>
-    <div ng-repeat="tracePart in currentTrace track by $index" ng-class="{'active': !tracePart.inTrace}">
-        <div class="node">
-            <a class="action" np-rsearch-node-simple="tracePart.node" ng-click="nodeClick($event, tracePart)"></a>
-        </div>
-        <div class="relation {{tracePart.direction}}" ng-hide="tracePart.isLast">
-            <div class="target-relations-info">{{tracePart.targetInfo | targetRelationsInfo:tracePart.node:true}}</div>
+    <div class="traces" ng-show="!!currentTrace">
+        <div class="trace-part" ng-class="{'active': !tracePart.inTrace}" ng-repeat="tracePart in currentTrace track by $index">
+            <div class="trace-part-info">
+                <!-- TODO при наличии других статусов: динамическое обновление сообщения о статусе -->
+                <div class="trace-part-info-entry node-status">${_trc("в отчете", "объект в отчете")}</div>
+            </div>
+            <div class="node">
+                <a class="action" node-id="{{tracePart.node._id}}" node-uid="{{tracePart.node.__uid}}" np-rsearch-node-simple="tracePart.node" ng-click="nodeClick($event, tracePart)"></a>
+            </div>
+            <div class="relation {{tracePart.direction}}" ng-hide="tracePart.isLast">
+                <div class="target-relations-info">{{tracePart.targetInfo | targetRelationsInfo:tracePart.node:true}}</div>
+            </div>
         </div>
     </div>
 </div>

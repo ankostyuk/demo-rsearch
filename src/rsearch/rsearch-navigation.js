@@ -76,6 +76,9 @@ define(function(require) {'use strict';
                 showNodeList: function(nodeList, addNodeList, nodeListView) {
                 },
                 //
+                showTrace: function(trace, nodeTracesView) {
+                },
+                //
                 showNodeForm: function(node, formType, nodeFormView) {
                 },
                 // @Deprecated
