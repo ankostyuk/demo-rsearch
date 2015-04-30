@@ -114,6 +114,19 @@ define(function(require) {'use strict';
                     }, null, options);
                 },
 
+                traces: function(options) {
+                    var params = _.extend({}, options.filter);
+
+                    return npResource.request({
+                        method: 'GET',
+                        url: config['relations.url'] + '/' +
+                            options.node1._type + '/' + options.node1._id +
+                            '/trace/' +
+                            options.node2._type + '/' + options.node2._id,
+                        params: params
+                    }, null, options);
+                },
+
                 egrulList: function(options) {
                     return npResource.request({
                         method: 'GET',

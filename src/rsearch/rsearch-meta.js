@@ -331,6 +331,24 @@ define(function(require) {'use strict';
                     }
 
                     return node1.__uid === node2.__uid;
+                },
+
+                isNodesEquals: function(nodes1, nodes2) {
+                    if (_.size(nodes1) !== _.size(nodes2) || !_.size(nodes1) || !_.size(nodes2)) {
+                        return false;
+                    }
+
+                    var find;
+
+                    _.each(nodes1, function(node1){
+                        find = !!_.find(nodes2, function(node2){
+                            return metaHelper.isNodeEquals(node1, node2);
+                        });
+
+                        return find;
+                    });
+
+                    return find;
                 }
             };
 

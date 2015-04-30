@@ -389,7 +389,7 @@ define(function(require) {'use strict';
                         nodes: [],
                         filters: {
                             depths: null,
-                            depth: null,
+                            depth: null
                         },
                         dataSource: null,
                         result: null,
@@ -491,7 +491,7 @@ define(function(require) {'use strict';
                             relationMap = {};
 
                             // Именно при отображении цепочки,
-                            // а не в ответе запроса relatedKinsmen,
+                            // а не в ответе запроса на поиск цепочек,
                             // т.к. ответ может быть "жирным" - оптимизация
                             npRsearchMetaHelper.buildNodeExtraMeta(node);
 

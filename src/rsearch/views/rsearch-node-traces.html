@@ -5,8 +5,8 @@
             <option ng-repeat="depth in filters.depths" value="{{depth}}" ng-selected="depth === filters.depth">{{depth}} ${_trc("уровень", "Уровень (глубина) поиска цепочек")}</option>
         </select>
     </div>
-    <div class="span5 muted pre filters-message" ng-show="!filters.depth">${_tr("Будут найдены все возможные цепочки связей\nдо указанного уровня")}</div>
-    <div class="align-right filters-message" ng-show="filters.depth && pager.getPageCount() === 1">${_trc("Одна цепочка", "Одна единственная цепочка связанных объектов")}</div>
+    <div class="span5 pre filters-message hint" ng-show="!filters.depth">${_tr("Будут найдены все возможные цепочки связей\nдо указанного уровня")}</div>
+    <div class="align-right filters-message single-result" ng-show="filters.depth && pager.getPageCount() === 1">${_trc("Одна цепочка", "Одна единственная цепочка связанных объектов")}</div>
     <div class="align-right trace-pager" ng-show="pager.getPageCount() > 1">
         <div class="btn-group">
             <button class="btn flat link page-prev" ng-disabled="!pager.hasPrevPage()" ng-click="pager.prevPage()"><i class="icon i-left"></i></button>
