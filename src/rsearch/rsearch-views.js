@@ -220,6 +220,9 @@ define(function(require) {'use strict';
                         element.remove();
                         scope.$destroy();
                     },
+                    toggle: function(show) {
+                        element.toggle(show);
+                    },
                     show: function() {
                         element.show();
                     },
