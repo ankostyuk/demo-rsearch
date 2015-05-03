@@ -47,7 +47,7 @@
             <div class="span7 node-header" data-node-id="{{node._id}}"><span ng-click="nodeHeaderClick($event)">{{node.form}}</span></div>
             <div class="node-header-small align-right" ng-show="node.date">{{node.date | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
         </div>
-        <div class="row">
+        <div class="row node-content">
             <div class="span8">
                 <div class="node-entry" ng-show="node.total_price">{{node.total_price | number:0}} {{_tr(node.currency)}}</div>
                 <div class="node-entry">{{node.name}}</div>
