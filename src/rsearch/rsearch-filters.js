@@ -7,7 +7,8 @@ define(function(require) {'use strict';
 
     var regionFilterTemplate            = require('text!./views/rsearch-region-filter.html'),
         innFilterTemplate               = require('text!./views/rsearch-inn-filter.html'),
-        affiliatedCauseFilterTemplate   = require('text!./views/rsearch-affiliated-cause-filter.html');
+        affiliatedCauseFilterTemplate   = require('text!./views/rsearch-affiliated-cause-filter.html'),
+        relationDateFilterTemplate      = require('text!./views/rsearch-relation-date-filter.html');
 
                           require('jquery');
                           require('lodash');
@@ -15,7 +16,9 @@ define(function(require) {'use strict';
         angular         = require('angular');
 
     //
-    function Filter() {
+    function Filter(options) {
+        options = options || {};
+
         var data        = null,
             value       = null,
             isShow      = false,
@@ -41,10 +44,18 @@ define(function(require) {'use strict';
             },
 
             isShow: function() {
+                if (_.isFunction(options.isShow)) {
+                    return options.isShow(isShow, data, sortedPairs);
+                }
+
                 return isShow;
             },
 
             isNoFilter: function() {
+                if (_.isFunction(options.isNoFilter)) {
+                    return options.isNoFilter(data, sortedPairs);
+                }
+
                 return !!(data && _.size(sortedPairs) === 1 && sortedPairs[0][1] === data.total);
             },
 
@@ -87,6 +98,7 @@ define(function(require) {'use strict';
             regionFilterTemplate = i18n.translateTemplate(regionFilterTemplate);
             innFilterTemplate = i18n.translateTemplate(innFilterTemplate);
             affiliatedCauseFilterTemplate = i18n.translateTemplate(affiliatedCauseFilterTemplate);
+            relationDateFilterTemplate = i18n.translateTemplate(relationDateFilterTemplate);
         }])
         //
         .directive('npRsearchRegionFilter', ['$log', '$rootScope', function($log, $rootScope){
@@ -170,9 +182,41 @@ define(function(require) {'use strict';
                             filter.toggle(show);
                         },
                         setData: function(data) {
+                            $log.info('npRsearchAffiliatedCauseFilter::setData...', data);
                             filter.setData(data, function(pair){
                                 var causeMeta = causesMeta[pair[0]];
                                 return causeMeta ? causeMeta.order : null;
+                            });
+                        },
+                        filter: filter
+                    }, i18n.translateFuncs);
+                }
+            };
+        }])
+        //
+        .directive('npRsearchRelationDateFilter', ['$log', '$rootScope', function($log, $rootScope){
+            return {
+                restrict: 'A',
+                template: relationDateFilterTemplate,
+                scope: {},
+                link: function(scope, element, attrs) {
+                    var filter = new Filter({
+                        isShow: function(isShow, data, sortedPairs) {
+                            return (isShow && data && _.size(data.values) > 1);
+                        },
+                        isNoFilter: function(data, sortedPairs) {
+                            return false;
+                        }
+                    });
+
+                    _.extend(scope, {
+                        toggle: function(show) {
+                            filter.toggle(show);
+                        },
+                        setData: function(data) {
+                            filter.setData(data, function(pair){
+                                var actualData = pair[1];
+                                return -actualData.actual;
                             });
                         },
                         filter: filter

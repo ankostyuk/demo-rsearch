@@ -1,0 +1,14 @@
+<div class="np-rsearch-filter" ng-show="filter.isShow()">
+    <!--
+    <p class="no-filter-message" ng-show="filter.isNoFilter()"></span></p>
+    <ul class="unstyled" ng-show="!filter.isNoFilter()">
+    -->
+    <ul class="unstyled">
+        <li class="filter-item" ng-class="{active: filter.getValue() === null}" ng-click="filter.doFilter(null)">
+            <a class="action">${_tr("За всё время")}</a>
+        </li>
+        <li class="filter-item" ng-class="{active: filter.getValue() === p[0]}" ng-click="filter.doFilter(p[0])" ng-repeat="p in filter.getSortedPairs() track by $index">
+            <a class="simple-row action"><span class="count">{{p[1].relations.length | number}}</span><span class="text">${_trc("на", "на такую-то дату")} {{p[0] | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</span></a>
+        </li>
+    </ul>
+</div>

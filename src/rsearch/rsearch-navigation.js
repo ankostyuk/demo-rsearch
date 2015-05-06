@@ -600,7 +600,7 @@ define(function(require) {'use strict';
                         });
                     }
 
-                    function buildTracesRelations(node, direction, relationType, options) {
+                    function buildTracesRelations(node, direction, relationType) {
                         return _.extend(buildRelations(node, direction, relationType), {
                             reset: function(byRelations) {
                                 nodeListView.clear();
@@ -765,8 +765,8 @@ define(function(require) {'use strict';
                         $rootScope.$emit('np-rsearch-navigation-node-relations', node, relationType);
                     }
 
-                    function doRelations(byRelations, checkAccentedResult, noHistory) {
-                        byRelations.doRelations(byRelations, checkAccentedResult, noHistory);
+                    function doRelations(byRelations, checkAccentedResult, noHistory, options) {
+                        byRelations.doRelations(byRelations, checkAccentedResult, noHistory, options);
                     }
 
                     function resetRelationsNodeListView(byRelations) {
@@ -1185,6 +1185,7 @@ define(function(require) {'use strict';
                         relationsRegionFilterScope.toggle(false);
                         relationsInnFilterScope.toggle(false);
                         hideAffiliatedCauseFilters();
+                        hideRelationDateFilters();
                     }
 
                     function initRelationsFilters(byRelations) {
@@ -1239,40 +1240,83 @@ define(function(require) {'use strict';
                                 }
                             };
 
+                            // @Deprecated relation_history
+                            // Временное решение для отладки истории связей
+                            // TODO Сделать API и нормальный фильтр
+                            var relationDateFilter = {
+                                values: byRelations.relationMap.byRelations[byRelations.relationType][byRelations.direction].byActual,
+                                value: null,
+                                total: total,
+                                callback: function(value) {
+                                    var actualData  = value && relationDateFilter.values[value],
+                                        relations   = actualData && actualData.relations;
+
+                                    relationDateFilter.value = value;
+                                    relationDateFilter.condition = {
+                                        'fake_relations': relations
+                                    };
+
+                                    doRelations(byRelations, false, true, {
+                                        relations: relations
+                                    });
+                                }
+                            };
+
                             filters = {
                                 region: regionFilter,
                                 inn: innFilter,
-                                affiliatedCause: affiliatedCauseFilter
+                                affiliatedCause: affiliatedCauseFilter,
+                                relationDate: relationDateFilter
                             };
 
                             byRelations.filters = filters;
                         }
 
-                        if (filters.region.values) {
+                        if (filters.region.values && relationsRegionFilterScope) {
                             relationsRegionFilterScope.setData(filters.region);
                             relationsRegionFilterScope.toggle(true);
                         }
 
-                        if (filters.inn.values) {
+                        if (filters.inn.values && relationsInnFilterScope) {
                             relationsInnFilterScope.setData(filters.inn);
                             relationsInnFilterScope.toggle(true);
                         }
 
-                        if (filters.affiliatedCause.values) {
-                            $timeout(function(){
+                        $timeout(function(){
+                            if (filters.affiliatedCause.values) {
                                 var affiliatedCauseFilterElement    = element.find('.right-bar [np-rsearch-node-relations] .active [np-rsearch-affiliated-cause-filter]'),
                                     affiliatedCauseFilterScope      = affiliatedCauseFilterElement.isolateScope();
 
                                 hideAffiliatedCauseFilters();
 
-                                affiliatedCauseFilterScope.setData(filters.affiliatedCause);
-                                affiliatedCauseFilterScope.toggle(true);
-                            });
-                        }
+                                if (affiliatedCauseFilterScope) {
+                                    affiliatedCauseFilterScope.setData(filters.affiliatedCause);
+                                    affiliatedCauseFilterScope.toggle(true);
+                                }
+                            }
+
+                            if (filters.relationDate.values) {
+                                var relationDateFilterElement   = element.find('.right-bar [np-rsearch-node-relations] .active [np-rsearch-relation-date-filter]'),
+                                    relationDateFilterScope     = relationDateFilterElement.isolateScope();
+
+                                hideRelationDateFilters();
+
+                                if (relationDateFilterScope) {
+                                    relationDateFilterScope.setData(filters.relationDate);
+                                    relationDateFilterScope.toggle(true);
+                                }
+                            }
+                        });
                     }
 
                     function hideAffiliatedCauseFilters() {
                         element.find('.right-bar [np-rsearch-node-relations] [np-rsearch-affiliated-cause-filter]').each(function(el){
+                            angular.element(this).isolateScope().toggle(false);
+                        });
+                    }
+
+                    function hideRelationDateFilters() {
+                        element.find('.right-bar [np-rsearch-node-relations] [np-rsearch-relation-date-filter]').each(function(el){
                             angular.element(this).isolateScope().toggle(false);
                         });
                     }

@@ -281,15 +281,39 @@ define(function(require) {'use strict';
                                 'children': {}
                             };
 
-                            var bySources = relationInfoByRelations[direction]['bySources'] || {};
+                            // byRelations bySources
+                            // TODO только для определенных типов связей: для оптимизации по скорости и памяти
+                            var bySources   = relationInfoByRelations[direction]['bySources'] || {},
+                                source      = relation._source;
 
-                            if (relation._source) {
-                                var source = bySources[relation._source] || {};
+                            if (source) {
+                                var sourceData = bySources[source] || {};
                                 // Пока пустой объект: только фиксируем количество источников.
-                                bySources[relation._source] = source;
+                                bySources[source] = sourceData;
                             }
 
                             relationInfoByRelations[direction]['bySources'] = bySources;
+
+                            // byRelations byActual
+                            // <<< @Deprecated relation_history
+                            // Временное решение для отладки истории связей
+                            // TODO Сделать API и нормальный фильтр
+                            var byActual    = relationInfoByRelations[direction]['byActual'] || {},
+                                actual      = relation._actual;
+
+                            if (actual) {
+                                var actualData = byActual[actual] || {
+                                    actual: actual,
+                                    relations: []
+                                };
+
+                                actualData.relations.push(relation);
+
+                                byActual[actual] = actualData;
+                            }
+
+                            relationInfoByRelations[direction]['byActual'] = byActual;
+                            // >>>
 
                             byRelations[relation._type] = relationInfoByRelations;
                         });

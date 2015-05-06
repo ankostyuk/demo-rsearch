@@ -17,9 +17,31 @@ define(function(require) {'use strict';
 
             var config = appConfig.resource || {};
 
-            function nodeListProcess(data, nodeIterator) {
+            function nodeListProcess(data, nodeIterator, requestOptions) {
                 var npRsearchMetaHelper = $injector.get('npRsearchMetaHelper'),
                     baseIndex           = data.pageSize * (data.pageNumber - 1);
+
+                // <<< @Deprecated relation_history
+                // Временное решение для отладки истории связей
+                // TODO Сделать API и нормальный фильтр
+                var fakeRelations = requestOptions && requestOptions.filter && requestOptions.filter['fake_relations'];
+
+                if (fakeRelations) {
+                    var list = _.filter(data.list, function(node){
+                        var r;
+
+                        _.each(fakeRelations, function(fakeRelation){
+                            r = !!_.findWhere(node._relations, fakeRelation);
+                            return !r;
+                        });
+
+                        return r;
+                    });
+
+                    data.list = list;
+                    data.total = _.size(list);
+                }
+                // >>>
 
                 _.each(data.list, function(node, i){
                     npRsearchMetaHelper.buildNodeExtraMeta(node);
@@ -65,14 +87,26 @@ define(function(require) {'use strict';
                 },
 
                 relations: function(options) {
-                    var params = _.extend({}, options.filter, options.pageConfig);
+                    // var params = _.extend({}, options.filter, options.pageConfig);
+
+                    // @Deprecated relation_history
+                    // Временное решение для отладки истории связей
+                    // TODO Сделать API и нормальный фильтр
+                    var params = _.extend({}, (options.filter && options.filter['fake_relations'] ? null : options.filter), options.pageConfig);
 
                     return npResource.request({
                         method: 'GET',
                         url: config['relations.url'] + '/' + options.node._id + '/' + options.relationType + '/' + options.direction,
                         params: params
                     }, {
-                        responseProcess: nodeListProcess
+                        // responseProcess: nodeListProcess
+
+                        // @Deprecated relation_history
+                        // Временное решение для отладки истории связей
+                        // TODO Сделать API и нормальный фильтр
+                        responseProcess: function(data) {
+                            return nodeListProcess(data, null, options);
+                        }
                     }, options);
                 },
 
