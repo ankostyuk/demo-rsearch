@@ -98,6 +98,10 @@ msgstr "Закупки"
 msgid "rosstat"
 msgstr "Росстат"
 
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "xegrul"
+msgstr "ЕГРЮЛ"
+
 #~ msgid "BROTHER"
 #~ msgstr "брат"
 

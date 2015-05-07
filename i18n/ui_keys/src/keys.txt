@@ -33,6 +33,7 @@ PARTICIPANT
 # Источники связей
 rosstat
 egrul
+xegrul
 egrul_individual_founder
 egrul_individual_executive
 eaf
