@@ -78,6 +78,10 @@ msgid "egrul"
 msgstr ""
 
 #: ../i18n/ui_keys/src/keys.txt:1
+msgid "xegrul"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
 msgid "egrul_individual_founder"
 msgstr ""
 
