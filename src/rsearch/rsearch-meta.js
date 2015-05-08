@@ -129,48 +129,7 @@ define(function(require) {'use strict';
 
                     // компания
                     if (node._type === 'COMPANY') {
-                        // юридическое состояние
-                        var egrulState          = node.egrul_state,
-                            aliveCode           = '5', // действующее
-                            intermediateCodes   = ['6', '111', '121', '122', '123', '124', '131', '132'], // коды промежуточных состояний
-                            _liquidate;
-
-                        if (egrulState) {
-                            if (egrulState.code !== aliveCode) {
-                                _liquidate = {
-                                    state: {
-                                        _actual: egrulState._actual,
-                                        _since: egrulState._since,
-                                        type: egrulState.type,
-                                        intermediate: _.contains(intermediateCodes, egrulState.code)
-                                    }
-                                };
-                            }
-                        } else if (node.dead_dt) {
-                            _liquidate = {
-                                state: {
-                                    _actual: null,
-                                    _since: node.dead_dt,
-                                    type: _trc("Ликвидировано", "Состояние ЮЛ")
-                                }
-                            };
-                        }
-
-                        node._liquidate = _liquidate;
-
-                        // способ организации компании
-                        var egrulReg    = node.egrul_reg,
-                            baseCodes   = ['100001', '100024', '210001']; // коды стандартных регистраций
-
-                        if (egrulReg && !_.contains(baseCodes, egrulReg.code)) {
-                            node._reg = {
-                                state: {
-                                    _actual: egrulReg._actual,
-                                    _since: egrulReg._since,
-                                    type: egrulReg.type
-                                }
-                            };
-                        }
+                        metaHelper.buildCompanyState(node);
 
                         // группы связей
                         node.__isAffiliatedRelations = isRelations([
@@ -243,6 +202,51 @@ define(function(require) {'use strict';
                         }
 
                         return false;
+                    }
+                },
+
+                buildCompanyState: function(node) {
+                    // юридическое состояние
+                    var egrulState          = node.egrul_state,
+                        aliveCode           = '5', // действующее
+                        intermediateCodes   = ['6', '111', '121', '122', '123', '124', '131', '132'], // коды промежуточных состояний
+                        _liquidate;
+
+                    if (egrulState) {
+                        if (egrulState.code !== aliveCode) {
+                            _liquidate = {
+                                state: {
+                                    _actual: egrulState._actual,
+                                    _since: egrulState._since,
+                                    type: egrulState.type,
+                                    intermediate: _.contains(intermediateCodes, egrulState.code)
+                                }
+                            };
+                        }
+                    } else if (node.dead_dt) {
+                        _liquidate = {
+                            state: {
+                                _actual: null,
+                                _since: node.dead_dt,
+                                type: _trc("Ликвидировано", "Состояние ЮЛ")
+                            }
+                        };
+                    }
+
+                    node._liquidate = _liquidate;
+
+                    // способ организации компании
+                    var egrulReg    = node.egrul_reg,
+                        baseCodes   = ['100001', '100024', '210001']; // коды стандартных регистраций
+
+                    if (egrulReg && !_.contains(baseCodes, egrulReg.code)) {
+                        node._reg = {
+                            state: {
+                                _actual: egrulReg._actual,
+                                _since: egrulReg._since,
+                                type: egrulReg.type
+                            }
+                        };
                     }
                 },
 
