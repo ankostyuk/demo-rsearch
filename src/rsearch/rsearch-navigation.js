@@ -600,7 +600,7 @@ define(function(require) {'use strict';
                         });
                     }
 
-                    function buildTracesRelations(node, direction, relationType) {
+                    function buildTracesRelations(node, direction, relationType, options) {
                         return _.extend(buildRelations(node, direction, relationType), {
                             reset: function(byRelations) {
                                 nodeListView.clear();
@@ -765,8 +765,8 @@ define(function(require) {'use strict';
                         $rootScope.$emit('np-rsearch-navigation-node-relations', node, relationType);
                     }
 
-                    function doRelations(byRelations, checkAccentedResult, noHistory, options) {
-                        byRelations.doRelations(byRelations, checkAccentedResult, noHistory, options);
+                    function doRelations(byRelations, checkAccentedResult, noHistory) {
+                        byRelations.doRelations(byRelations, checkAccentedResult, noHistory);
                     }
 
                     function resetRelationsNodeListView(byRelations) {
