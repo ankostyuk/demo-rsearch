@@ -52,20 +52,26 @@ define(function(require) {'use strict';
                 relationTypesMeta   = {},
                 nodeTypes, relationTypes;
 
-            var nodeTypesPromise = npRsearchResource.nodeTypes({
-                success: function(data){
-                    nodeTypes = data;
-                }
-            }).completePromise;
+            if (!resourceConfig.noInitMeta) {
+                doInitMeta();
+            }
 
-            var relationTypesPromise = npRsearchResource.relationTypes({
-                success: function(data){
-                    relationTypes = data;
-                }
-            }).completePromise;
+            function doInitMeta() {
+                var nodeTypesPromise = npRsearchResource.nodeTypes({
+                    success: function(data){
+                        nodeTypes = data;
+                    }
+                }).completePromise;
 
-            // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
-            $q.all([nodeTypesPromise, relationTypesPromise]).then(initMeta, initMeta);
+                var relationTypesPromise = npRsearchResource.relationTypes({
+                    success: function(data){
+                        relationTypes = data;
+                    }
+                }).completePromise;
+
+                // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
+                $q.all([nodeTypesPromise, relationTypesPromise]).then(initMeta, initMeta);
+            }
 
             function initMeta() {
                 if (!nodeTypes || !relationTypes) {
