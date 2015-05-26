@@ -22,6 +22,7 @@ define(function(require) {'use strict';
                             return {
                                 sources: [
                                     {key: 'company_name', value: node['nameshortsort']},
+                                    {key: 'company_full_name', value: node['namesort']},
                                     {key: 'company_ogrn', value: node['ogrn']},
                                     {key: 'company_inn', value: node['inn']}
                                 ]
