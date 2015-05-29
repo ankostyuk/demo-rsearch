@@ -17,13 +17,17 @@ define(function(require) {'use strict';
 
             var config = appConfig.resource || {};
 
-            function nodeListProcess(data) {
+            function nodeListProcess(data, nodeIterator) {
                 var npRsearchMetaHelper = $injector.get('npRsearchMetaHelper'),
                     baseIndex           = data.pageSize * (data.pageNumber - 1);
 
                 _.each(data.list, function(node, i){
                     npRsearchMetaHelper.buildNodeExtraMeta(node);
                     node.__index = baseIndex + i;
+
+                    if (_.isFunction(nodeIterator)) {
+                        nodeIterator(node, i);
+                    }
                 });
 
                 return data;
@@ -70,6 +74,57 @@ define(function(require) {'use strict';
                     }, {
                         responseProcess: nodeListProcess
                     }, options);
+                },
+
+                kinsmen: function(options) {
+                    var params = _.extend({}, options.pageConfig);
+
+                    return npResource.request({
+                        method: 'GET',
+                        url: config['relations.url'] + '/INDIVIDUAL/' + options.node.name + '/kinsmen',
+                        params: params
+                    }, {
+                        responseProcess: function(data) {
+                            return nodeListProcess(data, options.nodeIterator);
+                        }
+                    }, options);
+                },
+
+                relatedKinsmen: function(options) {
+                    var params = _.extend({}, options.filter, {
+                        individualId: options.node._id
+                    });
+
+                    return npResource.request({
+                        method: 'GET',
+                        url: config['algo.url'] + '/kinsmen',
+                        params: params
+                    }, null, options);
+                },
+
+                beneficiary: function(options) {
+                    var params = _.extend({}, options.filter, {
+                        companyId: options.node._id
+                    });
+
+                    return npResource.request({
+                        method: 'GET',
+                        url: config['algo.url'] + '/individualBeneficiary',
+                        params: params
+                    }, null, options);
+                },
+
+                traces: function(options) {
+                    var params = _.extend({}, options.filter);
+
+                    return npResource.request({
+                        method: 'GET',
+                        url: config['relations.url'] + '/' +
+                            options.node1._type + '/' + options.node1._id +
+                            '/trace/' +
+                            options.node2._type + '/' + options.node2._id,
+                        params: params
+                    }, null, options);
                 },
 
                 egrulList: function(options) {

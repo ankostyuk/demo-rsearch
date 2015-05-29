@@ -1,12 +1,12 @@
 <span ng-if="fnsRegDocs.gettingDocCount()">
     <span class="action-info" ng-show="!fnsRegDocs.isDocCountPending() && fnsRegDocs.hasError()">
-        ${_trc("Поиск", "Поиск в ФНС")}
-        <a class="underline" href="https://service.nalog.ru/uwsfind.do" target="_blank">${_trc("документов для государственной регистрации", "Поиск в ФНС")}</a></br>
+        ${_trc("Поиск", "Поиск в ФНС")}</br>
+        <a class="underline pre" href="https://service.nalog.ru/uwsfind.do" target="_blank">${_trc("документов\nдля государственной регистрации", "Поиск в ФНС")}</a></br>
         ${_trc("временно недоступен", "Поиск в ФНС")}
     </span>
     <a class="action" ng-click="fnsRegDocsClick()">
-        <np-pluralize count="fnsRegDocs.getDocCount()" when="::${_tr("NG_PLURALIZE::FNS_REG_DOC_COUNT")}" ng-hide="fnsRegDocs.isDocCountPending() || fnsRegDocs.hasError()"></np-pluralize>
-        <span class="animate-pulsed-flash" ng-show="fnsRegDocs.isDocCountPending()">${_tr("Поиск документов для государственной регистрации...")}</span>
+        <np-pluralize class="pre" count="fnsRegDocs.getDocCount()" when="::${_tr("NG_PLURALIZE::FNS_REG_DOC_COUNT")}" ng-hide="fnsRegDocs.isDocCountPending() || fnsRegDocs.hasError()"></np-pluralize>
+        <span class="animate-pulsed-flash pre" ng-show="fnsRegDocs.isDocCountPending()">${_tr("Поиск документов\nдля государственной регистрации...")}</span>
     </a>
 </span>
-<a class="action" ng-click="fnsRegDocsClick()" ng-if="!fnsRegDocs.gettingDocCount()">${_tr("Найти документы для государственной регистрации")}</a>
+<a class="action pre" ng-click="fnsRegDocsClick()" ng-if="!fnsRegDocs.gettingDocCount()">${_tr("Документы\nдля государственной регистрации")}</a>

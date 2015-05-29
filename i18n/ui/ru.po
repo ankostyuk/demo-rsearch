@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "CLDR_PLURAL_FORMS_FORMAT: one{0}few{1}many{2}other{2}\n"
-"X-Generator: Poedit 1.7.4\n"
+"X-Generator: Poedit 1.7.5\n"
 
 #: ../src/nkb-app/index.html:1
 msgid "API информационной системы"
@@ -29,7 +29,13 @@ msgstr "{'one': 'ещё {} выписка', 'few': 'ещё {} выписки', '
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
 msgid "NG_PLURALIZE::FNS_REG_DOC_COUNT"
-msgstr "{'0': 'Нет документов для государственной регистрации', 'one': '{} документ для государственной регистрации', 'few': '{} документа для государственной регистрации', 'many': '{} документов для государственной регистрации', 'other': '{} документа для государственной регистрации'}"
+msgstr ""
+"{'0': 'Нет документов\n"
+"для государственной регистрации', 'one': '{} документ\n"
+"для государственной регистрации', 'few': '{} документа\n"
+"для государственной регистрации', 'many': '{} документов\n"
+"для государственной регистрации', 'other': '{} документа\n"
+"для государственной регистрации'}"
 
 #: ../src/comment/views/comment.html:1
 msgid "NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT"
@@ -111,6 +117,7 @@ msgstr "{'one': '{} компания', 'few': '{} компании', 'many': '{}
 msgid "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_CHILDREN"
 msgstr "{'one': '{} закупка', 'few': '{} закупки', 'many': '{} закупок', 'other': '{} закупки'}"
 
+#: ../src/rsearch/views/rsearch-node-plain.html:1
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_PARENTS"
@@ -183,6 +190,10 @@ msgstr "{'one': '{} участие в закупках', 'few': '{} участи
 msgid "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_PARENTS"
 msgstr "{'one': '{} участник физическое лицо', 'few': '{} участника физических лица', 'many': '{} участников физических лиц', 'other': '{} участника физического лица'}"
 
+#: ../src/rsearch/views/rsearch-node-plain.html:1
+msgid "NG_PLURALIZE::RELATION_PARTICIPANT_PARENTS"
+msgstr "{'one': '{} участник', 'few': '{} участника', 'many': '{} участников', 'other': '{} участника'}"
+
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_PHONE"
@@ -216,6 +227,12 @@ msgstr "{'one': '{} учреждённая компания', 'few': '{} учр�
 msgid "NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY"
 msgstr "{'one': '{} правопреемник', 'few': '{} правопреемника', 'many': '{} правопреемников', 'other': '{} правопреемника'}"
 
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+msgid "NG_PLURALIZE::kinsmen"
+msgstr "{'0': 'Нет однофамильцев', 'one': '{} однофамилец', 'few': '{} однофамильца', 'many': '{} однофамильцев', 'other': '{} однофамильца'}"
+
+#: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/views/rsearch-egrul-data-update.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgctxt "Формат даты: http://momentjs.com/docs/#/displaying/format/"
@@ -237,6 +254,7 @@ msgstr ""
 msgid "Аналитический профиль"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-autokad-info.html:1
 #: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
 msgid "Арбитражные дела"
 msgstr ""
@@ -252,6 +270,11 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 msgid "Без ИНН"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Бенефициары"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
@@ -271,6 +294,12 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Бизнес-справки онлайн"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgid ""
+"Будут найдены все возможные цепочки связей\n"
+"до указанного уровня"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-history-info.html:1
@@ -340,12 +369,14 @@ msgstr ""
 msgid "Документов для государственной регистрации не найдено"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
-msgid "Документы для государственной регистрации"
+#: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
+msgid ""
+"Документы\n"
+"для государственной регистрации"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "ЕГРЮЛ"
+#: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
+msgid "Документы для государственной регистрации"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -452,14 +483,6 @@ msgstr ""
 msgid "Найти"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-autokad-info.html:1
-msgid "Найти арбитражные дела"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
-msgid "Найти документы для государственной регистрации"
-msgstr ""
-
 #: ../src/nkb-app/index.html:1
 msgid "Национальное кредитное бюро"
 msgstr ""
@@ -493,8 +516,17 @@ msgstr ""
 msgid "ОКПО"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-node-info.html:1
-msgid "Объём продаж за последний год"
+#: ../src/rsearch/views/rsearch-egrul-data-update.html:1
+msgid "Обновить данные из ЕГРЮЛ"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Одна единственная цепочка связанных объектов"
+msgid "Одна цепочка"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Однофамильцы"
 msgstr ""
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
@@ -544,7 +576,9 @@ msgid "Поиск в"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
-msgid "Поиск документов для государственной регистрации..."
+msgid ""
+"Поиск документов\n"
+"для государственной регистрации..."
 msgstr ""
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
@@ -609,6 +643,11 @@ msgctxt "ФНС. Сведения о юридических лицах и инд
 msgid "Сведения о юридическом лице"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Связанные однофамильцы"
+msgstr ""
+
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
 msgid ""
@@ -638,6 +677,11 @@ msgstr ""
 msgid "Схема аффилированных лиц"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Уровень (глубина) поиска связанных объектов"
+msgid "Укажите уровень..."
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 msgid "Учредитель — компания"
 msgstr ""
@@ -660,12 +704,28 @@ msgctxt "Сведения о поданном заявлении. ФНС. Све
 msgid "Форма заявления"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-node-info.html:1
-msgid "Формы отчетности за последний год"
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgid "Цепочек связей не найдено"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "аффилированное лицо"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "брат"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-info.html:1
+#: ../src/rsearch/views/rsearch-node-list.html:1
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "объект в отчете"
+msgid "в отчете"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgctxt "возможно жена, сестра или мать"
+msgid "возможно"
 msgstr ""
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
@@ -679,8 +739,14 @@ msgctxt "Поиск в картотеке арбитражных дел врем
 msgid "временно недоступен"
 msgstr ""
 
-#: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
+msgctxt "Поиск в ФНС"
+msgid ""
+"документов\n"
+"для государственной регистрации"
+msgstr ""
+
+#: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 msgctxt "Поиск в ФНС"
 msgid "документов для государственной регистрации"
 msgstr ""
@@ -703,10 +769,24 @@ msgctxt "доступность продукта"
 msgid "доступно"
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "дочь"
+msgstr ""
+
 #: ../src/nkb-app/components/login/views/login-form.html:1
 #: ../src/rsearch/views/rsearch-user-product-limits-info.html:1
 msgctxt "валюта"
 msgid "ие"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "из такого-то количества"
+msgid "из"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgctxt "возможно жена, сестра или мать"
+msgid "или"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-autokad-info.html:1
@@ -728,13 +808,32 @@ msgctxt "лот в закупке"
 msgid "лоты"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-egrul-data-update.html:1
+msgctxt "обработка заказа (запроса)"
+msgid "обрабатывается..."
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgid "объём продаж за последний год"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "основано"
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgctxt "от такой-то даты"
 msgid "от"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "отец"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-egrul-data-update.html:1
+msgctxt "актуализация данных"
+msgid "последняя актуализация"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
@@ -745,12 +844,38 @@ msgstr ""
 msgid "руководитель"
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "сестра"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "супруга"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "сын"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "тыс. руб."
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Уровень (глубина) поиска цепочек"
+msgid "уровень"
+msgstr ""
+
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "учредитель"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgid "формы за последний год"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "цепочка связанных объектов"
+msgid "цепочка"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1

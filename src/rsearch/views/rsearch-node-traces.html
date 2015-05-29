@@ -1,0 +1,34 @@
+<div class="row tools">
+    <div class="span3 filters">
+        <select class="span3 depth" ng-model="filters.depth" ng-change="doTraces()">
+            <option value="" ng-selected="!filters.depth" disabled>${_trc("Укажите уровень...", "Уровень (глубина) поиска связанных объектов")}</option>
+            <option ng-repeat="depth in filters.depths" value="{{depth}}" ng-selected="depth === filters.depth">{{depth}} ${_trc("уровень", "Уровень (глубина) поиска цепочек")}</option>
+        </select>
+    </div>
+    <div class="span5 pre filters-message hint" ng-show="!filters.depth">${_tr("Будут найдены все возможные цепочки связей\nдо указанного уровня")}</div>
+    <div class="align-right filters-message single-result" ng-show="filters.depth && pager.getPageCount() === 1">${_trc("Одна цепочка", "Одна единственная цепочка связанных объектов")}</div>
+    <div class="align-right trace-pager" ng-show="pager.getPageCount() > 1">
+        <div class="btn-group">
+            <button class="btn flat link page-prev" ng-disabled="!pager.hasPrevPage()" ng-click="pager.prevPage()"><i class="icon i-left"></i></button>
+            <button class="btn flat link page-info">{{pager.getPageNumber() | number}} ${_trc("цепочка", "цепочка связанных объектов")} ${_trc("из", "из такого-то количества")} {{pager.getPageCount() | number}}</button>
+            <button class="btn flat link page-next" ng-disabled="!pager.hasNextPage()" ng-click="pager.nextPage()"><i class="icon i-right"></i></button>
+        </div>
+    </div>
+</div>
+<div class="trace-result">
+    <div class="empty-result align-center" ng-show="traceCount === 0">${_tr("Цепочек связей не найдено")}</div>
+    <div class="traces" ng-show="!!currentTrace">
+        <div class="trace-part" ng-class="{'active': !tracePart.inTrace}" ng-repeat="tracePart in currentTrace track by $index">
+            <div class="trace-part-info">
+                <!-- TODO при наличии других статусов: динамическое обновление сообщения о статусе -->
+                <div class="trace-part-info-entry node-status">${_trc("в отчете", "объект в отчете")}</div>
+            </div>
+            <div class="node">
+                <a class="action" node-id="{{tracePart.node._id}}" node-uid="{{tracePart.node.__uid}}" np-rsearch-node-simple="tracePart.node" ng-click="nodeClick($event, tracePart)"></a>
+            </div>
+            <div class="relation {{tracePart.direction}}" ng-hide="tracePart.isLast">
+                <div class="target-relations-info">{{tracePart.targetInfo | targetRelationsInfo:tracePart.node:true}}</div>
+            </div>
+        </div>
+    </div>
+</div>

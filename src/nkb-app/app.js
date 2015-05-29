@@ -39,6 +39,7 @@ define(function(require) {'use strict';
                 'meta.url':                 '/nkbrelation/api/meta',
                 'search.url':               '/nkbrelation/api/nodes',
                 'relations.url':            '/nkbrelation/api/node',
+                'algo.url':                 '/nkbrelation/api/algo',
                 'egrul.history.url':        '/siteapp/api/egrul/history',
                 'nkb.file.download.url':    '/reports/file.php'
             },

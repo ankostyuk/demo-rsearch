@@ -129,6 +129,11 @@ root._RESOURCES_CONFIG = {
         location: 'external_components/nullpointer-commons/angular/resource',
         main: 'resource'
     }, {
+        // TODO перенести в nullpointer-commons/angular
+        name: 'np.utils',
+        location: 'src/utils',
+        main: 'utils'
+    }, {
         name: 'autokad',
         location: 'external_components/nullpointer-autokad/autokad',
         main: 'autokad'

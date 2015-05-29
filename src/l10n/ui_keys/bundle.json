@@ -62,6 +62,38 @@
     "WIN": [
       null,
       "победитель"
+    ],
+    "disclosure": [
+      null,
+      "Список аффилированных лиц"
+    ],
+    "eaf": [
+      null,
+      "Архив ЕГРЮЛ"
+    ],
+    "egrul": [
+      null,
+      "ЕГРЮЛ"
+    ],
+    "egrul_individual_executive": [
+      null,
+      "ЕГРЮЛ"
+    ],
+    "egrul_individual_founder": [
+      null,
+      "ЕГРЮЛ"
+    ],
+    "purchases": [
+      null,
+      "Закупки"
+    ],
+    "rosstat": [
+      null,
+      "Росстат"
+    ],
+    "xegrul": [
+      null,
+      "ЕГРЮЛ"
     ]
   },
   "en": {
@@ -127,6 +159,38 @@
     "WIN": [
       null,
       "winner"
+    ],
+    "disclosure": [
+      null,
+      "Список аффилированных лиц"
+    ],
+    "eaf": [
+      null,
+      "Архив ЕГРЮЛ"
+    ],
+    "egrul": [
+      null,
+      "ЕГРЮЛ"
+    ],
+    "egrul_individual_executive": [
+      null,
+      "ЕГРЮЛ"
+    ],
+    "egrul_individual_founder": [
+      null,
+      "ЕГРЮЛ"
+    ],
+    "purchases": [
+      null,
+      "Закупки"
+    ],
+    "rosstat": [
+      null,
+      "Росстат"
+    ],
+    "xegrul": [
+      null,
+      "ЕГРЮЛ"
     ]
   }
 }

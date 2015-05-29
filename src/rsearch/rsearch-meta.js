@@ -3,7 +3,7 @@
  * @desc RequireJS/Angular module
  * @author ankostyuk
  */
-// TODO объеденить код со "связями"
+// TODO объеденить relation/.../meta.js и rsearch-meta.js
 define(function(require) {'use strict';
 
                   require('lodash');
@@ -52,20 +52,26 @@ define(function(require) {'use strict';
                 relationTypesMeta   = {},
                 nodeTypes, relationTypes;
 
-            var nodeTypesPromise = npRsearchResource.nodeTypes({
-                success: function(data){
-                    nodeTypes = data;
-                }
-            }).completePromise;
+            if (!resourceConfig.noInitMeta) {
+                doInitMeta();
+            }
 
-            var relationTypesPromise = npRsearchResource.relationTypes({
-                success: function(data){
-                    relationTypes = data;
-                }
-            }).completePromise;
+            function doInitMeta() {
+                var nodeTypesPromise = npRsearchResource.nodeTypes({
+                    success: function(data){
+                        nodeTypes = data;
+                    }
+                }).completePromise;
 
-            // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
-            $q.all([nodeTypesPromise, relationTypesPromise]).then(initMeta, initMeta);
+                var relationTypesPromise = npRsearchResource.relationTypes({
+                    success: function(data){
+                        relationTypes = data;
+                    }
+                }).completePromise;
+
+                // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
+                $q.all([nodeTypesPromise, relationTypesPromise]).then(initMeta, initMeta);
+            }
 
             function initMeta() {
                 if (!nodeTypes || !relationTypes) {
@@ -129,48 +135,7 @@ define(function(require) {'use strict';
 
                     // компания
                     if (node._type === 'COMPANY') {
-                        // юридическое состояние
-                        var egrulState          = node.egrul_state,
-                            aliveCode           = '5', // действующее
-                            intermediateCodes   = ['6', '111', '121', '122', '123', '124', '131', '132'], // коды промежуточных состояний
-                            _liquidate;
-
-                        if (egrulState) {
-                            if (egrulState.code !== aliveCode) {
-                                _liquidate = {
-                                    state: {
-                                        _actual: egrulState._actual,
-                                        _since: egrulState._since,
-                                        type: egrulState.type,
-                                        intermediate: _.contains(intermediateCodes, egrulState.code)
-                                    }
-                                };
-                            }
-                        } else if (node.dead_dt) {
-                            _liquidate = {
-                                state: {
-                                    _actual: null,
-                                    _since: node.dead_dt,
-                                    type: _trc("Ликвидировано", "Состояние ЮЛ")
-                                }
-                            };
-                        }
-
-                        node._liquidate = _liquidate;
-
-                        // способ организации компании
-                        var egrulReg    = node.egrul_reg,
-                            baseCodes   = ['100001', '100024', '210001']; // коды стандартных регистраций
-
-                        if (egrulReg && !_.contains(baseCodes, egrulReg.code)) {
-                            node._reg = {
-                                state: {
-                                    _actual: egrulReg._actual,
-                                    _since: egrulReg._since,
-                                    type: egrulReg.type
-                                }
-                            };
-                        }
+                        metaHelper.buildCompanyState(node);
 
                         // группы связей
                         node.__isAffiliatedRelations = isRelations([
@@ -246,8 +211,55 @@ define(function(require) {'use strict';
                     }
                 },
 
+                buildCompanyState: function(node) {
+                    // юридическое состояние
+                    var egrulState          = node.egrul_state,
+                        aliveCode           = '5', // действующее
+                        intermediateCodes   = ['6', '111', '121', '122', '123', '124', '131', '132'], // коды промежуточных состояний
+                        _liquidate;
+
+                    if (egrulState) {
+                        if (egrulState.code !== aliveCode) {
+                            _liquidate = {
+                                state: {
+                                    _actual: egrulState._actual,
+                                    _since: egrulState._since,
+                                    type: egrulState.type,
+                                    intermediate: _.contains(intermediateCodes, egrulState.code)
+                                }
+                            };
+                        }
+                    } else if (node.dead_dt) {
+                        _liquidate = {
+                            state: {
+                                _actual: null,
+                                _since: node.dead_dt,
+                                type: _trc("Ликвидировано", "Состояние ЮЛ")
+                            }
+                        };
+                    }
+
+                    node._liquidate = _liquidate;
+
+                    // способ организации компании
+                    var egrulReg    = node.egrul_reg,
+                        baseCodes   = ['100001', '100024', '210001']; // коды стандартных регистраций
+
+                    if (egrulReg && !_.contains(baseCodes, egrulReg.code)) {
+                        node._reg = {
+                            state: {
+                                _actual: egrulReg._actual,
+                                _since: egrulReg._since,
+                                type: egrulReg.type
+                            }
+                        };
+                    }
+                },
+
                 buildRelationMap: function(node) {
-                    var relationMap = {};
+                    var relationMap = {},
+                        byNodes     = {},
+                        byRelations = {};
 
                     _.each(node._relations, function(relation){
                         var relationType    = relationTypesMeta[relation._type],
@@ -258,23 +270,95 @@ define(function(require) {'use strict';
                             var nodeUID     = conf[0],
                                 direction   = conf[1];
 
-                            // Только связи с другими нодями и "кольцевые" связи
+                            // Только связи с другими нодами и "кольцевые" связи
                             if (nodeUID === node.__uid && srcNodeUID !== dstNodeUID) {
                                 return;
                             }
 
-                            var relationInfo = relationMap[nodeUID] || {
+                            // byNodes
+                            var relationInfoByNodes = byNodes[nodeUID] || {
                                 'parents': {},
                                 'children': {}
                             };
 
-                            relationInfo[direction][relation._type] = relation;
+                            relationInfoByNodes[direction][relation._type] = relation;
 
-                            relationMap[nodeUID] = relationInfo;
+                            byNodes[nodeUID] = relationInfoByNodes;
+
+                            // byRelations
+                            var relationInfoByRelations = byRelations[relation._type] || {
+                                'parents': {},
+                                'children': {}
+                            };
+
+                            var bySources = relationInfoByRelations[direction]['bySources'] || {};
+
+                            if (relation._source) {
+                                var source = bySources[relation._source] || {};
+                                // Пока пустой объект: только фиксируем количество источников.
+                                bySources[relation._source] = source;
+                            }
+
+                            relationInfoByRelations[direction]['bySources'] = bySources;
+
+                            byRelations[relation._type] = relationInfoByRelations;
                         });
                     });
 
+                    relationMap.byNodes = byNodes;
+                    relationMap.byRelations = byRelations;
+
                     return relationMap;
+                },
+
+                addToRelationMap: function(relationMap, srcNode, dstNode, direction, relation) {
+                    relationMap.byNodes = relationMap.byNodes || {};
+
+                    var byNodes = relationMap.byNodes;
+
+                    byNodes[dstNode.__uid] = byNodes[dstNode.__uid] || {};
+                    byNodes[dstNode.__uid][direction] = byNodes[dstNode.__uid][direction] || {};
+                    byNodes[dstNode.__uid][direction][relation._type] = relation;
+                },
+
+                buildRelationInfo: function(node, relationType, data) {
+                    node.__info = node.__info || {};
+                    node.__info[relationType] = data.count;
+                },
+
+                buildKinsmenRelation: function(srcNode, dstNode) {
+                    return {
+                        _type: 'kinsmen',
+                        _srcId: srcNode._id,
+                        _dstId: dstNode._id,
+                        kinship: dstNode._kinship
+                    };
+                },
+
+                isNodeEquals: function(node1, node2) {
+                    if (!node1 || !node2) {
+                        return null;
+                    }
+
+                    return node1.__uid === node2.__uid;
+                },
+
+                isNodesEquals: function(nodes1, nodes2) {
+                    if (_.size(nodes1) !== _.size(nodes2) || !_.size(nodes1) || !_.size(nodes2)) {
+                        return false;
+                    }
+
+                    var find;
+
+                    _.each(nodes1, function(node1){
+                        find = !!_.find(nodes2, function(node2){
+                            return metaHelper.isNodeEquals(node1, node2);
+                        });
+
+                        return find;
+                    });
+
+                    return find;
                 }
             };
 
@@ -320,13 +404,14 @@ define(function(require) {'use strict';
             //      COMMISSION_MEMBER
             //          <role>
             //
-            return function(data, node){
-                if (!data) {
+            return function(data, node, anyway){
+                if (!data || !node) {
                     return null;
                 }
 
-                var nbsp    = ' ',
-                    separator     = ', ';
+                var nbsp        = ' ',      // &nbsp
+                    separator   = ', ',     // , + space
+                    dash        = ' — ';    // space + dash + &nbsp
 
                 var SHOW_TYPES = {
                     'FOUNDER_COMPANY': {
@@ -394,6 +479,27 @@ define(function(require) {'use strict';
                         text: function(relation){
                             return getCommissionMemberText(relation);
                         }
+                    },
+
+                    'kinsmen': {
+                        order: 601,
+                        data: {
+                            availableKinship: {
+                                'FATHER':            _tr("отец"),
+                                //'LASTNAME':          null,
+                                //'MALE_LASTNAME':     null,
+                                'FEMALE_LASTNAME':   _tr("супруга"),
+                                //'SIBLING':           null,
+                                'BROTHER':           _tr("брат"),
+                                'SISTER':            _tr("сестра"),
+                                //'CHILD':             null,
+                                'SON':               _tr("сын"),
+                                'DAUGHTER':          _tr("дочь")
+                            }
+                        },
+                        text: function(relation){
+                            return getKinsmenText(relation);
+                        }
                     }
                 };
 
@@ -420,14 +526,17 @@ define(function(require) {'use strict';
                 }
 
                 function getFounderText(relation) {
+                    var sourceText = buildSourceText(relation);
+
                     if (relation.sharePercent || relation.shareAmount) {
                         return _trc("доля", "Доля в учреждении компании") + nbsp +
                             (relation.sharePercent ? $filter('share')(relation.sharePercent, 2) + '%' : '') +
                             (relation.sharePercent && relation.shareAmount ? nbsp + nbsp : '') +
-                            (relation.shareAmount ? $filter('number')(relation.shareAmount) + nbsp + _tr("руб.") : '');
+                            (relation.shareAmount ? $filter('number')(relation.shareAmount) + nbsp + _tr("руб.") : '') +
+                            sourceText;
                     }
 
-                    return isTargetRelation(relation) ? '' : _tr("учредитель");
+                    return !isTargetRelation(relation) || anyway ? _tr("учредитель") + sourceText : '';
                 }
 
                 function getAffiliatedText(relation) {
@@ -460,7 +569,7 @@ define(function(require) {'use strict';
                         return t;
                     }
 
-                    return isTargetRelation(relation) ? '' : _tr("аффилированное лицо");
+                    return !isTargetRelation(relation) || anyway ? _tr("аффилированное лицо") : '';
                 }
 
                 function getExecutiveText(relation) {
@@ -468,7 +577,7 @@ define(function(require) {'use strict';
                         return relation.position;
                     }
 
-                    return isTargetRelation(relation) ? '' : _tr("руководитель");
+                    return !isTargetRelation(relation) || anyway ? _tr("руководитель") : '';
                 }
 
                 function getEmployeeText(relation) {
@@ -482,8 +591,7 @@ define(function(require) {'use strict';
                         return t;
                     }
 
-                    // TODO проверить возникает такая ситуация?
-                    return isTargetRelation(relation) ? '' : _tr("контактное лицо");
+                    return !isTargetRelation(relation) || anyway ? _tr("контактное лицо") : '';
                 }
 
                 function getParticipantText(relation) {
@@ -553,14 +661,52 @@ define(function(require) {'use strict';
                         return relation.role;
                     }
 
-                    return isTargetRelation(relation) ? '' : _tr("член комиссии");
+                    return !isTargetRelation(relation) || anyway ? _tr("член комиссии") : '';
+                }
+
+                function getKinsmenText(relation) {
+                    var ts = [], k;
+
+                    _.each(relation.kinship, function(t){
+                        k = SHOW_TYPES['kinsmen'].data.availableKinship[t];
+
+                        if (k) {
+                            ts.push(_tr(k));
+                        }
+                    });
+
+                    return _.size(ts) ?
+                        _trc("возможно", "возможно жена, сестра или мать") + nbsp + _.toSentence(ts, separator, nbsp + _trc("или", "возможно жена, сестра или мать") + nbsp) :
+                        null;
+                }
+
+                function getSourceCount(relation) {
+                    return _.size(
+                        data.relationInfo.relationMap.byRelations &&
+                        data.relationInfo.relationMap.byRelations[data.relationInfo.relationType] &&
+                        data.relationInfo.relationMap.byRelations[data.relationInfo.relationType][data.relationInfo.direction]['bySources']
+                    );
+                }
+
+                function getSourceText(relation) {
+                    if (!relation._actual || !relation._source) {
+                        return '';
+                    }
+
+                    return dash + _tr(relation._source) +
+                        nbsp + _trc("от", "от такой-то даты") + nbsp +
+                        $filter('amDateFormat')(relation._actual, _trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/"));
+                }
+
+                function buildSourceText(relation) {
+                    return getSourceCount(relation) > 1 ? getSourceText(relation) : '';
                 }
 
                 function getInnText(inn) {
                     return _tr("ИНН") + nbsp + inn;
                 }
 
-                var relations   = data.relationInfo.relationMap[node.__uid][data.relationInfo.direction],
+                var relations   = data.relationInfo.relationMap.byNodes && data.relationInfo.relationMap.byNodes[node.__uid] && data.relationInfo.relationMap.byNodes[node.__uid][data.relationInfo.direction],
                     list        = [];
 
                 _.each(relations, function(relation, type){

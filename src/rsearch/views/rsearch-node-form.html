@@ -18,17 +18,17 @@
                 </div>
                 <div class="actions">
                     <div ng-if="node._type === 'COMPANY'">
-                        <div class="row actions-row">
+                        <div class="row actions-row" ng-hide="proxy.isLightForm(node)">
                             <div class="span5">
                                 <div class="product-panel shadow-lift-lb-corner shadow-strong">
                                     <h5 class="product-panel-label"><i class="icon big i-document-ok"></i> ${_tr("Бизнес-справки онлайн")}</h5>
                                     <ul class="unstyled product-list">
-                                        <li><a class="action" ng-click="productClick('ext_history_profile')">${_tr("Исторический профиль")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('ext_history_profile')"></span></li>
-                                        <li ng-show="node | isBalance"><a class="action" ng-click="productClick('credit_profile')">${_tr("Кредитный профиль")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('credit_profile')"></span></li>
-                                        <li ng-show="node | isBalance"><a class="action" ng-click="productClick('market_profile_full')">${_tr("Аналитический профиль")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('market_profile_full')"></span></li>
-                                        <li ng-show="node | isBalance"><a class="action" ng-click="productClick('business_profile')">${_tr("Бизнес профиль")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('business_profile')"></span></li>
-                                        <li><a class="action" ng-click="productClick('market_list')">${_tr("Корпоративная структура")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('market_list')"></span></li>
-                                        <li><a class="action" ng-click="productClick('market_profile_short')">${_tr("Профиль регистрации")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('market_profile_short')"></span></li>
+                                        <li><a class="action" ng-click="actions.productClick('ext_history_profile')">${_tr("Исторический профиль")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('ext_history_profile')"></span></li>
+                                        <li ng-show="node | isBalance"><a class="action" ng-click="actions.productClick('credit_profile')">${_tr("Кредитный профиль")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('credit_profile')"></span></li>
+                                        <li ng-show="node | isBalance"><a class="action" ng-click="actions.productClick('market_profile_full')">${_tr("Аналитический профиль")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('market_profile_full')"></span></li>
+                                        <li ng-show="node | isBalance"><a class="action" ng-click="actions.productClick('business_profile')">${_tr("Бизнес профиль")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('business_profile')"></span></li>
+                                        <li><a class="action" ng-click="actions.productClick('market_list')">${_tr("Корпоративная структура")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('market_list')"></span></li>
+                                        <li><a class="action" ng-click="actions.productClick('market_profile_short')">${_tr("Профиль регистрации")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('market_profile_short')"></span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -36,15 +36,16 @@
                                 <div class="product-panel shadow-lift-lb-corner shadow-strong">
                                     <h5 class="product-panel-label"><i class="icon big i-document-plus"></i> ${_tr("Отчеты на заказ")}</h5>
                                     <ul class="unstyled product-list">
-                                        <li><a class="action" ng-click="productClick('extended_research')">${_tr("Расширенное исследование")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('extended_research')"></span></li>
-                                        <li><a class="action" ng-click="productClick('actualizeReport')">${_tr("Схема аффилированных лиц")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('actualizeReport')"></span></li>
+                                        <li><a class="action" ng-click="actions.productClick('extended_research')">${_tr("Расширенное исследование")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('extended_research')"></span></li>
+                                        <li><a class="action" ng-click="actions.productClick('actualizeReport')">${_tr("Схема аффилированных лиц")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('actualizeReport')"></span></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="row actions-row">
                             <div class="span5 egrul-products">
-                                <p><a class="action with-icon" ng-click="productClick('egrulCompanyReport')"><i class="icon large i-document-stamp"></i> <span class="text">${_tr("Заказать выписку ЕГРЮЛ")}</span></a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('egrulCompanyReport')"></span></p>
+                                <p ng-show="dataUpdateHelper" np-rsearch-egrul-data-update></p>
+                                <p ng-hide="dataUpdateHelper"><a class="action with-icon" ng-click="actions.productClick('egrulCompanyReport')"><i class="icon large i-document-stamp"></i> <span class="text">${_tr("Заказать выписку ЕГРЮЛ")}</span></a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('egrulCompanyReport')"></span></p>
                                 <ul class="unstyled actions-list">
                                     <li ng-if="node.__egrulList[0]" ng-init="egrul = node.__egrulList[0]; egrulCount = node.__egrulList.length; moreCount = 1">
                                         <a class="action" ng-href="{{egrul._link}}" download="{{egrul._downloadName}}" target="_self">${_tr("Выписка")} ${_trc("от", "от такой-то даты")} {{egrul.fileDate | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</a>
@@ -57,21 +58,22 @@
                             </div>
                             <div class="span4 extra-search">
                                 <p ng-show="node.disclosure_type === 'interfax'"><a class="underline with-icon" ng-href="http://disclosure.interfax.ru/portal/files.aspx?id={{node.disclosure_id}}&type=6" target="_blank"><i class="icon large i-document-info"></i> <span class="text">${_tr("Страница эмитента")}</span></a></p>
-                                <p><a class="underline with-icon" ng-href="http://fssprus.ru/iss/ip/" target="_blank"><i class="icon large i-justice-1"></i> <span class="text">${_tr("Исполнительные производства")}</span></a></p>
+                                <p ng-hide="proxy.isLightForm(node)"><a class="underline with-icon" ng-href="http://fssprus.ru/iss/ip/" target="_blank"><i class="icon large i-justice-1"></i> <span class="text">${_tr("Исполнительные производства")}</span></a></p>
+                                <p ng-show="proxy.isLightForm(node)"><a class="action with-icon" ng-click="actions.productClick('ext_history_profile')"><i class="icon large i-document-ok"></i> <span class="text">${_tr("Исторический профиль")}</span></a></p>
                             </div>
                         </div>
                     </div>
                     <div ng-if="node._type === 'INDIVIDUAL' && !node.subtype">
                         <div class="row actions-row">
                             <div class="span4 egrul-products">
-                                <h5 class="actions-label"><i class="icon large i-document-stamp"></i> ${_tr("ЕГРЮЛ")}</h5>
                                 <ul class="unstyled actions-list">
-                                    <li><a class="action" ng-click="productClick('egrulChiefReport')">${_tr("Заказать список руководимых компаний")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('egrulChiefReport')"></span></li>
-                                    <li><a class="action" ng-click="productClick('egrulFounderPersonReport')">${_tr("Заказать список учрежденных компаний")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('egrulFounderPersonReport')"></span></li>
-                                    <li><a class="action" ng-click="productClick('egripReport')">${_tr("Заказать выписку ЕГРИП")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('egripReport')"></span></li>
+                                    <li ng-show="dataUpdateHelper" np-rsearch-egrul-data-update></li>
+                                    <li ng-hide="dataUpdateHelper"><a class="action with-icon" ng-click="actions.productClick('egrulChiefReport')"><i class="icon large i-document-stamp"></i> <span class="text">${_tr("Заказать список руководимых компаний")}</span></a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('egrulChiefReport')"></span></li>
+                                    <li ng-hide="dataUpdateHelper"><a class="action" ng-click="actions.productClick('egrulFounderPersonReport')"><i class="icon large i-document-stamp"></i> <span class="text">${_tr("Заказать список учрежденных компаний")}</span></a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('egrulFounderPersonReport')"></span></li>
+                                    <li><a class="action" ng-click="actions.productClick('egripReport')"><i class="icon large i-document-stamp"></i> <span class="text">${_tr("Заказать выписку ЕГРИП")}</span></a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('egripReport')"></span></li>
                                 </ul>
                             </div>
-                            <div class="span5 extra-search">
+                            <div class="span5 extra-search" ng-hide="proxy.isLightForm(node)">
                                 <p>
                                     <a class="underline with-icon" ng-href="https://yandex.ru/yandsearch?text={{node.name}}&filter=people" target="_blank"><i class="icon large i-global-search-1"></i> <span class="text">${_tr("Искать в социальных сетях")}</span></a>
                                 </p>
@@ -84,18 +86,18 @@
                     <div ng-if="node._type === 'INDIVIDUAL' && node.subtype === 'foreign'">
                         <div class="row actions-row">
                             <div class="span5">
-                                <a class="simple-row product-link foreign" ng-click="productClick('ForeignCompanyReport')">
+                                <a class="simple-row product-link foreign" ng-click="actions.productClick('ForeignCompanyReport')">
                                     <span class="link-icon"><i class="icon i-document-info"></i></span>
                                     <span class="link-text">${_trc("Заказать бизнес-справку\nпо иностранной компании", "Заказ продукта НКБ на странице миниотчета")}</span>
                                 </a>
                                 <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('ForeignCompanyReport')"></span>
                             </div>
-                            <div class="span4">
+                            <div class="span4" ng-hide="proxy.isLightForm(node)">
                                 <div class="product-panel shadow-lift-lb-corner shadow-strong">
                                     <h5 class="product-panel-label"><i class="icon big i-document-plus"></i> ${_tr("Отчеты на заказ")}</h5>
                                     <ul class="unstyled product-list">
-                                        <li><a class="action" ng-click="productClick('extended_research')">${_tr("Расширенное исследование")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('extended_research')"></span></li>
-                                        <li><a class="action" ng-click="productClick('actualizeReport')">${_tr("Схема аффилированных лиц")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('actualizeReport')"></span></li>
+                                        <li><a class="action" ng-click="actions.productClick('extended_research')">${_tr("Расширенное исследование")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('extended_research')"></span></li>
+                                        <li><a class="action" ng-click="actions.productClick('actualizeReport')">${_tr("Схема аффилированных лиц")}</a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('actualizeReport')"></span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -112,21 +114,13 @@
                 <div nkb-comment-widget="node"></div>
             </div>
             <div class="span3">
-                <div
-                    np-rsearch-node-relations="node"
-                    np-rsearch-node-relations-click="relationsClick"
-                    np-rsearch-node-product-click="productClick"
-                    np-rsearch-node-relations-autokad="autokad"
-                    np-rsearch-node-autokad-click="autokadClick"
-                    np-rsearch-node-relations-fns-reg-docs="fnsRegDocs"
-                    np-rsearch-node-fns-reg-docs-click="fnsRegDocsClick">
-                </div>
+                <div np-rsearch-node-relations="node" np-rsearch-node-relations-proxy="proxy" np-rsearch-node-relations-actions="actions"></div>
             </div>
         </div>
     </div>
 
     <div class="span12" ng-show="formType === 'AUTOKAD'">
-        <div np-autokad></div>
+        <div np-autokad np-autokad-scroll-container="scrollContainer"></div>
     </div>
 
     <div class="span12" ng-show="formType === 'FNS_REG_DOCS'">

@@ -33,9 +33,9 @@ define(function(require) {'use strict';
                         focusable       = _.isBoolean(scope.npRsearchInputFocusable) ? scope.npRsearchInputFocusable : true,
                         inputElement    = element.find('input');
 
-                    inputElement.bind('keydown', function(e){
-                        // Отключить дефолтное поведение
+                    inputElement.bind('keyup', function(e){
                         if (e.keyCode === 13) {
+                            fireRefresh('SEARCH_INPUT');
                             return false;
                         }
                     });
@@ -45,13 +45,16 @@ define(function(require) {'use strict';
                         text: null,
                         initiator: null,
 
-                        // TODO Реализовать
-                        searchInputEnter: function(){
-                            fireRefresh();
+                        searchInputFocus: function(){
+                            $rootScope.$emit('np-rsearch-input-focus', scope.text);
+                        },
+
+                        searchInputBlur: function(){
+                            $rootScope.$emit('np-rsearch-input-blur', scope.text);
                         },
 
                         searchBtnClick: function(){
-                            fireRefresh();
+                            fireRefresh('SEARCH_BUTTON');
                         }
                     });
 
@@ -59,7 +62,7 @@ define(function(require) {'use strict';
                         // Не всегда (newValue != oldValue), например, при инициализации scope.
                         // Поэтому приходится сравнивать, чтобы исключить ложные срабатывания.
                         if (newValue !== oldValue) {
-                            fireRefresh();
+                            fireRefresh('SEARCH_INPUT');
                         }
                     });
 
@@ -69,8 +72,8 @@ define(function(require) {'use strict';
                     });
 
                     //
-                    function fireRefresh() {
-                        $rootScope.$emit('np-rsearch-input-refresh', scope.text, scope.initiator);
+                    function fireRefresh(ui) {
+                        $rootScope.$emit('np-rsearch-input-refresh', scope.text, scope.initiator, ui);
                         scope.initiator = null;
                     }
 

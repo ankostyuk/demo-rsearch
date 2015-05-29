@@ -15,6 +15,7 @@ define(function(require) {'use strict';
     var extmodules = {
         'np.directives':  require('np.directives'),
         'np.filters':     require('np.filters'),
+        'np.utils':       require('np.utils'),
         'nkb.user':       require('nkb.user'),
         'autokad':        require('autokad'),
         'fnsRegDocs':     require('nkb.extraneous/fns/reg_docs/company/main')
@@ -30,9 +31,11 @@ define(function(require) {'use strict';
         'np-rsearch-node-relations-header':         require('text!./views/rsearch-node-relations-header.html'),
         'np-rsearch-navigation-breadcrumb':         require('text!./views/rsearch-navigation-breadcrumb.html'),
         'np-rsearch-node-list':                     require('text!./views/rsearch-node-list.html'),
+        'np-rsearch-node-traces':                   require('text!./views/rsearch-node-traces.html'),
         'np-rsearch-user-product-limits-info':      require('text!./views/rsearch-user-product-limits-info.html'),
         'np-rsearch-autokad-info':                  require('text!./views/rsearch-autokad-info.html'),
         'np-rsearch-fns-reg-docs-info':             require('text!./views/rsearch-fns-reg-docs-info.html'),
+        'np-rsearch-egrul-data-update':             require('text!./views/rsearch-egrul-data-update.html'),
         'np-rsearch-node-form':                     require('text!./views/rsearch-node-form.html')
     };
 
@@ -60,14 +63,28 @@ define(function(require) {'use strict';
                 restrict: 'A',
                 scope: {
                     node: '=npRsearchNodePlain',
-                    targetInfo: '=npRsearchNodeTargetInfo'
+                    targetInfo: '=npRsearchNodeTargetInfo',
+                    actions: '=npRsearchNodeRelationsActions'
                 },
                 template: templates['np-rsearch-node-plain'],
                 link: function(scope, element, attrs){
                     _.extend(scope, {
                         user: nkbUser.user(),
-                        toggleSelect: function() {
-                            $rootScope.$emit('np-rsearch-node-select', scope.node, element);
+                        nodeClick: function(e) {
+                            $rootScope.$emit('np-rsearch-node-click', {
+                                node: scope.node,
+                                element: element,
+                                event: e,
+                                ui: 'npRsearchNodePlain'
+                            });
+                        },
+                        nodeHeaderClick: function(e) {
+                            $rootScope.$emit('np-rsearch-node-header-click', {
+                                node: scope.node,
+                                element: element,
+                                event: e,
+                                ui: 'npRsearchNodePlain'
+                            });
                         }
                     }, i18n.translateFuncs);
                 }
@@ -95,13 +112,9 @@ define(function(require) {'use strict';
                 restrict: 'A',
                 scope: {
                     node: '=npRsearchNodeRelations',
-                    active: '=npRsearchNodeRelationsActive',
-                    relationsClick: '=npRsearchNodeRelationsClick',
-                    productClick: '=npRsearchNodeProductClick',
-                    autokad: '=npRsearchNodeRelationsAutokad',
-                    autokadClick: '=npRsearchNodeAutokadClick',
-                    fnsRegDocs: '=npRsearchNodeRelationsFnsRegDocs',
-                    fnsRegDocsClick: '=npRsearchNodeFnsRegDocsClick'
+                    proxy: '=npRsearchNodeRelationsProxy',
+                    actions: '=npRsearchNodeRelationsActions',
+                    active: '=npRsearchNodeRelationsActive'
                 },
                 template: templates['np-rsearch-node-relations'],
                 link: function(scope, element, attrs){
@@ -149,12 +162,10 @@ define(function(require) {'use strict';
         .directive('npRsearchAutokadInfo', [function() {
             return {
                 restrict: 'A',
-                // require:
-                // {
-                //     autokadClick: Function,
-                //     autokad: Object
-                // }
-                scope: false,
+                scope: {
+                    autokad: '=npRsearchAutokadInfo',
+                    autokadClick: '=npRsearchAutokadClick'
+                },
                 template: templates['np-rsearch-autokad-info']
             };
         }])
@@ -162,20 +173,30 @@ define(function(require) {'use strict';
         .directive('npRsearchFnsRegDocsInfo', [function() {
             return {
                 restrict: 'A',
-                // require:
-                // {
-                //     fnsRegDocsClick: Function,
-                //     fnsRegDocs: Object
-                // }
-                scope: false,
+                scope: {
+                    fnsRegDocs: '=npRsearchFnsRegDocsInfo',
+                    fnsRegDocsClick: '=npRsearchFnsRegDocsClick'
+                },
                 template: templates['np-rsearch-fns-reg-docs-info']
             };
         }])
         //
-        .factory('npRsearchViews', ['$log', '$compile', '$rootScope', '$timeout', '$window', 'nkbUser', function($log, $compile, $rootScope, $timeout, $window, nkbUser){
+        .directive('npRsearchEgrulDataUpdate', [function() {
+            return {
+                restrict: 'A',
+                // require:
+                // {
+                //     dataUpdateHelper: Object,
+                //     node: Object
+                // }
+                scope: false,
+                template: templates['np-rsearch-egrul-data-update']
+            };
+        }])
+        //
+        .factory('npRsearchViews', ['$log', '$compile', '$rootScope', '$timeout', '$window', 'SimplePager', 'nkbUser', 'npRsearchMetaHelper', function($log, $compile, $rootScope, $timeout, $window, SimplePager, nkbUser, npRsearchMetaHelper){
 
-            var windowElement   = angular.element($window),
-                htmlbodyElement = $('html, body');
+            var htmlbodyElement = $('html, body');
 
             function createView(name, parent, parentScope, scopeData) {
                 var scope = parentScope.$new(true);
@@ -199,6 +220,9 @@ define(function(require) {'use strict';
                         element.remove();
                         scope.$destroy();
                     },
+                    toggle: function(show) {
+                        element.toggle(show);
+                    },
                     show: function() {
                         element.show();
                     },
@@ -211,15 +235,17 @@ define(function(require) {'use strict';
             //
             return {
 
-                createNodeListView: function(parent, parentScope, options) {
+                createNodeListView: function(parent, parentScope, proxy) {
                     var view                = createView('np-rsearch-node-list', parent, parentScope),
                         scope               = view.scope,
                         internalDisabled    = false,
                         noNextPage          = false,
                         nextPageHandler     = null,
-                        scrollMargin        = 5; // TODO взять из CSS
+                        scrollMargin        = 5, // TODO взять из CSS
+                        scrollDuration      = 200;
 
                     _.extend(view, {
+                        type: 'NODE_LIST',
                         reset: function(nodeList, noMore, pageHandler) {
                             scope.nodeList = nodeList;
                             scope.targetInfo = null;
@@ -228,7 +254,8 @@ define(function(require) {'use strict';
                             noNextPage = noMore;
                             nextPageHandler = pageHandler;
 
-                            refresh();
+                            resetNodeListProxy();
+                            showNodeListProxy(scope.nodeList, scope.nodeList);
                         },
                         clear: function() {
                             scope.nodeList = null;
@@ -237,18 +264,28 @@ define(function(require) {'use strict';
                             noNextPage = false;
                             nextPageHandler = null;
                         },
+                        getNodeElement: function(node) {
+                            var nodeElement = view.element.find('[node-id="' + node._id + '"]').parent();
+                            return nodeElement.length === 1 ? nodeElement : null;
+                        },
                         scrollToNode: function(node) {
                             $timeout(function(){
-                                var nodeElement = view.element.find('[node-id="' + node._id + '"]');
+                                var nodeElement = view.getNodeElement(node);
 
-                                if (nodeElement.length !== 1) {
+                                if (!nodeElement) {
                                     return;
                                 }
 
-                                htmlbodyElement.animate({
-                                    scrollTop: nodeElement.offset().top - scrollMargin
-                                }, 200);
+                                var scrollContainer = scope.scrollContainer || htmlbodyElement,
+                                    top             = scope.scrollContainer ? (nodeElement.offset().top - scope.scrollContainer.offset().top) : nodeElement.offset().top;
+
+                                scrollContainer.animate({
+                                    scrollTop: top - scrollMargin
+                                }, scrollDuration);
                             });
+                        },
+                        scrollTop: function() {
+                            (scope.scrollContainer || htmlbodyElement).scrollTop(0);
                         },
                         showItemNumber: function(show) {
                             scope.showItemNumber = show;
@@ -261,14 +298,23 @@ define(function(require) {'use strict';
                     _.extend(scope, {
                         nodeList: null,
                         targetInfo: null,
+                        scrollContainer: proxy.getScrollContainer(),
+                        actions: {
+                            relationsClick: function(direction, relationType, node, e) {
+                                e.stopPropagation();
+                                $rootScope.$emit('np-rsearch-node-list-relations-click', node, direction, relationType);
+                            }
+                        },
                         pager: {
-                            nextPage: function(){
+                            nextPage: function() {
                                 if (!isDisabled() && nextPageHandler) {
                                     internalDisabled = true;
 
-                                    nextPageHandler(function(noMore){
+                                    nextPageHandler(function(noMore, pushNodeList){
                                         internalDisabled = false;
                                         noNextPage = noMore;
+
+                                        showNodeListProxy(scope.nodeList, pushNodeList);
                                     });
                                 }
                             },
@@ -280,55 +326,279 @@ define(function(require) {'use strict';
                         return internalDisabled || noNextPage || !nextPageHandler;
                     }
 
-                    function refresh() {
-                        //windowElement.trigger('scroll');
+                    function resetNodeListProxy() {
+                        proxy.resetNodeList(view);
+                    }
+
+                    function showNodeListProxy(nodeList, addNodeList) {
+                        $timeout(function(){
+                            proxy.showNodeList(nodeList, addNodeList, view);
+                        });
                     }
 
                     return view;
                 },
 
-                createNodeFormView: function(parent, parentScope) {
+                createNodeTracesView: function(parent, parentScope, proxy) {
+                    var view            = createView('np-rsearch-node-traces', parent, parentScope),
+                        tracesElement   = view.element.find('.traces'),
+                        scope           = view.scope;
+
+                    _.extend(view, {
+                        type: 'NODE_TRACES',
+                        setNodes: function(nodes) {
+                            scope.nodes = _.isArray(nodes) ? nodes : [];
+                            scope.currentTrace = null;
+                        },
+                        getNodes: function(nodes) {
+                            return scope.nodes;
+                        },
+                        setFilters: function(filters) {
+                            if (_.isObject(filters)) {
+                                _.extend(scope.filters, filters);
+                            }
+                        },
+                        setDataSource: function(dataSource) {
+                            // ? TODO reset prev dataSource
+                            // if (scope.dataSource) {
+                            // }
+
+                            scope.dataSource = dataSource;
+                            scope.filters.depths = dataSource.depths;
+                            reset();
+                        },
+                        setResult: function(nodes, filters, result, traceIndex, silent) {
+                            view.setNodes(nodes);
+                            view.setFilters(filters);
+                            applyResult(result, traceIndex, silent);
+                            doTrace(silent);
+                        },
+                        reset: reset,
+                        getTracesElement: function() {
+                            return tracesElement;
+                        },
+                        getNodeElement: function(node) {
+                            var nodeElement = view.element.find('[node-uid="' + node.__uid + '"]');
+                            return nodeElement.length === 1 ? nodeElement : null;
+                        },
+                        scrollTop: function() {
+                            (scope.scrollContainer || htmlbodyElement).scrollTop(0);
+                        }
+                    });
+
+                    _.extend(scope, {
+                        scrollContainer: proxy.getScrollContainer(),
+                        proxy: proxy,
+                        nodes: [],
+                        filters: {
+                            depths: null,
+                            depth: null
+                        },
+                        dataSource: null,
+                        result: null,
+                        traceIndex: 0,
+                        traceCount: null,
+                        currentTrace: null,
+                        pager: new SimplePager({
+                            prevPage: function(pageNumber) {
+                                scope.traceIndex--;
+                                doTrace();
+                            },
+                            nextPage: function(pageNumber) {
+                                scope.traceIndex++;
+                                doTrace();
+                            }
+                        }),
+                        nodeClick: function(e, tracePart) {
+                            scope.dataSource.nodeClick(tracePart, {
+                                node: tracePart.node,
+                                element: null,
+                                event: e,
+                                ui: 'npRsearchNodeTraces'
+                            });
+                        },
+                        doTraces: function() {
+                            if (!scope.dataSource) {
+                                return;
+                            }
+
+                            scope.traceCount = null;
+                            // scope.currentTrace = null; // ? TODO Очищать перед запросом
+
+                            scope.dataSource.tracesRequest({
+                                nodes: scope.nodes,
+                                filters: scope.filters
+                            }, function(result){
+                                if (scope.dataSource.reverse && result && result.traces) {
+                                    _.each(result.traces, function(trace){
+                                        trace.nodes.reverse();
+                                        trace.relations.reverse();
+                                    });
+                                }
+
+                                applyResult(result);
+                                doTrace();
+                            });
+                        },
+                        actions: {
+                        }
+                    });
+
+                    function reset() {
+                        scope.filters.depth = null;
+                        scope.result = null;
+                        scope.traceIndex = 0;
+                        scope.traceCount = null;
+                        scope.currentTrace = null;
+                        scope.pager.reset();
+                    }
+
+                    function applyResult(result, traceIndex, silent) {
+                        scope.result = result || {};
+                        scope.traceIndex = traceIndex || 0;
+
+                        scope.traceCount = _.size(scope.result.traces);
+
+                        scope.pager.reset({
+                            pageCount: scope.traceCount,
+                            pageNumber: scope.traceIndex + 1
+                        });
+
+                        if (!silent && _.isFunction(scope.dataSource.applyResult)) {
+                            scope.dataSource.applyResult(_.clone(scope.nodes), _.cloneDeep(scope.filters), scope.result);
+                        }
+                    }
+
+                    function doTrace(silent) {
+                        if (!silent && _.isFunction(scope.dataSource.doTrace)) {
+                            scope.dataSource.doTrace(scope.traceIndex);
+                        }
+
+                        if (scope.traceCount < 1) {
+                            scope.currentTrace = null;
+                            return;
+                        }
+
+                        var trace           = scope.result.traces[scope.traceIndex],
+                            nodes           = scope.result.nodes,
+                            relations       = scope.result.relations,
+                            relationIndexes = trace.relations,
+                            nodeIndexes     = trace.nodes,
+                            nodeCount       = _.size(nodeIndexes),
+                            currentTrace    = new Array(nodeCount),
+                            isLast, node, relation, direction, relationMap, targetInfo, isSrcNode;
+
+                        _.each(nodeIndexes, function(nodeIndex, i){
+                            isLast      = (i === nodeCount - 1);
+                            node        = nodes[nodeIndex];
+                            relationMap = {};
+
+                            // Именно при отображении цепочки,
+                            // а не в ответе запроса на поиск цепочек,
+                            // т.к. ответ может быть "жирным" - оптимизация
+                            npRsearchMetaHelper.buildNodeExtraMeta(node);
+
+                            isSrcNode = !!_.find(scope.nodes, function(n){
+                                return n.__uid === node.__uid;
+                            });
+
+                            if (isLast) {
+                                relation    = null;
+                                direction   = null;
+                                targetInfo  = null;
+                            } else {
+                                relation    = relations[relationIndexes[i]];
+                                direction   = relation._srcId === node._id ? 'parents' : 'children';
+                                npRsearchMetaHelper.addToRelationMap(relationMap, null, node, direction, relation);
+                                targetInfo = {
+                                    node: nodes[nodeIndexes[i + 1]],
+                                    relationInfo: {
+                                        direction: direction,
+                                        relationType: relation._type,
+                                        relationMap: relationMap
+                                    }
+                                };
+                            }
+
+                            currentTrace[i] = {
+                                isLast: isLast,
+                                inTrace: isSrcNode ? scope.dataSource.srcInTrace : true,
+                                node: node,
+                                targetInfo: targetInfo,
+                                direction: direction
+                            };
+                        });
+
+                        scope.currentTrace = currentTrace;
+
+                        showTraceProxy(scope.currentTrace);
+                    }
+
+                    function showTraceProxy(trace) {
+                        $timeout(function(){
+                            proxy.showTrace(trace, view);
+                        });
+                    }
+
+                    return view;
+                },
+
+                createNodeFormView: function(parent, parentScope, proxy) {
                     var view    = createView('np-rsearch-node-form', parent, parentScope),
                         scope   = view.scope;
 
                     _.extend(view, {
+                        type: 'NODE_FORM',
                         setNode: function(node) {
                             scope.node = node;
+                            showNodeFormProxy(scope.node, scope.formType);
                         },
                         setFormType: function(formType) {
                             scope.formType = formType;
                         },
                         setAutokad: function(autokad) {
-                            scope.autokad = autokad;
+                            scope.actions.autokad = autokad;
                         },
-                        setFnsRegDocs: function(fnsRegDocs){
-                            scope.fnsRegDocs = fnsRegDocs;
+                        setFnsRegDocs: function(fnsRegDocs) {
+                            scope.actions.fnsRegDocs = fnsRegDocs;
+                        },
+                        getNodeElement: function(node) {
+                            var nodeElement = view.element.find('[np-rsearch-node-info]');
+                            return nodeElement.length === 1 ? nodeElement : null;
+                        },
+                        scrollTop: function() {
+                            (scope.scrollContainer || htmlbodyElement).scrollTop(0);
                         }
                     });
 
                     _.extend(scope, {
                         user: nkbUser.user(),
-                        relationsClick: function(direction, relationType) {
-                            $rootScope.$emit('np-rsearch-node-form-relations-click', scope.node, direction, relationType);
-                        },
-                        productClick: function(productName) {
-                            $rootScope.$emit('np-rsearch-node-form-product-click', productName, scope.node);
-                        },
-                        autokadClick: function() {
-                            $rootScope.$emit('np-rsearch-node-form-autokad-click', scope.node);
-                        },
-                        fnsRegDocsClick: function(){
-                            $rootScope.$emit('np-rsearch-node-form-fns-reg-docs-click', scope.node);
+                        scrollContainer: proxy.getScrollContainer(),
+                        dataUpdateHelper: proxy.getDataUpdateHelper(),
+                        proxy: proxy,
+                        actions: {
+                            relationsClick: function(direction, relationType) {
+                                $rootScope.$emit('np-rsearch-node-form-relations-click', scope.node, direction, relationType);
+                            },
+                            productClick: function(productName) {
+                                $rootScope.$emit('np-rsearch-node-form-product-click', productName, scope.node);
+                            },
+                            autokadClick: function() {
+                                $rootScope.$emit('np-rsearch-node-form-autokad-click', scope.node);
+                            },
+                            fnsRegDocsClick: function() {
+                                $rootScope.$emit('np-rsearch-node-form-fns-reg-docs-click', scope.node);
+                            }
                         }
                     }, i18n.translateFuncs);
 
-                    return view;
-                },
+                    function showNodeFormProxy(node, formType) {
+                        $timeout(function(){
+                            proxy.showNodeForm(node, formType, view);
+                        });
+                    }
 
-                scrollTop: function() {
-                    $timeout(function(){
-                        htmlbodyElement.scrollTop(0);
-                    });
+                    return view;
                 }
             };
         }]);

@@ -20,17 +20,112 @@ define(function(require) {'use strict';
             template = i18n.translateTemplate(template);
         }])
         //
-        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npL10n', 'NpRsearchAutokad', 'NpRsearchFnsRegDocsCompany', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npL10n, NpRsearchAutokad, NpRsearchFnsRegDocsCompany){
+        .factory('npRsearchNavigationHelper', ['$log', function($log){
+
+            var SIMPLE_NODE_FORM = {
+                'ADDRESS': {
+                    relation: {
+                        type: 'ADDRESS',
+                        direction: 'children'
+                    }
+                },
+                'PHONE': {
+                    relation: {
+                        type: 'PHONE',
+                        direction: 'children'
+                    }
+                }
+            };
+
+            function isSimpleNodeForm(node) {
+                return _.has(SIMPLE_NODE_FORM, node._type);
+            }
+
+            //
+            var navigationProxy = {
+                //
+                getScrollContainer: function() {
+                    return null;
+                },
+                //
+                getDataUpdateHelper: function() {
+                    return null;
+                },
+                // @Deprecated
+                rsearchInputRefresh: function(text, ui) {
+                    return true;
+                },
+                //
+                isSimpleNodeForm: isSimpleNodeForm,
+                //
+                isLightForm: function(node) {
+                    return false;
+                },
+                //
+                hasShowRelations: function(node, active) {
+                    return node && !navigationProxy.isSimpleNodeForm(node);
+                },
+                //
+                hasCheckAccentedResult: function(target, mode) {
+                    return true;
+                },
+                //
+                resetNodeList: function(nodeListView) {
+                },
+                //
+                showNodeList: function(nodeList, addNodeList, nodeListView) {
+                },
+                //
+                showTrace: function(trace, nodeTracesView) {
+                },
+                //
+                showNodeForm: function(node, formType, nodeFormView) {
+                },
+                // @Deprecated
+                nodeHeaderClick: function(info) {
+                    return false;
+                },
+                nodeClick: function(info) {
+                    return true;
+                }
+            };
+
+            // API
+            return {
+                getNavigationProxy: function() {
+                    return navigationProxy;
+                },
+
+                setNavigationProxy: function(proxy) {
+                    navigationProxy = proxy;
+                },
+
+                isSimpleNodeForm: isSimpleNodeForm,
+
+                getSimpleNodeFormRelation: function(node) {
+                    return SIMPLE_NODE_FORM[node._type].relation;
+                }
+            };
+        }])
+        //
+        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npL10n', 'NpRsearchAutokad', 'NpRsearchFnsRegDocsCompany', 'npRsearchNavigationHelper', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npL10n, NpRsearchAutokad, NpRsearchFnsRegDocsCompany, npRsearchNavigationHelper){
             return {
                 restrict: 'A',
                 template: template,
-                scope: {},
+                scope: {
+                    npRsearchNavigationBrowserHistory: '='
+                },
                 link: function(scope, element, attrs) {
+                    //
+                    var navigationProxy = npRsearchNavigationHelper.getNavigationProxy();
+
                     //
                     var windowElement   = angular.element($window),
                         viewsElement    = element.find('.views'),
-                        nodeListView    = npRsearchViews.createNodeListView(viewsElement, scope),
-                        nodeFormView    = npRsearchViews.createNodeFormView(viewsElement, scope);
+                        nodeListView    = npRsearchViews.createNodeListView(viewsElement, scope, navigationProxy),
+                        nodeTracesView  = npRsearchViews.createNodeTracesView(viewsElement, scope, navigationProxy),
+                        nodeFormView    = npRsearchViews.createNodeFormView(viewsElement, scope, navigationProxy),
+                        browserHistory  = _.isBoolean(scope.npRsearchNavigationBrowserHistory) ? scope.npRsearchNavigationBrowserHistory : true;
 
                     var autokad = new NpRsearchAutokad();
                     nodeFormView.setAutokad(autokad);
@@ -46,11 +141,10 @@ define(function(require) {'use strict';
                         l10n                    = npL10n.l10n(),
                         user                    = nkbUser.user(),
                         initPromise             = $q.all([npRsearchMetaHelper.initPromise()]),
-                        initDeferredFunctions   = [];
+                        initDeferredFunctions   = [],
+                        _this                   = this;
 
                     function initSuccess() {
-                        var me = this;
-
                         init = true;
 
                         initByMeta();
@@ -58,15 +152,13 @@ define(function(require) {'use strict';
                         $rootScope.$emit('np-rsearch-navigation-init', scope);
 
                         _.each(initDeferredFunctions, function(f){
-                            f.func.apply(me, f.args);
+                            f.func.apply(_this, f.args);
                         });
                     }
 
                     function functionAfterInit(func, args) {
-                        var me = this;
-
                         if (init) {
-                            func.apply(me, args);
+                            func.apply(_this, args);
                         } else {
                             initDeferredFunctions.push({
                                 func: func,
@@ -120,10 +212,12 @@ define(function(require) {'use strict';
 
                     function pushNodeList(object, callback) {
                         if (object.result) {
+                            var _pushNodeList = [];
                             _.each(object.result.list, function(node){
+                                _pushNodeList.push(node);
                                 object.nodeList.push(node);
                             });
-                            callback(noMore(object.result));
+                            callback(noMore(object.result), _pushNodeList);
                         } else {
                             callback(true);
                         }
@@ -143,7 +237,11 @@ define(function(require) {'use strict';
                         showResult: showSearchResult
                     };
 
-                    $rootScope.$on('np-rsearch-input-refresh', function(e, text, initiator){
+                    $rootScope.$on('np-rsearch-input-refresh', function(e, text, initiator, ui){
+                        if (navigationProxy.rsearchInputRefresh(text, ui) === false) {
+                            return;
+                        }
+
                         if (initiator !== history) {
                             functionAfterInit(doSearch, [text]);
                         }
@@ -154,10 +252,13 @@ define(function(require) {'use strict';
                     }
 
                     function doSearch(query) {
+                        scope.mode = 'SEARCH';
+
                         search.query = query;
 
                         clearAutokad();
                         clearFnsRegDocs();
+                        nodeTracesView.hide();
                         nodeFormView.hide();
                         clearBreadcrumbs();
                         clearNodeRelationsFilter();
@@ -281,18 +382,24 @@ define(function(require) {'use strict';
                     }
 
                     function showSearchResult(nodeType, breadcrumb) {
-                        var byNodeType = search.byNodeTypes[nodeType];
+                        var byNodeType      = search.byNodeTypes[nodeType],
+                            lastBreadcrumb  = getLastBreadcrumb();
 
                         setSearchResult(nodeType, breadcrumb);
 
                         clearAutokad();
                         clearFnsRegDocs();
+                        nodeTracesView.hide();
                         nodeFormView.hide();
                         clearNodeRelationsFilter();
                         hideRelationsFilters();
                         clearMessages();
 
                         resetSearchNodeListView(byNodeType);
+
+                        highlightNodeInListByBreadcrumb(lastBreadcrumb, function(node){
+                            return nodeType === node._type;
+                        });
                     }
 
                     function resetSearchNodeListView(byNodeType) {
@@ -334,8 +441,16 @@ define(function(require) {'use strict';
                         egrulRequest: null
                     };
 
-                    $rootScope.$on('np-rsearch-node-select', function(e, node){
-                        showNodeForm('MINIREPORT', node);
+                    $rootScope.$on('np-rsearch-node-header-click', function(e, info){
+                        if (navigationProxy.nodeHeaderClick(info) !== false) {
+                            showNodeForm('MINIREPORT', info.node);
+                        }
+                    });
+
+                    $rootScope.$on('np-rsearch-node-click', function(e, info){
+                        if (navigationProxy.nodeClick(info) !== false) {
+                            showNodeForm('MINIREPORT', info.node);
+                        }
                     });
 
                     function nodeFormEgrulList(node) {
@@ -362,54 +477,52 @@ define(function(require) {'use strict';
                         return nodeForm.egrulRequest.completePromise;
                     }
 
-                    function showNodeForm(formType, node, breadcrumb, noHistory, noSearchHistory) {
+                    function showNodeForm(formType, node, breadcrumb, noHistory, noSearchHistory, passing) {
                         if (!noHistory && !noSearchHistory) {
                             checkSearchToHistory();
                         }
 
-                        if (checkAccentedResultByNodeForm(formType, node, breadcrumb)) {
+                        if (!passing && checkAccentedResultByNodeForm(formType, node, breadcrumb)) {
                             return;
                         }
 
-                        loading(function(done){
-                            // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
-                            nkbUser.fetchUser()
-                                .then(egrulList, egrulList)
-                                .then(complete, complete);
+                        nodeListView.clear();
+                        nodeTracesView.hide();
+                        clearAutokad();
+                        clearFnsRegDocs();
+                        clearNodeRelationsFilter();
+                        hideSearchFilters();
+                        hideRelationsFilters();
+                        clearMessages();
 
-                            function egrulList() {
-                                nodeFormEgrulList(node);
-                            }
+                        nodeFormView.setFormType(formType);
+                        nodeFormView.setNode(node);
+                        nodeFormView.show();
 
-                            function complete() {
-                                nodeListView.clear();
-                                clearAutokad();
-                                clearFnsRegDocs();
-                                clearNodeRelationsFilter();
-                                hideSearchFilters();
-                                hideRelationsFilters();
-                                clearMessages();
+                        pushNodeFormBreadcrumb(formType, node, breadcrumb);
 
-                                nodeFormView.setNode(node);
-                                nodeFormView.setFormType(formType);
-                                nodeFormView.show();
+                        if (!noHistory) {
+                            checkNodeFormToHistory();
+                        }
 
-                                pushNodeFormBreadcrumb(formType, node, breadcrumb);
+                        if (passing) {
+                            return;
+                        }
 
-                                npRsearchViews.scrollTop();
+                        nodeFormView.scrollTop();
 
-                                if (!noHistory) {
-                                    checkNodeFormToHistory();
-                                }
+                        showAutokad(formType, node);
+                        showFnsRegDocs(formType, node);
 
-                                showAutokad(formType, node);
-                                showFnsRegDocs(formType, node);
+                        $rootScope.$emit('np-rsearch-navigation-node-form', node);
 
-                                $rootScope.$emit('np-rsearch-navigation-node-form', node);
+                        //
+                        // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
+                        nkbUser.fetchUser().then(egrulList, egrulList);
 
-                                done();
-                            }
-                        });
+                        function egrulList() {
+                            nodeFormEgrulList(node);
+                        }
                     }
 
                     /*
@@ -422,17 +535,213 @@ define(function(require) {'use strict';
                         relationsClick(node, direction, relationType);
                     });
 
-                    function relationsClick(node, direction, relationType) {
+                    $rootScope.$on('np-rsearch-node-list-relations-click', function(e, node, direction, relationType){
+                        showNodeForm('MINIREPORT', node, null, false, false, true);
+                        relationsClick(node, direction, relationType, true);
+                    });
+
+                    function relationsClick(node, direction, relationType, noCheckAccentedResult) {
                         if (user.isProductAvailable('relations_find_related')) {
-                            showRelations(node, direction, relationType);
+                            showRelations(node, direction, relationType, null, null, false, noCheckAccentedResult);
                         } else {
                             showProductInfo('relations_find_related');
                         }
                     }
 
-                    function showRelations(node, direction, relationType, key, breadcrumb, noHistory) {
+                    function buildRelations(node, direction, relationType) {
+                        return {
+                            node: node,
+                            direction: direction,
+                            relationType: relationType,
+                            relationMap: npRsearchMetaHelper.buildRelationMap(node),
+                            request: null,
+                            result: null
+                        };
+                    }
+
+                    function buildListRelations(node, direction, relationType) {
+                        return _.extend(buildRelations(node, direction, relationType), {
+                            pageConfig: null,
+                            nodeList: null,
+                            reset: function(byRelations) {
+                                nodeTracesView.hide();
+                                resetRelationsNodeListView(byRelations);
+                            },
+                            doRelations: function(byRelations, checkAccentedResult, noHistory) {
+                                nodeTracesView.hide();
+
+                                loading(function(done){
+                                    clearMessages();
+
+                                    byRelations.pageConfig = resetPageConfig();
+
+                                    listRelationsRequest(byRelations);
+
+                                    // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
+                                    byRelations.request.promise.then(complete, complete);
+
+                                    function complete() {
+                                        setNodeList(byRelations);
+
+                                        var accentedResult = checkAccentedResult && checkAccentedResultByRelations(byRelations);
+
+                                        if (!accentedResult) {
+                                            resetRelationsNodeListView(byRelations);
+
+                                            if (!noHistory) {
+                                                checkNodeRelationsToHistory();
+                                            }
+                                        }
+
+                                        done();
+                                    }
+                                });
+                            }
+                        });
+                    }
+
+                    function buildTracesRelations(node, direction, relationType, options) {
+                        return _.extend(buildRelations(node, direction, relationType), {
+                            reset: function(byRelations) {
+                                nodeListView.clear();
+
+                                if (byRelations.result) {
+                                    nodeTracesView.setResult(byRelations.nodes, byRelations.filters, byRelations.result, byRelations.traceIndex, true);
+                                } else {
+                                    nodeTracesView.setNodes([byRelations.node]);
+                                    nodeTracesView.reset();
+                                }
+
+                                nodeTracesView.show();
+                            },
+                            doRelations: function(byRelations, checkAccentedResult, noHistory) {
+                                nodeListView.clear();
+
+                                options.dataSource.setInfo({
+                                    byRelations: byRelations
+                                });
+                                nodeTracesView.setNodes([byRelations.node]);
+                                nodeTracesView.setDataSource(options.dataSource);
+
+                                nodeTracesView.show();
+
+                                if (!noHistory) {
+                                    checkNodeRelationsToHistory();
+                                }
+                            }
+                        });
+                    }
+
+                    function buildRelatedKinsmenTracesRelations(node, direction, relationType) {
+                        return buildTracesRelations(node, direction, relationType, {
+                            dataSource: relatedKinsmenTracesDataSource
+                        });
+                    }
+
+                    function buildBeneficiaryTracesRelations(node, direction, relationType) {
+                        return buildTracesRelations(node, direction, relationType, {
+                            dataSource: beneficiaryTracesDataSource
+                        });
+                    }
+
+                    function getDefaultTracesDataSource() {
+                        return {
+                            reverse: true,
+                            srcInTrace: false,
+                            nodeClick: function(tracePart, info) {
+                                if (tracePart.inTrace) {
+                                    $rootScope.$emit('np-rsearch-node-click', info);
+                                }
+                            },
+                            setInfo: function(info) {
+                                this.info = info;
+                            },
+                            applyResult: function(nodes, filters, result) {
+                                _.extend(this.info.byRelations, {
+                                    nodes: nodes,
+                                    filters: filters,
+                                    result: result
+                                });
+                            },
+                            doTrace: function(traceIndex) {
+                                this.info.byRelations.traceIndex = traceIndex;
+                            }
+                        };
+                    }
+
+                    function RelatedKinsmenTracesDataSource() {
+                        return _.extend({}, getDefaultTracesDataSource(), {
+                            depths: _.range(2, 5),
+                            tracesRequest: function(data, callback) {
+                                loading(function(done){
+                                    var request = npRsearchResource.relatedKinsmen({
+                                        node: data.nodes[0],
+                                        filter: {
+                                            maxDepth: data.filters.depth
+                                        },
+                                        previousRequest: null,
+                                        success: function(data, status){
+                                            complete(data);
+                                        },
+                                        error: function(data, status){
+                                            complete(null);
+                                        }
+                                    });
+
+                                    function complete(result) {
+                                        callback(result);
+                                        done();
+                                    }
+                                });
+                            }
+                        });
+                    }
+                    var relatedKinsmenTracesDataSource = new RelatedKinsmenTracesDataSource();
+
+                    function BeneficiaryTracesDataSource() {
+                        return _.extend({}, getDefaultTracesDataSource(), {
+                            depths: _.range(1, 11),
+                            tracesRequest: function(data, callback) {
+                                loading(function(done){
+                                    var request = npRsearchResource.beneficiary({
+                                        node: data.nodes[0],
+                                        filter: {
+                                            maxDepth: data.filters.depth
+                                        },
+                                        previousRequest: null,
+                                        success: function(data, status){
+                                            complete(data);
+                                        },
+                                        error: function(data, status){
+                                            complete(null);
+                                        }
+                                    });
+
+                                    function complete(result) {
+                                        callback(result);
+                                        done();
+                                    }
+                                });
+                            }
+                        });
+                    }
+                    var beneficiaryTracesDataSource = new BeneficiaryTracesDataSource();
+
+                    function buildByRelations(node, direction, relationType) {
+                        if (relationType === 'related_kinsmen') {
+                            return buildRelatedKinsmenTracesRelations(node, direction, relationType);
+                        } else
+                        if (relationType === 'beneficiary') {
+                            return buildBeneficiaryTracesRelations(node, direction, relationType);
+                        } else {
+                            return buildListRelations(node, direction, relationType);
+                        }
+                    }
+
+                    function showRelations(node, direction, relationType, key, breadcrumb, noHistory, noCheckAccentedResult) {
                         clearAutokad();
                         clearFnsRegDocs();
+                        nodeTracesView.hide();
                         nodeFormView.hide();
                         setNodeRelationsFilter(node, direction, relationType);
                         hideSearchFilters();
@@ -443,56 +752,21 @@ define(function(require) {'use strict';
                             byRelations = byRelationsStore[key];
 
                         if (byRelations) {
-                            resetRelationsNodeListView(byRelations);
+                            byRelations.reset(byRelations);
 
                             if (!noHistory) {
                                 checkNodeRelationsToHistory();
                             }
                         } else {
-                            byRelations = byRelationsStore[index] = {
-                                node: node,
-                                direction: direction,
-                                relationType: relationType,
-                                relationMap: npRsearchMetaHelper.buildRelationMap(node),
-                                pageConfig: null,
-                                request: null,
-                                result: null,
-                                nodeList: null
-                            };
-
-                            doRelations(byRelations, true, noHistory);
+                            byRelations = byRelationsStore[index] = buildByRelations(node, direction, relationType);
+                            doRelations(byRelations, !noCheckAccentedResult, noHistory);
                         }
 
                         $rootScope.$emit('np-rsearch-navigation-node-relations', node, relationType);
                     }
 
                     function doRelations(byRelations, checkAccentedResult, noHistory) {
-                        loading(function(done){
-                            clearMessages();
-
-                            byRelations.pageConfig = resetPageConfig();
-
-                            relationsRequest(byRelations);
-
-                            // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
-                            byRelations.request.promise.then(complete, complete);
-
-                            function complete() {
-                                setNodeList(byRelations);
-
-                                var accentedResult = checkAccentedResult && checkAccentedResultByRelations(byRelations);
-
-                                if (!accentedResult) {
-                                    resetRelationsNodeListView(byRelations);
-
-                                    if (!noHistory) {
-                                        checkNodeRelationsToHistory();
-                                    }
-                                }
-
-                                done();
-                            }
-                        });
+                        byRelations.doRelations(byRelations, checkAccentedResult, noHistory);
                     }
 
                     function resetRelationsNodeListView(byRelations) {
@@ -506,7 +780,7 @@ define(function(require) {'use strict';
                             loading(function(done){
                                 byRelations.pageConfig.page++;
 
-                                relationsRequest(byRelations);
+                                listRelationsRequest(byRelations);
 
                                 // ! При конструкции ['finally'](...) - генерятся исключения, но не отображаются в консоли
                                 byRelations.request.promise.then(complete, complete);
@@ -521,29 +795,55 @@ define(function(require) {'use strict';
                         nodeListView.setTargetInfo(getLastTargetInfo());
 
                         initRelationsFilters(byRelations);
+
+                        nodeListView.scrollTop();
                     }
 
-                    function relationsRequest(byRelations) {
+                    function listRelationsRequest(byRelations) {
                         var filter = {};
 
-                        _.each(byRelations.filters, function(f){
-                            _.extend(filter, f.condition);
-                        });
+                        if (byRelations.relationType === 'kinsmen') {
+                            byRelations.request = npRsearchResource.kinsmen({
+                                node: byRelations.node,
+                                pageConfig: byRelations.pageConfig,
+                                previousRequest: byRelations.request,
+                                nodeIterator: function(node, i) {
+                                    npRsearchMetaHelper.addToRelationMap(
+                                        byRelations.relationMap, byRelations.node, node, byRelations.direction,
+                                        npRsearchMetaHelper.buildKinsmenRelation(byRelations.node, node)
+                                    );
+                                },
+                                success: function(data, status){
+                                    npRsearchMetaHelper.buildRelationInfo(byRelations.node, 'kinsmen', {
+                                        count: data.total
+                                    });
 
-                        byRelations.request = npRsearchResource.relations({
-                            node: byRelations.node,
-                            direction: byRelations.direction,
-                            relationType: byRelations.relationType,
-                            pageConfig: byRelations.pageConfig,
-                            filter: filter,
-                            previousRequest: byRelations.request,
-                            success: function(data, status){
-                                complete(data);
-                            },
-                            error: function(data, status){
-                                complete(null);
-                            }
-                        });
+                                    complete(data);
+                                },
+                                error: function(data, status){
+                                    complete(null);
+                                }
+                            });
+                        } else {
+                            _.each(byRelations.filters, function(f){
+                                _.extend(filter, f.condition);
+                            });
+
+                            byRelations.request = npRsearchResource.relations({
+                                node: byRelations.node,
+                                direction: byRelations.direction,
+                                relationType: byRelations.relationType,
+                                pageConfig: byRelations.pageConfig,
+                                filter: filter,
+                                previousRequest: byRelations.request,
+                                success: function(data, status){
+                                    complete(data);
+                                },
+                                error: function(data, status){
+                                    complete(null);
+                                }
+                            });
+                        }
 
                         function complete(result) {
                             byRelations.result = result;
@@ -689,8 +989,11 @@ define(function(require) {'use strict';
                         } : null;
                     }
 
-                    function highlightNodeInListByBreadcrumb(breadcrumb) {
+                    function highlightNodeInListByBreadcrumb(breadcrumb, predicate) {
                         if (breadcrumb && breadcrumb.type === 'NODE_FORM') {
+                            if (_.isFunction(predicate) && !predicate(breadcrumb.data.node)) {
+                                return;
+                            }
                             // TODO Не прокручивать до ноды,
                             // а прокрутить до сохраненного положения прокрутки
                             // и выделить ноду?
@@ -703,6 +1006,10 @@ define(function(require) {'use strict';
                      *
                      */
                     function checkAccentedResultBySearch(activeResult) {
+                        if (!navigationProxy.hasCheckAccentedResult('bySearch', scope.mode)) {
+                            return false;
+                        }
+
                         var individualResult = search.byNodeTypes['INDIVIDUAL'].result,
                             node;
 
@@ -724,20 +1031,27 @@ define(function(require) {'use strict';
                     }
 
                     function checkAccentedResultByNodeForm(formType, node, breadcrumb) {
-                        if (node._type === 'ADDRESS') {
-                            pushNodeFormBreadcrumb(formType, node, breadcrumb);
-                            showRelations(node, 'children', 'ADDRESS');
-                            return true;
-                        } else if (node._type === 'PHONE') {
-                            pushNodeFormBreadcrumb(formType, node, breadcrumb);
-                            showRelations(node, 'children', 'PHONE');
-                            return true;
+                        if (!navigationProxy.hasCheckAccentedResult('byNodeForm', scope.mode)) {
+                            return false;
                         }
 
-                        return false;
+                        if (!npRsearchNavigationHelper.isSimpleNodeForm(node)) {
+                            return false;
+                        }
+
+                        var relation = npRsearchNavigationHelper.getSimpleNodeFormRelation(node);
+
+                        pushNodeFormBreadcrumb(formType, node, breadcrumb);
+                        showRelations(node, relation.direction, relation.type);
+
+                        return true;
                     }
 
                     function checkAccentedResultByRelations(byRelations) {
+                        if (!navigationProxy.hasCheckAccentedResult('byRelations', scope.mode)) {
+                            return false;
+                        }
+
                         if (!byRelations.result) {
                             return null;
                         }
@@ -805,20 +1119,8 @@ define(function(require) {'use strict';
 
                     var nodeRelationsFilter = {
                         node: null,
-                        autokad: autokad,
-                        fnsRegDocs: fnsRegDocs,
+                        proxy: navigationProxy,
                         active: null,
-                        relationsClick: function(direction, relationType) {
-                            if (buildNodeRelationActiveKey(direction, relationType) === nodeRelationsFilter.active) {
-                                return;
-                            }
-
-                            clearLastBreadcrumb();
-                            relationsClick(nodeRelationsFilter.node, direction, relationType);
-                        },
-                        productClick: function(productName) {
-                            doProduct(productName, nodeRelationsFilter.node);
-                        },
                         getActiveRelation: function() {
                             var active = nodeRelationsFilter.active;
 
@@ -833,13 +1135,30 @@ define(function(require) {'use strict';
                                 relationType: s[1]
                             };
                         },
-                        autokadClick: function() {
-                            clearLastBreadcrumb();
-                            doAutokad(nodeRelationsFilter.node);
-                        },
-                        fnsRegDocsClick: function() {
-                            clearLastBreadcrumb();
-                            doFnsRegDocs(nodeRelationsFilter.node);
+                        actions: {
+                            relationsClick: function(direction, relationType) {
+                                if (buildNodeRelationActiveKey(direction, relationType) === nodeRelationsFilter.active) {
+                                    return;
+                                }
+
+                                clearLastBreadcrumb();
+                                relationsClick(nodeRelationsFilter.node, direction, relationType);
+                            },
+                            productClick: function(productName) {
+                                doProduct(productName, nodeRelationsFilter.node);
+                            },
+
+                            autokad: autokad,
+                            autokadClick: function() {
+                                clearLastBreadcrumb();
+                                doAutokad(nodeRelationsFilter.node);
+                            },
+
+                            fnsRegDocs: fnsRegDocs,
+                            fnsRegDocsClick: function() {
+                                clearLastBreadcrumb();
+                                doFnsRegDocs(nodeRelationsFilter.node);
+                            }
                         }
                     };
 
@@ -1059,7 +1378,7 @@ define(function(require) {'use strict';
                      */
                     var History = function() {
                         var windowHistory   = $window.history,
-                            isHistory       = windowHistory && windowHistory.pushState,
+                            isHistory       = browserHistory && windowHistory && windowHistory.pushState,
                             // historyId -
                             // Для идентификации истории в контексте только данного приложения,
                             // если в браузерной истории есть состояния от предыдущего выполнения приложения,
@@ -1275,6 +1594,7 @@ define(function(require) {'use strict';
                      *
                      */
                     _.extend(scope, {
+                        mode: null, // 'SEARCH'|'NODE'
                         search: search,
                         isSearch: isSearch,
                         messages: messages,
@@ -1289,246 +1609,38 @@ define(function(require) {'use strict';
                         search.total = null;
 
                         _.each(search.byNodeTypes, function(byNodeType, nodeType){
-                            byNodeType.request.abort();
+                            if (byNodeType.request) {
+                                byNodeType.request.abort();
+                            }
                             byNodeType.total = null;
                         });
 
                         nodeListView.clear();
                     }
 
+                    $rootScope.$on('np-rsearch-navigation-set-node', function(e, node, relation){
+                        scope.mode = 'NODE';
+
+                        clearAutokad();
+                        clearFnsRegDocs();
+                        nodeTracesView.hide();
+                        nodeFormView.hide();
+                        clearBreadcrumbs();
+                        clearNodeRelationsFilter();
+                        hideSearchFilters();
+                        hideRelationsFilters();
+                        clearMessages();
+
+                        showNodeForm('MINIREPORT', node, null, true, true);
+
+                        if (relation && navigationProxy.hasShowRelations(node)) {
+                            showRelations(node, relation.direction, relation.type);
+                        }
+                    });
+
                     // Выполнить после отработки кода модуля
                     initPromise.then(initSuccess);
                 }
-            };
-        }])
-        //
-        .factory('NpRsearchAutokad', ['$log', '$rootScope', '$timeout', 'npAutokadHelper', 'npRsearchAutokadConfig', function($log, $rootScope, $timeout, npAutokadHelper, npRsearchAutokadConfig){
-
-            // Class
-            return function() {
-                var caseCountPending, caseCountRequest,
-                    node;
-
-                var byNodeType = {
-                    'COMPANY': {
-                        getCaseSearch: function() {
-                            return {
-                                sources: [
-                                    {key: 'company_name', value: node['nameshortsort']},
-                                    {key: 'company_ogrn', value: node['ogrn']},
-                                    {key: 'company_inn', value: node['inn']}
-                                ]
-                            };
-                        }
-                    },
-                    'INDIVIDUAL': {
-                        getCaseSearch: function() {
-                            return {
-                                sources: [
-                                    {key: node.subtype === 'foreign' ? 'company_name' : 'individual_name', value: node['name']}
-                                ]
-                            };
-                        }
-                    }
-                };
-
-                reset();
-
-                function reset() {
-                    caseCountPending = false;
-
-                    abortCaseCountRequest();
-                }
-
-                function abortCaseCountRequest() {
-                    if (caseCountRequest) {
-                        caseCountRequest.abort();
-                    }
-                }
-
-                function doGetCaseCount() {
-                    var caseSearch = byNodeType[node._type].getCaseSearch();
-
-                    caseCountPending = true;
-
-                    abortCaseCountRequest();
-
-                    caseCountRequest = npAutokadHelper.getCaseCount(
-                        caseSearch,
-                        function(result, source){
-                            node.__autokad.caseCount = result;
-                            node.__autokad.searchSource = source;
-                            node.__autokad.error = null;
-                        },
-                        function(){
-                            $log.warn('getCaseCount... error');
-                            node.__autokad.caseCount = 0;
-                            node.__autokad.searchSource = null;
-                            node.__autokad.error = true;
-                        },
-                        function(){
-                            caseCountPending = false;
-                        });
-                }
-
-                function isNodeValid(n) {
-                    return !!byNodeType[n._type];
-                }
-
-                function setNode(n) {
-                    reset();
-
-                    if (!isNodeValid(n)) {
-                        return;
-                    }
-
-                    node = n;
-                    node.__autokad = {
-                        caseCount: 0,
-                        error: null
-                    };
-
-                    if (npRsearchAutokadConfig.gettingCaseCount) {
-                        doGetCaseCount();
-                    }
-                }
-
-                function isNodeWithAutokad() {
-                    return node && node.__autokad;
-                }
-
-                // API
-                return {
-                    setNode: setNode,
-                    gettingCaseCount: function() {
-                        return npRsearchAutokadConfig.gettingCaseCount;
-                    },
-                    isCaseCountPending: function() {
-                        return caseCountPending;
-                    },
-                    getCaseCount: function() {
-                        return isNodeWithAutokad() ? node.__autokad.caseCount : 0;
-                    },
-                    hasError: function() {
-                        return isNodeWithAutokad() ? node.__autokad.error : null;
-                    },
-                    showCases: function() {
-                        $timeout(function(){
-                            $rootScope.$emit('np-autokad-do-search', {
-                                search: byNodeType[node._type].getCaseSearch(),
-                                searchSource: node.__autokad.searchSource
-                            });
-                        });
-                    },
-                    clear: function() {
-                        reset();
-                        $rootScope.$emit('np-autokad-do-clear');
-                    }
-                };
-            };
-        }])
-        //
-        .factory('NpRsearchFnsRegDocsCompany', ['$log', '$rootScope', '$timeout', 'npExtraneousFnsRegDocsCompanyHelper', 'npRsearchFnsRegDocsConfig', function($log, $rootScope, $timeout, npExtraneousFnsRegDocsCompanyHelper, npRsearchFnsRegDocsConfig){
-
-            // Class
-            return function() {
-                var docCountPending, docCountRequest,
-                    node;
-
-                reset();
-
-                function getDocSearch() {
-                    return {
-                        'ogrn': node['ogrn']
-                    };
-                }
-
-                function reset() {
-                    docCountPending = false;
-
-                    abortDocCountRequest();
-                }
-
-                function abortDocCountRequest() {
-                    if (docCountRequest) {
-                        docCountRequest.abort();
-                    }
-                }
-
-                function doGetDocCount() {
-                    var docSearch = getDocSearch();
-
-                    docCountPending = true;
-
-                    abortDocCountRequest();
-
-                    docCountRequest = npExtraneousFnsRegDocsCompanyHelper.getDocCount(
-                        docSearch,
-                        function(result){
-                            node.__fnsRegDocs.docCount = result;
-                            node.__fnsRegDocs.error = null;
-                            docCountPending = false;
-                        },
-                        function(){
-                            node.__fnsRegDocs.docCount = 0;
-                            node.__fnsRegDocs.error = true;
-                            docCountPending = false;
-                        });
-                }
-
-                function isNodeValid(n) {
-                    return n._type === 'COMPANY';
-                }
-
-                function setNode(n) {
-                    reset();
-
-                    if (!isNodeValid(n)) {
-                        return;
-                    }
-
-                    node = n;
-                    node.__fnsRegDocs = {
-                        docCount: 0,
-                        error: null
-                    };
-
-                    if (npRsearchFnsRegDocsConfig.gettingDocCount) {
-                        doGetDocCount();
-                    }
-                }
-
-                function isNodeWithData() {
-                    return node && node.__fnsRegDocs;
-                }
-
-                // API
-                return {
-                    setNode: setNode,
-                    gettingDocCount: function() {
-                        return npRsearchFnsRegDocsConfig.gettingDocCount;
-                    },
-                    isDocCountPending: function() {
-                        return docCountPending;
-                    },
-                    getDocCount: function() {
-                        return isNodeWithData() ? node.__fnsRegDocs.docCount : 0;
-                    },
-                    hasError: function() {
-                        return isNodeWithData() ? node.__fnsRegDocs.error : null;
-                    },
-                    showDocs: function() {
-                        $timeout(function(){
-                            $rootScope.$emit('np-extraneous-fns-reg-docs-company-do-search', {
-                                search: getDocSearch()
-                            });
-                        });
-                    },
-                    clear: function() {
-                        reset();
-                        $rootScope.$emit('np-extraneous-fns-reg-docs-company-do-clear');
-                    }
-                };
             };
         }]);
     //

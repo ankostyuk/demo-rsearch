@@ -68,11 +68,17 @@
 [np-rsearch-node-relations] .relations-block ul {
     margin: 0;
 }
+[np-rsearch-node-relations] .relations-block ul li {
+  margin-bottom: 4px;
+}
 [np-rsearch-node-relations] .relations-block .relations-block-header {
     margin: 0 0 5px 0;
     line-height: 20px;
     font-weight: normal;
     color: @defaultHeaderLightColor;
+}
+[np-rsearch-node-relations] .relations-block .action {
+    display: inline-block;
 }
 [np-rsearch-node-relations] .relations-block .action-info {
     color: @defaultHeaderLightColor;
@@ -98,7 +104,7 @@
 [np-rsearch-navigation] .mask .message-box {
     position: fixed;
     left: 50%;
-    top: 50%;
+    /*top: 50%;*/
 }
 [np-rsearch-navigation] .mask .message {
     margin-left: -100%;
@@ -114,12 +120,13 @@
     margin: 0;
 }
 [np-rsearch-navigation] .breadcrumb {
-    margin: 1px 0 23px 0;
+    margin: 0 0 15px 0;
     padding: 0;
     background-color: transparent;
 }
 [np-rsearch-navigation] .breadcrumb > li {
     display: inline-block;
+    margin-bottom: 10px;
     padding-right: 5px;
     line-height: 18px;
     vertical-align: top;
@@ -145,6 +152,9 @@
 [np-rsearch-navigation] .breadcrumb [np-rsearch-navigation-breadcrumb] a > span {
     display: block;
 }
+[np-rsearch-navigation] .breadcrumb [np-rsearch-navigation-breadcrumb] [np-rsearch-node-simple] .icon {
+    display: none;
+}
 [np-rsearch-navigation] .breadcrumb [np-rsearch-navigation-breadcrumb] [np-rsearch-node-simple] > span {
     white-space: pre;
 }
@@ -165,7 +175,7 @@
 }
 [np-rsearch-navigation] [np-rsearch-node-relations] {
     margin-bottom: 25px;
-    padding-top: 15px;
+    padding-top: 13px;
 }
 [np-rsearch-navigation] [np-rsearch-node-relations] .active {
     font-weight: bold;
@@ -209,8 +219,41 @@
     cursor: default !important;
 }
 
+[np-rsearch-navigation] .product-link {
+    display: block;
+    text-rendering: optimizelegibility;
+}
+[np-rsearch-navigation] .product-link .link-icon {
+    display: block;
+    float: left;
+    margin-top: 0;
+    padding-right: 7px;
+    font-size: 150%;
+}
+[np-rsearch-navigation] .product-link .link-text {
+    display: block;
+    float: left;
+    margin-top: 3px;
+    white-space: pre;
+}
+
 
 /* np-rsearch-node-info */
+[np-rsearch-node-info] {
+    position: relative;
+}
+[np-rsearch-node-info] .node-info {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    padding: 13px 15px 0 0;
+    text-align: right;
+    white-space: nowrap;
+    color: @defaultDisabledColor;
+}
+[np-rsearch-node-info] .node-info .node-info-entry {
+  margin-bottom: 4px;
+}
 [np-rsearch-node-info] .body {
     padding: 5px 7px 0 7px;
 }
@@ -271,7 +314,9 @@
 }
 
 /* np-rsearch-node-simple */
-[np-rsearch-node-simple] {
+[np-rsearch-node-simple] .icon {
+    margin-right: 5px;
+    vertical-align: 1px;
 }
 
 /* np-rsearch-node-plain */
@@ -314,12 +359,23 @@
 [np-rsearch-node-list] .node-list-item:first-child {
     margin-top: 10px;
 }
-[np-rsearch-node-list] .node-list-item .item-number {
+[np-rsearch-node-list] .node-list-item .item-info {
     position: absolute;
     top: 0;
     right: 100%;
-    padding: 5px 5px 0 0;
+    padding: 5px 13px 0 0;
+    text-align: right;
+    white-space: nowrap;
     color: @defaultDisabledColor;
+}
+[np-rsearch-node-list] .node-list-item .item-info .item-info-entry {
+  margin-bottom: 4px;
+}
+[np-rsearch-node-list] .node-list-item .item-info .item-info-entry.node-status {
+    display: none;
+}
+[np-rsearch-node-list] .node-list-item [np-rsearch-node-info] .node-info {
+    display: none;
 }
 [np-rsearch-node-list] [np-rsearch-node-plain] {
     position: relative;
@@ -334,7 +390,12 @@
     background-color: @defaultBackgroundColor;
 }
 [np-rsearch-node-list] [np-rsearch-node-plain] .node-header {
+    margin-top: -2px;
+    font-size: 16px;
     color: @linkColor;
+}
+[np-rsearch-node-list] [np-rsearch-node-plain] .node-header-small {
+    margin-top: -1px;
 }
 [np-rsearch-node-list] [np-rsearch-node-plain]:hover {
     border-color: @defaultShadowHighlightBorderColor;
@@ -343,24 +404,126 @@
 [np-rsearch-node-list] [np-rsearch-node-plain]:hover .node-header {
     color: @linkActiveColor !important;
 }
-[np-rsearch-node-list] [np-rsearch-node-info] a.action {
+/*[np-rsearch-node-list] [np-rsearch-node-info] a.action {
     color: @defaultColor !important;
-}
+}*/
 [np-rsearch-node-list] [np-rsearch-node-info] .balance-forms,
 [np-rsearch-node-list] [np-rsearch-node-info] .okfs {
     display: none;
 }
 
+/* np-rsearch-node-traces */
+[np-rsearch-node-traces] {
+    padding: 10px 0 20px 0;
+}
+[np-rsearch-node-traces] .tools {
+    padding-bottom: 15px;
+}
+[np-rsearch-node-traces] .filters .depth {
+    width: 180px;
+}
+[np-rsearch-node-traces] .filters-message {
+    padding-top: 5px;
+    color: @defaultDisabledColor;
+}
+[np-rsearch-node-traces] .trace-pager .page-prev,
+[np-rsearch-node-traces] .trace-pager .page-next {
+    padding-top: 5px;
+    padding-bottom: 3px;
+}
+[np-rsearch-node-traces] .trace-pager .page-info {
+    color: @defaultHeaderLightColor !important;
+    background-color: @defaultBackgroundColor !important;
+    cursor: default !important;
+}
+[np-rsearch-node-traces] .trace-result .empty-result {
+    color: @defaultDisabledColor;
+}
+[np-rsearch-node-traces] .trace-result .traces {
+    padding: 5px;
+}
+[np-rsearch-node-traces] .trace-part {
+    position: relative;
+}
+[np-rsearch-node-traces] .trace-part-info {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    padding: 0px 18px 0 0;
+    text-align: right;
+    white-space: nowrap;
+    color: @defaultDisabledColor;
+}
+[np-rsearch-node-traces] .trace-part-info .trace-part-info-entry.node-status {
+    display: none;
+}
+[np-rsearch-node-traces] .traces .relation {
+    position: relative;
+    height: 25px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid @defaultBorderColor;
+}
+[np-rsearch-node-traces] .traces .relation .target-relations-info {
+    position: absolute;
+    top: 15px;
+    left: 30px;
+    padding: 0 5px;
+    color: @defaultHeaderLightColor;
+    background-color: @defaultBackgroundColor;
+}
+
+[np-rsearch-node-traces] .trace-result .relation.parents:before,
+[np-rsearch-node-traces] .trace-result .relation.parents:after {
+    content: "";
+    display: block;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    position: absolute;
+    left: 10px;
+}
+[np-rsearch-node-traces] .trace-result .relation.parents:before {
+    border-top: 5px solid @defaultBorderColor;
+    top: 26px;
+}
+[np-rsearch-node-traces] .trace-result .relation.parents:after {
+    border-top: 5px solid @defaultBackgroundColor;
+    top: 25px;
+}
+
+[np-rsearch-node-traces] .trace-result .relation.children:before {
+    content: "";
+    display: block;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid @defaultBorderColor;
+    position: absolute;
+    top: 20px;
+    left: 9px;
+}
+[np-rsearch-node-traces] .trace-result .relation.children:after {
+    content: "";
+    display: block;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid @defaultBackgroundColor;
+    position: absolute;
+    top: 21px;
+    left: 10px;
+}
+
 /* np-rsearch-node-form */
 [np-rsearch-node-form] {
     position: relative;
-    padding-top: 10px;
 }
 [np-rsearch-node-form] [np-rsearch-node-history-info] .history-labels {
-    padding: 0 5px 5px 5px;
+    margin-left: -2px;
+    padding: 0 5px 5px 0;
 }
 [np-rsearch-node-form] [np-rsearch-node-info] {
-    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+[np-rsearch-node-form] [np-rsearch-node-info] .node-info .node-info-entry.node-status {
+    display: none;
 }
 [np-rsearch-node-form] [np-rsearch-node-info] .body {
     padding: 5px 7px 0 0;
@@ -369,11 +532,14 @@
     font-size: 150%;
     line-height: 150%;
 }
+[np-rsearch-node-form] [np-rsearch-node-info] .node-header-small {
+    padding-top: 8px;
+}
 [np-rsearch-node-form] [np-rsearch-node-info] .reg-state {
     display: block;
 }
 [np-rsearch-node-form] [np-rsearch-node-relations] {
-    padding: 5px 0 0 0;
+    padding: 13px 0 0 0;
 }
 [np-rsearch-node-form] .np-rsearch-node-info {
     padding: 0 7px 20px 7px;
@@ -431,16 +597,18 @@
     padding-left: 20px;
 }
 [np-rsearch-node-form] .INDIVIDUAL .egrul-products {
-    width: 330px;
+    width: 380px;
+}
+[np-rsearch-node-form] .INDIVIDUAL .egrul-products ul.actions-list > li {
+    margin-bottom: 10px;
 }
 [np-rsearch-node-form] .INDIVIDUAL .extra-search {
-    padding-top: 10px;
-    width: 330px;
+    width: 280px;
     white-space: nowrap;
 }
 
 [np-rsearch-node-form] .PURCHASE [np-rsearch-node-info] {
-    padding-bottom: 0;
+    margin-bottom: 0;
 }
 [np-rsearch-node-form] .PURCHASE .lot-list {
     margin-bottom: 20px;
@@ -757,5 +925,18 @@
     color: @defaultDisabledLightColor;
 }
 [np-rsearch-user-product-limits-info] .info {
+    color: @defaultDisabledColor;
+}
+
+/* np-rsearch-egrul-data-update */
+[np-rsearch-egrul-data-update] .pending-info {
+    display: none;
+    padding-left: 10px;
+    color: @defaultDisabledColor;
+}
+[np-rsearch-egrul-data-update] .PENDING .pending-info {
+    display: inline;
+}
+[np-rsearch-egrul-data-update] .actual-info {
     color: @defaultDisabledColor;
 }

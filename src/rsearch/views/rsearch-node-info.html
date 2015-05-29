@@ -1,8 +1,12 @@
+<div class="node-info">
+    <!-- TODO при наличии других статусов: динамическое обновление сообщения о статусе -->
+    <div class="node-info-entry node-status">${_trc("в отчете", "объект в отчете")}</div>
+</div>
 <div class="body" ng-class="{'liquidate': node._liquidate, 'liquidate-intermediate': node._liquidate.state.intermediate}">
     <div ng-if="node._type === 'COMPANY'">
         <div class="row">
-            <div class="span6 node-header" data-node-id="{{node._id}}">{{node.nameshortsort || node.namesort}}</div>
-            <div class="align-right" ng-show="node.founded_dt">${_tr("основано")} {{node.founded_dt | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
+            <div class="span6 node-header" data-node-id="{{node._id}}"><span ng-click="nodeHeaderClick($event)">{{node.nameshortsort || node.namesort}}</span></div>
+            <div class="node-header-small align-right" ng-show="node.founded_dt">${_tr("основано")} {{node.founded_dt | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
         </div>
         <div class="row node-entry reg-state" ng-show="node._reg.state">
             <div class="span6">{{node._reg.state.type}}</div>
@@ -14,37 +18,36 @@
         </div>
         <div class="node-entry" ng-show="node.name_diff">{{node.namesort}}</div>
         <div class="node-entry">{{node | OKVED}}</div>
-        <div class="node-entry" ng-show="node.chief_name"><a class="action" ng-click="relationsClick('parents', 'EXECUTIVE_INDIVIDUAL')"><i class="icon i-user small {{node.chief_gender}}"></i> {{node.chief_name}}</a></div>
-        <div class="node-entry" ng-show="node.addresssort"><a class="action" ng-click="relationsClick('parents', 'ADDRESS')"><i class="icon i-map-marker small"></i> {{node.addresssort}}</a></div>
+        <div class="node-entry" ng-show="node.chief_name"><a class="action" ng-click="actions.relationsClick('parents', 'EXECUTIVE_INDIVIDUAL', node, $event)"><i class="icon i-user small {{node.chief_gender}}"></i> {{node.chief_name}}</a></div>
+        <div class="node-entry" ng-show="node.addresssort"><a class="action" ng-click="actions.relationsClick('parents', 'ADDRESS', node, $event)"><i class="icon i-map-marker small"></i> {{node.addresssort}}</a></div>
         <ul class="inline">
             <li ng-show="node.ogrn"><span class="value-label">${_tr("ОГРН")}</span> {{node.ogrn}}</li>
             <li ng-show="node.inn"><span class="value-label">${_tr("ИНН")}</span> {{node.inn}}</li>
             <li ng-show="node.okpo"><span class="value-label">${_tr("ОКПО")}</span> {{node.okpo}}</li>
         </ul>
-        <div class="node-entry" ng-show="node | isBalance">${_tr("Финансовая отчётность")}: {{node | balanceByPeriod}}</div>
-        <div class="node-entry" ng-show="user.isAuthenticated() && (node | isLastSalesVolume)">${_tr("Объём продаж за последний год")}: {{node | lastSalesVolume | number:0}}&nbsp;${_tr("тыс. руб.")}</div>
-        <div class="node-entry balance-forms" ng-show="node | isBalance">${_tr("Формы отчетности за последний год")}: {{node | balanceForms}}</div>
+        <div class="node-entry" ng-show="user.isAuthenticated() && (node | isLastSalesVolume)"><i class="icon i-coins-2 small"></i> {{node | lastSalesVolume | number:0}}&nbsp;${_tr("тыс. руб.")} <span class="value-label">— ${_tr("объём продаж за последний год")}</span></div>
+        <div class="node-entry balance-forms" ng-show="node | isBalance">${_tr("Финансовая отчётность")}: {{node | balanceByPeriod}}, ${_tr("формы за последний год")}: {{node | balanceForms}}</div>
         <div class="node-entry okfs" ng-show="node.okfscode && node.okfscode !== 16">{{node.okfs_text}}</div>
     </div>
 
     <div ng-if="node._type === 'INDIVIDUAL'">
-        <div class="node-header" data-node-id="{{node._id}}">{{node.name}}</div>
+        <div class="node-header" data-node-id="{{node._id}}"><span ng-click="nodeHeaderClick($event)">{{node.name}}</span></div>
     </div>
 
     <div ng-if="node._type === 'ADDRESS'">
-        <div class="node-header" data-node-id="{{node._id}}">{{node.value}}</div>
+        <div class="node-header" data-node-id="{{node._id}}"><span ng-click="nodeHeaderClick($event)">{{node.value}}</span></div>
     </div>
 
     <div ng-if="node._type === 'PHONE'">
-        <div class="node-header" data-node-id="{{node._id}}">{{node.value}}</div>
+        <div class="node-header" data-node-id="{{node._id}}"><span ng-click="nodeHeaderClick($event)">{{node.value}}</span></div>
     </div>
 
     <div ng-if="node._type === 'PURCHASE'">
         <div class="row">
-            <div class="span7 node-header" data-node-id="{{node._id}}">{{node.form}}</div>
-            <div class="align-right" ng-show="node.date">{{node.date | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
+            <div class="span7 node-header" data-node-id="{{node._id}}"><span ng-click="nodeHeaderClick($event)">{{node.form}}</span></div>
+            <div class="node-header-small align-right" ng-show="node.date">{{node.date | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
         </div>
-        <div class="row">
+        <div class="row node-content">
             <div class="span8">
                 <div class="node-entry" ng-show="node.total_price">{{node.total_price | number:0}} {{_tr(node.currency)}}</div>
                 <div class="node-entry">{{node.name}}</div>

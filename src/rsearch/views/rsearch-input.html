@@ -1,4 +1,4 @@
 <div class="input-append">
-    <input class="span4" type="text" placeholder='${_tr("ИНН, ОГРН, наименование, адрес или ФИО")}' ng-model="text">
+    <input class="span4" type="text" placeholder='${_tr("ИНН, ОГРН, наименование, адрес или ФИО")}' ng-model="text" ng-focus="searchInputFocus()" ng-blur="searchInputBlur()">
     <button class="btn flat search-btn" type="button" ng-click="searchBtnClick()"><i class="icon i-search"></i><span>${_tr("Найти")}</span></button>
 </div>

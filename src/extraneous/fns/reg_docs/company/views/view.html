@@ -48,7 +48,7 @@
         </table>
         <div class="align-center empty-result muted" ng-show="!search.isNoResult() && search.isEmptyResult() && !search.hasError()">${_tr("Документов для государственной регистрации не найдено")}</div>
         <div class="align-center empty-result" ng-show="search.hasError()">
-            ${_trc("Поиск", "Поиск в ФНС")}
+            ${_trc("Поиск", "Поиск в ФНС")}</br>
             <a class="underline" href="https://service.nalog.ru/uwsfind.do" target="_blank">${_trc("документов для государственной регистрации", "Поиск в ФНС")}</a></br>
             ${_trc("временно недоступен", "Поиск в ФНС")}
         </div>
