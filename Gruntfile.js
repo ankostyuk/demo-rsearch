@@ -9,6 +9,7 @@ _.mixin(_d);
 //
 module.exports = function(grunt) {
     webapp.setBuildMeta({
+        appId: 'rsearch',
         cwd: __dirname,
         name: 'nkb-app',
         rootpath: '/rsearch/'
