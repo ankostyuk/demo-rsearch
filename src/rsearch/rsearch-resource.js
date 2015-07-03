@@ -87,6 +87,10 @@ define(function(require) {'use strict';
                 },
 
                 relations: function(options) {
+                    function buildUrl(relationType) {
+                        return config['relations.url'] + '/' + options.node._id + '/' + relationType + '/' + options.direction;
+                    }
+
                     // var params = _.extend({}, options.filter, options.pageConfig);
 
                     // @Deprecated relation_history
@@ -94,20 +98,76 @@ define(function(require) {'use strict';
                     // TODO Сделать API и нормальный фильтр
                     var params = _.extend({}, (options.filter && options.filter['fake_relations'] ? null : options.filter), options.pageConfig);
 
-                    return npResource.request({
-                        method: 'GET',
-                        url: config['relations.url'] + '/' + options.node._id + '/' + options.relationType + '/' + options.direction,
-                        params: params
-                    }, {
-                        // responseProcess: nodeListProcess
+                    if (_.size(options.relationTypes) === 1) {
+                        return npResource.request({
+                            method: 'GET',
+                            url: buildUrl(options.relationTypes[0]),
+                            params: params
+                        }, {
+                            // responseProcess: nodeListProcess
 
-                        // @Deprecated relation_history
-                        // Временное решение для отладки истории связей
-                        // TODO Сделать API и нормальный фильтр
-                        responseProcess: function(data) {
-                            return nodeListProcess(data, null, options);
+                            // @Deprecated relation_history
+                            // Временное решение для отладки истории связей
+                            // TODO Сделать API и нормальный фильтр
+                            responseProcess: function(data) {
+                                return nodeListProcess(data, null, options);
+                            }
+                        }, options);
+                    }
+
+                    // joint relations
+                    var httpConfigs = {},
+                        request;
+
+                    _.each(options.relationTypes, function(relationType){
+                        httpConfigs[relationType] = {
+                            method: 'GET',
+                            url: buildUrl(relationType),
+                            params: params
+                        };
+                    });
+
+                    function merge(requests) {
+                        var data = {
+                            pageNumber: 1,
+                            pageCount: 0,
+                            total: 0,
+                            list: [],
+                            info: {}, // TODO merge info
+                            firstNumber: null,
+                            lastNumber: null,
+                            pageSize: null
+                        };
+
+                        _.each(options.relationTypes, function(relationType){
+                            var responseData = requests[relationType].response.data;
+
+                            nodeListProcess(responseData, options.nodeIterator);
+
+                            data.total += responseData.total;
+
+                            data.list.push({
+                                key: relationType,
+                                data: responseData
+                            });
+                        });
+
+                        return data;
+                    }
+
+                    return npResource.multiRequest(httpConfigs, null, _.extend({}, options, {
+                        success: function(requests){
+                            if (_.isFunction(options.success)) {
+                                var data = merge(requests);
+                                options.success(data, null);
+                            }
+                        },
+                        error: function(requests){
+                            if (_.isFunction(options.error)) {
+                                options.error(null, null);
+                            }
                         }
-                    }, options);
+                    }));
                 },
 
                 kinsmen: function(options) {

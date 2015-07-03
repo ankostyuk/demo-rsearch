@@ -31,6 +31,7 @@ define(function(require) {'use strict';
         'np-rsearch-node-relations-header':         require('text!./views/rsearch-node-relations-header.html'),
         'np-rsearch-navigation-breadcrumb':         require('text!./views/rsearch-navigation-breadcrumb.html'),
         'np-rsearch-node-list':                     require('text!./views/rsearch-node-list.html'),
+        'np-rsearch-node-plain-list':               require('text!./views/rsearch-node-plain-list.html'),
         'np-rsearch-node-traces':                   require('text!./views/rsearch-node-traces.html'),
         'np-rsearch-user-product-limits-info':      require('text!./views/rsearch-user-product-limits-info.html'),
         'np-rsearch-autokad-info':                  require('text!./views/rsearch-autokad-info.html'),
@@ -149,6 +150,18 @@ define(function(require) {'use strict';
             };
         }])
         //
+        .directive('npRsearchNodePlainList', [function($) {
+            return {
+                restrict: 'A',
+                scope: {
+                    nodeList: '=npRsearchNodePlainList',
+                    showItemNumber: '=npRsearchNodePlainListShowItemNumber',
+                    actions: '=npRsearchNodePlainListActions'
+                },
+                template: templates['np-rsearch-node-plain-list']
+            };
+        }])
+        //
         .directive('npRsearchUserProductLimitsInfo', ['$rootScope', function($rootScope) {
             return {
                 restrict: 'A',
@@ -246,9 +259,10 @@ define(function(require) {'use strict';
 
                     _.extend(view, {
                         type: 'NODE_LIST',
-                        reset: function(nodeList, noMore, pageHandler) {
+                        reset: function(nodeList, noMore, pageHandler, isJointLists) {
                             scope.nodeList = nodeList;
                             scope.targetInfo = null;
+                            scope.isJointLists = isJointLists;
 
                             internalDisabled = false;
                             noNextPage = noMore;
@@ -298,6 +312,7 @@ define(function(require) {'use strict';
                     _.extend(scope, {
                         nodeList: null,
                         targetInfo: null,
+                        isJointLists: null,
                         scrollContainer: proxy.getScrollContainer(),
                         actions: {
                             relationsClick: function(direction, relationType, node, e) {
@@ -320,7 +335,7 @@ define(function(require) {'use strict';
                             },
                             isDisabled: isDisabled
                         }
-                    });
+                    }, i18n.translateFuncs);
 
                     function isDisabled() {
                         return internalDisabled || noNextPage || !nextPageHandler;
