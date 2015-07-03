@@ -156,6 +156,7 @@ define(function(require) {'use strict';
                 scope: {
                     nodeList: '=npRsearchNodePlainList',
                     showItemNumber: '=npRsearchNodePlainListShowItemNumber',
+                    targetInfo: '=npRsearchNodePlainListTargetInfo',
                     actions: '=npRsearchNodePlainListActions'
                 },
                 template: templates['np-rsearch-node-plain-list']

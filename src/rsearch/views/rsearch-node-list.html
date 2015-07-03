@@ -1,11 +1,11 @@
 <div ng-if="!isJointLists" infinite-scroll="pager.nextPage()" infinite-scroll-disabled="pager.isDisabled()" infinite-scroll-distance="0" infinite-scroll-container="scrollContainer">
-    <div np-rsearch-node-plain-list="nodeList" np-rsearch-node-plain-list-show-item-number="showItemNumber" np-rsearch-node-plain-list-actions="actions"></div>
+    <div np-rsearch-node-plain-list="nodeList" np-rsearch-node-plain-list-show-item-number="showItemNumber" np-rsearch-node-plain-list-target-info="targetInfo" np-rsearch-node-plain-list-actions="actions"></div>
 </div>
 <div ng-if="isJointLists">
     <div ng-repeat="list in nodeList track by $index">
         <div class="node-list-header">
             <np-pluralize count="list.data.total" when="$eval(_tr('NG_PLURALIZE::RELATION_' + list.key))"></np-pluralize>
         </div>
-        <div np-rsearch-node-plain-list="list.data.list" np-rsearch-node-plain-list-show-item-number="showItemNumber && list.data.total > 1" np-rsearch-node-plain-list-actions="actions"></div>
+        <div np-rsearch-node-plain-list="list.data.list" np-rsearch-node-plain-list-show-item-number="showItemNumber && list.data.total > 1" np-rsearch-node-plain-list-target-info="targetInfo" np-rsearch-node-plain-list-actions="actions"></div>
     </div>
 </div>
