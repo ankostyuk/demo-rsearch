@@ -774,6 +774,8 @@ define(function(require) {'use strict';
                             showMessage('FILTERS_RESULT_EMPTY');
                         }
 
+                        var isJointLists = npRsearchMetaHelper.getRelationTypesByMergedType(byRelations.relationType);
+
                         nodeListView.showItemNumber(byRelations.result && byRelations.result.total > 1);
 
                         nodeListView.reset(byRelations.nodeList, noMore(byRelations.result), function(callback){
@@ -790,7 +792,7 @@ define(function(require) {'use strict';
                                     done();
                                 }
                             });
-                        });
+                        }, isJointLists);
 
                         nodeListView.setTargetInfo(getLastTargetInfo());
 
@@ -829,10 +831,12 @@ define(function(require) {'use strict';
                                 _.extend(filter, f.condition);
                             });
 
+                            var relationTypes = npRsearchMetaHelper.getRelationTypesByMergedType(byRelations.relationType) || [byRelations.relationType];
+
                             byRelations.request = npRsearchResource.relations({
                                 node: byRelations.node,
                                 direction: byRelations.direction,
-                                relationType: byRelations.relationType,
+                                relationTypes: relationTypes,
                                 pageConfig: byRelations.pageConfig,
                                 filter: filter,
                                 previousRequest: byRelations.request,

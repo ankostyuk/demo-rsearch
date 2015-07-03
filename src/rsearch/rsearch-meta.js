@@ -39,7 +39,12 @@ define(function(require) {'use strict';
                     searchResultPriority: 0
                 }
             },
-            relationTypes: {}
+
+            relationTypes: {},
+
+            mergedRelationTypes: {
+                'FOUNDER': ['FOUNDER_INDIVIDUAL', 'FOUNDER_COMPANY']
+            }
         })
         //
         .factory('npRsearchMetaHelper', ['$log', '$q', '$rootScope', 'appConfig', 'npRsearchMeta', 'npRsearchResource', function($log, $q, $rootScope, appConfig, npRsearchMeta, npRsearchResource){
@@ -254,6 +259,10 @@ define(function(require) {'use strict';
                             }
                         };
                     }
+                },
+
+                getRelationTypesByMergedType: function(mergedType) {
+                    return npRsearchMeta.mergedRelationTypes[mergedType];
                 },
 
                 buildRelationMap: function(node) {

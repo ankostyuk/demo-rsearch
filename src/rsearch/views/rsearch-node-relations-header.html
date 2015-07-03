@@ -1,4 +1,6 @@
 <span ng-if="relationsData.node._type === 'COMPANY'">
+    <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'FOUNDER'"><np-pluralize count="relationsData.node._info.in['FOUNDER_INDIVIDUAL'] + relationsData.node._info.in['FOUNDER_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_FOUNDER")}"></np-pluralize></span>
+
     <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'FOUNDER_INDIVIDUAL'"><np-pluralize count="relationsData.node._info.in['FOUNDER_INDIVIDUAL']" when="::${_tr("NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL")}"></np-pluralize></span>
     <span ng-show="relationsData.direction === 'parents' && relationsData.relationType === 'FOUNDER_COMPANY'"><np-pluralize count="relationsData.node._info.in['FOUNDER_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_FOUNDER_COMPANY")}"></np-pluralize></span>
     <span ng-show="relationsData.direction === 'children' && relationsData.relationType === 'FOUNDER_COMPANY'"><np-pluralize count="relationsData.node._info.out['FOUNDER_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY")}"></np-pluralize></span>
