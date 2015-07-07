@@ -365,7 +365,7 @@ define(function(require) {'use strict';
             return metaHelper;
         }])
         //
-        .filter('targetRelationsInfo', ['$log', '$filter', 'appConfig', function($log, $filter, appConfig){
+        .filter('targetRelationsInfo', ['$log', '$filter', 'appConfig', 'nkbScreenHelper', function($log, $filter, appConfig, nkbScreenHelper){
             // COMPANY-COMPANY
             //      FOUNDER_COMPANY
             //          <доля %>
@@ -530,9 +530,17 @@ define(function(require) {'use strict';
 
                     if (relation.sharePercent || relation.shareAmount) {
                         return _trc("доля", "Доля в учреждении компании") + nbsp +
-                            (relation.sharePercent ? $filter('share')(relation.sharePercent, 2) + '%' : '') +
+                            (relation.sharePercent ?
+                                (nkbScreenHelper.isScreen(relation.sharePercent) ?
+                                    nkbScreenHelper.screen(relation.sharePercent) :
+                                    $filter('share')(relation.sharePercent, 2)
+                                ) + '%' : '') +
                             (relation.sharePercent && relation.shareAmount ? nbsp + nbsp : '') +
-                            (relation.shareAmount ? $filter('number')(relation.shareAmount) + nbsp + _tr("руб.") : '') +
+                            (relation.shareAmount ?
+                                (nkbScreenHelper.isScreen(relation.shareAmount) ?
+                                    nkbScreenHelper.screen(relation.shareAmount) :
+                                    $filter('number')(relation.shareAmount)
+                                ) + nbsp + _tr("руб.") : '') +
                             sourceText;
                     }
 
@@ -574,7 +582,9 @@ define(function(require) {'use strict';
 
                 function getExecutiveText(relation) {
                     if (relation.position) {
-                        return relation.position;
+                        return nkbScreenHelper.isScreen(relation.position) ?
+                                nkbScreenHelper.screen(relation.position) :
+                                relation.position;
                     }
 
                     return !isTargetRelation(relation) || anyway ? _tr("руководитель") : '';
@@ -695,7 +705,9 @@ define(function(require) {'use strict';
 
                     return dash + _tr(relation._source) +
                         nbsp + _trc("от", "от такой-то даты") + nbsp +
-                        $filter('amDateFormat')(relation._actual, _trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/"));
+                        (nkbScreenHelper.isScreen(relation._actual) ?
+                            nkbScreenHelper.screen(relation._actual) :
+                            $filter('amDateFormat')(relation._actual, _trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")));
                 }
 
                 function buildSourceText(relation) {
@@ -703,7 +715,7 @@ define(function(require) {'use strict';
                 }
 
                 function getInnText(inn) {
-                    return _tr("ИНН") + nbsp + inn;
+                    return _tr("ИНН") + nbsp + (nkbScreenHelper.isScreen(inn) ? nkbScreenHelper.screen(inn) : inn);
                 }
 
                 var relations   = data.relationInfo.relationMap.byNodes && data.relationInfo.relationMap.byNodes[node.__uid] && data.relationInfo.relationMap.byNodes[node.__uid][data.relationInfo.direction],
