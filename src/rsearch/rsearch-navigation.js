@@ -1190,6 +1190,7 @@ define(function(require) {'use strict';
                         relationsInnFilterScope.toggle(false);
                         hideAffiliatedCauseFilters();
                         hideRelationDateFilters();
+                        hideRelationTimelineFilters();
                     }
 
                     function initRelationsFilters(byRelations) {
@@ -1248,12 +1249,12 @@ define(function(require) {'use strict';
                             // Временное решение для отладки истории связей
                             // TODO Сделать API и нормальный фильтр
                             var relationDateFilter = {
-                                values: _.get(byRelations, ['relationMap', 'byRelations', byRelations.relationType, byRelations.direction, 'byActual']),
+                                values: _.get(byRelations, ['relationMap', 'byRelations', byRelations.relationType, byRelations.direction, 'byDate']),
                                 value: null,
                                 total: total,
                                 callback: function(value) {
-                                    var actualData  = value && relationDateFilter.values[value],
-                                        relations   = actualData && actualData.relations;
+                                    var byDate      = value && relationDateFilter.values[value],
+                                        relations   = byDate && byDate.relations;
 
                                     relationDateFilter.value = value;
                                     relationDateFilter.condition = {
@@ -1266,11 +1267,47 @@ define(function(require) {'use strict';
                                 }
                             };
 
+                            // @Deprecated relation_history
+                            // Временное решение для отладки истории связей
+                            // TODO Сделать API и нормальный фильтр
+                            var relationTimelineFilter = {
+                                values: _.get(byRelations, ['relationMap', 'byRelations', byRelations.relationType, byRelations.direction, 'byDate']),
+                                value: null,
+                                total: total,
+                                callback: function(values, sortedPairs) {
+                                    var fromIndex   = getIndexByDate(values[0]),
+                                        toIndex     = getIndexByDate(values[1]),
+                                        relations   = null;
+
+                                    if (fromIndex > 0 || toIndex < _.size(sortedPairs) - 1) {
+                                        _.each(_.range(fromIndex, toIndex + 1), function(index){
+                                            relations = _.union(relations, sortedPairs[index][1].relations);
+                                        });
+                                    }
+
+                                    relationTimelineFilter.value = values;
+                                    relationTimelineFilter.condition = {
+                                        'fake_relations': relations
+                                    };
+
+                                    function getIndexByDate(date) {
+                                        return _.findIndex(sortedPairs, function(pair){
+                                            return pair[0] === date;
+                                        });
+                                    }
+
+                                    doRelations(byRelations, false, true, {
+                                        relations: relations
+                                    });
+                                }
+                            };
+
                             filters = {
                                 region: regionFilter,
                                 inn: innFilter,
                                 affiliatedCause: affiliatedCauseFilter,
-                                relationDate: relationDateFilter
+                                relationDate: relationDateFilter,
+                                relationTimeline: relationTimelineFilter
                             };
 
                             byRelations.filters = filters;
@@ -1299,6 +1336,7 @@ define(function(require) {'use strict';
                                 }
                             }
 
+                            //
                             if (filters.relationDate.values) {
                                 var relationDateFilterElement   = element.find('.right-bar [np-rsearch-node-relations] .active [np-rsearch-relation-date-filter]'),
                                     relationDateFilterScope     = relationDateFilterElement.isolateScope();
@@ -1308,6 +1346,18 @@ define(function(require) {'use strict';
                                 if (relationDateFilterScope) {
                                     relationDateFilterScope.setData(filters.relationDate);
                                     relationDateFilterScope.toggle(true);
+                                }
+                            }
+                            //
+                            if (filters.relationTimeline.values) {
+                                var relationTimelineFilterElement   = viewsElement.find('[np-rsearch-timeline-filter]'),
+                                    relationTimelineFilterScope     = relationTimelineFilterElement.isolateScope();
+
+                                hideRelationTimelineFilters();
+
+                                if (relationTimelineFilterScope) {
+                                    relationTimelineFilterScope.setData(filters.relationTimeline);
+                                    relationTimelineFilterScope.toggle(true);
                                 }
                             }
                         });
@@ -1321,6 +1371,12 @@ define(function(require) {'use strict';
 
                     function hideRelationDateFilters() {
                         element.find('.right-bar [np-rsearch-node-relations] [np-rsearch-relation-date-filter]').each(function(el){
+                            angular.element(this).isolateScope().toggle(false);
+                        });
+                    }
+
+                    function hideRelationTimelineFilters() {
+                        viewsElement.find('[np-rsearch-timeline-filter]').each(function(el){
                             angular.element(this).isolateScope().toggle(false);
                         });
                     }

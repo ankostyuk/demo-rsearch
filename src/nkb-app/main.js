@@ -38,6 +38,7 @@ root._RESOURCES_CONFIG = {
         'angular':              'external_components/angular/angular',
         'angular-locale_ru':    'external_components/angular-i18n/angular-locale_ru',
         'angular-locale_en':    'external_components/angular-i18n/angular-locale_en',
+        'angular-ui-slider':    'external_components/angular-ui-slider/slider',
         'ng-infinite-scroll':   'external_components/ngInfiniteScroll/ng-infinite-scroll',
 
         'jquery':               'external_components/jquery/jquery',
@@ -86,11 +87,11 @@ root._RESOURCES_CONFIG = {
         location: 'src/rsearch',
         main: 'rsearch'
     },
-    /*
-     * external packages
-     *
-     */
+    // external packages
     {
+        name: 'jquery-ui',
+        location: 'external_components/jquery-ui'
+    }, {
         name: 'lodash',
         location: 'external_components/nullpointer-commons/lodash'
     }, {
@@ -146,6 +147,9 @@ root._RESOURCES_CONFIG = {
     shim: {
         'angular': {
             exports: 'angular'
+        },
+        'angular-ui-slider': {
+            deps: ['angular', 'jquery-ui/slider', 'css!external_components/jquery-ui/theme/slider.css']
         },
         'ng-infinite-scroll': {
             deps: ['angular']

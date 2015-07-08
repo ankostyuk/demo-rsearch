@@ -8,12 +8,15 @@ define(function(require) {'use strict';
     var regionFilterTemplate            = require('text!./views/rsearch-region-filter.html'),
         innFilterTemplate               = require('text!./views/rsearch-inn-filter.html'),
         affiliatedCauseFilterTemplate   = require('text!./views/rsearch-affiliated-cause-filter.html'),
-        relationDateFilterTemplate      = require('text!./views/rsearch-relation-date-filter.html');
+        relationDateFilterTemplate      = require('text!./views/rsearch-relation-date-filter.html'),
+        timelineFilterTemplate          = require('text!./views/rsearch-timeline-filter.html');
 
                           require('jquery');
                           require('lodash');
     var i18n            = require('i18n'),
         angular         = require('angular');
+
+                          require('angular-ui-slider');
 
     //
     function Filter(options) {
@@ -64,7 +67,7 @@ define(function(require) {'use strict';
                     return;
                 }
                 value = v;
-                data.callback(value);
+                data.callback(value, sortedPairs);
             }
         };
     }
@@ -92,13 +95,14 @@ define(function(require) {'use strict';
     }
 
     //
-    return angular.module('np.rsearch-filters', [])
+    return angular.module('np.rsearch-filters', ['ui.slider'])
         //
         .run([function(){
             regionFilterTemplate = i18n.translateTemplate(regionFilterTemplate);
             innFilterTemplate = i18n.translateTemplate(innFilterTemplate);
             affiliatedCauseFilterTemplate = i18n.translateTemplate(affiliatedCauseFilterTemplate);
             relationDateFilterTemplate = i18n.translateTemplate(relationDateFilterTemplate);
+            timelineFilterTemplate = i18n.translateTemplate(timelineFilterTemplate);
         }])
         //
         .directive('npRsearchRegionFilter', ['$log', '$rootScope', function($log, $rootScope){
@@ -182,7 +186,6 @@ define(function(require) {'use strict';
                             filter.toggle(show);
                         },
                         setData: function(data) {
-                            $log.info('npRsearchAffiliatedCauseFilter::setData...', data);
                             filter.setData(data, function(pair){
                                 var causeMeta = causesMeta[pair[0]];
                                 return causeMeta ? causeMeta.order : null;
@@ -215,12 +218,77 @@ define(function(require) {'use strict';
                         },
                         setData: function(data) {
                             filter.setData(data, function(pair){
-                                var actualData = pair[1];
-                                return -actualData.actual;
+                                var byDate = pair[1];
+                                return -byDate.date;
                             });
                         },
                         filter: filter
                     }, i18n.translateFuncs);
+                }
+            };
+        }])
+        //
+        .directive('npRsearchTimelineFilter', ['$log', '$rootScope', function($log, $rootScope){
+            return {
+                restrict: 'A',
+                template: timelineFilterTemplate,
+                scope: {},
+                link: function(scope, element, attrs) {
+                    var filter = new Filter({
+                        isShow: function(isShow, data, sortedPairs) {
+                            return (isShow && data && _.size(data.values) > 1);
+                        },
+                        isNoFilter: function(data, sortedPairs) {
+                            return false;
+                        }
+                    });
+
+                    _.extend(scope, {
+                        dateIndexes: [0, 0],
+                        slider: {
+                            options: {
+                                range: true,
+                                min: 0,
+                                max: 0,
+                                slide: function(event, ui) {
+                                    var pairs       = filter.getSortedPairs(),
+                                        dateFrom    = pairs[scope.dateIndexes[0]][0],
+                                        dateTo      = pairs[scope.dateIndexes[1]][0];
+
+                                    filter.doFilter([dateFrom, dateTo]);
+                                }
+                            }
+                        },
+                        toggle: function(show) {
+                            filter.toggle(show);
+                        },
+                        setData: function(data) {
+                            filter.setData(data, function(pair){
+                                var byDate = pair[1];
+                                return byDate.date;
+                            });
+
+                            var max         = _.size(data.values) - 1,
+                                dateIndexes = scope.dateIndexes;
+
+                            if (_.size(data.value) === 2) {
+                                dateIndexes[0] = getIndexByDate(data.value[0]);
+                                dateIndexes[1] = getIndexByDate(data.value[1]);
+                            } else {
+                                dateIndexes[0] = 0;
+                                dateIndexes[1] = max;
+                            }
+
+                            scope.slider.options.max = max;
+                        },
+                        filter: filter
+                    }, i18n.translateFuncs);
+
+                    function getIndexByDate(date) {
+                        return _.findIndex(filter.getSortedPairs(), function(pair){
+                            return pair[0] === date;
+                        });
+                    }
                 }
             };
         }]);

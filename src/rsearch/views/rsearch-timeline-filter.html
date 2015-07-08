@@ -1,0 +1,8 @@
+<div class="np-rsearch-filter" ng-show="filter.isShow()">
+    <div ui-slider="slider.options" ng-model="dateIndexes"></div>
+    <div class="dates">
+        <div class="date-label" ng-repeat="p in filter.getSortedPairs() track by $index" style="left: {{100 * $index / slider.options.max}}%; z-index: {{slider.options.max - $index}};">
+            {{p[0] | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}
+        </div>
+    </div>
+</div>

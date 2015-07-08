@@ -302,44 +302,73 @@ define(function(require) {'use strict';
 
                             // byRelations bySources
                             // TODO только для определенных типов связей: для оптимизации по скорости и памяти
-                            var bySources   = relationInfoByRelations[direction]['bySources'] || {},
-                                source      = relation._source;
+                            collectByProperty('bySources', '_source', 'source', true);
 
-                            if (source) {
-                                var sourceData = bySources[source] || {};
-                                // Пока пустой объект: только фиксируем количество источников.
-                                bySources[source] = sourceData;
-                            }
-
-                            relationInfoByRelations[direction]['bySources'] = bySources;
-
-                            // byRelations byActual
+                            // byRelations byDate
                             // <<< @Deprecated relation_history
                             // Временное решение для отладки истории связей
                             // TODO Сделать API и нормальный фильтр
-                            var byActual    = relationInfoByRelations[direction]['byActual'] || {},
-                                actual      = relation._actual;
-
-                            if (actual) {
-                                var actualData = byActual[actual] || {
-                                    actual: actual,
-                                    relations: []
-                                };
-
-                                actualData.relations.push(relation);
-
-                                byActual[actual] = actualData;
-                            }
-
-                            relationInfoByRelations[direction]['byActual'] = byActual;
+                            // collectByProperty('byDate', '_actual', 'date', false);
+                            // TODO _since?
+                            collectByProperty('byDate', '_since', 'date', false);
                             // >>>
 
+                            //
                             byRelations[relation._type] = relationInfoByRelations;
+
+                            function collectByProperty(name, srcPropertyName, dstPropertyName, isSimple) {
+                                var byName          = relationInfoByRelations[direction][name] || {},
+                                    propertyValue   = relation[srcPropertyName],
+                                    data;
+
+                                if (propertyValue) {
+                                    data = byName[propertyValue];
+
+                                    if (!data) {
+                                        data = {};
+
+                                        if (!isSimple) {
+                                            data[dstPropertyName] = propertyValue;
+                                            data['relations'] = [];
+                                        }
+                                    }
+
+                                    if (data.relations) {
+                                        data.relations.push(relation);
+                                    }
+
+                                    byName[propertyValue] = data;
+                                }
+
+                                relationInfoByRelations[direction][name] = byName;
+                            }
                         });
                     });
 
                     relationMap.byNodes = byNodes;
                     relationMap.byRelations = byRelations;
+
+                    // Слить для npRsearchMeta.mergedRelationTypes
+                    _.each(npRsearchMeta.mergedRelationTypes, function(relationTypes, mergedRelationType){
+                        var object = {},
+                            sourceObject;
+
+                        _.each(relationTypes, function(relationType){
+                            sourceObject = relationMap.byRelations[relationType];
+
+                            if (sourceObject) {
+                                _.merge(object, relationMap.byRelations[relationType], function(a, b){
+                                    if (_.isArray(a)) {
+                                        return a.concat(b);
+                                    }
+                                });
+                            }
+                        });
+
+                        if (!_.isEmpty(object)) {
+                            relationMap.byRelations[mergedRelationType] = object;
+                        }
+                    });
 
                     return relationMap;
                 },
@@ -442,7 +471,8 @@ define(function(require) {'use strict';
                     return null;
                 }
 
-                var nbsp        = ' ',      // &nbsp
+                var space       = ' ',
+                    nbsp        = ' ',      // &nbsp
                     separator   = ', ',     // , + space
                     dash        = ' — ';    // space + dash + &nbsp
 
@@ -559,7 +589,12 @@ define(function(require) {'use strict';
                 }
 
                 function getFounderText(relation) {
-                    var sourceText = buildSourceText(relation);
+                    var sinceText   = getSinceText(relation),
+                        sourceText  = getSourceText(relation);
+
+                    var sText = sinceText && sourceText ?
+                        (dash + sinceText + space + sourceText) :
+                        (sinceText || sourceText ? dash + (sinceText || sourceText) : '');
 
                     if (relation.sharePercent || relation.shareAmount) {
                         return _trc("доля", "Доля в учреждении компании") + nbsp +
@@ -574,10 +609,10 @@ define(function(require) {'use strict';
                                     nkbScreenHelper.screen(relation.shareAmount) :
                                     $filter('number')(relation.shareAmount)
                                 ) + nbsp + _tr("руб.") : '') +
-                            sourceText;
+                            sText;
                     }
 
-                    return !isTargetRelation(relation) || anyway ? _tr("учредитель") + sourceText : '';
+                    return !isTargetRelation(relation) || anyway ? _tr("учредитель") + sText : '';
                 }
 
                 function getAffiliatedText(relation) {
@@ -723,6 +758,17 @@ define(function(require) {'use strict';
                         null;
                 }
 
+                function getSinceText(relation) {
+                    if (!relation._since) {
+                        return '';
+                    }
+
+                    return _trc("с", "с такой-то даты") + nbsp +
+                        (nkbScreenHelper.isScreen(relation._since) ?
+                            nkbScreenHelper.screen(relation._since) :
+                            $filter('amDateFormat')(relation._since, _trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")));
+                }
+
                 function getSourceCount(relation) {
                     return _.size(
                         data.relationInfo.relationMap.byRelations &&
@@ -732,20 +778,21 @@ define(function(require) {'use strict';
                 }
 
                 function getSourceText(relation) {
-                    if (!relation._actual || !relation._source) {
+                    if (!relation._actual || !relation._source || getSourceCount(relation) < 2) {
                         return '';
                     }
 
-                    return dash + _tr(relation._source) +
+                    // return dash + _tr(relation._source) +
+                    return _tr(relation._source) +
                         nbsp + _trc("от", "от такой-то даты") + nbsp +
                         (nkbScreenHelper.isScreen(relation._actual) ?
                             nkbScreenHelper.screen(relation._actual) :
                             $filter('amDateFormat')(relation._actual, _trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")));
                 }
 
-                function buildSourceText(relation) {
-                    return getSourceCount(relation) > 1 ? getSourceText(relation) : '';
-                }
+                // function buildSourceText(relation) {
+                //     return getSourceCount(relation) > 1 ? getSourceText(relation) : '';
+                // }
 
                 function getInnText(inn) {
                     return _tr("ИНН") + nbsp + (nkbScreenHelper.isScreen(inn) ? nkbScreenHelper.screen(inn) : inn);

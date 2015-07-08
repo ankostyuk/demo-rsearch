@@ -142,7 +142,10 @@ define(function(require) {'use strict';
                         _.each(options.relationTypes, function(relationType){
                             var responseData = requests[relationType].response.data;
 
-                            nodeListProcess(responseData, options.nodeIterator);
+                            // @Deprecated relation_history
+                            // Временное решение для отладки истории связей
+                            // TODO Сделать API и нормальный фильтр
+                            nodeListProcess(responseData, null, options);
 
                             data.total += responseData.total;
 
