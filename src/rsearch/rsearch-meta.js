@@ -14,6 +14,13 @@ define(function(require) {'use strict';
         'nkb.filters': require('nkb.filters')
     };
 
+    // <<< @Deprecated relation_history
+    // Временное решение для отладки истории связей
+    var purl            = require('purl'),
+        locationSearch  = purl().param(),
+        _isActual       = locationSearch['_actual'] === 'true';
+    // >>>
+
     return angular.module('np.rsearch-meta', _.pluck(extmodules, 'name'))
         //
         .constant('npRsearchMeta', {
@@ -310,7 +317,7 @@ define(function(require) {'use strict';
                             // TODO Сделать API и нормальный фильтр
                             // collectByProperty('byDate', '_actual', 'date', false);
                             // TODO _since?
-                            collectByProperty('byDate', '_since', 'date', false);
+                            collectByProperty('byDate', _isActual ? '_actual' : '_since', 'date', false);
                             // >>>
 
                             //
