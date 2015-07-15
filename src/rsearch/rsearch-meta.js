@@ -18,7 +18,7 @@ define(function(require) {'use strict';
     // Временное решение для отладки истории связей
     var purl            = require('purl'),
         locationSearch  = purl().param(),
-        _isActual       = locationSearch['_actual'] === 'true';
+        _dateProperty   = locationSearch['_since'] === 'true' ? '_since' : '_actual';
     // >>>
 
     return angular.module('np.rsearch-meta', _.pluck(extmodules, 'name'))
@@ -47,7 +47,16 @@ define(function(require) {'use strict';
                 }
             },
 
-            relationTypes: {},
+            relationIdProperties: ['_srcId', '_type', '_dstId'],
+
+            relationTypes: {
+                'FOUNDER_INDIVIDUAL': {
+                    historyProperties: ['shareAmount', 'sharePercent']
+                },
+                'FOUNDER_COMPANY': {
+                    historyProperties: ['shareAmount', 'sharePercent']
+                }
+            },
 
             mergedRelationTypes: {
                 'FOUNDER': ['FOUNDER_INDIVIDUAL', 'FOUNDER_COMPANY']
@@ -125,16 +134,39 @@ define(function(require) {'use strict';
                     return relationTypesMeta;
                 },
 
-                buildNodeUID: function(node){
+                buildNodeUID: function(node) {
                     node.__uid = node.$$hashKey = node.__uid || metaHelper.buildNodeUIDByType(node._id, node._type);
                     return node.__uid;
                 },
 
-                buildNodeUIDByType: function(id, type){
+                buildNodeUIDByType: function(id, type) {
                     return ('node-' + type + '-' + id);
                 },
 
-                buildNodeExtraMeta: function(node){
+                isRelationsEquals: function(relation1, relation2, extraProperties) {
+                    // $log.info('* isRelationsEquals', relation1, relation2, extraProperties);
+
+                    var properties  = npRsearchMeta.relationIdProperties.concat(extraProperties),
+                        equals      = true;
+
+                    // $log.info('> properties', properties);
+
+                    _.each(properties, function(property){
+                        if (!property) {
+                            return;
+                        }
+
+                        equals = (relation1[property] === relation2[property]);
+
+                        return equals;
+                    });
+
+                    // $log.info('> equals', equals);
+
+                    return equals;
+                },
+
+                buildNodeExtraMeta: function(node) {
                     if (!node) {
                         return;
                     }
@@ -273,16 +305,22 @@ define(function(require) {'use strict';
                 },
 
                 buildRelationMap: function(node) {
+                    // $log.warn('* buildRelationMap node', node);
+
                     var relationMap = {},
                         byNodes     = {},
                         byRelations = {};
 
                     _.each(node._relations, function(relation){
+                        // $log.warn('> relation', relation._type, relation);
+
                         var relationType    = relationTypesMeta[relation._type],
                             srcNodeUID      = metaHelper.buildNodeUIDByType(relation._srcId, relationType.sourceNodeType),
                             dstNodeUID      = metaHelper.buildNodeUIDByType(relation._dstId, relationType.destinationNodeType);
 
                         _.each([[srcNodeUID, 'parents'], [dstNodeUID, 'children']], function(conf){
+                            // $log.warn('>> conf', conf);
+
                             var nodeUID     = conf[0],
                                 direction   = conf[1];
 
@@ -297,7 +335,36 @@ define(function(require) {'use strict';
                                 'children': {}
                             };
 
-                            relationInfoByNodes[direction][relation._type] = relation;
+                            // relationInfoByNodes[direction][relation._type] = relation;
+
+                            // <<< @Deprecated relation_history
+                            var byRelationType = relationInfoByNodes[direction][relation._type] || {
+                                'byDates': {}
+                            };
+
+                            var dateProperty    = _dateProperty,
+                                date            = relation[dateProperty],
+                                byDate          = byRelationType['byDates'][date];
+
+                            // ! Возможно замещение
+                            if (byDate) {
+                                $log.warn(
+                                    'Отменена перезапись свойства: relationMap.byNodes[nodeUID][direction][relation._type].byDates[date]...',
+                                    _.sprintf('\nrelationMap.byNodes["%s"]["%s"]["%s"].byDates["%s"]', nodeUID, direction, relation._type, date)
+                                );
+                                $log.warn('...имеется relation', byDate);
+                                $log.warn('...попытка relation', relation);
+                                $log.warn('...объекты', _.isEqual(byDate, relation) ? 'идентичны' : 'различны');
+                            } else {
+                                byRelationType['byDates'][date] = relation;
+                            }
+
+                            if (!byRelationType['byDates']['lastDate'] || byRelationType['byDates']['lastDate'][dateProperty] < date) {
+                                byRelationType['byDates']['lastDate'] = relation;
+                            }
+
+                            relationInfoByNodes[direction][relation._type] = byRelationType;
+                            // >>>
 
                             byNodes[nodeUID] = relationInfoByNodes;
 
@@ -311,13 +378,14 @@ define(function(require) {'use strict';
                             // TODO только для определенных типов связей: для оптимизации по скорости и памяти
                             collectByProperty('bySources', '_source', 'source', true);
 
-                            // byRelations byDate
+                            // byRelations byDates
                             // <<< @Deprecated relation_history
                             // Временное решение для отладки истории связей
                             // TODO Сделать API и нормальный фильтр
-                            // collectByProperty('byDate', '_actual', 'date', false);
+                            // collectByProperty('byDates', '_actual', 'date', false);
                             // TODO _since?
-                            collectByProperty('byDate', _isActual ? '_actual' : '_since', 'date', false);
+                            collectByProperty('byDates', _dateProperty, 'date', false);
+                            // TODO ? нормализоать дату: привести к началу суток, т.к. форматирование даты до суток
                             // >>>
 
                             //
@@ -341,7 +409,14 @@ define(function(require) {'use strict';
                                     }
 
                                     if (data.relations) {
-                                        data.relations.push(relation);
+                                        if (_.find(data.relations, relation)) {
+                                            // TODO убрать, когда не будет дубликатов
+                                            $log.warn('Дубликат связи...');
+                                            $log.warn('...relation', relation);
+                                            $log.warn('...node', node);
+                                        } else {
+                                            data.relations.push(relation);
+                                        }
                                     }
 
                                     byName[propertyValue] = data;
@@ -354,6 +429,48 @@ define(function(require) {'use strict';
 
                     relationMap.byNodes = byNodes;
                     relationMap.byRelations = byRelations;
+
+                    // <<< @Deprecated relation_history
+                    // Схлопнуть простыню по датам
+                    _.each(relationMap.byRelations, function(byRelation, relationType){
+                        _.each(byRelation, function(direction){
+                            var byDates = direction['byDates'];
+
+                            if (!byDates) {
+                                return;
+                            }
+
+                            var sortedByDates = _.sortBy(byDates, 'date'),
+                                nextByDate;
+
+                            _.each(sortedByDates, function(byDate, i){
+                                nextByDate = sortedByDates[i + 1];
+
+                                if (!nextByDate) {
+                                    return;
+                                }
+
+                                var properties = npRsearchMeta.relationIdProperties,
+                                    relations1 = _.sortByAll(byDate.relations, properties),
+                                    relations2 = _.sortByAll(nextByDate.relations, properties);
+
+                                var isEqual = _.isEqual(relations1, relations2, function(v1, v2) {
+                                    if (_.isPlainObject(v1)) {
+                                        return metaHelper.isRelationsEquals(v1, v2, _.get(npRsearchMeta.relationTypes[relationType], 'historyProperties'));
+                                        // return metaHelper.isRelationsEquals(v1, v2);
+                                    }
+                                });
+
+                                if (isEqual) {
+                                    delete byDates[byDate.date];
+                                }
+                            });
+                        });
+                    });
+
+                    // TODO источники после схлопывания простыни по датам?
+                    // или пусть пока так?
+                    // >>>
 
                     // Слить для npRsearchMeta.mergedRelationTypes
                     _.each(npRsearchMeta.mergedRelationTypes, function(relationTypes, mergedRelationType){
@@ -376,6 +493,8 @@ define(function(require) {'use strict';
                             relationMap.byRelations[mergedRelationType] = object;
                         }
                     });
+
+                    // $log.warn('>>> buildRelationMap node', relationMap);
 
                     return relationMap;
                 },
@@ -434,7 +553,7 @@ define(function(require) {'use strict';
             return metaHelper;
         }])
         //
-        .filter('targetRelationsInfo', ['$log', '$filter', 'appConfig', 'nkbScreenHelper', function($log, $filter, appConfig, nkbScreenHelper){
+        .filter('targetRelationsInfo', ['$log', '$filter', 'npRsearchMeta', 'appConfig', 'nkbScreenHelper', function($log, $filter, npRsearchMeta, appConfig, nkbScreenHelper){
             // COMPANY-COMPANY
             //      FOUNDER_COMPANY
             //          <доля %>
@@ -777,11 +896,9 @@ define(function(require) {'use strict';
                 }
 
                 function getSourceCount(relation) {
-                    return _.size(
-                        data.relationInfo.relationMap.byRelations &&
-                        data.relationInfo.relationMap.byRelations[data.relationInfo.relationType] &&
-                        data.relationInfo.relationMap.byRelations[data.relationInfo.relationType][data.relationInfo.direction]['bySources']
-                    );
+                    return _.size(_.get(data.relationInfo.relationMap.byRelations, [
+                        data.relationInfo.relationType, data.relationInfo.direction, 'bySources'
+                    ]));
                 }
 
                 function getSourceText(relation) {
@@ -789,7 +906,6 @@ define(function(require) {'use strict';
                         return '';
                     }
 
-                    // return dash + _tr(relation._source) +
                     return _tr(relation._source) +
                         nbsp + _trc("от", "от такой-то даты") + nbsp +
                         (nkbScreenHelper.isScreen(relation._actual) ?
@@ -797,22 +913,31 @@ define(function(require) {'use strict';
                             $filter('amDateFormat')(relation._actual, _trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")));
                 }
 
-                // function buildSourceText(relation) {
-                //     return getSourceCount(relation) > 1 ? getSourceText(relation) : '';
-                // }
-
                 function getInnText(inn) {
                     return _tr("ИНН") + nbsp + (nkbScreenHelper.isScreen(inn) ? nkbScreenHelper.screen(inn) : inn);
                 }
 
-                var relations   = data.relationInfo.relationMap.byNodes && data.relationInfo.relationMap.byNodes[node.__uid] && data.relationInfo.relationMap.byNodes[node.__uid][data.relationInfo.direction],
-                    list        = [];
+                // var relations   = _.get(data.relationInfo.relationMap.byNodes, [node.__uid, data.relationInfo.direction]),
+                //     list        = [];
+                // _.each(relations, function(relation, type){
+                //     if (SHOW_TYPES[type]) {
+                //         list.push(relation);
+                //     }
+                // });
 
-                _.each(relations, function(relation, type){
+                // <<< @Deprecated relation_history
+                var list = [];
+
+                _.each(_.get(data.relationInfo.relationMap.byNodes, [node.__uid, data.relationInfo.direction]), function(byRelationType, type){
                     if (SHOW_TYPES[type]) {
-                        list.push(relation);
+                        if (data.relationInfo.relationType === type || _.contains(npRsearchMeta.mergedRelationTypes[data.relationInfo.relationType], type)) {
+                            list.push(byRelationType['byDates'][data.relationInfo.date ? data.relationInfo.date : 'lastDate']);
+                        } else {
+                            list.push(byRelationType['byDates']['lastDate']);
+                        }
                     }
                 });
+                // >>>
 
                 var size = _.size(list);
 

@@ -24,7 +24,7 @@ define(function(require) {'use strict';
                 // <<< @Deprecated relation_history
                 // Временное решение для отладки истории связей
                 // TODO Сделать API и нормальный фильтр
-                var fakeRelations = requestOptions && requestOptions.filter && requestOptions.filter['fake_relations'];
+                var fakeRelations = _.get(requestOptions, 'filter.fake_relations');
 
                 if (fakeRelations) {
                     var list = _.filter(data.list, function(node){

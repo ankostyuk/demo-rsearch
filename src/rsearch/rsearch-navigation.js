@@ -986,6 +986,7 @@ define(function(require) {'use strict';
                         return byRelations ? {
                             node: byRelations.node,
                             relationInfo: {
+                                date: _.get(byRelations, 'filters.relationDate.value'), // @Deprecated relation_history
                                 direction: byRelations.direction,
                                 relationType: byRelations.relationType,
                                 relationMap: byRelations.relationMap
@@ -1249,7 +1250,7 @@ define(function(require) {'use strict';
                             // Временное решение для отладки истории связей
                             // TODO Сделать API и нормальный фильтр
                             var relationDateFilter = {
-                                values: _.get(byRelations, ['relationMap', 'byRelations', byRelations.relationType, byRelations.direction, 'byDate']),
+                                values: _.get(byRelations, ['relationMap', 'byRelations', byRelations.relationType, byRelations.direction, 'byDates']),
                                 value: null,
                                 total: total,
                                 callback: function(value) {
@@ -1271,7 +1272,7 @@ define(function(require) {'use strict';
                             // Временное решение для отладки истории связей
                             // TODO Сделать API и нормальный фильтр
                             var relationTimelineFilter = {
-                                values: _.get(byRelations, ['relationMap', 'byRelations', byRelations.relationType, byRelations.direction, 'byDate']),
+                                values: _.get(byRelations, ['relationMap', 'byRelations', byRelations.relationType, byRelations.direction, 'byDates']),
                                 value: null,
                                 total: total,
                                 callback: function(values, sortedPairs) {
