@@ -18,6 +18,13 @@ define(function(require) {'use strict';
 
                           require('angular-ui-slider');
 
+    // <<< @Deprecated relation_history
+    // Временное решение для отладки истории связей
+    var purl                = require('purl'),
+        locationSearch      = purl().param(),
+        _isSinceInterval    = locationSearch['_since_interval'] === 'true';
+    // >>>
+
     //
     function Filter(options) {
         options = options || {};
@@ -220,6 +227,17 @@ define(function(require) {'use strict';
                             filter.setData(data, function(pair){
                                 var byDate = pair[1];
                                 return -byDate.date;
+                            });
+
+
+                            // @Deprecated relation_history
+                            // Временное решение для отладки истории связей
+                            // TODO Сделать API и нормальный фильтр
+                            _.each(filter.getSortedPairs(), function(pair){
+                                var byDate = pair[1];
+                                byDate._max = (_.max(byDate.relations, '_since'))['_since'];
+                                byDate._min = _isSinceInterval ? (_.min(byDate.relations, '_since'))['_since'] : null;
+                                byDate._min = (byDate._min === byDate._max ? null : byDate._min);
                             });
                         },
                         filter: filter
