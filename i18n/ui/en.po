@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: feedback@null-pointer.ru\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: ankostyuk <andrew.kostyuk@gmail.com>\n"
+"Last-Translator: Alexander Yastrebov <yastrebov.alex@gmail.com>\n"
 "Language-Team: NULLPOINTER <feedback@null-pointer.ru>\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "CLDR_PLURAL_FORMS_FORMAT: one{0}other{1}\n"
-"X-Generator: Poedit 1.7.6\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #: ../src/nkb-app/index.html:1
 msgid "API информационной системы"
@@ -20,7 +20,9 @@ msgstr "API"
 
 #: ../src/rsearch/views/rsearch-autokad-info.html:1
 msgid "NG_PLURALIZE::AUTOKAD_CASE_COUNT"
-msgstr "{'0': 'No arbitration cases', 'one': '1 arbitration case', 'other': '{} arbitration cases'}"
+msgstr ""
+"{'0': 'No arbitration cases', 'one': '1 arbitration case', 'other': '{} "
+"arbitration cases'}"
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "NG_PLURALIZE::EGRUL_LIST_MORE"
@@ -28,13 +30,10 @@ msgstr "{'one': 'one more report', 'other': '{} more reports'}"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::FNS_REG_DOC_COUNT"
 msgstr ""
-"{'0': 'Нет документов\n"
-"для государственной регистрации', 'one': '1 документ\n"
-"для государственной регистрации', 'other': '{} документов\n"
-"для государственной регистрации'}"
+"{'0': 'No state registration documents', 'one': '1 state registration "
+"document', 'other': '{} state registration documents'}"
 
 #: ../src/comment/views/comment.html:1
 msgid "NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT"
@@ -156,7 +155,8 @@ msgstr "{'one': '1 shareholder company', 'other': '{} shareholder companies'}"
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL"
-msgstr "{'one': '1 individual shareholder', 'other': '{} individual shareholders'}"
+msgstr ""
+"{'one': '1 individual shareholder', 'other': '{} individual shareholders'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -190,7 +190,6 @@ msgid "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_PARENTS"
 msgstr "{'one': '1 participant person', 'other': '{} participant persons'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_PARTICIPANT_PARENTS"
 msgstr "{'one': '1 participant', 'other': '{} participants'}"
 
@@ -228,9 +227,8 @@ msgid "NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY"
 msgstr "{'one': '1 legal successor', 'other': '{} legal successors'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#, fuzzy
 msgid "NG_PLURALIZE::kinsmen"
-msgstr "{'0': 'Нет однофамильцев', 'one': '1 однофамилец', 'other': '{} однофамильцев'}"
+msgstr "{'0': 'No namesakes', 'one': '1 namesake', 'other': '{} namesakes'}"
 
 #: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
@@ -278,7 +276,7 @@ msgstr "No INN"
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Бенефициары"
-msgstr ""
+msgstr "Beneficiaries"
 
 #: ../src/nkb-app/index.html:1
 msgid "Библиотека"
@@ -305,7 +303,7 @@ msgstr "Online reports"
 msgid ""
 "Будут найдены все возможные цепочки связей\n"
 "до указанного уровня"
-msgstr ""
+msgstr "Will find all possible links up to specified level"
 
 #: ../src/rsearch/views/rsearch-node-history-info.html:1
 msgid "Бывшее наименование"
@@ -316,9 +314,12 @@ msgid "Бывший руководитель"
 msgstr "Former manager"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-msgctxt "Сведения о поданном заявлении. ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
+msgctxt ""
+"Сведения о поданном заявлении. ФНС. Сведения о юридических лицах и "
+"индивидуальных предпринимателях, в отношении которых представлены документы "
+"для государственной регистрации"
 msgid "Вид изменений"
-msgstr ""
+msgstr "Change type"
 
 #: ../src/nkb-app/components/login/views/login-form.html:1
 msgid "Войти"
@@ -335,9 +336,12 @@ msgid "Вход временно недоступен"
 msgstr "Login temporarily unavailable"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-msgctxt "Сведения о представлении документов. ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
+msgctxt ""
+"Сведения о представлении документов. ФНС. Сведения о юридических лицах и "
+"индивидуальных предпринимателях, в отношении которых представлены документы "
+"для государственной регистрации"
 msgid "Входящий номер"
-msgstr ""
+msgstr "Incoming number"
 
 #: ../src/nkb-app/components/login/views/login-form.html:1
 msgid "Выйти"
@@ -376,17 +380,17 @@ msgstr "Add"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 msgid "Документов для государственной регистрации не найдено"
-msgstr ""
+msgstr "State registration documents not found"
 
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
 msgid ""
 "Документы\n"
 "для государственной регистрации"
-msgstr ""
+msgstr "State registration documents"
 
 #: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
 msgid "Документы для государственной регистрации"
-msgstr ""
+msgstr "State registration documents"
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgctxt "Заказ продукта НКБ на странице миниотчета"
@@ -484,9 +488,11 @@ msgid "НАЛПОИНТЕР"
 msgstr "NULLPOINTER"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-msgctxt "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
+msgctxt ""
+"ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в "
+"отношении которых представлены документы для государственной регистрации"
 msgid "Наименование налогового органа"
-msgstr ""
+msgstr "Tax office name"
 
 #: ../src/rsearch/views/rsearch-input.html:1
 msgid "Найти"
@@ -526,18 +532,17 @@ msgid "ОКПО"
 msgstr "OKPO"
 
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
-#, fuzzy
 msgid "Обновить данные из ЕГРЮЛ"
-msgstr "Обновить данные из ЕГРЮЛ"
+msgstr "Update EGRUL data"
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
 msgctxt "Одна единственная цепочка связанных объектов"
 msgid "Одна цепочка"
-msgstr ""
+msgstr "Single connection"
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Однофамильцы"
-msgstr ""
+msgstr "Namesakes"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-navigation.html:1
@@ -574,7 +579,7 @@ msgstr "Search"
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
 msgctxt "Поиск в ФНС"
 msgid "Поиск"
-msgstr ""
+msgstr "Search"
 
 #: ../src/rsearch/views/rsearch-autokad-info.html:1
 msgid "Поиск арбитражных дел..."
@@ -583,21 +588,21 @@ msgstr "Searching..."
 #: ../src/rsearch/views/rsearch-autokad-info.html:1
 msgctxt "Поиск в картотеке арбитражных дел временно недоступен"
 msgid "Поиск в"
-msgstr ""
+msgstr "Search in"
 
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
 msgid ""
 "Поиск документов\n"
 "для государственной регистрации..."
-msgstr ""
+msgstr "Search state registration documents"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 msgid "Поиск документов..."
-msgstr ""
+msgstr "Searching documents..."
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 msgid "Поиск на сайте ФНС"
-msgstr ""
+msgstr "Search tax office site"
 
 #: ../src/nkb-app/index.html:1
 msgctxt "Наименование приложения поиска"
@@ -634,29 +639,37 @@ msgid "Регистрация"
 msgstr "Registration"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-msgctxt "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
+msgctxt ""
+"ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в "
+"отношении которых представлены документы для государственной регистрации"
 msgid "Сведения о поданном заявлении"
-msgstr ""
+msgstr "Details of application"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-msgctxt "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
+msgctxt ""
+"ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в "
+"отношении которых представлены документы для государственной регистрации"
 msgid "Сведения о представлении документов"
-msgstr ""
+msgstr "Details of application documents"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-msgctxt "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
+msgctxt ""
+"ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в "
+"отношении которых представлены документы для государственной регистрации"
 msgid "Сведения о решении"
-msgstr ""
+msgstr "Details of decision"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-msgctxt "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
+msgctxt ""
+"ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в "
+"отношении которых представлены документы для государственной регистрации"
 msgid "Сведения о юридическом лице"
-msgstr ""
+msgstr "Details of company"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Связанные однофамильцы"
-msgstr ""
+msgstr "Connected namesakes"
 
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
@@ -677,9 +690,12 @@ msgid "Сервис комментариев"
 msgstr "Comments"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-msgctxt "Сведения о представлении документов. ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
+msgctxt ""
+"Сведения о представлении документов. ФНС. Сведения о юридических лицах и "
+"индивидуальных предпринимателях, в отношении которых представлены документы "
+"для государственной регистрации"
 msgid "Способ представления"
-msgstr ""
+msgstr "Application type"
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Страница эмитента"
@@ -692,7 +708,7 @@ msgstr "Affiliated network diagram"
 #: ../src/rsearch/views/rsearch-node-traces.html:1
 msgctxt "Уровень (глубина) поиска связанных объектов"
 msgid "Укажите уровень..."
-msgstr ""
+msgstr "Select level..."
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
 msgid "Учредитель — компания"
@@ -705,20 +721,23 @@ msgstr "Founder — person"
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgctxt "Федеральная налоговая служба"
 msgid "ФНС"
-msgstr ""
+msgstr "Federal tax service"
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "Финансовая отчётность"
 msgstr "Financial statements"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-msgctxt "Сведения о поданном заявлении. ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
+msgctxt ""
+"Сведения о поданном заявлении. ФНС. Сведения о юридических лицах и "
+"индивидуальных предпринимателях, в отношении которых представлены документы "
+"для государственной регистрации"
 msgid "Форма заявления"
-msgstr ""
+msgstr "Application form"
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
 msgid "Цепочек связей не найдено"
-msgstr ""
+msgstr "Connections not found"
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "аффилированное лицо"
@@ -726,42 +745,42 @@ msgstr "affiliate"
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "брат"
-msgstr ""
+msgstr "brother"
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
 #: ../src/rsearch/views/rsearch-node-list.html:1
 #: ../src/rsearch/views/rsearch-node-traces.html:1
 msgctxt "объект в отчете"
 msgid "в отчете"
-msgstr ""
+msgstr "in report"
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgctxt "возможно жена, сестра или мать"
 msgid "возможно"
-msgstr ""
+msgstr "possibly"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
 msgctxt "Поиск в ФНС"
 msgid "временно недоступен"
-msgstr ""
+msgstr "temporarily unavailable"
 
 #: ../src/rsearch/views/rsearch-autokad-info.html:1
 msgctxt "Поиск в картотеке арбитражных дел временно недоступен"
 msgid "временно недоступен"
-msgstr ""
+msgstr "temporarily unavailable"
 
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
 msgctxt "Поиск в ФНС"
 msgid ""
 "документов\n"
 "для государственной регистрации"
-msgstr ""
+msgstr "state registration documents"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 msgctxt "Поиск в ФНС"
 msgid "документов для государственной регистрации"
-msgstr ""
+msgstr "state registration documents"
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgctxt "Доля в учреждении компании"
@@ -783,7 +802,7 @@ msgstr "available"
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "дочь"
-msgstr ""
+msgstr "daughter"
 
 #: ../src/nkb-app/components/login/views/login-form.html:1
 #: ../src/rsearch/views/rsearch-user-product-limits-info.html:1
@@ -792,24 +811,23 @@ msgid "ие"
 msgstr "ie"
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
-#, fuzzy
 msgctxt "из такого-то количества"
 msgid "из"
-msgstr "из"
+msgstr "of"
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgctxt "возможно жена, сестра или мать"
 msgid "или"
-msgstr ""
+msgstr "or"
 
 #: ../src/rsearch/views/rsearch-autokad-info.html:1
 msgctxt "Поиск в картотеке арбитражных дел временно недоступен"
 msgid "картотеке арбитражных дел"
-msgstr ""
+msgstr "arbitration cases file"
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "контактное лицо"
-msgstr ""
+msgstr "contact person"
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgctxt "лот в закупке"
@@ -819,12 +837,12 @@ msgstr "lot"
 #: ../src/rsearch/rsearch-meta.js:1
 msgctxt "лот в закупке"
 msgid "лоты"
-msgstr ""
+msgstr "lots"
 
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
 msgctxt "обработка заказа (запроса)"
 msgid "обрабатывается..."
-msgstr ""
+msgstr "processing..."
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "объём продаж за последний год"
@@ -836,19 +854,18 @@ msgstr "Est."
 
 #: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
-#, fuzzy
 msgctxt "от такой-то даты"
 msgid "от"
-msgstr "on"
+msgstr "of"
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "отец"
-msgstr ""
+msgstr "father"
 
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
 msgctxt "актуализация данных"
 msgid "последняя актуализация"
-msgstr ""
+msgstr "last update"
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "руб."
@@ -860,15 +877,15 @@ msgstr "manager"
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "сестра"
-msgstr ""
+msgstr "sister"
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "супруга"
-msgstr ""
+msgstr "wife"
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "сын"
-msgstr ""
+msgstr "son"
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "тыс. руб."
@@ -877,21 +894,20 @@ msgstr "thous. rub."
 #: ../src/rsearch/views/rsearch-node-traces.html:1
 msgctxt "Уровень (глубина) поиска цепочек"
 msgid "уровень"
-msgstr ""
+msgstr "level"
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "учредитель"
 msgstr "founder"
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
-#, fuzzy
 msgid "формы за последний год"
-msgstr "формы за последний год"
+msgstr "last year forms"
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
 msgctxt "цепочка связанных объектов"
 msgid "цепочка"
-msgstr ""
+msgstr "connection"
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "член комиссии"
