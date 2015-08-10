@@ -57,7 +57,7 @@
                                 </ul>
                             </div>
                             <div class="span4 extra-search">
-                                <p ng-show="node.disclosure_type === 'interfax'"><a class="underline with-icon" ng-href="http://disclosure.interfax.ru/portal/files.aspx?id={{node.disclosure_id}}&type=6" target="_blank"><i class="icon large i-document-info"></i> <span class="text">${_tr("Страница эмитента")}</span></a></p>
+                                <p ng-show="node.disclosure_type === 'interfax'"><a class="underline with-icon" ng-href="http://disclosure.interfax.ru/portal/company.aspx?id={{node.disclosure_id}}" target="_blank"><i class="icon large i-document-info"></i> <span class="text">${_tr("Страница эмитента")}</span></a></p>
                                 <p ng-hide="proxy.isLightForm(node)"><a class="underline with-icon" ng-href="http://fssprus.ru/iss/ip/" target="_blank"><i class="icon large i-justice-1"></i> <span class="text">${_tr("Исполнительные производства")}</span></a></p>
                                 <p ng-show="proxy.isLightForm(node)"><a class="action with-icon" ng-click="actions.productClick('ext_history_profile')"><i class="icon large i-document-ok"></i> <span class="text">${_tr("Исторический профиль")}</span></a></p>
                             </div>

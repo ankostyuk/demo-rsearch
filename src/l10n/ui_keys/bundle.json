@@ -146,7 +146,7 @@
     ],
     "PARTICIPANT": [
       null,
-      "участник"
+      "participant"
     ],
     "RUB": [
       null,
@@ -162,35 +162,35 @@
     ],
     "disclosure": [
       null,
-      "Список аффилированных лиц"
+      "List of affiliates"
     ],
     "eaf": [
       null,
-      "Архив ЕГРЮЛ"
+      "EGRUL archive"
     ],
     "egrul": [
       null,
-      "ЕГРЮЛ"
+      "EGRUL"
     ],
     "egrul_individual_executive": [
       null,
-      "ЕГРЮЛ"
+      "EGRUL"
     ],
     "egrul_individual_founder": [
       null,
-      "ЕГРЮЛ"
+      "EGRUL"
     ],
     "purchases": [
       null,
-      "Закупки"
+      "Procurements"
     ],
     "rosstat": [
       null,
-      "Росстат"
+      "Rosstat"
     ],
     "xegrul": [
       null,
-      "ЕГРЮЛ"
+      "EGRUL"
     ]
   }
 }
