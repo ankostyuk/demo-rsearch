@@ -108,7 +108,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npL10n', 'NpRsearchAutokad', 'NpRsearchFnsRegDocsCompany', 'npRsearchNavigationHelper', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npL10n, NpRsearchAutokad, NpRsearchFnsRegDocsCompany, npRsearchNavigationHelper){
+        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npL10n', 'NpRsearchAutokad', 'NpRsearchFedresursBankruptcyCompany', 'NpRsearchFnsRegDocsCompany', 'npRsearchNavigationHelper', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npL10n, NpRsearchAutokad, NpRsearchFedresursBankruptcyCompany, NpRsearchFnsRegDocsCompany, npRsearchNavigationHelper){
             return {
                 restrict: 'A',
                 template: template,
@@ -129,6 +129,9 @@ define(function(require) {'use strict';
 
                     var autokad = new NpRsearchAutokad();
                     nodeFormView.setAutokad(autokad);
+
+                    var fedresursBankruptcy = new NpRsearchFedresursBankruptcyCompany();
+                    nodeFormView.setFedresursBankruptcy(fedresursBankruptcy);
 
                     var fnsRegDocs = new NpRsearchFnsRegDocsCompany();
                     nodeFormView.setFnsRegDocs(fnsRegDocs);
@@ -257,6 +260,7 @@ define(function(require) {'use strict';
                         search.query = query;
 
                         clearAutokad();
+                        clearFedresursBankruptcy();
                         clearFnsRegDocs();
                         nodeTracesView.hide();
                         nodeFormView.hide();
@@ -388,6 +392,7 @@ define(function(require) {'use strict';
                         setSearchResult(nodeType, breadcrumb);
 
                         clearAutokad();
+                        clearFedresursBankruptcy();
                         clearFnsRegDocs();
                         nodeTracesView.hide();
                         nodeFormView.hide();
@@ -489,6 +494,7 @@ define(function(require) {'use strict';
                         nodeListView.clear();
                         nodeTracesView.hide();
                         clearAutokad();
+                        clearFedresursBankruptcy();
                         clearFnsRegDocs();
                         clearNodeRelationsFilter();
                         hideSearchFilters();
@@ -512,6 +518,7 @@ define(function(require) {'use strict';
                         nodeFormView.scrollTop();
 
                         showAutokad(formType, node);
+                        showFedresursBankruptcy(formType, node);
                         showFnsRegDocs(formType, node);
 
                         $rootScope.$emit('np-rsearch-navigation-node-form', node);
@@ -740,6 +747,7 @@ define(function(require) {'use strict';
 
                     function showRelations(node, direction, relationType, key, breadcrumb, noHistory, noCheckAccentedResult) {
                         clearAutokad();
+                        clearFedresursBankruptcy();
                         clearFnsRegDocs();
                         nodeTracesView.hide();
                         nodeFormView.hide();
@@ -1159,6 +1167,12 @@ define(function(require) {'use strict';
                                 doAutokad(nodeRelationsFilter.node);
                             },
 
+                            fedresursBankruptcy: fedresursBankruptcy,
+                            fedresursBankruptcyClick: function() {
+                                clearLastBreadcrumb();
+                                doFedresursBankruptcy(nodeRelationsFilter.node);
+                            },
+
                             fnsRegDocs: fnsRegDocs,
                             fnsRegDocsClick: function() {
                                 clearLastBreadcrumb();
@@ -1175,6 +1189,7 @@ define(function(require) {'use strict';
                         nodeRelationsFilter.node = node;
                         nodeRelationsFilter.active = buildNodeRelationActiveKey(direction, relationType);
                         autokad.setNode(node);
+                        fedresursBankruptcy.setNode(node);
                         fnsRegDocs.setNode(node);
                     }
 
@@ -1647,9 +1662,9 @@ define(function(require) {'use strict';
                     });
 
                     /*
-                    * autokad
-                    *
-                    */
+                     * autokad
+                     *
+                     */
                     $rootScope.$on('np-rsearch-node-form-autokad-click', function(e, node){
                         doAutokad(node);
                     });
@@ -1671,9 +1686,33 @@ define(function(require) {'use strict';
                     }
 
                     /*
-                    * fnsRegDocs
-                    *
-                    */
+                     * fedresursBankruptcy
+                     *
+                     */
+                    $rootScope.$on('np-rsearch-node-form-fedresurs-bankruptcy-click', function(e, node){
+                        doFedresursBankruptcy(node);
+                    });
+
+                    function showFedresursBankruptcy(formType, node) {
+                        if (formType === 'MINIREPORT') {
+                            fedresursBankruptcy.setNode(node);
+                        } else if (formType === 'FEDRESURS_BANKRUPTCY') {
+                            fedresursBankruptcy.showMessages();
+                        }
+                    }
+
+                    function clearFedresursBankruptcy() {
+                        fedresursBankruptcy.clear();
+                    }
+
+                    function doFedresursBankruptcy(node) {
+                        showNodeForm('FEDRESURS_BANKRUPTCY', node);
+                    }
+
+                    /*
+                     * fnsRegDocs
+                     *
+                     */
                     $rootScope.$on('np-rsearch-node-form-fns-reg-docs-click', function(e, node){
                         doFnsRegDocs(node);
                     });
@@ -1707,6 +1746,7 @@ define(function(require) {'use strict';
                         isBreadcrumbs: isBreadcrumbs,
                         nodeRelationsFilter: nodeRelationsFilter,
                         autokad: autokad,
+                        fedresursBankruptcy: fedresursBankruptcy,
                         fnsRegDocs: fnsRegDocs
                     });
 
@@ -1727,6 +1767,7 @@ define(function(require) {'use strict';
                         scope.mode = 'NODE';
 
                         clearAutokad();
+                        clearFedresursBankruptcy();
                         clearFnsRegDocs();
                         nodeTracesView.hide();
                         nodeFormView.hide();

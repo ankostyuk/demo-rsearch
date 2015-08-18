@@ -5,6 +5,8 @@
 
     <a ng-if="breadcrumb.type === 'NODE_FORM' && breadcrumb.data.formType === 'AUTOKAD'" class="action node-form">${_tr("Арбитражные дела")}</a>
 
+    <a ng-if="breadcrumb.type === 'NODE_FORM' && breadcrumb.data.formType === 'FEDRESURS_BANKRUPTCY'" class="action node-form">${_tr("Сообщения о банкротстве")}</a>
+
     <a ng-if="breadcrumb.type === 'NODE_FORM' && breadcrumb.data.formType === 'FNS_REG_DOCS'" class="action node-form">${_tr("Документы для государственной регистрации")}</a>
 
     <a ng-if="breadcrumb.type === 'NODE_RELATIONS'" class="action" np-rsearch-node-relations-header="breadcrumb.data"></a>

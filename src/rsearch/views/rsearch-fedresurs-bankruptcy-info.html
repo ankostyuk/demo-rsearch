@@ -1,0 +1,12 @@
+<span ng-if="fedresursBankruptcy.gettingMessageCount()">
+    <span class="action-info" ng-show="!fedresursBankruptcy.isMessageCountPending() && fedresursBankruptcy.hasError()">
+        ${_trc("Поиск", "Поиск в Fedresurs")}
+        <a class="underline pre" href="http://bankrot.fedresurs.ru/Default.aspx" target="_blank">${_trc("сообщений о банкротстве", "Поиск в Fedresurs")}</a></br>
+        ${_trc("временно недоступен", "Поиск в Fedresurs")}
+    </span>
+    <a class="action" ng-click="fedresursBankruptcyClick()">
+        <np-pluralize class="pre" count="fedresursBankruptcy.getMessageCount()" when="::${_tr("NG_PLURALIZE::FEDRESURS_BANKRUPTCY_MESSAGE_COUNT")}" ng-hide="fedresursBankruptcy.isMessageCountPending() || fedresursBankruptcy.hasError()"></np-pluralize>
+        <span class="animate-pulsed-flash pre" ng-show="fedresursBankruptcy.isMessageCountPending()">${_tr("Поиск сообщений о банкротстве...")}</span>
+    </a>
+</span>
+<a class="action pre" ng-click="fedresursBankruptcyClick()" ng-if="!fedresursBankruptcy.gettingMessageCount()">${_tr("Сообщения о банкротстве")}</a>
