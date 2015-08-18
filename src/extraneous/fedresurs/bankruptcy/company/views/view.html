@@ -1,0 +1,34 @@
+<div class="mask"><div class="message-box"><span class="message">${_tr("Ожидайте...")}</span></div></div>
+<div class="content">
+    <div class="row filters">
+        <h5 class="span7 search-header nowrap">
+            <div ng-hide="search.isEmptyResult()"><np-pluralize count="search.getTotal()" when="::${_tr("NG_PLURALIZE::FEDRESURS_BANKRUPTCY_MESSAGE_COUNT")}"></np-pluralize></div>
+            <div ng-show="search.isEmptyResult()">${_tr("Поиск сообщений о банкротстве...")}</div>
+        </h5>
+        <div class="align-right link-box nowrap">
+            <a class="underline" href="http://bankrot.fedresurs.ru/Default.aspx" target="_blank">${_tr("Поиск на федеральном ресурсе")}</a>
+        </div>
+    </div>
+    <div class="search-result">
+        <table class="table table-striped" ng-hide="search.isEmptyResult()">
+            <thead>
+                <tr>
+                    <th class="col1">${_trc("Дата публикации", "Fedresurs. Сообщения о банкротстве")}</th>
+                    <th class="col2">${_trc("Тип сообщения", "Fedresurs. Сообщения о банкротстве")}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in search.result.messages.list track by $index">
+                    <td>{{_tr(item.date)}}</td>
+                    <td><a class="underline" ng-href="{{item.link}}" target="_blank">{{_tr(item.type)}}</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="align-center empty-result muted" ng-show="!search.isNoResult() && search.isEmptyResult() && !search.hasError()">${_tr("Сообщений о банкротстве не найдено")}</div>
+        <div class="align-center empty-result" ng-show="search.hasError()">
+            ${_trc("Поиск", "Поиск в Fedresurs")}
+            <a class="underline" href="http://bankrot.fedresurs.ru/Default.aspx" target="_blank">${_trc("сообщений о банкротстве", "Поиск в Fedresurs")}</a>
+            ${_trc("временно недоступен", "Поиск в Fedresurs")}
+        </div>
+    </div>
+</div>

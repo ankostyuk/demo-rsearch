@@ -121,6 +121,10 @@ define(function(require) {'use strict';
             gettingCaseCount: false
         })
         //
+        .constant('npRsearchFedresursBankruptcyConfig', {
+            gettingMessageCount: false
+        })
+        //
         .constant('npRsearchFnsRegDocsConfig', {
             gettingDocCount: true
         })

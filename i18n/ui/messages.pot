@@ -31,9 +31,56 @@ msgctxt "Прямой эфир Системы комментариев"
 msgid "Прямой эфир"
 msgstr ""
 
+#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-navigation.html:1
 msgid "Ожидайте..."
+msgstr ""
+
+#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
+msgid "NG_PLURALIZE::FEDRESURS_BANKRUPTCY_MESSAGE_COUNT"
+msgstr ""
+
+#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
+msgid "Поиск сообщений о банкротстве..."
+msgstr ""
+
+#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+msgid "Поиск на федеральном ресурсе"
+msgstr ""
+
+#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+msgctxt "Fedresurs. Сообщения о банкротстве"
+msgid "Дата публикации"
+msgstr ""
+
+#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+msgctxt "Fedresurs. Сообщения о банкротстве"
+msgid "Тип сообщения"
+msgstr ""
+
+#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+msgid "Сообщений о банкротстве не найдено"
+msgstr ""
+
+#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
+msgctxt "Поиск в Fedresurs"
+msgid "Поиск"
+msgstr ""
+
+#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
+msgctxt "Поиск в Fedresurs"
+msgid "сообщений о банкротстве"
+msgstr ""
+
+#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
+msgctxt "Поиск в Fedresurs"
+msgid "временно недоступен"
 msgstr ""
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
@@ -404,6 +451,11 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
 msgctxt "актуализация данных"
 msgid "последняя актуализация"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
+#: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
+msgid "Сообщения о банкротстве"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
