@@ -4,7 +4,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: feedback@null-pointer.ru\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: Alexander Yastrebov <yastrebov.alex@gmail.com>\n"
+"Last-Translator: ankostyuk <andrew.kostyuk@gmail.com>\n"
 "Language-Team: NULLPOINTER <feedback@null-pointer.ru>\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "CLDR_PLURAL_FORMS_FORMAT: one{0}other{1}\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.7.4\n"
 
 #: ../src/nkb-app/index.html:1
 msgid "API информационной системы"
@@ -20,20 +20,22 @@ msgstr "API"
 
 #: ../src/rsearch/views/rsearch-autokad-info.html:1
 msgid "NG_PLURALIZE::AUTOKAD_CASE_COUNT"
-msgstr ""
-"{'0': 'No arbitration cases', 'one': '1 arbitration case', 'other': '{} "
-"arbitration cases'}"
+msgstr "{'0': 'No arbitration cases', 'one': '1 arbitration case', 'other': '{} arbitration cases'}"
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "NG_PLURALIZE::EGRUL_LIST_MORE"
 msgstr "{'one': 'one more report', 'other': '{} more reports'}"
 
+#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
+#, fuzzy
+msgid "NG_PLURALIZE::FEDRESURS_BANKRUPTCY_MESSAGE_COUNT"
+msgstr "{'0': 'Нет сообщений о банкротстве', 'one': '{} сообщение о банкротстве', 'few': '{} сообщения о банкротстве', 'many': '{} сообщений о банкротстве', 'other': '{} сообщений о банкротстве'}"
+
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
 msgid "NG_PLURALIZE::FNS_REG_DOC_COUNT"
-msgstr ""
-"{'0': 'No state registration documents', 'one': '1 state registration "
-"document', 'other': '{} state registration documents'}"
+msgstr "{'0': 'No state registration documents', 'one': '1 state registration document', 'other': '{} state registration documents'}"
 
 #: ../src/comment/views/comment.html:1
 msgid "NG_PLURALIZE::NKBCOMMENT_COMMENT_COUNT"
@@ -155,8 +157,7 @@ msgstr "{'one': '1 shareholder company', 'other': '{} shareholder companies'}"
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL"
-msgstr ""
-"{'one': '1 individual shareholder', 'other': '{} individual shareholders'}"
+msgstr "{'one': '1 individual shareholder', 'other': '{} individual shareholders'}"
 
 #: ../src/rsearch/views/rsearch-node-relations-header.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -314,10 +315,7 @@ msgid "Бывший руководитель"
 msgstr "Former manager"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-msgctxt ""
-"Сведения о поданном заявлении. ФНС. Сведения о юридических лицах и "
-"индивидуальных предпринимателях, в отношении которых представлены документы "
-"для государственной регистрации"
+msgctxt "Сведения о поданном заявлении. ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
 msgid "Вид изменений"
 msgstr "Change type"
 
@@ -336,10 +334,7 @@ msgid "Вход временно недоступен"
 msgstr "Login temporarily unavailable"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-msgctxt ""
-"Сведения о представлении документов. ФНС. Сведения о юридических лицах и "
-"индивидуальных предпринимателях, в отношении которых представлены документы "
-"для государственной регистрации"
+msgctxt "Сведения о представлении документов. ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
 msgid "Входящий номер"
 msgstr "Incoming number"
 
@@ -368,6 +363,11 @@ msgid ""
 msgstr ""
 "EGRUL\n"
 "Report"
+
+#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+msgctxt "Fedresurs. Сообщения о банкротстве"
+msgid "Дата публикации"
+msgstr ""
 
 #: ../src/nkb-app/components/login/views/login-form.html:1
 msgid "Демо-доступ"
@@ -488,9 +488,7 @@ msgid "НАЛПОИНТЕР"
 msgstr "NULLPOINTER"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-msgctxt ""
-"ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в "
-"отношении которых представлены документы для государственной регистрации"
+msgctxt "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
 msgid "Наименование налогового органа"
 msgstr "Tax office name"
 
@@ -544,6 +542,7 @@ msgstr "Single connection"
 msgid "Однофамильцы"
 msgstr "Namesakes"
 
+#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-navigation.html:1
 msgid "Ожидайте..."
@@ -575,6 +574,13 @@ msgstr "Password"
 msgid "Поиск"
 msgstr "Search"
 
+#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
+#, fuzzy
+msgctxt "Поиск в Fedresurs"
+msgid "Поиск"
+msgstr "Search"
+
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
 msgctxt "Поиск в ФНС"
@@ -603,6 +609,16 @@ msgstr "Searching documents..."
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 msgid "Поиск на сайте ФНС"
 msgstr "Search tax office site"
+
+#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+msgid "Поиск на федеральном ресурсе"
+msgstr ""
+
+#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
+#, fuzzy
+msgid "Поиск сообщений о банкротстве..."
+msgstr "Поиск сообщений о банкротстве..."
 
 #: ../src/nkb-app/index.html:1
 msgctxt "Наименование приложения поиска"
@@ -639,30 +655,22 @@ msgid "Регистрация"
 msgstr "Registration"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-msgctxt ""
-"ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в "
-"отношении которых представлены документы для государственной регистрации"
+msgctxt "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
 msgid "Сведения о поданном заявлении"
 msgstr "Details of application"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-msgctxt ""
-"ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в "
-"отношении которых представлены документы для государственной регистрации"
+msgctxt "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
 msgid "Сведения о представлении документов"
 msgstr "Details of application documents"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-msgctxt ""
-"ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в "
-"отношении которых представлены документы для государственной регистрации"
+msgctxt "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
 msgid "Сведения о решении"
 msgstr "Details of decision"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-msgctxt ""
-"ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в "
-"отношении которых представлены документы для государственной регистрации"
+msgctxt "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
 msgid "Сведения о юридическом лице"
 msgstr "Details of company"
 
@@ -689,11 +697,19 @@ msgctxt "Продукты НКБ на главной странице"
 msgid "Сервис комментариев"
 msgstr "Comments"
 
+#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#, fuzzy
+msgid "Сообщений о банкротстве не найдено"
+msgstr "Сообщений о банкротстве не найдено"
+
+#: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
+#: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
+#, fuzzy
+msgid "Сообщения о банкротстве"
+msgstr "Сообщения о банкротстве"
+
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-msgctxt ""
-"Сведения о представлении документов. ФНС. Сведения о юридических лицах и "
-"индивидуальных предпринимателях, в отношении которых представлены документы "
-"для государственной регистрации"
+msgctxt "Сведения о представлении документов. ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
 msgid "Способ представления"
 msgstr "Application type"
 
@@ -704,6 +720,11 @@ msgstr "Issuer page"
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Схема аффилированных лиц"
 msgstr "Affiliated network diagram"
+
+#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+msgctxt "Fedresurs. Сообщения о банкротстве"
+msgid "Тип сообщения"
+msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
 msgctxt "Уровень (глубина) поиска связанных объектов"
@@ -728,10 +749,7 @@ msgid "Финансовая отчётность"
 msgstr "Financial statements"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
-msgctxt ""
-"Сведения о поданном заявлении. ФНС. Сведения о юридических лицах и "
-"индивидуальных предпринимателях, в отношении которых представлены документы "
-"для государственной регистрации"
+msgctxt "Сведения о поданном заявлении. ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
 msgid "Форма заявления"
 msgstr "Application form"
 
@@ -758,6 +776,13 @@ msgstr "in report"
 msgctxt "возможно жена, сестра или мать"
 msgid "возможно"
 msgstr "possibly"
+
+#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
+#, fuzzy
+msgctxt "Поиск в Fedresurs"
+msgid "временно недоступен"
+msgstr "temporarily unavailable"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
@@ -878,6 +903,12 @@ msgstr "manager"
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "сестра"
 msgstr "sister"
+
+#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
+msgctxt "Поиск в Fedresurs"
+msgid "сообщений о банкротстве"
+msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "супруга"

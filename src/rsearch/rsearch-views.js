@@ -13,30 +13,32 @@ define(function(require) {'use strict';
                           require('ng-infinite-scroll');
 
     var extmodules = {
-        'np.directives':  require('np.directives'),
-        'np.filters':     require('np.filters'),
-        'np.utils':       require('np.utils'),
-        'nkb.user':       require('nkb.user'),
-        'autokad':        require('autokad'),
-        'fnsRegDocs':     require('nkb.extraneous/fns/reg_docs/company/main')
+        'np.directives':        require('np.directives'),
+        'np.filters':           require('np.filters'),
+        'np.utils':             require('np.utils'),
+        'nkb.user':             require('nkb.user'),
+        'autokad':              require('autokad'),
+        'fedresursBankruptcy':  require('nkb.extraneous/fedresurs/bankruptcy/company/main'),
+        'fnsRegDocs':           require('nkb.extraneous/fns/reg_docs/company/main')
     };
 
     //
     var templates = {
-        'np-rsearch-node-simple':                   require('text!./views/rsearch-node-simple.html'),
-        'np-rsearch-node-plain':                    require('text!./views/rsearch-node-plain.html'),
-        'np-rsearch-node-info':                     require('text!./views/rsearch-node-info.html'),
-        'np-rsearch-node-history-info':             require('text!./views/rsearch-node-history-info.html'),
-        'np-rsearch-node-relations':                require('text!./views/rsearch-node-relations.html'),
-        'np-rsearch-node-relations-header':         require('text!./views/rsearch-node-relations-header.html'),
-        'np-rsearch-navigation-breadcrumb':         require('text!./views/rsearch-navigation-breadcrumb.html'),
-        'np-rsearch-node-list':                     require('text!./views/rsearch-node-list.html'),
-        'np-rsearch-node-traces':                   require('text!./views/rsearch-node-traces.html'),
-        'np-rsearch-user-product-limits-info':      require('text!./views/rsearch-user-product-limits-info.html'),
-        'np-rsearch-autokad-info':                  require('text!./views/rsearch-autokad-info.html'),
-        'np-rsearch-fns-reg-docs-info':             require('text!./views/rsearch-fns-reg-docs-info.html'),
-        'np-rsearch-egrul-data-update':             require('text!./views/rsearch-egrul-data-update.html'),
-        'np-rsearch-node-form':                     require('text!./views/rsearch-node-form.html')
+        'np-rsearch-node-simple':               require('text!./views/rsearch-node-simple.html'),
+        'np-rsearch-node-plain':                require('text!./views/rsearch-node-plain.html'),
+        'np-rsearch-node-info':                 require('text!./views/rsearch-node-info.html'),
+        'np-rsearch-node-history-info':         require('text!./views/rsearch-node-history-info.html'),
+        'np-rsearch-node-relations':            require('text!./views/rsearch-node-relations.html'),
+        'np-rsearch-node-relations-header':     require('text!./views/rsearch-node-relations-header.html'),
+        'np-rsearch-navigation-breadcrumb':     require('text!./views/rsearch-navigation-breadcrumb.html'),
+        'np-rsearch-node-list':                 require('text!./views/rsearch-node-list.html'),
+        'np-rsearch-node-traces':               require('text!./views/rsearch-node-traces.html'),
+        'np-rsearch-user-product-limits-info':  require('text!./views/rsearch-user-product-limits-info.html'),
+        'np-rsearch-autokad-info':              require('text!./views/rsearch-autokad-info.html'),
+        'np-rsearch-fedresurs-bankruptcy-info': require('text!./views/rsearch-fedresurs-bankruptcy-info.html'),
+        'np-rsearch-fns-reg-docs-info':         require('text!./views/rsearch-fns-reg-docs-info.html'),
+        'np-rsearch-egrul-data-update':         require('text!./views/rsearch-egrul-data-update.html'),
+        'np-rsearch-node-form':                 require('text!./views/rsearch-node-form.html')
     };
 
     return angular.module('np.rsearch-views', _.pluck(extmodules, 'name').concat(['infinite-scroll']))
@@ -167,6 +169,17 @@ define(function(require) {'use strict';
                     autokadClick: '=npRsearchAutokadClick'
                 },
                 template: templates['np-rsearch-autokad-info']
+            };
+        }])
+        //
+        .directive('npRsearchFedresursBankruptcyInfo', [function() {
+            return {
+                restrict: 'A',
+                scope: {
+                    fedresursBankruptcy: '=npRsearchFedresursBankruptcyInfo',
+                    fedresursBankruptcyClick: '=npRsearchFedresursBankruptcyClick'
+                },
+                template: templates['np-rsearch-fedresurs-bankruptcy-info']
             };
         }])
         //
@@ -559,6 +572,9 @@ define(function(require) {'use strict';
                         setAutokad: function(autokad) {
                             scope.actions.autokad = autokad;
                         },
+                        setFedresursBankruptcy: function(fedresursBankruptcy) {
+                            scope.actions.fedresursBankruptcy = fedresursBankruptcy;
+                        },
                         setFnsRegDocs: function(fnsRegDocs) {
                             scope.actions.fnsRegDocs = fnsRegDocs;
                         },
@@ -585,6 +601,9 @@ define(function(require) {'use strict';
                             },
                             autokadClick: function() {
                                 $rootScope.$emit('np-rsearch-node-form-autokad-click', scope.node);
+                            },
+                            fedresursBankruptcyClick: function() {
+                                $rootScope.$emit('np-rsearch-node-form-fedresurs-bankruptcy-click', scope.node);
                             },
                             fnsRegDocsClick: function() {
                                 $rootScope.$emit('np-rsearch-node-form-fns-reg-docs-click', scope.node);

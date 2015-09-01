@@ -1,5 +1,4 @@
 /**
- * @module rsearch-navigation
  * @desc RequireJS/Angular module
  * @author ankostyuk
  */
