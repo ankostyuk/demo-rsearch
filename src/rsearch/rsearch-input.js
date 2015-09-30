@@ -31,14 +31,21 @@ define(function(require) {'use strict';
 
                     var urlWatch        = _.isString(scope.npRsearchInputUrlWatch) || _.isBoolean(scope.npRsearchInputUrlWatch) ? scope.npRsearchInputUrlWatch : 'q',
                         focusable       = _.isBoolean(scope.npRsearchInputFocusable) ? scope.npRsearchInputFocusable : true,
-                        inputElement    = element.find('input');
+                        inputElement    = element.find('input'),
+                        isKeyboard      = false,
+                        keyboardDelay   = 1000, // 1 секунда, среднее между 4-мя "опрошенными": (2000 + 1000 + 750 + 300 ) / 4 = 1012,5
+                        keyboardPromise = null;
 
-                    inputElement.bind('keyup', function(e){
-                        if (e.keyCode === 13) {
-                            fireRefresh('SEARCH_INPUT');
-                            return false;
-                        }
-                    });
+                    inputElement
+                        .bind('keydown', function(e){
+                            isKeyboard = !(e.keyCode === 13 || e.ctrlKey|| e.metaKey);
+                        })
+                        .bind('keyup', function(e){
+                            if (e.keyCode === 13) {
+                                fireRefresh('SEARCH_INPUT');
+                                return false;
+                            }
+                        });
 
                     //
                     _.extend(scope, {
@@ -73,6 +80,20 @@ define(function(require) {'use strict';
 
                     //
                     function fireRefresh(ui) {
+                        $timeout.cancel(keyboardPromise);
+
+                        if (isKeyboard) {
+                            keyboardPromise = $timeout(function(){
+                                doRefresh(ui);
+                            }, keyboardDelay);
+                        } else {
+                            doRefresh(ui);
+                        }
+
+                        isKeyboard = false;
+                    }
+
+                    function doRefresh(ui) {
                         $rootScope.$emit('np-rsearch-input-refresh', scope.text, scope.initiator, ui);
                         scope.initiator = null;
                     }
