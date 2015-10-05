@@ -273,10 +273,10 @@ define(function(require) {'use strict';
 
                     _.extend(view, {
                         type: 'NODE_LIST',
-                        reset: function(nodeList, noMore, pageHandler, isJointLists) {
+                        reset: function(nodeList, noMore, pageHandler, listProperties) {
                             scope.nodeList = nodeList;
                             scope.targetInfo = null;
-                            scope.isJointLists = isJointLists;
+                            scope.listProperties = listProperties;
 
                             internalDisabled = false;
                             noNextPage = noMore;
@@ -326,7 +326,9 @@ define(function(require) {'use strict';
                     _.extend(scope, {
                         nodeList: null,
                         targetInfo: null,
-                        isJointLists: null,
+                        listProperties: {
+                            isJoint: false
+                        },
                         scrollContainer: proxy.getScrollContainer(),
                         actions: {
                             relationsClick: function(direction, relationType, node, e) {

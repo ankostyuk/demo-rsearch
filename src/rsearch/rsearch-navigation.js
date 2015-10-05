@@ -782,7 +782,9 @@ define(function(require) {'use strict';
                             showMessage('FILTERS_RESULT_EMPTY');
                         }
 
-                        var isJointLists = npRsearchMetaHelper.getRelationTypesByMergedType(byRelations.relationType);
+                        var listProperties = {
+                            isJoint: npRsearchMetaHelper.getRelationTypesByMergedType(byRelations.relationType)
+                        };
 
                         nodeListView.showItemNumber(byRelations.result && byRelations.result.total > 1);
 
@@ -800,7 +802,7 @@ define(function(require) {'use strict';
                                     done();
                                 }
                             });
-                        }, isJointLists);
+                        }, listProperties);
 
                         nodeListView.setTargetInfo(getLastTargetInfo());
 
