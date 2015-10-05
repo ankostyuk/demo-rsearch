@@ -130,6 +130,10 @@ root._RESOURCES_CONFIG = {
         location: 'external_components/nullpointer-commons/angular/resource',
         main: 'resource'
     }, {
+        name: 'template-utils',
+        location: 'external_components/nullpointer-commons/utils/template-utils',
+        main: 'template-utils'
+    }, {
         // TODO перенести в nullpointer-commons/angular
         name: 'np.utils',
         location: 'src/utils',

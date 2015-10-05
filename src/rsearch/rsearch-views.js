@@ -8,7 +8,8 @@ define(function(require) {'use strict';
                           require('jquery');
                           require('lodash');
     var i18n            = require('i18n'),
-        angular         = require('angular');
+        angular         = require('angular'),
+        templateUtils   = require('template-utils');
 
                           require('ng-infinite-scroll');
 
@@ -31,7 +32,6 @@ define(function(require) {'use strict';
         'np-rsearch-node-relations':            require('text!./views/rsearch-node-relations.html'),
         'np-rsearch-node-relations-header':     require('text!./views/rsearch-node-relations-header.html'),
         'np-rsearch-navigation-breadcrumb':     require('text!./views/rsearch-navigation-breadcrumb.html'),
-        'np-rsearch-node-list':                 require('text!./views/rsearch-node-list.html'),
         'np-rsearch-node-plain-list':           require('text!./views/rsearch-node-plain-list.html'),
         'np-rsearch-node-traces':               require('text!./views/rsearch-node-traces.html'),
         'np-rsearch-user-product-limits-info':  require('text!./views/rsearch-user-product-limits-info.html'),
@@ -42,11 +42,24 @@ define(function(require) {'use strict';
         'np-rsearch-node-form':                 require('text!./views/rsearch-node-form.html')
     };
 
+    var combinedTemplates = {
+        'np-rsearch-node-list':                 require('text!./views/rsearch-node-list.html')
+    };
+
     return angular.module('np.rsearch-views', _.pluck(extmodules, 'name').concat(['infinite-scroll']))
         //
         .run([function(){
             _.each(templates, function(template, name){
                 templates[name] = i18n.translateTemplate(template);
+            });
+
+            _.each(combinedTemplates, function(template, name){
+                var templateData    = templateUtils.processTemplate(template),
+                    viewTemplates   = templateData.templates;
+
+                _.each(viewTemplates, function(viewTemplateData, viewName){
+                    templates[viewName] = viewTemplateData.html;
+                });
             });
         }])
         //
