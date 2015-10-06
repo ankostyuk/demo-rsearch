@@ -71,6 +71,9 @@ define(function(require) {'use strict';
                 },
                 'FOUNDER_COMPANY': {
                     'parents': {}
+                },
+                'EXECUTIVE_INDIVIDUAL': {
+                    'parents': {}
                 }
             },
         })
