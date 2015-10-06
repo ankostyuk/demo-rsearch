@@ -185,7 +185,8 @@ define(function(require) {'use strict';
                     nodeList: '=npRsearchNodeJointList',
                     showItemNumber: '=npRsearchNodeJointListShowItemNumber',
                     targetInfo: '=npRsearchNodeJointListTargetInfo',
-                    actions: '=npRsearchNodeJointListActions'
+                    actions: '=npRsearchNodeJointListActions',
+                    showHeaders: '=npRsearchNodeJointListShowHeaders'
                 },
                 template: templates['np-rsearch-node-joint-list'],
                 link: function(scope, element, attrs){
