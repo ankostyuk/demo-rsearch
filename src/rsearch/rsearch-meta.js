@@ -596,7 +596,7 @@ define(function(require) {'use strict';
                             byRelationType.list = list;
                             nodeListMap[relation._type] = byRelationType;
                         });
-                    };
+                    }
 
                     function buildNodeList(target, nodeListMap) {
                         if (_.isEmpty(nodeListMap)) {
@@ -625,7 +625,7 @@ define(function(require) {'use strict';
 
                             target['nodeList'] = nodeList;
                         });
-                    };
+                    }
 
                     function addToNodeMap(list) {
                         _.each(list, function(node){
@@ -634,7 +634,7 @@ define(function(require) {'use strict';
                                 node: node
                             };
                         });
-                    };
+                    }
 
                     // $log.info('buildRelationHistory... actualData', actualData);
                     // $log.info('buildRelationHistory... outdatedData', outdatedData);
