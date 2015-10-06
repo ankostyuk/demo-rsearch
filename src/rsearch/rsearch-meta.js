@@ -519,6 +519,8 @@ define(function(require) {'use strict';
                 },
 
                 addToRelationMap: function(relationMap, srcNode, dstNode, direction, relation) {
+                    // $log.warn('<<< addToRelationMap...', relationMap);
+
                     relationMap.byNodes = relationMap.byNodes || {};
 
                     var byNodes = relationMap.byNodes;
@@ -1058,17 +1060,23 @@ define(function(require) {'use strict';
 
                 // var relations   = _.get(data.relationInfo.relationMap.byNodes, [node.__uid, data.relationInfo.direction]),
                 //     list        = [];
+                //
                 // _.each(relations, function(relation, type){
                 //     if (SHOW_TYPES[type]) {
                 //         list.push(relation);
                 //     }
                 // });
 
-                // <<< @Deprecated relation_history
+                // <<< @Deprecated? relation_history
                 var list = [];
 
                 _.each(_.get(data.relationInfo.relationMap.byNodes, [node.__uid, data.relationInfo.direction]), function(byRelationType, type){
                     if (SHOW_TYPES[type]) {
+                        if (!byRelationType['byDates']) {
+                            list.push(byRelationType);
+                            return;
+                        }
+
                         if (data.relationInfo.relationType === type || _.contains(npRsearchMeta.mergedRelationTypes[data.relationInfo.relationType], type)) {
                             list.push(byRelationType['byDates'][data.relationInfo.date ? data.relationInfo.date : 'lastDate']);
                         } else {
