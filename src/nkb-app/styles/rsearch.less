@@ -357,6 +357,28 @@
     padding-bottom: 5px;
     color: @defaultHeaderLightColor;
 }
+[np-rsearch-node-list] .node-list-history-header {
+    z-index: 1;
+    position: relative;
+    padding: 10px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+[np-rsearch-node-list] .node-list-history-header:before {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    right: 0;
+    height: 1px;
+    background-color: @defaultBorderColor;
+}
+[np-rsearch-node-list] .node-list-history-header .text {
+    padding: 0 6px;
+    color: @defaultHeaderLightColor;
+    background-color: @defaultBackgroundColor;
+}
 [np-rsearch-node-list] .node-list-item {
     position: relative;
 }

@@ -782,8 +782,21 @@ define(function(require) {'use strict';
                             showMessage('FILTERS_RESULT_EMPTY');
                         }
 
+                        var jointRelationTypes  = npRsearchMetaHelper.getRelationTypesByMergedType(byRelations.relationType),
+                            isJoint             = !!jointRelationTypes,
+                            historyMeta         = npRsearchMetaHelper.getHistoryRelationMeta(byRelations.relationType, byRelations.direction);
+
                         var listProperties = {
-                            isJoint: npRsearchMetaHelper.getRelationTypesByMergedType(byRelations.relationType)
+                            isJoint: isJoint,
+                            isHistory: !!historyMeta,
+                            history: npRsearchMetaHelper.buildRelationHistory(historyMeta, {
+                                relationMap: byRelations.relationMap,
+                                relationType: byRelations.relationType,
+                                direction: byRelations.direction,
+                                nodeList: byRelations.nodeList,
+                                // jointRelationTypes: jointRelationTypes,
+                                isJoint: isJoint
+                            })
                         };
 
                         nodeListView.showItemNumber(byRelations.result && byRelations.result.total > 1);

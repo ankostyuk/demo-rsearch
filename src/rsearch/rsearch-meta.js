@@ -60,7 +60,19 @@ define(function(require) {'use strict';
 
             mergedRelationTypes: {
                 'FOUNDER': ['FOUNDER_INDIVIDUAL', 'FOUNDER_COMPANY']
-            }
+            },
+
+            historyRelationTypes: {
+                'FOUNDER': {
+                    'parents': {}
+                },
+                'FOUNDER_INDIVIDUAL': {
+                    'parents': {}
+                },
+                'FOUNDER_COMPANY': {
+                    'parents': {}
+                }
+            },
         })
         //
         .factory('npRsearchMetaHelper', ['$log', '$q', '$rootScope', 'appConfig', 'npRsearchMeta', 'npRsearchResource', function($log, $q, $rootScope, appConfig, npRsearchMeta, npRsearchResource){
@@ -304,6 +316,10 @@ define(function(require) {'use strict';
                     return npRsearchMeta.mergedRelationTypes[mergedType];
                 },
 
+                getHistoryRelationMeta: function(relationType, direction) {
+                    return _.get(npRsearchMeta.historyRelationTypes, [relationType, direction]);
+                },
+
                 buildRelationMap: function(node) {
                     // $log.warn('* buildRelationMap node', node);
 
@@ -507,6 +523,126 @@ define(function(require) {'use strict';
                     byNodes[dstNode.__uid] = byNodes[dstNode.__uid] || {};
                     byNodes[dstNode.__uid][direction] = byNodes[dstNode.__uid][direction] || {};
                     byNodes[dstNode.__uid][direction][relation._type] = relation;
+                },
+
+                buildRelationHistory: function(historyMeta, data) {
+                    if (!historyMeta) {
+                        return null;
+                    }
+
+                    var byDates         = _.get(data.relationMap, ['byRelations', data.relationType, data.direction, 'byDates']),
+                        bySortedDates   = _.sortBy(byDates, 'date'),
+                        byDatesSize     = _.size(bySortedDates),
+                        byActualDate    = _.last(bySortedDates),
+                        nodeMap         = {},
+                        actualData      = {},
+                        outdatedData     = {},
+                        i;
+
+                    // build related node map
+                    if (data.isJoint) {
+                        _.each(data.nodeList, function(list){
+                            addToNodeMap(list.data.list);
+                        });
+                    } else {
+                        addToNodeMap(data.nodeList);
+                    }
+
+                    // actual
+                    var actualNodeListMap = {};
+                    fillNodeListMap(byActualDate, actualNodeListMap);
+                    buildNodeList(actualData, actualNodeListMap);
+
+                    // outdated
+                    // Сортировка по убыванию дат
+                    var historyNodeListMap = {};
+                    for (i = byDatesSize - 2; i >= 0; i--) {
+                        fillNodeListMap(bySortedDates[i], historyNodeListMap);
+                    }
+                    buildNodeList(outdatedData, historyNodeListMap);
+
+                    //
+                    function fillNodeListMap(target, nodeListMap) {
+                        var byRelationType, relationType, nodeUID, nodeData, list;
+
+                        _.each(target.relations, function(relation){
+                            byRelationType = nodeListMap[relation._type] || {};
+                            list = byRelationType.list || [];
+
+                            relationType = relationTypesMeta[relation._type];
+
+                            nodeUID = metaHelper.buildNodeUIDByType(
+                                relation._srcId,
+                                data.direction === 'parents' ? relationType.sourceNodeType : relationType.destinationNodeType
+                            );
+
+                            nodeData = nodeMap[nodeUID];
+
+                            if (nodeData.added) {
+                                // TODO Формирование списка исторических данных по типу связи:
+                                // -------------------------------------------------------
+                                // Доля 50%  5 000 руб. — с 01.02.2014 ЕГРЮЛ от 06.07.2014
+                                // ...
+                                // Доля 10%  1 000 руб. — с 01.02.2013 ЕГРЮЛ от 10.03.2013
+                                // -------------------------------------------------------
+                                // Пока указывается последняя по дате информация
+                            } else {
+                                // Индексы согласно формируемому списку
+                                nodeData.node.__index = _.size(list);
+                                list.push(nodeData.node);
+                                nodeData.added = true;
+                            }
+
+                            byRelationType.list = list;
+                            nodeListMap[relation._type] = byRelationType;
+                        });
+                    };
+
+                    function buildNodeList(target, nodeListMap) {
+                        if (_.isEmpty(nodeListMap)) {
+                            return;
+                        }
+
+                        var nodeList, list, size;
+
+                        _.each(nodeListMap, function(byRelationType, relationType){
+                            list = byRelationType.list;
+                            size = _.size(list);
+
+                            if (!size) {
+                                return;
+                            }
+
+                            nodeList = target['nodeList'] || [];
+
+                            nodeList.push({
+                                data: {
+                                    list: list,
+                                    total: size
+                                },
+                                key: relationType
+                            });
+
+                            target['nodeList'] = nodeList;
+                        });
+                    };
+
+                    function addToNodeMap(list) {
+                        _.each(list, function(node){
+                            nodeMap[node.__uid] = {
+                                added: false,
+                                node: node
+                            };
+                        });
+                    };
+
+                    // $log.info('buildRelationHistory... actualData', actualData);
+                    // $log.info('buildRelationHistory... outdatedData', outdatedData);
+
+                    return {
+                        'actual': _.isEmpty(actualData) ? null : actualData,
+                        'outdated': _.isEmpty(outdatedData) ? null : outdatedData
+                    };
                 },
 
                 buildRelationInfo: function(node, relationType, data) {

@@ -5,18 +5,18 @@
             <li ng-show="node._info.in['FOUNDER_INDIVIDUAL'] && node._info.in['FOUNDER_COMPANY']" ng-class="{active: active === 'parents::FOUNDER'}">
                 <a class="action" ng-click="actions.relationsClick('parents', 'FOUNDER')"><np-pluralize count="node._info.in['FOUNDER_INDIVIDUAL'] + node._info.in['FOUNDER_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_FOUNDER")}"></np-pluralize></a>
                 <!-- @Deprecated -->
-                <div np-rsearch-relation-date-filter></div>
+                <!--<div np-rsearch-relation-date-filter></div>-->
             </li>
 
             <li ng-show="node._info.in['FOUNDER_INDIVIDUAL'] && !node._info.in['FOUNDER_COMPANY']" ng-class="{active: active === 'parents::FOUNDER_INDIVIDUAL'}">
                 <a class="action" ng-click="actions.relationsClick('parents', 'FOUNDER_INDIVIDUAL')"><np-pluralize count="node._info.in['FOUNDER_INDIVIDUAL']" when="::${_tr("NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL")}"></np-pluralize></a>
                 <!-- @Deprecated -->
-                <div np-rsearch-relation-date-filter></div>
+                <!--<div np-rsearch-relation-date-filter></div>-->
             </li>
             <li ng-show="node._info.in['FOUNDER_COMPANY'] && !node._info.in['FOUNDER_INDIVIDUAL']" ng-class="{active: active === 'parents::FOUNDER_COMPANY'}">
                 <a class="action" ng-click="actions.relationsClick('parents', 'FOUNDER_COMPANY')"><np-pluralize count="node._info.in['FOUNDER_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_FOUNDER_COMPANY")}"></np-pluralize></a>
                 <!-- @Deprecated -->
-                <div np-rsearch-relation-date-filter></div>
+                <!--<div np-rsearch-relation-date-filter></div>-->
             </li>
 
             <li ng-show="node._info.out['FOUNDER_COMPANY']" ng-class="{active: active === 'children::FOUNDER_COMPANY'}"><a class="action" ng-click="actions.relationsClick('children', 'FOUNDER_COMPANY')"><np-pluralize count="node._info.out['FOUNDER_COMPANY']" when="::${_tr("NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY")}"></np-pluralize></a></li>
@@ -36,7 +36,8 @@
 
             <li ng-show="node._info.in['EXECUTIVE_INDIVIDUAL']" ng-class="{active: active === 'parents::EXECUTIVE_INDIVIDUAL'}">
                 <a class="action" ng-click="actions.relationsClick('parents', 'EXECUTIVE_INDIVIDUAL')"><np-pluralize count="node._info.in['EXECUTIVE_INDIVIDUAL']" when="::${_tr("NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL")}"></np-pluralize></a>
-                <div np-rsearch-relation-date-filter></div>
+                <!-- @Deprecated -->
+                <!--<div np-rsearch-relation-date-filter></div>-->
             </li>
         </ul>
     </div>

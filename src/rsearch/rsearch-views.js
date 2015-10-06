@@ -178,6 +178,22 @@ define(function(require) {'use strict';
             };
         }])
         //
+        .directive('npRsearchNodeJointList', [function($) {
+            return {
+                restrict: 'A',
+                scope: {
+                    nodeList: '=npRsearchNodeJointList',
+                    showItemNumber: '=npRsearchNodeJointListShowItemNumber',
+                    targetInfo: '=npRsearchNodeJointListTargetInfo',
+                    actions: '=npRsearchNodeJointListActions'
+                },
+                template: templates['np-rsearch-node-joint-list'],
+                link: function(scope, element, attrs){
+                    _.extend(scope, i18n.translateFuncs);
+                }
+            };
+        }])
+        //
         .directive('npRsearchUserProductLimitsInfo', ['$rootScope', function($rootScope) {
             return {
                 restrict: 'A',
@@ -300,6 +316,7 @@ define(function(require) {'use strict';
                         },
                         clear: function() {
                             scope.nodeList = null;
+                            scope.listProperties = null;
 
                             internalDisabled = false;
                             noNextPage = false;
@@ -340,6 +357,7 @@ define(function(require) {'use strict';
                         nodeList: null,
                         targetInfo: null,
                         listProperties: {
+                            isHistory: false,
                             isJoint: false
                         },
                         scrollContainer: proxy.getScrollContainer(),
