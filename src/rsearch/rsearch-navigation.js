@@ -1009,7 +1009,6 @@ define(function(require) {'use strict';
                         return byRelations ? {
                             node: byRelations.node,
                             relationInfo: {
-                                date: _.get(byRelations, 'filters.relationDate.value'), // @Deprecated relation_history
                                 direction: byRelations.direction,
                                 relationType: byRelations.relationType,
                                 relationMap: byRelations.relationMap
@@ -1220,7 +1219,6 @@ define(function(require) {'use strict';
                         relationsRegionFilterScope.toggle(false);
                         relationsInnFilterScope.toggle(false);
                         hideAffiliatedCauseFilters();
-                        hideRelationDateFilters();
                     }
 
                     function initRelationsFilters(byRelations) {
@@ -1275,33 +1273,10 @@ define(function(require) {'use strict';
                                 }
                             };
 
-                            // @Deprecated relation_history
-                            // Временное решение для отладки истории связей
-                            // TODO Сделать API и нормальный фильтр
-                            var relationDateFilter = {
-                                values: _.get(byRelations, ['relationMap', 'byRelations', byRelations.relationType, byRelations.direction, 'byDates']),
-                                value: null,
-                                total: total,
-                                callback: function(value) {
-                                    var byDate      = value && relationDateFilter.values[value],
-                                        relations   = byDate && byDate.relations;
-
-                                    relationDateFilter.value = value;
-                                    relationDateFilter.condition = {
-                                        'fake_relations': relations
-                                    };
-
-                                    doRelations(byRelations, false, true, {
-                                        relations: relations
-                                    });
-                                }
-                            };
-
                             filters = {
                                 region: regionFilter,
                                 inn: innFilter,
-                                affiliatedCause: affiliatedCauseFilter,
-                                relationDate: relationDateFilter
+                                affiliatedCause: affiliatedCauseFilter
                             };
 
                             byRelations.filters = filters;
@@ -1329,30 +1304,11 @@ define(function(require) {'use strict';
                                     affiliatedCauseFilterScope.toggle(true);
                                 }
                             }
-
-                            //
-                            if (filters.relationDate.values) {
-                                var relationDateFilterElement   = element.find('.right-bar [np-rsearch-node-relations] .active [np-rsearch-relation-date-filter]'),
-                                    relationDateFilterScope     = relationDateFilterElement.isolateScope();
-
-                                hideRelationDateFilters();
-
-                                if (relationDateFilterScope) {
-                                    relationDateFilterScope.setData(filters.relationDate);
-                                    relationDateFilterScope.toggle(true);
-                                }
-                            }
                         });
                     }
 
                     function hideAffiliatedCauseFilters() {
                         element.find('.right-bar [np-rsearch-node-relations] [np-rsearch-affiliated-cause-filter]').each(function(el){
-                            angular.element(this).isolateScope().toggle(false);
-                        });
-                    }
-
-                    function hideRelationDateFilters() {
-                        element.find('.right-bar [np-rsearch-node-relations] [np-rsearch-relation-date-filter]').each(function(el){
                             angular.element(this).isolateScope().toggle(false);
                         });
                     }

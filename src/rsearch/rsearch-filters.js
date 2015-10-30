@@ -7,20 +7,12 @@ define(function(require) {'use strict';
 
     var regionFilterTemplate            = require('text!./views/rsearch-region-filter.html'),
         innFilterTemplate               = require('text!./views/rsearch-inn-filter.html'),
-        affiliatedCauseFilterTemplate   = require('text!./views/rsearch-affiliated-cause-filter.html'),
-        relationDateFilterTemplate      = require('text!./views/rsearch-relation-date-filter.html');
+        affiliatedCauseFilterTemplate   = require('text!./views/rsearch-affiliated-cause-filter.html');
 
                           require('jquery');
                           require('lodash');
     var i18n            = require('i18n'),
         angular         = require('angular');
-
-    // <<< @Deprecated relation_history
-    // Временное решение для отладки истории связей
-    var purl                = require('purl'),
-        locationSearch      = purl().param(),
-        _isSinceInterval    = locationSearch['_since_interval'] === 'true';
-    // >>>
 
     //
     function Filter(options) {
@@ -105,7 +97,6 @@ define(function(require) {'use strict';
             regionFilterTemplate = i18n.translateTemplate(regionFilterTemplate);
             innFilterTemplate = i18n.translateTemplate(innFilterTemplate);
             affiliatedCauseFilterTemplate = i18n.translateTemplate(affiliatedCauseFilterTemplate);
-            relationDateFilterTemplate = i18n.translateTemplate(relationDateFilterTemplate);
         }])
         //
         .directive('npRsearchRegionFilter', ['$log', '$rootScope', function($log, $rootScope){
@@ -192,48 +183,6 @@ define(function(require) {'use strict';
                             filter.setData(data, function(pair){
                                 var causeMeta = causesMeta[pair[0]];
                                 return causeMeta ? causeMeta.order : null;
-                            });
-                        },
-                        filter: filter
-                    }, i18n.translateFuncs);
-                }
-            };
-        }])
-        //
-        .directive('npRsearchRelationDateFilter', ['$log', '$rootScope', function($log, $rootScope){
-            return {
-                restrict: 'A',
-                template: relationDateFilterTemplate,
-                scope: {},
-                link: function(scope, element, attrs) {
-                    var filter = new Filter({
-                        isShow: function(isShow, data, sortedPairs) {
-                            return (isShow && data && _.size(data.values) > 1);
-                        },
-                        isNoFilter: function(data, sortedPairs) {
-                            return false;
-                        }
-                    });
-
-                    _.extend(scope, {
-                        toggle: function(show) {
-                            filter.toggle(show);
-                        },
-                        setData: function(data) {
-                            filter.setData(data, function(pair){
-                                var byDate = pair[1];
-                                return -byDate.date;
-                            });
-
-
-                            // @Deprecated relation_history
-                            // Временное решение для отладки истории связей
-                            // TODO Сделать API и нормальный фильтр
-                            _.each(filter.getSortedPairs(), function(pair){
-                                var byDate = pair[1];
-                                byDate._max = (_.max(byDate.relations, '_since'))['_since'];
-                                byDate._min = _isSinceInterval ? (_.min(byDate.relations, '_since'))['_since'] : null;
-                                byDate._min = (byDate._min === byDate._max ? null : byDate._min);
                             });
                         },
                         filter: filter
