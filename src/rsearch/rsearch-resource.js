@@ -21,28 +21,6 @@ define(function(require) {'use strict';
                 var npRsearchMetaHelper = $injector.get('npRsearchMetaHelper'),
                     baseIndex           = data.pageSize * (data.pageNumber - 1);
 
-                // <<< @Deprecated relation_history
-                // Временное решение для отладки истории связей
-                // TODO Сделать API и нормальный фильтр
-                var fakeRelations = _.get(requestOptions, 'filter.fake_relations');
-
-                if (fakeRelations) {
-                    var list = _.filter(data.list, function(node){
-                        var r;
-
-                        _.each(fakeRelations, function(fakeRelation){
-                            r = !!_.findWhere(node._relations, fakeRelation);
-                            return !r;
-                        });
-
-                        return r;
-                    });
-
-                    data.list = list;
-                    data.total = _.size(list);
-                }
-                // >>>
-
                 _.each(data.list, function(node, i){
                     npRsearchMetaHelper.buildNodeExtraMeta(node);
                     node.__index = baseIndex + i;
@@ -91,12 +69,7 @@ define(function(require) {'use strict';
                         return config['relations.url'] + '/' + options.node._id + '/' + relationType + '/' + options.direction;
                     }
 
-                    // var params = _.extend({}, options.filter, options.pageConfig);
-
-                    // @Deprecated relation_history
-                    // Временное решение для отладки истории связей
-                    // TODO Сделать API и нормальный фильтр
-                    var params = _.extend({}, (options.filter && options.filter['fake_relations'] ? null : options.filter), options.pageConfig);
+                    var params = _.extend({}, options.filter, options.pageConfig);
 
                     if (_.size(options.relationTypes) === 1) {
                         return npResource.request({
@@ -104,14 +77,7 @@ define(function(require) {'use strict';
                             url: buildUrl(options.relationTypes[0]),
                             params: params
                         }, {
-                            // responseProcess: nodeListProcess
-
-                            // @Deprecated relation_history
-                            // Временное решение для отладки истории связей
-                            // TODO Сделать API и нормальный фильтр
-                            responseProcess: function(data) {
-                                return nodeListProcess(data, null, options);
-                            }
+                            responseProcess: nodeListProcess
                         }, options);
                     }
 
@@ -142,9 +108,6 @@ define(function(require) {'use strict';
                         _.each(options.relationTypes, function(relationType){
                             var responseData = requests[relationType].response.data;
 
-                            // @Deprecated relation_history
-                            // Временное решение для отладки истории связей
-                            // TODO Сделать API и нормальный фильтр
                             nodeListProcess(responseData, null, options);
 
                             data.total += responseData.total;
