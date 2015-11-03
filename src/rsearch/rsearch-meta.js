@@ -756,12 +756,7 @@ define(function(require) {'use strict';
                 }
 
                 function getFounderTextByData(founderData) {
-                    var sinceText   = relationHistory ? getSinceText(founderData) : null,
-                        sourceText  = relationHistory ? getSourceText(founderData) : null;
-
-                    var sText = sinceText && sourceText ?
-                        (dash + sinceText + space + sourceText) :
-                        (sinceText || sourceText ? dash + (sinceText || sourceText) : '');
+                    var sText = getSinceAndSourceText(founderData);
 
                     if (founderData.sharePercent || founderData.shareAmount) {
                         return _trc("доля", "Доля в учреждении компании") + nbsp +
@@ -839,13 +834,20 @@ define(function(require) {'use strict';
                 }
 
                 function getExecutiveText(relation) {
+                    var relationId      = npRsearchMetaHelper.buildRelationId(relation),
+                        history         = data.relationInfo.relationMap.relations[relationId].history.sorted;
+
+                    $log.info('* history', history);
+
+                    var sText = getSinceAndSourceText(relation);
+
                     if (relation.position) {
                         return nkbScreenHelper.isScreen(relation.position) ?
                                 nkbScreenHelper.screen(relation.position) :
-                                relation.position;
+                                relation.position + sText;
                     }
 
-                    return !isTargetRelation(relation) || anyway ? _tr("руководитель") : '';
+                    return !isTargetRelation(relation) || anyway ? _tr("руководитель") + sText : '';
                 }
 
                 function getEmployeeText(relation) {
@@ -977,6 +979,15 @@ define(function(require) {'use strict';
                         (nkbScreenHelper.isScreen(relation._actual) ?
                             nkbScreenHelper.screen(relation._actual) :
                             $filter('amDateFormat')(relation._actual, _trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")));
+                }
+
+                function getSinceAndSourceText(relation) {
+                    var sinceText   = relationHistory ? getSinceText(relation) : null,
+                        sourceText  = relationHistory ? getSourceText(relation) : null;
+
+                    return sinceText && sourceText ?
+                        (dash + sinceText + space + sourceText) :
+                        (sinceText || sourceText ? dash + (sinceText || sourceText) : '');
                 }
 
                 function getInnText(inn) {
