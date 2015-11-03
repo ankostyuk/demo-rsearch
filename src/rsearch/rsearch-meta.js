@@ -40,35 +40,50 @@ define(function(require) {'use strict';
                 }
             },
 
+            // @Deprecated
             relationIdProperties: ['_srcId', '_type', '_dstId'],
 
-            relationTypes: {
-                'FOUNDER_INDIVIDUAL': {
-                    historyProperties: ['shareAmount', 'sharePercent']
-                },
-                'FOUNDER_COMPANY': {
-                    historyProperties: ['shareAmount', 'sharePercent']
-                }
-            },
+            // @Deprecated
+            relationTypes: {},
 
             mergedRelationTypes: {
                 'FOUNDER': ['FOUNDER_INDIVIDUAL', 'FOUNDER_COMPANY']
             },
 
+            // TODO учитывать _since в historyProperties,
+            // но сначала проверить формирование данных на сервере -- правильно ли ставится _since,
+            // т.к. при тестировании с учетом _since были замечены одинаковые данные
+            // по historyProperties с "близким" _since
+            //
+            // TODO проверить sharePercent
+            // ООО "ОНИКС" ОКПО 59412169 учредитель ООО КБ "НКБ" ОКПО 33774455
+            // в исторических связях есть "близкие" sharePercent
+            // sharePercent: 26.666666666666668
+            // sharePercent: 26.6667
+            // sharePercent: 26.67
+            // -- не схлопнулись исторические связи
             historyRelationTypes: {
                 'FOUNDER': {
-                    'parents': {}
+                    'parents': {
+                        historyProperties: ['shareAmount', 'sharePercent']
+                    }
                 },
                 'FOUNDER_INDIVIDUAL': {
-                    'parents': {}
+                    'parents': {
+                        historyProperties: ['shareAmount', 'sharePercent']
+                    }
                 },
                 'FOUNDER_COMPANY': {
-                    'parents': {}
+                    'parents': {
+                        historyProperties: ['shareAmount', 'sharePercent']
+                    }
                 },
                 'EXECUTIVE_INDIVIDUAL': {
                     'parents': {}
                 }
             },
+
+            historyRelationDate: '_actual'
         })
         //
         .factory('npRsearchMetaHelper', ['$log', '$q', '$rootScope', 'appConfig', 'npRsearchMeta', 'npRsearchResource', function($log, $q, $rootScope, appConfig, npRsearchMeta, npRsearchResource){
@@ -149,6 +164,12 @@ define(function(require) {'use strict';
 
                 buildNodeUIDByType: function(id, type) {
                     return ('node-' + type + '-' + id);
+                },
+
+                buildRelationId: function(relation) {
+                    // relation.__uid = relation.$$hashKey = relation.__uid || (relation._srcId + '-' + relation._type + '-' + relation._dstId);
+                    relation.__id = relation.__id || (relation._srcId + '-' + relation._type + '-' + relation._dstId);
+                    return relation.__id;
                 },
 
                 isRelationsEquals: function(relation1, relation2, extraProperties) {
@@ -319,20 +340,20 @@ define(function(require) {'use strict';
                 buildRelationMap: function(node) {
                     // $log.warn('* buildRelationMap node', node);
 
-                    var relationMap = {},
-                        byNodes     = {},
-                        byRelations = {};
+                    var dateProperty    = npRsearchMeta.historyRelationDate,
+                        relationMap     = {},
+                        relations       = {},
+                        byNodes         = {};
+
+                    relationMap.relations = relations;
+                    relationMap.byNodes = byNodes;
 
                     _.each(node._relations, function(relation){
-                        // $log.warn('> relation', relation._type, relation);
-
                         var relationType    = relationTypesMeta[relation._type],
                             srcNodeUID      = metaHelper.buildNodeUIDByType(relation._srcId, relationType.sourceNodeType),
                             dstNodeUID      = metaHelper.buildNodeUIDByType(relation._dstId, relationType.destinationNodeType);
 
                         _.each([[srcNodeUID, 'parents'], [dstNodeUID, 'children']], function(conf){
-                            // $log.warn('>> conf', conf);
-
                             var nodeUID     = conf[0],
                                 direction   = conf[1];
 
@@ -341,171 +362,82 @@ define(function(require) {'use strict';
                                 return;
                             }
 
-                            // byNodes
-                            var relationInfoByNodes = byNodes[nodeUID] || {
-                                'parents': {},
-                                'children': {}
+                            // relations
+                            var relationId = metaHelper.buildRelationId(relation);
+
+                            relations[relationId] = relations[relationId] || {
+                                relation: relation,
+                                direction: direction
                             };
 
-                            // relationInfoByNodes[direction][relation._type] = relation;
+                            buildHistory();
 
-                            // <<< +relation_history
-                            var byRelationType = relationInfoByNodes[direction][relation._type] || {
-                                'byDates': {}
-                            };
+                            function buildHistory() {
+                                var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationType.name, direction);
 
-                            var dateProperty    = '_actual',
-                                date            = relation[dateProperty],
-                                byDate          = byRelationType['byDates'][date];
-
-                            // ! Возможно замещение
-                            if (byDate) {
-                                $log.warn(
-                                    'Отменена перезапись свойства: relationMap.byNodes[nodeUID][direction][relation._type].byDates[date]...',
-                                    _.sprintf('\nrelationMap.byNodes["%s"]["%s"]["%s"].byDates["%s"]', nodeUID, direction, relation._type, date)
-                                );
-                                $log.warn('...имеется relation', byDate);
-                                $log.warn('...попытка relation', relation);
-                                $log.warn('...объекты', _.isEqual(byDate, relation) ? 'идентичны' : 'различны');
-                            } else {
-                                byRelationType['byDates'][date] = relation;
-                            }
-
-                            if (!byRelationType['byDates']['lastDate'] || byRelationType['byDates']['lastDate'][dateProperty] < date) {
-                                byRelationType['byDates']['lastDate'] = relation;
-                            }
-
-                            relationInfoByNodes[direction][relation._type] = byRelationType;
-                            // >>>
-
-                            byNodes[nodeUID] = relationInfoByNodes;
-
-                            // byRelations
-                            var relationInfoByRelations = byRelations[relation._type] || {
-                                'parents': {},
-                                'children': {}
-                            };
-
-                            // byRelations bySources
-                            // TODO только для определенных типов связей: для оптимизации по скорости и памяти
-                            collectByProperty('bySources', '_source', 'source', true);
-
-                            // byRelations byDates
-                            // <<< +relation_history
-                            collectByProperty('byDates', dateProperty, 'date', false);
-                            // TODO ? нормализоать дату: привести к началу суток, т.к. форматирование даты до суток
-                            // >>>
-
-                            //
-                            byRelations[relation._type] = relationInfoByRelations;
-
-                            function collectByProperty(name, srcPropertyName, dstPropertyName, isSimple) {
-                                var byName          = relationInfoByRelations[direction][name] || {},
-                                    propertyValue   = relation[srcPropertyName],
-                                    data;
-
-                                if (propertyValue) {
-                                    data = byName[propertyValue];
-
-                                    if (!data) {
-                                        data = {};
-
-                                        if (!isSimple) {
-                                            data[dstPropertyName] = propertyValue;
-                                            data['relations'] = [];
-                                        }
-                                    }
-
-                                    if (data.relations) {
-                                        if (_.find(data.relations, relation)) {
-                                            // TODO убрать, когда не будет дубликатов
-                                            $log.warn('Дубликат связи...');
-                                            $log.warn('...relation', relation);
-                                            $log.warn('...node', node);
-                                        } else {
-                                            data.relations.push(relation);
-                                        }
-                                    }
-
-                                    byName[propertyValue] = data;
+                                if (!historyRelationMeta) {
+                                    return;
                                 }
 
-                                relationInfoByRelations[direction][name] = byName;
+                                var relationData = relations[relationId];
+
+                                relationData.history = relationData.history || {
+                                    byDates: {},
+                                    sorted: null
+                                };
+
+                                var date        = relation[dateProperty],
+                                    byDate      = relationData.history.byDates[date];
+
+                                if (byDate) {
+                                    // TODO убрать дубликаты на сервере
+                                    $log.warn('Дубликат исторической связи по дате:', dateProperty, 'nodeUID:', nodeUID, 'relation:', relation);
+                                } else {
+                                    relationData.history.byDates[date] = relation;
+                                }
                             }
+
+                            // byNodes
+                            var relationByNode = byNodes[nodeUID] = byNodes[nodeUID] || {
+                                'parents': {},
+                                'children': {}
+                            };
+
+                            relationByNode[direction][relationType.name] = relationByNode[direction][relationType.name] || {
+                                relationId: relationId
+                            };
                         });
                     });
 
-                    relationMap.byNodes = byNodes;
-                    relationMap.byRelations = byRelations;
+                    // Постобработка...
+                    // отсортировать историю с проверкой дубликатов
+                    _.each(relations, function(relationData){
+                        if (relationData.history) {
+                            var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationData.relation._type, relationData.direction),
+                                relationCount       = _.size(relationData.history.byDates),
+                                existing;
 
-                    // // <<< +relation_history
-                    // // Схлопнуть простыню по датам
-                    // //
-                    // // Если будут убраны дубликаты связей,
-                    // // то, возможно, данный код будет не нужен.
-                    // _.each(relationMap.byRelations, function(byRelation, relationType){
-                    //     _.each(byRelation, function(direction){
-                    //         var byDates = direction['byDates'];
-                    //
-                    //         if (!byDates) {
-                    //             return;
-                    //         }
-                    //
-                    //         var sortedByDates = _.sortBy(byDates, 'date'),
-                    //             nextByDate;
-                    //
-                    //         _.each(sortedByDates, function(byDate, i){
-                    //             nextByDate = sortedByDates[i + 1];
-                    //
-                    //             if (!nextByDate) {
-                    //                 return;
-                    //             }
-                    //
-                    //             var properties = npRsearchMeta.relationIdProperties,
-                    //                 relations1 = _.sortByAll(byDate.relations, properties),
-                    //                 relations2 = _.sortByAll(nextByDate.relations, properties);
-                    //
-                    //             var isEqual = _.isEqual(relations1, relations2, function(v1, v2) {
-                    //                 if (_.isPlainObject(v1)) {
-                    //                     return metaHelper.isRelationsEquals(v1, v2, _.get(npRsearchMeta.relationTypes[relationType], 'historyProperties'));
-                    //                     // return metaHelper.isRelationsEquals(v1, v2);
-                    //                 }
-                    //             });
-                    //
-                    //             if (isEqual) {
-                    //                 delete byDates[byDate.date];
-                    //             }
-                    //         });
-                    //     });
-                    // });
-                    //
-                    // // TODO источники после схлопывания простыни по датам?
-                    // // или пусть пока так?
-                    // // >>>
+                            var sorted = _.sortBy(relationData.history.byDates, function(relation){
+                                return -relation[dateProperty];
+                            });
 
-                    // Слить для npRsearchMeta.mergedRelationTypes
-                    _.each(npRsearchMeta.mergedRelationTypes, function(relationTypes, mergedRelationType){
-                        var object = {},
-                            sourceObject;
+                            relationData.history.sorted = [];
 
-                        _.each(relationTypes, function(relationType){
-                            sourceObject = relationMap.byRelations[relationType];
+                            _.each(sorted, function(relation){
+                                existing = _.find(relationData.history.sorted, _.pick(relation, historyRelationMeta.historyProperties));
 
-                            if (sourceObject) {
-                                _.merge(object, relationMap.byRelations[relationType], function(a, b){
-                                    if (_.isArray(a)) {
-                                        return a.concat(b);
-                                    }
-                                });
-                            }
-                        });
-
-                        if (!_.isEmpty(object)) {
-                            relationMap.byRelations[mergedRelationType] = object;
+                                if (existing) {
+                                    // TODO убрать дубликаты на сервере
+                                    $log.warn('Дубликат исторической связи по историческим свойствам:', historyRelationMeta.historyProperties, 'nodeUID:', node.__uid, 'relation:', relation);
+                                } else {
+                                    relationData.history.sorted.push(relation);
+                                }
+                            });
                         }
                     });
 
-                    // $log.warn('>>> buildRelationMap node', relationMap);
+                    //
+                    $log.warn('>>> buildRelationMap node', relationMap);
 
                     return relationMap;
                 },
@@ -522,115 +454,88 @@ define(function(require) {'use strict';
                     byNodes[dstNode.__uid][direction][relation._type] = relation;
                 },
 
-                // +relation_history
                 buildRelationHistory: function(historyMeta, data) {
                     if (!historyMeta) {
                         return null;
                     }
 
-                    var byDates         = _.get(data.relationMap, ['byRelations', data.relationType, data.direction, 'byDates']),
-                        bySortedDates   = _.sortBy(byDates, 'date'),
-                        byDatesSize     = _.size(bySortedDates),
-                        byActualDate    = _.last(bySortedDates),
-                        nodeMap         = {},
+                    var dateProperty    = npRsearchMeta.historyRelationDate,
                         actualData      = {},
-                        outdatedData     = {},
-                        i;
+                        outdatedData    = {},
+                        byDates         = {},
+                        listKeys        = [];
 
-                    // build related node map
                     if (data.isJoint) {
                         _.each(data.nodeList, function(list){
-                            addToNodeMap(list.data.list);
+                            listKeys.push(list.key);
+                            buildByDates(list.key, list.data.list);
                         });
                     } else {
-                        addToNodeMap(data.nodeList);
+                        listKeys.push(data.relationType);
+                        buildByDates(data.relationType, data.nodeList);
                     }
 
-                    // actual
-                    var actualNodeListMap = {};
-                    fillNodeListMap(byActualDate, actualNodeListMap);
-                    buildNodeList(actualData, actualNodeListMap);
+                    function buildByDates(relationType, srcNodeList) {
+                        var relationId, lastRelation, date, byDate, byRelationType;
 
-                    // outdated
-                    // Сортировка по убыванию дат
-                    var historyNodeListMap = {};
-                    for (i = byDatesSize - 2; i >= 0; i--) {
-                        fillNodeListMap(bySortedDates[i], historyNodeListMap);
-                    }
-                    buildNodeList(outdatedData, historyNodeListMap);
+                        _.each(srcNodeList, function(node){
+                            relationId = data.relationMap.byNodes[node.__uid][data.direction][relationType].relationId;
+                            lastRelation = data.relationMap.relations[relationId].history.sorted[0];
+                            date = lastRelation[dateProperty];
 
-                    //
-                    function fillNodeListMap(target, nodeListMap) {
-                        var byRelationType, relationType, nodeUID, nodeData, list;
+                            byDate = byDates[date] = byDates[date] || {
+                                date: date,
+                                byRelationTypes: {}
+                            };
 
-                        _.each(target.relations, function(relation){
-                            byRelationType = nodeListMap[relation._type] || {};
-                            list = byRelationType.list || [];
-
-                            relationType = relationTypesMeta[relation._type];
-
-                            nodeUID = metaHelper.buildNodeUIDByType(
-                                relation._srcId,
-                                data.direction === 'parents' ? relationType.sourceNodeType : relationType.destinationNodeType
-                            );
-
-                            nodeData = nodeMap[nodeUID];
-
-                            if (nodeData.added) {
-                                // TODO Формирование списка исторических данных по типу связи:
-                                // -------------------------------------------------------
-                                // Доля 50%  5 000 руб. — с 01.02.2014 ЕГРЮЛ от 06.07.2014
-                                // ...
-                                // Доля 10%  1 000 руб. — с 01.02.2013 ЕГРЮЛ от 10.03.2013
-                                // -------------------------------------------------------
-                                // Пока указывается последняя по дате информация
-                            } else {
-                                // Индексы согласно формируемому списку
-                                nodeData.node.__index = _.size(list);
-                                list.push(nodeData.node);
-                                nodeData.added = true;
-                            }
-
-                            byRelationType.list = list;
-                            nodeListMap[relation._type] = byRelationType;
+                            byRelationType = byDate.byRelationTypes[relationType] = byDate.byRelationTypes[relationType] || [];
+                            byRelationType.push(node);
                         });
                     }
 
-                    function buildNodeList(target, nodeListMap) {
-                        if (_.isEmpty(nodeListMap)) {
+                    // Отсортировать в порядке убывания дат
+                    var sortedDates = _.sortBy(byDates, function(byDate){
+                        return -byDate.date;
+                    });
+
+                    // Схлопнуть все неактуальные
+                    var byOutdated = {
+                        byRelationTypes: {}
+                    };
+
+                    _.each(sortedDates, function(byDate, i){
+                        if (i > 0) {
+                            _.each(byDate.byRelationTypes, function(byRelationType, relationType){
+                                byOutdated.byRelationTypes[relationType] = (byOutdated.byRelationTypes[relationType] || []).concat(byRelationType);
+                            });
+                        }
+                    });
+
+                    buildNodeLists(sortedDates[0], actualData);
+                    buildNodeLists(byOutdated, outdatedData);
+
+                    function buildNodeLists(byDate, target) {
+                        if (_.isEmpty(byDate.byRelationTypes)) {
                             return;
                         }
 
-                        var nodeList, list, size;
+                        target.nodeList = [];
 
-                        _.each(nodeListMap, function(byRelationType, relationType){
-                            list = byRelationType.list;
-                            size = _.size(list);
+                        _.each(listKeys, function(listKey){
+                            var list = byDate.byRelationTypes[listKey];
 
-                            if (!size) {
-                                return;
-                            }
-
-                            nodeList = target['nodeList'] || [];
-
-                            nodeList.push({
-                                data: {
-                                    list: list,
-                                    total: size
-                                },
-                                key: relationType
+                            // Индексы согласно формируемому списку
+                            _.each(list, function(node, i){
+                                node.__index = i;
                             });
 
-                            target['nodeList'] = nodeList;
-                        });
-                    }
-
-                    function addToNodeMap(list) {
-                        _.each(list, function(node){
-                            nodeMap[node.__uid] = {
-                                added: false,
-                                node: node
-                            };
+                            target.nodeList.push({
+                                data: {
+                                    list: list,
+                                    total: _.size(list)
+                                },
+                                key: listKey
+                            });
                         });
                     }
 
@@ -638,7 +543,7 @@ define(function(require) {'use strict';
                     // $log.info('buildRelationHistory... outdatedData', outdatedData);
 
                     return {
-                        'actual': _.isEmpty(actualData) ? null : actualData,
+                        'actual': actualData,
                         'outdated': _.isEmpty(outdatedData) ? null : outdatedData
                     };
                 },
@@ -687,7 +592,7 @@ define(function(require) {'use strict';
             return metaHelper;
         }])
         //
-        .filter('targetRelationsInfo', ['$log', '$filter', 'npRsearchMeta', 'appConfig', 'nkbScreenHelper', function($log, $filter, npRsearchMeta, appConfig, nkbScreenHelper){
+        .filter('targetRelationsInfo', ['$log', '$filter', 'npRsearchMeta', 'npRsearchMetaHelper', 'appConfig', 'nkbScreenHelper', function($log, $filter, npRsearchMeta, npRsearchMetaHelper, appConfig, nkbScreenHelper){
             // COMPANY-COMPANY
             //      FOUNDER_COMPANY
             //          <доля %>
@@ -726,7 +631,7 @@ define(function(require) {'use strict';
             //      COMMISSION_MEMBER
             //          <role>
             //
-            return function(data, node, anyway){
+            return function(data, node, anyway, relationHistory, relationSeparator){
                 if (!data || !node) {
                     return null;
                 }
@@ -735,6 +640,8 @@ define(function(require) {'use strict';
                     nbsp        = ' ',      // &nbsp
                     separator   = ', ',     // , + space
                     dash        = ' — ';    // space + dash + &nbsp
+
+                relationSeparator = relationSeparator || separator;
 
                 var SHOW_TYPES = {
                     'FOUNDER_COMPANY': {
@@ -830,7 +737,7 @@ define(function(require) {'use strict';
                     return relation._type === data.relationInfo.relationType;
                 }
 
-                function getRelationText(relation, properties, sep) {
+                function getRelationText(relation, properties) {
                     var t = [],
                         value, v;
 
@@ -845,34 +752,57 @@ define(function(require) {'use strict';
                         }
                     });
 
-                    return t.join(sep || separator);
+                    return t.join(separator);
                 }
 
-                function getFounderText(relation) {
-                    var sinceText   = getSinceText(relation),
-                        sourceText  = getSourceText(relation);
+                function getFounderTextByData(founderData) {
+                    var sinceText   = relationHistory ? getSinceText(founderData) : null,
+                        sourceText  = relationHistory ? getSourceText(founderData) : null;
 
                     var sText = sinceText && sourceText ?
                         (dash + sinceText + space + sourceText) :
                         (sinceText || sourceText ? dash + (sinceText || sourceText) : '');
 
-                    if (relation.sharePercent || relation.shareAmount) {
+                    if (founderData.sharePercent || founderData.shareAmount) {
                         return _trc("доля", "Доля в учреждении компании") + nbsp +
-                            (relation.sharePercent ?
-                                (nkbScreenHelper.isScreen(relation.sharePercent) ?
-                                    nkbScreenHelper.screen(relation.sharePercent) :
-                                    $filter('share')(relation.sharePercent, 2)
+                            (founderData.sharePercent ?
+                                (nkbScreenHelper.isScreen(founderData.sharePercent) ?
+                                    nkbScreenHelper.screen(founderData.sharePercent) :
+                                    $filter('share')(founderData.sharePercent, 2)
                                 ) + '%' : '') +
-                            (relation.sharePercent && relation.shareAmount ? nbsp + nbsp : '') +
-                            (relation.shareAmount ?
-                                (nkbScreenHelper.isScreen(relation.shareAmount) ?
-                                    nkbScreenHelper.screen(relation.shareAmount) :
-                                    $filter('number')(relation.shareAmount)
+                            (founderData.sharePercent && founderData.shareAmount ? nbsp + nbsp : '') +
+                            (founderData.shareAmount ?
+                                (nkbScreenHelper.isScreen(founderData.shareAmount) ?
+                                    nkbScreenHelper.screen(founderData.shareAmount) :
+                                    $filter('number')(founderData.shareAmount)
                                 ) + nbsp + _tr("руб.") : '') +
                             sText;
                     }
 
-                    return !isTargetRelation(relation) || anyway ? _tr("учредитель") + sText : '';
+                    return '';
+                }
+
+                // TODO
+                // function getFounderText(relation, relationId) {
+                function getFounderText(relation) {
+                    var relationId      = npRsearchMetaHelper.buildRelationId(relation),
+                        history         = data.relationInfo.relationMap.relations[relationId].history.sorted,
+                        historyTexts    = [],
+                        historyText, sText;
+
+                    _.each(history, function(historyData){
+                        historyText = getFounderTextByData(historyData);
+
+                        if (historyText) {
+                            historyTexts.push(historyText);
+                        }
+
+                        return !!relationHistory;
+                    });
+
+                    sText = historyTexts.join(relationSeparator);
+
+                    return sText ? sText : _tr("учредитель");
                 }
 
                 function getAffiliatedText(relation) {
@@ -1029,6 +959,7 @@ define(function(require) {'use strict';
                             $filter('amDateFormat')(relation._since, _trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")));
                 }
 
+                // @Deprecated
                 function getSourceCount(relation) {
                     return _.size(_.get(data.relationInfo.relationMap.byRelations, [
                         data.relationInfo.relationType, data.relationInfo.direction, 'bySources'
@@ -1036,7 +967,8 @@ define(function(require) {'use strict';
                 }
 
                 function getSourceText(relation) {
-                    if (!relation._actual || !relation._source || getSourceCount(relation) < 2) {
+                    // if (!relation._actual || !relation._source || getSourceCount(relation) < 2) {
+                    if (!relation._actual || !relation._source) {
                         return '';
                     }
 
@@ -1063,9 +995,10 @@ define(function(require) {'use strict';
                 // <<< +relation_history
                 var list = [];
 
-                _.each(_.get(data.relationInfo.relationMap.byNodes, [node.__uid, data.relationInfo.direction]), function(byRelationType, type){
-                    if (SHOW_TYPES[type]) {
-                        list.push(byRelationType['byDates']['lastDate']);
+                _.each(_.get(data.relationInfo.relationMap.byNodes, [node.__uid, data.relationInfo.direction]), function(byRelationType, relationType){
+                    if (SHOW_TYPES[relationType]) {
+                        var relation = data.relationInfo.relationMap.relations[byRelationType.relationId].relation;
+                        list.push(relation);
                     }
                 });
                 // >>>
@@ -1100,7 +1033,7 @@ define(function(require) {'use strict';
                     texts.push(getInnText(inn));
                 }
 
-                return _.capitalize(texts.join(separator));
+                return _.capitalize(texts.join(relationSeparator));
             };
         }]);
     //
