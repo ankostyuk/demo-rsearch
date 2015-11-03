@@ -837,7 +837,9 @@ define(function(require) {'use strict';
                     var relationId      = npRsearchMetaHelper.buildRelationId(relation),
                         history         = data.relationInfo.relationMap.relations[relationId].history.sorted;
 
-                    $log.info('* history', history);
+                    if (_.size(history) > 1) {
+                        $log.warn('// TODO Формирование списка исторических данных по руководителю...', 'history:', history);
+                    }
 
                     var sText = getSinceAndSourceText(relation);
 
