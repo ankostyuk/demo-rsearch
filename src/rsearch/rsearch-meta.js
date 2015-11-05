@@ -777,11 +777,8 @@ define(function(require) {'use strict';
                     return '';
                 }
 
-                // TODO
-                // function getFounderText(relation, relationId) {
                 function getFounderText(relation) {
-                    var relationId      = npRsearchMetaHelper.buildRelationId(relation),
-                        history         = data.relationInfo.relationMap.relations[relationId].history.sorted,
+                    var history         = data.relationInfo.relationMap.relations[relation.__id].history.sorted,
                         historyTexts    = [],
                         historyText, sText;
 
@@ -798,6 +795,24 @@ define(function(require) {'use strict';
                     sText = historyTexts.join(relationSeparator);
 
                     return sText ? sText : _tr("учредитель");
+                }
+
+                function getExecutiveText(relation) {
+                    var history = data.relationInfo.relationMap.relations[relation.__id].history.sorted;
+
+                    if (_.size(history) > 1) {
+                        $log.warn('// TODO Формирование списка исторических данных по руководителю...', 'history:', history);
+                    }
+
+                    var sText = getSinceAndSourceText(relation);
+
+                    if (relation.position) {
+                        return nkbScreenHelper.isScreen(relation.position) ?
+                                nkbScreenHelper.screen(relation.position) :
+                                relation.position + sText;
+                    }
+
+                    return !isTargetRelation(relation) || anyway ? _tr("руководитель") + sText : '';
                 }
 
                 function getAffiliatedText(relation) {
@@ -831,25 +846,6 @@ define(function(require) {'use strict';
                     }
 
                     return !isTargetRelation(relation) || anyway ? _tr("аффилированное лицо") : '';
-                }
-
-                function getExecutiveText(relation) {
-                    var relationId      = npRsearchMetaHelper.buildRelationId(relation),
-                        history         = data.relationInfo.relationMap.relations[relationId].history.sorted;
-
-                    if (_.size(history) > 1) {
-                        $log.warn('// TODO Формирование списка исторических данных по руководителю...', 'history:', history);
-                    }
-
-                    var sText = getSinceAndSourceText(relation);
-
-                    if (relation.position) {
-                        return nkbScreenHelper.isScreen(relation.position) ?
-                                nkbScreenHelper.screen(relation.position) :
-                                relation.position + sText;
-                    }
-
-                    return !isTargetRelation(relation) || anyway ? _tr("руководитель") + sText : '';
                 }
 
                 function getEmployeeText(relation) {
@@ -996,16 +992,6 @@ define(function(require) {'use strict';
                     return _tr("ИНН") + nbsp + (nkbScreenHelper.isScreen(inn) ? nkbScreenHelper.screen(inn) : inn);
                 }
 
-                // var relations   = _.get(data.relationInfo.relationMap.byNodes, [node.__uid, data.relationInfo.direction]),
-                //     list        = [];
-                //
-                // _.each(relations, function(relation, type){
-                //     if (SHOW_TYPES[type]) {
-                //         list.push(relation);
-                //     }
-                // });
-
-                // <<< +relation_history
                 var list = [];
 
                 _.each(_.get(data.relationInfo.relationMap.byNodes, [node.__uid, data.relationInfo.direction]), function(byRelationType, relationType){
@@ -1014,7 +1000,6 @@ define(function(require) {'use strict';
                         list.push(relation);
                     }
                 });
-                // >>>
 
                 var size = _.size(list);
 
