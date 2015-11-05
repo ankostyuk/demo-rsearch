@@ -419,38 +419,40 @@ define(function(require) {'use strict';
                 // отсортировать историю с проверкой дубликатов
                 __relationsPostProcess: function(relationMap, node) {
                     _.each(relationMap.relations, function(relationData){
-                        if (relationData.history) {
-                            var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationData.relation._type),
-                                relationCount       = _.size(relationData.history.byDates),
-                                existing;
-
-                            var sorted = _.sortBy(relationData.history.byDates, function(relation){
-                                return -relation[npRsearchMeta.historyRelationDate];
-                            });
-
-                            relationData.history.sorted = [];
-
-                            _.each(sorted, function(relation, i){
-                                existing = _.find(relationData.history.sorted, _.pick(relation, historyRelationMeta.historyProperties));
-
-                                if (existing) {
-                                    // TODO убрать дубликаты на сервере
-                                    $log.warn('Дубликат исторической связи по историческим свойствам:', historyRelationMeta.historyProperties, 'nodeUID:', node.__uid, 'relation:', relation);
-                                    $log.info('relationData.history.sorted', relationData.history.sorted);
-                                } else if (__collapseHistory &&
-                                        _.last(relationData.history.sorted) &&
-                                        _.isEqual(
-                                            _.pick(relation, historyRelationMeta.collapseProperties),
-                                            _.pick(_.last(relationData.history.sorted), historyRelationMeta.collapseProperties)
-                                        )
-                                    ) {
-                                    // TODO на сервере?
-                                    $log.warn('Схлопнута историческая связь по свойствам:', historyRelationMeta.collapseProperties, 'nodeUID:', node.__uid, 'relation:', relation);
-                                } else {
-                                    relationData.history.sorted.push(relation);
-                                }
-                            });
+                        if (!relationData.history) {
+                            return;
                         }
+
+                        var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationData.relation._type),
+                            relationCount       = _.size(relationData.history.byDates),
+                            existing;
+
+                        var sorted = _.sortBy(relationData.history.byDates, function(relation){
+                            return -relation[npRsearchMeta.historyRelationDate];
+                        });
+
+                        relationData.history.sorted = [];
+
+                        _.each(sorted, function(relation, i){
+                            existing = _.find(relationData.history.sorted, _.pick(relation, historyRelationMeta.historyProperties));
+
+                            if (existing) {
+                                // TODO убрать дубликаты на сервере
+                                $log.warn('Дубликат исторической связи по историческим свойствам:', historyRelationMeta.historyProperties, 'nodeUID:', node.__uid, 'relation:', relation);
+                                $log.info('relationData.history.sorted', relationData.history.sorted);
+                            } else if (__collapseHistory &&
+                                    _.last(relationData.history.sorted) &&
+                                    _.isEqual(
+                                        _.pick(relation, historyRelationMeta.collapseProperties),
+                                        _.pick(_.last(relationData.history.sorted), historyRelationMeta.collapseProperties)
+                                    )
+                                ) {
+                                // TODO на сервере?
+                                $log.warn('Схлопнута историческая связь по свойствам:', historyRelationMeta.collapseProperties, 'nodeUID:', node.__uid, 'relation:', relation);
+                            } else {
+                                relationData.history.sorted.push(relation);
+                            }
+                        });
                     });
                 },
 
