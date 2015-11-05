@@ -356,6 +356,8 @@ define(function(require) {'use strict';
                             srcNodeUID      = metaHelper.buildNodeUIDByType(relation._srcId, relationType.sourceNodeType),
                             dstNodeUID      = metaHelper.buildNodeUIDByType(relation._dstId, relationType.destinationNodeType);
 
+                        // TODO убрать parents/children -- можно обойтись без direction
+                        // и убрать лишние циклы -- оптимизация
                         _.each([[srcNodeUID, 'parents'], [dstNodeUID, 'children']], function(conf){
                             var nodeUID     = conf[0],
                                 direction   = conf[1];
