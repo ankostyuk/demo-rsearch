@@ -14,6 +14,14 @@ define(function(require) {'use strict';
         'nkb.filters': require('nkb.filters')
     };
 
+    // <<< @Deprecated
+    // Временное решение для отладки истории связей
+    var purl                = require('purl'),
+        locationSearch      = purl().param(),
+        __collapseHistory   = locationSearch['collapse-history'] === 'false' ? false : true;
+        console.warn('__collapseHistory:', __collapseHistory);
+    // >>>
+
     return angular.module('np.rsearch-meta', _.pluck(extmodules, 'name'))
         //
         .constant('npRsearchMeta', {
@@ -62,23 +70,27 @@ define(function(require) {'use strict';
             relationTypes: {
                 'FOUNDER': {
                     history: {
-                        historyProperties: ['shareAmount', 'sharePercent']
+                        historyProperties: ['_since'],
+                        collapseProperties: ['shareAmount', 'sharePercent']
                     }
                 },
                 'FOUNDER_INDIVIDUAL': {
                     history: {
-                        historyProperties: ['shareAmount', 'sharePercent']
+                        historyProperties: ['_since'],
+                        collapseProperties: ['shareAmount', 'sharePercent']
                     }
                 },
                 'FOUNDER_COMPANY': {
                     history: {
-                        historyProperties: ['shareAmount', 'sharePercent']
+                        historyProperties: ['_since'],
+                        collapseProperties: ['shareAmount', 'sharePercent']
                     }
                 },
 
                 'EXECUTIVE_INDIVIDUAL': {
                     history: {
-                        historyProperties: ['_actual']
+                        historyProperties: ['_since'],
+                        collapseProperties: ['position']
                     }
                 }
             },
@@ -408,13 +420,22 @@ define(function(require) {'use strict';
 
                             relationData.history.sorted = [];
 
-                            _.each(sorted, function(relation){
+                            _.each(sorted, function(relation, i){
                                 existing = _.find(relationData.history.sorted, _.pick(relation, historyRelationMeta.historyProperties));
 
                                 if (existing) {
                                     // TODO убрать дубликаты на сервере
                                     $log.warn('Дубликат исторической связи по историческим свойствам:', historyRelationMeta.historyProperties, 'nodeUID:', node.__uid, 'relation:', relation);
                                     $log.info('relationData.history.sorted', relationData.history.sorted);
+                                } else if (__collapseHistory &&
+                                        _.last(relationData.history.sorted) &&
+                                        _.isEqual(
+                                            _.pick(relation, historyRelationMeta.collapseProperties),
+                                            _.pick(_.last(relationData.history.sorted), historyRelationMeta.collapseProperties)
+                                        )
+                                    ) {
+                                    // TODO на сервере?
+                                    $log.warn('Схлопнута историческая связь по свойствам:', historyRelationMeta.collapseProperties, 'nodeUID:', node.__uid, 'relation:', relation);
                                 } else {
                                     relationData.history.sorted.push(relation);
                                 }
@@ -467,6 +488,7 @@ define(function(require) {'use strict';
                         _.each(srcNodeList, function(node){
                             relationId = data.relationMap.byNodes[node.__uid][data.direction][relationType].relationId;
                             lastRelation = data.relationMap.relations[relationId].history.sorted[0];
+
                             date = lastRelation[dateProperty];
 
                             byDate = byDates[date] = byDates[date] || {
