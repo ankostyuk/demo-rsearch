@@ -784,7 +784,7 @@ define(function(require) {'use strict';
 
                         var jointRelationTypes  = npRsearchMetaHelper.getRelationTypesByMergedType(byRelations.relationType),
                             isJoint             = !!jointRelationTypes,
-                            historyMeta         = npRsearchMetaHelper.getHistoryRelationMeta(byRelations.relationType, byRelations.direction);
+                            historyMeta         = npRsearchMetaHelper.getHistoryRelationMeta(byRelations.relationType);
 
                         var listProperties = {
                             isJoint: isJoint,

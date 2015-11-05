@@ -17,6 +17,7 @@ define(function(require) {'use strict';
     return angular.module('np.rsearch-meta', _.pluck(extmodules, 'name'))
         //
         .constant('npRsearchMeta', {
+            // Дополнительные свойства для нод
             nodeTypes: {
                 'COMPANY': {
                     search: true,
@@ -40,16 +41,12 @@ define(function(require) {'use strict';
                 }
             },
 
-            // @Deprecated
-            relationIdProperties: ['_srcId', '_type', '_dstId'],
-
-            // @Deprecated
-            relationTypes: {},
-
-            mergedRelationTypes: {
-                'FOUNDER': ['FOUNDER_INDIVIDUAL', 'FOUNDER_COMPANY']
-            },
-
+            // Дополнительные свойства для связей
+            //
+            // TODO автоматическое формирование свойств для объединенных типов на основе базовых типов
+            //
+            // TODO учитывать _actual в historyProperties для FOUNDER_INDIVIDUAL, FOUNDER_COMPANY
+            //
             // TODO учитывать _since в historyProperties,
             // но сначала проверить формирование данных на сервере -- правильно ли ставится _since,
             // т.к. при тестировании с учетом _since были замечены одинаковые данные
@@ -62,25 +59,32 @@ define(function(require) {'use strict';
             // sharePercent: 26.6667
             // sharePercent: 26.67
             // -- не схлопнулись исторические связи
-            historyRelationTypes: {
+            relationTypes: {
                 'FOUNDER': {
-                    'parents': {
+                    history: {
                         historyProperties: ['shareAmount', 'sharePercent']
                     }
                 },
                 'FOUNDER_INDIVIDUAL': {
-                    'parents': {
+                    history: {
                         historyProperties: ['shareAmount', 'sharePercent']
                     }
                 },
                 'FOUNDER_COMPANY': {
-                    'parents': {
+                    history: {
                         historyProperties: ['shareAmount', 'sharePercent']
                     }
                 },
+
                 'EXECUTIVE_INDIVIDUAL': {
-                    'parents': {}
+                    history: {
+                        historyProperties: ['_actual']
+                    }
                 }
+            },
+
+            mergedRelationTypes: {
+                'FOUNDER': ['FOUNDER_INDIVIDUAL', 'FOUNDER_COMPANY']
             },
 
             historyRelationDate: '_actual'
@@ -170,29 +174,6 @@ define(function(require) {'use strict';
                     // relation.__uid = relation.$$hashKey = relation.__uid || (relation._srcId + '-' + relation._type + '-' + relation._dstId);
                     relation.__id = relation.__id || (relation._srcId + '-' + relation._type + '-' + relation._dstId);
                     return relation.__id;
-                },
-
-                isRelationsEquals: function(relation1, relation2, extraProperties) {
-                    // $log.info('* isRelationsEquals', relation1, relation2, extraProperties);
-
-                    var properties  = npRsearchMeta.relationIdProperties.concat(extraProperties),
-                        equals      = true;
-
-                    // $log.info('> properties', properties);
-
-                    _.each(properties, function(property){
-                        if (!property) {
-                            return;
-                        }
-
-                        equals = (relation1[property] === relation2[property]);
-
-                        return equals;
-                    });
-
-                    // $log.info('> equals', equals);
-
-                    return equals;
                 },
 
                 buildNodeExtraMeta: function(node) {
@@ -333,8 +314,12 @@ define(function(require) {'use strict';
                     return npRsearchMeta.mergedRelationTypes[mergedType];
                 },
 
-                getHistoryRelationMeta: function(relationType, direction) {
-                    return _.get(npRsearchMeta.historyRelationTypes, [relationType, direction]);
+                isRelationTypeInMergedType: function(relationType, mergedType) {
+                    return _.contains(npRsearchMeta.mergedRelationTypes[mergedType], relationType);
+                },
+
+                getHistoryRelationMeta: function(relationType) {
+                    return _.get(npRsearchMeta.relationTypes, [relationType, 'history']);
                 },
 
                 buildRelationMap: function(node) {
@@ -373,7 +358,7 @@ define(function(require) {'use strict';
                             buildHistory();
 
                             function buildHistory() {
-                                var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationType.name, direction);
+                                var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationType.name);
 
                                 if (!historyRelationMeta) {
                                     return;
@@ -413,7 +398,7 @@ define(function(require) {'use strict';
                     // отсортировать историю с проверкой дубликатов
                     _.each(relations, function(relationData){
                         if (relationData.history) {
-                            var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationData.relation._type, relationData.direction),
+                            var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationData.relation._type),
                                 relationCount       = _.size(relationData.history.byDates),
                                 existing;
 
@@ -429,6 +414,7 @@ define(function(require) {'use strict';
                                 if (existing) {
                                     // TODO убрать дубликаты на сервере
                                     $log.warn('Дубликат исторической связи по историческим свойствам:', historyRelationMeta.historyProperties, 'nodeUID:', node.__uid, 'relation:', relation);
+                                    $log.info('relationData.history.sorted', relationData.history.sorted);
                                 } else {
                                     relationData.history.sorted.push(relation);
                                 }
@@ -733,10 +719,6 @@ define(function(require) {'use strict';
                     }
                 };
 
-                function isTargetRelation(relation) {
-                    return relation._type === data.relationInfo.relationType;
-                }
-
                 function getRelationText(relation, properties) {
                     var t = [],
                         value, v;
@@ -755,35 +737,35 @@ define(function(require) {'use strict';
                     return t.join(separator);
                 }
 
-                function getFounderTextByData(founderData) {
-                    var sText = getSinceAndSourceText(founderData);
+                function getFounderTextByRelation(relation, isTarget) {
+                    var sText = getSinceAndSourceText(relation);
 
-                    if (founderData.sharePercent || founderData.shareAmount) {
+                    if (relation.sharePercent || relation.shareAmount) {
                         return _trc("доля", "Доля в учреждении компании") + nbsp +
-                            (founderData.sharePercent ?
-                                (nkbScreenHelper.isScreen(founderData.sharePercent) ?
-                                    nkbScreenHelper.screen(founderData.sharePercent) :
-                                    $filter('share')(founderData.sharePercent, 2)
+                            (relation.sharePercent ?
+                                (nkbScreenHelper.isScreen(relation.sharePercent) ?
+                                    nkbScreenHelper.screen(relation.sharePercent) :
+                                    $filter('share')(relation.sharePercent, 2)
                                 ) + '%' : '') +
-                            (founderData.sharePercent && founderData.shareAmount ? nbsp + nbsp : '') +
-                            (founderData.shareAmount ?
-                                (nkbScreenHelper.isScreen(founderData.shareAmount) ?
-                                    nkbScreenHelper.screen(founderData.shareAmount) :
-                                    $filter('number')(founderData.shareAmount)
+                            (relation.sharePercent && relation.shareAmount ? nbsp + nbsp : '') +
+                            (relation.shareAmount ?
+                                (nkbScreenHelper.isScreen(relation.shareAmount) ?
+                                    nkbScreenHelper.screen(relation.shareAmount) :
+                                    $filter('number')(relation.shareAmount)
                                 ) + nbsp + _tr("руб.") : '') +
                             sText;
                     }
 
-                    return '';
+                    return buildDefaultText(relation, isTarget, _tr("учредитель") + sText, true);
                 }
 
                 function getFounderText(relation) {
                     var history         = data.relationInfo.relationMap.relations[relation.__id].history.sorted,
                         historyTexts    = [],
-                        historyText, sText;
+                        historyText;
 
-                    _.each(history, function(historyData){
-                        historyText = getFounderTextByData(historyData);
+                    _.each(history, function(historyRelation){
+                        historyText = getFounderTextByRelation(historyRelation, relation.__isTarget);
 
                         if (historyText) {
                             historyTexts.push(historyText);
@@ -792,18 +774,10 @@ define(function(require) {'use strict';
                         return !!relationHistory;
                     });
 
-                    sText = historyTexts.join(relationSeparator);
-
-                    return sText ? sText : _tr("учредитель");
+                    return historyTexts.join(relationSeparator);
                 }
 
-                function getExecutiveText(relation) {
-                    var history = data.relationInfo.relationMap.relations[relation.__id].history.sorted;
-
-                    if (_.size(history) > 1) {
-                        $log.warn('// TODO Формирование списка исторических данных по руководителю...', 'history:', history);
-                    }
-
+                function getExecutiveTextByRelation(relation, isTarget) {
                     var sText = getSinceAndSourceText(relation);
 
                     if (relation.position) {
@@ -812,7 +786,25 @@ define(function(require) {'use strict';
                                 relation.position + sText;
                     }
 
-                    return !isTargetRelation(relation) || anyway ? _tr("руководитель") + sText : '';
+                    return buildDefaultText(relation, isTarget, _tr("руководитель") + sText, true);
+                }
+
+                function getExecutiveText(relation) {
+                    var history         = data.relationInfo.relationMap.relations[relation.__id].history.sorted,
+                        historyTexts    = [],
+                        historyText;
+
+                    _.each(history, function(historyRelation){
+                        historyText = getExecutiveTextByRelation(historyRelation, relation.__isTarget);
+
+                        if (historyText) {
+                            historyTexts.push(historyText);
+                        }
+
+                        return !!relationHistory;
+                    });
+
+                    return historyTexts.join(relationSeparator);
                 }
 
                 function getAffiliatedText(relation) {
@@ -845,7 +837,7 @@ define(function(require) {'use strict';
                         return t;
                     }
 
-                    return !isTargetRelation(relation) || anyway ? _tr("аффилированное лицо") : '';
+                    return buildDefaultText(relation, relation.__isTarget, _tr("аффилированное лицо"), false);
                 }
 
                 function getEmployeeText(relation) {
@@ -859,7 +851,7 @@ define(function(require) {'use strict';
                         return t;
                     }
 
-                    return !isTargetRelation(relation) || anyway ? _tr("контактное лицо") : '';
+                    return buildDefaultText(relation, relation.__isTarget, _tr("контактное лицо"), false);
                 }
 
                 function getParticipantText(relation) {
@@ -929,7 +921,7 @@ define(function(require) {'use strict';
                         return relation.role;
                     }
 
-                    return !isTargetRelation(relation) || anyway ? _tr("член комиссии") : '';
+                    return buildDefaultText(relation, relation.__isTarget, _tr("член комиссии"), false);
                 }
 
                 function getKinsmenText(relation) {
@@ -992,11 +984,25 @@ define(function(require) {'use strict';
                     return _tr("ИНН") + nbsp + (nkbScreenHelper.isScreen(inn) ? nkbScreenHelper.screen(inn) : inn);
                 }
 
+                function buildDefaultText(relation, isTarget, defaultText, checkHistory) {
+                    if (checkHistory) {
+                        return (isTarget && relationHistory) || !isTarget || anyway ? defaultText : '';
+                    }
+
+                    return !isTarget || anyway ? defaultText : '';
+                }
+
+                //
                 var list = [];
 
                 _.each(_.get(data.relationInfo.relationMap.byNodes, [node.__uid, data.relationInfo.direction]), function(byRelationType, relationType){
                     if (SHOW_TYPES[relationType]) {
                         var relation = data.relationInfo.relationMap.relations[byRelationType.relationId].relation;
+
+                        relation.__isTarget =
+                            (relation._type === data.relationInfo.relationType) ||
+                            npRsearchMetaHelper.isRelationTypeInMergedType(relation._type, data.relationInfo.relationType);
+
                         list.push(relation);
                     }
                 });
@@ -1011,7 +1017,7 @@ define(function(require) {'use strict';
                     inn;
 
                 list = _.sortBy(list, function(relation){
-                    return relation._type === data.relationInfo.relationType ? 0 : SHOW_TYPES[relation._type].order;
+                    return relation.__isTarget ? 0 : SHOW_TYPES[relation._type].order;
                 });
 
                 _.each(list, function(relation, i){
