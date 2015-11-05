@@ -492,6 +492,19 @@ define(function(require) {'use strict';
                                 nodes: scope.nodes,
                                 filters: scope.filters
                             }, function(result){
+                                // <<< схлопнуть цепочки
+                                // TODO на сервере
+                                var uniqTraces = [];
+
+                                _.each(result.traces, function(trace, i){
+                                    if (!_.isEqual(trace, result.traces[i - 1])) {
+                                        uniqTraces.push(trace);
+                                    }
+                                });
+                                // >>>
+
+                                result.traces = uniqTraces;
+
                                 if (scope.dataSource.reverse && result && result.traces) {
                                     _.each(result.traces, function(trace){
                                         trace.nodes.reverse();
@@ -549,7 +562,7 @@ define(function(require) {'use strict';
                             nodeIndexes     = trace.nodes,
                             nodeCount       = _.size(nodeIndexes),
                             currentTrace    = new Array(nodeCount),
-                            isLast, node, relation, direction, relationMap, targetInfo, isSrcNode;
+                            isLast, node, relation, direction, relationMap, targetInfo, targetNode, isSrcNode;
 
                         _.each(nodeIndexes, function(nodeIndex, i){
                             isLast      = (i === nodeCount - 1);
@@ -572,9 +585,12 @@ define(function(require) {'use strict';
                             } else {
                                 relation    = relations[relationIndexes[i]];
                                 direction   = relation._srcId === node._id ? 'parents' : 'children';
-                                npRsearchMetaHelper.addToRelationMap(relationMap, null, node, direction, relation);
+                                targetNode  = nodes[nodeIndexes[i + 1]];
+
+                                npRsearchMetaHelper.addToRelationMap(relationMap, targetNode, targetNode._relations);
+
                                 targetInfo = {
-                                    node: nodes[nodeIndexes[i + 1]],
+                                    node: targetNode,
                                     relationInfo: {
                                         direction: direction,
                                         relationType: relation._type,

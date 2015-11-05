@@ -337,15 +337,21 @@ define(function(require) {'use strict';
                 buildRelationMap: function(node) {
                     // $log.warn('* buildRelationMap node', node);
 
-                    var dateProperty    = npRsearchMeta.historyRelationDate,
-                        relationMap     = {},
-                        relations       = {},
-                        byNodes         = {};
+                    var relationMap = {};
 
-                    relationMap.relations = relations;
-                    relationMap.byNodes = byNodes;
+                    relationMap.relations = {};
+                    relationMap.byNodes = {};
 
-                    _.each(node._relations, function(relation){
+                    metaHelper.__relationsProcess(relationMap, node, node._relations);
+                    metaHelper.__relationsPostProcess(relationMap, node);
+
+                    // $log.warn('>>> buildRelationMap node', relationMap);
+
+                    return relationMap;
+                },
+
+                __relationsProcess: function(relationMap, node, relations) {
+                    _.each(relations, function(relation){
                         var relationType    = relationTypesMeta[relation._type],
                             srcNodeUID      = metaHelper.buildNodeUIDByType(relation._srcId, relationType.sourceNodeType),
                             dstNodeUID      = metaHelper.buildNodeUIDByType(relation._dstId, relationType.destinationNodeType);
@@ -359,10 +365,10 @@ define(function(require) {'use strict';
                                 return;
                             }
 
-                            // relations
+                            // relationMap.relations
                             var relationId = metaHelper.buildRelationId(relation);
 
-                            relations[relationId] = relations[relationId] || {
+                            relationMap.relations[relationId] = relationMap.relations[relationId] || {
                                 relation: relation,
                                 direction: direction
                             };
@@ -376,26 +382,26 @@ define(function(require) {'use strict';
                                     return;
                                 }
 
-                                var relationData = relations[relationId];
+                                var relationData = relationMap.relations[relationId];
 
                                 relationData.history = relationData.history || {
                                     byDates: {},
                                     sorted: null
                                 };
 
-                                var date        = relation[dateProperty],
+                                var date        = relation[npRsearchMeta.historyRelationDate],
                                     byDate      = relationData.history.byDates[date];
 
                                 if (byDate) {
                                     // TODO убрать дубликаты на сервере
-                                    $log.warn('Дубликат исторической связи по дате:', dateProperty, 'nodeUID:', nodeUID, 'relation:', relation);
+                                    $log.warn('Дубликат исторической связи по дате:', npRsearchMeta.historyRelationDate, 'nodeUID:', nodeUID, 'relation:', relation);
                                 } else {
                                     relationData.history.byDates[date] = relation;
                                 }
                             }
 
                             // byNodes
-                            var relationByNode = byNodes[nodeUID] = byNodes[nodeUID] || {
+                            var relationByNode = relationMap.byNodes[nodeUID] = relationMap.byNodes[nodeUID] || {
                                 'parents': {},
                                 'children': {}
                             };
@@ -405,17 +411,19 @@ define(function(require) {'use strict';
                             };
                         });
                     });
+                },
 
-                    // Постобработка...
-                    // отсортировать историю с проверкой дубликатов
-                    _.each(relations, function(relationData){
+                // Постобработка...
+                // отсортировать историю с проверкой дубликатов
+                __relationsPostProcess: function(relationMap, node) {
+                    _.each(relationMap.relations, function(relationData){
                         if (relationData.history) {
                             var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationData.relation._type),
                                 relationCount       = _.size(relationData.history.byDates),
                                 existing;
 
                             var sorted = _.sortBy(relationData.history.byDates, function(relation){
-                                return -relation[dateProperty];
+                                return -relation[npRsearchMeta.historyRelationDate];
                             });
 
                             relationData.history.sorted = [];
@@ -442,23 +450,18 @@ define(function(require) {'use strict';
                             });
                         }
                     });
-
-                    //
-                    $log.warn('>>> buildRelationMap node', relationMap);
-
-                    return relationMap;
                 },
 
-                addToRelationMap: function(relationMap, srcNode, dstNode, direction, relation) {
+                addToRelationMap: function(relationMap, node, relations) {
                     // $log.warn('<<< addToRelationMap...', relationMap);
 
+                    relationMap.relations = relationMap.relations || {};
                     relationMap.byNodes = relationMap.byNodes || {};
 
-                    var byNodes = relationMap.byNodes;
+                    metaHelper.__relationsProcess(relationMap, node, relations);
+                    metaHelper.__relationsPostProcess(relationMap, node);
 
-                    byNodes[dstNode.__uid] = byNodes[dstNode.__uid] || {};
-                    byNodes[dstNode.__uid][direction] = byNodes[dstNode.__uid][direction] || {};
-                    byNodes[dstNode.__uid][direction][relation._type] = relation;
+                    // $log.warn('>>> addToRelationMap...', relationMap);
                 },
 
                 buildRelationHistory: function(historyMeta, data) {
@@ -466,8 +469,7 @@ define(function(require) {'use strict';
                         return null;
                     }
 
-                    var dateProperty    = npRsearchMeta.historyRelationDate,
-                        actualData      = {},
+                    var actualData      = {},
                         outdatedData    = {},
                         byDates         = {},
                         listKeys        = [];
@@ -489,7 +491,7 @@ define(function(require) {'use strict';
                             relationId = data.relationMap.byNodes[node.__uid][data.direction][relationType].relationId;
                             lastRelation = data.relationMap.relations[relationId].history.sorted[0];
 
-                            date = lastRelation[dateProperty];
+                            date = lastRelation[npRsearchMeta.historyRelationDate];
 
                             byDate = byDates[date] = byDates[date] || {
                                 date: date,
