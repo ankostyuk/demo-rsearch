@@ -16,6 +16,8 @@ define(function(require) {'use strict';
 
     // <<< @Deprecated
     // Временное решение для отладки истории связей
+    var moment = require('moment');
+
     var purl                = require('purl'),
         locationSearch      = purl().param(),
         __collapseHistory   = locationSearch['collapse-history'] === 'false' ? false : true;
@@ -392,6 +394,12 @@ define(function(require) {'use strict';
                                     sorted: null
                                 };
 
+                                // <<< Нормализация даты для корректного отображения истории
+                                // Костыль
+                                // TODO на сервере
+                                metaHelper.__normalizeDate(relation, npRsearchMeta.historyRelationDate);
+                                // >>>
+
                                 var date        = relation[npRsearchMeta.historyRelationDate],
                                     byDate      = relationData.history.byDates[date];
 
@@ -476,6 +484,17 @@ define(function(require) {'use strict';
                             }
                         });
                     });
+                },
+
+                __normalizeDate: function(target, datePropertyName) {
+                    // TODO математическое решение
+                    var format      = 'DD.MM.YYYY',
+                        displayDate = moment(target[datePropertyName]).format(format),
+                        normalDate  = moment(displayDate, format).valueOf();
+
+                    // $log.info('***', target[datePropertyName], displayDate, normalDate);
+
+                    target[datePropertyName] = normalDate;
                 },
 
                 addToRelationMap: function(relationMap, node, relations) {
