@@ -1244,8 +1244,11 @@ define(function(require) {'use strict';
                                 }
                             };
 
+                            var innFilterValues = _.get(byRelations.relationMap.byRelationTypes, [byRelations.direction, byRelations.relationType, 'info', 'relFacet', 'inn']);
                             var innFilter = {
-                                values: byRelations.result.info.relFacet && byRelations.result.info.relFacet.inn,
+                                // values: byRelations.result.info.relFacet && byRelations.result.info.relFacet.inn,
+                                // TODO поправить npRsearchInnFilter для работы с пустыми данными как с null
+                                values: _.isEmpty(innFilterValues) ? null : innFilterValues,
                                 value: null,
                                 total: total,
                                 callback: function(value) {

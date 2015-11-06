@@ -368,7 +368,8 @@ define(function(require) {'use strict';
                             }
 
                             // relationMap.relations
-                            var relationId = metaHelper.buildRelationId(relation);
+                            var relationId      = metaHelper.buildRelationId(relation),
+                                relationExist   = !!relationMap.relations[relationId];
 
                             relationMap.relations[relationId] = relationMap.relations[relationId] || {
                                 relation: relation,
@@ -403,14 +404,35 @@ define(function(require) {'use strict';
                             }
 
                             // byNodes
-                            var relationByNode = relationMap.byNodes[nodeUID] = relationMap.byNodes[nodeUID] || {
+                            var byNodes = relationMap.byNodes[nodeUID] = relationMap.byNodes[nodeUID] || {
                                 'parents': {},
                                 'children': {}
                             };
 
-                            relationByNode[direction][relationType.name] = relationByNode[direction][relationType.name] || {
+                            byNodes[direction][relationType.name] = byNodes[direction][relationType.name] || {
                                 relationId: relationId
                             };
+
+                            // byRelations
+                            var byRelationTypes = relationMap.byRelationTypes = relationMap.byRelationTypes || {
+                                'parents': {},
+                                'children': {}
+                            };
+
+                            byRelationTypes[direction][relationType.name] = byRelationTypes[direction][relationType.name] || {
+                                // TODO на сервере
+                                'info': {
+                                    'relFacet': {
+                                        'inn': {}
+                                    }
+                                }
+                            };
+
+                            // TODO на сервере
+                            if (!relationExist && relation.inn) {
+                                byRelationTypes[direction][relationType.name]['info']['relFacet']['inn'][relation.inn] =
+                                    (byRelationTypes[direction][relationType.name]['info']['relFacet']['inn'][relation.inn] || 0) + 1;
+                            }
                         });
                     });
                 },
