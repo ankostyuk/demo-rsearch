@@ -833,9 +833,13 @@ define(function(require) {'use strict';
                                 pageConfig: byRelations.pageConfig,
                                 previousRequest: byRelations.request,
                                 nodeIterator: function(node, i) {
+                                    // TODO оптимизировать
                                     npRsearchMetaHelper.addToRelationMap(
-                                        byRelations.relationMap, byRelations.node, node, byRelations.direction,
-                                        npRsearchMetaHelper.buildKinsmenRelation(byRelations.node, node)
+                                        byRelations.relationMap,
+                                        node,
+                                        [npRsearchMetaHelper.buildKinsmenRelation(byRelations.node, node)], {
+                                            direction: byRelations.direction
+                                        }
                                     );
                                 },
                                 success: function(data, status){

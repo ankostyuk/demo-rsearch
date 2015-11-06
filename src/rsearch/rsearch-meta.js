@@ -368,7 +368,9 @@ define(function(require) {'use strict';
                     return relationMap;
                 },
 
-                __relationsProcess: function(relationMap, node, relations) {
+                __relationsProcess: function(relationMap, node, relations, options) {
+                    options = options || {};
+
                     _.each(relations, function(relation){
                         var relationType    = relationTypesMeta[relation._type],
                             srcNodeUID      = metaHelper.buildNodeUIDByType(relation._srcId, relationType.sourceNodeType),
@@ -376,12 +378,12 @@ define(function(require) {'use strict';
 
                         // TODO убрать parents/children -- можно обойтись без direction
                         // и убрать лишние циклы -- оптимизация
-                        _.each([[srcNodeUID, 'parents'], [dstNodeUID, 'children']], function(conf){
+                        _.each(options.direction ? [[node.__uid, options.direction]] : [[srcNodeUID, 'parents'], [dstNodeUID, 'children']], function(conf){
                             var nodeUID     = conf[0],
                                 direction   = conf[1];
 
                             // Только связи с другими нодами и "кольцевые" связи
-                            if (nodeUID === node.__uid && srcNodeUID !== dstNodeUID) {
+                            if (!options.direction && nodeUID === node.__uid && srcNodeUID !== dstNodeUID) {
                                 return;
                             }
 
@@ -428,31 +430,26 @@ define(function(require) {'use strict';
                             }
 
                             // byNodes
-                            var byNodes = relationMap.byNodes[nodeUID] = relationMap.byNodes[nodeUID] || {
-                                'parents': {},
-                                'children': {}
-                            };
+                            var byNodes = relationMap.byNodes[nodeUID] = relationMap.byNodes[nodeUID] || {};
+                            byNodes[direction] = byNodes[direction] || {};
 
                             byNodes[direction][relationType.name] = byNodes[direction][relationType.name] || {
                                 relationId: relationId
                             };
 
                             // byRelations
-                            var byRelationTypes = relationMap.byRelationTypes = relationMap.byRelationTypes || {
-                                'parents': {},
-                                'children': {}
-                            };
+                            var byRelationTypes = relationMap.byRelationTypes = relationMap.byRelationTypes || {};
+                            byRelationTypes[direction] = byRelationTypes[direction] || {};
 
+                            // TODO не для всех типов связей
+                            // TODO на сервере
                             byRelationTypes[direction][relationType.name] = byRelationTypes[direction][relationType.name] || {
-                                // TODO на сервере
                                 'info': {
                                     'relFacet': {
                                         'inn': {}
                                     }
                                 }
                             };
-
-                            // TODO на сервере
                             if (!relationExist && relation.inn) {
                                 byRelationTypes[direction][relationType.name]['info']['relFacet']['inn'][relation.inn] =
                                     (byRelationTypes[direction][relationType.name]['info']['relFacet']['inn'][relation.inn] || 0) + 1;
@@ -513,13 +510,13 @@ define(function(require) {'use strict';
                     target[datePropertyName] = normalDate;
                 },
 
-                addToRelationMap: function(relationMap, node, relations) {
+                addToRelationMap: function(relationMap, node, relations, options) {
                     // $log.warn('<<< addToRelationMap...', relationMap);
 
                     relationMap.relations = relationMap.relations || {};
                     relationMap.byNodes = relationMap.byNodes || {};
 
-                    metaHelper.__relationsProcess(relationMap, node, relations);
+                    metaHelper.__relationsProcess(relationMap, node, relations, options);
                     metaHelper.__relationsPostProcess(relationMap, node);
 
                     // $log.warn('>>> addToRelationMap...', relationMap);
