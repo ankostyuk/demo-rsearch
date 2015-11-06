@@ -574,6 +574,7 @@ define(function(require) {'use strict';
                             // т.к. ответ может быть "жирным" - оптимизация
                             npRsearchMetaHelper.buildNodeExtraMeta(node);
 
+                            // TODO оптимизировать
                             isSrcNode = !!_.find(scope.nodes, function(n){
                                 return n.__uid === node.__uid;
                             });
@@ -585,7 +586,9 @@ define(function(require) {'use strict';
                             } else {
                                 relation    = relations[relationIndexes[i]];
                                 direction   = relation._srcId === node._id ? 'parents' : 'children';
+
                                 targetNode  = nodes[nodeIndexes[i + 1]];
+                                npRsearchMetaHelper.buildNodeExtraMeta(targetNode);
 
                                 npRsearchMetaHelper.addToRelationMap(relationMap, targetNode, targetNode._relations);
 
