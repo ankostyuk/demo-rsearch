@@ -71,6 +71,7 @@ define(function(require) {'use strict';
             // -- не схлопнулись исторические связи
             relationTypes: {
                 'FOUNDER': {
+                    name: 'FOUNDER',
                     history: {
                         historyProperties: ['_since'],
                         collapseProperties: ['shareAmount', 'sharePercent']
@@ -94,6 +95,12 @@ define(function(require) {'use strict';
                         historyProperties: ['_since'],
                         collapseProperties: ['position']
                     }
+                },
+
+                'kinsmen': {
+                    name: 'kinsmen',
+                    sourceNodeType: "INDIVIDUAL",
+                    destinationNodeType: "INDIVIDUAL"
                 }
             },
 
@@ -140,22 +147,31 @@ define(function(require) {'use strict';
                     throw new Error('fail init meta');
                 }
 
+                // nodeTypesMeta
                 _.each(nodeTypes, function(nodeType){
-                    nodeTypesMeta[nodeType.name] = _.extend(
+                    nodeTypesMeta[nodeType.name] = nodeType;
+                });
+                _.each(npRsearchMeta.nodeTypes, function(nodeType, nodeTypeName){
+                    nodeTypesMeta[nodeTypeName] = _.extend(
                         {},
-                        nodeType,
-                        npRsearchMeta.nodeTypes[nodeType.name]
+                        nodeTypesMeta[nodeTypeName],
+                        nodeType
                     );
                 });
 
+                // relationTypesMeta
                 _.each(relationTypes, function(relationType){
-                    relationTypesMeta[relationType.name] = _.extend(
+                    relationTypesMeta[relationType.name] = relationType;
+                });
+                _.each(npRsearchMeta.relationTypes, function(relationType, relationTypeName){
+                    relationTypesMeta[relationTypeName] = _.extend(
                         {},
-                        relationType,
-                        npRsearchMeta.relationTypes[relationType.name]
+                        relationTypesMeta[relationTypeName],
+                        relationType
                     );
                 });
 
+                //
                 initDefer.resolve();
                 $rootScope.$emit('np-rsearch-meta-ready');
             }
@@ -333,7 +349,7 @@ define(function(require) {'use strict';
                 },
 
                 getHistoryRelationMeta: function(relationType) {
-                    return _.get(npRsearchMeta.relationTypes, [relationType, 'history']);
+                    return _.get(relationTypesMeta, [relationType, 'history']);
                 },
 
                 buildRelationMap: function(node) {
@@ -647,7 +663,7 @@ define(function(require) {'use strict';
             return metaHelper;
         }])
         //
-        .filter('targetRelationsInfo', ['$log', '$filter', 'npRsearchMeta', 'npRsearchMetaHelper', 'appConfig', 'nkbScreenHelper', function($log, $filter, npRsearchMeta, npRsearchMetaHelper, appConfig, nkbScreenHelper){
+        .filter('targetRelationsInfo', ['$log', '$filter', 'npRsearchMetaHelper', 'appConfig', 'nkbScreenHelper', function($log, $filter, npRsearchMetaHelper, appConfig, nkbScreenHelper){
             // COMPANY-COMPANY
             //      FOUNDER_COMPANY
             //          <доля %>
