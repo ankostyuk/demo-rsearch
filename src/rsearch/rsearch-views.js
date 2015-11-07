@@ -492,7 +492,8 @@ define(function(require) {'use strict';
                                 nodes: scope.nodes,
                                 filters: scope.filters
                             }, function(result){
-                                // <<< схлопнуть цепочки
+                                // <<< relation_history
+                                // схлопнуть цепочки
                                 // TODO на сервере
                                 var uniqTraces = [];
 
@@ -501,9 +502,9 @@ define(function(require) {'use strict';
                                         uniqTraces.push(trace);
                                     }
                                 });
-                                // >>>
 
                                 result.traces = uniqTraces;
+                                // >>>
 
                                 if (scope.dataSource.reverse && result && result.traces) {
                                     _.each(result.traces, function(trace){
@@ -572,6 +573,7 @@ define(function(require) {'use strict';
                             // Именно при отображении цепочки,
                             // а не в ответе запроса на поиск цепочек,
                             // т.к. ответ может быть "жирным" - оптимизация
+                            // @Deprecated
                             npRsearchMetaHelper.buildNodeExtraMeta(node);
 
                             // TODO оптимизировать
@@ -590,6 +592,7 @@ define(function(require) {'use strict';
                                 targetNode  = nodes[nodeIndexes[i + 1]];
                                 npRsearchMetaHelper.buildNodeExtraMeta(targetNode);
 
+                                // relation_history
                                 npRsearchMetaHelper.addToRelationMap(relationMap, targetNode, targetNode._relations);
 
                                 targetInfo = {

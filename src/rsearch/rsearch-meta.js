@@ -14,7 +14,7 @@ define(function(require) {'use strict';
         'nkb.filters': require('nkb.filters')
     };
 
-    // <<< @Deprecated
+    // <<< @Deprecated relation_history
     // Временное решение для отладки истории связей
     var moment = require('moment');
 
@@ -368,6 +368,18 @@ define(function(require) {'use strict';
                     return relationMap;
                 },
 
+                addToRelationMap: function(relationMap, node, relations, options) {
+                    // $log.warn('<<< addToRelationMap...', relationMap);
+
+                    relationMap.relations = relationMap.relations || {};
+                    relationMap.byNodes = relationMap.byNodes || {};
+
+                    metaHelper.__relationsProcess(relationMap, node, relations, options);
+                    metaHelper.__relationsPostProcess(relationMap, node);
+
+                    // $log.warn('>>> addToRelationMap...', relationMap);
+                },
+
                 __relationsProcess: function(relationMap, node, relations, options) {
                     options = options || {};
 
@@ -376,7 +388,8 @@ define(function(require) {'use strict';
                             srcNodeUID      = metaHelper.buildNodeUIDByType(relation._srcId, relationType.sourceNodeType),
                             dstNodeUID      = metaHelper.buildNodeUIDByType(relation._dstId, relationType.destinationNodeType);
 
-                        // TODO убрать parents/children -- можно обойтись без direction
+                        // TODO оптимизировать
+                        // убрать parents/children -- можно обойтись без direction
                         // и убрать лишние циклы -- оптимизация
                         _.each(options.direction ? [[node.__uid, options.direction]] : [[srcNodeUID, 'parents'], [dstNodeUID, 'children']], function(conf){
                             var nodeUID     = conf[0],
@@ -412,8 +425,9 @@ define(function(require) {'use strict';
                                     sorted: null
                                 };
 
-                                // <<< Нормализация даты для корректного отображения истории
-                                // Костыль
+                                // <<< relation_history
+                                // нормализация даты для корректного отображения истории
+                                // костыль!
                                 // TODO на сервере
                                 metaHelper.__normalizeDate(relation, npRsearchMeta.historyRelationDate);
                                 // >>>
@@ -422,7 +436,7 @@ define(function(require) {'use strict';
                                     byDate      = relationData.history.byDates[date];
 
                                 if (byDate) {
-                                    // TODO убрать дубликаты на сервере
+                                    // relation_history TODO убрать дубликаты на сервере
                                     $log.warn('Дубликат исторической связи по дате:', npRsearchMeta.historyRelationDate, 'nodeUID:', nodeUID, 'relation:', relation);
                                 } else {
                                     relationData.history.byDates[date] = relation;
@@ -466,9 +480,7 @@ define(function(require) {'use strict';
                             return;
                         }
 
-                        var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationData.relation._type),
-                            relationCount       = _.size(relationData.history.byDates),
-                            existing;
+                        var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationData.relation._type);
 
                         var sorted = _.sortBy(relationData.history.byDates, function(relation){
                             return -relation[npRsearchMeta.historyRelationDate];
@@ -477,10 +489,8 @@ define(function(require) {'use strict';
                         relationData.history.sorted = [];
 
                         _.each(sorted, function(relation, i){
-                            existing = _.find(relationData.history.sorted, _.pick(relation, historyRelationMeta.historyProperties));
-
-                            if (existing) {
-                                // TODO убрать дубликаты на сервере
+                            if (_.find(relationData.history.sorted, _.pick(relation, historyRelationMeta.historyProperties))) {
+                                // relation_history TODO убрать дубликаты на сервере
                                 $log.warn('Дубликат исторической связи по историческим свойствам:', historyRelationMeta.historyProperties, 'nodeUID:', node.__uid, 'relation:', relation);
                                 $log.info('relationData.history.sorted', relationData.history.sorted);
                             } else if (__collapseHistory &&
@@ -490,7 +500,7 @@ define(function(require) {'use strict';
                                         _.pick(_.last(relationData.history.sorted), historyRelationMeta.collapseProperties)
                                     )
                                 ) {
-                                // TODO на сервере?
+                                // relation_history TODO на сервере?
                                 $log.warn('Схлопнута историческая связь по свойствам:', historyRelationMeta.collapseProperties, 'nodeUID:', node.__uid, 'relation:', relation);
                             } else {
                                 relationData.history.sorted.push(relation);
@@ -510,18 +520,7 @@ define(function(require) {'use strict';
                     target[datePropertyName] = normalDate;
                 },
 
-                addToRelationMap: function(relationMap, node, relations, options) {
-                    // $log.warn('<<< addToRelationMap...', relationMap);
-
-                    relationMap.relations = relationMap.relations || {};
-                    relationMap.byNodes = relationMap.byNodes || {};
-
-                    metaHelper.__relationsProcess(relationMap, node, relations, options);
-                    metaHelper.__relationsPostProcess(relationMap, node);
-
-                    // $log.warn('>>> addToRelationMap...', relationMap);
-                },
-
+                // relation_history
                 buildRelationHistory: function(historyMeta, data) {
                     if (!historyMeta) {
                         return null;

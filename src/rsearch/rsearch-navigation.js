@@ -833,7 +833,7 @@ define(function(require) {'use strict';
                                 pageConfig: byRelations.pageConfig,
                                 previousRequest: byRelations.request,
                                 nodeIterator: function(node, i) {
-                                    // TODO оптимизировать
+                                    // relation_history TODO оптимизировать
                                     npRsearchMetaHelper.addToRelationMap(
                                         byRelations.relationMap,
                                         node,
