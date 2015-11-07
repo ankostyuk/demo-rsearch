@@ -16,7 +16,8 @@ define(function(require) {'use strict';
 
     // <<< @Deprecated relation_history
     // Временное решение для отладки истории связей
-    var moment = require('moment');
+    var moment                  = require('moment'),
+        __normalizeDateFormat   = 'DD.MM.YYYY';
 
     var purl                = require('purl'),
         locationSearch      = purl().param(),
@@ -348,6 +349,19 @@ define(function(require) {'use strict';
                     return _.contains(npRsearchMeta.mergedRelationTypes[mergedType], relationType);
                 },
 
+                getRelationTypesInMergedType: function(relationType) {
+                    var types;
+
+                    _.each(npRsearchMeta.mergedRelationTypes, function(relationTypes){
+                        if (_.contains(relationTypes, relationType)) {
+                            types = relationTypes;
+                            return false;
+                        }
+                    });
+
+                    return types;
+                },
+
                 getHistoryRelationMeta: function(relationType) {
                     return _.get(relationTypesMeta, [relationType, 'history']);
                 },
@@ -400,10 +414,11 @@ define(function(require) {'use strict';
                                 return;
                             }
 
-                            // relationMap.relations
-                            var relationId      = metaHelper.buildRelationId(relation),
-                                relationExist   = !!relationMap.relations[relationId];
+                            var relationId          = metaHelper.buildRelationId(relation),
+                                relationExist       = !!relationMap.relations[relationId],
+                                historyRelationMeta = metaHelper.getHistoryRelationMeta(relationType.name);
 
+                            // relationMap.relations
                             relationMap.relations[relationId] = relationMap.relations[relationId] || {
                                 relation: relation,
                                 direction: direction
@@ -412,8 +427,6 @@ define(function(require) {'use strict';
                             buildHistory();
 
                             function buildHistory() {
-                                var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationType.name);
-
                                 if (!historyRelationMeta) {
                                     return;
                                 }
@@ -455,24 +468,36 @@ define(function(require) {'use strict';
                             var byRelationTypes = relationMap.byRelationTypes = relationMap.byRelationTypes || {};
                             byRelationTypes[direction] = byRelationTypes[direction] || {};
 
+                            // <<< relation_history
                             // TODO не для всех типов связей
                             // TODO на сервере
                             byRelationTypes[direction][relationType.name] = byRelationTypes[direction][relationType.name] || {
-                                'info': {
-                                    'relFacet': {
-                                        'inn': {}
+                                info: {
+                                    history: {
+                                        actualDate: null
+                                    },
+                                    relFacet: {
+                                        inn: {}
                                     }
                                 }
                             };
-                            if (!relationExist && relation.inn) {
-                                byRelationTypes[direction][relationType.name]['info']['relFacet']['inn'][relation.inn] =
-                                    (byRelationTypes[direction][relationType.name]['info']['relFacet']['inn'][relation.inn] || 0) + 1;
+
+                            if (historyRelationMeta && relation[npRsearchMeta.historyRelationDate]) {
+                                var historyInfo = byRelationTypes[direction][relationType.name].info.history;
+                                historyInfo.actualDate = Math.max(historyInfo.actualDate, relation[npRsearchMeta.historyRelationDate]);
                             }
+
+                            if (!relationExist && relation.inn) {
+                                var innFacet = byRelationTypes[direction][relationType.name].info.relFacet.inn;
+                                innFacet[relation.inn] = (innFacet[relation.inn] || 0) + 1;
+                            }
+                            // >>>
                         });
                     });
                 },
 
                 // Постобработка...
+                // выставить актуальность
                 // отсортировать историю с проверкой дубликатов
                 __relationsPostProcess: function(relationMap, node) {
                     _.each(relationMap.relations, function(relationData){
@@ -480,7 +505,8 @@ define(function(require) {'use strict';
                             return;
                         }
 
-                        var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationData.relation._type);
+                        var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationData.relation._type),
+                            actualDate          = getActualDate(relationData);
 
                         var sorted = _.sortBy(relationData.history.byDates, function(relation){
                             return -relation[npRsearchMeta.historyRelationDate];
@@ -503,17 +529,30 @@ define(function(require) {'use strict';
                                 // relation_history TODO на сервере?
                                 $log.warn('Схлопнута историческая связь по свойствам:', historyRelationMeta.collapseProperties, 'nodeUID:', node.__uid, 'relation:', relation);
                             } else {
+                                relation.__isOutdated = relation[npRsearchMeta.historyRelationDate] < actualDate;
                                 relationData.history.sorted.push(relation);
                             }
                         });
                     });
+
+                    function getActualDate(relationData) {
+                        var actualDate = relationMap.byRelationTypes[relationData.direction][relationData.relation._type].info.history.actualDate,
+                            byRelationType;
+
+                        // по объединенным типам
+                        _.each(metaHelper.getRelationTypesInMergedType(relationData.relation._type), function(relationType){
+                            byRelationType = relationMap.byRelationTypes[relationData.direction][relationType];
+                            actualDate = byRelationType ? Math.max(actualDate, byRelationType.info.history.actualDate) : actualDate;
+                        });
+
+                        return actualDate;
+                    }
                 },
 
                 __normalizeDate: function(target, datePropertyName) {
                     // TODO математическое решение
-                    var format      = 'DD.MM.YYYY',
-                        displayDate = moment(target[datePropertyName]).format(format),
-                        normalDate  = moment(displayDate, format).valueOf();
+                    var displayDate = moment(target[datePropertyName]).format(__normalizeDateFormat),
+                        normalDate  = moment(displayDate, __normalizeDateFormat).valueOf();
 
                     // $log.info('***', target[datePropertyName], displayDate, normalDate);
 
@@ -704,9 +743,9 @@ define(function(require) {'use strict';
                 }
 
                 var space       = ' ',
-                    nbsp        = ' ',      // &nbsp
-                    separator   = ', ',     // , + space
-                    dash        = ' — ';    // space + dash + &nbsp
+                    nbsp        = '\u00A0',     // &nbsp
+                    separator   = ', ',         // , + space
+                    dash        = ' —\u00A0';   // space + dash + &nbsp
 
                 relationSeparator = relationSeparator || separator;
 
@@ -849,7 +888,7 @@ define(function(require) {'use strict';
                         historyText = getFounderTextByRelation(historyRelation, relation.__isTarget);
 
                         if (historyText) {
-                            historyTexts.push(historyText);
+                            historyTexts.push(buildHistoryText(relation, historyText));
                         }
 
                         return !!relationHistory;
@@ -1063,6 +1102,14 @@ define(function(require) {'use strict';
 
                 function getInnText(inn) {
                     return _tr("ИНН") + nbsp + (nkbScreenHelper.isScreen(inn) ? nkbScreenHelper.screen(inn) : inn);
+                }
+
+                function buildHistoryText(relation, historyText) {
+                    if (relation.__isOutdated) {
+                        return '\u2205\u00A0' + historyText; // &empty + &nbsp
+                    }
+
+                    return historyText;
                 }
 
                 function buildDefaultText(relation, isTarget, defaultText, checkHistory) {
