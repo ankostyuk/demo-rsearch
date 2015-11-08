@@ -698,7 +698,7 @@ define(function(require) {'use strict';
             return metaHelper;
         }])
         //
-        .filter('targetRelationsInfo', ['$log', '$filter', 'npRsearchMetaHelper', 'appConfig', 'nkbScreenHelper', function($log, $filter, npRsearchMetaHelper, appConfig, nkbScreenHelper){
+        .filter('targetRelationsInfo', ['$log', '$filter', '$sce', 'npRsearchMetaHelper', 'appConfig', 'nkbScreenHelper', function($log, $filter, $sce, npRsearchMetaHelper, appConfig, nkbScreenHelper){
             // COMPANY-COMPANY
             //      FOUNDER_COMPANY
             //          <доля %>
@@ -1106,7 +1106,7 @@ define(function(require) {'use strict';
 
                 function buildHistoryText(relation, historyText) {
                     if (relation.__isOutdated) {
-                        return '\u2205\u00A0' + historyText; // &empty + &nbsp
+                        return '<i class="icon i-history"></i>' + historyText;
                     }
 
                     return historyText;
@@ -1165,7 +1165,7 @@ define(function(require) {'use strict';
                     texts.push(getInnText(inn));
                 }
 
-                return _.capitalize(texts.join(relationSeparator));
+                return $sce.trustAsHtml(texts.join(relationSeparator));
             };
         }]);
     //

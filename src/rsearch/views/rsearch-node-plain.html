@@ -1,7 +1,7 @@
 <div node-id="{{node._id}}" ng-click="nodeClick($event)">
     <div np-rsearch-node-history-info></div>
 
-    <div class="target-relations-info">{{targetInfo | targetRelationsInfo:node:false:true:'\n'}}</div>
+    <div class="target-relations-info" ng-bind-html="targetInfo | targetRelationsInfo:node:false:true:'\n'"></div>
 
     <div np-rsearch-node-info></div>
 
