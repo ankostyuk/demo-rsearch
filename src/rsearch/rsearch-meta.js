@@ -367,8 +367,6 @@ define(function(require) {'use strict';
                 },
 
                 buildRelationMap: function(node) {
-                    // $log.warn('* buildRelationMap node', node);
-
                     var relationMap = {};
 
                     relationMap.relations = {};
@@ -377,21 +375,19 @@ define(function(require) {'use strict';
                     metaHelper.__relationsProcess(relationMap, node, node._relations);
                     metaHelper.__relationsPostProcess(relationMap, node);
 
-                    // $log.warn('>>> buildRelationMap node', relationMap);
+                    $log.debug('>>> buildRelationMap node', relationMap);
 
                     return relationMap;
                 },
 
                 addToRelationMap: function(relationMap, node, relations, options) {
-                    // $log.warn('<<< addToRelationMap...', relationMap);
-
                     relationMap.relations = relationMap.relations || {};
                     relationMap.byNodes = relationMap.byNodes || {};
 
                     metaHelper.__relationsProcess(relationMap, node, relations, options);
                     metaHelper.__relationsPostProcess(relationMap, node);
 
-                    // $log.warn('>>> addToRelationMap...', relationMap);
+                    $log.debug('>>> addToRelationMap...', relationMap);
                 },
 
                 __relationsProcess: function(relationMap, node, relations, options) {
@@ -450,7 +446,7 @@ define(function(require) {'use strict';
 
                                 if (byDate) {
                                     // relation_history TODO убрать дубликаты на сервере
-                                    $log.warn('Дубликат исторической связи по дате:', npRsearchMeta.historyRelationDate, 'nodeUID:', nodeUID, 'relation:', relation);
+                                    $log.debug('WARN: Дубликат исторической связи по дате:', npRsearchMeta.historyRelationDate, 'nodeUID:', nodeUID, 'relation:', relation);
                                 } else {
                                     relationData.history.byDates[date] = relation;
                                 }
@@ -517,8 +513,8 @@ define(function(require) {'use strict';
                         _.each(sorted, function(relation, i){
                             if (_.find(relationData.history.sorted, _.pick(relation, historyRelationMeta.historyProperties))) {
                                 // relation_history TODO убрать дубликаты на сервере
-                                $log.warn('Дубликат исторической связи по историческим свойствам:', historyRelationMeta.historyProperties, 'nodeUID:', node.__uid, 'relation:', relation);
-                                // $log.info('relationData.history.sorted', relationData.history.sorted);
+                                $log.debug('WARN: Дубликат исторической связи по историческим свойствам:', historyRelationMeta.historyProperties, 'nodeUID:', node.__uid, 'relation:', relation);
+                                $log.debug('relationData.history.sorted', relationData.history.sorted);
                             } else if (__collapseHistory &&
                                     _.last(relationData.history.sorted) &&
                                     _.isEqual(
@@ -527,7 +523,7 @@ define(function(require) {'use strict';
                                     )
                                 ) {
                                 // relation_history TODO на сервере?
-                                $log.warn('Схлопнута историческая связь по свойствам:', historyRelationMeta.collapseProperties, 'nodeUID:', node.__uid, 'relation:', relation);
+                                $log.debug('WARN: Схлопнута историческая связь по свойствам:', historyRelationMeta.collapseProperties, 'nodeUID:', node.__uid, 'relation:', relation);
                             } else {
                                 actualDate = getActualDate(relationData);
                                 relation.__isOutdated = relation[npRsearchMeta.historyRelationDate] < actualDate;
@@ -552,11 +548,9 @@ define(function(require) {'use strict';
 
                 __normalizeDate: function(target, datePropertyName) {
                     // TODO математическое решение
-                    // TODO timezone
+                    // TODO timezone -- возможно смещение в другие сутки
                     var displayDate = moment(target[datePropertyName]).format(__normalizeDateFormat),
                         normalDate  = moment(displayDate, __normalizeDateFormat).valueOf();
-
-                    // $log.info('***', target[datePropertyName], displayDate, normalDate);
 
                     target[datePropertyName] = normalDate;
                 },
@@ -647,8 +641,8 @@ define(function(require) {'use strict';
                         });
                     }
 
-                    // $log.info('buildRelationHistory... actualData', actualData);
-                    // $log.info('buildRelationHistory... outdatedData', outdatedData);
+                    // $log.debug('buildRelationHistory... actualData', actualData);
+                    // $log.debug('buildRelationHistory... outdatedData', outdatedData);
 
                     return {
                         'actual': actualData,

@@ -134,7 +134,7 @@ define(function(require) {'use strict';
         })
         //
         .config(['$logProvider', function($logProvider){
-            $logProvider.debugEnabled(false);
+            $logProvider.debugEnabled(root.APP_BUILD_TYPE !== 'production');
         }])
         //
         .run(['$log', '$rootScope', 'npL10n', function($log, $rootScope, npL10n){
