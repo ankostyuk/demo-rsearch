@@ -506,7 +506,7 @@ define(function(require) {'use strict';
                         }
 
                         var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationData.relation._type),
-                            actualDate          = getActualDate(relationData);
+                            actualDate;
 
                         var sorted = _.sortBy(relationData.history.byDates, function(relation){
                             return -relation[npRsearchMeta.historyRelationDate];
@@ -518,7 +518,7 @@ define(function(require) {'use strict';
                             if (_.find(relationData.history.sorted, _.pick(relation, historyRelationMeta.historyProperties))) {
                                 // relation_history TODO убрать дубликаты на сервере
                                 $log.warn('Дубликат исторической связи по историческим свойствам:', historyRelationMeta.historyProperties, 'nodeUID:', node.__uid, 'relation:', relation);
-                                $log.info('relationData.history.sorted', relationData.history.sorted);
+                                // $log.info('relationData.history.sorted', relationData.history.sorted);
                             } else if (__collapseHistory &&
                                     _.last(relationData.history.sorted) &&
                                     _.isEqual(
@@ -529,6 +529,7 @@ define(function(require) {'use strict';
                                 // relation_history TODO на сервере?
                                 $log.warn('Схлопнута историческая связь по свойствам:', historyRelationMeta.collapseProperties, 'nodeUID:', node.__uid, 'relation:', relation);
                             } else {
+                                actualDate = getActualDate(relationData);
                                 relation.__isOutdated = relation[npRsearchMeta.historyRelationDate] < actualDate;
                                 relationData.history.sorted.push(relation);
                             }
@@ -551,6 +552,7 @@ define(function(require) {'use strict';
 
                 __normalizeDate: function(target, datePropertyName) {
                     // TODO математическое решение
+                    // TODO timezone
                     var displayDate = moment(target[datePropertyName]).format(__normalizeDateFormat),
                         normalDate  = moment(displayDate, __normalizeDateFormat).valueOf();
 
@@ -888,7 +890,7 @@ define(function(require) {'use strict';
                         historyText = getFounderTextByRelation(historyRelation, relation.__isTarget);
 
                         if (historyText) {
-                            historyTexts.push(buildHistoryText(relation, historyText));
+                            historyTexts.push(buildHistoryText(historyRelation, historyText));
                         }
 
                         return !!relationHistory;
@@ -918,7 +920,7 @@ define(function(require) {'use strict';
                         historyText = getExecutiveTextByRelation(historyRelation, relation.__isTarget);
 
                         if (historyText) {
-                            historyTexts.push(historyText);
+                            historyTexts.push(buildHistoryText(historyRelation, historyText));
                         }
 
                         return !!relationHistory;
