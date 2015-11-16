@@ -165,6 +165,10 @@ define(function(require) {'use strict';
             return {
                 restrict: 'A',
                 link: function(scope, element, attrs) {
+                    if (root.APP_BUILD_TYPE !== 'production') {
+                        return;
+                    }
+
                     $rootScope.$on('nkb-user-apply', function() {
                         var src = '//image.providesupport.com/js/nkb-trial/safe-standard.js?ps_h=Xase&ps_t=' + new Date().getTime();
                         var user = nkbUser.user();

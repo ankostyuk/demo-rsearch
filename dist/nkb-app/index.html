@@ -32,7 +32,7 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.16/require.min.js"></script>
 
         <!-- nkb-app -->
-        <script src="./main.js?c350f82167a6fc6e97d9a2662cc2cae0d187efc7"></script>
+        <script src="./main.js?1d4cc945f4a0fe89dedf87cf3f5b326e56714074"></script>
     </head>
 
     <body ng-class="{'is-search': app.isSearch()}">
@@ -49,7 +49,7 @@
                 </div>
                 <div class="right-links"><a href="/reg/">{{::_tr("Регистрация")}}</a></div>
                 <div app-lang></div>
-                <!--<div class="providesupport-container" app-provide-support></div>-->
+                <div class="providesupport-container" app-provide-support></div>
             </div>
             <div class="content">
                 <div class="row">
@@ -187,11 +187,15 @@
             </div>
         </div>
 
-        <!-- Rating@Mail.ru counter
+        <!-- Rating@Mail.ru counter -->
         <script type="text/javascript">
         var _tmr = _tmr || [];
         _tmr.push({id: "211652", type: "pageView", start: (new Date()).getTime()});
         (function (d, w) {
+            if (w.APP_BUILD_TYPE !== 'production') {
+                return;
+            }
+
            var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true;
            ts.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//top-fwz1.mail.ru/js/code.js";
            var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
@@ -200,11 +204,15 @@
         </script><noscript><div style="position:absolute;left:-10000px;">
         <img src="//top-fwz1.mail.ru/counter?id=211652;js=na" style="border:0;" height="1" width="1" alt="Рейтинг@Mail.ru" />
         </div></noscript>
-        //Rating@Mail.ru counter -->
+        <!-- //Rating@Mail.ru counter -->
 
-        <!-- Yandex.Metrika counter
+        <!-- Yandex.Metrika counter -->
         <script type="text/javascript">
         (function (d, w, c) {
+            if (w.APP_BUILD_TYPE !== 'production') {
+                return;
+            }
+
             (w[c] = w[c] || []).push(function() {
                 try {
                     w.yaCounter23296318 = new Ya.Metrika({id:23296318,
@@ -229,7 +237,7 @@
         })(document, window, "yandex_metrika_callbacks");
         </script>
         <noscript><div><img src="//mc.yandex.ru/watch/23296318" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-        /Yandex.Metrika counter -->
+        <!-- /Yandex.Metrika counter -->
 
     </body>
 </html>
