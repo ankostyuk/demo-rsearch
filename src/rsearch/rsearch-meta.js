@@ -396,99 +396,90 @@ define(function(require) {'use strict';
                     _.each(relations, function(relation){
                         var relationType    = relationTypesMeta[relation._type],
                             srcNodeUID      = metaHelper.buildNodeUIDByType(relation._srcId, relationType.sourceNodeType),
-                            dstNodeUID      = metaHelper.buildNodeUIDByType(relation._dstId, relationType.destinationNodeType);
+                            dstNodeUID      = metaHelper.buildNodeUIDByType(relation._dstId, relationType.destinationNodeType),
+                            isSrcNode       = srcNodeUID === node.__uid,
+                            relationNodeUID = options.direction ? node.__uid : (isSrcNode ? dstNodeUID : srcNodeUID),
+                            direction       = options.direction ? options.direction : (isSrcNode ? 'children' : 'parents');
 
-                        // TODO оптимизировать
-                        // убрать parents/children -- можно обойтись без direction
-                        // и убрать лишние циклы -- оптимизация
-                        _.each(options.direction ? [[node.__uid, options.direction]] : [[srcNodeUID, 'parents'], [dstNodeUID, 'children']], function(conf){
-                            var nodeUID     = conf[0],
-                                direction   = conf[1];
+                        //
+                        var relationId          = metaHelper.buildRelationId(relation),
+                            relationExist       = !!relationMap.relations[relationId],
+                            historyRelationMeta = metaHelper.getHistoryRelationMeta(relationType.name);
 
-                            // Только связи с другими нодами и "кольцевые" связи
-                            if (!options.direction && nodeUID === node.__uid && srcNodeUID !== dstNodeUID) {
+                        // relationMap.relations
+                        relationMap.relations[relationId] = relationMap.relations[relationId] || {
+                            relation: relation,
+                            direction: direction
+                        };
+
+                        buildHistory();
+
+                        function buildHistory() {
+                            if (!historyRelationMeta) {
                                 return;
                             }
 
-                            var relationId          = metaHelper.buildRelationId(relation),
-                                relationExist       = !!relationMap.relations[relationId],
-                                historyRelationMeta = metaHelper.getHistoryRelationMeta(relationType.name);
+                            var relationData = relationMap.relations[relationId];
 
-                            // relationMap.relations
-                            relationMap.relations[relationId] = relationMap.relations[relationId] || {
-                                relation: relation,
-                                direction: direction
+                            relationData.history = relationData.history || {
+                                byDates: {},
+                                sorted: null
                             };
-
-                            buildHistory();
-
-                            function buildHistory() {
-                                if (!historyRelationMeta) {
-                                    return;
-                                }
-
-                                var relationData = relationMap.relations[relationId];
-
-                                relationData.history = relationData.history || {
-                                    byDates: {},
-                                    sorted: null
-                                };
-
-                                // <<< relation_history
-                                // нормализация даты для корректного отображения истории
-                                // костыль!
-                                // TODO на сервере
-                                metaHelper.__normalizeDate(relation, npRsearchMeta.historyRelationDate);
-                                // >>>
-
-                                var date        = relation[npRsearchMeta.historyRelationDate],
-                                    byDate      = relationData.history.byDates[date];
-
-                                if (byDate) {
-                                    // relation_history TODO убрать дубликаты на сервере
-                                    $log.debug('WARN: Дубликат исторической связи по дате:', npRsearchMeta.historyRelationDate, 'nodeUID:', nodeUID, 'relation:', relation);
-                                } else {
-                                    relationData.history.byDates[date] = relation;
-                                }
-                            }
-
-                            // byNodes
-                            var byNodes = relationMap.byNodes[nodeUID] = relationMap.byNodes[nodeUID] || {};
-                            byNodes[direction] = byNodes[direction] || {};
-
-                            byNodes[direction][relationType.name] = byNodes[direction][relationType.name] || {
-                                relationId: relationId
-                            };
-
-                            // byRelations
-                            var byRelationTypes = relationMap.byRelationTypes = relationMap.byRelationTypes || {};
-                            byRelationTypes[direction] = byRelationTypes[direction] || {};
 
                             // <<< relation_history
-                            // TODO не для всех типов связей
+                            // нормализация даты для корректного отображения истории
+                            // костыль!
                             // TODO на сервере
-                            byRelationTypes[direction][relationType.name] = byRelationTypes[direction][relationType.name] || {
-                                info: {
-                                    history: {
-                                        actualDate: null
-                                    },
-                                    relFacet: {
-                                        inn: {}
-                                    }
-                                }
-                            };
-
-                            if (historyRelationMeta && relation[npRsearchMeta.historyRelationDate]) {
-                                var historyInfo = byRelationTypes[direction][relationType.name].info.history;
-                                historyInfo.actualDate = Math.max(historyInfo.actualDate, relation[npRsearchMeta.historyRelationDate]);
-                            }
-
-                            if (!relationExist && relation.inn) {
-                                var innFacet = byRelationTypes[direction][relationType.name].info.relFacet.inn;
-                                innFacet[relation.inn] = (innFacet[relation.inn] || 0) + 1;
-                            }
+                            metaHelper.__normalizeDate(relation, npRsearchMeta.historyRelationDate);
                             // >>>
-                        });
+
+                            var date        = relation[npRsearchMeta.historyRelationDate],
+                                byDate      = relationData.history.byDates[date];
+
+                            if (byDate) {
+                                // relation_history TODO убрать дубликаты на сервере
+                                $log.debug('WARN: Дубликат исторической связи по дате:', npRsearchMeta.historyRelationDate, 'node.__uid:', node.__uid, 'relation:', relation);
+                            } else {
+                                relationData.history.byDates[date] = relation;
+                            }
+                        }
+
+                        // byNodes
+                        var byNodes = relationMap.byNodes[relationNodeUID] = relationMap.byNodes[relationNodeUID] || {};
+                        byNodes[direction] = byNodes[direction] || {};
+
+                        byNodes[direction][relationType.name] = byNodes[direction][relationType.name] || {
+                            relationId: relationId
+                        };
+
+                        // byRelations
+                        var byRelationTypes = relationMap.byRelationTypes = relationMap.byRelationTypes || {};
+                        byRelationTypes[direction] = byRelationTypes[direction] || {};
+
+                        // <<< relation_history
+                        // TODO не для всех типов связей
+                        // TODO на сервере
+                        byRelationTypes[direction][relationType.name] = byRelationTypes[direction][relationType.name] || {
+                            info: {
+                                history: {
+                                    actualDate: null
+                                },
+                                relFacet: {
+                                    inn: {}
+                                }
+                            }
+                        };
+
+                        if (historyRelationMeta && relation[npRsearchMeta.historyRelationDate]) {
+                            var historyInfo = byRelationTypes[direction][relationType.name].info.history;
+                            historyInfo.actualDate = Math.max(historyInfo.actualDate, relation[npRsearchMeta.historyRelationDate]);
+                        }
+
+                        if (!relationExist && relation.inn) {
+                            var innFacet = byRelationTypes[direction][relationType.name].info.relFacet.inn;
+                            innFacet[relation.inn] = (innFacet[relation.inn] || 0) + 1;
+                        }
+                        // >>>
                     });
                 },
 
@@ -513,7 +504,7 @@ define(function(require) {'use strict';
                         _.each(sorted, function(relation, i){
                             if (_.find(relationData.history.sorted, _.pick(relation, historyRelationMeta.historyProperties))) {
                                 // relation_history TODO убрать дубликаты на сервере
-                                $log.debug('WARN: Дубликат исторической связи по историческим свойствам:', historyRelationMeta.historyProperties, 'nodeUID:', node.__uid, 'relation:', relation);
+                                $log.debug('WARN: Дубликат исторической связи по историческим свойствам:', historyRelationMeta.historyProperties, 'node.__uid:', node.__uid, 'relation:', relation);
                                 $log.debug('relationData.history.sorted', relationData.history.sorted);
                             } else if (__collapseHistory &&
                                     _.last(relationData.history.sorted) &&
@@ -523,7 +514,7 @@ define(function(require) {'use strict';
                                     )
                                 ) {
                                 // relation_history TODO на сервере?
-                                $log.debug('WARN: Схлопнута историческая связь по свойствам:', historyRelationMeta.collapseProperties, 'nodeUID:', node.__uid, 'relation:', relation);
+                                $log.debug('WARN: Схлопнута историческая связь по свойствам:', historyRelationMeta.collapseProperties, 'node.__uid:', node.__uid, 'relation:', relation);
                             } else {
                                 actualDate = getActualDate(relationData);
                                 relation.__isOutdated = relation[npRsearchMeta.historyRelationDate] < actualDate;
