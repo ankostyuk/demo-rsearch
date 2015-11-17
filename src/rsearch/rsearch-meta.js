@@ -501,7 +501,7 @@ define(function(require) {'use strict';
 
                         relationData.history.sorted = [];
 
-                        _.each(sorted, function(relation, i){
+                        _.each(sorted, function(relation){
                             if (_.find(relationData.history.sorted, _.pick(relation, historyRelationMeta.historyProperties))) {
                                 // relation_history TODO убрать дубликаты на сервере
                                 $log.debug('WARN: Дубликат исторической связи по историческим свойствам:', historyRelationMeta.historyProperties, 'node.__uid:', node.__uid, 'relation:', relation);
