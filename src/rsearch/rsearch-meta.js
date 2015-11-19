@@ -29,8 +29,9 @@ define(function(require) {'use strict';
 
     function isFounderRelationsCollapsed(r1, r2) {
         return (
-            r1.shareAmount === r2.shareAmount &&
-            r1.sharePercent === r2.sharePercent
+            r1.shareAmount ?
+                r1.shareAmount === r2.shareAmount :
+                r1.sharePercent === r2.sharePercent
         );
     }
 
