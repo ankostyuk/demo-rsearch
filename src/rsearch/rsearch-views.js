@@ -358,7 +358,7 @@ define(function(require) {'use strict';
                         nodeList: null,
                         targetInfo: null,
                         listProperties: {
-                            isHistory: false,
+                            history: null,
                             isJoint: false
                         },
                         scrollContainer: proxy.getScrollContainer(),
@@ -593,6 +593,8 @@ define(function(require) {'use strict';
                                 npRsearchMetaHelper.buildNodeExtraMeta(targetNode);
 
                                 // relation_history
+                                // TODO оптимизировать
+                                npRsearchMetaHelper.buildNodeRelationMap(node);
                                 npRsearchMetaHelper.addToRelationMap(relationMap, targetNode, targetNode._relations);
 
                                 targetInfo = {

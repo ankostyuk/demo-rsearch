@@ -589,6 +589,7 @@ define(function(require) {'use strict';
 
                                     function complete() {
                                         setNodeList(byRelations);
+                                        buildRelationsOppositeHistory(byRelations);
 
                                         var accentedResult = checkAccentedResult && checkAccentedResultByRelations(byRelations);
 
@@ -784,17 +785,15 @@ define(function(require) {'use strict';
 
                         var jointRelationTypes  = npRsearchMetaHelper.getRelationTypesByMergedType(byRelations.relationType),
                             isJoint             = !!jointRelationTypes,
-                            historyMeta         = npRsearchMetaHelper.getHistoryRelationMeta(byRelations.relationType);
+                            historyMeta         = npRsearchMetaHelper.getHistoryRelationMeta(byRelations.relationType, byRelations.direction);
 
                         var listProperties = {
                             isJoint: isJoint,
-                            isHistory: !!historyMeta,
                             history: npRsearchMetaHelper.buildRelationHistoryList(historyMeta, {
                                 relationMap: byRelations.relationMap,
                                 relationType: byRelations.relationType,
                                 direction: byRelations.direction,
                                 nodeList: byRelations.nodeList,
-                                // jointRelationTypes: jointRelationTypes,
                                 isJoint: isJoint
                             })
                         };
@@ -811,6 +810,7 @@ define(function(require) {'use strict';
                                 byRelations.request.promise.then(complete, complete);
 
                                 function complete() {
+                                    buildRelationsOppositeHistory(byRelations);
                                     pushNodeList(byRelations, callback);
                                     done();
                                 }
@@ -822,6 +822,18 @@ define(function(require) {'use strict';
                         initRelationsFilters(byRelations);
 
                         nodeListView.scrollTop();
+                    }
+
+                    function buildRelationsOppositeHistory(byRelations) {
+                        var historyMeta = npRsearchMetaHelper.getHistoryRelationMeta(byRelations.relationType, byRelations.direction);
+
+                        if (!historyMeta || !historyMeta.opposite) {
+                            return;
+                        }
+
+                        var nodeList = byRelations.result.list;
+
+                        npRsearchMetaHelper.buildNodesRelationMap(nodeList);
                     }
 
                     function listRelationsRequest(byRelations) {

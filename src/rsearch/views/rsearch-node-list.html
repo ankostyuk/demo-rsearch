@@ -1,5 +1,5 @@
 <script id="np-rsearch-node-list" type="text/template">
-    <div ng-if="!listProperties.isHistory">
+    <div ng-if="!listProperties.history">
         <div ng-if="!listProperties.isJoint" infinite-scroll="pager.nextPage()" infinite-scroll-disabled="pager.isDisabled()" infinite-scroll-distance="0" infinite-scroll-container="scrollContainer">
             <div np-rsearch-node-plain-list="nodeList"
                 np-rsearch-node-plain-list-show-item-number="showItemNumber"
@@ -14,7 +14,7 @@
             np-rsearch-node-joint-list-show-headers="true">
         </div>
     </div>
-    <div ng-if="listProperties.isHistory">
+    <div ng-if="listProperties.history">
         <div np-rsearch-node-joint-list="listProperties.history.actual.nodeList"
             np-rsearch-node-joint-list-show-item-number="showItemNumber"
             np-rsearch-node-joint-list-target-info="targetInfo"

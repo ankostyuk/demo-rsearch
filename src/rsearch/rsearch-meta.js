@@ -91,27 +91,44 @@ define(function(require) {'use strict';
                 'FOUNDER': {
                     name: 'FOUNDER',
                     history: {
-                        historyProperties: ['_since'],
-                        isCollapsed: isFounderRelationsCollapsed
+                        'parents': {
+                            historyProperties: ['_since'],
+                            isCollapsed: isFounderRelationsCollapsed
+                        }
                     }
                 },
                 'FOUNDER_INDIVIDUAL': {
                     history: {
-                        historyProperties: ['_since'],
-                        isCollapsed: isFounderRelationsCollapsed
+                        'children': {
+                            opposite: true
+                        },
+                        'parents': {
+                            historyProperties: ['_since'],
+                            isCollapsed: isFounderRelationsCollapsed
+                        }
                     }
                 },
                 'FOUNDER_COMPANY': {
                     history: {
-                        historyProperties: ['_since'],
-                        isCollapsed: isFounderRelationsCollapsed
+                        'children': {
+                            opposite: true
+                        },
+                        'parents': {
+                            historyProperties: ['_since'],
+                            isCollapsed: isFounderRelationsCollapsed
+                        }
                     }
                 },
 
                 'EXECUTIVE_INDIVIDUAL': {
                     history: {
-                        historyProperties: ['_since'],
-                        isCollapsed: isExecutiveRelationsCollapsed
+                        'children': {
+                            opposite: true
+                        },
+                        'parents': {
+                            historyProperties: ['_since'],
+                            isCollapsed: isExecutiveRelationsCollapsed
+                        }
                     }
                 },
 
@@ -384,8 +401,18 @@ define(function(require) {'use strict';
                     return info;
                 },
 
-                getHistoryRelationMeta: function(relationType) {
-                    return _.get(relationTypesMeta, [relationType, 'history']);
+                getHistoryRelationMeta: function(relationType, direction) {
+                    return _.get(relationTypesMeta, [relationType, 'history', direction]);
+                },
+
+                buildNodesRelationMap: function(nodeList) {
+                    _.each(nodeList, function(node){
+                        metaHelper.buildNodeRelationMap(node);
+                    });
+                },
+
+                buildNodeRelationMap: function(node) {
+                    node.__relationMap = metaHelper.buildRelationMap(node);
                 },
 
                 buildRelationMap: function(node) {
@@ -426,7 +453,7 @@ define(function(require) {'use strict';
                         //
                         var relationId          = metaHelper.buildRelationId(relation),
                             relationExist       = !!relationMap.relations[relationId],
-                            historyRelationMeta = metaHelper.getHistoryRelationMeta(relationType.name);
+                            historyRelationMeta = metaHelper.getHistoryRelationMeta(relationType.name, direction);
 
                         // relationMap.relations
                         relationMap.relations[relationId] = relationMap.relations[relationId] || {
@@ -437,7 +464,7 @@ define(function(require) {'use strict';
                         buildHistory();
 
                         function buildHistory() {
-                            if (!historyRelationMeta) {
+                            if (!historyRelationMeta || historyRelationMeta.opposite) {
                                 return;
                             }
 
@@ -516,7 +543,7 @@ define(function(require) {'use strict';
                             return;
                         }
 
-                        var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationData.relation._type);
+                        var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationData.relation._type, relationData.direction);
 
                         var sorted = _.sortBy(relationData.history.byDates, function(relation){
                             return -relation[npRsearchMeta.historyRelationDate];
@@ -551,6 +578,9 @@ define(function(require) {'use strict';
 
                                 relationData.history.sorted[relationData.history.sorted.length - 1] = relation;
 
+                                // TODO может расширить случаи проверки actual:
+                                // при схлопывании дальше 1,
+                                // при вставке в список sorted
                                 if (relationData.history.sorted.length === 1) {
                                     relationData.history.actual.min = Math.min(relationData.history.actual.min, relation[npRsearchMeta.historyRelationDate]);
                                     relationData.history.actual.since.min = Math.min(relationData.history.actual.since.min, relation[npRsearchMeta.sinceRelationDate]);
@@ -631,7 +661,7 @@ define(function(require) {'use strict';
 
                 // relation_history
                 buildRelationHistoryList: function(historyMeta, data) {
-                    if (!historyMeta) {
+                    if (!historyMeta || historyMeta.opposite) {
                         return null;
                     }
 
@@ -924,11 +954,18 @@ define(function(require) {'use strict';
                 }
 
                 function getFounderText(relation) {
-                    var history         = data.relationInfo.relationMap.relations[relation.__id].history.sorted,
-                        historyTexts    = [],
+                    var relationHistoryInfo =
+                        data.relationInfo.relationMap.relations[relation.__id].history ||
+                        node.__relationMap.relations[relation.__id].history;
+
+                    if (!relationHistoryInfo) {
+                        return getFounderTextByRelation(relation, relation.__isTarget);
+                    }
+
+                    var historyTexts    = [],
                         historyText;
 
-                    _.each(history, function(historyRelation){
+                    _.each(relationHistoryInfo.sorted, function(historyRelation){
                         historyText = getFounderTextByRelation(historyRelation, relation.__isTarget);
 
                         if (historyText) {
@@ -953,12 +990,21 @@ define(function(require) {'use strict';
                     return buildDefaultText(relation, isTarget, _tr("руководитель") + sText, true);
                 }
 
+                // Дублирование кода с getFounderText
+                // TODO обобщить код
                 function getExecutiveText(relation) {
-                    var history         = data.relationInfo.relationMap.relations[relation.__id].history.sorted,
-                        historyTexts    = [],
+                    var relationHistoryInfo =
+                        data.relationInfo.relationMap.relations[relation.__id].history ||
+                        node.__relationMap.relations[relation.__id].history;
+
+                    if (!relationHistoryInfo) {
+                        return getExecutiveTextByRelation(relation, relation.__isTarget);
+                    }
+
+                    var historyTexts    = [],
                         historyText;
 
-                    _.each(history, function(historyRelation){
+                    _.each(relationHistoryInfo.sorted, function(historyRelation){
                         historyText = getExecutiveTextByRelation(historyRelation, relation.__isTarget);
 
                         if (historyText) {
