@@ -21,9 +21,25 @@ define(function(require) {'use strict';
 
     var purl                = require('purl'),
         locationSearch      = purl().param(),
-        __collapseHistory   = locationSearch['collapse-history'] === 'false' ? false : true;
+        __collapseHistory   = locationSearch['collapse-history'] === 'false' ? false : true,
+        __crossSince        = locationSearch['cross-since'] === 'false' ? false : true;
         console.warn('__collapseHistory:', __collapseHistory);
+        console.warn('__crossSince:', __crossSince);
     // >>>
+
+    function isFounderRelationsCollapsed(r1, r2) {
+        return (
+            r1.shareAmount === r2.shareAmount &&
+            r1.sharePercent === r2.sharePercent
+        );
+    }
+
+    function isExecutiveRelationsCollapsed(r1, r2) {
+        return (
+            r1.position && r2.position &&
+            r1.position.toLowerCase() === r2.position.toLowerCase()
+        );
+    }
 
     return angular.module('np.rsearch-meta', _.pluck(extmodules, 'name'))
         //
@@ -75,26 +91,26 @@ define(function(require) {'use strict';
                     name: 'FOUNDER',
                     history: {
                         historyProperties: ['_since'],
-                        collapseProperties: ['shareAmount', 'sharePercent']
+                        isCollapsed: isFounderRelationsCollapsed
                     }
                 },
                 'FOUNDER_INDIVIDUAL': {
                     history: {
                         historyProperties: ['_since'],
-                        collapseProperties: ['shareAmount', 'sharePercent']
+                        isCollapsed: isFounderRelationsCollapsed
                     }
                 },
                 'FOUNDER_COMPANY': {
                     history: {
                         historyProperties: ['_since'],
-                        collapseProperties: ['shareAmount', 'sharePercent']
+                        isCollapsed: isFounderRelationsCollapsed
                     }
                 },
 
                 'EXECUTIVE_INDIVIDUAL': {
                     history: {
                         historyProperties: ['_since'],
-                        collapseProperties: ['position']
+                        isCollapsed: isExecutiveRelationsCollapsed
                     }
                 },
 
@@ -109,7 +125,8 @@ define(function(require) {'use strict';
                 'FOUNDER': ['FOUNDER_INDIVIDUAL', 'FOUNDER_COMPANY']
             },
 
-            historyRelationDate: '_actual'
+            historyRelationDate: '_actual',
+            sinceRelationDate: '_since'
         })
         //
         .factory('npRsearchMetaHelper', ['$log', '$q', '$rootScope', 'appConfig', 'npRsearchMeta', 'npRsearchResource', function($log, $q, $rootScope, appConfig, npRsearchMeta, npRsearchResource){
@@ -349,17 +366,21 @@ define(function(require) {'use strict';
                     return _.contains(npRsearchMeta.mergedRelationTypes[mergedType], relationType);
                 },
 
-                getRelationTypesInMergedType: function(relationType) {
-                    var types;
+                getMergedTypeInfoByRelationType: function(relationType) {
+                    var info = {
+                        mergedType: null,
+                        relationTypes: null
+                    };
 
-                    _.each(npRsearchMeta.mergedRelationTypes, function(relationTypes){
+                    _.each(npRsearchMeta.mergedRelationTypes, function(relationTypes, mergedType){
                         if (_.contains(relationTypes, relationType)) {
-                            types = relationTypes;
+                            info.mergedType = mergedType;
+                            info.relationTypes = relationTypes;
                             return false;
                         }
                     });
 
-                    return types;
+                    return info;
                 },
 
                 getHistoryRelationMeta: function(relationType) {
@@ -375,7 +396,7 @@ define(function(require) {'use strict';
                     metaHelper.__relationsProcess(relationMap, node, node._relations);
                     metaHelper.__relationsPostProcess(relationMap, node);
 
-                    $log.debug('>>> buildRelationMap node', relationMap);
+                    $log.debug('buildRelationMap... relationMap:', relationMap);
 
                     return relationMap;
                 },
@@ -387,7 +408,7 @@ define(function(require) {'use strict';
                     metaHelper.__relationsProcess(relationMap, node, relations, options);
                     metaHelper.__relationsPostProcess(relationMap, node);
 
-                    $log.debug('>>> addToRelationMap...', relationMap);
+                    $log.debug('addToRelationMap... relationMap:', relationMap);
                 },
 
                 __relationsProcess: function(relationMap, node, relations, options) {
@@ -430,6 +451,7 @@ define(function(require) {'use strict';
                             // нормализация даты для корректного отображения истории
                             // костыль!
                             // TODO на сервере
+                            // TODO ? нормализовать _since
                             metaHelper.__normalizeDate(relation, npRsearchMeta.historyRelationDate);
                             // >>>
 
@@ -462,18 +484,19 @@ define(function(require) {'use strict';
                         byRelationTypes[direction][relationType.name] = byRelationTypes[direction][relationType.name] || {
                             info: {
                                 history: {
-                                    actualDate: null
+                                    actual: {
+                                        min: 0,
+                                        since: {
+                                            min: 0,
+                                            max: 0
+                                        }
+                                    }
                                 },
                                 relFacet: {
                                     inn: {}
                                 }
                             }
                         };
-
-                        if (historyRelationMeta && relation[npRsearchMeta.historyRelationDate]) {
-                            var historyInfo = byRelationTypes[direction][relationType.name].info.history;
-                            historyInfo.actualDate = Math.max(historyInfo.actualDate, relation[npRsearchMeta.historyRelationDate]);
-                        }
 
                         if (!relationExist && relation.inn) {
                             var innFacet = byRelationTypes[direction][relationType.name].info.relFacet.inn;
@@ -492,12 +515,24 @@ define(function(require) {'use strict';
                             return;
                         }
 
-                        var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationData.relation._type),
-                            actualDate;
+                        var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationData.relation._type);
 
                         var sorted = _.sortBy(relationData.history.byDates, function(relation){
                             return -relation[npRsearchMeta.historyRelationDate];
                         });
+
+                        var historyInfo = relationMap.byRelationTypes[relationData.direction][relationData.relation._type].info.history,
+                            first;
+
+                        first = _.first(sorted);
+
+                        relationData.history.actual = {
+                            min: first[npRsearchMeta.historyRelationDate],
+                            since: {
+                                min: first[npRsearchMeta.sinceRelationDate],
+                                max: first[npRsearchMeta.sinceRelationDate]
+                            }
+                        };
 
                         relationData.history.sorted = [];
 
@@ -505,36 +540,83 @@ define(function(require) {'use strict';
                             if (_.find(relationData.history.sorted, _.pick(relation, historyRelationMeta.historyProperties))) {
                                 // relation_history TODO убрать дубликаты на сервере
                                 $log.debug('WARN: Дубликат исторической связи по историческим свойствам:', historyRelationMeta.historyProperties, 'node.__uid:', node.__uid, 'relation:', relation);
-                                $log.debug('relationData.history.sorted', relationData.history.sorted);
+                                $log.debug('relationData.history.sorted:', relationData.history.sorted);
                             } else if (__collapseHistory &&
                                     _.last(relationData.history.sorted) &&
-                                    _.isEqual(
-                                        _.pick(relation, historyRelationMeta.collapseProperties),
-                                        _.pick(_.last(relationData.history.sorted), historyRelationMeta.collapseProperties)
-                                    )
+                                    historyRelationMeta.isCollapsed(relation, _.last(relationData.history.sorted))
                                 ) {
                                 // relation_history TODO на сервере?
-                                $log.debug('WARN: Схлопнута историческая связь по свойствам:', historyRelationMeta.collapseProperties, 'node.__uid:', node.__uid, 'relation:', relation);
+                                $log.debug('WARN: Схлопнута историческая связь...', 'node.__uid:', node.__uid, 'relation:', relation);
+
+                                relationData.history.sorted[relationData.history.sorted.length - 1] = relation;
+
+                                if (relationData.history.sorted.length === 1) {
+                                    relationData.history.actual.min = Math.min(relationData.history.actual.min, relation[npRsearchMeta.historyRelationDate]);
+                                    relationData.history.actual.since.min = Math.min(relationData.history.actual.since.min, relation[npRsearchMeta.sinceRelationDate]);
+                                    relationData.history.actual.since.max = Math.max(relationData.history.actual.since.max, relation[npRsearchMeta.sinceRelationDate]);
+                                }
                             } else {
-                                actualDate = getActualDate(relationData);
-                                relation.__isOutdated = relation[npRsearchMeta.historyRelationDate] < actualDate;
                                 relationData.history.sorted.push(relation);
+                            }
+                        });
+
+                        if (historyInfo.actual.min < relationData.history.actual.min) {
+                            historyInfo.actual.min = relationData.history.actual.min;
+                            historyInfo.actual.since.min = relationData.history.actual.since.min;
+                            historyInfo.actual.since.max = relationData.history.actual.since.max;
+                        }
+                    });
+
+                    // Объединить данные по истории
+                    // TODO Не объединять для "необъединяемых" направлений связей,
+                    // например: children - 'FOUNDER_INDIVIDUAL', 'FOUNDER_COMPANY'
+                    _.each(relationMap.byRelationTypes, function(relationTypes, direction){
+                        _.each(relationTypes, function(data, relationType){
+                            var mergedTypeInfo = metaHelper.getMergedTypeInfoByRelationType(relationType);
+
+                            if (!mergedTypeInfo.mergedType) {
+                                return;
+                            }
+
+                            var byMergedType = relationMap.byRelationTypes[direction][mergedTypeInfo.mergedType];
+
+                            if (!byMergedType) {
+                                byMergedType = {};
+
+                                _.each(mergedTypeInfo.relationTypes, function(type){
+                                    var historyInfo = _.get(relationMap.byRelationTypes[direction], [type, 'info', 'history']);
+
+                                    if (historyInfo && (_.get(byMergedType, 'info.history.actual.min') || 0) < historyInfo.actual.min) {
+                                        _.set(byMergedType, 'info.history', historyInfo);
+                                    }
+                                });
+
+                                relationMap.byRelationTypes[direction][mergedTypeInfo.mergedType] = byMergedType;
                             }
                         });
                     });
 
-                    function getActualDate(relationData) {
-                        var actualDate = relationMap.byRelationTypes[relationData.direction][relationData.relation._type].info.history.actualDate,
-                            byRelationType;
+                    // Выставить актуальность связей
+                    _.each(relationMap.relations, function(relationData){
+                        if (!relationData.history) {
+                            return;
+                        }
 
-                        // по объединенным типам
-                        _.each(metaHelper.getRelationTypesInMergedType(relationData.relation._type), function(relationType){
-                            byRelationType = relationMap.byRelationTypes[relationData.direction][relationType];
-                            actualDate = byRelationType ? Math.max(actualDate, byRelationType.info.history.actualDate) : actualDate;
+                        var mergedTypeInfo          = metaHelper.getMergedTypeInfoByRelationType(relationData.relation._type),
+                            mergedTypeHistoryInfo   = _.get(relationMap.byRelationTypes[relationData.direction], [mergedTypeInfo.mergedType, 'info', 'history']),
+                            historyInfo             = mergedTypeHistoryInfo || relationMap.byRelationTypes[relationData.direction][relationData.relation._type].info.history;
+
+                        _.each(relationData.history.sorted, function(relation, i){
+                            if (__crossSince && i === 0) {
+                                relation.__isOutdated =
+                                    relation[npRsearchMeta.historyRelationDate] < historyInfo.actual.min &&
+                                    relationData.history.actual.since.max < historyInfo.actual.since.min;
+                            } else {
+                                relation.__isOutdated =
+                                    relation[npRsearchMeta.historyRelationDate] < historyInfo.actual.min;
+                            }
                         });
-
-                        return actualDate;
-                    }
+                    });
                 },
 
                 __normalizeDate: function(target, datePropertyName) {
@@ -547,98 +629,72 @@ define(function(require) {'use strict';
                 },
 
                 // relation_history
-                buildRelationHistory: function(historyMeta, data) {
+                buildRelationHistoryList: function(historyMeta, data) {
                     if (!historyMeta) {
                         return null;
                     }
 
-                    var actualData      = {},
-                        outdatedData    = {},
-                        byDates         = {},
-                        listKeys        = [];
+                    var actualNodeList      = {},
+                        outdatedNodeList    = {},
+                        keyOrder            = {},
+                        result;
 
                     if (data.isJoint) {
-                        _.each(data.nodeList, function(list){
-                            listKeys.push(list.key);
-                            buildByDates(list.key, list.data.list);
+                        _.each(data.nodeList, function(list, i){
+                            keyOrder[list.key] = i;
+                            buildByActual(list.key, list.data.list);
                         });
                     } else {
-                        listKeys.push(data.relationType);
-                        buildByDates(data.relationType, data.nodeList);
+                        buildByActual(data.relationType, data.nodeList);
                     }
 
-                    function buildByDates(relationType, srcNodeList) {
-                        var relationId, lastRelation, date, byDate, byRelationType;
+                    actualNodeList = buildList(actualNodeList);
+                    outdatedNodeList = buildList(outdatedNodeList);
+
+                    function buildByActual(relationType, srcNodeList) {
+                        var relationId, lastRelation, targetNodeList, byKey, size;
 
                         _.each(srcNodeList, function(node){
                             relationId = data.relationMap.byNodes[node.__uid][data.direction][relationType].relationId;
                             lastRelation = data.relationMap.relations[relationId].history.sorted[0];
+                            targetNodeList = lastRelation.__isOutdated ? outdatedNodeList : actualNodeList;
 
-                            date = lastRelation[npRsearchMeta.historyRelationDate];
-
-                            byDate = byDates[date] = byDates[date] || {
-                                date: date,
-                                byRelationTypes: {}
+                            byKey = targetNodeList[relationType] = targetNodeList[relationType] || {
+                                data: {
+                                    list: [],
+                                    total: 0
+                                },
+                                key: relationType
                             };
 
-                            byRelationType = byDate.byRelationTypes[relationType] = byDate.byRelationTypes[relationType] || [];
-                            byRelationType.push(node);
-                        });
-                    }
-
-                    // Отсортировать в порядке убывания дат
-                    var sortedDates = _.sortBy(byDates, function(byDate){
-                        return -byDate.date;
-                    });
-
-                    // Схлопнуть все неактуальные
-                    var byOutdated = {
-                        byRelationTypes: {}
-                    };
-
-                    _.each(sortedDates, function(byDate, i){
-                        if (i > 0) {
-                            _.each(byDate.byRelationTypes, function(byRelationType, relationType){
-                                byOutdated.byRelationTypes[relationType] = (byOutdated.byRelationTypes[relationType] || []).concat(byRelationType);
-                            });
-                        }
-                    });
-
-                    buildNodeLists(sortedDates[0], actualData);
-                    buildNodeLists(byOutdated, outdatedData);
-
-                    function buildNodeLists(byDate, target) {
-                        if (_.isEmpty(byDate.byRelationTypes)) {
-                            return;
-                        }
-
-                        target.nodeList = [];
-
-                        _.each(listKeys, function(listKey){
-                            var list = byDate.byRelationTypes[listKey];
+                            size = _.size(byKey.data.list);
 
                             // Индексы согласно формируемому списку
-                            _.each(list, function(node, i){
-                                node.__index = i;
-                            });
+                            node.__index = size;
 
-                            target.nodeList.push({
-                                data: {
-                                    list: list,
-                                    total: _.size(list)
-                                },
-                                key: listKey
-                            });
+                            byKey.data.total = size + 1;
+                            byKey.data.list.push(node);
                         });
                     }
 
-                    // $log.debug('buildRelationHistory... actualData', actualData);
-                    // $log.debug('buildRelationHistory... outdatedData', outdatedData);
+                    function buildList(nodeList) {
+                        return _.sortBy(nodeList, function(byKey, key){
+                            return keyOrder[key];
+                        });
+                    }
 
-                    return {
-                        'actual': actualData,
-                        'outdated': _.isEmpty(outdatedData) ? null : outdatedData
+                    result = {
+                        actual: {
+                            nodeList: actualNodeList
+                        },
+                        outdated: _.isEmpty(outdatedNodeList) ? null : {
+                            nodeList: outdatedNodeList
+                        }
                     };
+
+                    $log.debug('buildRelationHistoryList... result', result);
+
+                    return result;
                 },
 
                 buildRelationInfo: function(node, relationType, data) {

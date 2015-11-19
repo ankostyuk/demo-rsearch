@@ -789,7 +789,7 @@ define(function(require) {'use strict';
                         var listProperties = {
                             isJoint: isJoint,
                             isHistory: !!historyMeta,
-                            history: npRsearchMetaHelper.buildRelationHistory(historyMeta, {
+                            history: npRsearchMetaHelper.buildRelationHistoryList(historyMeta, {
                                 relationMap: byRelations.relationMap,
                                 relationType: byRelations.relationType,
                                 direction: byRelations.direction,
