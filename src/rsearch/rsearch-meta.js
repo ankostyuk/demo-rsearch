@@ -21,8 +21,10 @@ define(function(require) {'use strict';
 
     var purl                = require('purl'),
         locationSearch      = purl().param(),
+        __sortBySince       = locationSearch['sort-by-since'] === 'true' ? true : false,
         __collapseHistory   = locationSearch['collapse-history'] === 'false' ? false : true,
         __crossSince        = locationSearch['cross-since'] === 'false' ? false : true;
+        console.warn('__sortBySince:', __sortBySince);
         console.warn('__collapseHistory:', __collapseHistory);
         console.warn('__crossSince:', __crossSince);
     // >>>
@@ -546,7 +548,7 @@ define(function(require) {'use strict';
                         var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationData.relation._type, relationData.direction);
 
                         var sorted = _.sortBy(relationData.history.byDates, function(relation){
-                            return -relation[npRsearchMeta.historyRelationDate];
+                            return __sortBySince ? -relation[npRsearchMeta.sinceRelationDate] : -relation[npRsearchMeta.historyRelationDate];
                         });
 
                         var historyInfo = relationMap.byRelationTypes[relationData.direction][relationData.relation._type].info.history,
