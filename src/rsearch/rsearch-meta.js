@@ -23,24 +23,24 @@ define(function(require) {'use strict';
         locationSearch      = purl().param(),
         __sortBySince       = locationSearch['sort-by-since'] === 'true' ? true : false,
         __collapseHistory   = locationSearch['collapse-history'] === 'false' ? false : true,
-        __crossSince        = locationSearch['cross-since'] === 'false' ? false : true;
+        __crossSince        = locationSearch['cross-since'] === 'false' ? false : true,
+        __normalizeDate     = locationSearch['normalize-date'] === 'true' ? true : false;
         console.warn('__sortBySince:', __sortBySince);
         console.warn('__collapseHistory:', __collapseHistory);
         console.warn('__crossSince:', __crossSince);
+        console.warn('__normalizeDate:', __normalizeDate);
     // >>>
 
     function isFounderRelationsCollapsed(r1, r2) {
         return (
-            r1.shareAmount ?
-                r1.shareAmount === r2.shareAmount :
-                r1.sharePercent === r2.sharePercent
+            (r1.shareAmount || 0) === (r2.shareAmount || 0) &&
+            (r1.sharePercent || 0) === (r2.sharePercent || 0)
         );
     }
 
     function isExecutiveRelationsCollapsed(r1, r2) {
         return (
-            r1.position && r2.position &&
-            r1.position.toLowerCase() === r2.position.toLowerCase()
+            (r1.position || '').toLowerCase() === (r2.position || '').toLowerCase()
         );
     }
 
@@ -482,7 +482,9 @@ define(function(require) {'use strict';
                             // костыль!
                             // TODO на сервере
                             // TODO ? нормализовать _since
-                            metaHelper.__normalizeDate(relation, npRsearchMeta.historyRelationDate);
+                            if (__normalizeDate) {
+                                metaHelper.__normalizeDate(relation, npRsearchMeta.historyRelationDate);
+                            }
                             // >>>
 
                             var date        = relation[npRsearchMeta.historyRelationDate],
