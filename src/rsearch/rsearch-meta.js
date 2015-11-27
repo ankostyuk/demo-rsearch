@@ -24,10 +24,12 @@ define(function(require) {'use strict';
         __sortBySince       = locationSearch['sort-by-since'] === 'true' ? true : false,
         __collapseHistory   = locationSearch['collapse-history'] === 'false' ? false : true,
         __crossSince        = locationSearch['cross-since'] === 'false' ? false : true,
+        __crossActual       = locationSearch['cross-actual'] === 'true' ? true : false,
         __normalizeDate     = locationSearch['normalize-date'] === 'true' ? true : false;
         console.warn('__sortBySince:', __sortBySince);
         console.warn('__collapseHistory:', __collapseHistory);
         console.warn('__crossSince:', __crossSince);
+        console.warn('__crossActual:', __crossActual);
         console.warn('__normalizeDate:', __normalizeDate);
     // >>>
 
@@ -492,7 +494,7 @@ define(function(require) {'use strict';
 
                             if (byDate) {
                                 // relation_history TODO убрать дубликаты на сервере
-                                $log.debug('WARN: Дубликат исторической связи по дате:', npRsearchMeta.historyRelationDate, 'node.__uid:', node.__uid, 'relation:', relation);
+                                $log.debug('WARN: Дубликат исторической связи по дате:', npRsearchMeta.historyRelationDate, ', node.__uid:', node.__uid, ', relation:', relation);
                             } else {
                                 relationData.history.byDates[date] = relation;
                             }
@@ -560,6 +562,7 @@ define(function(require) {'use strict';
 
                         relationData.history.actual = {
                             min: first[npRsearchMeta.historyRelationDate],
+                            max: first[npRsearchMeta.historyRelationDate],
                             since: {
                                 min: first[npRsearchMeta.sinceRelationDate],
                                 max: first[npRsearchMeta.sinceRelationDate]
@@ -571,25 +574,23 @@ define(function(require) {'use strict';
                         _.each(sorted, function(relation){
                             if (_.find(relationData.history.sorted, _.pick(relation, historyRelationMeta.historyProperties))) {
                                 // relation_history TODO убрать дубликаты на сервере
-                                $log.debug('WARN: Дубликат исторической связи по историческим свойствам:', historyRelationMeta.historyProperties, 'node.__uid:', node.__uid, 'relation:', relation);
+                                $log.debug('WARN: Дубликат исторической связи по историческим свойствам:', historyRelationMeta.historyProperties, ', node.__uid:', node.__uid, ', relation:', relation);
                                 $log.debug('relationData.history.sorted:', relationData.history.sorted);
+
+                                if (__crossActual) {
+                                    checkActual(relation);
+                                }
                             } else if (__collapseHistory &&
                                     _.last(relationData.history.sorted) &&
                                     historyRelationMeta.isCollapsed(relation, _.last(relationData.history.sorted))
                                 ) {
+
                                 // relation_history TODO на сервере?
-                                $log.debug('WARN: Схлопнута историческая связь...', 'node.__uid:', node.__uid, 'relation:', relation);
+                                $log.debug('WARN: Схлопнута историческая связь...', 'node.__uid:', node.__uid, ', relation:', relation);
 
                                 relationData.history.sorted[relationData.history.sorted.length - 1] = relation;
 
-                                // TODO может расширить случаи проверки actual:
-                                // при схлопывании дальше 1,
-                                // при вставке в список sorted
-                                if (relationData.history.sorted.length === 1) {
-                                    relationData.history.actual.min = Math.min(relationData.history.actual.min, relation[npRsearchMeta.historyRelationDate]);
-                                    relationData.history.actual.since.min = Math.min(relationData.history.actual.since.min, relation[npRsearchMeta.sinceRelationDate]);
-                                    relationData.history.actual.since.max = Math.max(relationData.history.actual.since.max, relation[npRsearchMeta.sinceRelationDate]);
-                                }
+                                checkActual(relation);
                             } else {
                                 relationData.history.sorted.push(relation);
                             }
@@ -599,6 +600,15 @@ define(function(require) {'use strict';
                             historyInfo.actual.min = relationData.history.actual.min;
                             historyInfo.actual.since.min = relationData.history.actual.since.min;
                             historyInfo.actual.since.max = relationData.history.actual.since.max;
+                        }
+
+                        function checkActual(relation) {
+                            if (relationData.history.sorted.length === 1) {
+                                relationData.history.actual.min = Math.min(relationData.history.actual.min, relation[npRsearchMeta.historyRelationDate]);
+                                relationData.history.actual.max = Math.max(relationData.history.actual.max, relation[npRsearchMeta.historyRelationDate]);
+                                relationData.history.actual.since.min = Math.min(relationData.history.actual.since.min, relation[npRsearchMeta.sinceRelationDate]);
+                                relationData.history.actual.since.max = Math.max(relationData.history.actual.since.max, relation[npRsearchMeta.sinceRelationDate]);
+                            }
                         }
                     });
 
@@ -642,13 +652,13 @@ define(function(require) {'use strict';
                             historyInfo             = mergedTypeHistoryInfo || relationMap.byRelationTypes[relationData.direction][relationData.relation._type].info.history;
 
                         _.each(relationData.history.sorted, function(relation, i){
-                            if (__crossSince && i === 0) {
+                            if (i === 0) {
                                 relation.__isOutdated =
-                                    relation[npRsearchMeta.historyRelationDate] < historyInfo.actual.min &&
-                                    relationData.history.actual.since.max < historyInfo.actual.since.min;
+                                    relationData.history.actual.min < historyInfo.actual.min &&
+                                    (__crossActual ? relationData.history.actual.max < historyInfo.actual.min : true) &&
+                                    (__crossSince ? relationData.history.actual.since.max < historyInfo.actual.since.min : true);
                             } else {
-                                relation.__isOutdated =
-                                    relation[npRsearchMeta.historyRelationDate] < historyInfo.actual.min;
+                                relation.__isOutdated = true;
                             }
                         });
                     });
