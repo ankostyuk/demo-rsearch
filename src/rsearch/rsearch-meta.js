@@ -430,6 +430,8 @@ define(function(require) {'use strict';
 
                     $log.debug('buildRelationMap... relationMap:', relationMap);
 
+                    metaHelper.__checkRelations(node);
+
                     return relationMap;
                 },
 
@@ -441,6 +443,44 @@ define(function(require) {'use strict';
                     metaHelper.__relationsPostProcess(relationMap, node);
 
                     $log.debug('addToRelationMap... relationMap:', relationMap);
+                },
+
+                __checkRelations: function(node) {
+                    var relationCount   = _.size(node._relations),
+                        duplicateMap    = {};
+
+                    _.each(node._relations, function(relation, i){
+                        var relationId = metaHelper.buildRelationId(relation);
+
+                        if (duplicateMap[relationId]) {
+                            return;
+                        }
+
+                        var duplicates = [],
+                            r, j;
+
+                        for (j = i + 1; j < relationCount; j++) {
+                            r = node._relations[j];
+
+                            if (_.isEqual(relation, r)) {
+                                duplicates.push(j);
+                            }
+                        }
+
+                        if (!_.isEmpty(duplicates)) {
+                            duplicates.splice(0, 0, i);
+                            duplicateMap[relationId] = duplicates;
+                        }
+                    });
+
+                    if (!_.isEmpty(duplicateMap)) {
+                        var result = _.sortBy(duplicateMap, function(duplicates){
+                            return duplicates[0];
+                        });
+
+                        $log.warn('Дубликаты связей...\n', JSON.stringify(result));
+                        $log.warn('__checkRelations... duplicateMap:', duplicateMap);
+                    }
                 },
 
                 __relationsProcess: function(relationMap, node, relations, options) {
