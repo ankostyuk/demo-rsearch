@@ -170,8 +170,8 @@ define(function(require) {'use strict';
                 'FOUNDER': ['FOUNDER_INDIVIDUAL', 'FOUNDER_COMPANY']
             },
 
-            historyRelationDate: '_actual',
-            sinceRelationDate: '_since'
+            relationActualDate: '_actual',
+            relationSinceDate: '_since'
         })
         //
         .factory('npRsearchMetaHelper', ['$log', '$q', '$rootScope', 'appConfig', 'npRsearchMeta', 'npRsearchResource', function($log, $q, $rootScope, appConfig, npRsearchMeta, npRsearchResource){
@@ -548,7 +548,7 @@ define(function(require) {'use strict';
                             // TODO на сервере
                             // TODO ? нормализовать _since
                             if (__normalizeDate) {
-                                metaHelper.__normalizeDate(relation, npRsearchMeta.historyRelationDate);
+                                metaHelper.__normalizeDate(relation, npRsearchMeta.relationActualDate);
                             }
                             // >>>
 
@@ -608,7 +608,7 @@ define(function(require) {'use strict';
                             historyInfo         = relationMap.byRelationTypes[relationData.direction][relationData.relation._type].info.history;
 
                         var sortedBySince = _.sortBy(relationData.history.byDates, function(relation){
-                            return -relation[npRsearchMeta.sinceRelationDate];
+                            return -relation[npRsearchMeta.relationSinceDate];
                         });
 
                         relationData.history.sorted = checkSorted(sortedBySince, true);
@@ -651,11 +651,11 @@ define(function(require) {'use strict';
 
                             if (checkActual) {
                                 relationData.history.actual = {
-                                    min: historyActual ? Math.min(historyActual.min, first[npRsearchMeta.historyRelationDate]) : first[npRsearchMeta.historyRelationDate],
-                                    max: historyActual ? Math.max(historyActual.max, first[npRsearchMeta.historyRelationDate]) : first[npRsearchMeta.historyRelationDate],
+                                    min: historyActual ? Math.min(historyActual.min, first[npRsearchMeta.relationActualDate]) : first[npRsearchMeta.relationActualDate],
+                                    max: historyActual ? Math.max(historyActual.max, first[npRsearchMeta.relationActualDate]) : first[npRsearchMeta.relationActualDate],
                                     since: {
-                                        min: historyActual ? Math.min(historyActual.since.min, first[npRsearchMeta.sinceRelationDate]) : first[npRsearchMeta.sinceRelationDate],
-                                        max: historyActual ? Math.max(historyActual.since.max, first[npRsearchMeta.sinceRelationDate]) : first[npRsearchMeta.sinceRelationDate]
+                                        min: historyActual ? Math.min(historyActual.since.min, first[npRsearchMeta.relationSinceDate]) : first[npRsearchMeta.relationSinceDate],
+                                        max: historyActual ? Math.max(historyActual.since.max, first[npRsearchMeta.relationSinceDate]) : first[npRsearchMeta.relationSinceDate]
                                     }
                                 };
                             }
@@ -669,10 +669,10 @@ define(function(require) {'use strict';
                                     result[result.length - 1] = collapseInfo.relation;
 
                                     if (checkActual && result.length === 1) {
-                                        relationData.history.actual.min = Math.min(relationData.history.actual.min, relation[npRsearchMeta.historyRelationDate]);
-                                        relationData.history.actual.max = Math.max(relationData.history.actual.max, relation[npRsearchMeta.historyRelationDate]);
-                                        relationData.history.actual.since.min = Math.min(relationData.history.actual.since.min, relation[npRsearchMeta.sinceRelationDate]);
-                                        relationData.history.actual.since.max = Math.max(relationData.history.actual.since.max, relation[npRsearchMeta.sinceRelationDate]);
+                                        relationData.history.actual.min = Math.min(relationData.history.actual.min, relation[npRsearchMeta.relationActualDate]);
+                                        relationData.history.actual.max = Math.max(relationData.history.actual.max, relation[npRsearchMeta.relationActualDate]);
+                                        relationData.history.actual.since.min = Math.min(relationData.history.actual.since.min, relation[npRsearchMeta.relationSinceDate]);
+                                        relationData.history.actual.since.max = Math.max(relationData.history.actual.since.max, relation[npRsearchMeta.relationSinceDate]);
                                     }
                                 } else {
                                     result.push(relation);
@@ -779,10 +779,16 @@ define(function(require) {'use strict';
                     actualNodeList = buildList(actualNodeList);
                     outdatedNodeList = buildList(outdatedNodeList);
 
-                    function buildByActual(relationType, srcNodeList) {
+                    function buildByActual(relationType, nodeList) {
                         var relationId, lastRelation, targetNodeList, byKey, size;
 
-                        _.each(srcNodeList, function(node){
+                        nodeList = _.sortBy(nodeList, function(node){
+                            relationId = data.relationMap.byNodes[node.__uid][data.direction][relationType].relationId;
+                            lastRelation = data.relationMap.relations[relationId].history.sorted[0];
+                            return -lastRelation[npRsearchMeta.relationSinceDate];
+                        });
+
+                        _.each(nodeList, function(node){
                             relationId = data.relationMap.byNodes[node.__uid][data.direction][relationType].relationId;
                             lastRelation = data.relationMap.relations[relationId].history.sorted[0];
                             targetNodeList = lastRelation.__isOutdated ? outdatedNodeList : actualNodeList;
