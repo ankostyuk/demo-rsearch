@@ -25,18 +25,28 @@ define(function(require) {'use strict';
         __collapseHistory   = locationSearch['collapse-history'] === 'false' ? false : true,
         __crossSince        = locationSearch['cross-since'] === 'false' ? false : true,
         __crossActual       = locationSearch['cross-actual'] === 'true' ? true : false,
+        __showAll           = locationSearch['show-all'] === 'true' ? true : false,
         __normalizeDate     = locationSearch['normalize-date'] === 'true' ? true : false;
         console.warn('__sortBySince:', __sortBySince);
         console.warn('__collapseHistory:', __collapseHistory);
         console.warn('__crossSince:', __crossSince);
         console.warn('__crossActual:', __crossActual);
+        console.warn('__showAll:', __showAll);
         console.warn('__normalizeDate:', __normalizeDate);
     // >>>
 
+    // 81772813
+    // 07622839
     function isFounderRelationsCollapsed(r1, r2) {
+        if (r1._since === r2._since) {
+            return true;
+        }
+
         return (
-            (r1.shareAmount || 0) === (r2.shareAmount || 0) &&
-            (r1.sharePercent || 0) === (r2.sharePercent || 0)
+            (r1.shareAmount || r2.shareAmount || 0).toFixed(0) === (r2.shareAmount || r1.shareAmount || 0).toFixed(0) &&
+            (r1._source === 'egrul_individual_founder' || r2._source === 'egrul_individual_founder' ? true :
+                (r1.sharePercent || r2.sharePercent || 0).toFixed(2) === (r2.sharePercent || r1.sharePercent || 0).toFixed(2)
+            )
         );
     }
 
@@ -587,71 +597,61 @@ define(function(require) {'use strict';
                 // выставить актуальность
                 // отсортировать историю с проверкой дубликатов
                 __relationsPostProcess: function(relationMap, node) {
-                    _.each(relationMap.relations, function(relationData){
+                    _.each(relationMap.relations, function(relationData, xxx){
                         if (!relationData.history) {
                             return;
                         }
 
-                        var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationData.relation._type, relationData.direction);
+                        var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationData.relation._type, relationData.direction),
+                            historyInfo         = relationMap.byRelationTypes[relationData.direction][relationData.relation._type].info.history;
 
-                        var sorted = _.sortBy(relationData.history.byDates, function(relation){
-                            return __sortBySince ? -relation[npRsearchMeta.sinceRelationDate] : -relation[npRsearchMeta.historyRelationDate];
+                        var sortedBySince = _.sortBy(relationData.history.byDates, function(relation){
+                            return -relation[npRsearchMeta.sinceRelationDate];
                         });
 
-                        var historyInfo = relationMap.byRelationTypes[relationData.direction][relationData.relation._type].info.history,
-                            first;
+                        relationData.history.sorted = checkSorted(sortedBySince, true);
+                        relationData.history.__sorted = __showAll ? sortedBySince : null;
 
-                        first = _.first(sorted);
+                        historyInfo.actual.min = Math.max(historyInfo.actual.min, relationData.history.actual.min);
 
-                        relationData.history.actual = {
-                            min: first[npRsearchMeta.historyRelationDate],
-                            max: first[npRsearchMeta.historyRelationDate],
-                            since: {
-                                min: first[npRsearchMeta.sinceRelationDate],
-                                max: first[npRsearchMeta.sinceRelationDate]
+                        function checkSorted(sorted, checkActual) {
+                            var result          = [],
+                                historyActual   = relationData.history.actual,
+                                first           = _.first(sorted),
+                                last;
+
+                            if (checkActual) {
+                                relationData.history.actual = {
+                                    min: historyActual ? Math.min(historyActual.min, first[npRsearchMeta.historyRelationDate]) : first[npRsearchMeta.historyRelationDate],
+                                    max: historyActual ? Math.max(historyActual.max, first[npRsearchMeta.historyRelationDate]) : first[npRsearchMeta.historyRelationDate],
+                                    since: {
+                                        min: historyActual ? Math.min(historyActual.since.min, first[npRsearchMeta.sinceRelationDate]) : first[npRsearchMeta.sinceRelationDate],
+                                        max: historyActual ? Math.max(historyActual.since.max, first[npRsearchMeta.sinceRelationDate]) : first[npRsearchMeta.sinceRelationDate]
+                                    }
+                                };
                             }
-                        };
 
-                        relationData.history.sorted = [];
+                            _.each(sorted, function(relation){
+                                last = _.last(result);
 
-                        _.each(sorted, function(relation){
-                            if (false && _.find(relationData.history.sorted, _.pick(relation, historyRelationMeta.historyProperties))) {
-                                // relation_history TODO убрать дубликаты на сервере
-                                $log.debug('WARN: Дубликат исторической связи по историческим свойствам:', historyRelationMeta.historyProperties, ', node.__uid:', node.__uid, ', relation:', relation);
-                                $log.debug('relationData.history.sorted:', relationData.history.sorted);
+                                if (__collapseHistory && last && historyRelationMeta.isCollapsed(relation, last)) {
+                                    // relation_history TODO на сервере?
+                                    // $log.debug('WARN: Схлопнута историческая связь...', 'node.__uid:', node.__uid, ', relation:', relation);
 
-                                if (__crossActual) {
-                                    checkActual(relation);
+                                    result[result.length - 1] = relation;
+
+                                    if (checkActual && result.length === 1) {
+                                        relationData.history.actual.min = Math.min(relationData.history.actual.min, relation[npRsearchMeta.historyRelationDate]);
+                                        relationData.history.actual.max = Math.max(relationData.history.actual.max, relation[npRsearchMeta.historyRelationDate]);
+                                        relationData.history.actual.since.min = Math.min(relationData.history.actual.since.min, relation[npRsearchMeta.sinceRelationDate]);
+                                        relationData.history.actual.since.max = Math.max(relationData.history.actual.since.max, relation[npRsearchMeta.sinceRelationDate]);
+                                    }
+                                } else {
+                                    result.push(relation);
                                 }
-                            } else if (__collapseHistory &&
-                                    _.last(relationData.history.sorted) &&
-                                    historyRelationMeta.isCollapsed(relation, _.last(relationData.history.sorted))
-                                ) {
+                            });
 
-                                // relation_history TODO на сервере?
-                                // $log.debug('WARN: Схлопнута историческая связь...', 'node.__uid:', node.__uid, ', relation:', relation);
-
-                                relationData.history.sorted[relationData.history.sorted.length - 1] = relation;
-
-                                checkActual(relation);
-                            } else {
-                                relationData.history.sorted.push(relation);
-                            }
-                        });
-
-                        if (historyInfo.actual.min < relationData.history.actual.min) {
-                            historyInfo.actual.min = relationData.history.actual.min;
-                            historyInfo.actual.since.min = relationData.history.actual.since.min;
-                            historyInfo.actual.since.max = relationData.history.actual.since.max;
-                        }
-
-                        function checkActual(relation) {
-                            if (relationData.history.sorted.length === 1) {
-                                relationData.history.actual.min = Math.min(relationData.history.actual.min, relation[npRsearchMeta.historyRelationDate]);
-                                relationData.history.actual.max = Math.max(relationData.history.actual.max, relation[npRsearchMeta.historyRelationDate]);
-                                relationData.history.actual.since.min = Math.min(relationData.history.actual.since.min, relation[npRsearchMeta.sinceRelationDate]);
-                                relationData.history.actual.since.max = Math.max(relationData.history.actual.since.max, relation[npRsearchMeta.sinceRelationDate]);
-                            }
+                            return result;
                         }
                     });
 
@@ -660,6 +660,11 @@ define(function(require) {'use strict';
                     // например: children - 'FOUNDER_INDIVIDUAL', 'FOUNDER_COMPANY'
                     _.each(relationMap.byRelationTypes, function(relationTypes, direction){
                         _.each(relationTypes, function(data, relationType){
+                            $log.info(
+                                '*', relationType, direction, '...',
+                                '\nactual:', moment(data.info.history.actual.min).format(__normalizeDateFormat)
+                            );
+
                             var mergedTypeInfo = metaHelper.getMergedTypeInfoByRelationType(relationType);
 
                             if (!mergedTypeInfo.mergedType) {
@@ -694,12 +699,18 @@ define(function(require) {'use strict';
                             mergedTypeHistoryInfo   = _.get(relationMap.byRelationTypes[relationData.direction], [mergedTypeInfo.mergedType, 'info', 'history']),
                             historyInfo             = mergedTypeHistoryInfo || relationMap.byRelationTypes[relationData.direction][relationData.relation._type].info.history;
 
+                        var first = _.first(relationData.history.sorted);
+                        $log.info(
+                            '-', relationData.relation.__id, '...',
+                            '\nactual:', moment(relationData.history.actual.min).format(__normalizeDateFormat), moment(relationData.history.actual.max).format(__normalizeDateFormat),
+                            '\nsince: ', moment(relationData.history.actual.since.min).format(__normalizeDateFormat), moment(relationData.history.actual.since.max).format(__normalizeDateFormat)
+                        );
+
                         _.each(relationData.history.sorted, function(relation, i){
                             if (i === 0) {
                                 relation.__isOutdated =
                                     relationData.history.actual.min < historyInfo.actual.min &&
-                                    (__crossActual ? relationData.history.actual.max < historyInfo.actual.min : true) &&
-                                    (__crossSince ? relationData.history.actual.since.max < historyInfo.actual.since.min : true);
+                                    (__crossActual ? relationData.history.actual.max < historyInfo.actual.min : true);
                             } else {
                                 relation.__isOutdated = true;
                             }
@@ -1022,7 +1033,7 @@ define(function(require) {'use strict';
                     var historyTexts    = [],
                         historyText;
 
-                    _.each(relationHistoryInfo.sorted, function(historyRelation){
+                    _.each(relationHistoryInfo[__showAll ? '__sorted' : 'sorted'], function(historyRelation){
                         historyText = getFounderTextByRelation(historyRelation, relation.__isTarget);
 
                         if (historyText) {
@@ -1061,7 +1072,7 @@ define(function(require) {'use strict';
                     var historyTexts    = [],
                         historyText;
 
-                    _.each(relationHistoryInfo.sorted, function(historyRelation){
+                    _.each(relationHistoryInfo[__showAll ? '__sorted' : 'sorted'], function(historyRelation){
                         historyText = getExecutiveTextByRelation(historyRelation, relation.__isTarget);
 
                         if (historyText) {
