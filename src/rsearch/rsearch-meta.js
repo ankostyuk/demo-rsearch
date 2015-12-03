@@ -35,8 +35,6 @@ define(function(require) {'use strict';
         console.warn('__normalizeDate:', __normalizeDate);
     // >>>
 
-    // 81772813
-    // 07622839
     function isFounderRelationsCollapsed(r1, r2) {
         if (r1._since === r2._since) {
             return true;
@@ -54,6 +52,21 @@ define(function(require) {'use strict';
         return (
             (r1.position || '').toLowerCase() === (r2.position || '').toLowerCase()
         );
+    }
+
+    function collapseRelations(r1, r2, checkFunc) {
+        var result = {
+            isCollapsed: checkFunc(r1, r2),
+            relation: null
+        };
+
+        if (!result.isCollapsed) {
+            return result;
+        }
+
+        result.relation = r1._actual > r2._actual ? r1 : r2;
+
+        return result;
     }
 
     return angular.module('np.rsearch-meta', _.pluck(extmodules, 'name'))
@@ -525,7 +538,6 @@ define(function(require) {'use strict';
                             var relationData = relationMap.relations[relationId];
 
                             relationData.history = relationData.history || {
-                                // byDates: {},
                                 byDates: [],
                                 sorted: null
                             };
@@ -539,16 +551,6 @@ define(function(require) {'use strict';
                                 metaHelper.__normalizeDate(relation, npRsearchMeta.historyRelationDate);
                             }
                             // >>>
-
-                            var date        = relation[npRsearchMeta.historyRelationDate];//,
-                                // byDate      = relationData.history.byDates[date];
-
-                            // if (byDate) {
-                            //     // relation_history TODO убрать дубликаты на сервере
-                            //     $log.debug('WARN: Дубликат исторической связи по дате:', npRsearchMeta.historyRelationDate, ', node.__uid:', node.__uid, ', relation:', relation);
-                            // } else {
-                            //     relationData.history.byDates[date] = relation;
-                            // }
 
                             relationData.history.byDates.push(relation);
                         }
@@ -597,7 +599,7 @@ define(function(require) {'use strict';
                 // выставить актуальность
                 // отсортировать историю с проверкой дубликатов
                 __relationsPostProcess: function(relationMap, node) {
-                    _.each(relationMap.relations, function(relationData, xxx){
+                    _.each(relationMap.relations, function(relationData){
                         if (!relationData.history) {
                             return;
                         }
@@ -610,6 +612,33 @@ define(function(require) {'use strict';
                         });
 
                         relationData.history.sorted = checkSorted(sortedBySince, true);
+
+                        // Еще раз для повторного схлопывания, но без проверки актульности,
+                        // для случаев, когда первичное схлопывание дало результат,
+                        // который еще можно схлопнуть:
+                        //  ...
+                        //  доля 26,12%  1 169 940 923,28 руб. — с 09.08.2011 Росстат от 31.05.2015
+                        //  доля 26,12%  1 169 940 923,28 руб. — с 02.08.2011 ЕГРЮЛ от 06.08.2014
+                        //  ->
+                        //  доля 26,12%  1 169 940 923,28 руб. — с 09.08.2011 Росстат от 31.05.2015
+                        //  ...
+                        //
+                        // Плохое решение.
+                        // Есть случаи:
+                        //  ...
+                        //  доля 13,06%  584 970 461,64 руб. — с 05.04.2010 ЕГРЮЛ от 07.08.2011
+                        //  доля 50%  584 970 461,64 руб. — с 26.03.2010 ЕГРЮЛ от 31.03.2010
+                        //  доля 13,06%  584 970 461,64 руб. — с 16.02.2009 ЕГРЮЛ от 07.08.2011
+                        //  доля 50%  584 970 461,64 руб. — с 17.10.2007 ЕГРЮЛ от 16.07.2009
+                        //  доля 50%  500 000 руб. — с 30.05.2007 ЕГРЮЛ от 26.09.2007
+                        //  ...
+                        // надо:
+                        //  ...
+                        //  доля 13,06%  584 970 461,64 руб. — с 16.02.2009 ЕГРЮЛ от 07.08.2011
+                        //  доля 50%  584 970 461,64 руб. — с 17.10.2007 ЕГРЮЛ от 16.07.2009
+                        //  доля 50%  500 000 руб. — с 30.05.2007 ЕГРЮЛ от 26.09.2007
+                        relationData.history.sorted = checkSorted(relationData.history.sorted, false);
+
                         relationData.history.__sorted = __showAll ? sortedBySince : null;
 
                         historyInfo.actual.min = Math.max(historyInfo.actual.min, relationData.history.actual.min);
@@ -618,7 +647,7 @@ define(function(require) {'use strict';
                             var result          = [],
                                 historyActual   = relationData.history.actual,
                                 first           = _.first(sorted),
-                                last;
+                                last, collapseInfo;
 
                             if (checkActual) {
                                 relationData.history.actual = {
@@ -634,11 +663,10 @@ define(function(require) {'use strict';
                             _.each(sorted, function(relation){
                                 last = _.last(result);
 
-                                if (__collapseHistory && last && historyRelationMeta.isCollapsed(relation, last)) {
-                                    // relation_history TODO на сервере?
-                                    // $log.debug('WARN: Схлопнута историческая связь...', 'node.__uid:', node.__uid, ', relation:', relation);
+                                collapseInfo = last ? collapseRelations(relation, last, historyRelationMeta.isCollapsed) : null;
 
-                                    result[result.length - 1] = relation;
+                                if (__collapseHistory && collapseInfo && collapseInfo.isCollapsed) {
+                                    result[result.length - 1] = collapseInfo.relation;
 
                                     if (checkActual && result.length === 1) {
                                         relationData.history.actual.min = Math.min(relationData.history.actual.min, relation[npRsearchMeta.historyRelationDate]);
@@ -660,7 +688,7 @@ define(function(require) {'use strict';
                     // например: children - 'FOUNDER_INDIVIDUAL', 'FOUNDER_COMPANY'
                     _.each(relationMap.byRelationTypes, function(relationTypes, direction){
                         _.each(relationTypes, function(data, relationType){
-                            $log.info(
+                            $log.debug(
                                 '*', relationType, direction, '...',
                                 '\nactual:', moment(data.info.history.actual.min).format(__normalizeDateFormat)
                             );
@@ -700,7 +728,8 @@ define(function(require) {'use strict';
                             historyInfo             = mergedTypeHistoryInfo || relationMap.byRelationTypes[relationData.direction][relationData.relation._type].info.history;
 
                         var first = _.first(relationData.history.sorted);
-                        $log.info(
+
+                        $log.debug(
                             '-', relationData.relation.__id, '...',
                             '\nactual:', moment(relationData.history.actual.min).format(__normalizeDateFormat), moment(relationData.history.actual.max).format(__normalizeDateFormat),
                             '\nsince: ', moment(relationData.history.actual.since.min).format(__normalizeDateFormat), moment(relationData.history.actual.since.max).format(__normalizeDateFormat)
