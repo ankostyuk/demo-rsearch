@@ -35,6 +35,7 @@ define(function(require) {'use strict';
         console.warn('__normalizeDate:', __normalizeDate);
     // >>>
 
+    //
     function isFounderRelationsCollapsed(r1, r2) {
         if (r1._since === r2._since) {
             return true;
@@ -68,6 +69,7 @@ define(function(require) {'use strict';
 
         return result;
     }
+    //
 
     return angular.module('np.rsearch-meta', _.pluck(extmodules, 'name'))
         //
@@ -99,61 +101,48 @@ define(function(require) {'use strict';
             // Дополнительные свойства для связей
             //
             // TODO автоматическое формирование свойств для объединенных типов на основе базовых типов
-            //
-            // TODO учитывать _actual в historyProperties для FOUNDER_INDIVIDUAL, FOUNDER_COMPANY
-            //
-            // TODO учитывать _since в historyProperties,
-            // но сначала проверить формирование данных на сервере -- правильно ли ставится _since,
-            // т.к. при тестировании с учетом _since были замечены одинаковые данные
-            // по historyProperties с "близким" _since
-            //
-            // TODO проверить sharePercent
-            // ООО "ОНИКС" ОКПО 59412169 учредитель ООО КБ "НКБ" ОКПО 33774455
-            // в исторических связях есть "близкие" sharePercent
-            // sharePercent: 26.666666666666668
-            // sharePercent: 26.6667
-            // sharePercent: 26.67
-            // -- не схлопнулись исторические связи
             relationTypes: {
                 'FOUNDER': {
                     name: 'FOUNDER',
-                    history: {
-                        'parents': {
-                            historyProperties: ['_since'],
+                    'parents': {
+                        history: {
                             isCollapsed: isFounderRelationsCollapsed
                         }
                     }
                 },
                 'FOUNDER_INDIVIDUAL': {
-                    history: {
-                        'children': {
+                    'children': {
+                        history: {
                             opposite: true
-                        },
-                        'parents': {
-                            historyProperties: ['_since'],
+                        }
+                    },
+                    'parents': {
+                        history: {
                             isCollapsed: isFounderRelationsCollapsed
                         }
                     }
                 },
                 'FOUNDER_COMPANY': {
-                    history: {
-                        'children': {
+                    'children': {
+                        history: {
                             opposite: true
-                        },
-                        'parents': {
-                            historyProperties: ['_since'],
+                        }
+                    },
+                    'parents': {
+                        history: {
                             isCollapsed: isFounderRelationsCollapsed
                         }
                     }
                 },
 
                 'EXECUTIVE_INDIVIDUAL': {
-                    history: {
-                        'children': {
+                    'children': {
+                        history: {
                             opposite: true
-                        },
-                        'parents': {
-                            historyProperties: ['_since'],
+                        }
+                    },
+                    'parents': {
+                        history: {
                             isCollapsed: isExecutiveRelationsCollapsed
                         }
                     }
@@ -429,7 +418,7 @@ define(function(require) {'use strict';
                 },
 
                 getHistoryRelationMeta: function(relationType, direction) {
-                    return _.get(relationTypesMeta, [relationType, 'history', direction]);
+                    return _.get(relationTypesMeta, [relationType, direction, 'history']);
                 },
 
                 buildNodesRelationMap: function(nodeList) {
