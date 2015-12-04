@@ -1088,7 +1088,7 @@ define(function(require) {'use strict';
                     if (relation.position) {
                         return nkbScreenHelper.isScreen(relation.position) ?
                                 nkbScreenHelper.screen(relation.position) :
-                                relation.position + sText;
+                                $filter('multiline')(relation.position, 'line', 50) + sText;
                     }
 
                     return buildDefaultText(relation, isTarget, _tr("руководитель") + sText, true);
