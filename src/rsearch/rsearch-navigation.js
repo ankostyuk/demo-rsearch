@@ -201,6 +201,14 @@ define(function(require) {'use strict';
                         };
                     }
 
+                    function getRelationsPageConfig(byRelations) {
+                        $log.info('getRelationsPageConfig...', byRelations);
+                        return {
+                            page: 1,
+                            pageSize: 40
+                        };
+                    }
+
                     function noMore(result) {
                         return result ? result.pageNumber >= result.pageCount : null;
                     }
@@ -580,7 +588,7 @@ define(function(require) {'use strict';
                                 loading(function(done){
                                     clearMessages();
 
-                                    byRelations.pageConfig = resetPageConfig();
+                                    byRelations.pageConfig = getRelationsPageConfig(byRelations);
 
                                     listRelationsRequest(byRelations);
 
