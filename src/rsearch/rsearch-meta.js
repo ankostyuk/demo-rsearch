@@ -24,7 +24,7 @@ define(function(require) {'use strict';
         __sortBySince       = locationSearch['sort-by-since'] === 'true' ? true : false,
         __collapseHistory   = locationSearch['collapse-history'] === 'false' ? false : true,
         __crossSince        = locationSearch['cross-since'] === 'false' ? false : true,
-        __crossActual       = locationSearch['cross-actual'] === 'true' ? true : false,
+        __crossActual       = locationSearch['cross-actual'] === 'false' ? false : true,
         __showAll           = locationSearch['show-all'] === 'true' ? true : false,
         __normalizeDate     = locationSearch['normalize-date'] === 'true' ? true : false;
         console.warn('__sortBySince:', __sortBySince);
