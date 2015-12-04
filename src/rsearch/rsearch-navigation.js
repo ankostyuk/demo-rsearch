@@ -201,6 +201,29 @@ define(function(require) {'use strict';
                         };
                     }
 
+                    function getRelationPageConfig(byRelations) {
+                        var relationPageSize = npRsearchMetaHelper.getRelationPageSize(byRelations.relationType, byRelations.direction);
+
+                        if (!relationPageSize) {
+                            return resetPageConfig();
+                        }
+
+                        var relationTypes   = npRsearchMetaHelper.getRelationTypesByMergedType(byRelations.relationType) || [byRelations.relationType],
+                            pageSize        = 0,
+                            infoDirection, relationCount;
+
+                        _.each(relationTypes, function(relationType){
+                            infoDirection = npRsearchMetaHelper.getInfoDirection(byRelations.direction);
+                            relationCount = byRelations.node._info[infoDirection][relationType];
+                            pageSize = Math.max(pageSize, relationCount);
+                        });
+
+                        return {
+                            page: 1,
+                            pageSize: pageSize
+                        };
+                    }
+
                     function noMore(result) {
                         return result ? result.pageNumber >= result.pageCount : null;
                     }
@@ -580,7 +603,7 @@ define(function(require) {'use strict';
                                 loading(function(done){
                                     clearMessages();
 
-                                    byRelations.pageConfig = resetPageConfig();
+                                    byRelations.pageConfig = getRelationPageConfig(byRelations);
 
                                     listRelationsRequest(byRelations);
 
@@ -785,7 +808,7 @@ define(function(require) {'use strict';
 
                         var jointRelationTypes  = npRsearchMetaHelper.getRelationTypesByMergedType(byRelations.relationType),
                             isJoint             = !!jointRelationTypes,
-                            historyMeta         = npRsearchMetaHelper.getHistoryRelationMeta(byRelations.relationType, byRelations.direction);
+                            historyMeta         = npRsearchMetaHelper.getRelationHistoryMeta(byRelations.relationType, byRelations.direction);
 
                         var listProperties = {
                             isJoint: isJoint,
@@ -825,7 +848,7 @@ define(function(require) {'use strict';
                     }
 
                     function buildRelationsOppositeHistory(byRelations) {
-                        var historyMeta = npRsearchMetaHelper.getHistoryRelationMeta(byRelations.relationType, byRelations.direction);
+                        var historyMeta = npRsearchMetaHelper.getRelationHistoryMeta(byRelations.relationType, byRelations.direction);
 
                         if (!historyMeta || !historyMeta.opposite) {
                             return;

@@ -105,6 +105,7 @@ define(function(require) {'use strict';
                 'FOUNDER': {
                     name: 'FOUNDER',
                     'parents': {
+                        pageSize: 'all',
                         history: {
                             isCollapsed: isFounderRelationsCollapsed
                         }
@@ -117,6 +118,7 @@ define(function(require) {'use strict';
                         }
                     },
                     'parents': {
+                        pageSize: 'all',
                         history: {
                             isCollapsed: isFounderRelationsCollapsed
                         }
@@ -129,6 +131,7 @@ define(function(require) {'use strict';
                         }
                     },
                     'parents': {
+                        pageSize: 'all',
                         history: {
                             isCollapsed: isFounderRelationsCollapsed
                         }
@@ -142,6 +145,7 @@ define(function(require) {'use strict';
                         }
                     },
                     'parents': {
+                        pageSize: 'all',
                         history: {
                             isCollapsed: isExecutiveRelationsCollapsed
                         }
@@ -417,8 +421,16 @@ define(function(require) {'use strict';
                     return info;
                 },
 
-                getHistoryRelationMeta: function(relationType, direction) {
+                getRelationPageSize: function(relationType, direction) {
+                    return _.get(relationTypesMeta, [relationType, direction, 'pageSize']);
+                },
+
+                getRelationHistoryMeta: function(relationType, direction) {
                     return _.get(relationTypesMeta, [relationType, direction, 'history']);
+                },
+
+                getInfoDirection: function(relationDirection) {
+                    return relationDirection === 'parents' ? 'in' : 'out';
                 },
 
                 buildNodesRelationMap: function(nodeList) {
@@ -509,7 +521,7 @@ define(function(require) {'use strict';
                         //
                         var relationId          = metaHelper.buildRelationId(relation),
                             relationExist       = !!relationMap.relations[relationId],
-                            historyRelationMeta = metaHelper.getHistoryRelationMeta(relationType.name, direction);
+                            historyRelationMeta = metaHelper.getRelationHistoryMeta(relationType.name, direction);
 
                         // relationMap.relations
                         relationMap.relations[relationId] = relationMap.relations[relationId] || {
@@ -593,7 +605,7 @@ define(function(require) {'use strict';
                             return;
                         }
 
-                        var historyRelationMeta = metaHelper.getHistoryRelationMeta(relationData.relation._type, relationData.direction),
+                        var historyRelationMeta = metaHelper.getRelationHistoryMeta(relationData.relation._type, relationData.direction),
                             historyInfo         = relationMap.byRelationTypes[relationData.direction][relationData.relation._type].info.history;
 
                         var sortedBySince = _.sortBy(relationData.history.byDates, function(relation){
