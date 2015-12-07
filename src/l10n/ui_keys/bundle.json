@@ -43,6 +43,138 @@
       null,
       "£"
     ],
+    "NG_PLURALIZE::RELATION_ADDRESS-children": [
+      null,
+      "{'one': '{} компания', 'few': '{} компании', 'many': '{} компаний', 'other': '{} компании'}"
+    ],
+    "NG_PLURALIZE::RELATION_ADDRESS-parents": [
+      null,
+      "{'one': 'Адрес', 'few': '{} адреса', 'many': '{} адресов', 'other': '{} адреса'}"
+    ],
+    "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY-children": [
+      null,
+      "{'one': '{} зависимая компания', 'few': '{} зависимые компании', 'many': '{} зависимых компаний', 'other': '{} зависимой компании'}"
+    ],
+    "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY-parents": [
+      null,
+      "{'one': '{} аффилированная компания', 'few': '{} аффилированные компании', 'many': '{} аффилированных компаний', 'other': '{} аффилированной компании'}"
+    ],
+    "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL-children": [
+      null,
+      "{'one': '{} зависимая компания', 'few': '{} зависимые компании', 'many': '{} зависимых компаний', 'other': '{} зависимой компании'}"
+    ],
+    "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL-parents": [
+      null,
+      "{'one': '{} аффилированное физическое лицо', 'few': '{} аффилированных физических лица', 'many': '{} аффилированных физических лиц', 'other': '{} аффилированного физического лица'}"
+    ],
+    "NG_PLURALIZE::RELATION_COMMISSION_MEMBER-children": [
+      null,
+      "{'one': '{} закупочная комиссия', 'few': '{} закупочные комиссии', 'many': '{} закупочных комиссий', 'other': '{} закупочных комиссий'}"
+    ],
+    "NG_PLURALIZE::RELATION_COMMISSION_MEMBER-parents": [
+      null,
+      "{'one': '{} член комиссии', 'few': '{} члена комиссии', 'many': '{} членов комиссии', 'other': '{} члена комиссии'}"
+    ],
+    "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY-children": [
+      null,
+      "{'one': '{} закупка', 'few': '{} закупки', 'many': '{} закупок', 'other': '{} закупки'}"
+    ],
+    "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY-parents": [
+      null,
+      "{'one': 'Заказчик', 'few': '{} заказчика', 'many': '{} заказчиков', 'other': '{} заказчика'}"
+    ],
+    "NG_PLURALIZE::RELATION_EMPLOYEE-children": [
+      null,
+      "{'one': '{} организатор закупки', 'few': '{} организатора закупок', 'many': '{} организаторов закупок', 'other': '{} организатора закупок'}"
+    ],
+    "NG_PLURALIZE::RELATION_EMPLOYEE-parents": [
+      null,
+      "{'one': '{} контактное лицо', 'few': '{} контактных лица', 'many': '{} контактных лиц', 'other': '{} контактных лица'}"
+    ],
+    "NG_PLURALIZE::RELATION_EXECUTIVE_COMPANY-children": [
+      null,
+      "{'one': '{} руководимая компания', 'few': '{} руководимые компании', 'many': '{} руководимых компаний', 'other': '{} руководимой компании'}"
+    ],
+    "NG_PLURALIZE::RELATION_EXECUTIVE_COMPANY-parents": [
+      null,
+      "{'one': '{} управляющая компания', 'few': '{} управляющие компании', 'many': '{} управляющих компаний', 'other': '{} управляющей компании'}"
+    ],
+    "NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL-children": [
+      null,
+      "{'one': '{} руководимая компания', 'few': '{} руководимые компании', 'many': '{} руководимых компаний', 'other': '{} руководимой компании'}"
+    ],
+    "NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL-parents": [
+      null,
+      "{'one': 'Руководитель', 'few': '{} руководителя', 'many': '{} руководителей', 'other': '{} руководителя'}"
+    ],
+    "NG_PLURALIZE::RELATION_FOUNDER-parents": [
+      null,
+      "{'one': '{} учредитель', 'few': '{} учредителя', 'many': '{} учредителей', 'other': '{} учредителя'}"
+    ],
+    "NG_PLURALIZE::RELATION_FOUNDER_COMPANY-children": [
+      null,
+      "{'one': '{} учреждённая компания', 'few': '{} учреждённые компании', 'many': '{} учреждённых компаний', 'other': '{} учреждённой компании'}"
+    ],
+    "NG_PLURALIZE::RELATION_FOUNDER_COMPANY-parents": [
+      null,
+      "{'one': '{} учредитель компания', 'few': '{} учредителя компании', 'many': '{} учредителей компаний', 'other': '{} учредителя компании'}"
+    ],
+    "NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL-children": [
+      null,
+      "{'one': '{} учреждённая компания', 'few': '{} учреждённые компании', 'many': '{} учреждённых компаний', 'other': '{} учреждённой компании'}"
+    ],
+    "NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL-parents": [
+      null,
+      "{'one': '{} учредитель физическое лицо', 'few': '{} учредителя физических лица', 'many': '{} учредителей физических лиц', 'other': '{} учредителя физического лица'}"
+    ],
+    "NG_PLURALIZE::RELATION_HEAD_COMPANY-children": [
+      null,
+      "{'one': '{} филиал', 'few': '{} филиала', 'many': '{} филиалов', 'other': '{} филиала'}"
+    ],
+    "NG_PLURALIZE::RELATION_HEAD_COMPANY-parents": [
+      null,
+      "{'one': 'Головная компания', 'few': '{} головные компании', 'many': '{} головных компаний', 'other': '{} головной компании'}"
+    ],
+    "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY-children": [
+      null,
+      "{'one': '{} участие в закупках', 'few': '{} участия в закупках', 'many': '{} участий в закупках', 'other': '{} участий в закупках'}"
+    ],
+    "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY-parents": [
+      null,
+      "{'one': '{} участник компания', 'few': '{} участника компании', 'many': '{} участников компаний', 'other': '{} участника компании'}"
+    ],
+    "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL-children": [
+      null,
+      "{'one': '{} участие в закупках', 'few': '{} участия в закупках', 'many': '{} участий в закупках', 'other': '{} участий в закупках'}"
+    ],
+    "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL-parents": [
+      null,
+      "{'one': '{} участник физическое лицо', 'few': '{} участника физических лица', 'many': '{} участников физических лиц', 'other': '{} участника физического лица'}"
+    ],
+    "NG_PLURALIZE::RELATION_PHONE-children": [
+      null,
+      "{'one': '{} компания', 'few': '{} компании', 'many': '{} компаний', 'other': '{} компании'}"
+    ],
+    "NG_PLURALIZE::RELATION_PHONE-parents": [
+      null,
+      "{'one': '{} телефон', 'few': '{} телефона', 'many': '{} телефонов', 'other': '{} телефона'}"
+    ],
+    "NG_PLURALIZE::RELATION_PREDECESSOR_COMPANY-children": [
+      null,
+      "{'one': '{} правопреемник', 'few': '{} правопреемника', 'many': '{} правопреемников', 'other': '{} правопреемника'}"
+    ],
+    "NG_PLURALIZE::RELATION_PREDECESSOR_COMPANY-parents": [
+      null,
+      "{'one': '{} предшественник', 'few': '{} предшественника', 'many': '{} предшественников', 'other': '{} предшественника'}"
+    ],
+    "NG_PLURALIZE::RELATION_REGISTER_HOLDER-children": [
+      null,
+      "{'one': '{} эмитент', 'few': '{} эмитента', 'many': '{} эмитентов', 'other': '{} эмитента'}"
+    ],
+    "NG_PLURALIZE::RELATION_REGISTER_HOLDER-parents": [
+      null,
+      "{'one': '{} реестродержатель', 'few': '{} реестродержателя', 'many': '{} реестродержателей', 'other': '{} реестродержателя'}"
+    ],
     "NOT_ADMITTED": [
       null,
       "не допущен"
@@ -50,6 +182,22 @@
     "PARTICIPANT": [
       null,
       "участник"
+    ],
+    "RELATION_GROUP_AFFILIATED": [
+      null,
+      "Аффилированные лица"
+    ],
+    "RELATION_GROUP_BASE": [
+      null,
+      ""
+    ],
+    "RELATION_GROUP_CONTACTS": [
+      null,
+      "Контакты"
+    ],
+    "RELATION_GROUP_PURCHASE": [
+      null,
+      "Закупки"
     ],
     "RUB": [
       null,
@@ -140,6 +288,138 @@
       null,
       "£"
     ],
+    "NG_PLURALIZE::RELATION_ADDRESS-children": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_ADDRESS-parents": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY-children": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY-parents": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL-children": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL-parents": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_COMMISSION_MEMBER-children": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_COMMISSION_MEMBER-parents": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY-children": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY-parents": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_EMPLOYEE-children": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_EMPLOYEE-parents": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_EXECUTIVE_COMPANY-children": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_EXECUTIVE_COMPANY-parents": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL-children": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL-parents": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_FOUNDER-parents": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_FOUNDER_COMPANY-children": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_FOUNDER_COMPANY-parents": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL-children": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL-parents": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_HEAD_COMPANY-children": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_HEAD_COMPANY-parents": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY-children": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY-parents": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL-children": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL-parents": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_PHONE-children": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_PHONE-parents": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_PREDECESSOR_COMPANY-children": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_PREDECESSOR_COMPANY-parents": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_REGISTER_HOLDER-children": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_REGISTER_HOLDER-parents": [
+      null,
+      ""
+    ],
     "NOT_ADMITTED": [
       null,
       "not admitted"
@@ -147,6 +427,22 @@
     "PARTICIPANT": [
       null,
       "participant"
+    ],
+    "RELATION_GROUP_AFFILIATED": [
+      null,
+      ""
+    ],
+    "RELATION_GROUP_BASE": [
+      null,
+      ""
+    ],
+    "RELATION_GROUP_CONTACTS": [
+      null,
+      ""
+    ],
+    "RELATION_GROUP_PURCHASE": [
+      null,
+      ""
     ],
     "RUB": [
       null,

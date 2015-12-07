@@ -144,6 +144,8 @@ msgid "NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL"
 msgstr "{'one': 'Director', 'other': '{} directors'}"
 
 #: ../src/rsearch/views/rsearch-node-plain.html:1
+#: ../src/rsearch/views/rsearch-node-relations-header.html:1
+#: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "NG_PLURALIZE::RELATION_FOUNDER"
 msgstr "{'one': '1 shareholder', 'other': '{} shareholders'}"
 
@@ -443,6 +445,11 @@ msgstr "Enforcement proceedings"
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Исторический профиль"
 msgstr "Historical Report"
+
+#: ../src/rsearch/views/rsearch-node-list.html:1
+msgctxt "История связей"
+msgid "История"
+msgstr ""
 
 #: ../src/nkb-app/index.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
@@ -766,7 +773,7 @@ msgid "брат"
 msgstr "brother"
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
-#: ../src/rsearch/views/rsearch-node-list.html:1
+#: ../src/rsearch/views/rsearch-node-plain-list.html:1
 #: ../src/rsearch/views/rsearch-node-traces.html:1
 msgctxt "объект в отчете"
 msgid "в отчете"
@@ -899,6 +906,11 @@ msgstr "rub."
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "руководитель"
 msgstr "manager"
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgctxt "с такой-то даты"
+msgid "с"
+msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "сестра"

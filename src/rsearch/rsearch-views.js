@@ -74,7 +74,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .directive('npRsearchNodePlain', ['$rootScope', 'nkbUser', function($rootScope, nkbUser) {
+        .directive('npRsearchNodePlain', ['$rootScope', 'nkbUser', 'npRsearchMetaHelper', function($rootScope, nkbUser, npRsearchMetaHelper) {
             return {
                 restrict: 'A',
                 scope: {
@@ -134,7 +134,9 @@ define(function(require) {'use strict';
                 },
                 template: templates['np-rsearch-node-relations'],
                 link: function(scope, element, attrs){
-                    scope.user = nkbUser.user();
+                    _.extend(scope, {
+                        user: nkbUser.user(),
+                    }, i18n.translateFuncs);
                 }
             };
         }])
@@ -145,7 +147,10 @@ define(function(require) {'use strict';
                 scope: {
                     relationsData: '=npRsearchNodeRelationsHeader'
                 },
-                template: templates['np-rsearch-node-relations-header']
+                template: templates['np-rsearch-node-relations-header'],
+                link: function(scope, element, attrs){
+                    _.extend(scope, i18n.translateFuncs);
+                }
             };
         }])
         //

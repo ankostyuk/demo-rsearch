@@ -105,32 +105,9 @@ define(function(require) {'use strict';
                 'FOUNDER': {
                     name: 'FOUNDER',
                     'parents': {
-                        pageSize: 'all',
-                        history: {
-                            isCollapsed: isFounderRelationsCollapsed
-                        }
-                    }
-                },
-                'FOUNDER_INDIVIDUAL': {
-                    'children': {
-                        history: {
-                            opposite: true
-                        }
-                    },
-                    'parents': {
-                        pageSize: 'all',
-                        history: {
-                            isCollapsed: isFounderRelationsCollapsed
-                        }
-                    }
-                },
-                'FOUNDER_COMPANY': {
-                    'children': {
-                        history: {
-                            opposite: true
-                        }
-                    },
-                    'parents': {
+                        order: 100,
+                        top: true,
+                        group: 'BASE',
                         pageSize: 'all',
                         history: {
                             isCollapsed: isFounderRelationsCollapsed
@@ -138,17 +115,217 @@ define(function(require) {'use strict';
                     }
                 },
 
-                'EXECUTIVE_INDIVIDUAL': {
+                'FOUNDER_INDIVIDUAL': {
                     'children': {
+                        order: 250,
+                        top: true,
+                        group: 'BASE',
                         history: {
                             opposite: true
                         }
                     },
                     'parents': {
+                        order: 200,
+                        top: true,
+                        group: 'BASE',
+                        pageSize: 'all',
+                        history: {
+                            isCollapsed: isFounderRelationsCollapsed
+                        }
+                    }
+                },
+
+                'FOUNDER_COMPANY': {
+                    'children': {
+                        order: 350,
+                        top: true,
+                        group: 'BASE',
+                        history: {
+                            opposite: true
+                        }
+                    },
+                    'parents': {
+                        order: 300,
+                        top: true,
+                        group: 'BASE',
+                        pageSize: 'all',
+                        history: {
+                            isCollapsed: isFounderRelationsCollapsed
+                        }
+                    }
+                },
+
+                'HEAD_COMPANY': {
+                    'children': {
+                        order: 400,
+                        top: true,
+                        group: 'BASE'
+                    },
+                    'parents': {
+                        order: 450,
+                        group: 'BASE'
+                    }
+                },
+
+                'PREDECESSOR_COMPANY': {
+                    'children': {
+                        order: 550,
+                        top: true,
+                        group: 'BASE'
+                    },
+                    'parents': {
+                        order: 500,
+                        top: true,
+                        group: 'BASE'
+                    }
+                },
+
+                'REGISTER_HOLDER': {
+                    'children': {
+                        order: 650,
+                        group: 'BASE'
+                    },
+                    'parents': {
+                        order: 600,
+                        group: 'BASE'
+                    }
+                },
+
+                'EXECUTIVE_COMPANY': {
+                    'children': {
+                        order: 750,
+                        group: 'BASE'
+                    },
+                    'parents': {
+                        order: 700,
+                        group: 'BASE'
+                    }
+                },
+
+                'EXECUTIVE_INDIVIDUAL': {
+                    'children': {
+                        order: 850,
+                        top: true,
+                        group: 'BASE',
+                        history: {
+                            opposite: true
+                        }
+                    },
+                    'parents': {
+                        order: 800,
+                        group: 'BASE',
                         pageSize: 'all',
                         history: {
                             isCollapsed: isExecutiveRelationsCollapsed
                         }
+                    }
+                },
+
+                'AFFILIATED_INDIVIDUAL': {
+                    'children': {
+                        order: 950,
+                        top: true,
+                        group: 'AFFILIATED'
+                    },
+                    'parents': {
+                        order: 900,
+                        top: true,
+                        group: 'AFFILIATED'
+                    }
+                },
+
+                'AFFILIATED_COMPANY': {
+                    'children': {
+                        order: 1050,
+                        top: true,
+                        group: 'AFFILIATED'
+                    },
+                    'parents': {
+                        order: 1000,
+                        top: true,
+                        group: 'AFFILIATED'
+                    }
+                },
+
+                'ADDRESS': {
+                    'children': {
+                        order: 1150,
+                        top: true,
+                        group: 'BASE'
+                    },
+                    'parents': {
+                        order: 1100,
+                        group: 'CONTACTS'
+                    }
+                },
+
+                'PHONE': {
+                    'children': {
+                        order: 1250,
+                        top: true,
+                        group: 'BASE'
+                    },
+                    'parents': {
+                        order: 1200,
+                        group: 'CONTACTS'
+                    }
+                },
+
+                'CUSTOMER_COMPANY': {
+                    'children': {
+                        order: 1300,
+                        group: 'PURCHASE'
+                    },
+                    'parents': {
+                        order: 1350,
+                        top: true,
+                        group: 'BASE'
+                    }
+                },
+
+                'PARTICIPANT_COMPANY': {
+                    'children': {
+                        order: 1400,
+                        group: 'PURCHASE'
+                    },
+                    'parents': {
+                        order: 1670,
+                        top: true,
+                        group: 'BASE'
+                    }
+                },
+
+                'EMPLOYEE': {
+                    'children': {
+                        order: 1720,
+                        group: 'PURCHASE'
+                    },
+                    'parents': {
+                        order: 1500,
+                        group: 'PURCHASE'
+                    }
+                },
+
+                'PARTICIPANT_INDIVIDUAL': {
+                    'children': {
+                        order: 1600,
+                        group: 'PURCHASE'
+                    },
+                    'parents': {
+                        order: 1650,
+                        top: true,
+                        group: 'BASE'
+                    }
+                },
+
+                'COMMISSION_MEMBER': {
+                    'children': {
+                        order: 1700,
+                        group: 'PURCHASE'
+                    },
+                    'parents': {
+                        order: 1750,
+                        group: 'BASE'
                     }
                 },
 
@@ -160,7 +337,24 @@ define(function(require) {'use strict';
             },
 
             mergedRelationTypes: {
-                'FOUNDER': ['FOUNDER_INDIVIDUAL', 'FOUNDER_COMPANY']
+                'FOUNDER': {
+                    'parents': ['FOUNDER_INDIVIDUAL', 'FOUNDER_COMPANY']
+                }
+            },
+
+            relationGroups: {
+                'BASE': {
+                    order: 10
+                },
+                'AFFILIATED': {
+                    order: 20
+                },
+                'CONTACTS': {
+                    order: 30
+                },
+                'PURCHASE': {
+                    order: 40
+                }
             },
 
             relationActualDate: '_actual',
@@ -262,6 +456,19 @@ define(function(require) {'use strict';
                     return relation.__id;
                 },
 
+                buildNodeRelationKey: function(direction, relationType) {
+                    return direction + '::' + relationType;
+                },
+
+                getNodeRelationInfoByKey: function(key) {
+                    var s = key.split('::');
+
+                    return {
+                        relationDirection: s[0],
+                        relationType: s[1]
+                    };
+                },
+
                 buildNodeExtraMeta: function(node) {
                     if (!node) {
                         return;
@@ -271,42 +478,14 @@ define(function(require) {'use strict';
                     metaHelper.buildNodeUID(node);
 
                     //
+                    node.__relationData = metaHelper.buildRelationData(node);
+
+                    //
                     node.__idField = nodeTypesMeta[node._type]['idField'];
 
                     // компания
                     if (node._type === 'COMPANY') {
                         metaHelper.buildCompanyState(node);
-
-                        // группы связей
-                        node.__isAffiliatedRelations = isRelations([
-                            ['AFFILIATED_COMPANY', 'in'],
-                            ['AFFILIATED_INDIVIDUAL', 'in'],
-                            ['AFFILIATED_COMPANY', 'out']
-                        ]);
-
-                        node.__isContactsRelations = isRelations([
-                            ['ADDRESS', 'in'],
-                            ['PHONE', 'in']
-                        ]);
-
-                        node.__isPurchaseRelations = isRelations([
-                            ['CUSTOMER_COMPANY', 'out'],
-                            ['PARTICIPANT_COMPANY', 'out'],
-                            ['EMPLOYEE', 'in']
-                        ]);
-                    } else
-                    // физическое лицо
-                    if (node._type === 'INDIVIDUAL') {
-                        // группы связей
-                        node.__isAffiliatedRelations = isRelations([
-                            ['AFFILIATED_INDIVIDUAL', 'out']
-                        ]);
-
-                        node.__isPurchaseRelations = isRelations([
-                            ['PARTICIPANT_INDIVIDUAL', 'out'],
-                            ['COMMISSION_MEMBER', 'out'],
-                            ['EMPLOYEE', 'out']
-                        ]);
                     } else
                     // закупка
                     if (node._type === 'PURCHASE') {
@@ -329,26 +508,67 @@ define(function(require) {'use strict';
                             node.__historical[m] = true;
                         });
                     }
+                },
 
-                    function isRelations(relationTypes) {
-                        if (!node._info) {
-                            return false;
-                        }
+                buildRelationData: function(node) {
+                    var relationCountMap    = {},
+                        relationCounts      = [],
+                        groups              = {};
 
-                        var type, d, t, i;
+                    _.each(['in', 'out'], function(infoDirection){
+                        _.each(_.get(node, ['_info', infoDirection]), function(relationCount, relationType){
+                            var direction               = metaHelper.getDirection(infoDirection),
+                                relationTypeMeta        = metaHelper.getRelationTypeMeta(relationType, direction),
+                                groupKey                = relationTypeMeta.group,
+                                relationGroupMeta       = metaHelper.getRelationGroupMeta(groupKey),
+                                mergedTypeInfo          = metaHelper.getMergedTypeInfoByRelationType(relationType, direction),
+                                mergedTypeRelationCount = 0,
+                                relationKey, countData;
 
-                        for (i = 0; i < relationTypes.length; i++) {
-                            t = relationTypes[i];
-                            d = t[1];
-                            type = t[0];
+                            var group = groups[groupKey] = groups[groupKey] || {
+                                key: groupKey,
+                                order: relationGroupMeta.order,
+                                relationCounts: {}
+                            };
 
-                            if (node._info[d] && node._info[d][type]) {
-                                return true;
+                            _.each(mergedTypeInfo.relationTypes, function(t){
+                                mergedTypeRelationCount += _.get(node, ['_info', infoDirection, t]) || 0;
+                            });
+
+                            if (mergedTypeRelationCount > relationCount) {
+                                relationType = mergedTypeInfo.mergedType;
+                                relationTypeMeta = metaHelper.getRelationTypeMeta(mergedTypeInfo.mergedType, direction);
+                                relationCount = mergedTypeRelationCount;
                             }
-                        }
 
-                        return false;
-                    }
+                            relationKey = metaHelper.buildNodeRelationKey(direction, relationType);
+
+                            countData = {
+                                key:            relationKey,
+                                order:          relationTypeMeta.order,
+                                top:            relationTypeMeta.top,
+                                relationType:   relationType,
+                                relationCount:  relationCount,
+                                direction:      direction
+                            };
+
+                            relationCountMap[relationKey] = countData;
+                            group.relationCounts[relationKey] = countData;
+                        });
+                    });
+
+                    groups = _.sortBy(groups, 'order');
+
+                    _.each(groups, function(group){
+                        group.relationCounts = _.sortBy(group.relationCounts, 'order');
+                        relationCounts = relationCounts.concat(group.relationCounts);
+                    });
+
+                    return {
+                        relationCountMap: relationCountMap,
+                        relationCounts: relationCounts,
+                        groups: groups
+                    };
                 },
 
                 buildCompanyState: function(node) {
@@ -396,21 +616,26 @@ define(function(require) {'use strict';
                     }
                 },
 
-                getRelationTypesByMergedType: function(mergedType) {
-                    return npRsearchMeta.mergedRelationTypes[mergedType];
+                getRelationTypeMeta: function(relationType, direction) {
+                    return _.get(npRsearchMeta.relationTypes, [relationType, direction]);
                 },
 
-                isRelationTypeInMergedType: function(relationType, mergedType) {
-                    return _.contains(npRsearchMeta.mergedRelationTypes[mergedType], relationType);
+                getRelationTypesByMergedType: function(mergedType, direction) {
+                    return _.get(npRsearchMeta.mergedRelationTypes, [mergedType, direction]);
                 },
 
-                getMergedTypeInfoByRelationType: function(relationType) {
+                isRelationTypeInMergedType: function(relationType, mergedType, direction) {
+                    return _.contains(_.get(npRsearchMeta.mergedRelationTypes, [mergedType, direction]), relationType);
+                },
+
+                getMergedTypeInfoByRelationType: function(relationType, direction) {
                     var info = {
                         mergedType: null,
                         relationTypes: null
                     };
 
-                    _.each(npRsearchMeta.mergedRelationTypes, function(relationTypes, mergedType){
+                    _.each(npRsearchMeta.mergedRelationTypes, function(byDirections, mergedType){
+                        var relationTypes = byDirections[direction];
                         if (_.contains(relationTypes, relationType)) {
                             info.mergedType = mergedType;
                             info.relationTypes = relationTypes;
@@ -431,6 +656,14 @@ define(function(require) {'use strict';
 
                 getInfoDirection: function(relationDirection) {
                     return relationDirection === 'parents' ? 'in' : 'out';
+                },
+
+                getDirection: function(infoDirection) {
+                    return infoDirection === 'in' ? 'parents' : 'children';
+                },
+
+                getRelationGroupMeta: function(relationGroup) {
+                    return npRsearchMeta.relationGroups[relationGroup];
                 },
 
                 buildNodesRelationMap: function(nodeList) {
@@ -694,7 +927,7 @@ define(function(require) {'use strict';
                                 '\nactual:', moment(data.info.history.actual.min).format(__normalizeDateFormat)
                             );
 
-                            var mergedTypeInfo = metaHelper.getMergedTypeInfoByRelationType(relationType);
+                            var mergedTypeInfo = metaHelper.getMergedTypeInfoByRelationType(relationType, direction);
 
                             if (!mergedTypeInfo.mergedType) {
                                 return;
@@ -724,7 +957,7 @@ define(function(require) {'use strict';
                             return;
                         }
 
-                        var mergedTypeInfo          = metaHelper.getMergedTypeInfoByRelationType(relationData.relation._type),
+                        var mergedTypeInfo          = metaHelper.getMergedTypeInfoByRelationType(relationData.relation._type, relationData.direction),
                             mergedTypeHistoryInfo   = _.get(relationMap.byRelationTypes[relationData.direction], [mergedTypeInfo.mergedType, 'info', 'history']),
                             historyInfo             = mergedTypeHistoryInfo || relationMap.byRelationTypes[relationData.direction][relationData.relation._type].info.history;
 
@@ -1323,7 +1556,7 @@ define(function(require) {'use strict';
 
                         relation.__isTarget =
                             (relation._type === data.relationInfo.relationType) ||
-                            npRsearchMetaHelper.isRelationTypeInMergedType(relation._type, data.relationInfo.relationType);
+                            npRsearchMetaHelper.isRelationTypeInMergedType(relation._type, data.relationInfo.relationType, data.relationInfo.direction);
 
                         list.push(relation);
                     }

@@ -208,7 +208,7 @@ define(function(require) {'use strict';
                             return resetPageConfig();
                         }
 
-                        var relationTypes   = npRsearchMetaHelper.getRelationTypesByMergedType(byRelations.relationType) || [byRelations.relationType],
+                        var relationTypes   = npRsearchMetaHelper.getRelationTypesByMergedType(byRelations.relationType, byRelations.direction) || [byRelations.relationType],
                             pageSize        = 0,
                             infoDirection, relationCount;
 
@@ -806,7 +806,7 @@ define(function(require) {'use strict';
                             showMessage('FILTERS_RESULT_EMPTY');
                         }
 
-                        var jointRelationTypes  = npRsearchMetaHelper.getRelationTypesByMergedType(byRelations.relationType),
+                        var jointRelationTypes  = npRsearchMetaHelper.getRelationTypesByMergedType(byRelations.relationType, byRelations.direction),
                             isJoint             = !!jointRelationTypes,
                             historyMeta         = npRsearchMetaHelper.getRelationHistoryMeta(byRelations.relationType, byRelations.direction);
 
@@ -893,7 +893,7 @@ define(function(require) {'use strict';
                                 _.extend(filter, f.condition);
                             });
 
-                            var relationTypes = npRsearchMetaHelper.getRelationTypesByMergedType(byRelations.relationType) || [byRelations.relationType];
+                            var relationTypes = npRsearchMetaHelper.getRelationTypesByMergedType(byRelations.relationType, byRelations.direction) || [byRelations.relationType];
 
                             byRelations.request = npRsearchResource.relations({
                                 node: byRelations.node,
@@ -984,8 +984,9 @@ define(function(require) {'use strict';
                             type: 'NODE_RELATIONS',
                             data: {
                                 node: node,
-                                direction: direction,
-                                relationType: relationType
+                                relationKey: npRsearchMetaHelper.buildNodeRelationKey(direction, relationType),
+                                direction: direction, // @Deprecated
+                                relationType: relationType // @Deprecated
                             }
                         };
 
@@ -1188,18 +1189,7 @@ define(function(require) {'use strict';
                         proxy: navigationProxy,
                         active: null,
                         getActiveRelation: function() {
-                            var active = nodeRelationsFilter.active;
-
-                            if (!active) {
-                                return {};
-                            }
-
-                            var s = active.split('::');
-
-                            return {
-                                relationDirection: s[0],
-                                relationType: s[1]
-                            };
+                            return nodeRelationsFilter.active ? npRsearchMetaHelper.getNodeRelationInfoByKey(nodeRelationsFilter.active) : {};
                         },
                         actions: {
                             relationsClick: function(direction, relationType) {
@@ -1235,7 +1225,7 @@ define(function(require) {'use strict';
                     };
 
                     function buildNodeRelationActiveKey(direction, relationType) {
-                        return direction + '::' + relationType;
+                        return npRsearchMetaHelper.buildNodeRelationKey(direction, relationType);
                     }
 
                     function setNodeRelationsFilter(node, direction, relationType) {
