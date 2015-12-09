@@ -73,7 +73,7 @@ define(function(require) {'use strict';
                 resetNodeList: function(nodeListView) {
                 },
                 //
-                showNodeList: function(nodeList, addNodeList, nodeListView) {
+                showNodeList: function(nodeList, addNodeList, nodeListView, listProperties) {
                 },
                 //
                 showTrace: function(trace, nodeTracesView) {
@@ -984,7 +984,7 @@ define(function(require) {'use strict';
                             type: 'NODE_RELATIONS',
                             data: {
                                 node: node,
-                                relationKey: npRsearchMetaHelper.buildNodeRelationKey(direction, relationType),
+                                countData: npRsearchMetaHelper.getRelationCountData(node, direction, relationType),
                                 direction: direction, // @Deprecated
                                 relationType: relationType // @Deprecated
                             }

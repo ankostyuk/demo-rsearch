@@ -183,6 +183,18 @@ msgid "NG_PLURALIZE::RELATION_REGISTER_HOLDER-parents"
 msgstr ""
 
 #: ../i18n/ui_keys/src/keys.txt:1
+msgid "NG_PLURALIZE::RELATION_beneficiary-parents"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "NG_PLURALIZE::RELATION_kinsmen-sibling"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "NG_PLURALIZE::RELATION_related_kinsmen-sibling"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
 msgid "NOT_ADMITTED"
 msgstr "not admitted"
 

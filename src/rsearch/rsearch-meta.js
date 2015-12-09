@@ -469,6 +469,10 @@ define(function(require) {'use strict';
                     };
                 },
 
+                buildNodeRelationPluralKey: function(direction, relationType) {
+                    return 'NG_PLURALIZE::RELATION_' + relationType + '-' + direction;
+                },
+
                 buildNodeExtraMeta: function(node) {
                     if (!node) {
                         return;
@@ -478,7 +482,7 @@ define(function(require) {'use strict';
                     metaHelper.buildNodeUID(node);
 
                     //
-                    node.__relationData = metaHelper.buildRelationData(node);
+                    node.__relationData = metaHelper.buildRelationDataByNodeInfo(node);
 
                     //
                     node.__idField = nodeTypesMeta[node._type]['idField'];
@@ -510,7 +514,7 @@ define(function(require) {'use strict';
                     }
                 },
 
-                buildRelationData: function(node) {
+                buildRelationDataByNodeInfo: function(node) {
                     var relationCountMap    = {},
                         relationCounts      = [],
                         groups              = {};
@@ -522,8 +526,11 @@ define(function(require) {'use strict';
                                 groupKey                = relationTypeMeta.group,
                                 relationGroupMeta       = metaHelper.getRelationGroupMeta(groupKey),
                                 mergedTypeInfo          = metaHelper.getMergedTypeInfoByRelationType(relationType, direction),
+                                mergedTypeKey           = mergedTypeInfo.mergedType && metaHelper.buildNodeRelationKey(direction, mergedTypeInfo.mergedType),
+                                mergedTypeCountData     = relationCountMap[mergedTypeKey],
                                 mergedTypeRelationCount = 0,
-                                relationKey, countData;
+                                relationKey             = metaHelper.buildNodeRelationKey(direction, relationType),
+                                relationPluralKey       = metaHelper.buildNodeRelationPluralKey(direction, relationType);
 
                             var group = groups[groupKey] = groups[groupKey] || {
                                 key: groupKey,
@@ -531,29 +538,43 @@ define(function(require) {'use strict';
                                 relationCounts: {}
                             };
 
-                            _.each(mergedTypeInfo.relationTypes, function(t){
-                                mergedTypeRelationCount += _.get(node, ['_info', infoDirection, t]) || 0;
-                            });
-
-                            if (mergedTypeRelationCount > relationCount) {
-                                relationType = mergedTypeInfo.mergedType;
-                                relationTypeMeta = metaHelper.getRelationTypeMeta(mergedTypeInfo.mergedType, direction);
-                                relationCount = mergedTypeRelationCount;
-                            }
-
-                            relationKey = metaHelper.buildNodeRelationKey(direction, relationType);
-
-                            countData = {
+                            var countData = {
                                 key:            relationKey,
                                 order:          relationTypeMeta.order,
                                 top:            relationTypeMeta.top,
                                 relationType:   relationType,
+                                direction:      direction,
                                 relationCount:  relationCount,
-                                direction:      direction
+                                pluralKey:      relationPluralKey
                             };
 
+                            _.each(!mergedTypeCountData && mergedTypeInfo.relationTypes, function(t){
+                                mergedTypeRelationCount += _.get(node, ['_info', infoDirection, t]) || 0;
+                            });
+
+                            if (!mergedTypeCountData && mergedTypeRelationCount > relationCount) {
+                                var mergedType      = mergedTypeInfo.mergedType,
+                                    mergedTypeMeta  = metaHelper.getRelationTypeMeta(mergedType, direction);
+
+                                mergedTypeCountData = {
+                                    key:            mergedTypeKey,
+                                    order:          mergedTypeMeta.order,
+                                    top:            mergedTypeMeta.top,
+                                    relationType:   mergedType,
+                                    direction:      direction,
+                                    relationCount:  mergedTypeRelationCount,
+                                    pluralKey:      metaHelper.buildNodeRelationPluralKey(direction, mergedType)
+                                };
+
+                                group.relationCounts[mergedTypeKey] = mergedTypeCountData;
+                                relationCountMap[mergedTypeKey] = mergedTypeCountData;
+                            }
+
+                            if (!relationCountMap[mergedTypeKey]) {
+                                group.relationCounts[relationKey] = countData;
+                            }
+
                             relationCountMap[relationKey] = countData;
-                            group.relationCounts[relationKey] = countData;
                         });
                     });
 
@@ -568,6 +589,58 @@ define(function(require) {'use strict';
                         relationCountMap: relationCountMap,
                         relationCounts: relationCounts,
                         groups: groups
+                    };
+                },
+
+                buildRelationDataByNodeRelations: function(node, relations) {
+                    var relationCountMap = {};
+
+                    _.each(relations, function(relation){
+                        var direction       = metaHelper.getDirectionByNode(node, relation),
+                            relationType    = relation._type;
+
+                        buildCountData(relationType, direction);
+
+                        // Для объединенных типов
+                        var mergedTypeInfo = metaHelper.getMergedTypeInfoByRelationType(relationType, direction);
+
+                        if (mergedTypeInfo.mergedType) {
+                            buildCountData(mergedTypeInfo.mergedType, direction);
+                        }
+                    });
+
+                    function buildCountData(relationType, direction) {
+                        var relationKey = metaHelper.buildNodeRelationKey(direction, relationType);
+
+                        var countData = relationCountMap[relationKey] = relationCountMap[relationKey] || {
+                            key:            relationKey,
+                            relationType:   relationType,
+                            direction:      direction,
+                            relationCount:  0
+                        };
+
+                        countData.relationCount++;
+                    }
+
+                    return {
+                        relationCountMap: relationCountMap
+                    };
+                },
+
+                getRelationCountData: function(node, direction, relationType) {
+                    var relationKey = metaHelper.buildNodeRelationKey(direction, relationType),
+                        countData   = _.get(node, ['__relationData', 'relationCountMap', relationKey]);
+
+                    if (countData) {
+                        return countData;
+                    }
+
+                    return {
+                        key:            relationKey,
+                        relationType:   relationType,
+                        direction:      direction,
+                        relationCount:  null,
+                        pluralKey:      metaHelper.buildNodeRelationPluralKey(direction, relationType)
                     };
                 },
 
@@ -660,6 +733,10 @@ define(function(require) {'use strict';
 
                 getDirection: function(infoDirection) {
                     return infoDirection === 'in' ? 'parents' : 'children';
+                },
+
+                getDirectionByNode: function(node, relation) {
+                    return relation._dstId === node._id ? 'parents' : 'children';
                 },
 
                 getRelationGroupMeta: function(relationGroup) {
@@ -1028,11 +1105,12 @@ define(function(require) {'use strict';
                             targetNodeList = lastRelation.__isOutdated ? outdatedNodeList : actualNodeList;
 
                             byKey = targetNodeList[relationType] = targetNodeList[relationType] || {
+                                key: relationType,
+                                direction: data.direction,
                                 data: {
                                     list: [],
                                     total: 0
-                                },
-                                key: relationType
+                                }
                             };
 
                             size = _.size(byKey.data.list);

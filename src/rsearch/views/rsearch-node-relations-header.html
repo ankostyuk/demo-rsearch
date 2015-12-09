@@ -1,4 +1,2 @@
-<span ng-init="countData = relationsData.node.__relationData.relationCountMap[relationsData.relationKey]; relationPluralKey = 'NG_PLURALIZE::RELATION_' + countData.relationType + '-' + countData.direction;">
-    <!-- Без ng-if="" np-pluralize не работает. TODO разобраться почему -->
-    <np-pluralize ng-if="relationPluralKey" count="countData.relationCount" when="$eval(_tr(relationPluralKey))"></np-pluralize>
-</span>
+<!-- Для 'kinsmen' - костыль. TODO Другое решение. Перенести в buildRelationDataBy... relationCountMap -->
+<span><np-pluralize plural="{count: relationsData.relationType === 'kinsmen' ? (relationsData.node.__info['kinsmen'] || null) : relationsData.countData.relationCount, when: _tr(relationsData.countData.pluralKey)}"></np-pluralize></span>

@@ -36,7 +36,7 @@
 <script id="np-rsearch-node-joint-list" type="text/template">
     <div ng-repeat="list in nodeList" ng-show="list.data.total">
         <div class="node-list-header" ng-show="showHeaders">
-            <np-pluralize count="list.data.total" when="$eval(_tr('NG_PLURALIZE::RELATION_' + list.key))"></np-pluralize>
+            <np-pluralize plural="{count: list.data.total, when: _tr('NG_PLURALIZE::RELATION_' + list.key + '-' + list.direction)}"></np-pluralize>
         </div>
         <div np-rsearch-node-plain-list="list.data.list"
             np-rsearch-node-plain-list-show-item-number="showItemNumber && list.data.total > 1"

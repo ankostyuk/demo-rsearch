@@ -175,6 +175,18 @@
       null,
       "{'one': '{} реестродержатель', 'few': '{} реестродержателя', 'many': '{} реестродержателей', 'other': '{} реестродержателя'}"
     ],
+    "NG_PLURALIZE::RELATION_beneficiary-parents": [
+      null,
+      "{'null': 'Бенефициары'}"
+    ],
+    "NG_PLURALIZE::RELATION_kinsmen-sibling": [
+      null,
+      "{'null': 'Однофамильцы', 'one': '{} однофамилец', 'few': '{} однофамильца', 'many': '{} однофамильцев', 'other': '{} однофамильца'}"
+    ],
+    "NG_PLURALIZE::RELATION_related_kinsmen-sibling": [
+      null,
+      "{'null': 'Связанные однофамильцы'}"
+    ],
     "NOT_ADMITTED": [
       null,
       "не допущен"
@@ -417,6 +429,18 @@
       ""
     ],
     "NG_PLURALIZE::RELATION_REGISTER_HOLDER-parents": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_beneficiary-parents": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_kinsmen-sibling": [
+      null,
+      ""
+    ],
+    "NG_PLURALIZE::RELATION_related_kinsmen-sibling": [
       null,
       ""
     ],

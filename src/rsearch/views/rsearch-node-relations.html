@@ -2,8 +2,8 @@
     <div class="relations-block" ng-repeat="group in node.__relationData.groups">
         <h5 class="relations-block-header" ng-show="group.key !== 'BASE'">{{_tr('RELATION_GROUP_' + group.key)}}</h5>
         <ul class="unstyled">
-            <li ng-class="{active: active === countData.key}" ng-repeat="countData in group.relationCounts" ng-init="relationPluralKey = 'NG_PLURALIZE::RELATION_' + countData.relationType + '-' + countData.direction">
-                <a class="action" ng-click="actions.relationsClick(countData.direction, countData.relationType)"><np-pluralize count="countData.relationCount" when="$eval(_tr(relationPluralKey))"></np-pluralize></a>
+            <li ng-repeat="countData in group.relationCounts" ng-class="{active: active === countData.key}">
+                <a class="action" ng-click="actions.relationsClick(countData.direction, countData.relationType)"><np-pluralize plural="{count: countData.relationCount, when: _tr(countData.pluralKey)}"></np-pluralize></a>
                 <div ng-if="group.key === 'AFFILIATED'" np-rsearch-affiliated-cause-filter></div>
             </li>
         </ul>

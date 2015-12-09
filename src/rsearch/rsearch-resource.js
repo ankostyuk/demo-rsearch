@@ -114,6 +114,7 @@ define(function(require) {'use strict';
 
                             data.list.push({
                                 key: relationType,
+                                direction: options.direction,
                                 data: responseData
                             });
                         });

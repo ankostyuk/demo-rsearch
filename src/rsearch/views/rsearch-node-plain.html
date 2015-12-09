@@ -7,8 +7,8 @@
 
     <div class="extra-info">
         <ul class="inline">
-            <li ng-repeat="countData in node.__relationData.relationCounts" ng-show="countData.top" ng-init="relationPluralKey = 'NG_PLURALIZE::RELATION_' + countData.relationType + '-' + countData.direction">
-                <a class="action" ng-click="actions.relationsClick(countData.direction, countData.relationType, node, $event)"><np-pluralize count="countData.relationCount" when="$eval(_tr(relationPluralKey))"></np-pluralize></a>
+            <li ng-repeat="countData in node.__relationData.relationCounts" ng-show="countData.top">
+                <a class="action" ng-click="actions.relationsClick(countData.direction, countData.relationType, node, $event)"><np-pluralize plural="{count: countData.relationCount, when: _tr(countData.pluralKey)}"></np-pluralize></a>
             </li>
         </ul>
     </div>

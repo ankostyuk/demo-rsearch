@@ -275,7 +275,6 @@ msgid "О проекте"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Контакты"
 msgstr ""
 
@@ -676,219 +675,6 @@ msgctxt "История связей"
 msgid "История"
 msgstr ""
 
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_FOUNDER"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_FOUNDER_INDIVIDUAL"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-msgid "Учредитель — физическое лицо"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_FOUNDER_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-msgid "Учредитель — компания"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_SUBSIDIARY_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_BRANCH_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_PREDECESSOR_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_SUCCESSOR_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-msgid "NG_PLURALIZE::RELATION_AFFILIATED_PARENTS"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-msgid "NG_PLURALIZE::RELATION_AFFILIATED_CHILDREN"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_LEAD_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_PARENTS"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-plain.html:1
-msgid "NG_PLURALIZE::RELATION_PARTICIPANT_PARENTS"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_EXECUTIVE_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_PARENTS"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_AFFILIATED_COMPANY_CHILDREN"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_PARENTS"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_HEAD_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_REGISTER_HOLDER_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_REGISTERED_HOLDER_COMPANY"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_ADDRESS"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_PHONE"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_CUSTOMER_COMPANY_CHILDREN"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_CHILDREN"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_EMPLOYEE_PARENTS"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "Бенефициары"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_AFFILIATED_INDIVIDUAL_CHILDREN"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_CHILDREN"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_CHILDREN"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_EMPLOYEE_CHILDREN"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-msgid "NG_PLURALIZE::kinsmen"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "Связанные однофамильцы"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_PARTICIPANT_COMPANY_PARENTS"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_PARTICIPANT_INDIVIDUAL_PARENTS"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations-header.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "NG_PLURALIZE::RELATION_COMMISSION_MEMBER_PARENTS"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "Аффилированные лица"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-#: ../src/rsearch/views/rsearch-node-relations.html:1
-msgid "Закупки"
-msgstr ""
-
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Иски и судебные решения"
@@ -900,6 +686,10 @@ msgid "ФНС"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Бенефициары"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Анализ аффилированных лиц"
@@ -907,6 +697,10 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Однофамильцы"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Связанные однофамильцы"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1

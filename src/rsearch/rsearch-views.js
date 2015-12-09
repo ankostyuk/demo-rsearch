@@ -141,7 +141,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .directive('npRsearchNodeRelationsHeader', [function() {
+        .directive('npRsearchNodeRelationsHeader', ['$log', 'npRsearchMetaHelper', function($log, npRsearchMetaHelper) {
             return {
                 restrict: 'A',
                 scope: {
@@ -400,7 +400,7 @@ define(function(require) {'use strict';
 
                     function showNodeListProxy(nodeList, addNodeList) {
                         $timeout(function(){
-                            proxy.showNodeList(nodeList, addNodeList, view);
+                            proxy.showNodeList(nodeList, addNodeList, view, scope.listProperties);
                         });
                     }
 

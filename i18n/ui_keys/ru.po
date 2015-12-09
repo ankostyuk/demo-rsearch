@@ -183,6 +183,21 @@ msgid "NG_PLURALIZE::RELATION_REGISTER_HOLDER-parents"
 msgstr "{'one': '{} реестродержатель', 'few': '{} реестродержателя', 'many': '{} реестродержателей', 'other': '{} реестродержателя'}"
 
 #: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
+msgid "NG_PLURALIZE::RELATION_beneficiary-parents"
+msgstr "{'null': 'Бенефициары'}"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
+msgid "NG_PLURALIZE::RELATION_kinsmen-sibling"
+msgstr "{'null': 'Однофамильцы', 'one': '{} однофамилец', 'few': '{} однофамильца', 'many': '{} однофамильцев', 'other': '{} однофамильца'}"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
+msgid "NG_PLURALIZE::RELATION_related_kinsmen-sibling"
+msgstr "{'null': 'Связанные однофамильцы'}"
+
+#: ../i18n/ui_keys/src/keys.txt:1
 msgid "NOT_ADMITTED"
 msgstr "не допущен"
 
