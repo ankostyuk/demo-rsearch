@@ -141,7 +141,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .directive('npRsearchNodeRelationsHeader', ['$log', 'npRsearchMetaHelper', function($log, npRsearchMetaHelper) {
+        .directive('npRsearchNodeRelationsHeader', [function() {
             return {
                 restrict: 'A',
                 scope: {
@@ -170,7 +170,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .directive('npRsearchNodePlainList', [function($) {
+        .directive('npRsearchNodePlainList', [function() {
             return {
                 restrict: 'A',
                 scope: {
@@ -183,7 +183,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .directive('npRsearchNodeJointList', [function($) {
+        .directive('npRsearchNodeJointList', [function() {
             return {
                 restrict: 'A',
                 scope: {
