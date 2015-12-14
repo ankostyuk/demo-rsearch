@@ -1672,6 +1672,425 @@ define(function(require) {'use strict';
 
                 return $sce.trustAsHtml(texts.join(relationSeparator));
             };
+        }])
+        //
+        .factory('npRsearchRelationHelper', ['$log', '$filter', 'nkbScreenHelper', function($log, $filter, nkbScreenHelper){
+
+            var nbsp        = '\u00A0',     // &nbsp
+                // space       = ' ',
+                // dash        = ' —\u00A0',   // space + dash + &nbsp
+                separator   = ', ';         // , + space
+
+            var SHOW_TYPES = {
+                'FOUNDER_COMPANY': {
+                    order: 101,
+                    text: function(relation, srcNode, dstNode) {
+                        return getFounderText(relation);
+                    }
+                },
+
+                'AFFILIATED_COMPANY': {
+                    order: 102,
+                    text: function(relation, srcNode, dstNode) {
+                        return getAffiliatedText(relation);
+                    }
+                },
+
+                'FOUNDER_INDIVIDUAL': {
+                    order: 201,
+                    mergedInn: true,
+                    text: function(relation, srcNode, dstNode) {
+                        return getFounderText(relation);
+                    }
+                },
+
+                'EXECUTIVE_INDIVIDUAL': {
+                    order: 202,
+                    mergedInn: true,
+                    text: function(relation, srcNode, dstNode) {
+                        return getExecutiveText(relation);
+                    }
+                },
+
+                'AFFILIATED_INDIVIDUAL': {
+                    order: 203,
+                    text: function(relation, srcNode, dstNode) {
+                        return getAffiliatedText(relation);
+                    }
+                },
+
+                'EMPLOYEE': {
+                    order: 204,
+                    mergedInn: true,
+                    text: function(relation, srcNode, dstNode) {
+                        return getEmployeeText(relation);
+                    }
+                },
+
+                'PARTICIPANT_COMPANY': {
+                    order: 301,
+                    text: function(relation, srcNode, dstNode) {
+                        return getParticipantText(relation, srcNode, dstNode);
+                    }
+                },
+
+                'PARTICIPANT_INDIVIDUAL': {
+                    order: 401,
+                    mergedInn: true,
+                    text: function(relation, srcNode, dstNode) {
+                        return getParticipantText(relation, srcNode, dstNode);
+                    }
+                },
+
+                'COMMISSION_MEMBER': {
+                    order: 501,
+                    text: function(relation, srcNode, dstNode) {
+                        return getCommissionMemberText(relation);
+                    }
+                },
+
+                'HEAD_COMPANY': {
+                    order: 10010,
+                    text: function(relation, srcNode, dstNode) {
+                        return _tr("головная компания");
+                    }
+                },
+
+                'PREDECESSOR_COMPANY': {
+                    order: 10020,
+                    text: function(relation, srcNode, dstNode) {
+                        return _tr("предшественник");
+                    }
+                },
+
+                'REGISTER_HOLDER': {
+                    order: 10030,
+                    text: function(relation, srcNode, dstNode) {
+                        return _tr("реестродержатель");
+                    }
+                },
+
+                'EXECUTIVE_COMPANY': {
+                    order: 10040,
+                    text: function(relation, srcNode, dstNode) {
+                        return _tr("Управляющая компания");
+                    }
+                },
+
+                'ADDRESS': {
+                    order: 10050,
+                    text: function(relation, srcNode, dstNode) {
+                        return null;
+                    }
+                },
+
+                'PHONE': {
+                    order: 10060,
+                    text: function(relation, srcNode, dstNode) {
+                        return null;
+                    }
+                },
+
+                'CUSTOMER_COMPANY': {
+                    order: 10070,
+                    text: function(relation, srcNode, dstNode) {
+                        return _tr("Заказчик");
+                    }
+                },
+
+                'kinsmen': {
+                    order: 20000,
+                    data: {
+                        availableKinship: {
+                            'FATHER':            _tr("отец"),
+                            //'LASTNAME':          null,
+                            //'MALE_LASTNAME':     null,
+                            'FEMALE_LASTNAME':   _tr("супруга"),
+                            //'SIBLING':           null,
+                            'BROTHER':           _tr("брат"),
+                            'SISTER':            _tr("сестра"),
+                            //'CHILD':             null,
+                            'SON':               _tr("сын"),
+                            'DAUGHTER':          _tr("дочь")
+                        }
+                    },
+                    text: function(relation){
+                        return getKinsmenText(relation);
+                    }
+                }
+            };
+
+            function getRelationText(relation, properties) {
+                var t = [],
+                    value, v;
+
+                _.each(properties, function(p){
+                    value = relation[p.name] || (p.alternateData && p.alternateData[p.name]);
+
+                    if (value) {
+                        v = p.filter ? p.filter(value) : value;
+                        if (v) {
+                            t.push(v);
+                        }
+                    }
+                });
+
+                return t.join(separator);
+            }
+
+            function getFounderText(relation) {
+                if (relation.sharePercent || relation.shareAmount) {
+                    return _trc("доля", "Доля в учреждении компании") + nbsp +
+                        (relation.sharePercent ?
+                            (nkbScreenHelper.isScreen(relation.sharePercent) ?
+                                nkbScreenHelper.screen(relation.sharePercent) :
+                                $filter('share')(relation.sharePercent, 2)
+                            ) + '%' : '') +
+                        (relation.sharePercent && relation.shareAmount ? nbsp + nbsp : '') +
+                        (relation.shareAmount ?
+                            (nkbScreenHelper.isScreen(relation.shareAmount) ?
+                                nkbScreenHelper.screen(relation.shareAmount) :
+                                $filter('number')(relation.shareAmount)
+                            ) + nbsp + _tr("руб.") : '');
+                }
+
+                return _tr("учредитель");
+            }
+
+            function getExecutiveText(relation) {
+                if (relation.position) {
+                    return nkbScreenHelper.isScreen(relation.position) ?
+                            nkbScreenHelper.screen(relation.position) :
+                            $filter('multiline')(relation.position, 'line', 50);
+                }
+
+                return _tr("руководитель");
+            }
+
+            function getAffiliatedText(relation) {
+                var t = getRelationText(relation, [{
+                    name: 'causes',
+                    filter: function(causes) {
+                        var v = [];
+
+                        _.each(causes, function(cause){
+                            if (cause.name) {
+                                v.push(_tr(cause.name));
+                            }
+                        });
+
+                        return v.join(separator);
+                    }
+                }, {
+                    name: 'shareCapital',
+                    filter: function(v) {
+                        return _tr("доля УК") + nbsp + $filter('share')(v) + '%';
+                    }
+                }, {
+                    name: 'shareStock',
+                    filter: function(v) {
+                        return _tr("доля акций") + nbsp + $filter('share')(v) + '%';
+                    }
+                }]);
+
+                if (t) {
+                    return t;
+                }
+
+                return _tr("аффилированное лицо");
+            }
+
+            function getEmployeeText(relation) {
+                var t = getRelationText(relation, [{
+                    name: 'phone'
+                }, {
+                    name: 'email'
+                }]);
+
+                if (t) {
+                    return t;
+                }
+
+                return _tr("контактное лицо");
+            }
+
+            function getParticipantText(relation, srcNode, dstNode) {
+                var purchaseNode = (srcNode._type === 'PURCHASE' ? srcNode : (dstNode._type === 'PURCHASE' ? dstNode : null));
+
+                var statusOrder = {
+                    'WIN': 0,
+                    'PARTICIPANT': 1,
+                    'NOT_ADMITTED': 2
+                };
+
+                var ts = [],
+                    byStatusMap = {},
+                    alternateData, t,
+                    byStatus, status, byStatusList,
+                    price, lotNumber;
+
+                _.each(relation.lots, function(lot){
+                    alternateData = (
+                        purchaseNode.__lotMap[lot.lot] &&
+                        purchaseNode.__lotMap[lot.lot].applications &&
+                        purchaseNode.__lotMap[lot.lot].applications[lot.application]
+                    ) || {};
+
+                    status      = lot['status'] || alternateData['status'] || 'PARTICIPANT';
+                    price       = lot['price'] || alternateData['price'] || 0;
+                    lotNumber   = lot['lot'];
+
+                    byStatus = byStatusMap[status];
+
+                    if (byStatus) {
+                        byStatus.totalPrice += price;
+                        byStatus.lots.push(lotNumber);
+                    } else {
+                        byStatusMap[status] = {
+                            status: status,
+                            totalPrice: price,
+                            lots: [lotNumber]
+                        };
+                    }
+                });
+
+                byStatusList = _.sortBy(byStatusMap, function(s, k){
+                    return statusOrder[k];
+                });
+
+                _.each(byStatusList, function(s){
+                    t = [_tr(s.status)];
+
+                    if (s.totalPrice) {
+                        t.push($filter('number')(s.totalPrice, 0) + nbsp + _tr(purchaseNode.currency));
+                    }
+
+                    // t.push(
+                    //     (_.size(s.lots) === 1 ? _trc("лот", "лот в закупке") : _trc("лоты", "лот в закупке")) +
+                    //     nbsp + s.lots.join(separator)
+                    // );
+
+                    ts.push(t.join(nbsp));
+                });
+
+                return ts.join(separator);
+            }
+
+            function getCommissionMemberText(relation) {
+                if (relation.role) {
+                    return relation.role;
+                }
+
+                return _tr("член комиссии");
+            }
+
+            function getKinsmenText(relation) {
+                var ts = [], k;
+
+                _.each(relation.kinship, function(t){
+                    k = SHOW_TYPES['kinsmen'].data.availableKinship[t];
+
+                    if (k) {
+                        ts.push(_tr(k));
+                    }
+                });
+
+                return _.size(ts) ?
+                    _trc("возможно", "возможно жена, сестра или мать") + nbsp + _.toSentence(ts, separator, nbsp + _trc("или", "возможно жена, сестра или мать") + nbsp) :
+                    null;
+            }
+
+            function getSinceText(relation) {
+                if (!relation._since) {
+                    return '';
+                }
+
+                return _trc("с", "с такой-то даты") + nbsp +
+                    (nkbScreenHelper.isScreen(relation._since) ?
+                        nkbScreenHelper.screen(relation._since) :
+                        $filter('amDateFormat')(relation._since, _trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")));
+            }
+
+            function getActualText(relation) {
+                if (!relation._actual || !relation._source) {
+                    return '';
+                }
+
+                return _tr(relation._source) +
+                    nbsp + _trc("от", "от такой-то даты") + nbsp +
+                    (nkbScreenHelper.isScreen(relation._actual) ?
+                        nkbScreenHelper.screen(relation._actual) :
+                        $filter('amDateFormat')(relation._actual, _trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")));
+            }
+
+            function getInnText(inn) {
+                return _tr("ИНН") + nbsp + (nkbScreenHelper.isScreen(inn) ? nkbScreenHelper.screen(inn) : inn);
+            }
+
+            //
+            var relationHelper = {
+                buildRelationsInfoBetweenNodes: function(srcNode, dstNode, options) {
+                    // options = options || {};
+
+                    // $log.warn('* buildRelationsInfoBetweenNodes...', srcNode.__uid, dstNode.__uid, options);
+
+                    var list = [],
+                        inn;
+
+                    _.each(_.get(srcNode.__relationMap.byNodes, [dstNode.__uid, 'children']), function(byRelationType, relationType){
+                        // $log.info('> byRelationType', relationType, byRelationType);
+
+                        var showType = SHOW_TYPES[relationType];
+
+                        if (showType) {
+                            var relationId          = byRelationType.relationId,
+                                srcRelationData     = srcNode.__relationMap.relations[relationId],
+                                dstRelationData     = dstNode.__relationMap.relations[relationId],
+                                relationHistoryInfo = srcRelationData.history || dstRelationData.history,
+                                relations           = relationHistoryInfo ? relationHistoryInfo[__showAll ? '__sorted' : 'sorted'] : [srcRelationData.relation],
+                                texts               = [];
+
+                            _.each(relations, function(relation){
+                                texts.push({
+                                    text: _.capitalize(showType.text(relation, srcNode, dstNode)),
+                                    sinceText: getSinceText(relation),
+                                    actualText: getActualText(relation),
+                                    outdated: relation.__isOutdated
+                                });
+
+                                return false; // TODO убрать
+                            });
+
+                            if (!inn && showType.mergedInn) {
+                                inn = relations[0].inn;
+                            }
+
+                            var relationData = {
+                                relationId: relationId,
+                                relationType: relationType,
+                                texts: texts,
+                                isTarget: false // TODO
+                            };
+
+                            list.push(relationData);
+                        }
+                    });
+
+                    list = _.sortBy(list, function(relationData){
+                        return relationData.__isTarget ? 0 : SHOW_TYPES[relationData.relationType].order;
+                    });
+
+                    // $log.info('*** list...', list);
+
+                    return {
+                        innText: inn ? getInnText(inn) : null,
+                        list: list
+                    };
+                }
+            };
+
+            //
+            return relationHelper;
         }]);
     //
 });
