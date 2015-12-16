@@ -1674,7 +1674,9 @@ define(function(require) {'use strict';
                 }
 
                 function buildHistoryText(relation, historyText) {
-                    if (relation.__isOutdated) {
+                    // TODO @demo
+                    if (relation.outdated) {
+                    // if (relation.__isOutdated) {
                         return '<i class="icon i-history"></i>' + historyText;
                     }
 
@@ -2119,7 +2121,9 @@ define(function(require) {'use strict';
                                     text: _.capitalize(showType.text(relation, srcNode, dstNode)),
                                     sinceText: getSinceText(relation),
                                     actualText: getActualText(relation),
-                                    outdated: relation.__isOutdated
+                                    // TODO @demo
+                                    outdated: relation.outdated
+                                    // outdated: relation.__isOutdated
                                 });
 
                                 return false; // TODO убрать
