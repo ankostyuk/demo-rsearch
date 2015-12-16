@@ -518,13 +518,31 @@ define(function(require) {'use strict';
                     }
                 },
 
+                getHistoryRelationCounts: function(node, direction, relationType) {
+                    var infoDirection   = metaHelper.getInfoDirection(direction),
+                        info            = node._info[infoDirection][relationType];
+
+                    return metaHelper.getHistoryRelationCountsByInfo(info);
+                },
+
+                getHistoryRelationCountsByInfo: function(info) {
+                    return {
+                        'actual': info.actual,
+                        'outdated': info.outdated,
+                        'all': (info.actual || 0) + (info.outdated || 0)
+                    };
+                },
+
                 buildRelationDataByNodeInfo: function(node) {
                     var relationCountMap    = {},
                         relationCounts      = [],
                         groups              = {};
 
                     _.each(['in', 'out'], function(infoDirection){
-                        _.each(_.get(node, ['_info', infoDirection]), function(relationCount, relationType){
+                        _.each(_.get(node, ['_info', infoDirection]), function(info, relationType){
+                            var historyRelationCounts   = metaHelper.getHistoryRelationCountsByInfo(info),
+                                relationCount           = historyRelationCounts['all'];
+
                             var direction               = metaHelper.getDirection(infoDirection),
                                 relationTypeMeta        = metaHelper.getRelationTypeMeta(relationType, direction),
                                 groupKey                = relationTypeMeta.group,
@@ -553,7 +571,10 @@ define(function(require) {'use strict';
                             };
 
                             _.each(!mergedTypeCountData && mergedTypeInfo.relationTypes, function(t){
-                                mergedTypeRelationCount += _.get(node, ['_info', infoDirection, t]) || 0;
+                                var info    = _.get(node, ['_info', infoDirection, t]),
+                                    counts  = info ? metaHelper.getHistoryRelationCountsByInfo(info) : null;
+
+                                mergedTypeRelationCount += counts ? counts['all'] : 0;
                             });
 
                             if (!mergedTypeCountData && mergedTypeRelationCount > relationCount) {
@@ -922,6 +943,16 @@ define(function(require) {'use strict';
                         var historyRelationMeta = metaHelper.getRelationHistoryMeta(relationData.relation._type, relationData.direction),
                             historyInfo         = relationMap.byRelationTypes[relationData.direction][relationData.relation._type].info.history;
 
+                        // <<< TODO @demo
+                        var sortedByActual = _.sortBy(relationData.history.byDates, function(relation){
+                            return -relation[npRsearchMeta.relationActualDate];
+                        });
+
+                        relationData.history.sorted = sortedByActual;
+
+                        return;
+                        // >>>
+
                         var sortedBySince = _.sortBy(relationData.history.byDates, function(relation){
                             return -relation[npRsearchMeta.relationSinceDate];
                         });
@@ -997,6 +1028,9 @@ define(function(require) {'use strict';
                             return result;
                         }
                     });
+
+                    // TODO @demo
+                    return;
 
                     // Объединить данные по истории
                     // TODO Не объединять для "необъединяемых" направлений связей,
@@ -1097,28 +1131,44 @@ define(function(require) {'use strict';
                     function buildByActual(relationType, nodeList) {
                         var relationId, lastRelation, targetNodeList, byKey, size;
 
-                        nodeList = _.sortBy(nodeList, function(node){
-                            relationId = _.get(data.relationMap.byNodes[node.__uid], [data.direction, relationType, 'relationId']);
-
-                            if (!relationId) {
-                                $log.debug('WARN: No realation by node in relationMap...\n\tnode.__uid:', node.__uid, '\n\tdata:', data);
-                                return 0;
-                            }
-
-                            lastRelation = data.relationMap.relations[relationId].history.sorted[0];
-                            return -lastRelation[npRsearchMeta.relationSinceDate];
-                        });
+// <<<<<<< HEAD
+//                         nodeList = _.sortBy(nodeList, function(node){
+//                             relationId = _.get(data.relationMap.byNodes[node.__uid], [data.direction, relationType, 'relationId']);
+//
+//                             if (!relationId) {
+//                                 $log.debug('WARN: No realation by node in relationMap...\n\tnode.__uid:', node.__uid, '\n\tdata:', data);
+//                                 return 0;
+//                             }
+//
+//                             lastRelation = data.relationMap.relations[relationId].history.sorted[0];
+//                             return -lastRelation[npRsearchMeta.relationSinceDate];
+//                         });
+//
+//                         _.each(nodeList, function(node){
+//                             relationId = _.get(data.relationMap.byNodes[node.__uid], [data.direction, relationType, 'relationId']);
+//
+//                             if (relationId) {
+//                                 lastRelation = data.relationMap.relations[relationId].history.sorted[0];
+//                                 targetNodeList = lastRelation.__isOutdated ? outdatedNodeList : actualNodeList;
+//                             } else {
+//                                 $log.debug('WARN: No realation by node in relationMap...\n\tnode.__uid:', node.__uid, '\n\tdata:', data);
+//                                 return;
+//                             }
+// =======
+                        // TODO @demo
+                        // nodeList = _.sortBy(nodeList, function(node){
+                        //     relationId = data.relationMap.byNodes[node.__uid][data.direction][relationType].relationId;
+                        //     lastRelation = data.relationMap.relations[relationId].history.sorted[0];
+                        //     return -lastRelation[npRsearchMeta.relationSinceDate];
+                        // });
 
                         _.each(nodeList, function(node){
-                            relationId = _.get(data.relationMap.byNodes[node.__uid], [data.direction, relationType, 'relationId']);
-
-                            if (relationId) {
-                                lastRelation = data.relationMap.relations[relationId].history.sorted[0];
-                                targetNodeList = lastRelation.__isOutdated ? outdatedNodeList : actualNodeList;
-                            } else {
-                                $log.debug('WARN: No realation by node in relationMap...\n\tnode.__uid:', node.__uid, '\n\tdata:', data);
-                                return;
-                            }
+                            // TODO @demo
+                            // relationId = data.relationMap.byNodes[node.__uid][data.direction][relationType].relationId;
+                            // lastRelation = data.relationMap.relations[relationId].history.sorted[0];
+                            // targetNodeList = lastRelation.__isOutdated ? outdatedNodeList : actualNodeList;
+                            targetNodeList = actualNodeList;
+// >>>>>>> 9beadca... Поддержка измененных счетчиков связей
 
                             byKey = targetNodeList[relationType] = targetNodeList[relationType] || {
                                 key: relationType,

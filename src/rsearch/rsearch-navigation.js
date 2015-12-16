@@ -213,9 +213,8 @@ define(function(require) {'use strict';
                             infoDirection, relationCount;
 
                         _.each(relationTypes, function(relationType){
-                            infoDirection = npRsearchMetaHelper.getInfoDirection(byRelations.direction);
-                            relationCount = byRelations.node._info[infoDirection][relationType];
-                            pageSize = Math.max(pageSize, relationCount);
+                            var historyRelationCounts = npRsearchMetaHelper.getHistoryRelationCounts(byRelations.node, byRelations.direction, relationType);
+                            pageSize = Math.max(pageSize, historyRelationCounts['all']);
                         });
 
                         return {
@@ -571,7 +570,8 @@ define(function(require) {'use strict';
                     });
 
                     function relationsClick(node, direction, relationType, noCheckAccentedResult) {
-                        if (user.isProductAvailable('relations_find_related')) {
+                        // TODO @demo
+                        if (true || user.isProductAvailable('relations_find_related')) {
                             showRelations(node, direction, relationType, null, null, false, noCheckAccentedResult);
                         } else {
                             showProductInfo('relations_find_related');
