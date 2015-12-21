@@ -73,7 +73,7 @@ define(function(require) {'use strict';
                 resetNodeList: function(nodeListView) {
                 },
                 //
-                showNodeList: function(nodeList, addNodeList, nodeListView) {
+                showNodeList: function(nodeList, addNodeList, nodeListView, listProperties) {
                 },
                 //
                 showTrace: function(trace, nodeTracesView) {
@@ -198,6 +198,29 @@ define(function(require) {'use strict';
                         return {
                             page: 1,
                             pageSize: 20
+                        };
+                    }
+
+                    function getRelationPageConfig(byRelations) {
+                        var relationPageSize = npRsearchMetaHelper.getRelationPageSize(byRelations.relationType, byRelations.direction);
+
+                        if (!relationPageSize) {
+                            return resetPageConfig();
+                        }
+
+                        var relationTypes   = npRsearchMetaHelper.getRelationTypesByMergedType(byRelations.relationType, byRelations.direction) || [byRelations.relationType],
+                            pageSize        = 0,
+                            infoDirection, relationCount;
+
+                        _.each(relationTypes, function(relationType){
+                            infoDirection = npRsearchMetaHelper.getInfoDirection(byRelations.direction);
+                            relationCount = byRelations.node._info[infoDirection][relationType];
+                            pageSize = Math.max(pageSize, relationCount);
+                        });
+
+                        return {
+                            page: 1,
+                            pageSize: pageSize
                         };
                     }
 
@@ -580,7 +603,7 @@ define(function(require) {'use strict';
                                 loading(function(done){
                                     clearMessages();
 
-                                    byRelations.pageConfig = resetPageConfig();
+                                    byRelations.pageConfig = getRelationPageConfig(byRelations);
 
                                     listRelationsRequest(byRelations);
 
@@ -589,6 +612,7 @@ define(function(require) {'use strict';
 
                                     function complete() {
                                         setNodeList(byRelations);
+                                        buildRelationsOppositeHistory(byRelations);
 
                                         var accentedResult = checkAccentedResult && checkAccentedResultByRelations(byRelations);
 
@@ -782,6 +806,21 @@ define(function(require) {'use strict';
                             showMessage('FILTERS_RESULT_EMPTY');
                         }
 
+                        var jointRelationTypes  = npRsearchMetaHelper.getRelationTypesByMergedType(byRelations.relationType, byRelations.direction),
+                            isJoint             = !!jointRelationTypes,
+                            historyMeta         = npRsearchMetaHelper.getRelationHistoryMeta(byRelations.relationType, byRelations.direction);
+
+                        var listProperties = {
+                            isJoint: isJoint,
+                            history: npRsearchMetaHelper.buildRelationHistoryList(historyMeta, {
+                                relationMap: byRelations.relationMap,
+                                relationType: byRelations.relationType,
+                                direction: byRelations.direction,
+                                nodeList: byRelations.nodeList,
+                                isJoint: isJoint
+                            })
+                        };
+
                         nodeListView.showItemNumber(byRelations.result && byRelations.result.total > 1);
 
                         nodeListView.reset(byRelations.nodeList, noMore(byRelations.result), function(callback){
@@ -794,17 +833,30 @@ define(function(require) {'use strict';
                                 byRelations.request.promise.then(complete, complete);
 
                                 function complete() {
+                                    buildRelationsOppositeHistory(byRelations);
                                     pushNodeList(byRelations, callback);
                                     done();
                                 }
                             });
-                        });
+                        }, listProperties);
 
                         nodeListView.setTargetInfo(getLastTargetInfo());
 
                         initRelationsFilters(byRelations);
 
                         nodeListView.scrollTop();
+                    }
+
+                    function buildRelationsOppositeHistory(byRelations) {
+                        var historyMeta = npRsearchMetaHelper.getRelationHistoryMeta(byRelations.relationType, byRelations.direction);
+
+                        if (!historyMeta || !historyMeta.opposite) {
+                            return;
+                        }
+
+                        var nodeList = byRelations.result.list;
+
+                        npRsearchMetaHelper.buildNodesRelationMap(nodeList);
                     }
 
                     function listRelationsRequest(byRelations) {
@@ -816,9 +868,13 @@ define(function(require) {'use strict';
                                 pageConfig: byRelations.pageConfig,
                                 previousRequest: byRelations.request,
                                 nodeIterator: function(node, i) {
+                                    // relation_history TODO оптимизировать
                                     npRsearchMetaHelper.addToRelationMap(
-                                        byRelations.relationMap, byRelations.node, node, byRelations.direction,
-                                        npRsearchMetaHelper.buildKinsmenRelation(byRelations.node, node)
+                                        byRelations.relationMap,
+                                        node,
+                                        [npRsearchMetaHelper.buildKinsmenRelation(byRelations.node, node)], {
+                                            direction: byRelations.direction
+                                        }
                                     );
                                 },
                                 success: function(data, status){
@@ -837,10 +893,12 @@ define(function(require) {'use strict';
                                 _.extend(filter, f.condition);
                             });
 
+                            var relationTypes = npRsearchMetaHelper.getRelationTypesByMergedType(byRelations.relationType, byRelations.direction) || [byRelations.relationType];
+
                             byRelations.request = npRsearchResource.relations({
                                 node: byRelations.node,
                                 direction: byRelations.direction,
-                                relationType: byRelations.relationType,
+                                relationTypes: relationTypes,
                                 pageConfig: byRelations.pageConfig,
                                 filter: filter,
                                 previousRequest: byRelations.request,
@@ -926,8 +984,9 @@ define(function(require) {'use strict';
                             type: 'NODE_RELATIONS',
                             data: {
                                 node: node,
-                                direction: direction,
-                                relationType: relationType
+                                countData: npRsearchMetaHelper.getRelationCountData(node, direction, relationType),
+                                direction: direction, // @Deprecated
+                                relationType: relationType // @Deprecated
                             }
                         };
 
@@ -1130,18 +1189,7 @@ define(function(require) {'use strict';
                         proxy: navigationProxy,
                         active: null,
                         getActiveRelation: function() {
-                            var active = nodeRelationsFilter.active;
-
-                            if (!active) {
-                                return {};
-                            }
-
-                            var s = active.split('::');
-
-                            return {
-                                relationDirection: s[0],
-                                relationType: s[1]
-                            };
+                            return nodeRelationsFilter.active ? npRsearchMetaHelper.getNodeRelationInfoByKey(nodeRelationsFilter.active) : {};
                         },
                         actions: {
                             relationsClick: function(direction, relationType) {
@@ -1177,7 +1225,7 @@ define(function(require) {'use strict';
                     };
 
                     function buildNodeRelationActiveKey(direction, relationType) {
-                        return direction + '::' + relationType;
+                        return npRsearchMetaHelper.buildNodeRelationKey(direction, relationType);
                     }
 
                     function setNodeRelationsFilter(node, direction, relationType) {
@@ -1225,8 +1273,11 @@ define(function(require) {'use strict';
                                 }
                             };
 
+                            var innFilterValues = _.get(byRelations.relationMap.byRelationTypes, [byRelations.direction, byRelations.relationType, 'info', 'relFacet', 'inn']);
                             var innFilter = {
-                                values: byRelations.result.info.relFacet && byRelations.result.info.relFacet.inn,
+                                // values: byRelations.result.info.relFacet && byRelations.result.info.relFacet.inn,
+                                // TODO поправить npRsearchInnFilter для работы с пустыми данными как с null
+                                values: _.isEmpty(innFilterValues) ? null : innFilterValues,
                                 value: null,
                                 total: total,
                                 callback: function(value) {
@@ -1263,27 +1314,29 @@ define(function(require) {'use strict';
                             byRelations.filters = filters;
                         }
 
-                        if (filters.region.values) {
+                        if (filters.region.values && relationsRegionFilterScope) {
                             relationsRegionFilterScope.setData(filters.region);
                             relationsRegionFilterScope.toggle(true);
                         }
 
-                        if (filters.inn.values) {
+                        if (filters.inn.values && relationsInnFilterScope) {
                             relationsInnFilterScope.setData(filters.inn);
                             relationsInnFilterScope.toggle(true);
                         }
 
-                        if (filters.affiliatedCause.values) {
-                            $timeout(function(){
+                        $timeout(function(){
+                            if (filters.affiliatedCause.values) {
                                 var affiliatedCauseFilterElement    = element.find('.right-bar [np-rsearch-node-relations] .active [np-rsearch-affiliated-cause-filter]'),
                                     affiliatedCauseFilterScope      = affiliatedCauseFilterElement.isolateScope();
 
                                 hideAffiliatedCauseFilters();
 
-                                affiliatedCauseFilterScope.setData(filters.affiliatedCause);
-                                affiliatedCauseFilterScope.toggle(true);
-                            });
-                        }
+                                if (affiliatedCauseFilterScope) {
+                                    affiliatedCauseFilterScope.setData(filters.affiliatedCause);
+                                    affiliatedCauseFilterScope.toggle(true);
+                                }
+                            }
+                        });
                     }
 
                     function hideAffiliatedCauseFilters() {

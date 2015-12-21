@@ -1,6 +1,6 @@
 {
     "name": "rsearch",
-    "version": "3.3.0",
+    "version": "4.0.0-a",
     "description": "rsearch frontend",
 
     "dependencies": {
@@ -65,7 +65,8 @@
         "nullpointer-commons": {
             "lodash": "src/lodash",
             "angular": "src/angular",
-            "nkb": "src/nkb"
+            "nkb": "src/nkb",
+            "utils": "src/utils"
         },
         "nullpointer-autokad": {
             "l10n": "src/l10n",
@@ -99,6 +100,7 @@
 
     "resolutions": {
         "requirejs": "2.1.16",
-        "jquery": "2.1.*"
+        "jquery": "2.1.*",
+        "jquery-ui": "1.11.*"
     }
 }

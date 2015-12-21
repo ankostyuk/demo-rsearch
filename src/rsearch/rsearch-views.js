@@ -8,7 +8,8 @@ define(function(require) {'use strict';
                           require('jquery');
                           require('lodash');
     var i18n            = require('i18n'),
-        angular         = require('angular');
+        angular         = require('angular'),
+        templateUtils   = require('template-utils');
 
                           require('ng-infinite-scroll');
 
@@ -31,7 +32,7 @@ define(function(require) {'use strict';
         'np-rsearch-node-relations':            require('text!./views/rsearch-node-relations.html'),
         'np-rsearch-node-relations-header':     require('text!./views/rsearch-node-relations-header.html'),
         'np-rsearch-navigation-breadcrumb':     require('text!./views/rsearch-navigation-breadcrumb.html'),
-        'np-rsearch-node-list':                 require('text!./views/rsearch-node-list.html'),
+        'np-rsearch-node-plain-list':           require('text!./views/rsearch-node-plain-list.html'),
         'np-rsearch-node-traces':               require('text!./views/rsearch-node-traces.html'),
         'np-rsearch-user-product-limits-info':  require('text!./views/rsearch-user-product-limits-info.html'),
         'np-rsearch-autokad-info':              require('text!./views/rsearch-autokad-info.html'),
@@ -41,11 +42,24 @@ define(function(require) {'use strict';
         'np-rsearch-node-form':                 require('text!./views/rsearch-node-form.html')
     };
 
+    var combinedTemplates = {
+        'np-rsearch-node-list':                 require('text!./views/rsearch-node-list.html')
+    };
+
     return angular.module('np.rsearch-views', _.pluck(extmodules, 'name').concat(['infinite-scroll']))
         //
         .run([function(){
             _.each(templates, function(template, name){
                 templates[name] = i18n.translateTemplate(template);
+            });
+
+            _.each(combinedTemplates, function(template, name){
+                var templateData    = templateUtils.processTemplate(template),
+                    viewTemplates   = templateData.templates;
+
+                _.each(viewTemplates, function(viewTemplateData, viewName){
+                    templates[viewName] = viewTemplateData.html;
+                });
             });
         }])
         //
@@ -60,7 +74,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .directive('npRsearchNodePlain', ['$rootScope', 'nkbUser', function($rootScope, nkbUser) {
+        .directive('npRsearchNodePlain', ['$rootScope', 'nkbUser', 'npRsearchMetaHelper', function($rootScope, nkbUser, npRsearchMetaHelper) {
             return {
                 restrict: 'A',
                 scope: {
@@ -120,7 +134,9 @@ define(function(require) {'use strict';
                 },
                 template: templates['np-rsearch-node-relations'],
                 link: function(scope, element, attrs){
-                    scope.user = nkbUser.user();
+                    _.extend(scope, {
+                        user: nkbUser.user(),
+                    }, i18n.translateFuncs);
                 }
             };
         }])
@@ -131,7 +147,10 @@ define(function(require) {'use strict';
                 scope: {
                     relationsData: '=npRsearchNodeRelationsHeader'
                 },
-                template: templates['np-rsearch-node-relations-header']
+                template: templates['np-rsearch-node-relations-header'],
+                link: function(scope, element, attrs){
+                    _.extend(scope, i18n.translateFuncs);
+                }
             };
         }])
         //
@@ -147,6 +166,36 @@ define(function(require) {'use strict';
                     scope.go = function(){
                         $rootScope.$emit('np-rsearch-navigation-breadcrumb-go', scope.breadcrumb);
                     };
+                }
+            };
+        }])
+        //
+        .directive('npRsearchNodePlainList', [function() {
+            return {
+                restrict: 'A',
+                scope: {
+                    nodeList: '=npRsearchNodePlainList',
+                    showItemNumber: '=npRsearchNodePlainListShowItemNumber',
+                    targetInfo: '=npRsearchNodePlainListTargetInfo',
+                    actions: '=npRsearchNodePlainListActions'
+                },
+                template: templates['np-rsearch-node-plain-list']
+            };
+        }])
+        //
+        .directive('npRsearchNodeJointList', [function() {
+            return {
+                restrict: 'A',
+                scope: {
+                    nodeList: '=npRsearchNodeJointList',
+                    showItemNumber: '=npRsearchNodeJointListShowItemNumber',
+                    targetInfo: '=npRsearchNodeJointListTargetInfo',
+                    actions: '=npRsearchNodeJointListActions',
+                    showHeaders: '=npRsearchNodeJointListShowHeaders'
+                },
+                template: templates['np-rsearch-node-joint-list'],
+                link: function(scope, element, attrs){
+                    _.extend(scope, i18n.translateFuncs);
                 }
             };
         }])
@@ -259,9 +308,10 @@ define(function(require) {'use strict';
 
                     _.extend(view, {
                         type: 'NODE_LIST',
-                        reset: function(nodeList, noMore, pageHandler) {
+                        reset: function(nodeList, noMore, pageHandler, listProperties) {
                             scope.nodeList = nodeList;
                             scope.targetInfo = null;
+                            scope.listProperties = listProperties;
 
                             internalDisabled = false;
                             noNextPage = noMore;
@@ -272,6 +322,7 @@ define(function(require) {'use strict';
                         },
                         clear: function() {
                             scope.nodeList = null;
+                            scope.listProperties = null;
 
                             internalDisabled = false;
                             noNextPage = false;
@@ -311,6 +362,10 @@ define(function(require) {'use strict';
                     _.extend(scope, {
                         nodeList: null,
                         targetInfo: null,
+                        listProperties: {
+                            history: null,
+                            isJoint: false
+                        },
                         scrollContainer: proxy.getScrollContainer(),
                         actions: {
                             relationsClick: function(direction, relationType, node, e) {
@@ -333,7 +388,7 @@ define(function(require) {'use strict';
                             },
                             isDisabled: isDisabled
                         }
-                    });
+                    }, i18n.translateFuncs);
 
                     function isDisabled() {
                         return internalDisabled || noNextPage || !nextPageHandler;
@@ -345,7 +400,7 @@ define(function(require) {'use strict';
 
                     function showNodeListProxy(nodeList, addNodeList) {
                         $timeout(function(){
-                            proxy.showNodeList(nodeList, addNodeList, view);
+                            proxy.showNodeList(nodeList, addNodeList, view, scope.listProperties);
                         });
                     }
 
@@ -442,6 +497,20 @@ define(function(require) {'use strict';
                                 nodes: scope.nodes,
                                 filters: scope.filters
                             }, function(result){
+                                // <<< relation_history
+                                // схлопнуть цепочки
+                                // TODO на сервере
+                                var uniqTraces = [];
+
+                                _.each(result.traces, function(trace, i){
+                                    if (!_.isEqual(trace, result.traces[i - 1])) {
+                                        uniqTraces.push(trace);
+                                    }
+                                });
+
+                                result.traces = uniqTraces;
+                                // >>>
+
                                 if (scope.dataSource.reverse && result && result.traces) {
                                     _.each(result.traces, function(trace){
                                         trace.nodes.reverse();
@@ -499,7 +568,7 @@ define(function(require) {'use strict';
                             nodeIndexes     = trace.nodes,
                             nodeCount       = _.size(nodeIndexes),
                             currentTrace    = new Array(nodeCount),
-                            isLast, node, relation, direction, relationMap, targetInfo, isSrcNode;
+                            isLast, node, relation, direction, relationMap, targetInfo, targetNode, isSrcNode;
 
                         _.each(nodeIndexes, function(nodeIndex, i){
                             isLast      = (i === nodeCount - 1);
@@ -509,8 +578,10 @@ define(function(require) {'use strict';
                             // Именно при отображении цепочки,
                             // а не в ответе запроса на поиск цепочек,
                             // т.к. ответ может быть "жирным" - оптимизация
+                            // @Deprecated
                             npRsearchMetaHelper.buildNodeExtraMeta(node);
 
+                            // TODO оптимизировать
                             isSrcNode = !!_.find(scope.nodes, function(n){
                                 return n.__uid === node.__uid;
                             });
@@ -522,9 +593,17 @@ define(function(require) {'use strict';
                             } else {
                                 relation    = relations[relationIndexes[i]];
                                 direction   = relation._srcId === node._id ? 'parents' : 'children';
-                                npRsearchMetaHelper.addToRelationMap(relationMap, null, node, direction, relation);
+
+                                targetNode  = nodes[nodeIndexes[i + 1]];
+                                npRsearchMetaHelper.buildNodeExtraMeta(targetNode);
+
+                                // relation_history
+                                // TODO оптимизировать
+                                npRsearchMetaHelper.buildNodeRelationMap(node);
+                                npRsearchMetaHelper.addToRelationMap(relationMap, targetNode, targetNode._relations);
+
                                 targetInfo = {
-                                    node: nodes[nodeIndexes[i + 1]],
+                                    node: targetNode,
                                     relationInfo: {
                                         direction: direction,
                                         relationType: relation._type,
