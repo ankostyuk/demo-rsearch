@@ -1094,15 +1094,27 @@ define(function(require) {'use strict';
                         var relationId, lastRelation, targetNodeList, byKey, size;
 
                         nodeList = _.sortBy(nodeList, function(node){
-                            relationId = data.relationMap.byNodes[node.__uid][data.direction][relationType].relationId;
+                            relationId = _.get(data.relationMap.byNodes[node.__uid], [data.direction, relationType, 'relationId']);
+
+                            if (!relationId) {
+                                $log.debug('WARN: No realation by node in relationMap...\n\tnode.__uid:', node.__uid, '\n\tdata:', data);
+                                return 0;
+                            }
+
                             lastRelation = data.relationMap.relations[relationId].history.sorted[0];
                             return -lastRelation[npRsearchMeta.relationSinceDate];
                         });
 
                         _.each(nodeList, function(node){
-                            relationId = data.relationMap.byNodes[node.__uid][data.direction][relationType].relationId;
-                            lastRelation = data.relationMap.relations[relationId].history.sorted[0];
-                            targetNodeList = lastRelation.__isOutdated ? outdatedNodeList : actualNodeList;
+                            relationId = _.get(data.relationMap.byNodes[node.__uid], [data.direction, relationType, 'relationId']);
+
+                            if (relationId) {
+                                lastRelation = data.relationMap.relations[relationId].history.sorted[0];
+                                targetNodeList = lastRelation.__isOutdated ? outdatedNodeList : actualNodeList;
+                            } else {
+                                $log.debug('WARN: No realation by node in relationMap...\n\tnode.__uid:', node.__uid, '\n\tdata:', data);
+                                return;
+                            }
 
                             byKey = targetNodeList[relationType] = targetNodeList[relationType] || {
                                 key: relationType,
@@ -1113,13 +1125,11 @@ define(function(require) {'use strict';
                                 }
                             };
 
-                            size = _.size(byKey.data.list);
+                            byKey.data.list.push(node);
+                            byKey.data.total = _.size(byKey.data.list);
 
                             // Индексы согласно формируемому списку
-                            node.__index = size;
-
-                            byKey.data.total = size + 1;
-                            byKey.data.list.push(node);
+                            node.__index = byKey.data.total - 1;
                         });
                     }
 
