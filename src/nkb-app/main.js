@@ -86,10 +86,7 @@ root._RESOURCES_CONFIG = {
         location: 'src/rsearch',
         main: 'rsearch'
     },
-    /*
-     * external packages
-     *
-     */
+    // external packages
     {
         name: 'lodash',
         location: 'external_components/nullpointer-commons/lodash'
@@ -128,6 +125,10 @@ root._RESOURCES_CONFIG = {
         name: 'np.resource',
         location: 'external_components/nullpointer-commons/angular/resource',
         main: 'resource'
+    }, {
+        name: 'template-utils',
+        location: 'external_components/nullpointer-commons/utils/template-utils',
+        main: 'template-utils'
     }, {
         // TODO перенести в nullpointer-commons/angular
         name: 'np.utils',

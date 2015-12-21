@@ -192,6 +192,10 @@
         var _tmr = _tmr || [];
         _tmr.push({id: "211652", type: "pageView", start: (new Date()).getTime()});
         (function (d, w) {
+            if (w.APP_BUILD_TYPE !== 'production') {
+                return;
+            }
+
            var ts = d.createElement("script"); ts.type = "text/javascript"; ts.async = true;
            ts.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//top-fwz1.mail.ru/js/code.js";
            var f = function () {var s = d.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ts, s);};
@@ -205,6 +209,10 @@
         <!-- Yandex.Metrika counter -->
         <script type="text/javascript">
         (function (d, w, c) {
+            if (w.APP_BUILD_TYPE !== 'production') {
+                return;
+            }
+
             (w[c] = w[c] || []).push(function() {
                 try {
                     w.yaCounter23296318 = new Ya.Metrika({id:23296318,

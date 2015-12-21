@@ -15,7 +15,9 @@ define(function(require) {'use strict';
         angular         = require('angular');
 
     //
-    function Filter() {
+    function Filter(options) {
+        options = options || {};
+
         var data        = null,
             value       = null,
             isShow      = false,
@@ -41,10 +43,18 @@ define(function(require) {'use strict';
             },
 
             isShow: function() {
+                if (_.isFunction(options.isShow)) {
+                    return options.isShow(isShow, data, sortedPairs);
+                }
+
                 return isShow;
             },
 
             isNoFilter: function() {
+                if (_.isFunction(options.isNoFilter)) {
+                    return options.isNoFilter(data, sortedPairs);
+                }
+
                 return !!(data && _.size(sortedPairs) === 1 && sortedPairs[0][1] === data.total);
             },
 
@@ -53,7 +63,7 @@ define(function(require) {'use strict';
                     return;
                 }
                 value = v;
-                data.callback(value);
+                data.callback(value, sortedPairs);
             }
         };
     }

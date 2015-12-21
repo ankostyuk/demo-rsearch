@@ -1,10 +1,47 @@
-<div infinite-scroll="pager.nextPage()" infinite-scroll-disabled="pager.isDisabled()" infinite-scroll-distance="0" infinite-scroll-container="scrollContainer">
-    <div class="node-list-item" ng-repeat="node in nodeList track by $index">
-        <div class="item-info">
-            <div class="item-info-entry item-number" ng-show="showItemNumber">{{node.__index + 1 | number}}.</div>
-            <!-- TODO при наличии других статусов: динамическое обновление сообщения о статусе -->
-            <div class="item-info-entry node-status">${_trc("в отчете", "объект в отчете")}</div>
+<script id="np-rsearch-node-list" type="text/template">
+    <div ng-if="!listProperties.history">
+        <div ng-if="!listProperties.isJoint" infinite-scroll="pager.nextPage()" infinite-scroll-disabled="pager.isDisabled()" infinite-scroll-distance="0" infinite-scroll-container="scrollContainer">
+            <div np-rsearch-node-plain-list="nodeList"
+                np-rsearch-node-plain-list-show-item-number="showItemNumber"
+                np-rsearch-node-plain-list-target-info="targetInfo"
+                np-rsearch-node-plain-list-actions="actions">
+            </div>
         </div>
-        <div class="shadow-lift-lb-corner" np-rsearch-node-plain="node" np-rsearch-node-target-info="targetInfo" np-rsearch-node-relations-actions="actions"></div>
+        <div ng-if="listProperties.isJoint" np-rsearch-node-joint-list="nodeList"
+            np-rsearch-node-joint-list-show-item-number="showItemNumber"
+            np-rsearch-node-joint-list-target-info="targetInfo"
+            np-rsearch-node-joint-list-actions="actions"
+            np-rsearch-node-joint-list-show-headers="true">
+        </div>
     </div>
-</div>
+    <div ng-if="listProperties.history">
+        <div np-rsearch-node-joint-list="listProperties.history.actual.nodeList"
+            np-rsearch-node-joint-list-show-item-number="showItemNumber"
+            np-rsearch-node-joint-list-target-info="targetInfo"
+            np-rsearch-node-joint-list-actions="actions"
+            np-rsearch-node-joint-list-show-headers="listProperties.isJoint">
+        </div>
+        <div ng-show="listProperties.history.outdated">
+            <div class="node-list-history-header"><span class="text">${_trc("История", "История связей")}</span></div>
+            <div np-rsearch-node-joint-list="listProperties.history.outdated.nodeList"
+                np-rsearch-node-joint-list-show-item-number="showItemNumber"
+                np-rsearch-node-joint-list-target-info="targetInfo"
+                np-rsearch-node-joint-list-actions="actions"
+                np-rsearch-node-joint-list-show-headers="listProperties.isJoint">
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="np-rsearch-node-joint-list" type="text/template">
+    <div ng-repeat="list in nodeList" ng-show="list.data.total">
+        <div class="node-list-header" ng-show="showHeaders">
+            <np-pluralize plural="{count: list.data.total, when: _tr('NG_PLURALIZE::RELATION_' + list.key + '-' + list.direction)}"></np-pluralize>
+        </div>
+        <div np-rsearch-node-plain-list="list.data.list"
+            np-rsearch-node-plain-list-show-item-number="showItemNumber && list.data.total > 1"
+            np-rsearch-node-plain-list-target-info="targetInfo"
+            np-rsearch-node-plain-list-actions="actions">
+        </div>
+    </div>
+</script>
