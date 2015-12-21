@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "CLDR_PLURAL_FORMS_FORMAT: one{0}other{1}\n"
-"X-Generator: Poedit 1.7.4\n"
+"X-Generator: Poedit 1.8.6\n"
 
 #: ../src/nkb-app/index.html:1
 msgid "API информационной системы"
@@ -186,9 +186,10 @@ msgstr ""
 "Report"
 
 #: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#, fuzzy
 msgctxt "Fedresurs. Сообщения о банкротстве"
 msgid "Дата публикации"
-msgstr ""
+msgstr "Дата публикации"
 
 #: ../src/nkb-app/components/login/views/login-form.html:1
 msgid "Демо-доступ"
@@ -237,6 +238,11 @@ msgid "Заказать список учрежденных компаний"
 msgstr "Order Established Companies list"
 
 #: ../src/rsearch/rsearch-meta.js:1
+#, fuzzy
+msgid "Заказчик"
+msgstr "Заказчик"
+
+#: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ИНН"
 msgstr "INN"
@@ -262,9 +268,10 @@ msgid "Исторический профиль"
 msgstr "Historical Report"
 
 #: ../src/rsearch/views/rsearch-node-list.html:1
+#, fuzzy
 msgctxt "История связей"
 msgid "История"
-msgstr ""
+msgstr "История"
 
 #: ../src/nkb-app/index.html:1
 msgid "Контакты"
@@ -432,8 +439,9 @@ msgid "Поиск на сайте ФНС"
 msgstr "Search tax office site"
 
 #: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#, fuzzy
 msgid "Поиск на федеральном ресурсе"
-msgstr ""
+msgstr "Поиск на федеральном ресурсе"
 
 #: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
@@ -542,14 +550,20 @@ msgid "Схема аффилированных лиц"
 msgstr "Affiliated network diagram"
 
 #: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#, fuzzy
 msgctxt "Fedresurs. Сообщения о банкротстве"
 msgid "Тип сообщения"
-msgstr ""
+msgstr "Тип сообщения"
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
 msgctxt "Уровень (глубина) поиска связанных объектов"
 msgid "Укажите уровень..."
 msgstr "Select level..."
+
+#: ../src/rsearch/rsearch-meta.js:1
+#, fuzzy
+msgid "Управляющая компания"
+msgstr "Управляющая компания"
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgctxt "Федеральная налоговая служба"
@@ -606,6 +620,11 @@ msgstr "temporarily unavailable"
 msgctxt "Поиск в картотеке арбитражных дел временно недоступен"
 msgid "временно недоступен"
 msgstr "temporarily unavailable"
+
+#: ../src/rsearch/rsearch-meta.js:1
+#, fuzzy
+msgid "головная компания"
+msgstr "головная компания"
 
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
 msgctxt "Поиск в ФНС"
@@ -705,6 +724,16 @@ msgid "последняя актуализация"
 msgstr "last update"
 
 #: ../src/rsearch/rsearch-meta.js:1
+#, fuzzy
+msgid "предшественник"
+msgstr "предшественник"
+
+#: ../src/rsearch/rsearch-meta.js:1
+#, fuzzy
+msgid "реестродержатель"
+msgstr "реестродержатель"
+
+#: ../src/rsearch/rsearch-meta.js:1
 msgid "руб."
 msgstr "rub."
 
@@ -713,9 +742,10 @@ msgid "руководитель"
 msgstr "manager"
 
 #: ../src/rsearch/rsearch-meta.js:1
+#, fuzzy
 msgctxt "с такой-то даты"
 msgid "с"
-msgstr ""
+msgstr "с"
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "сестра"
@@ -723,9 +753,10 @@ msgstr "sister"
 
 #: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
+#, fuzzy
 msgctxt "Поиск в Fedresurs"
 msgid "сообщений о банкротстве"
-msgstr ""
+msgstr "сообщений о банкротстве"
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "супруга"
@@ -888,9 +919,6 @@ msgstr "#"
 #~ msgstr ""
 #~ "Custom\n"
 #~ "Reports"
-
-#~ msgid "Учредитель — компания"
-#~ msgstr "Founder — company"
 
 #~ msgid "Учредитель — физическое лицо"
 #~ msgstr "Founder — person"

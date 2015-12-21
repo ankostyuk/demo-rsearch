@@ -296,91 +296,113 @@ msgid "Ликвидировано"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
 msgid "отец"
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "супруга"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
 msgid "брат"
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "сестра"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
 msgid "сын"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
 msgid "дочь"
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/rsearch-meta.js:1
 msgctxt "Доля в учреждении компании"
 msgid "доля"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
 msgid "руб."
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "учредитель"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
 msgid "руководитель"
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "доля УК"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
 msgid "доля акций"
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "аффилированное лицо"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
 msgid "контактное лицо"
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/rsearch-meta.js:1
 msgctxt "лот в закупке"
 msgid "лот"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
 msgctxt "лот в закупке"
 msgid "лоты"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
 msgid "член комиссии"
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/rsearch-meta.js:1
 msgctxt "возможно жена, сестра или мать"
 msgid "возможно"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
 msgctxt "возможно жена, сестра или мать"
 msgid "или"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
 msgctxt "с такой-то даты"
 msgid "с"
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
@@ -395,6 +417,7 @@ msgid "mediumDate"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgctxt "от такой-то даты"
@@ -402,8 +425,29 @@ msgid "от"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ИНН"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "головная компания"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "предшественник"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "реестродержатель"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "Управляющая компания"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "Заказчик"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-affiliated-cause-filter.html:1

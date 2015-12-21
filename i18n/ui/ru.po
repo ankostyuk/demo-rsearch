@@ -234,6 +234,10 @@ msgid "Заказать список учрежденных компаний"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
+msgid "Заказчик"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ИНН"
 msgstr ""
@@ -542,6 +546,10 @@ msgctxt "Уровень (глубина) поиска связанных объ�
 msgid "Укажите уровень..."
 msgstr ""
 
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "Управляющая компания"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgctxt "Федеральная налоговая служба"
 msgid "ФНС"
@@ -595,6 +603,10 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-autokad-info.html:1
 msgctxt "Поиск в картотеке арбитражных дел временно недоступен"
 msgid "временно недоступен"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "головная компания"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
@@ -692,6 +704,14 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
 msgctxt "актуализация данных"
 msgid "последняя актуализация"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "предшественник"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+msgid "реестродержатель"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
