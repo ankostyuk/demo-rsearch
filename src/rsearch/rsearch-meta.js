@@ -361,7 +361,7 @@ define(function(require) {'use strict';
             relationSinceDate: '_since'
         })
         //
-        .factory('npRsearchMetaHelper', ['$log', '$q', '$rootScope', 'appConfig', 'npRsearchMeta', 'npRsearchResource', function($log, $q, $rootScope, appConfig, npRsearchMeta, npRsearchResource){
+        .factory('npRsearchMetaHelper', ['$log', '$window', '$q', '$rootScope', 'appConfig', 'npRsearchMeta', 'npRsearchResource', function($log, $window, $q, $rootScope, appConfig, npRsearchMeta, npRsearchResource){
             var resourceConfig = appConfig.resource || {};
 
             // init meta
@@ -371,7 +371,11 @@ define(function(require) {'use strict';
                 relationTypesMeta   = {},
                 nodeTypes, relationTypes;
 
-            if (!resourceConfig.noInitMeta) {
+            if (resourceConfig.noInitMeta) {
+                nodeTypes = $window._INTERNAL_DATA_.nodeTypes;
+                relationTypes = $window._INTERNAL_DATA_.relationTypes;
+                initMeta();
+            } else {
                 doInitMeta();
             }
 
