@@ -471,7 +471,8 @@ define(function(require) {'use strict';
                         nodes: [],
                         filters: {
                             depths: null,
-                            depth: null
+                            depth: null,
+                            history: null
                         },
                         dataSource: null,
                         result: null,
@@ -497,9 +498,11 @@ define(function(require) {'use strict';
                             });
                         },
                         doTraces: function() {
-                            if (!scope.dataSource) {
+                            if (!scope.dataSource || !scope.filters.depth) {
                                 return;
                             }
+
+                            scope.filters.history = scope.filters.history || null;
 
                             scope.traceCount = null;
                             // scope.currentTrace = null; // ? TODO Очищать перед запросом
@@ -525,6 +528,7 @@ define(function(require) {'use strict';
 
                     function reset() {
                         scope.filters.depth = null;
+                        scope.filters.history = null;
                         scope.result = null;
                         scope.traceIndex = 0;
                         scope.traceCount = null;

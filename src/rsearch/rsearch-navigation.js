@@ -708,7 +708,8 @@ define(function(require) {'use strict';
                                     var request = npRsearchResource.relatedKinsmen({
                                         node: data.nodes[0],
                                         filter: {
-                                            maxDepth: data.filters.depth
+                                            maxDepth: data.filters.depth,
+                                            history: data.filters.history
                                         },
                                         previousRequest: null,
                                         success: function(data, status){
@@ -737,7 +738,8 @@ define(function(require) {'use strict';
                                     var request = npRsearchResource.beneficiary({
                                         node: data.nodes[0],
                                         filter: {
-                                            maxDepth: data.filters.depth
+                                            maxDepth: data.filters.depth,
+                                            history: data.filters.history
                                         },
                                         previousRequest: null,
                                         success: function(data, status){
