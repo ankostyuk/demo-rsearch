@@ -146,7 +146,7 @@ define(function(require) {'use strict';
                     var noInnCount;
 
                     filter.getNoInnCount = function() {
-                        return noInnCount;
+                        return noInnCount > 0 ? noInnCount : 0;
                     };
                 }
             };

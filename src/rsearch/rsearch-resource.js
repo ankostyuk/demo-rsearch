@@ -71,9 +71,6 @@ define(function(require) {'use strict';
 
                     var params = _.extend({}, options.filter, options.pageConfig);
 
-                    // TODO @demo
-                    params['rel.outdated.equals'] = true;
-
                     if (_.size(options.relationTypes) === 1) {
                         return npResource.request({
                             method: 'GET',

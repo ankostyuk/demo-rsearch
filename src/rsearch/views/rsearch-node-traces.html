@@ -27,7 +27,7 @@
                 <a class="action" node-id="{{tracePart.node._id}}" node-uid="{{tracePart.node.__uid}}" np-rsearch-node-simple="tracePart.node" ng-click="nodeClick($event, tracePart)"></a>
             </div>
             <div class="relation {{tracePart.direction}}" ng-hide="tracePart.isLast">
-                <div class="target-relations-info" ng-bind-html="tracePart.targetInfo | targetRelationsInfo:tracePart.node:true:true:'\n'"></div>
+                <div np-rsearch-node-relations-info="tracePart.relationsInfo"></div>
             </div>
         </div>
     </div>
