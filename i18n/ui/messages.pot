@@ -451,6 +451,8 @@ msgid "Заказчик"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-affiliated-cause-filter.html:1
+#: ../src/rsearch/views/rsearch-history-filter.html:1
+#: ../src/rsearch/views/rsearch-history-filter.html:1
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 #: ../src/rsearch/views/rsearch-region-filter.html:1
 msgid "Все"
@@ -758,7 +760,18 @@ msgid "уровень"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
-msgid "Будут найдены все возможные цепочки связей\nдо указанного уровня"
+msgctxt "Цепочки связанных объектов"
+msgid "Любые цепочки"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Цепочки связанных объектов"
+msgid "Только актуальные связи"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Цепочки связанных объектов"
+msgid "Через неактуальные связи"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
@@ -774,6 +787,10 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-node-traces.html:1
 msgctxt "из такого-то количества"
 msgid "из"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgid "Будут найдены все возможные цепочки связей до указанного уровня"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1

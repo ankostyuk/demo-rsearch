@@ -123,9 +123,7 @@ msgid "Бизнес-справки онлайн"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
-msgid ""
-"Будут найдены все возможные цепочки связей\n"
-"до указанного уровня"
+msgid "Будут найдены все возможные цепочки связей до указанного уровня"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-history-info.html:1
@@ -146,6 +144,7 @@ msgid "Войти"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-affiliated-cause-filter.html:1
+#: ../src/rsearch/views/rsearch-history-filter.html:1
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 #: ../src/rsearch/views/rsearch-region-filter.html:1
 msgid "Все"
@@ -303,6 +302,11 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-region-filter.html:1
 msgid "Любой регион"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Цепочки связанных объектов"
+msgid "Любые цепочки"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
@@ -542,6 +546,11 @@ msgid "Тип сообщения"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Цепочки связанных объектов"
+msgid "Только актуальные связи"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
 msgctxt "Уровень (глубина) поиска связанных объектов"
 msgid "Укажите уровень..."
 msgstr ""
@@ -566,6 +575,11 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
 msgid "Цепочек связей не найдено"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Цепочки связанных объектов"
+msgid "Через неактуальные связи"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1

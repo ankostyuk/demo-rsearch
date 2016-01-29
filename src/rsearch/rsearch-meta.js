@@ -470,8 +470,8 @@ define(function(require) {'use strict';
 
                 getHistoryRelationCountsByInfo: function(info) {
                     return {
-                        'actual': info.actual,
-                        'outdated': info.outdated,
+                        'actual': info.actual || 0,
+                        'outdated': info.outdated || 0,
                         'all': (info.actual || 0) + (info.outdated || 0)
                     };
                 },
@@ -503,35 +503,57 @@ define(function(require) {'use strict';
                                 relationCounts: {}
                             };
 
+                            // TODO Объединить код с mergedTypeCountData
                             var countData = {
-                                key:            relationKey,
-                                order:          relationTypeMeta.order,
-                                top:            relationTypeMeta.top,
-                                relationType:   relationType,
-                                direction:      direction,
-                                relationCount:  relationCount,
-                                pluralKey:      relationPluralKey
+                                key:                    relationKey,
+                                order:                  relationTypeMeta.order,
+                                top:                    relationTypeMeta.top,
+                                history:                relationTypeMeta.history,
+                                relationType:           relationType,
+                                direction:              direction,
+                                relationCount:          relationCount,
+                                historyRelationCounts:  historyRelationCounts,
+                                pluralKey:              relationPluralKey
+                            };
+
+                            var mergedTypeHistoryRelationCounts = {
+                                'actual': 0,
+                                'outdated': 0,
+                                'all': 0
                             };
 
                             _.each(!mergedTypeCountData && mergedTypeInfo.relationTypes, function(t){
                                 var info    = _.get(node, ['_info', infoDirection, t]),
                                     counts  = info ? metaHelper.getHistoryRelationCountsByInfo(info) : null;
 
-                                mergedTypeRelationCount += counts ? counts['all'] : 0;
+                                if (!counts) {
+                                    return;
+                                }
+
+                                mergedTypeHistoryRelationCounts['actual']   += counts['actual'];
+                                mergedTypeHistoryRelationCounts['outdated'] += counts['outdated'];
+                                mergedTypeHistoryRelationCounts['all']      += counts['all'];
+
+                                // mergedTypeRelationCount += counts ? counts['all'] : 0;
                             });
+
+                            mergedTypeRelationCount = mergedTypeHistoryRelationCounts['all'];
 
                             if (!mergedTypeCountData && mergedTypeRelationCount > relationCount) {
                                 var mergedType      = mergedTypeInfo.mergedType,
                                     mergedTypeMeta  = metaHelper.getRelationTypeMeta(mergedType, direction);
 
+                                // TODO Объединить код с countData
                                 mergedTypeCountData = {
-                                    key:            mergedTypeKey,
-                                    order:          mergedTypeMeta.order,
-                                    top:            mergedTypeMeta.top,
-                                    relationType:   mergedType,
-                                    direction:      direction,
-                                    relationCount:  mergedTypeRelationCount,
-                                    pluralKey:      metaHelper.buildNodeRelationPluralKey(direction, mergedType)
+                                    key:                    mergedTypeKey,
+                                    order:                  mergedTypeMeta.order,
+                                    top:                    mergedTypeMeta.top,
+                                    history:                mergedTypeMeta.history,
+                                    relationType:           mergedType,
+                                    direction:              direction,
+                                    relationCount:          mergedTypeRelationCount,
+                                    historyRelationCounts:  mergedTypeHistoryRelationCounts,
+                                    pluralKey:              metaHelper.buildNodeRelationPluralKey(direction, mergedType)
                                 };
 
                                 group.relationCounts[mergedTypeKey] = mergedTypeCountData;
@@ -1161,7 +1183,7 @@ define(function(require) {'use strict';
                 function getFounderText(relation) {
                     var relationHistoryInfo =
                         data.relationInfo.relationMap.relations[relation.__id].history ||
-                        node.__relationMap.relations[relation.__id].history;
+                        _.get(node.__relationMap, ['relations', relation.__id, 'history']);
 
                     if (!relationHistoryInfo) {
                         return getFounderTextByRelation(relation, relation.__isTarget);
@@ -1200,7 +1222,7 @@ define(function(require) {'use strict';
                 function getExecutiveText(relation) {
                     var relationHistoryInfo =
                         data.relationInfo.relationMap.relations[relation.__id].history ||
-                        node.__relationMap.relations[relation.__id].history;
+                        _.get(node.__relationMap, ['relations', relation.__id, 'history']);
 
                     if (!relationHistoryInfo) {
                         return getExecutiveTextByRelation(relation, relation.__isTarget);

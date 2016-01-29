@@ -7,7 +7,8 @@ define(function(require) {'use strict';
 
     var regionFilterTemplate            = require('text!./views/rsearch-region-filter.html'),
         innFilterTemplate               = require('text!./views/rsearch-inn-filter.html'),
-        affiliatedCauseFilterTemplate   = require('text!./views/rsearch-affiliated-cause-filter.html');
+        affiliatedCauseFilterTemplate   = require('text!./views/rsearch-affiliated-cause-filter.html'),
+        historyFilterTemplate           = require('text!./views/rsearch-history-filter.html');
 
                           require('jquery');
                           require('lodash');
@@ -28,6 +29,10 @@ define(function(require) {'use strict';
                 data = d;
                 value = data.value;
                 sortedPairs = sortBy(data.values, sort);
+            },
+
+            getData: function() {
+                return data;
             },
 
             getSortedPairs: function() {
@@ -97,6 +102,7 @@ define(function(require) {'use strict';
             regionFilterTemplate = i18n.translateTemplate(regionFilterTemplate);
             innFilterTemplate = i18n.translateTemplate(innFilterTemplate);
             affiliatedCauseFilterTemplate = i18n.translateTemplate(affiliatedCauseFilterTemplate);
+            historyFilterTemplate = i18n.translateTemplate(historyFilterTemplate);
         }])
         //
         .directive('npRsearchRegionFilter', ['$log', '$rootScope', function($log, $rootScope){
@@ -187,6 +193,54 @@ define(function(require) {'use strict';
                         },
                         filter: filter
                     }, i18n.translateFuncs);
+                }
+            };
+        }])
+        //
+        .directive('npRsearchHistoryFilter', ['$log', '$rootScope', function($log, $rootScope){
+            var countsMeta = {
+                'all': {
+                    order: 10
+                },
+                'actual': {
+                    order: 20
+                },
+                'outdated': {
+                    order: 30
+                }
+            };
+            return {
+                restrict: 'A',
+                template: historyFilterTemplate,
+                scope: {},
+                link: function(scope, element, attrs) {
+                    var filter = new Filter({
+                        isShow: function(isShow, data, sortedPairs) {
+                            return (isShow && data && data.values['all'] > 1);
+                        },
+                        isNoFilter: function(data, sortedPairs) {
+                            return !!(data && (!data.values['actual'] || !data.values['outdated']));
+                        }
+                    });
+
+                    _.extend(scope, {
+                        toggle: function(show) {
+                            filter.toggle(show);
+                        },
+                        setData: function(data) {
+                            filter.setData(data, function(pair){
+                                var countMeta = countsMeta[pair[0]];
+                                return countMeta.order;
+                            });
+                        },
+                        filter: filter
+                    }, i18n.translateFuncs);
+
+                    //
+                    filter.getNoFilterCountKey = function() {
+                        var data = filter.getData();
+                        return data && (data.values['actual'] ? 'actual' : 'outdated');
+                    };
                 }
             };
         }]);
