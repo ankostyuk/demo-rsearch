@@ -1313,10 +1313,9 @@ define(function(require) {'use strict';
                                 value: null,
                                 total: total,
                                 callback: function(value) {
-                                    $log.warn('value', value);
                                     historyFilter.value = value;
                                     historyFilter.condition = {
-                                        'history': value ? (value === 'outdated') : null 
+                                        'history': value ? (value === 'outdated') : null
                                     };
                                     doRelations(byRelations, false, true);
                                 }
