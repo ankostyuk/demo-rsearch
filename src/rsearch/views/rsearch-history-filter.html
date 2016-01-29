@@ -1,0 +1,11 @@
+<div class="np-rsearch-filter" ng-show="filter.isShow()">
+    <p class="no-filter-message" ng-show="filter.isNoFilter()">${_tr("Все")} — {{_tr('RELATION_' + filter.getNoFilterCountKey())}}</p>
+    <ul class="unstyled" ng-show="!filter.isNoFilter()">
+        <li class="filter-item" ng-class="{active: filter.getValue() === null}" ng-click="filter.doFilter(null)">
+            <a class="action">${_tr("Все")}</a>
+        </li>
+        <li class="filter-item" ng-class="{active: filter.getValue() === p[0]}" ng-click="filter.doFilter(p[0])" ng-repeat="p in filter.getSortedPairs() track by $index" ng-hide="p[0] === 'all'">
+            <a class="simple-row action"><span class="count">{{p[1] | number}}</span><span class="text">{{_tr('RELATION_' + p[0]) | capitalizeFirst}}</span></a>
+        </li>
+    </ul>
+</div>
