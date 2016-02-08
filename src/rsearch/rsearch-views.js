@@ -511,12 +511,20 @@ define(function(require) {'use strict';
                                 nodes: scope.nodes,
                                 filters: scope.filters
                             }, function(result){
+                                // @demo
+                                delete result.relations;
+
                                 if (scope.dataSource.reverse && result && result.traces) {
                                     _.each(result.traces, function(trace){
                                         trace.nodes.reverse();
-                                        trace.relations.reverse();
+                                        // @demo
+                                        delete trace.relations;
+                                        // trace.relations.reverse();
                                     });
                                 }
+
+                                // @demo
+                                $log.info('* result', result);
 
                                 applyResult(result);
                                 doTrace();
@@ -564,8 +572,9 @@ define(function(require) {'use strict';
 
                         var trace           = scope.result.traces[scope.traceIndex],
                             nodes           = scope.result.nodes,
-                            relations       = scope.result.relations,
-                            relationIndexes = trace.relations,
+                            // @demo
+                            // relations       = scope.result.relations,
+                            // relationIndexes = trace.relations,
                             nodeIndexes     = trace.nodes,
                             nodeCount       = _.size(nodeIndexes),
                             currentTrace    = new Array(nodeCount),
