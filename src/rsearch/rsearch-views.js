@@ -514,7 +514,6 @@ define(function(require) {'use strict';
                                 if (scope.dataSource.reverse && result && result.traces) {
                                     _.each(result.traces, function(trace){
                                         trace.nodes.reverse();
-                                        trace.relations.reverse();
                                     });
                                 }
 
@@ -564,8 +563,6 @@ define(function(require) {'use strict';
 
                         var trace           = scope.result.traces[scope.traceIndex],
                             nodes           = scope.result.nodes,
-                            relations       = scope.result.relations,
-                            relationIndexes = trace.relations,
                             nodeIndexes     = trace.nodes,
                             nodeCount       = _.size(nodeIndexes),
                             currentTrace    = new Array(nodeCount),
