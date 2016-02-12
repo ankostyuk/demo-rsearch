@@ -1,7 +1,7 @@
 <span ng-if="purchaseDishonestSupplier.gettingRecCount()">
     <span class="action-info" ng-show="!purchaseDishonestSupplier.isRecCountPending() && purchaseDishonestSupplier.hasError()">
         ${_trc("Поиск", "Поиск в реестре недобросовестных поставщиков")}</br>
-        <a class="underline pre" href="http://zakupki.gov.ru/epz/dishonestsupplier/dishonestSuppliersQuickSearch/search.html" target="_blank">${_trc("в реестре\nнедобросовестных поставщиков", "Поиск в реестре недобросовестных поставщиков")}</a></br>
+        <a class="underline pre" ng-href="{{purchaseDishonestSupplier.getShowRecsUrl()}}" target="_blank">${_trc("в реестре\nнедобросовестных поставщиков", "Поиск в реестре недобросовестных поставщиков")}</a></br>
         ${_trc("временно недоступен", "Поиск в реестре недобросовестных поставщиков")}
     </span>
     <a class="action" ng-click="purchaseDishonestSupplierClick()" ng-href="{{purchaseDishonestSupplier.getShowRecsUrl()}}" target="_blank">
