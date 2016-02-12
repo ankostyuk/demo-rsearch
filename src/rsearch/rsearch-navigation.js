@@ -108,7 +108,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npL10n', 'NpRsearchAutokad', 'NpRsearchFedresursBankruptcyCompany', 'NpRsearchFnsRegDocsCompany', 'npRsearchNavigationHelper', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npL10n, NpRsearchAutokad, NpRsearchFedresursBankruptcyCompany, NpRsearchFnsRegDocsCompany, npRsearchNavigationHelper){
+        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npL10n', 'NpRsearchAutokad', 'NpRsearchFedresursBankruptcyCompany', 'NpRsearchFnsRegDocsCompany', 'NpRsearchPurchaseDishonestSupplierCompany', 'npRsearchNavigationHelper', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npL10n, NpRsearchAutokad, NpRsearchFedresursBankruptcyCompany, NpRsearchFnsRegDocsCompany, NpRsearchPurchaseDishonestSupplierCompany, npRsearchNavigationHelper){
             return {
                 restrict: 'A',
                 template: template,
@@ -135,6 +135,9 @@ define(function(require) {'use strict';
 
                     var fnsRegDocs = new NpRsearchFnsRegDocsCompany();
                     nodeFormView.setFnsRegDocs(fnsRegDocs);
+
+                    var purchaseDishonestSupplier = new NpRsearchPurchaseDishonestSupplierCompany();
+                    nodeFormView.setPurchaseDishonestSupplier(purchaseDishonestSupplier);
 
                     /*
                      * init
@@ -285,6 +288,7 @@ define(function(require) {'use strict';
                         clearAutokad();
                         clearFedresursBankruptcy();
                         clearFnsRegDocs();
+                        clearPurchaseDishonestSupplier();
                         nodeTracesView.hide();
                         nodeFormView.hide();
                         clearBreadcrumbs();
@@ -417,6 +421,7 @@ define(function(require) {'use strict';
                         clearAutokad();
                         clearFedresursBankruptcy();
                         clearFnsRegDocs();
+                        clearPurchaseDishonestSupplier();
                         nodeTracesView.hide();
                         nodeFormView.hide();
                         clearNodeRelationsFilter();
@@ -519,6 +524,7 @@ define(function(require) {'use strict';
                         clearAutokad();
                         clearFedresursBankruptcy();
                         clearFnsRegDocs();
+                        clearPurchaseDishonestSupplier();
                         clearNodeRelationsFilter();
                         hideSearchFilters();
                         hideRelationsFilters();
@@ -543,6 +549,7 @@ define(function(require) {'use strict';
                         showAutokad(formType, node);
                         showFedresursBankruptcy(formType, node);
                         showFnsRegDocs(formType, node);
+                        showPurchaseDishonestSupplier(formType, node);
 
                         $rootScope.$emit('np-rsearch-navigation-node-form', node);
 
@@ -773,6 +780,7 @@ define(function(require) {'use strict';
                         clearAutokad();
                         clearFedresursBankruptcy();
                         clearFnsRegDocs();
+                        clearPurchaseDishonestSupplier();
                         nodeTracesView.hide();
                         nodeFormView.hide();
                         setNodeRelationsFilter(node, direction, relationType);
@@ -1220,6 +1228,11 @@ define(function(require) {'use strict';
                             fnsRegDocsClick: function() {
                                 clearLastBreadcrumb();
                                 doFnsRegDocs(nodeRelationsFilter.node);
+                            },
+
+                            purchaseDishonestSupplier: purchaseDishonestSupplier,
+                            purchaseDishonestSupplierClick: function() {
+                                doPurchaseDishonestSupplier(nodeRelationsFilter.node);
                             }
                         }
                     };
@@ -1234,6 +1247,7 @@ define(function(require) {'use strict';
                         autokad.setNode(node);
                         fedresursBankruptcy.setNode(node);
                         fnsRegDocs.setNode(node);
+                        purchaseDishonestSupplier.setNode(node);
                     }
 
                     function clearNodeRelationsFilter() {
@@ -1682,6 +1696,29 @@ define(function(require) {'use strict';
                     }
 
                     /*
+                     * purchaseDishonestSupplier
+                     *
+                     */
+                    $rootScope.$on('np-rsearch-node-form-purchase-dishonest-supplier-click', function(e, node){
+                        doPurchaseDishonestSupplier(node);
+                    });
+
+                    function showPurchaseDishonestSupplier(formType, node) {
+                        if (formType === 'MINIREPORT') {
+                            purchaseDishonestSupplier.setNode(node);
+                        }
+                    }
+
+                    function clearPurchaseDishonestSupplier() {
+                        purchaseDishonestSupplier.clear();
+                    }
+
+                    function doPurchaseDishonestSupplier(node) {
+                        // NOOP
+                        // Open external link. See npRsearchPurchaseDishonestSupplierInfo directive
+                    }
+
+                    /*
                      * scope
                      *
                      */
@@ -1695,7 +1732,8 @@ define(function(require) {'use strict';
                         nodeRelationsFilter: nodeRelationsFilter,
                         autokad: autokad,
                         fedresursBankruptcy: fedresursBankruptcy,
-                        fnsRegDocs: fnsRegDocs
+                        fnsRegDocs: fnsRegDocs,
+                        purchaseDishonestSupplier: purchaseDishonestSupplier
                     });
 
                     function reset() {
@@ -1717,6 +1755,7 @@ define(function(require) {'use strict';
                         clearAutokad();
                         clearFedresursBankruptcy();
                         clearFnsRegDocs();
+                        clearPurchaseDishonestSupplier();
                         nodeTracesView.hide();
                         nodeFormView.hide();
                         clearBreadcrumbs();

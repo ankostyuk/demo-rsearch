@@ -6,43 +6,48 @@
                 <a class="action" ng-click="actions.relationsClick(countData.direction, countData.relationType)"><np-pluralize plural="{count: countData.relationCount, when: _tr(countData.pluralKey)}"></np-pluralize></a>
                 <div ng-if="group.key === 'AFFILIATED'" np-rsearch-affiliated-cause-filter></div>
             </li>
+            <li ng-if="group.key === 'PURCHASE' && node._type === 'COMPANY'" np-rsearch-purchase-dishonest-supplier-info="actions.purchaseDishonestSupplier" np-rsearch-purchase-dishonest-supplier-click="actions.purchaseDishonestSupplierClick"></li>
         </ul>
     </div>
 
     <div ng-if="node._type === 'COMPANY'">
-        <div class="relations-block" ng-show="user.isAuthenticated()">
-            <h5 class="relations-block-header">${_tr("Иски и судебные решения")}</h5>
-            <ul class="unstyled">
-                <li np-rsearch-autokad-info="actions.autokad" np-rsearch-autokad-click="actions.autokadClick"></li>
-                <li np-rsearch-fedresurs-bankruptcy-info="actions.fedresursBankruptcy" np-rsearch-fedresurs-bankruptcy-click="actions.fedresursBankruptcyClick"></li>
-            </ul>
-        </div>
-        <div class="relations-block" ng-show="user.isAuthenticated()">
-            <h5 class="relations-block-header">${_trc("ФНС", "Федеральная налоговая служба")}</h5>
-            <ul class="unstyled">
-                <li np-rsearch-fns-reg-docs-info="actions.fnsRegDocs" np-rsearch-fns-reg-docs-click="actions.fnsRegDocsClick"></li>
-            </ul>
-        </div>
-        <div class="relations-block" ng-show="user.isAuthenticated()">
-            <ul class="unstyled">
-                <li ng-class="{active: active === 'parents::beneficiary'}"><a class="action" ng-click="actions.relationsClick('parents', 'beneficiary')">${_tr("Бенефициары")}</a></li>
-            </ul>
+        <div ng-show="user.isAuthenticated()">
+            <div class="relations-block">
+                <h5 class="relations-block-header">${_tr("Иски и судебные решения")}</h5>
+                <ul class="unstyled">
+                    <li np-rsearch-autokad-info="actions.autokad" np-rsearch-autokad-click="actions.autokadClick"></li>
+                    <li np-rsearch-fedresurs-bankruptcy-info="actions.fedresursBankruptcy" np-rsearch-fedresurs-bankruptcy-click="actions.fedresursBankruptcyClick"></li>
+                </ul>
+            </div>
+            <div class="relations-block">
+                <h5 class="relations-block-header">${_trc("ФНС", "Федеральная налоговая служба")}</h5>
+                <ul class="unstyled">
+                    <li np-rsearch-fns-reg-docs-info="actions.fnsRegDocs" np-rsearch-fns-reg-docs-click="actions.fnsRegDocsClick"></li>
+                </ul>
+            </div>
+            <div class="relations-block">
+                <ul class="unstyled">
+                    <li ng-class="{active: active === 'parents::beneficiary'}"><a class="action" ng-click="actions.relationsClick('parents', 'beneficiary')">${_tr("Бенефициары")}</a></li>
+                </ul>
+            </div>
         </div>
         <a class="action relations-product shadow-lift-lb-corner shadow-strong" ng-click="actions.productClick('relations_find_related')">${_tr("Анализ аффилированных лиц")}</a>
     </div>
 
     <div ng-if="node._type === 'INDIVIDUAL'">
-        <div class="relations-block" ng-show="user.isAuthenticated()">
-            <h5 class="relations-block-header">${_tr("Иски и судебные решения")}</h5>
-            <ul class="unstyled">
-                <li np-rsearch-autokad-info="actions.autokad" np-rsearch-autokad-click="actions.autokadClick"></li>
-            </ul>
-        </div>
-        <div class="relations-block" ng-show="!node.subtype && user.isAuthenticated()">
-            <ul class="unstyled">
-                <li ng-class="{active: active === 'sibling::kinsmen'}"><a class="action" ng-click="actions.relationsClick('sibling', 'kinsmen')">${_tr("Однофамильцы")}</a></li>
-                <li ng-class="{active: active === 'sibling::related_kinsmen'}"><a class="action" ng-click="actions.relationsClick('sibling', 'related_kinsmen')">${_tr("Связанные однофамильцы")}</a></li>
-            </ul>
+        <div ng-show="user.isAuthenticated()">
+            <div class="relations-block">
+                <h5 class="relations-block-header">${_tr("Иски и судебные решения")}</h5>
+                <ul class="unstyled">
+                    <li np-rsearch-autokad-info="actions.autokad" np-rsearch-autokad-click="actions.autokadClick"></li>
+                </ul>
+            </div>
+            <div class="relations-block" ng-show="!node.subtype">
+                <ul class="unstyled">
+                    <li ng-class="{active: active === 'sibling::kinsmen'}"><a class="action" ng-click="actions.relationsClick('sibling', 'kinsmen')">${_tr("Однофамильцы")}</a></li>
+                    <li ng-class="{active: active === 'sibling::related_kinsmen'}"><a class="action" ng-click="actions.relationsClick('sibling', 'related_kinsmen')">${_tr("Связанные однофамильцы")}</a></li>
+                </ul>
+            </div>
         </div>
         <a class="action relations-product shadow-lift-lb-corner shadow-strong" ng-click="actions.productClick('relations_find_related')">${_tr("Анализ аффилированных лиц")}</a>
     </div>

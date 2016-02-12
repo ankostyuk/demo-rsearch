@@ -780,6 +780,33 @@ msgstr ""
 msgid "Цепочек связей не найдено"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgctxt "Поиск в реестре недобросовестных поставщиков"
+msgid "Поиск"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgctxt "Поиск в реестре недобросовестных поставщиков"
+msgid "в реестре\nнедобросовестных поставщиков"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgctxt "Поиск в реестре недобросовестных поставщиков"
+msgid "временно недоступен"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgid "NG_PLURALIZE::PURCHASE_DISHONEST_SUPPLIER_REC_COUNT"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgid "Поиск в реестре\nнедобросовестных поставщиков..."
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgid "Реестр\nнедобросовестных поставщиков"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-region-filter.html:1
 msgid "Любой регион"
 msgstr ""
