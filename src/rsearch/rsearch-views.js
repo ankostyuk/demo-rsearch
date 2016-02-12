@@ -14,33 +14,34 @@ define(function(require) {'use strict';
                           require('ng-infinite-scroll');
 
     var extmodules = {
-        'np.directives':        require('np.directives'),
-        'np.filters':           require('np.filters'),
-        'np.utils':             require('np.utils'),
-        'nkb.user':             require('nkb.user'),
-        'autokad':              require('autokad'),
-        'fedresursBankruptcy':  require('nkb.extraneous/fedresurs/bankruptcy/company/main'),
-        'fnsRegDocs':           require('nkb.extraneous/fns/reg_docs/company/main')
+        'np.directives':                require('np.directives'),
+        'np.filters':                   require('np.filters'),
+        'np.utils':                     require('np.utils'),
+        'nkb.user':                     require('nkb.user'),
+        'autokad':                      require('autokad'),
+        'fedresursBankruptcy':          require('nkb.extraneous/fedresurs/bankruptcy/company/main'),
+        'fnsRegDocs':                   require('nkb.extraneous/fns/reg_docs/company/main'),
+        'purchaseDishonestSupplier':    require('nkb.extraneous/purchase/dishonest_supplier/company/main')
     };
 
     //
     var templates = {
-        'np-rsearch-node-simple':               require('text!./views/rsearch-node-simple.html'),
-        'np-rsearch-node-plain':                require('text!./views/rsearch-node-plain.html'),
-        'np-rsearch-node-info':                 require('text!./views/rsearch-node-info.html'),
-        'np-rsearch-node-history-info':         require('text!./views/rsearch-node-history-info.html'),
-        'np-rsearch-node-relations-info':       require('text!./views/rsearch-node-relations-info.html'),
-        'np-rsearch-node-relations':            require('text!./views/rsearch-node-relations.html'),
-        'np-rsearch-node-relations-header':     require('text!./views/rsearch-node-relations-header.html'),
-        'np-rsearch-navigation-breadcrumb':     require('text!./views/rsearch-navigation-breadcrumb.html'),
-        'np-rsearch-node-plain-list':           require('text!./views/rsearch-node-plain-list.html'),
-        'np-rsearch-node-traces':               require('text!./views/rsearch-node-traces.html'),
-        'np-rsearch-user-product-limits-info':  require('text!./views/rsearch-user-product-limits-info.html'),
-        'np-rsearch-autokad-info':              require('text!./views/rsearch-autokad-info.html'),
-        'np-rsearch-fedresurs-bankruptcy-info': require('text!./views/rsearch-fedresurs-bankruptcy-info.html'),
-        'np-rsearch-fns-reg-docs-info':         require('text!./views/rsearch-fns-reg-docs-info.html'),
-        'np-rsearch-egrul-data-update':         require('text!./views/rsearch-egrul-data-update.html'),
-        'np-rsearch-node-form':                 require('text!./views/rsearch-node-form.html')
+        'np-rsearch-node-simple':                       require('text!./views/rsearch-node-simple.html'),
+        'np-rsearch-node-plain':                        require('text!./views/rsearch-node-plain.html'),
+        'np-rsearch-node-info':                         require('text!./views/rsearch-node-info.html'),
+        'np-rsearch-node-history-info':                 require('text!./views/rsearch-node-history-info.html'),
+        'np-rsearch-node-relations':                    require('text!./views/rsearch-node-relations.html'),
+        'np-rsearch-node-relations-header':             require('text!./views/rsearch-node-relations-header.html'),
+        'np-rsearch-navigation-breadcrumb':             require('text!./views/rsearch-navigation-breadcrumb.html'),
+        'np-rsearch-node-plain-list':                   require('text!./views/rsearch-node-plain-list.html'),
+        'np-rsearch-node-traces':                       require('text!./views/rsearch-node-traces.html'),
+        'np-rsearch-user-product-limits-info':          require('text!./views/rsearch-user-product-limits-info.html'),
+        'np-rsearch-autokad-info':                      require('text!./views/rsearch-autokad-info.html'),
+        'np-rsearch-fedresurs-bankruptcy-info':         require('text!./views/rsearch-fedresurs-bankruptcy-info.html'),
+        'np-rsearch-fns-reg-docs-info':                 require('text!./views/rsearch-fns-reg-docs-info.html'),
+        'np-rsearch-purchase-dishonest-supplier-info':  require('text!./views/rsearch-purchase-dishonest-supplier-info.html'),
+        'np-rsearch-egrul-data-update':                 require('text!./views/rsearch-egrul-data-update.html'),
+        'np-rsearch-node-form':                         require('text!./views/rsearch-node-form.html')
     };
 
     var combinedTemplates = {
@@ -251,6 +252,17 @@ define(function(require) {'use strict';
                     fnsRegDocsClick: '=npRsearchFnsRegDocsClick'
                 },
                 template: templates['np-rsearch-fns-reg-docs-info']
+            };
+        }])
+        //
+        .directive('npRsearchPurchaseDishonestSupplierInfo', [function() {
+            return {
+                restrict: 'A',
+                scope: {
+                    purchaseDishonestSupplier: '=npRsearchPurchaseDishonestSupplierInfo',
+                    purchaseDishonestSupplierClick: '=npRsearchPurchaseDishonestSupplierClick'
+                },
+                template: templates['np-rsearch-purchase-dishonest-supplier-info']
             };
         }])
         //
@@ -645,6 +657,9 @@ define(function(require) {'use strict';
                         setFnsRegDocs: function(fnsRegDocs) {
                             scope.actions.fnsRegDocs = fnsRegDocs;
                         },
+                        setPurchaseDishonestSupplier: function(purchaseDishonestSupplier) {
+                            scope.actions.purchaseDishonestSupplier = purchaseDishonestSupplier;
+                        },
                         getNodeElement: function(node) {
                             var nodeElement = view.element.find('[np-rsearch-node-info]');
                             return nodeElement.length === 1 ? nodeElement : null;
@@ -674,6 +689,9 @@ define(function(require) {'use strict';
                             },
                             fnsRegDocsClick: function() {
                                 $rootScope.$emit('np-rsearch-node-form-fns-reg-docs-click', scope.node);
+                            },
+                            purchaseDishonestSupplierClick: function() {
+                                $rootScope.$emit('np-rsearch-node-form-purchase-dishonest-supplier-click', scope.node);
                             }
                         }
                     }, i18n.translateFuncs);

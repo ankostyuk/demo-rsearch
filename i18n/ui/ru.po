@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "CLDR_PLURAL_FORMS_FORMAT: one{0}few{1}many{2}other{2}\n"
-"X-Generator: Poedit 1.7.4\n"
+"X-Generator: Poedit 1.7.6\n"
 
 #: ../src/nkb-app/index.html:1
 msgid "API информационной системы"
@@ -61,6 +61,16 @@ msgstr "{'one': '{} физическое лицо', 'few': '{} физическ�
 #: ../src/rsearch/views/rsearch-navigation.html:1
 msgid "NG_PLURALIZE::NODE_PHONE"
 msgstr "{'one': '{} телефон', 'few': '{} телефона', 'many': '{} телефонов', 'other': '{} телефона'}"
+
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgid "NG_PLURALIZE::PURCHASE_DISHONEST_SUPPLIER_REC_COUNT"
+msgstr ""
+"{'0': 'Нет в реестре\n"
+"недобросовестных поставщиков', 'one': 'В реестре\n"
+"недобросовестных поставщиков', 'few': 'В реестре\n"
+"недобросовестных поставщиков', 'many': 'В реестре\n"
+"недобросовестных поставщиков', 'other': 'В реестре\n"
+"недобросовестных поставщиков'}"
 
 #: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
@@ -412,6 +422,11 @@ msgctxt "Поиск в ФНС"
 msgid "Поиск"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgctxt "Поиск в реестре недобросовестных поставщиков"
+msgid "Поиск"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-autokad-info.html:1
 msgid "Поиск арбитражных дел..."
 msgstr ""
@@ -419,6 +434,12 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-autokad-info.html:1
 msgctxt "Поиск в картотеке арбитражных дел временно недоступен"
 msgid "Поиск в"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgid ""
+"Поиск в реестре\n"
+"недобросовестных поставщиков..."
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
@@ -476,6 +497,12 @@ msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgid "Регистрация"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgid ""
+"Реестр\n"
+"недобросовестных поставщиков"
 msgstr ""
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
@@ -597,6 +624,13 @@ msgctxt "объект в отчете"
 msgid "в отчете"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgctxt "Поиск в реестре недобросовестных поставщиков"
+msgid ""
+"в реестре\n"
+"недобросовестных поставщиков"
+msgstr ""
+
 #: ../src/rsearch/rsearch-meta.js:1
 msgctxt "возможно жена, сестра или мать"
 msgid "возможно"
@@ -616,6 +650,11 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-autokad-info.html:1
 msgctxt "Поиск в картотеке арбитражных дел временно недоступен"
+msgid "временно недоступен"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgctxt "Поиск в реестре недобросовестных поставщиков"
 msgid "временно недоступен"
 msgstr ""
 
