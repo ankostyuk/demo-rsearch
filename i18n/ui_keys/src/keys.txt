@@ -83,3 +83,7 @@ RELATION_GROUP_BASE
 RELATION_GROUP_AFFILIATED
 RELATION_GROUP_CONTACTS
 RELATION_GROUP_PURCHASE
+
+# Актуальность связей (relation.outdated = true | false)
+RELATION_actual
+RELATION_outdated

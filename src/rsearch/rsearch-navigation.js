@@ -108,7 +108,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npL10n', 'NpRsearchAutokad', 'NpRsearchFedresursBankruptcyCompany', 'NpRsearchFnsRegDocsCompany', 'npRsearchNavigationHelper', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npL10n, NpRsearchAutokad, NpRsearchFedresursBankruptcyCompany, NpRsearchFnsRegDocsCompany, npRsearchNavigationHelper){
+        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npL10n', 'NpRsearchAutokad', 'NpRsearchFedresursBankruptcyCompany', 'NpRsearchFnsRegDocsCompany', 'NpRsearchPurchaseDishonestSupplierCompany', 'npRsearchNavigationHelper', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npL10n, NpRsearchAutokad, NpRsearchFedresursBankruptcyCompany, NpRsearchFnsRegDocsCompany, NpRsearchPurchaseDishonestSupplierCompany, npRsearchNavigationHelper){
             return {
                 restrict: 'A',
                 template: template,
@@ -135,6 +135,9 @@ define(function(require) {'use strict';
 
                     var fnsRegDocs = new NpRsearchFnsRegDocsCompany();
                     nodeFormView.setFnsRegDocs(fnsRegDocs);
+
+                    var purchaseDishonestSupplier = new NpRsearchPurchaseDishonestSupplierCompany();
+                    nodeFormView.setPurchaseDishonestSupplier(purchaseDishonestSupplier);
 
                     /*
                      * init
@@ -213,9 +216,8 @@ define(function(require) {'use strict';
                             infoDirection, relationCount;
 
                         _.each(relationTypes, function(relationType){
-                            infoDirection = npRsearchMetaHelper.getInfoDirection(byRelations.direction);
-                            relationCount = byRelations.node._info[infoDirection][relationType];
-                            pageSize = Math.max(pageSize, relationCount);
+                            var historyRelationCounts = npRsearchMetaHelper.getHistoryRelationCounts(byRelations.node, byRelations.direction, relationType);
+                            pageSize = Math.max(pageSize, historyRelationCounts['all']);
                         });
 
                         return {
@@ -285,6 +287,7 @@ define(function(require) {'use strict';
                         clearAutokad();
                         clearFedresursBankruptcy();
                         clearFnsRegDocs();
+                        clearPurchaseDishonestSupplier();
                         nodeTracesView.hide();
                         nodeFormView.hide();
                         clearBreadcrumbs();
@@ -417,6 +420,7 @@ define(function(require) {'use strict';
                         clearAutokad();
                         clearFedresursBankruptcy();
                         clearFnsRegDocs();
+                        clearPurchaseDishonestSupplier();
                         nodeTracesView.hide();
                         nodeFormView.hide();
                         clearNodeRelationsFilter();
@@ -519,6 +523,7 @@ define(function(require) {'use strict';
                         clearAutokad();
                         clearFedresursBankruptcy();
                         clearFnsRegDocs();
+                        clearPurchaseDishonestSupplier();
                         clearNodeRelationsFilter();
                         hideSearchFilters();
                         hideRelationsFilters();
@@ -543,6 +548,7 @@ define(function(require) {'use strict';
                         showAutokad(formType, node);
                         showFedresursBankruptcy(formType, node);
                         showFnsRegDocs(formType, node);
+                        showPurchaseDishonestSupplier(formType, node);
 
                         $rootScope.$emit('np-rsearch-navigation-node-form', node);
 
@@ -571,7 +577,8 @@ define(function(require) {'use strict';
                     });
 
                     function relationsClick(node, direction, relationType, noCheckAccentedResult) {
-                        if (user.isProductAvailable('relations_find_related')) {
+                        // TODO @demo
+                        if (true || user.isProductAvailable('relations_find_related')) {
                             showRelations(node, direction, relationType, null, null, false, noCheckAccentedResult);
                         } else {
                             showProductInfo('relations_find_related');
@@ -708,7 +715,8 @@ define(function(require) {'use strict';
                                     var request = npRsearchResource.relatedKinsmen({
                                         node: data.nodes[0],
                                         filter: {
-                                            maxDepth: data.filters.depth
+                                            maxDepth: data.filters.depth,
+                                            history: data.filters.history
                                         },
                                         previousRequest: null,
                                         success: function(data, status){
@@ -737,7 +745,8 @@ define(function(require) {'use strict';
                                     var request = npRsearchResource.beneficiary({
                                         node: data.nodes[0],
                                         filter: {
-                                            maxDepth: data.filters.depth
+                                            maxDepth: data.filters.depth,
+                                            history: data.filters.history
                                         },
                                         previousRequest: null,
                                         success: function(data, status){
@@ -773,6 +782,7 @@ define(function(require) {'use strict';
                         clearAutokad();
                         clearFedresursBankruptcy();
                         clearFnsRegDocs();
+                        clearPurchaseDishonestSupplier();
                         nodeTracesView.hide();
                         nodeFormView.hide();
                         setNodeRelationsFilter(node, direction, relationType);
@@ -1220,6 +1230,11 @@ define(function(require) {'use strict';
                             fnsRegDocsClick: function() {
                                 clearLastBreadcrumb();
                                 doFnsRegDocs(nodeRelationsFilter.node);
+                            },
+
+                            purchaseDishonestSupplier: purchaseDishonestSupplier,
+                            purchaseDishonestSupplierClick: function() {
+                                doPurchaseDishonestSupplier(nodeRelationsFilter.node);
                             }
                         }
                     };
@@ -1234,6 +1249,7 @@ define(function(require) {'use strict';
                         autokad.setNode(node);
                         fedresursBankruptcy.setNode(node);
                         fnsRegDocs.setNode(node);
+                        purchaseDishonestSupplier.setNode(node);
                     }
 
                     function clearNodeRelationsFilter() {
@@ -1248,6 +1264,7 @@ define(function(require) {'use strict';
                         relationsRegionFilterScope.toggle(false);
                         relationsInnFilterScope.toggle(false);
                         hideAffiliatedCauseFilters();
+                        hideHistoryFilters();
                     }
 
                     function initRelationsFilters(byRelations) {
@@ -1261,7 +1278,7 @@ define(function(require) {'use strict';
                             var total = byRelations.result.total;
 
                             var regionFilter = {
-                                values: byRelations.result.info.nodeFacet && byRelations.result.info.nodeFacet.region_code,
+                                values: _.get(byRelations.result.info.nodeFacet, 'region_code'),
                                 value: null,
                                 total: total,
                                 callback: function(value) {
@@ -1273,9 +1290,8 @@ define(function(require) {'use strict';
                                 }
                             };
 
-                            var innFilterValues = _.get(byRelations.relationMap.byRelationTypes, [byRelations.direction, byRelations.relationType, 'info', 'relFacet', 'inn']);
+                            var innFilterValues = _.get(byRelations.result.info.relFacet, 'inn');
                             var innFilter = {
-                                // values: byRelations.result.info.relFacet && byRelations.result.info.relFacet.inn,
                                 // TODO поправить npRsearchInnFilter для работы с пустыми данными как с null
                                 values: _.isEmpty(innFilterValues) ? null : innFilterValues,
                                 value: null,
@@ -1293,7 +1309,7 @@ define(function(require) {'use strict';
                             };
 
                             var affiliatedCauseFilter = {
-                                values: byRelations.result.info.relFacet && byRelations.result.info.relFacet['causes.name'],
+                                values: _.get(byRelations.result.info.relFacet, 'causes.name'),
                                 value: null,
                                 total: total,
                                 callback: function(value) {
@@ -1305,10 +1321,25 @@ define(function(require) {'use strict';
                                 }
                             };
 
+                            var historyFilterValues = byRelations.node.__relationData.relationCountMap[npRsearchMetaHelper.buildNodeRelationKey(byRelations.direction, byRelations.relationType)].historyRelationCounts;
+                            var historyFilter = {
+                                values: historyFilterValues,
+                                value: null,
+                                total: total,
+                                callback: function(value) {
+                                    historyFilter.value = value;
+                                    historyFilter.condition = {
+                                        'history': value ? (value === 'outdated') : null
+                                    };
+                                    doRelations(byRelations, false, true);
+                                }
+                            };
+
                             filters = {
                                 region: regionFilter,
                                 inn: innFilter,
-                                affiliatedCause: affiliatedCauseFilter
+                                affiliatedCause: affiliatedCauseFilter,
+                                history: historyFilter
                             };
 
                             byRelations.filters = filters;
@@ -1336,11 +1367,29 @@ define(function(require) {'use strict';
                                     affiliatedCauseFilterScope.toggle(true);
                                 }
                             }
+
+                            if (filters.history.values) {
+                                var historyFilterElement    = element.find('.right-bar [np-rsearch-node-relations] .active [np-rsearch-history-filter]'),
+                                    historyFilterScope      = historyFilterElement.isolateScope();
+
+                                hideHistoryFilters();
+
+                                if (historyFilterScope) {
+                                    historyFilterScope.setData(filters.history);
+                                    historyFilterScope.toggle(true);
+                                }
+                            }
                         });
                     }
 
                     function hideAffiliatedCauseFilters() {
                         element.find('.right-bar [np-rsearch-node-relations] [np-rsearch-affiliated-cause-filter]').each(function(el){
+                            angular.element(this).isolateScope().toggle(false);
+                        });
+                    }
+
+                    function hideHistoryFilters() {
+                        element.find('.right-bar [np-rsearch-node-relations] [np-rsearch-history-filter]').each(function(el){
                             angular.element(this).isolateScope().toggle(false);
                         });
                     }
@@ -1682,6 +1731,29 @@ define(function(require) {'use strict';
                     }
 
                     /*
+                     * purchaseDishonestSupplier
+                     *
+                     */
+                    $rootScope.$on('np-rsearch-node-form-purchase-dishonest-supplier-click', function(e, node){
+                        doPurchaseDishonestSupplier(node);
+                    });
+
+                    function showPurchaseDishonestSupplier(formType, node) {
+                        if (formType === 'MINIREPORT') {
+                            purchaseDishonestSupplier.setNode(node);
+                        }
+                    }
+
+                    function clearPurchaseDishonestSupplier() {
+                        purchaseDishonestSupplier.clear();
+                    }
+
+                    function doPurchaseDishonestSupplier(node) {
+                        // NOOP
+                        // Open external link. See npRsearchPurchaseDishonestSupplierInfo directive
+                    }
+
+                    /*
                      * scope
                      *
                      */
@@ -1695,7 +1767,8 @@ define(function(require) {'use strict';
                         nodeRelationsFilter: nodeRelationsFilter,
                         autokad: autokad,
                         fedresursBankruptcy: fedresursBankruptcy,
-                        fnsRegDocs: fnsRegDocs
+                        fnsRegDocs: fnsRegDocs,
+                        purchaseDishonestSupplier: purchaseDishonestSupplier
                     });
 
                     function reset() {
@@ -1717,6 +1790,7 @@ define(function(require) {'use strict';
                         clearAutokad();
                         clearFedresursBankruptcy();
                         clearFnsRegDocs();
+                        clearPurchaseDishonestSupplier();
                         nodeTracesView.hide();
                         nodeFormView.hide();
                         clearBreadcrumbs();

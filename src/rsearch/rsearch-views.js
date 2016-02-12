@@ -14,32 +14,34 @@ define(function(require) {'use strict';
                           require('ng-infinite-scroll');
 
     var extmodules = {
-        'np.directives':        require('np.directives'),
-        'np.filters':           require('np.filters'),
-        'np.utils':             require('np.utils'),
-        'nkb.user':             require('nkb.user'),
-        'autokad':              require('autokad'),
-        'fedresursBankruptcy':  require('nkb.extraneous/fedresurs/bankruptcy/company/main'),
-        'fnsRegDocs':           require('nkb.extraneous/fns/reg_docs/company/main')
+        'np.directives':                require('np.directives'),
+        'np.filters':                   require('np.filters'),
+        'np.utils':                     require('np.utils'),
+        'nkb.user':                     require('nkb.user'),
+        'autokad':                      require('autokad'),
+        'fedresursBankruptcy':          require('nkb.extraneous/fedresurs/bankruptcy/company/main'),
+        'fnsRegDocs':                   require('nkb.extraneous/fns/reg_docs/company/main'),
+        'purchaseDishonestSupplier':    require('nkb.extraneous/purchase/dishonest_supplier/company/main')
     };
 
     //
     var templates = {
-        'np-rsearch-node-simple':               require('text!./views/rsearch-node-simple.html'),
-        'np-rsearch-node-plain':                require('text!./views/rsearch-node-plain.html'),
-        'np-rsearch-node-info':                 require('text!./views/rsearch-node-info.html'),
-        'np-rsearch-node-history-info':         require('text!./views/rsearch-node-history-info.html'),
-        'np-rsearch-node-relations':            require('text!./views/rsearch-node-relations.html'),
-        'np-rsearch-node-relations-header':     require('text!./views/rsearch-node-relations-header.html'),
-        'np-rsearch-navigation-breadcrumb':     require('text!./views/rsearch-navigation-breadcrumb.html'),
-        'np-rsearch-node-plain-list':           require('text!./views/rsearch-node-plain-list.html'),
-        'np-rsearch-node-traces':               require('text!./views/rsearch-node-traces.html'),
-        'np-rsearch-user-product-limits-info':  require('text!./views/rsearch-user-product-limits-info.html'),
-        'np-rsearch-autokad-info':              require('text!./views/rsearch-autokad-info.html'),
-        'np-rsearch-fedresurs-bankruptcy-info': require('text!./views/rsearch-fedresurs-bankruptcy-info.html'),
-        'np-rsearch-fns-reg-docs-info':         require('text!./views/rsearch-fns-reg-docs-info.html'),
-        'np-rsearch-egrul-data-update':         require('text!./views/rsearch-egrul-data-update.html'),
-        'np-rsearch-node-form':                 require('text!./views/rsearch-node-form.html')
+        'np-rsearch-node-simple':                       require('text!./views/rsearch-node-simple.html'),
+        'np-rsearch-node-plain':                        require('text!./views/rsearch-node-plain.html'),
+        'np-rsearch-node-info':                         require('text!./views/rsearch-node-info.html'),
+        'np-rsearch-node-history-info':                 require('text!./views/rsearch-node-history-info.html'),
+        'np-rsearch-node-relations':                    require('text!./views/rsearch-node-relations.html'),
+        'np-rsearch-node-relations-header':             require('text!./views/rsearch-node-relations-header.html'),
+        'np-rsearch-navigation-breadcrumb':             require('text!./views/rsearch-navigation-breadcrumb.html'),
+        'np-rsearch-node-plain-list':                   require('text!./views/rsearch-node-plain-list.html'),
+        'np-rsearch-node-traces':                       require('text!./views/rsearch-node-traces.html'),
+        'np-rsearch-user-product-limits-info':          require('text!./views/rsearch-user-product-limits-info.html'),
+        'np-rsearch-autokad-info':                      require('text!./views/rsearch-autokad-info.html'),
+        'np-rsearch-fedresurs-bankruptcy-info':         require('text!./views/rsearch-fedresurs-bankruptcy-info.html'),
+        'np-rsearch-fns-reg-docs-info':                 require('text!./views/rsearch-fns-reg-docs-info.html'),
+        'np-rsearch-purchase-dishonest-supplier-info':  require('text!./views/rsearch-purchase-dishonest-supplier-info.html'),
+        'np-rsearch-egrul-data-update':                 require('text!./views/rsearch-egrul-data-update.html'),
+        'np-rsearch-node-form':                         require('text!./views/rsearch-node-form.html')
     };
 
     var combinedTemplates = {
@@ -120,6 +122,16 @@ define(function(require) {'use strict';
                 restrict: 'A',
                 scope: false, // require <node>
                 template: templates['np-rsearch-node-history-info']
+            };
+        }])
+        //
+        .directive('npRsearchNodeRelationsInfo', [function() {
+            return {
+                restrict: 'A',
+                scope: {
+                    relationsInfo: '=npRsearchNodeRelationsInfo'
+                },
+                template: templates['np-rsearch-node-relations-info']
             };
         }])
         //
@@ -243,6 +255,17 @@ define(function(require) {'use strict';
             };
         }])
         //
+        .directive('npRsearchPurchaseDishonestSupplierInfo', [function() {
+            return {
+                restrict: 'A',
+                scope: {
+                    purchaseDishonestSupplier: '=npRsearchPurchaseDishonestSupplierInfo',
+                    purchaseDishonestSupplierClick: '=npRsearchPurchaseDishonestSupplierClick'
+                },
+                template: templates['np-rsearch-purchase-dishonest-supplier-info']
+            };
+        }])
+        //
         .directive('npRsearchEgrulDataUpdate', [function() {
             return {
                 restrict: 'A',
@@ -256,7 +279,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .factory('npRsearchViews', ['$log', '$compile', '$rootScope', '$timeout', '$window', 'SimplePager', 'nkbUser', 'npRsearchMetaHelper', function($log, $compile, $rootScope, $timeout, $window, SimplePager, nkbUser, npRsearchMetaHelper){
+        .factory('npRsearchViews', ['$log', '$compile', '$rootScope', '$timeout', '$window', 'SimplePager', 'nkbUser', 'npRsearchMetaHelper', 'npRsearchRelationHelper', function($log, $compile, $rootScope, $timeout, $window, SimplePager, nkbUser, npRsearchMetaHelper, npRsearchRelationHelper){
 
             var htmlbodyElement = $('html, body');
 
@@ -460,7 +483,8 @@ define(function(require) {'use strict';
                         nodes: [],
                         filters: {
                             depths: null,
-                            depth: null
+                            depth: null,
+                            history: null
                         },
                         dataSource: null,
                         result: null,
@@ -486,9 +510,11 @@ define(function(require) {'use strict';
                             });
                         },
                         doTraces: function() {
-                            if (!scope.dataSource) {
+                            if (!scope.dataSource || !scope.filters.depth) {
                                 return;
                             }
+
+                            scope.filters.history = scope.filters.history || null;
 
                             scope.traceCount = null;
                             // scope.currentTrace = null; // ? TODO Очищать перед запросом
@@ -497,26 +523,17 @@ define(function(require) {'use strict';
                                 nodes: scope.nodes,
                                 filters: scope.filters
                             }, function(result){
-                                // <<< relation_history
-                                // схлопнуть цепочки
-                                // TODO на сервере
-                                var uniqTraces = [];
-
-                                _.each(result.traces, function(trace, i){
-                                    if (!_.isEqual(trace, result.traces[i - 1])) {
-                                        uniqTraces.push(trace);
-                                    }
-                                });
-
-                                result.traces = uniqTraces;
-                                // >>>
+                                // @demo
+                                delete result.relations;
 
                                 if (scope.dataSource.reverse && result && result.traces) {
                                     _.each(result.traces, function(trace){
                                         trace.nodes.reverse();
-                                        trace.relations.reverse();
                                     });
                                 }
+
+                                // @demo
+                                $log.info('* result', result);
 
                                 applyResult(result);
                                 doTrace();
@@ -528,6 +545,7 @@ define(function(require) {'use strict';
 
                     function reset() {
                         scope.filters.depth = null;
+                        scope.filters.history = null;
                         scope.result = null;
                         scope.traceIndex = 0;
                         scope.traceCount = null;
@@ -563,17 +581,14 @@ define(function(require) {'use strict';
 
                         var trace           = scope.result.traces[scope.traceIndex],
                             nodes           = scope.result.nodes,
-                            relations       = scope.result.relations,
-                            relationIndexes = trace.relations,
                             nodeIndexes     = trace.nodes,
                             nodeCount       = _.size(nodeIndexes),
                             currentTrace    = new Array(nodeCount),
-                            isLast, node, relation, direction, relationMap, targetInfo, targetNode, isSrcNode;
+                            isLast, node, relation, direction, relationsInfo, targetNode, isSrcNode;
 
                         _.each(nodeIndexes, function(nodeIndex, i){
                             isLast      = (i === nodeCount - 1);
                             node        = nodes[nodeIndex];
-                            relationMap = {};
 
                             // Именно при отображении цепочки,
                             // а не в ответе запроса на поиск цепочек,
@@ -587,36 +602,27 @@ define(function(require) {'use strict';
                             });
 
                             if (isLast) {
-                                relation    = null;
-                                direction   = null;
-                                targetInfo  = null;
+                                relation        = null;
+                                direction       = null;
+                                relationsInfo   = null;
                             } else {
-                                relation    = relations[relationIndexes[i]];
-                                direction   = relation._srcId === node._id ? 'parents' : 'children';
-
                                 targetNode  = nodes[nodeIndexes[i + 1]];
+
+                                // TODO оптимизировать:
+                                // при обходе цепочек данные функции могут вызываться повторно для обойденных нод
                                 npRsearchMetaHelper.buildNodeExtraMeta(targetNode);
-
-                                // relation_history
-                                // TODO оптимизировать
+                                npRsearchMetaHelper.buildNodeRelationMap(targetNode);
                                 npRsearchMetaHelper.buildNodeRelationMap(node);
-                                npRsearchMetaHelper.addToRelationMap(relationMap, targetNode, targetNode._relations);
 
-                                targetInfo = {
-                                    node: targetNode,
-                                    relationInfo: {
-                                        direction: direction,
-                                        relationType: relation._type,
-                                        relationMap: relationMap
-                                    }
-                                };
+                                relationsInfo = npRsearchRelationHelper.buildRelationsInfoBetweenNodes(node, targetNode);
+                                direction = relationsInfo.direction;
                             }
 
                             currentTrace[i] = {
                                 isLast: isLast,
                                 inTrace: isSrcNode ? scope.dataSource.srcInTrace : true,
                                 node: node,
-                                targetInfo: targetInfo,
+                                relationsInfo: relationsInfo,
                                 direction: direction
                             };
                         });
@@ -657,6 +663,9 @@ define(function(require) {'use strict';
                         setFnsRegDocs: function(fnsRegDocs) {
                             scope.actions.fnsRegDocs = fnsRegDocs;
                         },
+                        setPurchaseDishonestSupplier: function(purchaseDishonestSupplier) {
+                            scope.actions.purchaseDishonestSupplier = purchaseDishonestSupplier;
+                        },
                         getNodeElement: function(node) {
                             var nodeElement = view.element.find('[np-rsearch-node-info]');
                             return nodeElement.length === 1 ? nodeElement : null;
@@ -686,6 +695,9 @@ define(function(require) {'use strict';
                             },
                             fnsRegDocsClick: function() {
                                 $rootScope.$emit('np-rsearch-node-form-fns-reg-docs-click', scope.node);
+                            },
+                            purchaseDishonestSupplierClick: function() {
+                                $rootScope.$emit('np-rsearch-node-form-purchase-dishonest-supplier-click', scope.node);
                             }
                         }
                     }, i18n.translateFuncs);

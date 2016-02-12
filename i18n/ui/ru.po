@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "CLDR_PLURAL_FORMS_FORMAT: one{0}few{1}many{2}other{2}\n"
-"X-Generator: Poedit 1.7.4\n"
+"X-Generator: Poedit 1.7.6\n"
 
 #: ../src/nkb-app/index.html:1
 msgid "API информационной системы"
@@ -61,6 +61,16 @@ msgstr "{'one': '{} физическое лицо', 'few': '{} физическ�
 #: ../src/rsearch/views/rsearch-navigation.html:1
 msgid "NG_PLURALIZE::NODE_PHONE"
 msgstr "{'one': '{} телефон', 'few': '{} телефона', 'many': '{} телефонов', 'other': '{} телефона'}"
+
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgid "NG_PLURALIZE::PURCHASE_DISHONEST_SUPPLIER_REC_COUNT"
+msgstr ""
+"{'0': 'Нет в реестре\n"
+"недобросовестных поставщиков', 'one': 'В реестре\n"
+"недобросовестных поставщиков', 'few': 'В реестре\n"
+"недобросовестных поставщиков', 'many': 'В реестре\n"
+"недобросовестных поставщиков', 'other': 'В реестре\n"
+"недобросовестных поставщиков'}"
 
 #: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
@@ -123,9 +133,7 @@ msgid "Бизнес-справки онлайн"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
-msgid ""
-"Будут найдены все возможные цепочки связей\n"
-"до указанного уровня"
+msgid "Будут найдены все возможные цепочки связей до указанного уровня"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-history-info.html:1
@@ -146,6 +154,7 @@ msgid "Войти"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-affiliated-cause-filter.html:1
+#: ../src/rsearch/views/rsearch-history-filter.html:1
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 #: ../src/rsearch/views/rsearch-region-filter.html:1
 msgid "Все"
@@ -305,6 +314,11 @@ msgstr ""
 msgid "Любой регион"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Цепочки связанных объектов"
+msgid "Любые цепочки"
+msgstr ""
+
 #: ../src/nkb-app/index.html:1
 msgid "НАЛПОИНТЕР"
 msgstr ""
@@ -408,6 +422,11 @@ msgctxt "Поиск в ФНС"
 msgid "Поиск"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgctxt "Поиск в реестре недобросовестных поставщиков"
+msgid "Поиск"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-autokad-info.html:1
 msgid "Поиск арбитражных дел..."
 msgstr ""
@@ -415,6 +434,12 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-autokad-info.html:1
 msgctxt "Поиск в картотеке арбитражных дел временно недоступен"
 msgid "Поиск в"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgid ""
+"Поиск в реестре\n"
+"недобросовестных поставщиков..."
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
@@ -472,6 +497,12 @@ msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgid "Регистрация"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgid ""
+"Реестр\n"
+"недобросовестных поставщиков"
 msgstr ""
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
@@ -542,6 +573,11 @@ msgid "Тип сообщения"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Цепочки связанных объектов"
+msgid "Только актуальные связи"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
 msgctxt "Уровень (глубина) поиска связанных объектов"
 msgid "Укажите уровень..."
 msgstr ""
@@ -568,6 +604,11 @@ msgstr ""
 msgid "Цепочек связей не найдено"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Цепочки связанных объектов"
+msgid "Через неактуальные связи"
+msgstr ""
+
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "аффилированное лицо"
 msgstr ""
@@ -581,6 +622,13 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-node-traces.html:1
 msgctxt "объект в отчете"
 msgid "в отчете"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgctxt "Поиск в реестре недобросовестных поставщиков"
+msgid ""
+"в реестре\n"
+"недобросовестных поставщиков"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
@@ -602,6 +650,11 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-autokad-info.html:1
 msgctxt "Поиск в картотеке арбитражных дел временно недоступен"
+msgid "временно недоступен"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgctxt "Поиск в реестре недобросовестных поставщиков"
 msgid "временно недоступен"
 msgstr ""
 

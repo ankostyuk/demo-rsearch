@@ -14,63 +14,6 @@ define(function(require) {'use strict';
         'nkb.filters': require('nkb.filters')
     };
 
-    // <<< @Deprecated relation_history
-    // Временное решение для отладки истории связей
-    var moment                  = require('moment'),
-        __normalizeDateFormat   = 'DD.MM.YYYY';
-
-    var purl                = require('purl'),
-        locationSearch      = purl().param(),
-        __sortBySince       = locationSearch['sort-by-since'] === 'true' ? true : false,
-        __collapseHistory   = locationSearch['collapse-history'] === 'false' ? false : true,
-        __crossSince        = locationSearch['cross-since'] === 'false' ? false : true,
-        __crossActual       = locationSearch['cross-actual'] === 'false' ? false : true,
-        __showAll           = locationSearch['show-all'] === 'true' ? true : false,
-        __normalizeDate     = locationSearch['normalize-date'] === 'true' ? true : false;
-        console.warn('__sortBySince:', __sortBySince);
-        console.warn('__collapseHistory:', __collapseHistory);
-        console.warn('__crossSince:', __crossSince);
-        console.warn('__crossActual:', __crossActual);
-        console.warn('__showAll:', __showAll);
-        console.warn('__normalizeDate:', __normalizeDate);
-    // >>>
-
-    //
-    function isFounderRelationsCollapsed(r1, r2) {
-        if (r1._since === r2._since) {
-            return true;
-        }
-
-        return (
-            (r1.shareAmount || r2.shareAmount || 0).toFixed(0) === (r2.shareAmount || r1.shareAmount || 0).toFixed(0) &&
-            (r1._source === 'egrul_individual_founder' || r2._source === 'egrul_individual_founder' ? true :
-                (r1.sharePercent || r2.sharePercent || 0).toFixed(2) === (r2.sharePercent || r1.sharePercent || 0).toFixed(2)
-            )
-        );
-    }
-
-    function isExecutiveRelationsCollapsed(r1, r2) {
-        return (
-            (r1.position || '').toLowerCase() === (r2.position || '').toLowerCase()
-        );
-    }
-
-    function collapseRelations(r1, r2, checkFunc) {
-        var result = {
-            isCollapsed: checkFunc(r1, r2),
-            relation: null
-        };
-
-        if (!result.isCollapsed) {
-            return result;
-        }
-
-        result.relation = r1._actual > r2._actual ? r1 : r2;
-
-        return result;
-    }
-    //
-
     return angular.module('np.rsearch-meta', _.pluck(extmodules, 'name'))
         //
         .constant('npRsearchMeta', {
@@ -110,7 +53,7 @@ define(function(require) {'use strict';
                         group: 'BASE',
                         pageSize: 'all',
                         history: {
-                            isCollapsed: isFounderRelationsCollapsed
+                            opposite: false
                         }
                     }
                 },
@@ -130,7 +73,7 @@ define(function(require) {'use strict';
                         group: 'BASE',
                         pageSize: 'all',
                         history: {
-                            isCollapsed: isFounderRelationsCollapsed
+                            opposite: false
                         }
                     }
                 },
@@ -150,7 +93,7 @@ define(function(require) {'use strict';
                         group: 'BASE',
                         pageSize: 'all',
                         history: {
-                            isCollapsed: isFounderRelationsCollapsed
+                            opposite: false
                         }
                     }
                 },
@@ -216,7 +159,7 @@ define(function(require) {'use strict';
                         group: 'BASE',
                         pageSize: 'all',
                         history: {
-                            isCollapsed: isExecutiveRelationsCollapsed
+                            opposite: false
                         }
                     }
                 },
@@ -518,13 +461,31 @@ define(function(require) {'use strict';
                     }
                 },
 
+                getHistoryRelationCounts: function(node, direction, relationType) {
+                    var infoDirection   = metaHelper.getInfoDirection(direction),
+                        info            = node._info[infoDirection][relationType];
+
+                    return metaHelper.getHistoryRelationCountsByInfo(info);
+                },
+
+                getHistoryRelationCountsByInfo: function(info) {
+                    return {
+                        'actual': info.actual || 0,
+                        'outdated': info.outdated || 0,
+                        'all': (info.actual || 0) + (info.outdated || 0)
+                    };
+                },
+
                 buildRelationDataByNodeInfo: function(node) {
                     var relationCountMap    = {},
                         relationCounts      = [],
                         groups              = {};
 
                     _.each(['in', 'out'], function(infoDirection){
-                        _.each(_.get(node, ['_info', infoDirection]), function(relationCount, relationType){
+                        _.each(_.get(node, ['_info', infoDirection]), function(info, relationType){
+                            var historyRelationCounts   = metaHelper.getHistoryRelationCountsByInfo(info),
+                                relationCount           = historyRelationCounts['all'];
+
                             var direction               = metaHelper.getDirection(infoDirection),
                                 relationTypeMeta        = metaHelper.getRelationTypeMeta(relationType, direction),
                                 groupKey                = relationTypeMeta.group,
@@ -542,32 +503,57 @@ define(function(require) {'use strict';
                                 relationCounts: {}
                             };
 
+                            // TODO Объединить код с mergedTypeCountData
                             var countData = {
-                                key:            relationKey,
-                                order:          relationTypeMeta.order,
-                                top:            relationTypeMeta.top,
-                                relationType:   relationType,
-                                direction:      direction,
-                                relationCount:  relationCount,
-                                pluralKey:      relationPluralKey
+                                key:                    relationKey,
+                                order:                  relationTypeMeta.order,
+                                top:                    relationTypeMeta.top,
+                                history:                relationTypeMeta.history,
+                                relationType:           relationType,
+                                direction:              direction,
+                                relationCount:          relationCount,
+                                historyRelationCounts:  historyRelationCounts,
+                                pluralKey:              relationPluralKey
+                            };
+
+                            var mergedTypeHistoryRelationCounts = {
+                                'actual': 0,
+                                'outdated': 0,
+                                'all': 0
                             };
 
                             _.each(!mergedTypeCountData && mergedTypeInfo.relationTypes, function(t){
-                                mergedTypeRelationCount += _.get(node, ['_info', infoDirection, t]) || 0;
+                                var info    = _.get(node, ['_info', infoDirection, t]),
+                                    counts  = info ? metaHelper.getHistoryRelationCountsByInfo(info) : null;
+
+                                if (!counts) {
+                                    return;
+                                }
+
+                                mergedTypeHistoryRelationCounts['actual']   += counts['actual'];
+                                mergedTypeHistoryRelationCounts['outdated'] += counts['outdated'];
+                                mergedTypeHistoryRelationCounts['all']      += counts['all'];
+
+                                // mergedTypeRelationCount += counts ? counts['all'] : 0;
                             });
+
+                            mergedTypeRelationCount = mergedTypeHistoryRelationCounts['all'];
 
                             if (!mergedTypeCountData && mergedTypeRelationCount > relationCount) {
                                 var mergedType      = mergedTypeInfo.mergedType,
                                     mergedTypeMeta  = metaHelper.getRelationTypeMeta(mergedType, direction);
 
+                                // TODO Объединить код с countData
                                 mergedTypeCountData = {
-                                    key:            mergedTypeKey,
-                                    order:          mergedTypeMeta.order,
-                                    top:            mergedTypeMeta.top,
-                                    relationType:   mergedType,
-                                    direction:      direction,
-                                    relationCount:  mergedTypeRelationCount,
-                                    pluralKey:      metaHelper.buildNodeRelationPluralKey(direction, mergedType)
+                                    key:                    mergedTypeKey,
+                                    order:                  mergedTypeMeta.order,
+                                    top:                    mergedTypeMeta.top,
+                                    history:                mergedTypeMeta.history,
+                                    relationType:           mergedType,
+                                    direction:              direction,
+                                    relationCount:          mergedTypeRelationCount,
+                                    historyRelationCounts:  mergedTypeHistoryRelationCounts,
+                                    pluralKey:              metaHelper.buildNodeRelationPluralKey(direction, mergedType)
                                 };
 
                                 group.relationCounts[mergedTypeKey] = mergedTypeCountData;
@@ -857,16 +843,6 @@ define(function(require) {'use strict';
                                 sorted: null
                             };
 
-                            // <<< relation_history
-                            // нормализация даты для корректного отображения истории
-                            // костыль!
-                            // TODO на сервере
-                            // TODO ? нормализовать _since
-                            if (__normalizeDate) {
-                                metaHelper.__normalizeDate(relation, npRsearchMeta.relationActualDate);
-                            }
-                            // >>>
-
                             relationData.history.byDates.push(relation);
                         }
 
@@ -877,201 +853,21 @@ define(function(require) {'use strict';
                         byNodes[direction][relationType.name] = byNodes[direction][relationType.name] || {
                             relationId: relationId
                         };
-
-                        // byRelations
-                        var byRelationTypes = relationMap.byRelationTypes = relationMap.byRelationTypes || {};
-                        byRelationTypes[direction] = byRelationTypes[direction] || {};
-
-                        // <<< relation_history
-                        // TODO не для всех типов связей
-                        // TODO на сервере
-                        byRelationTypes[direction][relationType.name] = byRelationTypes[direction][relationType.name] || {
-                            info: {
-                                history: {
-                                    actual: {
-                                        min: 0,
-                                        since: {
-                                            min: 0,
-                                            max: 0
-                                        }
-                                    }
-                                },
-                                relFacet: {
-                                    inn: {}
-                                }
-                            }
-                        };
-
-                        if (!relationExist && relation.inn) {
-                            var innFacet = byRelationTypes[direction][relationType.name].info.relFacet.inn;
-                            innFacet[relation.inn] = (innFacet[relation.inn] || 0) + 1;
-                        }
-                        // >>>
                     });
                 },
 
                 // Постобработка...
-                // выставить актуальность
-                // отсортировать историю с проверкой дубликатов
+                // отсортировать историю
                 __relationsPostProcess: function(relationMap, node) {
                     _.each(relationMap.relations, function(relationData){
                         if (!relationData.history) {
                             return;
                         }
 
-                        var historyRelationMeta = metaHelper.getRelationHistoryMeta(relationData.relation._type, relationData.direction),
-                            historyInfo         = relationMap.byRelationTypes[relationData.direction][relationData.relation._type].info.history;
-
-                        var sortedBySince = _.sortBy(relationData.history.byDates, function(relation){
-                            return -relation[npRsearchMeta.relationSinceDate];
-                        });
-
-                        relationData.history.sorted = checkSorted(sortedBySince, true);
-
-                        // Еще раз для повторного схлопывания, но без проверки актульности,
-                        // для случаев, когда первичное схлопывание дало результат,
-                        // который еще можно схлопнуть:
-                        //  ...
-                        //  доля 26,12%  1 169 940 923,28 руб. — с 09.08.2011 Росстат от 31.05.2015
-                        //  доля 26,12%  1 169 940 923,28 руб. — с 02.08.2011 ЕГРЮЛ от 06.08.2014
-                        //  ->
-                        //  доля 26,12%  1 169 940 923,28 руб. — с 09.08.2011 Росстат от 31.05.2015
-                        //  ...
-                        //
-                        // Плохое решение.
-                        // Есть случаи:
-                        //  ...
-                        //  доля 13,06%  584 970 461,64 руб. — с 05.04.2010 ЕГРЮЛ от 07.08.2011
-                        //  доля 50%  584 970 461,64 руб. — с 26.03.2010 ЕГРЮЛ от 31.03.2010
-                        //  доля 13,06%  584 970 461,64 руб. — с 16.02.2009 ЕГРЮЛ от 07.08.2011
-                        //  доля 50%  584 970 461,64 руб. — с 17.10.2007 ЕГРЮЛ от 16.07.2009
-                        //  доля 50%  500 000 руб. — с 30.05.2007 ЕГРЮЛ от 26.09.2007
-                        //  ...
-                        // надо:
-                        //  ...
-                        //  доля 13,06%  584 970 461,64 руб. — с 16.02.2009 ЕГРЮЛ от 07.08.2011
-                        //  доля 50%  584 970 461,64 руб. — с 17.10.2007 ЕГРЮЛ от 16.07.2009
-                        //  доля 50%  500 000 руб. — с 30.05.2007 ЕГРЮЛ от 26.09.2007
-                        relationData.history.sorted = checkSorted(relationData.history.sorted, false);
-
-                        relationData.history.__sorted = __showAll ? sortedBySince : null;
-
-                        historyInfo.actual.min = Math.max(historyInfo.actual.min, relationData.history.actual.min);
-
-                        function checkSorted(sorted, checkActual) {
-                            var result          = [],
-                                historyActual   = relationData.history.actual,
-                                first           = _.first(sorted),
-                                last, collapseInfo;
-
-                            if (checkActual) {
-                                relationData.history.actual = {
-                                    min: historyActual ? Math.min(historyActual.min, first[npRsearchMeta.relationActualDate]) : first[npRsearchMeta.relationActualDate],
-                                    max: historyActual ? Math.max(historyActual.max, first[npRsearchMeta.relationActualDate]) : first[npRsearchMeta.relationActualDate],
-                                    since: {
-                                        min: historyActual ? Math.min(historyActual.since.min, first[npRsearchMeta.relationSinceDate]) : first[npRsearchMeta.relationSinceDate],
-                                        max: historyActual ? Math.max(historyActual.since.max, first[npRsearchMeta.relationSinceDate]) : first[npRsearchMeta.relationSinceDate]
-                                    }
-                                };
-                            }
-
-                            _.each(sorted, function(relation){
-                                last = _.last(result);
-
-                                collapseInfo = last ? collapseRelations(relation, last, historyRelationMeta.isCollapsed) : null;
-
-                                if (__collapseHistory && collapseInfo && collapseInfo.isCollapsed) {
-                                    result[result.length - 1] = collapseInfo.relation;
-
-                                    if (checkActual && result.length === 1) {
-                                        relationData.history.actual.min = Math.min(relationData.history.actual.min, relation[npRsearchMeta.relationActualDate]);
-                                        relationData.history.actual.max = Math.max(relationData.history.actual.max, relation[npRsearchMeta.relationActualDate]);
-                                        relationData.history.actual.since.min = Math.min(relationData.history.actual.since.min, relation[npRsearchMeta.relationSinceDate]);
-                                        relationData.history.actual.since.max = Math.max(relationData.history.actual.since.max, relation[npRsearchMeta.relationSinceDate]);
-                                    }
-                                } else {
-                                    result.push(relation);
-                                }
-                            });
-
-                            return result;
-                        }
-                    });
-
-                    // Объединить данные по истории
-                    // TODO Не объединять для "необъединяемых" направлений связей,
-                    // например: children - 'FOUNDER_INDIVIDUAL', 'FOUNDER_COMPANY'
-                    _.each(relationMap.byRelationTypes, function(relationTypes, direction){
-                        _.each(relationTypes, function(data, relationType){
-                            $log.debug(
-                                '*', relationType, direction, '...',
-                                '\nactual:', moment(data.info.history.actual.min).format(__normalizeDateFormat)
-                            );
-
-                            var mergedTypeInfo = metaHelper.getMergedTypeInfoByRelationType(relationType, direction);
-
-                            if (!mergedTypeInfo.mergedType) {
-                                return;
-                            }
-
-                            var byMergedType = relationMap.byRelationTypes[direction][mergedTypeInfo.mergedType];
-
-                            if (!byMergedType) {
-                                byMergedType = {};
-
-                                _.each(mergedTypeInfo.relationTypes, function(type){
-                                    var historyInfo = _.get(relationMap.byRelationTypes[direction], [type, 'info', 'history']);
-
-                                    if (historyInfo && (_.get(byMergedType, 'info.history.actual.min') || 0) < historyInfo.actual.min) {
-                                        _.set(byMergedType, 'info.history', historyInfo);
-                                    }
-                                });
-
-                                relationMap.byRelationTypes[direction][mergedTypeInfo.mergedType] = byMergedType;
-                            }
-                        });
-                    });
-
-                    // Выставить актуальность связей
-                    _.each(relationMap.relations, function(relationData){
-                        if (!relationData.history) {
-                            return;
-                        }
-
-                        var mergedTypeInfo          = metaHelper.getMergedTypeInfoByRelationType(relationData.relation._type, relationData.direction),
-                            mergedTypeHistoryInfo   = _.get(relationMap.byRelationTypes[relationData.direction], [mergedTypeInfo.mergedType, 'info', 'history']),
-                            historyInfo             = mergedTypeHistoryInfo || relationMap.byRelationTypes[relationData.direction][relationData.relation._type].info.history;
-
-                        var first = _.first(relationData.history.sorted);
-
-                        $log.debug(
-                            '-', relationData.relation.__id, '...',
-                            '\nactual:', moment(relationData.history.actual.min).format(__normalizeDateFormat), moment(relationData.history.actual.max).format(__normalizeDateFormat),
-                            '\nsince: ', moment(relationData.history.actual.since.min).format(__normalizeDateFormat), moment(relationData.history.actual.since.max).format(__normalizeDateFormat)
-                        );
-
-                        _.each(relationData.history.sorted, function(relation, i){
-                            if (i === 0) {
-                                relation.__isOutdated =
-                                    relationData.history.actual.min < historyInfo.actual.min &&
-                                    (__crossActual ? relationData.history.actual.max < historyInfo.actual.min : true);
-                            } else {
-                                relation.__isOutdated = true;
-                            }
-                        });
+                        relationData.history.sorted = _.sortByOrder(relationData.history.byDates, ['outdated', npRsearchMeta.relationSinceDate], ['asc', 'desc']);
                     });
                 },
 
-                __normalizeDate: function(target, datePropertyName) {
-                    // TODO математическое решение
-                    // TODO timezone -- возможно смещение в другие сутки
-                    var displayDate = moment(target[datePropertyName]).format(__normalizeDateFormat),
-                        normalDate  = moment(displayDate, __normalizeDateFormat).valueOf();
-
-                    target[datePropertyName] = normalDate;
-                },
-
-                // relation_history
                 buildRelationHistoryList: function(historyMeta, data) {
                     if (!historyMeta || historyMeta.opposite) {
                         return null;
@@ -1114,7 +910,8 @@ define(function(require) {'use strict';
 
                             if (relationId) {
                                 lastRelation = data.relationMap.relations[relationId].history.sorted[0];
-                                targetNodeList = lastRelation.__isOutdated ? outdatedNodeList : actualNodeList;
+                                // targetNodeList = lastRelation.__isOutdated ? outdatedNodeList : actualNodeList;
+                                targetNodeList = lastRelation.outdated ? outdatedNodeList : actualNodeList;
                             } else {
                                 $log.debug('WARN: No realation by node in relationMap...\n\tnode.__uid:', node.__uid, '\n\tdata:', data);
                                 return;
@@ -1201,6 +998,7 @@ define(function(require) {'use strict';
             return metaHelper;
         }])
         //
+        // @Deprecated
         .filter('targetRelationsInfo', ['$log', '$filter', '$sce', 'npRsearchMetaHelper', 'appConfig', 'nkbScreenHelper', function($log, $filter, $sce, npRsearchMetaHelper, appConfig, nkbScreenHelper){
             // COMPANY-COMPANY
             //      FOUNDER_COMPANY
@@ -1385,7 +1183,7 @@ define(function(require) {'use strict';
                 function getFounderText(relation) {
                     var relationHistoryInfo =
                         data.relationInfo.relationMap.relations[relation.__id].history ||
-                        node.__relationMap.relations[relation.__id].history;
+                        _.get(node.__relationMap, ['relations', relation.__id, 'history']);
 
                     if (!relationHistoryInfo) {
                         return getFounderTextByRelation(relation, relation.__isTarget);
@@ -1394,7 +1192,7 @@ define(function(require) {'use strict';
                     var historyTexts    = [],
                         historyText;
 
-                    _.each(relationHistoryInfo[__showAll ? '__sorted' : 'sorted'], function(historyRelation){
+                    _.each(relationHistoryInfo.sorted, function(historyRelation){
                         historyText = getFounderTextByRelation(historyRelation, relation.__isTarget);
 
                         if (historyText) {
@@ -1424,7 +1222,7 @@ define(function(require) {'use strict';
                 function getExecutiveText(relation) {
                     var relationHistoryInfo =
                         data.relationInfo.relationMap.relations[relation.__id].history ||
-                        node.__relationMap.relations[relation.__id].history;
+                        _.get(node.__relationMap, ['relations', relation.__id, 'history']);
 
                     if (!relationHistoryInfo) {
                         return getExecutiveTextByRelation(relation, relation.__isTarget);
@@ -1433,7 +1231,7 @@ define(function(require) {'use strict';
                     var historyTexts    = [],
                         historyText;
 
-                    _.each(relationHistoryInfo[__showAll ? '__sorted' : 'sorted'], function(historyRelation){
+                    _.each(relationHistoryInfo.sorted, function(historyRelation){
                         historyText = getExecutiveTextByRelation(historyRelation, relation.__isTarget);
 
                         if (historyText) {
@@ -1624,7 +1422,7 @@ define(function(require) {'use strict';
                 }
 
                 function buildHistoryText(relation, historyText) {
-                    if (relation.__isOutdated) {
+                    if (relation.outdated) {
                         return '<i class="icon i-history"></i>' + historyText;
                     }
 
@@ -2046,22 +1844,22 @@ define(function(require) {'use strict';
                 buildRelationsInfoBetweenNodes: function(srcNode, dstNode, options) {
                     // options = options || {};
 
-                    // $log.warn('* buildRelationsInfoBetweenNodes...', srcNode.__uid, dstNode.__uid, options);
+                    var byRelationTypes = _.get(srcNode.__relationMap.byNodes, [dstNode.__uid, 'children']) || _.get(srcNode.__relationMap.byNodes, [dstNode.__uid, 'parents']);
 
-                    var list = [],
-                        inn;
+                    var list        = [],
+                        direction, inn;
 
-                    _.each(_.get(srcNode.__relationMap.byNodes, [dstNode.__uid, 'children']), function(byRelationType, relationType){
-                        // $log.info('> byRelationType', relationType, byRelationType);
+                    _.each(byRelationTypes, function(byRelationType, relationType){
+                        var showType        = SHOW_TYPES[relationType],
+                            relationId      = byRelationType.relationId,
+                            srcRelationData = srcNode.__relationMap.relations[relationId];
 
-                        var showType = SHOW_TYPES[relationType];
+                        direction = srcRelationData.direction;
 
                         if (showType) {
-                            var relationId          = byRelationType.relationId,
-                                srcRelationData     = srcNode.__relationMap.relations[relationId],
-                                dstRelationData     = dstNode.__relationMap.relations[relationId],
+                            var dstRelationData     = dstNode.__relationMap.relations[relationId],
                                 relationHistoryInfo = srcRelationData.history || dstRelationData.history,
-                                relations           = relationHistoryInfo ? relationHistoryInfo[__showAll ? '__sorted' : 'sorted'] : [srcRelationData.relation],
+                                relations           = relationHistoryInfo ? relationHistoryInfo.sorted : [srcRelationData.relation],
                                 texts               = [];
 
                             _.each(relations, function(relation){
@@ -2069,10 +1867,10 @@ define(function(require) {'use strict';
                                     text: _.capitalize(showType.text(relation, srcNode, dstNode)),
                                     sinceText: getSinceText(relation),
                                     actualText: getActualText(relation),
-                                    outdated: relation.__isOutdated
+                                    outdated: relation.outdated
                                 });
 
-                                return false; // TODO убрать
+                                return false; // TODO учитывать все связи при определенной опции
                             });
 
                             if (!inn && showType.mergedInn) {
@@ -2091,12 +1889,11 @@ define(function(require) {'use strict';
                     });
 
                     list = _.sortBy(list, function(relationData){
-                        return relationData.__isTarget ? 0 : SHOW_TYPES[relationData.relationType].order;
+                        return relationData.isTarget ? 0 : SHOW_TYPES[relationData.relationType].order;
                     });
 
-                    // $log.info('*** list...', list);
-
                     return {
+                        direction: direction,
                         innText: inn ? getInnText(inn) : null,
                         list: list
                     };

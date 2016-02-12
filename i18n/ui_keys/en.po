@@ -258,6 +258,14 @@ msgid "RELATION_GROUP_PURCHASE"
 msgstr "Закупки"
 
 #: ../i18n/ui_keys/src/keys.txt:1
+msgid "RELATION_actual"
+msgstr "актуальные"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "RELATION_outdated"
+msgstr "неактуальные"
+
+#: ../i18n/ui_keys/src/keys.txt:1
 msgid "RUB"
 msgstr "rub."
 

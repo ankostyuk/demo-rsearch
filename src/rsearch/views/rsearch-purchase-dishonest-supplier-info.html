@@ -1,0 +1,13 @@
+<span ng-if="purchaseDishonestSupplier.gettingRecCount()">
+    <span class="action-info" ng-show="!purchaseDishonestSupplier.isRecCountPending() && purchaseDishonestSupplier.hasError()">
+        ${_trc("Поиск", "Поиск в реестре недобросовестных поставщиков")}</br>
+        <a class="underline pre" ng-href="{{purchaseDishonestSupplier.getShowRecsUrl()}}" target="_blank">${_trc("в реестре\nнедобросовестных поставщиков", "Поиск в реестре недобросовестных поставщиков")}</a></br>
+        ${_trc("временно недоступен", "Поиск в реестре недобросовестных поставщиков")}
+    </span>
+    <a class="action" ng-click="purchaseDishonestSupplierClick()" ng-href="{{purchaseDishonestSupplier.getShowRecsUrl()}}" target="_blank">
+        <i class="icon i-save-3" ng-show="purchaseDishonestSupplier.getRecCount()"></i>
+        <np-pluralize class="pre" count="purchaseDishonestSupplier.getRecCount()" when="::${_tr("NG_PLURALIZE::PURCHASE_DISHONEST_SUPPLIER_REC_COUNT")}" ng-hide="purchaseDishonestSupplier.isRecCountPending() || purchaseDishonestSupplier.hasError()"></np-pluralize>
+        <span class="animate-pulsed-flash pre" ng-show="purchaseDishonestSupplier.isRecCountPending()">${_tr("Поиск в реестре\nнедобросовестных поставщиков...")}</span>
+    </a>
+</span>
+<a class="action pre" ng-click="purchaseDishonestSupplierClick()" ng-if="!purchaseDishonestSupplier.gettingRecCount()">${_tr("Реестр\nнедобросовестных поставщиков")}</a>

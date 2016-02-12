@@ -129,6 +129,10 @@ define(function(require) {'use strict';
             gettingDocCount: true
         })
         //
+        .constant('npRsearchPurchaseDishonestSupplierConfig', {
+            gettingRecCount: true
+        })
+        //
         .constant('angularMomentConfig', {
             timezone: 'Europe/Moscow'
         })

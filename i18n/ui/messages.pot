@@ -451,6 +451,8 @@ msgid "Заказчик"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-affiliated-cause-filter.html:1
+#: ../src/rsearch/views/rsearch-history-filter.html:1
+#: ../src/rsearch/views/rsearch-history-filter.html:1
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 #: ../src/rsearch/views/rsearch-region-filter.html:1
 msgid "Все"
@@ -758,7 +760,18 @@ msgid "уровень"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
-msgid "Будут найдены все возможные цепочки связей\nдо указанного уровня"
+msgctxt "Цепочки связанных объектов"
+msgid "Любые цепочки"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Цепочки связанных объектов"
+msgid "Только актуальные связи"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Цепочки связанных объектов"
+msgid "Через неактуальные связи"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
@@ -777,7 +790,38 @@ msgid "из"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
+msgid "Будут найдены все возможные цепочки связей до указанного уровня"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
 msgid "Цепочек связей не найдено"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgctxt "Поиск в реестре недобросовестных поставщиков"
+msgid "Поиск"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgctxt "Поиск в реестре недобросовестных поставщиков"
+msgid "в реестре\nнедобросовестных поставщиков"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgctxt "Поиск в реестре недобросовестных поставщиков"
+msgid "временно недоступен"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgid "NG_PLURALIZE::PURCHASE_DISHONEST_SUPPLIER_REC_COUNT"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgid "Поиск в реестре\nнедобросовестных поставщиков..."
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
+msgid "Реестр\nнедобросовестных поставщиков"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-region-filter.html:1

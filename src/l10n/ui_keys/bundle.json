@@ -211,6 +211,14 @@
       null,
       "Закупки"
     ],
+    "RELATION_actual": [
+      null,
+      "актуальные"
+    ],
+    "RELATION_outdated": [
+      null,
+      "неактуальные"
+    ],
     "RUB": [
       null,
       "руб."
@@ -467,6 +475,14 @@
     "RELATION_GROUP_PURCHASE": [
       null,
       "Закупки"
+    ],
+    "RELATION_actual": [
+      null,
+      "актуальные"
+    ],
+    "RELATION_outdated": [
+      null,
+      "неактуальные"
     ],
     "RUB": [
       null,
