@@ -30,6 +30,7 @@ define(function(require) {'use strict';
         'np-rsearch-node-plain':                        require('text!./views/rsearch-node-plain.html'),
         'np-rsearch-node-info':                         require('text!./views/rsearch-node-info.html'),
         'np-rsearch-node-history-info':                 require('text!./views/rsearch-node-history-info.html'),
+        'np-rsearch-node-relations-info':               require('text!./views/rsearch-node-relations-info.html'),
         'np-rsearch-node-relations':                    require('text!./views/rsearch-node-relations.html'),
         'np-rsearch-node-relations-header':             require('text!./views/rsearch-node-relations-header.html'),
         'np-rsearch-navigation-breadcrumb':             require('text!./views/rsearch-navigation-breadcrumb.html'),
@@ -523,17 +524,11 @@ define(function(require) {'use strict';
                                 nodes: scope.nodes,
                                 filters: scope.filters
                             }, function(result){
-                                // @demo
-                                delete result.relations;
-
                                 if (scope.dataSource.reverse && result && result.traces) {
                                     _.each(result.traces, function(trace){
                                         trace.nodes.reverse();
                                     });
                                 }
-
-                                // @demo
-                                $log.info('* result', result);
 
                                 applyResult(result);
                                 doTrace();
