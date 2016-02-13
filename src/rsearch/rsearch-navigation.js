@@ -1321,7 +1321,7 @@ define(function(require) {'use strict';
                                 }
                             };
 
-                            var historyFilterValues = byRelations.node.__relationData.relationCountMap[npRsearchMetaHelper.buildNodeRelationKey(byRelations.direction, byRelations.relationType)].historyRelationCounts;
+                            var historyFilterValues = _.get(byRelations.node, ['__relationData', 'relationCountMap', npRsearchMetaHelper.buildNodeRelationKey(byRelations.direction, byRelations.relationType), 'historyRelationCounts']);
                             var historyFilter = {
                                 values: historyFilterValues,
                                 value: null,
