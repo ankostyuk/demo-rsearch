@@ -1,10 +1,7 @@
 //
 var _       = require("lodash"),
-    _d      = require("lodash-deep"),
     path    = require('path'),
     webapp  = require('nullpointer-web-app');
-
-_.mixin(_d);
 
 //
 module.exports = function(grunt) {
@@ -20,10 +17,10 @@ module.exports = function(grunt) {
         buildMeta   = webapp.getBuildMeta();
 
     // extend copy
-    _.deepGet(gruntConfig, 'copy.dist.src').push('src/nkb-app/opensearch.xml');
+    _.get(gruntConfig, 'copy.dist.src').push('src/nkb-app/opensearch.xml');
 
     // extend i18n
-    _.deepSet(gruntConfig, 'i18n.ui_keys.options', {
+    _.set(gruntConfig, 'i18n.ui_keys.options', {
         mode:           'simple',
         pattern:        '**/*.txt',
         inputDir:       path.resolve(__dirname, 'i18n/ui_keys/src'),
@@ -33,7 +30,7 @@ module.exports = function(grunt) {
         baseLang:       buildMeta.langs[0],
         langs:          buildMeta.langs
     });
-    _.deepSet(gruntConfig, 'i18n.okato_region.options', {
+    _.set(gruntConfig, 'i18n.okato_region.options', {
         mode:           'simple',
         pattern:        '**/*.txt',
         inputDir:       path.resolve(__dirname, 'i18n/okato_region/src'),
@@ -43,7 +40,7 @@ module.exports = function(grunt) {
         baseLang:       buildMeta.langs[0],
         langs:          buildMeta.langs
     });
-    _.deepSet(gruntConfig, 'i18n.fns_company_application_form.options', {
+    _.set(gruntConfig, 'i18n.fns_company_application_form.options', {
         mode:           'simple',
         pattern:        '**/*.txt',
         inputDir:       path.resolve(__dirname, 'src/extraneous/fns/i18n/company_application_form/src'),
