@@ -105,6 +105,7 @@ define(function(require) {'use strict';
         //
         .constant('nkbUserConfig', {
             resource: {
+                'external.url': '/siteapp/url/external/',
                 'users.url':    '/siteapp/api/users',
                 'login.url':    '/siteapp/login',
                 'logout.url':   '/siteapp/logout'
