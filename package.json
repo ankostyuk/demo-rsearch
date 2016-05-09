@@ -1,6 +1,6 @@
 {
     "name": "rsearch",
-    "version": "4.2.2",
+    "version": "4.2.3",
     "description": "rsearch frontend",
 
     "author": {
@@ -22,7 +22,6 @@
         "grunt-bower-task": "*",
 
         "lodash": "*",
-        "lodash-deep": "*",
         "nullpointer-web-app": "git+ssh://git@github.com:newpointer/web-app.git"
     }
 }
