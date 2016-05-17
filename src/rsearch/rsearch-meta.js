@@ -499,6 +499,7 @@ define(function(require) {'use strict';
                     if (node._type === 'PURCHASE') {
                         node.currency = node.currency || appConfig.meta.defaultCurrency;
                         node.__lotMap = _.indexBy(node.lots, 'lot');
+                        metaHelper.resolvePurchaseHref(node);
                     }
 
                     // история?
@@ -690,6 +691,14 @@ define(function(require) {'use strict';
                                 type: egrulReg.type
                             }
                         };
+                    }
+                },
+
+                resolvePurchaseHref: function(node) {
+                    if (node.law === 'FZ_44') {
+                        node.__href = node.href;
+                    } else {
+                        node.__href = 'http://zakupki.gov.ru/epz/order/quicksearch/search_eis.html?strictEqual=on&pageNumber=1&sortDirection=false&recordsPerPage=_10&showLotsInfoHidden=false&fz44=on&fz223=on&fz94=on&regions=&priceFrom=&priceTo=&currencyId=-1&publishDateFrom=&publishDateTo=&updateDateFrom=&updateDateTo=&sortBy=UPDATE_DATE&searchString=' + node._id;
                     }
                 },
 
