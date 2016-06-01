@@ -601,6 +601,9 @@ define(function(require) {'use strict';
                                 direction       = null;
                                 relationsInfo   = null;
                             } else {
+                                // relation    = relations[relationIndexes[i]];
+                                // direction   = relation._srcId === node._id ? 'parents' : 'children';
+
                                 targetNode  = nodes[nodeIndexes[i + 1]];
 
                                 // TODO оптимизировать:
@@ -609,8 +612,22 @@ define(function(require) {'use strict';
                                 npRsearchMetaHelper.buildNodeRelationMap(targetNode);
                                 npRsearchMetaHelper.buildNodeRelationMap(node);
 
-                                relationsInfo = npRsearchRelationHelper.buildRelationsInfoBetweenNodes(node, targetNode);
-                                direction = relationsInfo.direction;
+                                // relationsInfo = npRsearchRelationHelper.buildRelationsInfoBetweenNodes(node, targetNode);
+                                // direction = relationsInfo.direction;
+
+                                npRsearchMetaHelper.addToRelationMap(relationMap, targetNode, targetNode._relations);
+
+                                relation    = getFirstRelation(node, targetNode);
+                                direction   = relation._srcId === node._id ? 'parents' : 'children';
+
+                                targetInfo = {
+                                    node: targetNode,
+                                    relationInfo: {
+                                        direction: direction,
+                                        relationType: relation._type,
+                                        relationMap: relationMap
+                                    }
+                                };
                             }
 
                             currentTrace[i] = {
@@ -625,6 +642,20 @@ define(function(require) {'use strict';
                         scope.currentTrace = currentTrace;
 
                         showTraceProxy(scope.currentTrace);
+                    }
+
+                    function getFirstRelation(node1, node2) {
+                        var byDirections    = _.get(node1.__relationMap, ['byNodes', node2.__uid]),
+                            byTypes         = byDirections['children'] || byDirections['parents'];
+
+                        var relationInfo = _.find(byTypes, function(){
+                            return true;
+                        });
+
+                        var relationId = relationInfo && relationInfo.relationId,
+                            relation = _.get(node1.__relationMap, ['relations', relationId, 'relation']);
+
+                        return relation;
                     }
 
                     function showTraceProxy(trace) {
