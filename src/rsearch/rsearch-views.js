@@ -280,7 +280,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .factory('npRsearchViews', ['$log', '$compile', '$rootScope', '$timeout', '$window', 'SimplePager', 'nkbUser', 'npRsearchMetaHelper', 'npRsearchRelationHelper', function($log, $compile, $rootScope, $timeout, $window, SimplePager, nkbUser, npRsearchMetaHelper, npRsearchRelationHelper){
+        .factory('npRsearchViews', ['$log', '$filter', '$compile', '$rootScope', '$timeout', '$window', 'SimplePager', 'nkbUser', 'npRsearchMetaHelper', function($log, $filter, $compile, $rootScope, $timeout, $window, SimplePager, nkbUser, npRsearchMetaHelper){
 
             var htmlbodyElement = $('html, body');
 
@@ -465,6 +465,9 @@ define(function(require) {'use strict';
                             applyResult(result, traceIndex, silent);
                             doTrace(silent);
                         },
+                        buildResultText: function(nodes, result) {
+                            return buildResultText(nodes, result);
+                        },
                         reset: reset,
                         getTracesElement: function() {
                             return tracesElement;
@@ -548,7 +551,23 @@ define(function(require) {'use strict';
                         scope.pager.reset();
                     }
 
+                    // TODO на сервере. Много раз вызывается :(
+                    function normalizeResult(result) {
+                        // схлопнуть цепочки
+                        var uniqTraces = [];
+
+                        _.each(result.traces, function(trace, i){
+                            if (!_.isEqual(trace, result.traces[i - 1])) {
+                                uniqTraces.push(trace);
+                            }
+                        });
+
+                        result.traces = uniqTraces;
+                    }
+
                     function applyResult(result, traceIndex, silent) {
+                        normalizeResult(result);
+
                         scope.result = result || {};
                         scope.traceIndex = traceIndex || 0;
 
@@ -642,6 +661,115 @@ define(function(require) {'use strict';
                         scope.currentTrace = currentTrace;
 
                         showTraceProxy(scope.currentTrace);
+                    }
+
+                    function buildResultText(nodes, result) {
+                        normalizeResult(result);
+
+                        var resultText = ''
+                            + $filter('nodeNameText')(nodes[0])
+                            + '\r\n'
+                            + 'и'
+                            + '\r\n'
+                            + $filter('nodeNameText')(nodes[1])
+                            + '\r\n'
+                            + '\r\n'
+                            + 'через связи:'
+                            + '\r\n'
+                            + '\r\n'
+                            + '';
+
+                        _.each(result.traces, function(trace, i){
+                            if (i > 0) {
+                                resultText += ''
+                                    + '\r\n'
+                                    + '***'
+                                    + '\r\n'
+                                    + '\r\n'
+                                    + '';
+                            }
+
+                            var nodes           = result.nodes,
+                                nodeIndexes     = trace.nodes,
+                                nodeCount       = _.size(nodeIndexes),
+                                currentTrace    = new Array(nodeCount),
+                                isLast, node, relation, direction, relationMap, targetInfo, targetNode, isSrcNode;
+
+                            _.each(nodeIndexes, function(nodeIndex, i){
+                                isLast      = (i === nodeCount - 1);
+                                node        = nodes[nodeIndex];
+                                relationMap = {};
+
+                                npRsearchMetaHelper.buildNodeExtraMeta(node);
+
+                                isSrcNode = !!_.find(scope.nodes, function(n){
+                                    return n.__uid === node.__uid;
+                                });
+
+                                if (isLast) {
+                                    relation    = null;
+                                    direction   = null;
+                                    targetInfo  = null;
+                                } else {
+                                    targetNode  = nodes[nodeIndexes[i + 1]];
+                                    npRsearchMetaHelper.buildNodeExtraMeta(targetNode);
+
+                                    npRsearchMetaHelper.buildNodeRelationMap(node);
+                                    npRsearchMetaHelper.addToRelationMap(relationMap, targetNode, targetNode._relations);
+
+                                    relation    = getFirstRelation(node, targetNode);
+                                    direction   = relation._srcId === node._id ? 'parents' : 'children';
+
+                                    targetInfo = {
+                                        node: targetNode,
+                                        relationInfo: {
+                                            direction: direction,
+                                            relationType: relation._type,
+                                            relationMap: relationMap
+                                        }
+                                    };
+                                }
+
+                                currentTrace[i] = {
+                                    isLast: isLast,
+                                    inTrace: isSrcNode ? scope.dataSource.srcInTrace : true,
+                                    node: node,
+                                    targetInfo: targetInfo,
+                                    direction: direction
+                                };
+                            });
+
+                            _.each(currentTrace, function(tracePart){
+                                var relationText;
+
+                                resultText += ''
+                                    + $filter('nodeNameText')(tracePart.node)
+                                    + '\r\n'
+                                    + '';
+
+                                if (!tracePart.isLast) {
+                                    relationText = $filter('targetRelationsInfo')(tracePart.targetInfo, tracePart.node, true, true, '\r\n');
+
+                                    if (relationText) {
+                                        resultText += ''
+                                            + (tracePart.direction === 'children' ? '↑' : '|')
+                                            + '\r\n'
+                                            + relationText
+                                            + '\r\n'
+                                            + (tracePart.direction === 'children' ? '|' : '↓')
+                                            + '\r\n'
+                                            + '';
+                                    } else {
+                                        resultText += ''
+                                            + (tracePart.direction === 'children' ? '↑' : '↓')
+                                            + '\r\n'
+                                            + '';
+                                    }
+                                }
+                            });
+                        });
+
+                        return resultText.replace(/<i class="icon i-history"><\/i>/gi, '∅ ');
                     }
 
                     function getFirstRelation(node1, node2) {

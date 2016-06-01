@@ -1012,6 +1012,26 @@ define(function(require) {'use strict';
             return metaHelper;
         }])
         //
+        .filter('nodeNameText', [function(){
+            return function(node){
+                if (node._type === 'COMPANY') {
+                    return node.nameshortsort || node.namesort;
+                }
+                if (node._type === 'INDIVIDUAL') {
+                    return node.name;
+                }
+                if (node._type === 'ADDRESS') {
+                    return node.value;
+                }
+                if (node._type === 'PHONE') {
+                    return node.value;
+                }
+                if (node._type === 'PURCHASE') {
+                    return node.form;
+                }
+            };
+        }])
+        //
         // @Deprecated
         .filter('targetRelationsInfo', ['$log', '$filter', '$sce', 'npRsearchMetaHelper', 'appConfig', 'nkbScreenHelper', function($log, $filter, $sce, npRsearchMetaHelper, appConfig, nkbScreenHelper){
             // COMPANY-COMPANY
