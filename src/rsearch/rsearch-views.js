@@ -663,29 +663,135 @@ define(function(require) {'use strict';
                         showTraceProxy(scope.currentTrace);
                     }
 
+                    // function __buildResultText(nodes, result) {
+                    //     normalizeResult(result);
+                    //
+                    //     var resultText = ''
+                    //         + $filter('nodeNameText')(nodes[0])
+                    //         + '\r\n'
+                    //         + 'и'
+                    //         + '\r\n'
+                    //         + $filter('nodeNameText')(nodes[1])
+                    //         + '\r\n'
+                    //         + '\r\n'
+                    //         + 'через связи:'
+                    //         + '\r\n'
+                    //         + '\r\n'
+                    //         + '';
+                    //
+                    //     _.each(result.traces, function(trace, i){
+                    //         if (i > 0) {
+                    //             resultText += ''
+                    //                 + '\r\n'
+                    //                 + '***'
+                    //                 + '\r\n'
+                    //                 + '\r\n'
+                    //                 + '';
+                    //         }
+                    //
+                    //         var nodes           = result.nodes,
+                    //             nodeIndexes     = trace.nodes,
+                    //             nodeCount       = _.size(nodeIndexes),
+                    //             currentTrace    = new Array(nodeCount),
+                    //             isLast, node, relation, direction, relationMap, targetInfo, targetNode, isSrcNode;
+                    //
+                    //         _.each(nodeIndexes, function(nodeIndex, i){
+                    //             isLast      = (i === nodeCount - 1);
+                    //             node        = nodes[nodeIndex];
+                    //             relationMap = {};
+                    //
+                    //             npRsearchMetaHelper.buildNodeExtraMeta(node);
+                    //
+                    //             isSrcNode = !!_.find(scope.nodes, function(n){
+                    //                 return n.__uid === node.__uid;
+                    //             });
+                    //
+                    //             if (isLast) {
+                    //                 relation    = null;
+                    //                 direction   = null;
+                    //                 targetInfo  = null;
+                    //             } else {
+                    //                 targetNode  = nodes[nodeIndexes[i + 1]];
+                    //                 npRsearchMetaHelper.buildNodeExtraMeta(targetNode);
+                    //
+                    //                 npRsearchMetaHelper.buildNodeRelationMap(node);
+                    //                 npRsearchMetaHelper.addToRelationMap(relationMap, targetNode, targetNode._relations);
+                    //
+                    //                 relation    = getFirstRelation(node, targetNode);
+                    //                 direction   = relation._srcId === node._id ? 'parents' : 'children';
+                    //
+                    //                 targetInfo = {
+                    //                     node: targetNode,
+                    //                     relationInfo: {
+                    //                         direction: direction,
+                    //                         relationType: relation._type,
+                    //                         relationMap: relationMap
+                    //                     }
+                    //                 };
+                    //             }
+                    //
+                    //             currentTrace[i] = {
+                    //                 isLast: isLast,
+                    //                 inTrace: isSrcNode ? scope.dataSource.srcInTrace : true,
+                    //                 node: node,
+                    //                 targetInfo: targetInfo,
+                    //                 direction: direction
+                    //             };
+                    //         });
+                    //
+                    //         _.each(currentTrace, function(tracePart){
+                    //             var relationText;
+                    //
+                    //             resultText += ''
+                    //                 + $filter('nodeNameText')(tracePart.node)
+                    //                 + '\r\n'
+                    //                 + '';
+                    //
+                    //             if (!tracePart.isLast) {
+                    //                 relationText = $filter('targetRelationsInfo')(tracePart.targetInfo, tracePart.node, true, true, '\r\n');
+                    //
+                    //                 if (relationText) {
+                    //                     resultText += ''
+                    //                         + (tracePart.direction === 'children' ? '↑' : '|')
+                    //                         + '\r\n'
+                    //                         + relationText
+                    //                         + '\r\n'
+                    //                         + (tracePart.direction === 'children' ? '|' : '↓')
+                    //                         + '\r\n'
+                    //                         + '';
+                    //                 } else {
+                    //                     resultText += ''
+                    //                         + (tracePart.direction === 'children' ? '↑' : '↓')
+                    //                         + '\r\n'
+                    //                         + '';
+                    //                 }
+                    //             }
+                    //         });
+                    //     });
+                    //
+                    //     return resultText.replace(/<i class="icon i-history"><\/i>/gi, '∅ ');
+                    // }
+
                     function buildResultText(nodes, result) {
                         normalizeResult(result);
 
                         var resultText = ''
-                            + $filter('nodeNameText')(nodes[0])
-                            + '\r\n'
+                            + ('<h3>' + $filter('nodeNameText')(nodes[0]) + '</h3>')
                             + 'и'
-                            + '\r\n'
-                            + $filter('nodeNameText')(nodes[1])
-                            + '\r\n'
-                            + '\r\n'
+                            + ('<h3>' + $filter('nodeNameText')(nodes[1]) + '</h3>')
+                            + '<br>'
                             + 'через связи:'
-                            + '\r\n'
-                            + '\r\n'
+                            + '<br>'
+                            + '<br>'
                             + '';
 
                         _.each(result.traces, function(trace, i){
                             if (i > 0) {
                                 resultText += ''
-                                    + '\r\n'
+                                    + '<br>'
                                     + '***'
-                                    + '\r\n'
-                                    + '\r\n'
+                                    + '<br>'
+                                    + '<br>'
                                     + '';
                             }
 
@@ -743,28 +849,27 @@ define(function(require) {'use strict';
                                 var relationText;
 
                                 resultText += ''
-                                    + $filter('nodeNameText')(tracePart.node)
-                                    + '\r\n'
+                                    + ('<div><b>' + $filter('nodeNameText')(tracePart.node) + '</b></div>')
                                     + '';
 
                                 if (!tracePart.isLast) {
-                                    relationText = $filter('targetRelationsInfo')(tracePart.targetInfo, tracePart.node, true, true, '\r\n');
+                                    resultText += '<div style="color: #808080;">';
+
+                                    relationText = ('<div>' + $filter('targetRelationsInfo')(tracePart.targetInfo, tracePart.node, true, true, '<br>') + '</div>');
 
                                     if (relationText) {
                                         resultText += ''
-                                            + (tracePart.direction === 'children' ? '↑' : '|')
-                                            + '\r\n'
+                                            + ('<div>' + (tracePart.direction === 'children' ? '↑' : '|') + '</div>')
                                             + relationText
-                                            + '\r\n'
-                                            + (tracePart.direction === 'children' ? '|' : '↓')
-                                            + '\r\n'
+                                            + ('<div>' + (tracePart.direction === 'children' ? '|' : '↓') + '</div>')
                                             + '';
                                     } else {
                                         resultText += ''
-                                            + (tracePart.direction === 'children' ? '↑' : '↓')
-                                            + '\r\n'
+                                            + ('<div>' + (tracePart.direction === 'children' ? '↑' : '↓') + '</div>')
                                             + '';
                                     }
+
+                                    resultText += '</div>';
                                 }
                             });
                         });
