@@ -748,12 +748,12 @@ define(function(require) {'use strict';
                                 if (!tracePart.isLast) {
                                     resultText += '<div style="color: #808080;">';
 
-                                    relationText = ('<div>' + $filter('targetRelationsInfo')(tracePart.targetInfo, tracePart.node, true, true, '<br>') + '</div>');
+                                    relationText = $filter('targetRelationsInfo')(tracePart.targetInfo, tracePart.node, true, true, '<br>');
 
                                     if (relationText) {
                                         resultText += ''
                                             + ('<div>' + (tracePart.direction === 'children' ? '↑' : '|') + '</div>')
-                                            + relationText
+                                            + ('<div>' + relationText + '</div>')
                                             + ('<div>' + (tracePart.direction === 'children' ? '|' : '↓') + '</div>')
                                             + '';
                                     } else {
