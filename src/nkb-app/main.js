@@ -9,6 +9,8 @@ var i18nBundles = [
     // external
     'text!external_components/nullpointer-autokad/l10n/ui/bundle.json',
     'text!external_components/nullpointer-autokad/l10n/ui_keys/bundle.json',
+    'text!external_components/nullpointer-connections-ui/l10n/ui/bundle.json',
+    'text!external_components/nullpointer-connections-ui/l10n/ui_keys/bundle.json',
     // internal
     'text!src/l10n/ui/bundle.json',
     'text!src/l10n/ui_keys/bundle.json',
@@ -142,6 +144,10 @@ root._RESOURCES_CONFIG = {
         name: 'i18n',
         location: 'external_components/nullpointer-i18n',
         main: 'i18n'
+    }, {
+        name: 'nullpointer-connections-ui',
+        // location: 'external_components/nullpointer-connections-ui'
+        location: '/connections-ui/src'
     }],
 
     shim: {
