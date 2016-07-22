@@ -1006,3 +1006,61 @@
 [np-rsearch-egrul-data-update] .actual-info {
     color: @defaultDisabledColor;
 }
+
+/* np-connections-widgets-node-favorites */
+[np-rsearch-node-form] [np-rsearch-node-info] .node-info .node-info-entry.node-favorites {
+    position: relative;
+    margin: 0;
+    height: 27px;
+}
+[np-rsearch-node-form] [np-rsearch-node-info] .node-info .node-info-entry.node-favorites [np-connections-widgets-node-favorites] {
+    position: absolute;
+    top: -4px;
+    right: 0;
+    text-align: left;
+}
+[np-rsearch-node-form] [np-rsearch-node-info] .node-info .node-info-entry.node-favorites [np-connections-widgets-node-favorites] .favorites-link {
+    font-size: 150%;
+}
+
+[np-rsearch-node-list] .node-list-item .item-info .item-info-entry.node-favorites {
+    position: relative;
+    margin: 0;
+    height: 24px;
+}
+[np-rsearch-node-list] .node-list-item .item-info .item-info-entry.node-favorites [np-connections-widgets-node-favorites] {
+    position: absolute;
+    top: -2px;
+    right: 0;
+    text-align: left;
+}
+[np-rsearch-node-list] .node-list-item .item-info .item-info-entry.node-favorites [np-connections-widgets-node-favorites] .favorites-link {
+    font-size: 16px;
+}
+
+[np-rsearch-node-traces] .trace-part-info .trace-part-info-entry.node-favorites {
+    position: relative;
+    margin: 0;
+    height: 16px;
+}
+[np-rsearch-node-traces] .trace-part-info .trace-part-info-entry.node-favorites [np-connections-widgets-node-favorites] {
+    position: absolute;
+    top: -1px;
+    right: 0;
+    text-align: left;
+}
+[np-rsearch-node-traces] .trace-part-info .trace-part-info-entry.node-favorites [np-connections-widgets-node-favorites] .favorites-link {
+    font-size: 14px;
+}
+
+
+[np-connections-widgets-node-favorites] .favorites-link .favorites-mark {
+    color: @favoritesColor;
+}
+[np-connections-widgets-node-favorites] .favorites-link:hover .favorites-mark {
+    color: @nkbRed;
+}
+[np-connections-widgets-node-favorites] [np-loader] .line-balls {
+    color: @favoritesColor;
+    opacity: 0.75;
+}

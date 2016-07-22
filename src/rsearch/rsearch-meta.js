@@ -437,6 +437,11 @@ define(function(require) {'use strict';
                     // компания
                     if (node._type === 'COMPANY') {
                         metaHelper.buildCompanyState(node);
+                        node.__isFavoritesSupported = true;
+                    } else
+                    // физик
+                    if (node._type === 'INDIVIDUAL') {
+                        node.__isFavoritesSupported = true;
                     } else
                     // закупка
                     if (node._type === 'PURCHASE') {

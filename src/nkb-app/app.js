@@ -41,7 +41,15 @@ define(function(require) {'use strict';
                 'relations.url':            '/nkbrelation/api/node',
                 'algo.url':                 '/nkbrelation/api/algo',
                 'egrul.history.url':        '/siteapp/api/egrul/history',
-                'nkb.file.download.url':    '/reports/file.php'
+                'nkb.file.download.url':    '/reports/file.php',
+
+                // connections
+                'list.create.url':          '/connections/api/list',
+                'lists.url':                '/connections/api/lists',
+
+                'list.entry.create.url':    '/connections/api/list/{{listId}}/entry',
+
+                'nodes.lists.url':          '/connections/api/nodes/lists'
             },
             product: {
                 'market_profile_short': {

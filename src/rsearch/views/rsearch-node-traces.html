@@ -25,6 +25,7 @@
     <div class="traces" ng-show="!!currentTrace">
         <div class="trace-part" ng-class="{'active': !tracePart.inTrace}" ng-repeat="tracePart in currentTrace track by $index">
             <div class="trace-part-info">
+                <div class="trace-part-info-entry node-favorites" ng-if="tracePart.node.__isFavoritesSupported"><div np-connections-widgets-node-favorites="tracePart.node"></div></div>
                 <!-- TODO при наличии других статусов: динамическое обновление сообщения о статусе -->
                 <div class="trace-part-info-entry node-status">${_trc("в отчете", "объект в отчете")}</div>
             </div>

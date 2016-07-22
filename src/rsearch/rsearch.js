@@ -7,6 +7,7 @@ define(function(require) {'use strict';
     var angular           = require('angular');
 
     var submodules = [
+        require('connections/widgets/widgets'),
         require('./rsearch-input'),
         require('./rsearch-navigation'),
         require('./rsearch-filters'),
@@ -16,8 +17,7 @@ define(function(require) {'use strict';
         require('./rsearch-fns-reg-docs'),
         require('./rsearch-purchase-dishonest-supplier'),
         require('./rsearch-resource'),
-        require('./rsearch-meta'),
-        require('nullpointer-connections-ui/connections/lists/resource')
+        require('./rsearch-meta')
     ];
 
     return angular.module('np.rsearch', _.pluck(submodules, 'name'));

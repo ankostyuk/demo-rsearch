@@ -1,4 +1,5 @@
 <div class="node-info">
+    <div class="node-info-entry node-favorites" ng-if="node.__isFavoritesSupported"><div np-connections-widgets-node-favorites="node"></div></div>
     <!-- TODO при наличии других статусов: динамическое обновление сообщения о статусе -->
     <div class="node-info-entry node-status">${_trc("в отчете", "объект в отчете")}</div>
 </div>

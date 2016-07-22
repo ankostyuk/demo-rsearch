@@ -132,9 +132,8 @@ root._RESOURCES_CONFIG = {
         location: 'external_components/nullpointer-commons/utils/template-utils',
         main: 'template-utils'
     }, {
-        // TODO перенести в nullpointer-commons/angular
         name: 'np.utils',
-        location: 'src/utils',
+        location: 'external_components/nullpointer-commons/angular/utils',
         main: 'utils'
     }, {
         name: 'autokad',
@@ -145,9 +144,9 @@ root._RESOURCES_CONFIG = {
         location: 'external_components/nullpointer-i18n',
         main: 'i18n'
     }, {
-        name: 'nullpointer-connections-ui',
-        // location: 'external_components/nullpointer-connections-ui'
-        location: '/connections-ui/src'
+        name: 'connections',
+        location: 'external_components/nullpointer-connections-ui/connections'
+        // location: '/connections-ui/src/connections'
     }],
 
     shim: {
