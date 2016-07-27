@@ -11,8 +11,8 @@ define(function(require) {'use strict';
         //
         .factory('NpRsearchPurchaseDishonestSupplierCompany', ['$log', '$rootScope', '$timeout', 'npExtraneousPurchaseDishonestSupplierCompanyHelper', 'npRsearchPurchaseDishonestSupplierConfig', function($log, $rootScope, $timeout, npExtraneousPurchaseDishonestSupplierCompanyHelper, npRsearchPurchaseDishonestSupplierConfig){
 
-            // url template '...&searchText=<company_inn>...'
-            var showRecsUrlTemplate = 'http://zakupki.gov.ru/epz/dishonestsupplier/dishonestSuppliersQuickSearch/search.html?placeOfSearch=FZ_44&_placeOfSearch=on&placeOfSearch=FZ_223&_placeOfSearch=on&dateOfInclusionStart=&dateOfInclusionEnd=&sortDirection=false&dishonestSupplierSimpleSorting=UPDATE_DATE&recordsPerPage=_10&pageNumber=1&searchText=<company_inn>&strictEqual=true&morphology=false';
+            // url template '?searchText=<company_inn>...'
+            var showRecsUrlTemplate = 'http://zakupki.gov.ru/epz/dishonestsupplier/quicksearch/search.html?searchString=<company_inn>&strictEqual=on&pageNumber=1&sortDirection=false&recordsPerPage=_10&fz_44=on&fz_223=on&inclusionDateFrom=&inclusionDateTo=&lastUpdateDateFrom=&lastUpdateDateTo=&sortBy=UPDATE_DATE';
 
             // Class
             return function() {
