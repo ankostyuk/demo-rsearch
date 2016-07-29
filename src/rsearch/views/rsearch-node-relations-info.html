@@ -1,7 +1,7 @@
 <span ng-repeat="relationData in relationsInfo.list track by $index">
     <span ng-repeat="textData in relationData.texts track by $index">
-        <span ng-show="textData.text"><i class="icon i-history" ng-show="textData.outdated"></i>{{textData.text}}</span>
-        <span>—&nbsp;</span><span>{{textData.sinceText}} </span><span>{{textData.actualText}}</span>
+        <span ng-show="textData.text"><i class="icon i-history" ng-show="textData.outdated"></i>{{textData.text}} <span>—&nbsp;</span></span>
+        <span>{{textData.sinceText}} </span><span>{{textData.actualText}}</span>
     </span><br>
 </span>
 <span ng-show="relationsInfo.innText">{{relationsInfo.innText}}</span>

@@ -280,7 +280,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .factory('npRsearchViews', ['$log', '$filter', '$compile', '$rootScope', '$timeout', '$window', 'SimplePager', 'nkbUser', 'npRsearchMetaHelper', function($log, $filter, $compile, $rootScope, $timeout, $window, SimplePager, nkbUser, npRsearchMetaHelper){
+        .factory('npRsearchViews', ['$log', '$filter', '$compile', '$rootScope', '$timeout', '$window', 'SimplePager', 'nkbUser', 'npRsearchMetaHelper', 'npRsearchRelationHelper', function($log, $filter, $compile, $rootScope, $timeout, $window, SimplePager, nkbUser, npRsearchMetaHelper, npRsearchRelationHelper){
 
             var htmlbodyElement = $('html, body');
 
@@ -585,6 +585,86 @@ define(function(require) {'use strict';
                         }
                     }
 
+                    // function doTrace(silent) {
+                    //     if (!silent && _.isFunction(scope.dataSource.doTrace)) {
+                    //         scope.dataSource.doTrace(scope.traceIndex);
+                    //     }
+                    //
+                    //     if (scope.traceCount < 1) {
+                    //         scope.currentTrace = null;
+                    //         return;
+                    //     }
+                    //
+                    //     var trace           = scope.result.traces[scope.traceIndex],
+                    //         nodes           = scope.result.nodes,
+                    //         nodeIndexes     = trace.nodes,
+                    //         nodeCount       = _.size(nodeIndexes),
+                    //         currentTrace    = new Array(nodeCount),
+                    //         isLast, node, relation, direction, relationsInfo, targetNode, isSrcNode;
+                    //
+                    //     _.each(nodeIndexes, function(nodeIndex, i){
+                    //         isLast      = (i === nodeCount - 1);
+                    //         node        = nodes[nodeIndex];
+                    //
+                    //         // Именно при отображении цепочки,
+                    //         // а не в ответе запроса на поиск цепочек,
+                    //         // т.к. ответ может быть "жирным" - оптимизация
+                    //         // @Deprecated
+                    //         npRsearchMetaHelper.buildNodeExtraMeta(node);
+                    //
+                    //         // TODO оптимизировать
+                    //         isSrcNode = !!_.find(scope.nodes, function(n){
+                    //             return n.__uid === node.__uid;
+                    //         });
+                    //
+                    //         if (isLast) {
+                    //             relation        = null;
+                    //             direction       = null;
+                    //             relationsInfo   = null;
+                    //         } else {
+                    //             // relation    = relations[relationIndexes[i]];
+                    //             // direction   = relation._srcId === node._id ? 'parents' : 'children';
+                    //
+                    //             targetNode  = nodes[nodeIndexes[i + 1]];
+                    //
+                    //             // TODO оптимизировать:
+                    //             // при обходе цепочек данные функции могут вызываться повторно для обойденных нод
+                    //             npRsearchMetaHelper.buildNodeExtraMeta(targetNode);
+                    //             npRsearchMetaHelper.buildNodeRelationMap(targetNode);
+                    //             npRsearchMetaHelper.buildNodeRelationMap(node);
+                    //
+                    //             // relationsInfo = npRsearchRelationHelper.buildRelationsInfoBetweenNodes(node, targetNode);
+                    //             // direction = relationsInfo.direction;
+                    //
+                    //             npRsearchMetaHelper.addToRelationMap(relationMap, targetNode, targetNode._relations);
+                    //
+                    //             relation    = getFirstRelation(node, targetNode);
+                    //             direction   = relation._srcId === node._id ? 'parents' : 'children';
+                    //
+                    //             targetInfo = {
+                    //                 node: targetNode,
+                    //                 relationInfo: {
+                    //                     direction: direction,
+                    //                     relationType: relation._type,
+                    //                     relationMap: relationMap
+                    //                 }
+                    //             };
+                    //         }
+                    //
+                    //         currentTrace[i] = {
+                    //             isLast: isLast,
+                    //             inTrace: isSrcNode ? scope.dataSource.srcInTrace : true,
+                    //             node: node,
+                    //             relationsInfo: relationsInfo,
+                    //             direction: direction
+                    //         };
+                    //     });
+                    //
+                    //     scope.currentTrace = currentTrace;
+                    //
+                    //     showTraceProxy(scope.currentTrace);
+                    // }
+
                     function doTrace(silent) {
                         if (!silent && _.isFunction(scope.dataSource.doTrace)) {
                             scope.dataSource.doTrace(scope.traceIndex);
@@ -595,9 +675,66 @@ define(function(require) {'use strict';
                             return;
                         }
 
-                        var trace           = scope.result.traces[scope.traceIndex],
-                            nodes           = scope.result.nodes,
-                            nodeIndexes     = trace.nodes,
+                        // var trace           = scope.result.traces[scope.traceIndex],
+                        //     nodes           = scope.result.nodes,
+                        //     nodeIndexes     = trace.nodes,
+                        //     nodeCount       = _.size(nodeIndexes),
+                        //     currentTrace    = new Array(nodeCount),
+                        //     isLast, node, relation, direction, relationsInfo, targetNode, isSrcNode;
+                        //
+                        // _.each(nodeIndexes, function(nodeIndex, i){
+                        //     isLast      = (i === nodeCount - 1);
+                        //     node        = nodes[nodeIndex];
+                        //
+                        //     // Именно при отображении цепочки,
+                        //     // а не в ответе запроса на поиск цепочек,
+                        //     // т.к. ответ может быть "жирным" - оптимизация
+                        //     // @Deprecated
+                        //     npRsearchMetaHelper.buildNodeExtraMeta(node);
+                        //
+                        //     // TODO оптимизировать
+                        //     isSrcNode = !!_.find(scope.nodes, function(n){
+                        //         return n.__uid === node.__uid;
+                        //     });
+                        //
+                        //     if (isLast) {
+                        //         relation        = null;
+                        //         direction       = null;
+                        //         relationsInfo   = null;
+                        //     } else {
+                        //         targetNode  = nodes[nodeIndexes[i + 1]];
+                        //
+                        //         // TODO оптимизировать:
+                        //         // при обходе цепочек данные функции могут вызываться повторно для обойденных нод
+                        //         npRsearchMetaHelper.buildNodeExtraMeta(targetNode);
+                        //         npRsearchMetaHelper.buildNodeRelationMap(targetNode);
+                        //         npRsearchMetaHelper.buildNodeRelationMap(node);
+                        //
+                        //         relationsInfo = npRsearchRelationHelper.buildRelationsInfoBetweenNodes(node, targetNode);
+                        //         direction = relationsInfo.direction;
+                        //     }
+                        //
+                        //     currentTrace[i] = {
+                        //         isLast: isLast,
+                        //         inTrace: isSrcNode ? scope.dataSource.srcInTrace : true,
+                        //         node: node,
+                        //         relationsInfo: relationsInfo,
+                        //         direction: direction
+                        //     };
+                        // });
+                        //
+                        // scope.currentTrace = currentTrace;
+
+                        var trace   = scope.result.traces[scope.traceIndex],
+                            nodes   = scope.result.nodes;
+
+                        scope.currentTrace = buildCurrentTrace(trace, nodes);
+
+                        showTraceProxy(scope.currentTrace);
+                    }
+
+                    function buildCurrentTrace(trace, nodes) {
+                        var nodeIndexes     = trace.nodes,
                             nodeCount       = _.size(nodeIndexes),
                             currentTrace    = new Array(nodeCount),
                             isLast, node, relation, direction, relationsInfo, targetNode, isSrcNode;
@@ -622,9 +759,6 @@ define(function(require) {'use strict';
                                 direction       = null;
                                 relationsInfo   = null;
                             } else {
-                                // relation    = relations[relationIndexes[i]];
-                                // direction   = relation._srcId === node._id ? 'parents' : 'children';
-
                                 targetNode  = nodes[nodeIndexes[i + 1]];
 
                                 // TODO оптимизировать:
@@ -633,22 +767,13 @@ define(function(require) {'use strict';
                                 npRsearchMetaHelper.buildNodeRelationMap(targetNode);
                                 npRsearchMetaHelper.buildNodeRelationMap(node);
 
-                                // relationsInfo = npRsearchRelationHelper.buildRelationsInfoBetweenNodes(node, targetNode);
-                                // direction = relationsInfo.direction;
+                                if (scope.dataSource.reverse) {
+                                    relationsInfo = npRsearchRelationHelper.buildRelationsInfoBetweenNodes(node, targetNode);
+                                } else {
+                                    relationsInfo = npRsearchRelationHelper.buildRelationsInfoBetweenNodes(targetNode, node);
+                                }
 
-                                npRsearchMetaHelper.addToRelationMap(relationMap, targetNode, targetNode._relations);
-
-                                relation    = getFirstRelation(node, targetNode);
-                                direction   = relation._srcId === node._id ? 'parents' : 'children';
-
-                                targetInfo = {
-                                    node: targetNode,
-                                    relationInfo: {
-                                        direction: direction,
-                                        relationType: relation._type,
-                                        relationMap: relationMap
-                                    }
-                                };
+                                direction = relationsInfo.direction;
                             }
 
                             currentTrace[i] = {
@@ -660,9 +785,7 @@ define(function(require) {'use strict';
                             };
                         });
 
-                        scope.currentTrace = currentTrace;
-
-                        showTraceProxy(scope.currentTrace);
+                        return currentTrace;
                     }
 
                     function buildResultHTML(nodes, result) {
@@ -688,55 +811,57 @@ define(function(require) {'use strict';
                                     + '';
                             }
 
-                            var nodes           = result.nodes,
-                                nodeIndexes     = trace.nodes,
-                                nodeCount       = _.size(nodeIndexes),
-                                currentTrace    = new Array(nodeCount),
-                                isLast, node, relation, direction, relationMap, targetInfo, targetNode, isSrcNode;
+                            var currentTrace = buildCurrentTrace(trace, result.nodes);
 
-                            _.each(nodeIndexes, function(nodeIndex, i){
-                                isLast      = (i === nodeCount - 1);
-                                node        = nodes[nodeIndex];
-                                relationMap = {};
-
-                                npRsearchMetaHelper.buildNodeExtraMeta(node);
-
-                                isSrcNode = !!_.find(scope.nodes, function(n){
-                                    return n.__uid === node.__uid;
-                                });
-
-                                if (isLast) {
-                                    relation    = null;
-                                    direction   = null;
-                                    targetInfo  = null;
-                                } else {
-                                    targetNode  = nodes[nodeIndexes[i + 1]];
-                                    npRsearchMetaHelper.buildNodeExtraMeta(targetNode);
-
-                                    npRsearchMetaHelper.buildNodeRelationMap(node);
-                                    npRsearchMetaHelper.addToRelationMap(relationMap, targetNode, targetNode._relations);
-
-                                    relation    = getFirstRelation(node, targetNode);
-                                    direction   = relation._srcId === node._id ? 'parents' : 'children';
-
-                                    targetInfo = {
-                                        node: targetNode,
-                                        relationInfo: {
-                                            direction: direction,
-                                            relationType: relation._type,
-                                            relationMap: relationMap
-                                        }
-                                    };
-                                }
-
-                                currentTrace[i] = {
-                                    isLast: isLast,
-                                    inTrace: isSrcNode ? scope.dataSource.srcInTrace : true,
-                                    node: node,
-                                    targetInfo: targetInfo,
-                                    direction: direction
-                                };
-                            });
+                            // var nodes           = result.nodes,
+                            //     nodeIndexes     = trace.nodes,
+                            //     nodeCount       = _.size(nodeIndexes),
+                            //     currentTrace    = new Array(nodeCount),
+                            //     isLast, node, relation, direction, relationMap, targetInfo, targetNode, isSrcNode;
+                            //
+                            // _.each(nodeIndexes, function(nodeIndex, i){
+                            //     isLast      = (i === nodeCount - 1);
+                            //     node        = nodes[nodeIndex];
+                            //     relationMap = {};
+                            //
+                            //     npRsearchMetaHelper.buildNodeExtraMeta(node);
+                            //
+                            //     isSrcNode = !!_.find(scope.nodes, function(n){
+                            //         return n.__uid === node.__uid;
+                            //     });
+                            //
+                            //     if (isLast) {
+                            //         relation    = null;
+                            //         direction   = null;
+                            //         targetInfo  = null;
+                            //     } else {
+                            //         targetNode  = nodes[nodeIndexes[i + 1]];
+                            //         npRsearchMetaHelper.buildNodeExtraMeta(targetNode);
+                            //
+                            //         npRsearchMetaHelper.buildNodeRelationMap(node);
+                            //         npRsearchMetaHelper.addToRelationMap(relationMap, targetNode, targetNode._relations);
+                            //
+                            //         relation    = getFirstRelation(node, targetNode);
+                            //         direction   = relation._srcId === node._id ? 'parents' : 'children';
+                            //
+                            //         targetInfo = {
+                            //             node: targetNode,
+                            //             relationInfo: {
+                            //                 direction: direction,
+                            //                 relationType: relation._type,
+                            //                 relationMap: relationMap
+                            //             }
+                            //         };
+                            //     }
+                            //
+                            //     currentTrace[i] = {
+                            //         isLast: isLast,
+                            //         inTrace: isSrcNode ? scope.dataSource.srcInTrace : true,
+                            //         node: node,
+                            //         targetInfo: targetInfo,
+                            //         direction: direction
+                            //     };
+                            // });
 
                             _.each(currentTrace, function(tracePart){
                                 var relationText;
@@ -748,7 +873,8 @@ define(function(require) {'use strict';
                                 if (!tracePart.isLast) {
                                     resultText += '<div style="color: #808080;">';
 
-                                    relationText = $filter('targetRelationsInfo')(tracePart.targetInfo, tracePart.node, true, true, '<br>');
+                                    // relationText = $filter('targetRelationsInfo')(tracePart.targetInfo, tracePart.node, true, true, '<br>');
+                                    relationText = buildRelationText(tracePart.relationsInfo);
 
                                     if (relationText) {
                                         resultText += ''
@@ -767,22 +893,41 @@ define(function(require) {'use strict';
                             });
                         });
 
-                        return resultText.replace(/<i class="icon i-history"><\/i>/gi, '∅ ');
+                        // return resultText.replace(/<i class="icon i-history"><\/i>/gi, '∅ ');
+                        return resultText;
                     }
 
-                    function getFirstRelation(node1, node2) {
-                        var byDirections    = _.get(node1.__relationMap, ['byNodes', node2.__uid]),
-                            byTypes         = byDirections['children'] || byDirections['parents'];
+                    // TODO перенести в rsearch-meta.js, сделать $filter
+                    function buildRelationText(relationsInfo) {
+                        var relationText = '';
 
-                        var relationInfo = _.find(byTypes, function(){
-                            return true;
+                        _.each(relationsInfo.list, function(relationData){
+                            _.each(relationData.texts, function(textData){
+                                relationText += textData.text ? ((textData.outdated ? '∅ ' : '') + textData.text + ' — ') : '';
+                                relationText += textData.sinceText + ' ' + textData.actualText + ' ';
+                            });
+                            relationText += '<br>';
                         });
 
-                        var relationId = relationInfo && relationInfo.relationId,
-                            relation = _.get(node1.__relationMap, ['relations', relationId, 'relation']);
+                        relationText += relationsInfo.innText ? relationsInfo.innText : '';
 
-                        return relation;
+                        return relationText;
                     }
+
+                    // @Deprecated
+                    // function getFirstRelation(node1, node2) {
+                    //     var byDirections    = _.get(node1.__relationMap, ['byNodes', node2.__uid]),
+                    //         byTypes         = byDirections['children'] || byDirections['parents'];
+                    //
+                    //     var relationInfo = _.find(byTypes, function(){
+                    //         return true;
+                    //     });
+                    //
+                    //     var relationId = relationInfo && relationInfo.relationId,
+                    //         relation = _.get(node1.__relationMap, ['relations', relationId, 'relation']);
+                    //
+                    //     return relation;
+                    // }
 
                     function showTraceProxy(trace) {
                         $timeout(function(){
