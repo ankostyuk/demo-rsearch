@@ -878,13 +878,13 @@ define(function(require) {'use strict';
 
                                     if (relationText) {
                                         resultText += ''
-                                            + ('<div>' + (tracePart.direction === 'children' ? '↑' : '|') + '</div>')
+                                            + ('<div>' + (tracePart.direction === 'parents' ? '↑' : '|') + '</div>')
                                             + ('<div>' + relationText + '</div>')
-                                            + ('<div>' + (tracePart.direction === 'children' ? '|' : '↓') + '</div>')
+                                            + ('<div>' + (tracePart.direction === 'parents' ? '|' : '↓') + '</div>')
                                             + '';
                                     } else {
                                         resultText += ''
-                                            + ('<div>' + (tracePart.direction === 'children' ? '↑' : '↓') + '</div>')
+                                            + ('<div>' + (tracePart.direction === 'parents' ? '↑' : '↓') + '</div>')
                                             + '';
                                     }
 

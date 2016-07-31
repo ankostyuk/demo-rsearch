@@ -18,34 +18,9 @@ define(function(require) {'use strict';
             var config = appConfig.resource || {};
 
             // <<< remove when resolved https://github.com/newpointer/relations/issues/17
-            var nodesListsRequestData;
-
             function nodesLists(nodeType, nodesCollection) {
-                if (!(nodeType === 'COMPANY' || nodeType === 'INDIVIDUAL') || _.isEmpty(nodesCollection)) {
-                    return;
-                }
-
-                nodesListsRequestData = [];
-
-                _.each(nodesCollection, function(node){
-                    nodesListsRequestData.push({
-                        type: node._type,
-                        id: node._id
-                    });
-                });
-
-                npConnectionsListsResource.nodesLists({
-                    data: nodesListsRequestData,
-                    success: function(data) {
-                        _.each(data, function(userLists, i){
-                            _.set(nodesCollection[i], '_connections.userLists', userLists);
-                        });
-                    },
-                    error: function() {
-                        //
-                    },
-                    previousRequest: null
-                });
+                var npRsearchMetaHelper = $injector.get('npRsearchMetaHelper');
+                npRsearchMetaHelper.nodesLists(nodeType, nodesCollection);
             }
             // >>>
 
