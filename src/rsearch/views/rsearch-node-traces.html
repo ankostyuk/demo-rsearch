@@ -6,8 +6,8 @@
         </select>
         <select class="span3" ng-model="filters.history" ng-change="doTraces()">
             <option value="" ng-selected="!filters.history">${_trc("Любые цепочки", "Цепочки связанных объектов")}</option>
-            <option value="false">${_trc("Только актуальные связи", "Цепочки связанных объектов")}</option>
-            <option value="true">${_trc("Через неактуальные связи", "Цепочки связанных объектов")}</option>
+            <option value="false">${_trc("Актуальные связи", "Цепочки связанных объектов")}</option>
+            <option value="true">${_trc("Исторические связи", "Цепочки связанных объектов")}</option>
         </select>
     </div>
     <div class="align-right filters-message single-result" ng-show="filters.depth && pager.getPageCount() === 1">${_trc("Одна цепочка", "Одна единственная цепочка связанных объектов")}</div>

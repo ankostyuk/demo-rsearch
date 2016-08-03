@@ -80,6 +80,11 @@ msgctxt "Формат даты: http://momentjs.com/docs/#/displaying/format/"
 msgid "mediumDate"
 msgstr "DD.MM.YYYY"
 
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Цепочки связанных объектов"
+msgid "Актуальные связи"
+msgstr ""
+
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
 msgid ""
@@ -267,6 +272,11 @@ msgstr ""
 msgid "Исполнительные производства"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Цепочки связанных объектов"
+msgid "Исторические связи"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Исторический профиль"
 msgstr ""
@@ -346,6 +356,11 @@ msgstr ""
 
 #: ../src/comment/views/comment.html:1
 msgid "Нет комментариев"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid "Новое"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
@@ -460,6 +475,13 @@ msgstr ""
 msgid "Поиск на федеральном ресурсе"
 msgstr ""
 
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid ""
+"Поиск признаков\n"
+"конфликта интересов"
+msgstr ""
+
 #: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
 msgid "Поиск сообщений о банкротстве..."
@@ -540,11 +562,6 @@ msgstr ""
 msgid "Сделано в"
 msgstr ""
 
-#: ../src/nkb-app/index.html:1
-msgctxt "Продукты НКБ на главной странице"
-msgid "Сервис комментариев"
-msgstr ""
-
 #: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
 msgid "Сообщений о банкротстве не найдено"
 msgstr ""
@@ -573,11 +590,6 @@ msgid "Тип сообщения"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
-msgctxt "Цепочки связанных объектов"
-msgid "Только актуальные связи"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-traces.html:1
 msgctxt "Уровень (глубина) поиска связанных объектов"
 msgid "Укажите уровень..."
 msgstr ""
@@ -602,11 +614,6 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
 msgid "Цепочек связей не найдено"
-msgstr ""
-
-#: ../src/rsearch/views/rsearch-node-traces.html:1
-msgctxt "Цепочки связанных объектов"
-msgid "Через неактуальные связи"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1

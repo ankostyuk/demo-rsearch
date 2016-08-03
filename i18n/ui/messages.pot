@@ -227,7 +227,12 @@ msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
-msgid "Сервис комментариев"
+msgid "Новое"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid "Поиск признаков\nконфликта интересов"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
@@ -766,12 +771,12 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
 msgctxt "Цепочки связанных объектов"
-msgid "Только актуальные связи"
+msgid "Актуальные связи"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
 msgctxt "Цепочки связанных объектов"
-msgid "Через неактуальные связи"
+msgid "Исторические связи"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1

@@ -229,7 +229,7 @@ msgstr "актуальные"
 #: ../i18n/ui_keys/src/keys.txt:1
 #, fuzzy
 msgid "RELATION_outdated"
-msgstr "неактуальные"
+msgstr "исторические"
 
 #: ../i18n/ui_keys/src/keys.txt:1
 msgid "RUB"
