@@ -17,13 +17,6 @@ define(function(require) {'use strict';
 
             var config = appConfig.resource || {};
 
-            // <<< remove when resolved https://github.com/newpointer/relations/issues/17
-            function nodesLists(nodeType, nodesCollection) {
-                var npRsearchMetaHelper = $injector.get('npRsearchMetaHelper');
-                npRsearchMetaHelper.nodesLists(nodeType, nodesCollection);
-            }
-            // >>>
-
             function nodeListProcess(data, nodeIterator, requestOptions) {
                 var npRsearchMetaHelper = $injector.get('npRsearchMetaHelper'),
                     baseIndex           = data.pageSize * (data.pageNumber - 1);
@@ -67,13 +60,7 @@ define(function(require) {'use strict';
                         url: config['search.url'] + '/' + options.nodeType,
                         params: params
                     }, {
-                        // responseProcess: nodeListProcess
-                        // <<< remove when resolved https://github.com/newpointer/relations/issues/17
-                        responseProcess: function(data) {
-                            nodesLists(_.get(data.list, '[0]._type'), data.list);
-                            return nodeListProcess(data);
-                        }
-                        // >>>
+                        responseProcess: nodeListProcess
                     }, options);
                 },
 
@@ -90,13 +77,7 @@ define(function(require) {'use strict';
                             url: buildUrl(options.relationTypes[0]),
                             params: params
                         }, {
-                            // responseProcess: nodeListProcess
-                            // <<< remove when resolved https://github.com/newpointer/relations/issues/17
-                            responseProcess: function(data) {
-                                nodesLists(_.get(data.list, '[0]._type'), data.list);
-                                return nodeListProcess(data);
-                            }
-                            // >>>
+                            responseProcess: nodeListProcess
                         }, options);
                     }
 
@@ -127,9 +108,6 @@ define(function(require) {'use strict';
                         _.each(options.relationTypes, function(relationType){
                             var responseData = requests[relationType].response.data;
 
-                            // <<< remove when resolved https://github.com/newpointer/relations/issues/17
-                            nodesLists(_.get(responseData.list, '[0]._type'), responseData.list);
-                            // >>>
                             nodeListProcess(responseData, null, options);
 
                             data.total += responseData.total;
@@ -168,9 +146,6 @@ define(function(require) {'use strict';
                         params: params
                     }, {
                         responseProcess: function(data) {
-                            // <<< remove when resolved https://github.com/newpointer/relations/issues/17
-                            nodesLists('INDIVIDUAL', data.list);
-                            // >>>
                             return nodeListProcess(data, options.nodeIterator);
                         }
                     }, options);
@@ -185,14 +160,7 @@ define(function(require) {'use strict';
                         method: 'GET',
                         url: config['algo.url'] + '/kinsmen',
                         params: params
-                    }, {
-                        // <<< remove when resolved https://github.com/newpointer/relations/issues/17
-                        responseProcess: function(data) {
-                            nodesLists('INDIVIDUAL', data.nodes);
-                            return data;
-                        }
-                        // >>>
-                    }, options);
+                    }, null, options);
                 },
 
                 beneficiary: function(options) {
@@ -204,14 +172,7 @@ define(function(require) {'use strict';
                         method: 'GET',
                         url: config['algo.url'] + '/individualBeneficiary',
                         params: params
-                    }, {
-                        // <<< remove when resolved https://github.com/newpointer/relations/issues/17
-                        responseProcess: function(data) {
-                            nodesLists('COMPANY', data.nodes);
-                            return data;
-                        }
-                        // >>>
-                    }, options);
+                    }, null, options);
                 },
 
                 traces: function(options) {
@@ -224,14 +185,7 @@ define(function(require) {'use strict';
                             '/trace/' +
                             options.node2._type + '/' + options.node2._id,
                         params: params
-                    }, {
-                        // <<< remove when resolved https://github.com/newpointer/relations/issues/17
-                        responseProcess: function(data) {
-                            nodesLists('COMPANY', data.nodes);
-                            return data;
-                        }
-                        // >>>
-                    }, options);
+                    }, null, options);
                 },
 
                 egrulList: function(options) {

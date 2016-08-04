@@ -376,36 +376,6 @@ define(function(require) {'use strict';
             // API
             var metaHelper = {
 
-                // <<< remove when resolved https://github.com/newpointer/relations/issues/17
-                nodesLists: function(nodeType, nodesCollection) {
-                    if (!(nodeType === 'COMPANY' || nodeType === 'INDIVIDUAL') || _.isEmpty(nodesCollection)) {
-                        return;
-                    }
-
-                    var nodesListsRequestData = [];
-
-                    _.each(nodesCollection, function(node){
-                        nodesListsRequestData.push({
-                            type: node._type,
-                            id: node._id
-                        });
-                    });
-
-                    npConnectionsListsResource.nodesLists({
-                        data: nodesListsRequestData,
-                        success: function(data) {
-                            _.each(data, function(userLists, i){
-                                _.set(nodesCollection[i], '_connections.userLists', userLists);
-                            });
-                        },
-                        error: function() {
-                            //
-                        },
-                        previousRequest: null
-                    });
-                },
-                // >>>
-
                 initPromise: function() {
                     return initDefer.promise;
                 },
