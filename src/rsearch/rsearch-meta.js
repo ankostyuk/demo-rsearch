@@ -298,10 +298,7 @@ define(function(require) {'use strict';
                 'PURCHASE': {
                     order: 40
                 }
-            },
-
-            relationActualDate: '_actual',
-            relationSinceDate: '_since'
+            }
         })
         //
         .factory('npRsearchMetaHelper', ['$log', '$window', '$q', '$rootScope', 'appConfig', 'npRsearchMeta', 'npRsearchResource', 'npConnectionsListsResource', function($log, $window, $q, $rootScope, appConfig, npRsearchMeta, npRsearchResource, npConnectionsListsResource){
@@ -878,7 +875,10 @@ define(function(require) {'use strict';
                             return;
                         }
 
-                        relationData.history.sorted = _.sortByOrder(relationData.history.byDates, ['outdated', npRsearchMeta.relationSinceDate], ['asc', 'desc']);
+                        relationData.history.sorted = _.sortByOrder(relationData.history.byDates,
+                            ['outdated', '_since', '_actual'],
+                            ['asc', 'desc', 'desc']
+                        );
                     });
                 },
 
@@ -916,7 +916,7 @@ define(function(require) {'use strict';
                             }
 
                             lastRelation = data.relationMap.relations[relationId].history.sorted[0];
-                            return -lastRelation[npRsearchMeta.relationSinceDate];
+                            return -lastRelation['_since'];
                         });
 
                         _.each(nodeList, function(node){
