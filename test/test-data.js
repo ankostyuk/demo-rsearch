@@ -9,8 +9,11 @@ define(function(require, exports, module) {'use strict';
     var testData = {
         nodes: {
             'COMPANY.1641441': angular.fromJson(require('text!./data/nodes/COMPANY.1641441.json')),
+            'COMPANY.8443194': angular.fromJson(require('text!./data/nodes/COMPANY.8443194.json')),
             'COMPANY.8505253': angular.fromJson(require('text!./data/nodes/COMPANY.8505253.json')),
-            'COMPANY.8708612': angular.fromJson(require('text!./data/nodes/COMPANY.8708612.json'))
+            'COMPANY.8708612': angular.fromJson(require('text!./data/nodes/COMPANY.8708612.json')),
+
+            'INDIVIDUAL.ab54ffed94bed4c9d52f96bb3b44e78eb8959013': angular.fromJson(require('text!./data/nodes/INDIVIDUAL.ab54ffed94bed4c9d52f96bb3b44e78eb8959013.json'))
         },
         relations: {
             nodes: {

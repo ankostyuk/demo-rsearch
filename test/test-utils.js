@@ -25,7 +25,7 @@ define(function(require, exports, module) {'use strict';
                         }
                     },
                     'INDIVIDUAL': {
-                        _nodeText: function(node) {
+                        nodeText: function(node) {
                             return node.name + ', id: ' + node._id;
                         }
                     }
@@ -131,7 +131,7 @@ define(function(require, exports, module) {'use strict';
                                 return;
                             }
 
-                            dumpText += '\n' + '--- ' + relationType + ' ' + direction + ' ---' + '\n\n';
+                            dumpText += '\n' + '--- ' + relationType + ' ' + direction + ' ' + _.size(byNodesId) + ' ---' + '\n\n';
 
                             _.each(byNodesId, function(relations, nodeId){
                                 relations = _.sortByOrder(relations,
