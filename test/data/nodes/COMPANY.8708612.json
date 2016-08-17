@@ -1,0 +1,144 @@
+{
+    "okvedcode_bal": "722",
+    "okved_bal_short_text": "Деятельность, связанная с использованием вычислительной техники и информационных технологий",
+    "egrul_state": {
+        "_actual": 1450265316890,
+        "_since": 1341432000000,
+        "code": "5",
+        "type": "Действующее"
+    },
+    "chief_gender": "MALE",
+    "addressindex": 119021,
+    "balance": [2014, 2013],
+    "okved_main_short_text": "Деятельность, связанная с использованием вычислительной техники и информационных технологий",
+    "egrul_reg": {
+        "_actual": 1450265316890,
+        "_since": 1341432000000,
+        "code": "100001",
+        "type": "Государственная регистрация юридического лица при создании"
+    },
+    "bsn_id": 8708612,
+    "okved_main_text": "Разработка программного обеспечения и консультирование в этой области",
+    "ogrn": "1127746519900",
+    "p20103_2014": 4078000,
+    "chief_name": "Костюк Андрей Григорьевич",
+    "balance_forms_2013": [1, 2],
+    "okved_bal_text": "Разработка программного обеспечения и консультирование в этой области",
+    "kpp": "770401001",
+    "balance_forms_2014": [1, 2],
+    "okfs_text": "Частная собственность",
+    "_relations": [{
+        "_holderDst": true,
+        "_actual": 1450265316890,
+        "_dstId": "8708612",
+        "_srcId": "456ad86233a2e75bd399a12e56527bceef97e2b959",
+        "_type": "ADDRESS",
+        "_since": 1341432000000,
+        "_source": "egrul"
+    }, {
+        "_holderDst": true,
+        "_actual": 1471075738588,
+        "_dstId": "8708612",
+        "outdated": false,
+        "_srcId": "35368187e76c68e80a35f360d4b1c3a676924266",
+        "name": "Костюк Андрей Григорьевич",
+        "inn": "772325788896",
+        "_type": "EXECUTIVE_INDIVIDUAL",
+        "_since": 1341432000000,
+        "_source": "egrul",
+        "position": "Генеральный директор"
+    }, {
+        "_holderDst": true,
+        "_actual": 1471075738588,
+        "_dstId": "8708612",
+        "outdated": false,
+        "_srcId": "8bb73c722fae9b513b4b9298c01303f34fbb3b6a",
+        "inn": "504707181698",
+        "_type": "FOUNDER_INDIVIDUAL",
+        "_since": 1341432000000,
+        "_source": "egrul",
+        "sharePercent": 50.0,
+        "shareAmount": 5000.0
+    }, {
+        "_holderDst": true,
+        "_actual": 1456693200000,
+        "_dstId": "8708612",
+        "_srcId": "456ad86233a2e75bd399a12e56527bceef97e2b959",
+        "_type": "ADDRESS",
+        "_since": 1341432000000,
+        "_source": "rosstat"
+    }, {
+        "_holderDst": true,
+        "_actual": 1471008708778,
+        "_dstId": "8708612",
+        "_srcId": "456ad86233a2e75bd399a12e56527bceef97e2b959",
+        "_type": "ADDRESS",
+        "_since": 1341432000000,
+        "_source": "egrul"
+    }, {
+        "_holderDst": false,
+        "_actual": 1471381200000,
+        "_dstId": "8708612",
+        "outdated": false,
+        "_srcId": "35368187e76c68e80a35f360d4b1c3a676924266",
+        "inn": "772325788896",
+        "_type": "FOUNDER_INDIVIDUAL",
+        "_since": 1341432000000,
+        "_source": "egrul_individual_founder",
+        "sharePercent": 50.0,
+        "shareAmount": 5000.0
+    }, {
+        "_holderDst": true,
+        "_actual": 1470935893624,
+        "_dstId": "8708612",
+        "_srcId": "456ad86233a2e75bd399a12e56527bceef97e2b959",
+        "_type": "ADDRESS",
+        "_since": 1341432000000,
+        "_source": "egrul"
+    }, {
+        "_holderDst": true,
+        "_actual": 1470507188078,
+        "_dstId": "8708612",
+        "_srcId": "456ad86233a2e75bd399a12e56527bceef97e2b959",
+        "_type": "ADDRESS",
+        "_since": 1341432000000,
+        "_source": "egrul"
+    }],
+    "okvedcode_main": "722",
+    "_id": "8708612",
+    "okopfcode": 65,
+    "founded_dt": 1341432000000,
+    "individual_placeholders": [{
+        "_since": 1341518400000,
+        "sharePercent": 100.0,
+        "shareAmount": 10000.0,
+        "name": "Граждане России(2)"
+    }],
+    "nameshortsort": "ООО \"НАЛПОИНТЕР\"",
+    "_info": {
+        "updates": {
+            "rosstat": 1456693200000,
+            "egrul": 1471075738588
+        },
+        "in": {
+            "FOUNDER_INDIVIDUAL": {
+                "actual": 2
+            },
+            "ADDRESS": {
+                "actual": 1
+            },
+            "EXECUTIVE_INDIVIDUAL": {
+                "actual": 1
+            }
+        },
+        "out": {},
+        "matches": ["name"]
+    },
+    "addresssort": "г Москва, пер Олсуфьевский, д 8, стр 3",
+    "inn": "7704811150",
+    "_type": "COMPANY",
+    "namesort": "Общество с ограниченной ответственностью \"НАЛПОИНТЕР\"",
+    "okatocode": 45286590000,
+    "okpo": "09933928",
+    "okfscode": 16
+}

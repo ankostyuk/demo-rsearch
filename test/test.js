@@ -6,15 +6,16 @@
 define(function(require, exports, module) {'use strict';
     var angular         = require('angular');
 
-    var purl            = require('purl'),
-        locationSearch  = purl().param(),
-        xxx             = locationSearch['xxx'] === 'true';
-
+    // var purl            = require('purl'),
+    //     locationSearch  = purl().param(),
+    //     xxx             = locationSearch['xxx'] === 'true';
+    //
     // console.info('xxx:', xxx);
 
     var angularModules = [
         // require('./data-mocks'),
-        require('./relations-actuality-algo-test')
+        require('./test-utils'),
+        require('./relation-history-test')
     ];
 
     //
@@ -23,11 +24,18 @@ define(function(require, exports, module) {'use strict';
         .constant('testConfig', {
         })
         //
-        .run(['$log', 'relationsActualityAlgoTest', function($log, relationsActualityAlgoTest){
+        .run(['$log', 'testUtils', 'relationHistoryTest', function($log, testUtils, relationHistoryTest){
             $log.info('Run tests...');
 
             //
-            relationsActualityAlgoTest.testXXX();
+            testUtils.nodesRelationsDump([
+                // 'COMPANY.1641441',
+                // 'COMPANY.8505253',
+                // 'COMPANY.8708612',
+            ]);
+
+            //
+            relationHistoryTest.test();
         }]);
     //
 });
