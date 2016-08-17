@@ -832,13 +832,20 @@ define(function(require) {'use strict';
                         //
                         var relationId          = metaHelper.buildRelationId(relation),
                             relationExist       = !!relationMap.relations[relationId],
-                            historyRelationMeta = metaHelper.getRelationHistoryMeta(relationType.name, direction);
+                            historyRelationMeta = metaHelper.getRelationHistoryMeta(relationType.name, direction),
+                            r;
 
                         // relationMap.relations
-                        relationMap.relations[relationId] = relationMap.relations[relationId] || {
-                            relation: relation,
-                            direction: direction
-                        };
+                        if (relationExist) {
+                            r = relationMap.relations[relationId].relation;
+                            // смержить специфические свойства
+                            r.inn = r.inn || relation.inn;
+                        } else {
+                            relationMap.relations[relationId] = {
+                                relation: relation,
+                                direction: direction
+                            };
+                        }
 
                         buildHistory();
 
