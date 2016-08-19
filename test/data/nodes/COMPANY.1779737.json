@@ -1,0 +1,1045 @@
+{
+    "egrul_reg": {
+        "_actual": 1462362062133,
+        "_since": 1123099200000,
+        "code": "100001",
+        "type": "Государственная регистрация юридического лица при создании"
+    },
+    "ogrn": "1057747690890",
+    "p20103_2014": 41862000,
+    "okved_bal_text": "Деятельность по созданию и использованию баз данных и информационных ресурсов, в том числе ресурсов сети Интернет",
+    "okfs_text": "Частная собственность",
+    "individual_placeholders": [{
+        "_since": 1125222984686,
+        "sharePercent": 50.0,
+        "shareAmount": 25000.0,
+        "name": "ГРАЖДАНИН РОССИИ"
+    }],
+    "addresssort": "г Москва, пр 3-й Хорошевский, д 1, корп 1",
+    "okfscode": 16,
+    "balance_forms_2009": [1, 2],
+    "balance_forms_2008": [1, 2],
+    "okvedcode_bal": "7240",
+    "balance_forms_2007": [1, 2],
+    "balance_forms_2006": [1, 2],
+    "balance_forms_2005": [1, 2],
+    "balance_forms_2013": [1, 2, 3, 4, 6],
+    "balance_forms_2012": [1, 2, 3, 4],
+    "balance_forms_2011": [1, 2, 3, 4],
+    "balance_forms_2010": [1, 2],
+    "balance_forms_2014": [1, 2, 3, 4],
+    "_relations": [{
+        "_holderDst": true,
+        "_actual": 1470507091447,
+        "_dstId": "1779737",
+        "_srcId": "1553592",
+        "_type": "REGISTER_HOLDER",
+        "_since": 1421614800000,
+        "_source": "egrul"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "3",
+            "price": 180000
+        }],
+        "_actual": 1460448180000,
+        "_dstId": "31603481731",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 2548800
+        }],
+        "_actual": 1368713864000,
+        "_dstId": "31300240511",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "_actual": 1471018891137,
+        "_dstId": "1779737",
+        "outdated": false,
+        "_srcId": "1581790",
+        "_type": "FOUNDER_COMPANY",
+        "_since": 1123099200000,
+        "_source": "egrul",
+        "sharePercent": 50.0,
+        "shareAmount": 25000.0
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "3470098",
+            "price": 1380000,
+            "status": "WIN"
+        }],
+        "_actual": 1440764879000,
+        "_dstId": "31502650158",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "2000004519",
+            "price": 744000
+        }],
+        "_actual": 1448547780000,
+        "_dstId": "31502837139",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "2",
+            "price": 287448
+        }],
+        "_actual": 1407397588000,
+        "_dstId": "31401283099",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "_actual": 1462362062133,
+        "_dstId": "1779737",
+        "_srcId": "45184408990a817678086dba642ef9b324e00890d9",
+        "_type": "ADDRESS",
+        "_since": 1123099200000,
+        "_source": "egrul"
+    }, {
+        "_holderDst": true,
+        "_actual": 1471018891137,
+        "_dstId": "1779737",
+        "outdated": false,
+        "_srcId": "69c3d824613f9c7a1540e7d45e6a230c99952fa0",
+        "name": "Малеев Владимир Иванович",
+        "inn": "772905147180",
+        "_type": "EXECUTIVE_INDIVIDUAL",
+        "_since": 1123099200000,
+        "_source": "egrul",
+        "position": "Генеральный директор"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 2548800,
+            "status": "WIN"
+        }],
+        "_actual": 1369398991000,
+        "_dstId": "31300240511",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "_actual": 1471018891137,
+        "_dstId": "1779737",
+        "_srcId": "1553592",
+        "_type": "REGISTER_HOLDER",
+        "_since": 1421614800000,
+        "_source": "egrul"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "Вход.№ 1723",
+            "price": 150096
+        }],
+        "_actual": 1418832789000,
+        "_dstId": "31401791555",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1"
+        }],
+        "_actual": 1450097155000,
+        "_dstId": "31502882581",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 2548800
+        }],
+        "_actual": 1368713864000,
+        "_dstId": "31300240511",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 212400,
+            "status": "WIN"
+        }],
+        "_actual": 1369137377000,
+        "_dstId": "31300270201",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "2000004519"
+        }],
+        "_actual": 1447330026000,
+        "_dstId": "31502837139",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 2548800,
+            "status": "WIN"
+        }],
+        "_actual": 1369399003000,
+        "_dstId": "31300240511",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1"
+        }],
+        "_actual": 1443078970488,
+        "_dstId": "0160200001515000036",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 2548800,
+            "status": "WIN"
+        }],
+        "_actual": 1369399003000,
+        "_dstId": "31300240511",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "4",
+            "price": 212660,
+            "status": "WIN"
+        }],
+        "_actual": 1433410800000,
+        "_dstId": "31502260767",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1"
+        }],
+        "_actual": 1461219537757,
+        "_dstId": "0160200001516000014",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "3470098",
+            "price": 1380000,
+            "status": "WIN"
+        }],
+        "_actual": 1440764879000,
+        "_dstId": "31502650158",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "Вход.№ 1723",
+            "price": 150096
+        }],
+        "_actual": 1419340837000,
+        "_dstId": "31401791555",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "_actual": 1456693200000,
+        "_dstId": "1779737",
+        "_srcId": "0959401708",
+        "_type": "PHONE",
+        "_since": 1421787600000,
+        "_source": "egrul"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "Вх. № 525",
+            "price": 212400
+        }],
+        "_actual": 1391088767000,
+        "_dstId": "31400827968",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "2",
+            "price": 212400,
+            "status": "WIN"
+        }],
+        "_actual": 1360084295000,
+        "_dstId": "0352200000913000001",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "2",
+            "price": 150096,
+            "status": "WIN"
+        }],
+        "_actual": 1448016331000,
+        "_dstId": "31502870804",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 2,
+            "application": "1",
+            "price": 372000
+        }],
+        "_actual": 1453470238000,
+        "_dstId": "31503146728",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "2",
+            "price": 212400,
+            "status": "WIN"
+        }],
+        "_actual": 1360084295000,
+        "_dstId": "0352200000913000001",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "2",
+            "price": 287448
+        }],
+        "_actual": 1388149264000,
+        "_dstId": "31300707375",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 2973600,
+            "status": "WIN"
+        }],
+        "_actual": 1439802369000,
+        "_dstId": "31502571860",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "3",
+            "price": 180000
+        }],
+        "_actual": 1460529813000,
+        "_dstId": "31603481731",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "4",
+            "price": 212660,
+            "status": "WIN"
+        }],
+        "_actual": 1433410800000,
+        "_dstId": "31502260767",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "_actual": 1471018891137,
+        "_dstId": "1779737",
+        "outdated": false,
+        "_srcId": "69c3d824613f9c7a1540e7d45e6a230c99952fa0",
+        "inn": "772905147180",
+        "_type": "FOUNDER_INDIVIDUAL",
+        "_since": 1123099200000,
+        "_source": "egrul",
+        "sharePercent": 50.0,
+        "shareAmount": 25000.0
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "2",
+            "price": 287448
+        }],
+        "_actual": 1407397588000,
+        "_dstId": "31401283099",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "3",
+            "price": 180000
+        }],
+        "_actual": 1460529813000,
+        "_dstId": "31603481731",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 372000,
+            "status": "WIN"
+        }],
+        "_actual": 1426512179000,
+        "_dstId": "31502099058",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 2,
+            "application": "1",
+            "price": 372000
+        }],
+        "_actual": 1453470238000,
+        "_dstId": "31503146728",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "Вх. № 525",
+            "price": 212400
+        }],
+        "_actual": 1391088598000,
+        "_dstId": "31400827968",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "Вх. № 525",
+            "price": 212400
+        }],
+        "_actual": 1391088767000,
+        "_dstId": "31400827968",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "3",
+            "price": 243600
+        }],
+        "_actual": 1417786592000,
+        "_dstId": "31401631202",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "4",
+            "price": 212660,
+            "status": "WIN"
+        }],
+        "_actual": 1445513738000,
+        "_dstId": "31502260767",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1"
+        }],
+        "_actual": 1450097155000,
+        "_dstId": "31502882581",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "2",
+            "price": 287448
+        }],
+        "_actual": 1388149264000,
+        "_dstId": "31300707375",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "2",
+            "price": 450000,
+            "status": "NOT_ADMITTED"
+        }, {
+            "lot": 2,
+            "application": "3",
+            "price": 405000,
+            "status": "NOT_ADMITTED"
+        }],
+        "_actual": 1443178920000,
+        "_dstId": "31502631216",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "2",
+            "price": 450000
+        }],
+        "_actual": 1440164167000,
+        "_dstId": "31502631216",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 372000,
+            "status": "WIN"
+        }],
+        "_actual": 1426512179000,
+        "_dstId": "31502099058",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 7680000,
+            "status": "WIN"
+        }],
+        "_actual": 1412757352000,
+        "_dstId": "31401430513",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "2",
+            "price": 450000
+        }],
+        "_actual": 1440164167000,
+        "_dstId": "31502631216",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1"
+        }],
+        "_actual": 1448881273000,
+        "_dstId": "31502882584",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 371912.4,
+            "status": "WIN"
+        }],
+        "_actual": 1454668467000,
+        "_dstId": "31603286778",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 2548800
+        }],
+        "_actual": 1368713864000,
+        "_dstId": "31300240511",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "_actual": 1456693200000,
+        "_dstId": "7484760",
+        "outdated": false,
+        "_srcId": "1779737",
+        "_type": "FOUNDER_COMPANY",
+        "_since": 1260392400000,
+        "_source": "egrul",
+        "sharePercent": 49.0,
+        "shareAmount": 49000.0
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "8619274"
+        }],
+        "_actual": 1409806449095,
+        "_dstId": "0160200001514000021",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "_actual": 1471018891137,
+        "_dstId": "1779737",
+        "_srcId": "45184408990a817678086dba642ef9b324e00890d9",
+        "_type": "ADDRESS",
+        "_since": 1464728400000,
+        "_source": "egrul"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 2973600,
+            "status": "WIN"
+        }],
+        "_actual": 1439802369000,
+        "_dstId": "31502571860",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 2704560,
+            "status": "WIN"
+        }],
+        "_actual": 1404309551000,
+        "_dstId": "31401179723",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 3115200
+        }],
+        "_actual": 1438179655000,
+        "_dstId": "31502571860",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 212400,
+            "status": "WIN"
+        }],
+        "_actual": 1369137377000,
+        "_dstId": "31300270201",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "3",
+            "price": 180000
+        }],
+        "_actual": 1460448180000,
+        "_dstId": "31603481731",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 2916960
+        }],
+        "_actual": 1402321672000,
+        "_dstId": "31401179723",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 2916960
+        }],
+        "_actual": 1402321672000,
+        "_dstId": "31401179723",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "2",
+            "price": 450000,
+            "status": "NOT_ADMITTED"
+        }, {
+            "lot": 2,
+            "application": "3",
+            "price": 405000,
+            "status": "NOT_ADMITTED"
+        }],
+        "_actual": 1443178920000,
+        "_dstId": "31502631216",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 48970
+        }],
+        "_actual": 1411622560000,
+        "_dstId": "31401430513",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 371912.4,
+            "status": "WIN"
+        }],
+        "_actual": 1454668467000,
+        "_dstId": "31603286778",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 7680000,
+            "status": "WIN"
+        }],
+        "_actual": 1412757352000,
+        "_dstId": "31401430513",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "Вх. № 525",
+            "price": 212400
+        }],
+        "_actual": 1391088598000,
+        "_dstId": "31400827968",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 2704560,
+            "status": "WIN"
+        }],
+        "_actual": 1404309551000,
+        "_dstId": "31401179723",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 372000,
+            "status": "WIN"
+        }],
+        "_actual": 1461244006000,
+        "_dstId": "31603555760",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 212400,
+            "status": "WIN"
+        }],
+        "_actual": 1369137377000,
+        "_dstId": "31300270201",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 48970
+        }],
+        "_actual": 1411622560000,
+        "_dstId": "31401430513",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 3115200
+        }],
+        "_actual": 1438179655000,
+        "_dstId": "31502571860",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "_actual": 1470507091447,
+        "_dstId": "1779737",
+        "_srcId": "45184408990a817678086dba642ef9b324e00890d9",
+        "_type": "ADDRESS",
+        "_since": 1464728400000,
+        "_source": "egrul"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 371912.4,
+            "status": "WIN"
+        }],
+        "_actual": 1416501901000,
+        "_dstId": "31401718006",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "4",
+            "price": 212660,
+            "status": "WIN"
+        }],
+        "_actual": 1445513738000,
+        "_dstId": "31502260767",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 372000,
+            "status": "WIN"
+        }],
+        "_actual": 1461244006000,
+        "_dstId": "31603555760",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 2548800,
+            "status": "WIN"
+        }],
+        "_actual": 1369398991000,
+        "_dstId": "31300240511",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }, {
+        "_holderDst": true,
+        "_actual": 1456693200000,
+        "_dstId": "1779737",
+        "_srcId": "45497049ac09075b19546b288f19b3a2f76c761399",
+        "_type": "ADDRESS",
+        "_since": 1421787600000,
+        "_source": "egrul"
+    }, {
+        "_holderDst": true,
+        "lots": [{
+            "lot": 1,
+            "application": "1",
+            "price": 371912.4,
+            "status": "WIN"
+        }],
+        "_actual": 1416501901000,
+        "_dstId": "31401718006",
+        "_srcId": "1779737",
+        "_type": "PARTICIPANT_COMPANY",
+        "_source": "purchases"
+    }],
+    "name_diff": true,
+    "_info": {
+        "updates": {
+            "egrul": 1471018891137
+        },
+        "in": {
+            "REGISTER_HOLDER": {
+                "actual": 1
+            },
+            "FOUNDER_INDIVIDUAL": {
+                "actual": 1
+            },
+            "FOUNDER_COMPANY": {
+                "actual": 1
+            },
+            "ADDRESS": {
+                "actual": 2
+            },
+            "PHONE": {
+                "actual": 1
+            },
+            "EXECUTIVE_INDIVIDUAL": {
+                "actual": 1
+            }
+        },
+        "out": {
+            "PARTICIPANT_COMPANY": {
+                "actual": 27
+            },
+            "FOUNDER_COMPANY": {
+                "actual": 1
+            }
+        },
+        "matches": []
+    },
+    "okpo": "78486593",
+    "egrul_state": {
+        "_actual": 1462362062133,
+        "_since": 1123099200000,
+        "code": "5",
+        "type": "Действующее"
+    },
+    "addressindex": 123007,
+    "balance": [2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005],
+    "okved_main_short_text": "Деятельность, связанная с использованием вычислительной техники и информационных технологий",
+    "okvedcode_main": "7220",
+    "okopfcode": 12267,
+    "_type": "COMPANY",
+    "namesort": "ЗАКРЫТОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \"НАЦИОНАЛЬНОЕ КРЕДИТНОЕ БЮРО\"",
+    "okatocode": 45277598000,
+    "okved_bal_short_text": "Деятельность, связанная с использованием вычислительной техники и информационных технологий",
+    "chief_gender": "MALE",
+    "bsn_id": 1779737,
+    "okved_main_text": "Разработка программного обеспечения и консультирование в этой области",
+    "chief_name": "Малеев Владимир Иванович",
+    "kpp": "771401001",
+    "_id": "1779737",
+    "founded_dt": 1123099200000,
+    "nameshortsort": "ЗАО \"НКБ\"",
+    "inn": "7714611569"
+}

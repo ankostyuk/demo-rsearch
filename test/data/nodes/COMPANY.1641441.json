@@ -29,37 +29,12 @@
     "okfs_text": "Частная собственность",
     "_relations": [{
         "_holderDst": true,
-        "_actual": 1471088829936,
-        "_dstId": "1641441",
-        "outdated": false,
-        "_srcId": "ab54ffed94bed4c9d52f96bb3b44e78eb8959013",
-        "name": "Чалый Александр Александрович",
-        "inn": "592107428001",
-        "_type": "EXECUTIVE_INDIVIDUAL",
-        "_since": 1301860800000,
-        "_source": "egrul",
-        "position": "Генеральный директор"
-    }, {
-        "_holderDst": true,
         "_actual": 1456693200000,
         "_dstId": "1641441",
         "_srcId": "45a4a27bf2ad1951f2789e546d465a3d2a8bac46a0",
         "_type": "ADDRESS",
         "_since": 1220212800000,
         "_source": "rosstat"
-    }, {
-        "_holderDst": true,
-        "_actual": 1259701204000,
-        "_dstId": "1641441",
-        "outdated": true,
-        "_srcId": "b5d98ab6be96a6123d05725b094bdd44e38cbd76",
-        "name": "Ященко Наталья Юрьевна",
-        "inn": "503207043754",
-        "_type": "FOUNDER_INDIVIDUAL",
-        "_since": 1078434000000,
-        "_source": "xegrul",
-        "sharePercent": 50.0,
-        "shareAmount": 20000
     }, {
         "_holderDst": true,
         "_actual": 1329422400000,
@@ -75,39 +50,17 @@
         "shareAmount": 10000
     }, {
         "_holderDst": true,
-        "_actual": 1471088829936,
-        "_dstId": "1641441",
-        "outdated": false,
-        "_srcId": "ab54ffed94bed4c9d52f96bb3b44e78eb8959013",
-        "inn": "592107428001",
-        "_type": "FOUNDER_INDIVIDUAL",
-        "_since": 1301860800000,
-        "_source": "egrul",
-        "sharePercent": 20.0,
-        "shareAmount": 10000.0
-    }, {
-        "_holderDst": true,
-        "_actual": 1470507303766,
+        "_actual": 1259701204000,
         "_dstId": "1641441",
         "outdated": true,
-        "_srcId": "ab54ffed94bed4c9d52f96bb3b44e78eb8959013",
-        "inn": "592107428001",
+        "_srcId": "b5d98ab6be96a6123d05725b094bdd44e38cbd76",
+        "name": "Ященко Наталья Юрьевна",
+        "inn": "503207043754",
         "_type": "FOUNDER_INDIVIDUAL",
-        "_since": 1301860800000,
-        "_source": "egrul",
-        "sharePercent": 20.0,
-        "shareAmount": 10000.0
-    }, {
-        "_holderDst": true,
-        "_actual": 1471088829936,
-        "_dstId": "1641441",
-        "outdated": false,
-        "_srcId": "1641441",
-        "_type": "FOUNDER_COMPANY",
-        "_since": 1302724800000,
-        "_source": "egrul",
-        "sharePercent": 80.0,
-        "shareAmount": 40000.0
+        "_since": 1078434000000,
+        "_source": "xegrul",
+        "sharePercent": 50.0,
+        "shareAmount": 20000
     }, {
         "_holderDst": true,
         "_actual": 1259701204000,
@@ -135,12 +88,28 @@
         "shareAmount": 20000
     }, {
         "_holderDst": true,
-        "_actual": 1470507303766,
+        "_actual": 1471561984288,
         "_dstId": "1641441",
-        "_srcId": "45d6d9cc11d6d340782b8e70db76cdd166753d6860",
-        "_type": "ADDRESS",
-        "_since": 1192564800000,
-        "_source": "egrul"
+        "outdated": false,
+        "_srcId": "1641441",
+        "_type": "FOUNDER_COMPANY",
+        "_since": 1302724800000,
+        "_source": "egrul",
+        "sharePercent": 80.0,
+        "shareAmount": 40000.0
+    }, {
+        "_holderDst": true,
+        "_actual": 1471561984288,
+        "_dstId": "1641441",
+        "outdated": false,
+        "_srcId": "ab54ffed94bed4c9d52f96bb3b44e78eb8959013",
+        "name": "Чалый Александр Александрович",
+        "inn": "592107428001",
+        "_type": "FOUNDER_INDIVIDUAL",
+        "_since": 1301860800000,
+        "_source": "egrul",
+        "sharePercent": 20.0,
+        "shareAmount": 10000.0
     }, {
         "_holderDst": true,
         "_actual": 1303166842000,
@@ -156,14 +125,6 @@
         "shareAmount": 20000
     }, {
         "_holderDst": true,
-        "_actual": 1456693200000,
-        "_dstId": "1641441",
-        "_srcId": "45d6d9cc11d6d340782b8e70db76cdd166753d6860",
-        "_type": "ADDRESS",
-        "_since": 1192564800000,
-        "_source": "rosstat"
-    }, {
-        "_holderDst": true,
         "_actual": 1455030407451,
         "_dstId": "1641441",
         "_srcId": "45d6d9cc11d6d340782b8e70db76cdd166753d6860",
@@ -172,11 +133,11 @@
         "_source": "egrul"
     }, {
         "_holderDst": true,
-        "_actual": 1456693200000,
+        "_actual": 1455030407451,
         "_dstId": "1641441",
-        "_srcId": "45a4a27bf2ad1951f2789e546d465a3d2a8bac46a0",
-        "_type": "ADDRESS",
-        "_since": 1220212800000,
+        "_srcId": "4959805503",
+        "_type": "PHONE",
+        "_since": 1192564800000,
         "_source": "egrul"
     }, {
         "_holderDst": true,
@@ -193,12 +154,29 @@
         "shareAmount": 20000
     }, {
         "_holderDst": true,
-        "_actual": 1455030407451,
+        "_actual": 1471561984288,
         "_dstId": "1641441",
-        "_srcId": "4959805503",
-        "_type": "PHONE",
-        "_since": 1192564800000,
-        "_source": "egrul"
+        "outdated": false,
+        "_srcId": "ab54ffed94bed4c9d52f96bb3b44e78eb8959013",
+        "name": "Чалый Александр Александрович",
+        "inn": "592107428001",
+        "_type": "EXECUTIVE_INDIVIDUAL",
+        "_since": 1301860800000,
+        "_source": "egrul",
+        "position": "Генеральный директор"
+    }, {
+        "_holderDst": true,
+        "_actual": 1471552978495,
+        "_dstId": "1641441",
+        "outdated": true,
+        "_srcId": "ab54ffed94bed4c9d52f96bb3b44e78eb8959013",
+        "name": "Чалый Александр Александрович",
+        "inn": "592107428001",
+        "_type": "FOUNDER_INDIVIDUAL",
+        "_since": 1301860800000,
+        "_source": "egrul",
+        "sharePercent": 20.0,
+        "shareAmount": 10000.0
     }],
     "okvedcode_main": "7220",
     "_id": "1641441",
@@ -214,7 +192,7 @@
     "_info": {
         "updates": {
             "rosstat": 1456693200000,
-            "egrul": 1471088829936,
+            "egrul": 1471561984288,
             "xegrul": 1303166842000,
             "eaf": 1329422400000
         },
@@ -230,8 +208,8 @@
                 "actual": 1
             },
             "EXECUTIVE_INDIVIDUAL": {
-                "actual": 1,
-                "outdated": 1
+                "outdated": 1,
+                "actual": 1
             }
         },
         "out": {

@@ -24,6 +24,7 @@ define(function(require, exports, module) {'use strict';
                 nodeTypes[nodeType.name] = nodeType;
             });
             _.defaultsDeep(nodeTypes, relationMetaExtra.nodeTypes);
+            $log.info('nodeTypes:', _.keys(nodeTypes));
 
             //
             var relationTypes = {};
@@ -31,6 +32,7 @@ define(function(require, exports, module) {'use strict';
                 relationTypes[relationType.name] = relationType;
             });
             _.defaultsDeep(relationTypes, relationMetaExtra.relationTypes);
+            $log.info('relationTypes:', _.keys(relationTypes));
 
             //
             return {

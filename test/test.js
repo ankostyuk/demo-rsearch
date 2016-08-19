@@ -30,11 +30,14 @@ define(function(require, exports, module) {'use strict';
             //
             testUtils.nodesRelationsDump([
                 // 'COMPANY.1641441',
+                'COMPANY.1779737',
+                'COMPANY.1779737.2',
+                // 'COMPANY.1970578',
                 // 'COMPANY.8443194',
                 // 'COMPANY.8505253',
                 // 'COMPANY.8708612',
 
-                'INDIVIDUAL.ab54ffed94bed4c9d52f96bb3b44e78eb8959013'
+                // 'INDIVIDUAL.ab54ffed94bed4c9d52f96bb3b44e78eb8959013',
             ]);
 
             //
