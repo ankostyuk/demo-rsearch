@@ -1915,7 +1915,14 @@ define(function(require) {'use strict';
                             });
 
                             if (!inn && showType.mergedInn) {
-                                inn = relations[0].inn;
+                                // inn = relations[0].inn;
+
+                                // TODO разобраться и объединтить код с:
+                                // __relationsProcess
+                                // смержить специфические свойства
+                                inn = _.result(_.find(relations, function(r){
+                                    return !!r.inn;
+                                }), 'inn');
                             }
 
                             var relationData = {
