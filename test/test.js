@@ -30,8 +30,8 @@ define(function(require, exports, module) {'use strict';
             //
             testUtils.nodesRelationsDump([
                 // 'COMPANY.1641441',
-                'COMPANY.1779737',
-                'COMPANY.1779737.2',
+                // 'COMPANY.1779737',
+                // 'COMPANY.1779737.2',
                 // 'COMPANY.1970578',
                 // 'COMPANY.8443194',
                 // 'COMPANY.8505253',
@@ -41,7 +41,7 @@ define(function(require, exports, module) {'use strict';
             ]);
 
             //
-            // relationHistoryTest.test();
+            relationHistoryTest.test();
         }]);
     //
 });

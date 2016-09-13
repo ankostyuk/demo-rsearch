@@ -23,6 +23,8 @@ define(function(require, exports, module) {'use strict';
                 'COMPANY.1641441.relations':    angular.fromJson(require('text!./data/relations/nodes/COMPANY.1641441.relations.json')),
                 'COMPANY.1641441.relations-2':  angular.fromJson(require('text!./data/relations/nodes/COMPANY.1641441.relations-2.json')),
 
+                'COMPANY.1779737.relations':    angular.fromJson(require('text!./data/relations/nodes/COMPANY.1779737.relations.json')),
+
                 'COMPANY.8505253.relations':    angular.fromJson(require('text!./data/relations/nodes/COMPANY.8505253.relations.json')),
                 'COMPANY.8505253.relations-2':  angular.fromJson(require('text!./data/relations/nodes/COMPANY.8505253.relations-2.json')),
             }

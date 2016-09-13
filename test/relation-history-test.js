@@ -30,6 +30,19 @@ define(function(require, exports, module) {'use strict';
             }
 
             //
+            function buildActuality_COMPANY_1779737_Test() {
+                $log.info('ЗАО "НКБ" buildActuality test...');
+
+                var node = testData.nodes['COMPANY.1779737'];
+
+                testUtils.toTypeId(node);
+                node._relations = testData.relations.nodes['COMPANY.1779737.relations'];
+
+                npRelationHistory.buildActuality(node);
+                testUtils.relationsDump(node);
+            }
+
+            //
             function buildActuality_COMPANY_8505253_Test() {
                 $log.info('ООО "СТРОЙКОНТРОЛЬСЕРВИС" buildActuality test...');
 
@@ -47,8 +60,9 @@ define(function(require, exports, module) {'use strict';
                 test: function() {
                     $log.info('Run relationHistory tests...');
 
-                    buildActuality_COMPANY_1641441_Test();
-                    buildActuality_COMPANY_8505253_Test();
+                    // buildActuality_COMPANY_1641441_Test();
+                    buildActuality_COMPANY_1779737_Test();
+                    // buildActuality_COMPANY_8505253_Test();
                 }
             };
         }]);

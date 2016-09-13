@@ -161,9 +161,13 @@ define(function(require) {'use strict';
             // * наименование источника -- с большей датой актуальности
             //
             function mergeSource(r1, r2) {
-                r1._since = Math.min(r1._since, r2._since);
-                r1._actual = Math.max(r1._actual, r2._actual);
-                r1._source = (r2._actual > r1._actual ? r2._source : r1._source);
+                var _since  = Math.min(r1._since, r2._since),
+                    _actual = Math.max(r1._actual, r2._actual),
+                    _source = (r2._actual > r1._actual ? r2._source : r1._source);
+
+                r1._since = _since;
+                r1._actual = _actual;
+                r1._source = _source;
             }
 
             // Проверяет можно ли схлопнуть связи.
