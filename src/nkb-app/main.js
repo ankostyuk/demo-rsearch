@@ -26,7 +26,7 @@ root._APP_CONFIG = {
     },
     meta: {
         // Параметр: Объём продаж за последний год
-        lastSalesVolumeField: 'p20103_2014',
+        lastSalesVolumeField: 'p20103_2015',
         defaultCurrency: 'RUB',
         currencyOrder: 1000
     }
