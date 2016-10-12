@@ -1917,7 +1917,7 @@ define(function(require) {'use strict';
 
                     var byRelationTypes = _.get(srcNode.__relationMap.byNodes, [dstNode.__uid, 'children']) || _.get(srcNode.__relationMap.byNodes, [dstNode.__uid, 'parents']);
 
-                    var list        = [],
+                    var list = [],
                         direction, inn;
 
                     _.each(byRelationTypes, function(byRelationType, relationType){
@@ -1927,43 +1927,45 @@ define(function(require) {'use strict';
 
                         direction = srcRelationData.direction;
 
-                        if (showType) {
-                            var dstRelationData     = dstNode.__relationMap.relations[relationId],
-                                relationHistoryInfo = srcRelationData.history || dstRelationData.history,
-                                relations           = relationHistoryInfo ? relationHistoryInfo.sorted : [srcRelationData.relation],
-                                texts               = [];
+                        if (!showType) {
+                            return;
+                        }
 
-                            _.each(relations, function(relation){
-                                texts.push({
-                                    text: _.capitalize(showType.text(relation, srcNode, dstNode)),
-                                    sinceText: getSinceText(relation),
-                                    actualText: getActualText(relation),
-                                    outdated: relation.outdated
-                                });
+                        var dstRelationData     = dstNode.__relationMap.relations[relationId],
+                            relationHistoryInfo = _.get(srcRelationData, 'history') || _.get(dstRelationData, 'history'),
+                            relations           = relationHistoryInfo ? relationHistoryInfo.sorted : [srcRelationData.relation],
+                            texts               = [];
 
-                                return false; // TODO учитывать все связи при определенной опции
+                        _.each(relations, function(relation){
+                            texts.push({
+                                text: _.capitalize(showType.text(relation, srcNode, dstNode)),
+                                sinceText: getSinceText(relation),
+                                actualText: getActualText(relation),
+                                outdated: relation.outdated
                             });
 
-                            if (!inn && showType.mergedInn) {
-                                // inn = relations[0].inn;
+                            return false; // TODO учитывать все связи при определенной опции
+                        });
 
-                                // TODO разобраться и объединтить код с:
-                                // __relationsProcess
-                                // смержить специфические свойства
-                                inn = _.result(_.find(relations, function(r){
-                                    return !!r.inn;
-                                }), 'inn');
-                            }
+                        if (!inn && showType.mergedInn) {
+                            // inn = relations[0].inn;
 
-                            var relationData = {
-                                relationId: relationId,
-                                relationType: relationType,
-                                texts: texts,
-                                isTarget: false // TODO
-                            };
-
-                            list.push(relationData);
+                            // TODO разобраться и объединтить код с:
+                            // __relationsProcess
+                            // смержить специфические свойства
+                            inn = _.result(_.find(relations, function(r){
+                                return !!r.inn;
+                            }), 'inn');
                         }
+
+                        var relationData = {
+                            relationId: relationId,
+                            relationType: relationType,
+                            texts: texts,
+                            isTarget: false // TODO
+                        };
+
+                        list.push(relationData);
                     });
 
                     list = _.sortBy(list, function(relationData){
