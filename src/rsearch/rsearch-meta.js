@@ -1049,22 +1049,26 @@ define(function(require) {'use strict';
             return metaHelper;
         }])
         //
-        .filter('nodeNameText', [function(){
+        .filter('nodeNameHtml', ['$filter', function($filter){
             return function(node){
                 if (node._type === 'COMPANY') {
-                    return node.nameshortsort || node.namesort;
+                    return '<b>' + (node.nameshortsort || node.namesort) + '</b>';
                 }
                 if (node._type === 'INDIVIDUAL') {
-                    return node.name;
+                    return '<b>' + node.name + '</b>';
                 }
                 if (node._type === 'ADDRESS') {
-                    return node.value;
+                    return '<b>' + node.value + '</b>';
                 }
                 if (node._type === 'PHONE') {
-                    return node.value;
+                    return '<b>' + node.value + '</b>';
                 }
                 if (node._type === 'PURCHASE') {
-                    return node.form;
+                    return '<div><b>' + node.form + '</b>' +
+                            (node.date ? ('&nbsp;&nbsp;&nbsp;&nbsp;' + $filter('amDateFormat')(node.date, _trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/"))) : '') +
+                            (node.total_price ? ('&nbsp;&nbsp;&nbsp;&nbsp;' + $filter('number')(node.total_price, 0) + '&nbsp;' + _tr(node.currency)) : '') +
+                        '</div>' +
+                        (node.name ? ('<div>' + node.name) + '</div>' : '');
                 }
             };
         }])

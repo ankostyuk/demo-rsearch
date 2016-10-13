@@ -30,7 +30,7 @@
                 <div class="trace-part-info-entry node-status">${_trc("в отчете", "объект в отчете")}</div>
             </div>
             <div class="node">
-                <a class="action" node-id="{{tracePart.node._id}}" node-uid="{{tracePart.node.__uid}}" np-rsearch-node-simple="tracePart.node" ng-click="nodeClick($event, tracePart)"></a>
+                <a class="action" node-id="{{tracePart.node._id}}" node-uid="{{tracePart.node.__uid}}" np-rsearch-node-simple-ext="tracePart.node" ng-click="nodeClick($event, tracePart)"></a>
             </div>
             <div class="relation {{tracePart.direction}}" ng-hide="tracePart.isLast">
                 <div np-rsearch-node-relations-info="tracePart.relationsInfo"></div>

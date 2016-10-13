@@ -27,6 +27,7 @@ define(function(require) {'use strict';
     //
     var templates = {
         'np-rsearch-node-simple':                       require('text!./views/rsearch-node-simple.html'),
+        'np-rsearch-node-simple-ext':                   require('text!./views/rsearch-node-simple-ext.html'),
         'np-rsearch-node-plain':                        require('text!./views/rsearch-node-plain.html'),
         'np-rsearch-node-info':                         require('text!./views/rsearch-node-info.html'),
         'np-rsearch-node-history-info':                 require('text!./views/rsearch-node-history-info.html'),
@@ -74,6 +75,19 @@ define(function(require) {'use strict';
                     targetInfo: '=npRsearchNodeTargetInfo'
                 },
                 template: templates['np-rsearch-node-simple']
+            };
+        }])
+        //
+        .directive('npRsearchNodeSimpleExt', [function() {
+            return {
+                restrict: 'A',
+                scope: {
+                    node: '=npRsearchNodeSimpleExt'
+                },
+                template: templates['np-rsearch-node-simple-ext'],
+                link: function(scope, element, attrs){
+                    _.extend(scope, i18n.translateFuncs);
+                }
             };
         }])
         //
@@ -792,9 +806,9 @@ define(function(require) {'use strict';
                         normalizeResult(result);
 
                         var resultText = ''
-                            + ('<h3>' + $filter('nodeNameText')(nodes[0]) + '</h3>')
+                            + ('<h3>' + $filter('nodeNameHtml')(nodes[0]) + '</h3>')
                             + 'и'
-                            + ('<h3>' + $filter('nodeNameText')(nodes[1]) + '</h3>')
+                            + ('<h3>' + $filter('nodeNameHtml')(nodes[1]) + '</h3>')
                             + '<br>'
                             + 'через связи:'
                             + '<br>'
@@ -867,7 +881,7 @@ define(function(require) {'use strict';
                                 var relationText;
 
                                 resultText += ''
-                                    + ('<div><b>' + $filter('nodeNameText')(tracePart.node) + '</b></div>')
+                                    + ('<div>' + $filter('nodeNameHtml')(tracePart.node) + '</div>')
                                     + '';
 
                                 if (!tracePart.isLast) {
