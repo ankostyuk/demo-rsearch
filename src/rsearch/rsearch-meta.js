@@ -1563,10 +1563,11 @@ define(function(require) {'use strict';
         //
         .factory('npRsearchRelationHelper', ['$log', '$filter', 'nkbScreenHelper', function($log, $filter, nkbScreenHelper){
 
-            var nbsp        = '\u00A0',     // &nbsp
-                // space       = ' ',
-                // dash        = ' —\u00A0',   // space + dash + &nbsp
-                separator   = ', ';         // , + space
+            var nbsp                        = '\u00A0',     // &nbsp
+                // space                       = ' ',
+                // dash                        = ' —\u00A0',   // space + dash + &nbsp
+                separator                   = ', ',         // , + space
+                wrapRelationTextsSeparator  = ',\n';
 
             var SHOW_TYPES = {
                 'FOUNDER_COMPANY': {
@@ -1578,8 +1579,8 @@ define(function(require) {'use strict';
 
                 'AFFILIATED_COMPANY': {
                     order: 102,
-                    text: function(relation, srcNode, dstNode) {
-                        return getAffiliatedText(relation);
+                    text: function(relation, srcNode, dstNode, options) {
+                        return getAffiliatedText(relation, srcNode, dstNode, options);
                     }
                 },
 
@@ -1594,15 +1595,15 @@ define(function(require) {'use strict';
                 'EXECUTIVE_INDIVIDUAL': {
                     order: 202,
                     mergedInn: true,
-                    text: function(relation, srcNode, dstNode) {
-                        return getExecutiveText(relation);
+                    text: function(relation, srcNode, dstNode, options) {
+                        return getExecutiveText(relation, srcNode, dstNode, options);
                     }
                 },
 
                 'AFFILIATED_INDIVIDUAL': {
                     order: 203,
-                    text: function(relation, srcNode, dstNode) {
-                        return getAffiliatedText(relation);
+                    text: function(relation, srcNode, dstNode, options) {
+                        return getAffiliatedText(relation, srcNode, dstNode, options);
                     }
                 },
 
@@ -1707,7 +1708,9 @@ define(function(require) {'use strict';
                 }
             };
 
-            function getRelationText(relation, properties) {
+            function getRelationText(relation, properties, options) {
+                options = options || {};
+
                 var t = [],
                     value, v;
 
@@ -1722,7 +1725,7 @@ define(function(require) {'use strict';
                     }
                 });
 
-                return t.join(separator);
+                return t.join(options.wrapRelationTexts ? wrapRelationTextsSeparator : separator);
             }
 
             function getFounderText(relation) {
@@ -1744,17 +1747,17 @@ define(function(require) {'use strict';
                 return _tr("учредитель");
             }
 
-            function getExecutiveText(relation) {
+            function getExecutiveText(relation, srcNode, dstNode, options) {
                 if (relation.position) {
                     return nkbScreenHelper.isScreen(relation.position) ?
                             nkbScreenHelper.screen(relation.position) :
-                            $filter('multiline')(relation.position, 'line', 50);
+                            $filter('multiline')(relation.position, 'line', options.wrapRelationTexts ? 20 : 50);
                 }
 
                 return _tr("руководитель");
             }
 
-            function getAffiliatedText(relation) {
+            function getAffiliatedText(relation, srcNode, dstNode, options) {
                 var t = getRelationText(relation, [{
                     name: 'causes',
                     filter: function(causes) {
@@ -1766,7 +1769,7 @@ define(function(require) {'use strict';
                             }
                         });
 
-                        return v.join(separator);
+                        return v.join(options.wrapRelationTexts ? wrapRelationTextsSeparator : separator);
                     }
                 }, {
                     name: 'shareCapital',
@@ -1778,7 +1781,7 @@ define(function(require) {'use strict';
                     filter: function(v) {
                         return _tr("доля акций") + nbsp + $filter('share')(v) + '%';
                     }
-                }]);
+                }], options);
 
                 if (t) {
                     return t;
@@ -1917,7 +1920,7 @@ define(function(require) {'use strict';
             //
             var relationHelper = {
                 buildRelationsInfoBetweenNodes: function(srcNode, dstNode, options) {
-                    // options = options || {};
+                    options = options || {};
 
                     var byRelationTypes = _.get(srcNode.__relationMap.byNodes, [dstNode.__uid, 'children']) || _.get(srcNode.__relationMap.byNodes, [dstNode.__uid, 'parents']);
 
@@ -1942,7 +1945,7 @@ define(function(require) {'use strict';
 
                         _.each(relations, function(relation){
                             texts.push({
-                                text: _.capitalize(showType.text(relation, srcNode, dstNode)),
+                                text: _.capitalize(showType.text(relation, srcNode, dstNode, options)),
                                 sinceText: getSinceText(relation),
                                 actualText: getActualText(relation),
                                 outdated: relation.outdated
