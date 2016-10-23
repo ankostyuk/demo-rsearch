@@ -502,6 +502,7 @@ define(function(require) {'use strict';
                 },
 
                 getHistoryRelationCountsByInfo: function(info) {
+                    info = info || {};
                     return {
                         'actual': info.actual || 0,
                         'outdated': info.outdated || 0,
