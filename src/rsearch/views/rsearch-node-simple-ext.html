@@ -1,0 +1,12 @@
+<span ng-if="node._type === 'COMPANY'"><i class="icon i-company"></i>{{(node.nameshortsort || node.namesort) | screen}}</span>
+<span ng-if="node._type === 'INDIVIDUAL'" class="{{node.subtype}} {{node.gender}}"><i class="icon i-user"></i>{{node.name | screen}}</span>
+<span ng-if="node._type === 'ADDRESS'"><i class="icon i-map-marker"></i>{{node.value | screen}}</span>
+<span ng-if="node._type === 'PHONE'"><i class="icon i-phone"></i>{{node.value | screen}}</span>
+<span ng-if="node._type === 'PURCHASE'">
+    <span><i class="icon i-justice-2"></i>{{node.form}}</span>
+    <span class="inline">
+        <span class="inline-entry" ng-show="node.date">{{node.date | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</span>
+        <span class="inline-entry" ng-show="node.total_price">{{node.total_price | number:0}} {{_tr(node.currency)}}</span>
+    </span>
+    <span class="entry">{{node.name}}</span>
+</span>

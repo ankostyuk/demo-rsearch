@@ -1,0 +1,229 @@
+{
+    "okvedcode_bal": "7220",
+    "okved_bal_short_text": "Деятельность, связанная с использованием вычислительной техники и информационных технологий",
+    "egrul_state": {
+        "_actual": 1455030407451,
+        "_since": 1199134800000,
+        "code": "5",
+        "type": "Действующее"
+    },
+    "balance_forms_2006": [1, 2],
+    "balance_forms_2005": [1, 2],
+    "balance_forms_2004": [1, 2],
+    "chief_gender": "MALE",
+    "addressindex": 107140,
+    "balance": [2006, 2005, 2004],
+    "okved_main_short_text": "Деятельность, связанная с использованием вычислительной техники и информационных технологий",
+    "egrul_reg": {
+        "_actual": 1455030407451,
+        "_since": 1078434000000,
+        "code": "100001",
+        "type": "Государственная регистрация юридического лица при создании"
+    },
+    "bsn_id": 1641441,
+    "okved_main_text": "Разработка программного обеспечения и консультирование в этой области",
+    "ogrn": "1047796140402",
+    "chief_name": "Чалый Александр Александрович",
+    "okved_bal_text": "Разработка программного обеспечения и консультирование в этой области",
+    "kpp": "770801001",
+    "okfs_text": "Частная собственность",
+    "_relations": [{
+        "_holderDst": true,
+        "_actual": 1456693200000,
+        "_dstId": "1641441",
+        "_srcId": "45a4a27bf2ad1951f2789e546d465a3d2a8bac46a0",
+        "_type": "ADDRESS",
+        "_since": 1220212800000,
+        "_source": "rosstat"
+    }, {
+        "_holderDst": true,
+        "_actual": 1329422400000,
+        "_dstId": "1641441",
+        "outdated": true,
+        "_srcId": "ab54ffed94bed4c9d52f96bb3b44e78eb8959013",
+        "name": "Чалый Александр Александрович",
+        "inn": "592107428001",
+        "_type": "FOUNDER_INDIVIDUAL",
+        "_since": 1302724800000,
+        "_source": "eaf",
+        "sharePercent": 100,
+        "shareAmount": 10000
+    }, {
+        "_holderDst": true,
+        "_actual": 1259701204000,
+        "_dstId": "1641441",
+        "outdated": true,
+        "_srcId": "b5d98ab6be96a6123d05725b094bdd44e38cbd76",
+        "name": "Ященко Наталья Юрьевна",
+        "inn": "503207043754",
+        "_type": "FOUNDER_INDIVIDUAL",
+        "_since": 1078434000000,
+        "_source": "xegrul",
+        "sharePercent": 50.0,
+        "shareAmount": 20000
+    }, {
+        "_holderDst": true,
+        "_actual": 1259701204000,
+        "_dstId": "1641441",
+        "outdated": true,
+        "_srcId": "84d32975bfb06e16fde7bae790e2dd619a929eea",
+        "name": "Ященко Вадим Викторович",
+        "inn": "503207044490",
+        "_type": "EXECUTIVE_INDIVIDUAL",
+        "_since": 1078434000000,
+        "_source": "xegrul",
+        "position": "Генеральный директор"
+    }, {
+        "_holderDst": true,
+        "_actual": 1303166842000,
+        "_dstId": "1641441",
+        "outdated": true,
+        "_srcId": "b5d98ab6be96a6123d05725b094bdd44e38cbd76",
+        "name": "Ященко Наталья Юрьевна",
+        "inn": "503207043754",
+        "_type": "FOUNDER_INDIVIDUAL",
+        "_since": 1301860800000,
+        "_source": "xegrul",
+        "sharePercent": 40.0,
+        "shareAmount": 20000
+    }, {
+        "_holderDst": true,
+        "_actual": 1471561984288,
+        "_dstId": "1641441",
+        "outdated": false,
+        "_srcId": "1641441",
+        "_type": "FOUNDER_COMPANY",
+        "_since": 1302724800000,
+        "_source": "egrul",
+        "sharePercent": 80.0,
+        "shareAmount": 40000.0
+    }, {
+        "_holderDst": true,
+        "_actual": 1471561984288,
+        "_dstId": "1641441",
+        "outdated": false,
+        "_srcId": "ab54ffed94bed4c9d52f96bb3b44e78eb8959013",
+        "name": "Чалый Александр Александрович",
+        "inn": "592107428001",
+        "_type": "FOUNDER_INDIVIDUAL",
+        "_since": 1301860800000,
+        "_source": "egrul",
+        "sharePercent": 20.0,
+        "shareAmount": 10000.0
+    }, {
+        "_holderDst": true,
+        "_actual": 1303166842000,
+        "_dstId": "1641441",
+        "outdated": true,
+        "_srcId": "84d32975bfb06e16fde7bae790e2dd619a929eea",
+        "name": "Ященко Вадим Викторович",
+        "inn": "503207044490",
+        "_type": "FOUNDER_INDIVIDUAL",
+        "_since": 1301860800000,
+        "_source": "xegrul",
+        "sharePercent": 40.0,
+        "shareAmount": 20000
+    }, {
+        "_holderDst": true,
+        "_actual": 1455030407451,
+        "_dstId": "1641441",
+        "_srcId": "45d6d9cc11d6d340782b8e70db76cdd166753d6860",
+        "_type": "ADDRESS",
+        "_since": 1192564800000,
+        "_source": "egrul"
+    }, {
+        "_holderDst": true,
+        "_actual": 1455030407451,
+        "_dstId": "1641441",
+        "_srcId": "4959805503",
+        "_type": "PHONE",
+        "_since": 1192564800000,
+        "_source": "egrul"
+    }, {
+        "_holderDst": true,
+        "_actual": 1259701204000,
+        "_dstId": "1641441",
+        "outdated": true,
+        "_srcId": "84d32975bfb06e16fde7bae790e2dd619a929eea",
+        "name": "Ященко Вадим Викторович",
+        "inn": "503207044490",
+        "_type": "FOUNDER_INDIVIDUAL",
+        "_since": 1078434000000,
+        "_source": "xegrul",
+        "sharePercent": 50.0,
+        "shareAmount": 20000
+    }, {
+        "_holderDst": true,
+        "_actual": 1471561984288,
+        "_dstId": "1641441",
+        "outdated": false,
+        "_srcId": "ab54ffed94bed4c9d52f96bb3b44e78eb8959013",
+        "name": "Чалый Александр Александрович",
+        "inn": "592107428001",
+        "_type": "EXECUTIVE_INDIVIDUAL",
+        "_since": 1301860800000,
+        "_source": "egrul",
+        "position": "Генеральный директор"
+    }, {
+        "_holderDst": true,
+        "_actual": 1471552978495,
+        "_dstId": "1641441",
+        "outdated": true,
+        "_srcId": "ab54ffed94bed4c9d52f96bb3b44e78eb8959013",
+        "name": "Чалый Александр Александрович",
+        "inn": "592107428001",
+        "_type": "FOUNDER_INDIVIDUAL",
+        "_since": 1301860800000,
+        "_source": "egrul",
+        "sharePercent": 20.0,
+        "shareAmount": 10000.0
+    }],
+    "okvedcode_main": "7220",
+    "_id": "1641441",
+    "okopfcode": 12165,
+    "founded_dt": 1078434000000,
+    "individual_placeholders": [{
+        "_since": 1303070400000,
+        "sharePercent": 100.0,
+        "shareAmount": 10000.0,
+        "name": "Граждане России(1)"
+    }],
+    "nameshortsort": "ООО \"ИНТ Проекты\"",
+    "_info": {
+        "updates": {
+            "rosstat": 1456693200000,
+            "egrul": 1471561984288,
+            "xegrul": 1303166842000,
+            "eaf": 1329422400000
+        },
+        "in": {
+            "FOUNDER_INDIVIDUAL": {
+                "outdated": 2,
+                "actual": 1
+            },
+            "ADDRESS": {
+                "actual": 2
+            },
+            "PHONE": {
+                "actual": 1
+            },
+            "EXECUTIVE_INDIVIDUAL": {
+                "outdated": 1,
+                "actual": 1
+            }
+        },
+        "out": {
+            "FOUNDER_COMPANY": {
+                "actual": 1
+            }
+        },
+        "matches": []
+    },
+    "addresssort": "г Москва, ул Верхяя Красносельская, д 2/1, стр 2",
+    "inn": "7704514076",
+    "_type": "COMPANY",
+    "namesort": "Общество с ограниченной ответственностью \"ИНТ Проекты\"",
+    "okatocode": 45286565000,
+    "okpo": "72049905",
+    "okfscode": 16
+}

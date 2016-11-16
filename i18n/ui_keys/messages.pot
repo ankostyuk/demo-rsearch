@@ -260,3 +260,11 @@ msgstr ""
 #: ../i18n/ui_keys/src/keys.txt:1
 msgid "RELATION_GROUP_PURCHASE"
 msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "RELATION_actual"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "RELATION_outdated"
+msgstr ""

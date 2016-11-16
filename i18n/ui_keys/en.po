@@ -12,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "CLDR_PLURAL_FORMS_FORMAT: one{0}other{1}\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.7.6\n"
 
 #: ../i18n/ui_keys/src/keys.txt:1
 msgid "AFFILIATE_20_PERCENT"
@@ -126,9 +126,8 @@ msgid "NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL-children"
 msgstr "{'one': '{} руководимая компания', 'few': '{} руководимые компании', 'many': '{} руководимых компаний', 'other': '{} руководимой компании'}"
 
 #: ../i18n/ui_keys/src/keys.txt:1
-#, fuzzy
 msgid "NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL-parents"
-msgstr "{'one': 'Руководитель', 'few': '{} руководителя', 'many': '{} руководителей', 'other': '{} руководителя'}"
+msgstr "{'one': 'Руководитель', 'few': '{} руководителя', 'many': '{} руководителей', 'other': '{} руководителя', 'null': 'Нет руководителя'}"
 
 #: ../i18n/ui_keys/src/keys.txt:1
 #, fuzzy
@@ -256,6 +255,15 @@ msgstr "Контакты"
 #, fuzzy
 msgid "RELATION_GROUP_PURCHASE"
 msgstr "Закупки"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
+msgid "RELATION_actual"
+msgstr "актуальные"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "RELATION_outdated"
+msgstr "исторические"
 
 #: ../i18n/ui_keys/src/keys.txt:1
 msgid "RUB"

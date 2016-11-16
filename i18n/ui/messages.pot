@@ -227,7 +227,12 @@ msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
-msgid "Сервис комментариев"
+msgid "Новое"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid "Поиск признаков\nконфликта интересов"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
@@ -451,6 +456,8 @@ msgid "Заказчик"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-affiliated-cause-filter.html:1
+#: ../src/rsearch/views/rsearch-history-filter.html:1
+#: ../src/rsearch/views/rsearch-history-filter.html:1
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 #: ../src/rsearch/views/rsearch-region-filter.html:1
 msgid "Все"
@@ -758,7 +765,18 @@ msgid "уровень"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
-msgid "Будут найдены все возможные цепочки связей\nдо указанного уровня"
+msgctxt "Цепочки связанных объектов"
+msgid "Любые цепочки"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Цепочки связанных объектов"
+msgid "Актуальные связи"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Цепочки связанных объектов"
+msgid "Исторические связи"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
@@ -774,6 +792,10 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-node-traces.html:1
 msgctxt "из такого-то количества"
 msgid "из"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgid "Будут найдены все возможные цепочки связей до указанного уровня"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1

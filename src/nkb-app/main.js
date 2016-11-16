@@ -9,6 +9,8 @@ var i18nBundles = [
     // external
     'text!external_components/nullpointer-autokad/l10n/ui/bundle.json',
     'text!external_components/nullpointer-autokad/l10n/ui_keys/bundle.json',
+    'text!external_components/nullpointer-connections-ui/l10n/ui/bundle.json',
+    'text!external_components/nullpointer-connections-ui/l10n/ui_keys/bundle.json',
     // internal
     'text!src/l10n/ui/bundle.json',
     'text!src/l10n/ui_keys/bundle.json',
@@ -24,7 +26,7 @@ root._APP_CONFIG = {
     },
     meta: {
         // Параметр: Объём продаж за последний год
-        lastSalesVolumeField: 'p20103_2014',
+        lastSalesVolumeField: 'p20103_2015',
         defaultCurrency: 'RUB',
         currencyOrder: 1000
     }
@@ -130,9 +132,8 @@ root._RESOURCES_CONFIG = {
         location: 'external_components/nullpointer-commons/utils/template-utils',
         main: 'template-utils'
     }, {
-        // TODO перенести в nullpointer-commons/angular
         name: 'np.utils',
-        location: 'src/utils',
+        location: 'external_components/nullpointer-commons/angular/utils',
         main: 'utils'
     }, {
         name: 'autokad',
@@ -142,6 +143,10 @@ root._RESOURCES_CONFIG = {
         name: 'i18n',
         location: 'external_components/nullpointer-i18n',
         main: 'i18n'
+    }, {
+        name: 'connections',
+        location: 'external_components/nullpointer-connections-ui/connections'
+        // location: '/connections-ui/src/connections'
     }],
 
     shim: {

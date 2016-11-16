@@ -5,6 +5,7 @@
             <li ng-repeat="countData in group.relationCounts" ng-class="{active: active === countData.key}">
                 <a class="action" ng-click="actions.relationsClick(countData.direction, countData.relationType)"><np-pluralize plural="{count: countData.relationCount, when: _tr(countData.pluralKey)}"></np-pluralize></a>
                 <div ng-if="group.key === 'AFFILIATED'" np-rsearch-affiliated-cause-filter></div>
+                <div ng-if="countData.history" np-rsearch-history-filter></div>
             </li>
             <li ng-if="group.key === 'PURCHASE' && node._type === 'COMPANY'" np-rsearch-purchase-dishonest-supplier-info="actions.purchaseDishonestSupplier" np-rsearch-purchase-dishonest-supplier-click="actions.purchaseDishonestSupplierClick"></li>
         </ul>

@@ -1,0 +1,227 @@
+{
+    "dead_dt": 1427749200000,
+    "founded_dt": 1323806400000,
+    "individual_placeholders": [{
+        "_since": 1407096000000,
+        "sharePercent": 100.0,
+        "shareAmount": 60000.0,
+        "name": "Граждане России(1)"
+    }],
+    "egrul_state": {
+        "_actual": 1456693200000,
+        "code": "12",
+        "_since": 1427749200000,
+        "type": "Ликвидировано"
+    },
+    "nameshortsort": "ООО \"ВИКИНГ\"",
+    "chief_gender": "FEMALE",
+    "addressindex": 121500,
+    "okved_main_short_text": "Оптовая торговля, включая торговлю через агентов, кроме торговли автотранспортными средствами и мотоциклами",
+    "bsn_id": 8443194,
+    "okved_main_text": "Прочая оптовая торговля",
+    "ogrn": "5117746020068",
+    "_info": {
+        "updates": {
+            "rosstat": 1456693200000,
+            "xegrul": 1417068110000
+        },
+        "in": {
+            "FOUNDER_INDIVIDUAL": {
+                "outdated": 3,
+                "actual": 1
+            },
+            "ADDRESS": {
+                "actual": 1
+            },
+            "EXECUTIVE_INDIVIDUAL": {
+                "outdated": 2,
+                "actual": 1
+            }
+        },
+        "out": {},
+        "matches": []
+    },
+    "addresssort": "г Москва, ул Василия Ботылева, д 37",
+    "chief_name": "Черемухина Юлия Сергеевна",
+    "inn": "7731418692",
+    "_type": "COMPANY",
+    "namesort": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ВИКИНГ\"",
+    "okatocode": 45268562000,
+    "okpo": "38204484",
+    "okfs_text": "Частная собственность",
+    "_relations": [{
+        "_holderDst": true,
+        "_srcId": "3f2df90bff82fee0ab0cb3815a55a79c4095dcb0",
+        "inn": "236504738770",
+        "_type": "FOUNDER_INDIVIDUAL",
+        "shareAmount": 1500,
+        "_actual": 1362689189000,
+        "_dstId": "8443194",
+        "outdated": true,
+        "name": "Глазырин Сергей Александрович",
+        "_since": 1362600000000,
+        "_testFlag": "TESTING TAKE 4",
+        "_source": "xegrul",
+        "sharePercent": 3.0
+    }, {
+        "_holderDst": true,
+        "_srcId": "d9747a340c2c9f5e37f3c26ee1a97eb5ee8a909f",
+        "inn": "503813432461",
+        "_type": "FOUNDER_INDIVIDUAL",
+        "shareAmount": 50000,
+        "_actual": 1395781084000,
+        "_dstId": "8443194",
+        "outdated": true,
+        "name": "Ляхов Владимир Юрьевич",
+        "_since": 1395604800000,
+        "_testFlag": "TESTING TAKE 4",
+        "_source": "xegrul",
+        "sharePercent": 83.3334
+    }, {
+        "_holderDst": true,
+        "_srcId": "ab54ffed94bed4c9d52f96bb3b44e78eb8959013",
+        "inn": "592107428001",
+        "_type": "FOUNDER_INDIVIDUAL",
+        "shareAmount": 13500,
+        "_actual": 1362689189000,
+        "_dstId": "8443194",
+        "outdated": true,
+        "name": "Чалый Александр Александрович",
+        "_since": 1362600000000,
+        "_testFlag": "TESTING TAKE 4",
+        "_source": "xegrul",
+        "sharePercent": 27.0
+    }, {
+        "_holderDst": true,
+        "_actual": 1357890213000,
+        "_dstId": "8443194",
+        "outdated": true,
+        "_srcId": "ab54ffed94bed4c9d52f96bb3b44e78eb8959013",
+        "name": "Чалый Александр Александрович",
+        "_type": "FOUNDER_INDIVIDUAL",
+        "_since": 1323806400000,
+        "_testFlag": "TESTING TAKE 4",
+        "_source": "xegrul",
+        "sharePercent": 90.0,
+        "shareAmount": 13500
+    }, {
+        "_holderDst": true,
+        "_actual": 1376423476000,
+        "_dstId": "8443194",
+        "outdated": true,
+        "_srcId": "d9747a340c2c9f5e37f3c26ee1a97eb5ee8a909f",
+        "name": "Ляхов Владимир Юрьевич",
+        "inn": "503813432461",
+        "_type": "EXECUTIVE_INDIVIDUAL",
+        "_since": 1362600000000,
+        "_testFlag": "TESTING TAKE 4",
+        "_source": "xegrul",
+        "position": "Генеральный директор"
+    }, {
+        "_holderDst": true,
+        "_actual": 1456693200000,
+        "_dstId": "8443194",
+        "_srcId": "450966a61c037cf8b0812424a2b8fd043769ba6cbd",
+        "_type": "ADDRESS",
+        "_since": 1323892800000,
+        "_source": "rosstat"
+    }, {
+        "_holderDst": true,
+        "_srcId": "054615d13c75f11c61339c59b1e98209d5a67276",
+        "inn": "580311016470",
+        "_type": "FOUNDER_INDIVIDUAL",
+        "shareAmount": 10000,
+        "_actual": 1395781084000,
+        "_dstId": "8443194",
+        "outdated": true,
+        "name": "Черемухина Юлия Сергеевна",
+        "_since": 1395604800000,
+        "_testFlag": "TESTING TAKE 4",
+        "_source": "xegrul",
+        "sharePercent": 16.6667
+    }, {
+        "_holderDst": true,
+        "_actual": 1357890213000,
+        "_dstId": "8443194",
+        "outdated": true,
+        "_srcId": "3f2df90bff82fee0ab0cb3815a55a79c4095dcb0",
+        "name": "Глазырин Сергей Александрович",
+        "_type": "FOUNDER_INDIVIDUAL",
+        "_since": 1323806400000,
+        "_testFlag": "TESTING TAKE 4",
+        "_source": "xegrul",
+        "sharePercent": 10.0,
+        "shareAmount": 1500
+    }, {
+        "_holderDst": true,
+        "_srcId": "d9747a340c2c9f5e37f3c26ee1a97eb5ee8a909f",
+        "inn": "503813432461",
+        "_type": "FOUNDER_INDIVIDUAL",
+        "shareAmount": 35000,
+        "_actual": 1362689189000,
+        "_dstId": "8443194",
+        "outdated": true,
+        "name": "Ляхов Владимир Юрьевич",
+        "_since": 1362600000000,
+        "_testFlag": "TESTING TAKE 4",
+        "_source": "xegrul",
+        "sharePercent": 70.0
+    }, {
+        "_holderDst": true,
+        "_actual": 1357890213000,
+        "_dstId": "8443194",
+        "outdated": true,
+        "_srcId": "ab54ffed94bed4c9d52f96bb3b44e78eb8959013",
+        "name": "Чалый Александр Александрович",
+        "_type": "EXECUTIVE_INDIVIDUAL",
+        "_since": 1323806400000,
+        "_testFlag": "TESTING TAKE 4",
+        "_source": "xegrul",
+        "position": "Генеральный директор"
+    }, {
+        "_holderDst": true,
+        "_srcId": "d9747a340c2c9f5e37f3c26ee1a97eb5ee8a909f",
+        "inn": "503813432461",
+        "_type": "FOUNDER_INDIVIDUAL",
+        "shareAmount": 50000,
+        "_actual": 1376423476000,
+        "_dstId": "8443194",
+        "outdated": true,
+        "name": "Ляхов Владимир Юрьевич",
+        "_since": 1363636800000,
+        "_testFlag": "TESTING TAKE 4",
+        "_source": "xegrul",
+        "sharePercent": 100.0
+    }, {
+        "_holderDst": true,
+        "_actual": 1456693200000,
+        "_dstId": "8443194",
+        "outdated": false,
+        "_srcId": "054615d13c75f11c61339c59b1e98209d5a67276",
+        "name": "Черемухина Юлия Сергеевна",
+        "inn": "580311016470",
+        "_type": "EXECUTIVE_INDIVIDUAL",
+        "_since": 1395604800000,
+        "_testFlag": "TESTING TAKE 4",
+        "_source": "rosstat",
+        "position": "ГЕНЕРАЛЬНЫЙ ДИРЕКТОР"
+    }, {
+        "_holderDst": true,
+        "_srcId": "054615d13c75f11c61339c59b1e98209d5a67276",
+        "inn": "580311016470",
+        "_type": "FOUNDER_INDIVIDUAL",
+        "shareAmount": 60000,
+        "_actual": 1417068110000,
+        "_dstId": "8443194",
+        "outdated": false,
+        "name": "Черемухина Юлия Сергеевна",
+        "_since": 1406664000000,
+        "_testFlag": "TESTING TAKE 4",
+        "_source": "xegrul",
+        "sharePercent": 100.0
+    }],
+    "okvedcode_main": "5170",
+    "okfscode": 16,
+    "_id": "8443194",
+    "okopfcode": 12165
+}

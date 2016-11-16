@@ -74,6 +74,12 @@ msgctxt "Формат даты: http://momentjs.com/docs/#/displaying/format/"
 msgid "mediumDate"
 msgstr "MMM D, YYYY"
 
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+#, fuzzy
+msgctxt "Цепочки связанных объектов"
+msgid "Актуальные связи"
+msgstr "Arbitration cases"
+
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
 msgid ""
@@ -131,9 +137,8 @@ msgid "Бизнес-справки онлайн"
 msgstr "Online reports"
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
-msgid ""
-"Будут найдены все возможные цепочки связей\n"
-"до указанного уровня"
+#, fuzzy
+msgid "Будут найдены все возможные цепочки связей до указанного уровня"
 msgstr "Will find all possible links up to specified level"
 
 #: ../src/rsearch/views/rsearch-node-history-info.html:1
@@ -154,6 +159,7 @@ msgid "Войти"
 msgstr "Login"
 
 #: ../src/rsearch/views/rsearch-affiliated-cause-filter.html:1
+#: ../src/rsearch/views/rsearch-history-filter.html:1
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 #: ../src/rsearch/views/rsearch-region-filter.html:1
 msgid "Все"
@@ -272,6 +278,12 @@ msgstr "Claims and court decisions"
 msgid "Исполнительные производства"
 msgstr "Enforcement proceedings"
 
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+#, fuzzy
+msgctxt "Цепочки связанных объектов"
+msgid "Исторические связи"
+msgstr "Historical Report"
+
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Исторический профиль"
 msgstr "Historical Report"
@@ -320,6 +332,12 @@ msgstr "Any INN"
 msgid "Любой регион"
 msgstr "Any region"
 
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+#, fuzzy
+msgctxt "Цепочки связанных объектов"
+msgid "Любые цепочки"
+msgstr "Single connection"
+
 #: ../src/nkb-app/index.html:1
 msgid "НАЛПОИНТЕР"
 msgstr "NULLPOINTER"
@@ -348,6 +366,11 @@ msgstr "No data. Try to adjust filters."
 #: ../src/comment/views/comment.html:1
 msgid "Нет комментариев"
 msgstr "No comments"
+
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid "Новое"
+msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgid "О проекте"
@@ -464,6 +487,13 @@ msgstr "Search tax office site"
 msgid "Поиск на федеральном ресурсе"
 msgstr "Поиск на федеральном ресурсе"
 
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid ""
+"Поиск признаков\n"
+"конфликта интересов"
+msgstr ""
+
 #: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
 #, fuzzy
@@ -546,11 +576,6 @@ msgstr ""
 #: ../src/nkb-app/index.html:1
 msgid "Сделано в"
 msgstr "Created by"
-
-#: ../src/nkb-app/index.html:1
-msgctxt "Продукты НКБ на главной странице"
-msgid "Сервис комментариев"
-msgstr "Comments"
 
 #: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
 #, fuzzy
@@ -959,6 +984,10 @@ msgstr "#"
 #~ msgstr ""
 #~ "Custom\n"
 #~ "Reports"
+
+#~ msgctxt "Продукты НКБ на главной странице"
+#~ msgid "Сервис комментариев"
+#~ msgstr "Comments"
 
 #~ msgid "Учредитель — физическое лицо"
 #~ msgstr "Founder — person"
