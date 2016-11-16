@@ -105,7 +105,7 @@
     ],
     "NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL-parents": [
       null,
-      "{'one': 'Руководитель', 'few': '{} руководителя', 'many': '{} руководителей', 'other': '{} руководителя'}"
+      "{'one': 'Руководитель', 'few': '{} руководителя', 'many': '{} руководителей', 'other': '{} руководителя', 'null': 'Нет руководителя'}"
     ],
     "NG_PLURALIZE::RELATION_FOUNDER-parents": [
       null,
@@ -210,6 +210,14 @@
     "RELATION_GROUP_PURCHASE": [
       null,
       "Закупки"
+    ],
+    "RELATION_actual": [
+      null,
+      "актуальные"
+    ],
+    "RELATION_outdated": [
+      null,
+      "исторические"
     ],
     "RUB": [
       null,
@@ -362,7 +370,7 @@
     ],
     "NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL-parents": [
       null,
-      "{'one': 'Руководитель', 'few': '{} руководителя', 'many': '{} руководителей', 'other': '{} руководителя'}"
+      "{'one': 'Руководитель', 'few': '{} руководителя', 'many': '{} руководителей', 'other': '{} руководителя', 'null': 'Нет руководителя'}"
     ],
     "NG_PLURALIZE::RELATION_FOUNDER-parents": [
       null,
@@ -467,6 +475,14 @@
     "RELATION_GROUP_PURCHASE": [
       null,
       "Закупки"
+    ],
+    "RELATION_actual": [
+      null,
+      "актуальные"
+    ],
+    "RELATION_outdated": [
+      null,
+      "исторические"
     ],
     "RUB": [
       null,

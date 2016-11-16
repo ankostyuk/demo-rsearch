@@ -1,0 +1,224 @@
+var root = this;
+
+/*
+ * config
+ *
+ */
+// i18n
+var i18nBundles = [
+    // // external
+    // 'text!external_components/nullpointer-autokad/l10n/ui/bundle.json',
+    // 'text!external_components/nullpointer-autokad/l10n/ui_keys/bundle.json',
+    // 'text!external_components/nullpointer-connections-ui/l10n/ui/bundle.json',
+    // 'text!external_components/nullpointer-connections-ui/l10n/ui_keys/bundle.json',
+    // internal
+    // 'text!src/l10n/ui/bundle.json',
+    'text!src/l10n/ui_keys/bundle.json',
+    // 'text!src/l10n/okato_region/bundle.json',
+    // 'text!src/l10n/fns_company_application_form/bundle.json'
+];
+
+//
+root._APP_CONFIG = {
+    lang: {
+        defaultLang: 'ru',
+        langs: ['ru', 'en']
+    },
+    meta: {
+        // Параметр: Объём продаж за последний год
+        lastSalesVolumeField: 'p20103_2014',
+        defaultCurrency: 'RUB',
+        currencyOrder: 1000
+    }
+};
+
+//
+root._RESOURCES_CONFIG = {
+    baseUrl: '/rsearch',
+
+    paths: {
+        'angular':              'external_components/angular/angular',
+        'angular-locale_ru':    'external_components/angular-i18n/angular-locale_ru',
+        'angular-locale_en':    'external_components/angular-i18n/angular-locale_en',
+        'ng-infinite-scroll':   'external_components/ngInfiniteScroll/ng-infinite-scroll',
+
+        'jquery':               'external_components/jquery/jquery',
+        'jquery.cookie':        'external_components/jquery.cookie/jquery.cookie',
+
+        'purl':                 'external_components/purl/purl',
+
+        'moment':               'external_components/moment/moment',
+        'moment-timezone':      'external_components/moment-timezone/moment-timezone-with-data',
+        'angular-moment':       'external_components/angular-moment/angular-moment',
+
+        'uuid':                 'external_components/node-uuid/uuid',
+
+        // nkbcomment
+        'backbone':                     'external_components/backbone/backbone',
+        'iso8601':                      'external_components/iso8601/iso8601',
+        'jquery.ui.widget':             'external_components/jquery-file-upload/jquery.ui.widget',
+        'jquery.iframe-transport':      'external_components/jquery-file-upload/jquery.iframe-transport',
+        'jquery.fileupload':            'external_components/jquery-file-upload/jquery.fileupload',
+        'jquery.fileDownload':          'external_components/jquery.fileDownload/jquery.fileDownload',
+        'dateformat':                   'external_components/nkbcomment/nkbcomment-lib/dateformat',
+        'nkbcomment-defaults':          'external_components/nkbcomment/nkbcomment-defaults/defaults',
+        'nkbcomment-message-widget':    'external_components/nkbcomment/nkbcomment-message-widget/js/message-widget',
+        'nkbcomment-comment-utils':     'external_components/nkbcomment/nkbcomment-comment-widget/js/comment-utils',
+        'nkbcomment-comment-widget':    'external_components/nkbcomment/nkbcomment-comment-widget/js/comment-widget'
+    },
+
+    packages: [{
+        // test
+        name: 'test',
+        location: 'test',
+        main: 'test'
+    }, {
+        name: 'app',
+        location: 'test/app',
+        main: 'app'
+    }, {
+        name: 'app.login',
+        location: 'src/nkb-app/components/login',
+        main: 'login'
+    }, {
+        name: 'app.lang',
+        location: 'src/nkb-app/components/lang',
+        main: 'lang'
+    }, {
+        name: 'app.log',
+        location: 'src/nkb-app/components/log',
+        main: 'log'
+    }, {
+        name: 'rsearch',
+        location: 'src/rsearch',
+        main: 'rsearch'
+    },
+    // external packages
+    {
+        name: 'lodash',
+        location: 'external_components/nullpointer-commons/lodash'
+    }, {
+        name: 'nkb.comment',
+        location: 'src/comment',
+        main: 'comment'
+    }, {
+        name: 'nkb.extraneous',
+        location: 'src/extraneous'
+    }, {
+        name: 'nkb.user',
+        location: 'external_components/nullpointer-commons/nkb/user',
+        main: 'user'
+    }, {
+        name: 'nkb.icons',
+        location: 'external_components/nullpointer-commons/nkb/icons',
+        main: 'icons'
+    }, {
+        name: 'nkb.filters',
+        location: 'external_components/nullpointer-commons/nkb/filters',
+        main: 'filters'
+    }, {
+        name: 'np.directives',
+        location: 'external_components/nullpointer-commons/angular/directives',
+        main: 'directives'
+    }, {
+        name: 'np.filters',
+        location: 'external_components/nullpointer-commons/angular/filters',
+        main: 'filters'
+    }, {
+        name: 'np.l10n',
+        location: 'external_components/nullpointer-commons/angular/l10n',
+        main: 'l10n'
+    }, {
+        name: 'np.resource',
+        location: 'external_components/nullpointer-commons/angular/resource',
+        main: 'resource'
+    }, {
+        name: 'template-utils',
+        location: 'external_components/nullpointer-commons/utils/template-utils',
+        main: 'template-utils'
+    }, {
+        name: 'np.utils',
+        location: 'external_components/nullpointer-commons/angular/utils',
+        main: 'utils'
+    }, {
+        name: 'autokad',
+        location: 'external_components/nullpointer-autokad/autokad',
+        main: 'autokad'
+    }, {
+        name: 'i18n',
+        location: 'external_components/nullpointer-i18n',
+        main: 'i18n'
+    }, {
+        name: 'connections',
+        location: 'external_components/nullpointer-connections-ui/connections'
+        // location: '/connections-ui/src/connections'
+    }],
+
+    shim: {
+        'angular': {
+            exports: 'angular'
+        },
+        'ng-infinite-scroll': {
+            deps: ['angular']
+        },
+
+        'jquery.cookie': {
+            deps: ['jquery']
+        }
+    },
+
+    config: {
+        'np.l10n/l10n': {
+            lang: root._APP_CONFIG.lang,
+            'i18n-component': {
+                // Должны отличаться от общих настроек шаблонизатора,
+                // т.к. смысл шаблонизации i18n:
+                //   только перевести текст шаблона,
+                //   а далее использовать переведённый шаблон с шаблонизатором по умолчанию
+                templateSettings: {
+                    evaluate:       '',
+                    interpolate:    /\$\{([\s\S]+?)\}/g,
+                    escape:         ''
+                },
+                escape: false
+            },
+            bundles: i18nBundles
+        }
+    },
+
+    modules: [{
+        name: 'app/main',
+        include: [
+            // locales
+            'text!angular-locale_ru.js',
+            'text!angular-locale_en.js'
+        ].concat(i18nBundles)
+    }],
+
+    map: {
+        '*': {
+            'css': 'external_components/require-css/css',
+            'less': 'external_components/require-less/less',
+            'text': 'external_components/requirejs-text/text'
+        }
+    },
+
+    less: {
+        relativeUrls: true
+    },
+
+    urlArgs: new Date().getTime()
+};
+
+/*
+ * init
+ *
+ */
+if (typeof define === 'function' && define.amd) {
+    requirejs.config(root._RESOURCES_CONFIG);
+
+    require(['app'], function(app){
+        // init app
+        app.init(document);
+    });
+}

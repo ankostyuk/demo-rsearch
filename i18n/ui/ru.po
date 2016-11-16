@@ -80,6 +80,11 @@ msgctxt "Формат даты: http://momentjs.com/docs/#/displaying/format/"
 msgid "mediumDate"
 msgstr "DD.MM.YYYY"
 
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Цепочки связанных объектов"
+msgid "Актуальные связи"
+msgstr ""
+
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
 msgid ""
@@ -133,9 +138,7 @@ msgid "Бизнес-справки онлайн"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
-msgid ""
-"Будут найдены все возможные цепочки связей\n"
-"до указанного уровня"
+msgid "Будут найдены все возможные цепочки связей до указанного уровня"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-history-info.html:1
@@ -156,6 +159,7 @@ msgid "Войти"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-affiliated-cause-filter.html:1
+#: ../src/rsearch/views/rsearch-history-filter.html:1
 #: ../src/rsearch/views/rsearch-inn-filter.html:1
 #: ../src/rsearch/views/rsearch-region-filter.html:1
 msgid "Все"
@@ -268,6 +272,11 @@ msgstr ""
 msgid "Исполнительные производства"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Цепочки связанных объектов"
+msgid "Исторические связи"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Исторический профиль"
 msgstr ""
@@ -315,6 +324,11 @@ msgstr ""
 msgid "Любой регион"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-traces.html:1
+msgctxt "Цепочки связанных объектов"
+msgid "Любые цепочки"
+msgstr ""
+
 #: ../src/nkb-app/index.html:1
 msgid "НАЛПОИНТЕР"
 msgstr ""
@@ -342,6 +356,11 @@ msgstr ""
 
 #: ../src/comment/views/comment.html:1
 msgid "Нет комментариев"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid "Новое"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
@@ -456,6 +475,13 @@ msgstr ""
 msgid "Поиск на федеральном ресурсе"
 msgstr ""
 
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid ""
+"Поиск признаков\n"
+"конфликта интересов"
+msgstr ""
+
 #: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
 msgid "Поиск сообщений о банкротстве..."
@@ -534,11 +560,6 @@ msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgid "Сделано в"
-msgstr ""
-
-#: ../src/nkb-app/index.html:1
-msgctxt "Продукты НКБ на главной странице"
-msgid "Сервис комментариев"
 msgstr ""
 
 #: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1

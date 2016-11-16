@@ -1,11 +1,15 @@
 <div class="row tools">
-    <div class="span3 filters">
+    <div class="span6 filters">
         <select class="span3 depth" ng-model="filters.depth" ng-change="doTraces()">
             <option value="" ng-selected="!filters.depth" disabled>${_trc("Укажите уровень...", "Уровень (глубина) поиска связанных объектов")}</option>
             <option ng-repeat="depth in filters.depths" value="{{depth}}" ng-selected="depth === filters.depth">{{depth}} ${_trc("уровень", "Уровень (глубина) поиска цепочек")}</option>
         </select>
+        <select class="span3" ng-model="filters.history" ng-change="doTraces()">
+            <option value="" ng-selected="!filters.history">${_trc("Любые цепочки", "Цепочки связанных объектов")}</option>
+            <option value="false">${_trc("Актуальные связи", "Цепочки связанных объектов")}</option>
+            <option value="true">${_trc("Исторические связи", "Цепочки связанных объектов")}</option>
+        </select>
     </div>
-    <div class="span5 pre filters-message hint" ng-show="!filters.depth">${_tr("Будут найдены все возможные цепочки связей\nдо указанного уровня")}</div>
     <div class="align-right filters-message single-result" ng-show="filters.depth && pager.getPageCount() === 1">${_trc("Одна цепочка", "Одна единственная цепочка связанных объектов")}</div>
     <div class="align-right trace-pager" ng-show="pager.getPageCount() > 1">
         <div class="btn-group">
@@ -15,19 +19,21 @@
         </div>
     </div>
 </div>
+<div class="filters-message hint" ng-show="!filters.depth">${_tr("Будут найдены все возможные цепочки связей до указанного уровня")}</div>
 <div class="trace-result">
     <div class="empty-result align-center" ng-show="traceCount === 0">${_tr("Цепочек связей не найдено")}</div>
     <div class="traces" ng-show="!!currentTrace">
         <div class="trace-part" ng-class="{'active': !tracePart.inTrace}" ng-repeat="tracePart in currentTrace track by $index">
             <div class="trace-part-info">
+                <div class="trace-part-info-entry node-favorites" ng-if="tracePart.node.__isFavoritesSupported"><div np-connections-widgets-node-favorites="tracePart.node"></div></div>
                 <!-- TODO при наличии других статусов: динамическое обновление сообщения о статусе -->
                 <div class="trace-part-info-entry node-status">${_trc("в отчете", "объект в отчете")}</div>
             </div>
             <div class="node">
-                <a class="action" node-id="{{tracePart.node._id}}" node-uid="{{tracePart.node.__uid}}" np-rsearch-node-simple="tracePart.node" ng-click="nodeClick($event, tracePart)"></a>
+                <a class="action" node-id="{{tracePart.node._id}}" node-uid="{{tracePart.node.__uid}}" np-rsearch-node-simple-ext="tracePart.node" ng-click="nodeClick($event, tracePart)"></a>
             </div>
             <div class="relation {{tracePart.direction}}" ng-hide="tracePart.isLast">
-                <div class="target-relations-info" ng-bind-html="tracePart.targetInfo | targetRelationsInfo:tracePart.node:true:true:'\n'"></div>
+                <div np-rsearch-node-relations-info="tracePart.relationsInfo"></div>
             </div>
         </div>
     </div>
