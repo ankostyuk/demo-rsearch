@@ -216,6 +216,12 @@ msgid "Регистрация"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid "Новое"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
 msgid "Анализ\nаффилированных лиц"
 msgstr ""
@@ -223,11 +229,6 @@ msgstr ""
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
 msgid "Связи между\nучастниками закупок"
-msgstr ""
-
-#: ../src/nkb-app/index.html:1
-msgctxt "Продукты НКБ на главной странице"
-msgid "Новое"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
@@ -298,6 +299,23 @@ msgstr ""
 #: ../src/rsearch/rsearch-meta.js:1
 msgctxt "Состояние ЮЛ"
 msgid "Ликвидировано"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/views/rsearch-egrul-data-update.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
+#: ../src/rsearch/views/rsearch-node-simple-ext.html:1
+msgctxt "Формат даты: http://momentjs.com/docs/#/displaying/format/"
+msgid "mediumDate"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
@@ -404,21 +422,6 @@ msgstr ""
 #: ../src/rsearch/rsearch-meta.js:1
 msgctxt "с такой-то даты"
 msgid "с"
-msgstr ""
-
-#: ../src/rsearch/rsearch-meta.js:1
-#: ../src/rsearch/rsearch-meta.js:1
-#: ../src/rsearch/rsearch-meta.js:1
-#: ../src/rsearch/rsearch-meta.js:1
-#: ../src/rsearch/views/rsearch-egrul-data-update.html:1
-#: ../src/rsearch/views/rsearch-node-form.html:1
-#: ../src/rsearch/views/rsearch-node-form.html:1
-#: ../src/rsearch/views/rsearch-node-info.html:1
-#: ../src/rsearch/views/rsearch-node-info.html:1
-#: ../src/rsearch/views/rsearch-node-info.html:1
-#: ../src/rsearch/views/rsearch-node-info.html:1
-msgctxt "Формат даты: http://momentjs.com/docs/#/displaying/format/"
-msgid "mediumDate"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
@@ -558,6 +561,10 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-navigation.html:1
 msgid "NG_PLURALIZE::NODE_COMPANY"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-navigation.html:1
+msgid "NG_PLURALIZE::NODE_SELFEMPLOYED"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-navigation.html:1

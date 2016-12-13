@@ -39,6 +39,11 @@
         <div class="node-entry okfs" ng-show="node.okfscode && node.okfscode !== 16">{{node.okfs_text}}</div>
     </div>
 
+    <div ng-if="node._type === 'INDIVIDUAL_IDENTITY'">
+        <div class="node-header" data-node-id="{{node._id}}"><span ng-click="nodeHeaderClick($event)">[${_tr("ИП || КФХ")}] {{node.name | screen}}</span></div>
+        // TODO краткая карточка ИП
+    </div>
+
     <div ng-if="node._type === 'INDIVIDUAL'">
         <div class="node-header" data-node-id="{{node._id}}"><span ng-click="nodeHeaderClick($event)">{{node.name | screen}}</span></div>
     </div>

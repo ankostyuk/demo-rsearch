@@ -47,6 +47,10 @@
       null,
       "{'one': '{} телефон', 'few': '{} телефона', 'many': '{} телефонов', 'other': '{} телефона'}"
     ],
+    "NG_PLURALIZE::NODE_SELFEMPLOYED": [
+      null,
+      "{'one': '{} индивидуальный предприниматель', 'few': '{} индивидуальных предпринимателя', 'many': '{} индивидуальных предпринимателей', 'other': '{} индивидуального предпринимателя'}"
+    ],
     "NG_PLURALIZE::PURCHASE_DISHONEST_SUPPLIER_REC_COUNT": [
       null,
       "{'0': 'Нет в реестре\nнедобросовестных поставщиков', 'one': 'В реестре\nнедобросовестных поставщиков', 'few': 'В реестре\nнедобросовестных поставщиков', 'many': 'В реестре\nнедобросовестных поставщиков', 'other': 'В реестре\nнедобросовестных поставщиков'}"
@@ -751,6 +755,10 @@
     "NG_PLURALIZE::NODE_PHONE": [
       null,
       "{'one': '1 phone', 'other': '{} phones'}"
+    ],
+    "NG_PLURALIZE::NODE_SELFEMPLOYED": [
+      null,
+      "{'one': '1 self-employed', 'other': '{} self-employed'}"
     ],
     "NG_PLURALIZE::PURCHASE_DISHONEST_SUPPLIER_REC_COUNT": [
       null,

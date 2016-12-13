@@ -21,23 +21,27 @@ define(function(require) {'use strict';
             nodeTypes: {
                 'COMPANY': {
                     search: true,
-                    searchResultPriority: 4
+                    searchResultPriority: 60
+                },
+                'SELFEMPLOYED': {
+                    search: true,
+                    searchResultPriority: 50
                 },
                 'INDIVIDUAL': {
                     search: true,
-                    searchResultPriority: 3
+                    searchResultPriority: 40
                 },
                 'ADDRESS': {
                     search: true,
-                    searchResultPriority: 2
+                    searchResultPriority: 30
                 },
                 'PHONE': {
                     search: true,
-                    searchResultPriority: 1
+                    searchResultPriority: 20
                 },
                 'PURCHASE': {
                     search: false,
-                    searchResultPriority: 0
+                    searchResultPriority: 10
                 }
             },
 
@@ -459,7 +463,7 @@ define(function(require) {'use strict';
                     node.__relationData = metaHelper.buildRelationDataByNodeInfo(node);
 
                     //
-                    node.__idField = nodeTypesMeta[node._type]['idField'];
+                    node.__idField = _.get(nodeTypesMeta[node._type], 'idField');
 
                     // компания
                     if (node._type === 'COMPANY') {
@@ -1054,6 +1058,9 @@ define(function(require) {'use strict';
             return function(node){
                 if (node._type === 'COMPANY') {
                     return '<b>' + (node.nameshortsort || node.namesort) + '</b>';
+                }
+                if (node._type === 'INDIVIDUAL_IDENTITY') {
+                    return '<b>' + node.name + '</b>';
                 }
                 if (node._type === 'INDIVIDUAL') {
                     return '<b>' + node.name + '</b>';

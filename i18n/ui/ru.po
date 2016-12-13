@@ -62,6 +62,10 @@ msgstr "{'one': '{} физическое лицо', 'few': '{} физическ�
 msgid "NG_PLURALIZE::NODE_PHONE"
 msgstr "{'one': '{} телефон', 'few': '{} телефона', 'many': '{} телефонов', 'other': '{} телефона'}"
 
+#: ../src/rsearch/views/rsearch-navigation.html:1
+msgid "NG_PLURALIZE::NODE_SELFEMPLOYED"
+msgstr "{'one': '{} индивидуальный предприниматель', 'few': '{} индивидуальных предпринимателя', 'many': '{} индивидуальных предпринимателей', 'other': '{} индивидуального предпринимателя'}"
+
 #: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
 msgid "NG_PLURALIZE::PURCHASE_DISHONEST_SUPPLIER_REC_COUNT"
 msgstr ""
@@ -76,6 +80,7 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
+#: ../src/rsearch/views/rsearch-node-simple-ext.html:1
 msgctxt "Формат даты: http://momentjs.com/docs/#/displaying/format/"
 msgid "mediumDate"
 msgstr "DD.MM.YYYY"

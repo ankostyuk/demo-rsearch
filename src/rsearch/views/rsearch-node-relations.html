@@ -35,6 +35,12 @@
         <a class="action relations-product shadow-lift-lb-corner shadow-strong" ng-click="actions.productClick('relations_find_related')">${_tr("Анализ аффилированных лиц")}</a>
     </div>
 
+    <div ng-if="node._type === 'INDIVIDUAL_IDENTITY'">
+        <div ng-show="user.isAuthenticated()">
+            // TODO Физическое лицо, Внешние источники
+        </div>
+    </div>
+
     <div ng-if="node._type === 'INDIVIDUAL'">
         <div ng-show="user.isAuthenticated()">
             <div class="relations-block">
