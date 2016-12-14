@@ -11,6 +11,8 @@ define(function(require, exports, module) {'use strict';
 
                           require('angular-mocks');
 
+    var testData        = require('./test-data');
+
     var purl                = require('purl'),
         locationSearch      = purl().param(),
         requestDelay        = parseInt(locationSearch['test-request-delay']) || 0;
@@ -86,8 +88,8 @@ define(function(require, exports, module) {'use strict';
 
             // nkbrelation/api/nodes/SELFEMPLOYED
             $httpBackend.whenGET(/^\/nkbrelation\/api\/nodes\/SELFEMPLOYED/).respond(function(method, url){
-                $log.warn(method, url);
-                return [200, {}];
+                $log.info(method, url);
+                return [200, testData.search['SELFEMPLOYED-1']];
             });
         }]);
     //

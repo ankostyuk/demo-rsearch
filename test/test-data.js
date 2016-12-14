@@ -26,8 +26,11 @@ define(function(require, exports, module) {'use strict';
                 'COMPANY.1779737.relations':    angular.fromJson(require('text!./data/relations/nodes/COMPANY.1779737.relations.json')),
 
                 'COMPANY.8505253.relations':    angular.fromJson(require('text!./data/relations/nodes/COMPANY.8505253.relations.json')),
-                'COMPANY.8505253.relations-2':  angular.fromJson(require('text!./data/relations/nodes/COMPANY.8505253.relations-2.json')),
+                'COMPANY.8505253.relations-2':  angular.fromJson(require('text!./data/relations/nodes/COMPANY.8505253.relations-2.json'))
             }
+        },
+        search: {
+            'SELFEMPLOYED-1':   angular.fromJson(require('text!./data/search/SELFEMPLOYED-1.json')),
         },
         meta: {
             nodeTypes:      angular.fromJson(require('text!./data/meta/node-types.json')),
