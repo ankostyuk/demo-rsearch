@@ -21,27 +21,33 @@ define(function(require) {'use strict';
             nodeTypes: {
                 'COMPANY': {
                     search: true,
-                    searchResultPriority: 60
+                    searchResultPriority: 60,
+                    accentedResultPriority: 0
                 },
                 'SELFEMPLOYED': {
                     search: true,
-                    searchResultPriority: 50
+                    searchResultPriority: 50,
+                    accentedResultPriority: 10
                 },
                 'INDIVIDUAL': {
                     search: true,
-                    searchResultPriority: 40
+                    searchResultPriority: 40,
+                    accentedResultPriority: 20
                 },
                 'ADDRESS': {
                     search: true,
-                    searchResultPriority: 30
+                    searchResultPriority: 30,
+                    accentedResultPriority: 0
                 },
                 'PHONE': {
                     search: true,
-                    searchResultPriority: 20
+                    searchResultPriority: 20,
+                    accentedResultPriority: 0
                 },
                 'PURCHASE': {
                     search: false,
-                    searchResultPriority: 10
+                    searchResultPriority: 10,
+                    accentedResultPriority: 0
                 }
             },
 

@@ -184,6 +184,7 @@ define(function(require) {'use strict';
                             search.byNodeTypes[nodeType] = {
                                   nodeType: nodeType,
                                   resultPriority: data.searchResultPriority,
+                                  accentedResultPriority: data.accentedResultPriority,
                                   pageConfig: null,
                                   filters: null,
                                   request: null,
@@ -1087,14 +1088,21 @@ define(function(require) {'use strict';
                             return false;
                         }
 
-                        var individualResult = search.byNodeTypes['INDIVIDUAL'].result,
-                            node;
+                        // TODO объединить с checkSearchResult
+
+                        var accentedResultPriority = 0,
+                            accentedResult, node;
 
                         if (search.total === 1) {
                             node = search.byNodeTypes[activeResult].result.list[0];
-                        } else if (individualResult && individualResult.total === 1) {
-                            var n = individualResult.list[0];
-                            node = n.gender ? n : null;
+                        } else {
+                            _.each(search.byNodeTypes, function(byNodeType, nodeType){
+                                if (_.get(byNodeType.result, 'total') === 1 && byNodeType.accentedResultPriority > accentedResultPriority) {
+                                    accentedResultPriority = byNodeType.accentedResultPriority;
+                                    accentedResult = nodeType;
+                                }
+                            });
+                            node = accentedResult && search.byNodeTypes[accentedResult].result.list[0];
                         }
 
                         if (!node) {
