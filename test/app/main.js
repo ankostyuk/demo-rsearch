@@ -70,7 +70,7 @@ root._RESOURCES_CONFIG = {
     packages: [{
         // test
         name: 'test',
-        location: 'test',
+        location: 'test/app',
         main: 'test'
     }, {
         name: 'app',

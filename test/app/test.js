@@ -14,8 +14,8 @@ define(function(require, exports, module) {'use strict';
 
     var angularModules = [
         // require('./data-mocks'),
-        require('./test-utils'),
-        require('./relation-history-test')
+        require('../../test/test-utils'),
+        require('../../test/relation-history-test')
     ];
 
     //
