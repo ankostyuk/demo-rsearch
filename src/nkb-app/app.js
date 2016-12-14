@@ -17,16 +17,18 @@ define(function(require) {'use strict';
                             require('moment');
                             require('moment-timezone');
 
-    var angularModules = {
-        'angular-moment':   require('angular-moment'),
+    var angularModules = [
+        require('angular-moment'),
 
-        'np.l10n':          require('np.l10n/np.l10n'),
-        login:              require('app.login'),
-        lang:               require('app.lang'),
-        log:                require('app.log'),
-        nkbcomment:         require('nkb.comment'),
-        rsearch:            require('rsearch')
-    };
+        require('np.l10n/np.l10n'),
+        require('app.login'),
+        require('app.lang'),
+        require('app.log'),
+        require('nkb.comment'),
+        require('rsearch'),
+
+        require('test')
+    ];
 
     var app = angular.module('app', _.pluck(angularModules, 'name'))
         //

@@ -64,23 +64,11 @@ define(function(require) {'use strict';
 
                     return npResource.request({
                         method: 'GET',
-                        // url: config['search.url'] + '/' + options.nodeType,
-                        // <<< remove when resolved https://bugtrack.nkb/issues/3271
-                        url: config['search.url'] + '/' + (options.nodeType === 'SELFEMPLOYED' ? 'INDIVIDUAL' : options.nodeType),
-                        // >>>
+                        url: config['search.url'] + '/' + options.nodeType,
                         params: params
                     }, {
                         // responseProcess: nodeListProcess
                         responseProcess: function(data) {
-                            // <<< remove when resolved https://bugtrack.nkb/issues/3271
-                            _.each(options.nodeType === 'SELFEMPLOYED' && data.list, function(node){
-                                node._type = 'INDIVIDUAL_IDENTITY';
-                                delete node._info;
-                                delete node._relations;
-                                $log.info('< INDIVIDUAL_IDENTITY node', node);
-                            });
-                            // >>>
-
                             // <<< remove when resolved https://github.com/newpointer/relations/issues/17
                             nodesLists(_.get(data.list, '[0]._type'), data.list);
                             // >>>
