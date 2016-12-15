@@ -479,6 +479,7 @@ define(function(require) {'use strict';
                     // идентифицированные физики
                     if (node._type === 'INDIVIDUAL_IDENTITY') {
                         node.__okato = nkbReferenceRegionCode.getOKATOByUnitCode(nkbReferenceUtils.getRegionUnitCodeByORGNIP(
+                            // TODO remove when resolved https://bugtrack.nkb/issues/3300#note-6
                             _.get(node.selfemployedInfo, 'ogrnip')
                         ));
                     } else
