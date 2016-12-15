@@ -118,7 +118,7 @@ define(function(require) {'use strict';
                             return '/bsnId:' + node.bsn_id + '/blocks/cnblk04';
                         } else
                         if (node._type === 'INDIVIDUAL_IDENTITY' && node.selfemployedInfo) {
-                            return 'SELFEMPLOYED ' + _.clean(node.name).toUpperCase();
+                            return 'SELFEMPLOYED.' + node.id;
                         } else
                         if (node._type === 'INDIVIDUAL' && !node.subtype) {
                             return _.clean(node.name).toUpperCase();
