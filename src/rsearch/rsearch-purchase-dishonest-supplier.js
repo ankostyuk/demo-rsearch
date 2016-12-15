@@ -64,7 +64,7 @@ define(function(require) {'use strict';
                 }
 
                 function isNodeValid(n) {
-                    return n._type === 'COMPANY';
+                    return n._type === 'COMPANY' || n._type === 'INDIVIDUAL_IDENTITY';
                 }
 
                 function setNode(n) {
