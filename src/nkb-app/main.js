@@ -104,6 +104,10 @@ root._RESOURCES_CONFIG = {
         location: 'src/comment',
         main: 'comment'
     }, {
+        name: 'nkb.reference',
+        location: 'src/reference',
+        main: 'reference'
+    }, {
         name: 'nkb.extraneous',
         location: 'src/extraneous'
     }, {
