@@ -8,7 +8,8 @@ define(function(require) {'use strict';
     var angular           = require('angular');
 
     var submodules = [
-        require('./sub-federal-unit')
+        require('./sub-federal-unit'),
+        require('./utils')
     ];
 
     return angular.module('nkb.reference', _.pluck(submodules, 'name'));

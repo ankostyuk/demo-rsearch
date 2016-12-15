@@ -311,7 +311,7 @@ define(function(require) {'use strict';
             }
         })
         //
-        .factory('npRsearchMetaHelper', ['$log', '$window', '$q', '$rootScope', 'appConfig', 'npRsearchMeta', 'npRsearchResource', 'npConnectionsListsResource', function($log, $window, $q, $rootScope, appConfig, npRsearchMeta, npRsearchResource, npConnectionsListsResource){
+        .factory('npRsearchMetaHelper', ['$log', '$window', '$q', '$rootScope', 'appConfig', 'npRsearchMeta', 'npRsearchResource', 'npConnectionsListsResource', 'nkbReferenceRegionCode', 'nkbReferenceUtils', function($log, $window, $q, $rootScope, appConfig, npRsearchMeta, npRsearchResource, npConnectionsListsResource, nkbReferenceRegionCode, nkbReferenceUtils){
             var resourceConfig = appConfig.resource || {};
 
             // init meta
@@ -475,6 +475,12 @@ define(function(require) {'use strict';
                     if (node._type === 'COMPANY') {
                         metaHelper.buildCompanyState(node);
                         node.__isFavoritesSupported = true;
+                    } else
+                    // идентифицированные физики
+                    if (node._type === 'INDIVIDUAL_IDENTITY') {
+                        node.__okato = nkbReferenceRegionCode.getOKATOByUnitCode(nkbReferenceUtils.getRegionUnitCodeByORGNIP(
+                            _.get(node.selfemployedInfo, 'ogrnip')
+                        ));
                     } else
                     // физик
                     if (node._type === 'INDIVIDUAL') {

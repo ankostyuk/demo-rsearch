@@ -187,18 +187,18 @@ define(function(require) {'use strict';
     var BY_UNIT_CODE_MAP = _.groupBy(SUB_FEDERAL_UNIT_MAP, 'unitCode');
 
     //
-    return angular.module('nkb.reference.sub-federal-unit', ['np.resource'])
+    return angular.module('nkb.reference.sub-federal-unit', [])
         //
-        .factory('nkbReferenceSubFederalUnit', ['$log', function($log){
+        .factory('nkbReferenceRegionCode', ['$log', function($log){
 
             function getDataByUnitCode(unitCode) {
-                return BY_UNIT_CODE_MAP[unitCode][0];
+                return _.get(BY_UNIT_CODE_MAP[unitCode], '[0]');
             }
 
             //
             return {
                 getOKATOByUnitCode: function(unitCode) {
-                    return getDataByUnitCode(unitCode)['okato'];
+                    return _.get(getDataByUnitCode(unitCode), 'okato');
                 }
             };
         }]);
