@@ -117,6 +117,9 @@ define(function(require) {'use strict';
                         if (node._type === 'COMPANY') {
                             return '/bsnId:' + node.bsn_id + '/blocks/cnblk04';
                         } else
+                        if (node._type === 'INDIVIDUAL_IDENTITY' && node.selfemployedInfo) {
+                            return 'SELFEMPLOYED ' + _.clean(node.name).toUpperCase();
+                        } else
                         if (node._type === 'INDIVIDUAL' && !node.subtype) {
                             return _.clean(node.name).toUpperCase();
                         }
@@ -131,6 +134,9 @@ define(function(require) {'use strict';
 
                         if (node._type === 'COMPANY') {
                             return node.nameshortsort || node.namesort;
+                        } else
+                        if (node._type === 'INDIVIDUAL_IDENTITY' && node.selfemployedInfo) {
+                            return _tr('SELFEMPLOYED_TYPE_ABBR.' + _.get(node.selfemployedInfo.infoStatement, ['data', 'кодВидИП'])) + ' ' + node.name;
                         } else
                         if (node._type === 'INDIVIDUAL' && !node.subtype) {
                             return node.name;
