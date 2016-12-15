@@ -10,6 +10,9 @@ define(function(require) {'use strict';
     return angular.module('np.rsearch-fedresurs-bankruptcy', [])
         //
         .factory('NpRsearchFedresursBankruptcyCompany', ['$log', '$rootScope', '$timeout', 'npExtraneousFedresursBankruptcyCompanyHelper', 'npRsearchFedresursBankruptcyConfig', function($log, $rootScope, $timeout, npExtraneousFedresursBankruptcyCompanyHelper, npRsearchFedresursBankruptcyConfig){
+            // TODO
+            // сделать общий компонент: и для компаний, и для ИП, и для физиков
+            // url в extraneous/fedresurs в зависимости от типа ноды -> привести в порядок getMessageSearch
 
             // Class
             return function() {

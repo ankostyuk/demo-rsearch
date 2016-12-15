@@ -10,6 +10,9 @@ define(function(require) {'use strict';
     return angular.module('np.rsearch-purchase-dishonest-supplier', [])
         //
         .factory('NpRsearchPurchaseDishonestSupplierCompany', ['$log', '$rootScope', '$timeout', 'npExtraneousPurchaseDishonestSupplierCompanyHelper', 'npRsearchPurchaseDishonestSupplierConfig', function($log, $rootScope, $timeout, npExtraneousPurchaseDishonestSupplierCompanyHelper, npRsearchPurchaseDishonestSupplierConfig){
+            // TODO
+            // <company_inn> -> <inn>
+            // url в extraneous/purchase/xxx в зависимости от типа ноды или общий extraneous/purchase/ для всех типов нод
 
             // url template '?searchText=<company_inn>...'
             var showRecsUrlTemplate = 'http://zakupki.gov.ru/epz/dishonestsupplier/quicksearch/search.html?searchString=<company_inn>&strictEqual=on&pageNumber=1&sortDirection=false&recordsPerPage=_10&fz_44=on&fz_223=on&inclusionDateFrom=&inclusionDateTo=&lastUpdateDateFrom=&lastUpdateDateTo=&sortBy=UPDATE_DATE';
