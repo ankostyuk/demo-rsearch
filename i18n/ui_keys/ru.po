@@ -236,6 +236,22 @@ msgid "RUB"
 msgstr "руб."
 
 #: ../i18n/ui_keys/src/keys.txt:1
+msgid "SELFEMPLOYED_TYPE.1"
+msgstr "Индивидуальный предприниматель"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "SELFEMPLOYED_TYPE.2"
+msgstr "Глава крестьянского (фермерского) хозяйства"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "SELFEMPLOYED_TYPE_ABBR.1"
+msgstr "ИП"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "SELFEMPLOYED_TYPE_ABBR.2"
+msgstr "КФХ"
+
+#: ../i18n/ui_keys/src/keys.txt:1
 msgid "USD"
 msgstr "$"
 

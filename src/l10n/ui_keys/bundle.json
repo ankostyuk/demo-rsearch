@@ -223,6 +223,22 @@
       null,
       "руб."
     ],
+    "SELFEMPLOYED_TYPE.1": [
+      null,
+      "Индивидуальный предприниматель"
+    ],
+    "SELFEMPLOYED_TYPE.2": [
+      null,
+      "Глава крестьянского (фермерского) хозяйства"
+    ],
+    "SELFEMPLOYED_TYPE_ABBR.1": [
+      null,
+      "ИП"
+    ],
+    "SELFEMPLOYED_TYPE_ABBR.2": [
+      null,
+      "КФХ"
+    ],
     "USD": [
       null,
       "$"
@@ -487,6 +503,22 @@
     "RUB": [
       null,
       "rub."
+    ],
+    "SELFEMPLOYED_TYPE.1": [
+      null,
+      "Индивидуальный предприниматель"
+    ],
+    "SELFEMPLOYED_TYPE.2": [
+      null,
+      "Глава крестьянского (фермерского) хозяйства"
+    ],
+    "SELFEMPLOYED_TYPE_ABBR.1": [
+      null,
+      "ИП"
+    ],
+    "SELFEMPLOYED_TYPE_ABBR.2": [
+      null,
+      "КФХ"
     ],
     "USD": [
       null,

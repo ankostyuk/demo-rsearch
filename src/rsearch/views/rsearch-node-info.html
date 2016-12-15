@@ -40,7 +40,7 @@
     </div>
 
     <div ng-if="node._type === 'INDIVIDUAL_IDENTITY'">
-        <div class="node-header" data-node-id="{{node._id}}"><span ng-click="nodeHeaderClick($event)">[${_tr("ИП || КФХ")}] {{node.name | screen}}</span></div>
+        <div class="node-header" data-node-id="{{node._id}}"><span ng-click="nodeHeaderClick($event)">{{_tr('SELFEMPLOYED_TYPE_ABBR.' + node.selfemployedInfo.infoStatement.data["кодВидИП"])}} {{node.name | screen}}</span></div>
         // TODO краткая карточка ИП
     </div>
 

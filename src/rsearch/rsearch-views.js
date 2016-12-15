@@ -74,7 +74,10 @@ define(function(require) {'use strict';
                     node: '=npRsearchNodeSimple',
                     targetInfo: '=npRsearchNodeTargetInfo'
                 },
-                template: templates['np-rsearch-node-simple']
+                template: templates['np-rsearch-node-simple'],
+                link: function(scope, element, attrs){
+                    _.extend(scope, i18n.translateFuncs);
+                }
             };
         }])
         //
