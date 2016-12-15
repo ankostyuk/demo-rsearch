@@ -99,3 +99,8 @@ SELFEMPLOYED_TYPE.2
 # Вид ИП аббревиатура: ИП | КФХ
 SELFEMPLOYED_TYPE_ABBR.1
 SELFEMPLOYED_TYPE_ABBR.2
+
+# TODO перенести в nullpointer-autokad?
+autokad_search_source::selfemployed_name
+autokad_search_source::selfemployed_full_name
+autokad_search_source::selfemployed_inn

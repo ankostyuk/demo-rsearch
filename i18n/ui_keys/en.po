@@ -298,6 +298,21 @@ msgid "WIN"
 msgstr "winner"
 
 #: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
+msgid "autokad_search_source::selfemployed_full_name"
+msgstr "по полному наименованию"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
+msgid "autokad_search_source::selfemployed_inn"
+msgstr "по ИНН"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
+msgid "autokad_search_source::selfemployed_name"
+msgstr "по наименованию"
+
+#: ../i18n/ui_keys/src/keys.txt:1
 msgid "disclosure"
 msgstr "List of affiliates"
 

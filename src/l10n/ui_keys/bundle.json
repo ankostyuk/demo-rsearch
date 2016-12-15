@@ -247,6 +247,18 @@
       null,
       "победитель"
     ],
+    "autokad_search_source::selfemployed_full_name": [
+      null,
+      "по полному наименованию"
+    ],
+    "autokad_search_source::selfemployed_inn": [
+      null,
+      "по ИНН"
+    ],
+    "autokad_search_source::selfemployed_name": [
+      null,
+      "по наименованию"
+    ],
     "disclosure": [
       null,
       "Список аффилированных лиц"
@@ -527,6 +539,18 @@
     "WIN": [
       null,
       "winner"
+    ],
+    "autokad_search_source::selfemployed_full_name": [
+      null,
+      "по полному наименованию"
+    ],
+    "autokad_search_source::selfemployed_inn": [
+      null,
+      "по ИНН"
+    ],
+    "autokad_search_source::selfemployed_name": [
+      null,
+      "по наименованию"
     ],
     "disclosure": [
       null,

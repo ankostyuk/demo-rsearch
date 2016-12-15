@@ -37,7 +37,13 @@
 
     <div ng-if="node._type === 'INDIVIDUAL_IDENTITY'">
         <div ng-show="user.isAuthenticated()">
-            // TODO Физическое лицо, Внешние источники
+            // TODO Физическое лицо, Внешние источники<br><br><br>
+            <div class="relations-block">
+                <h5 class="relations-block-header">${_tr("Иски и судебные решения")}</h5>
+                <ul class="unstyled">
+                    <li np-rsearch-autokad-info="actions.autokad" np-rsearch-autokad-click="actions.autokadClick"></li>
+                </ul>
+            </div>
         </div>
     </div>
 
