@@ -40,7 +40,14 @@
     </div>
 
     <div ng-if="node._type === 'INDIVIDUAL_IDENTITY'">
-        <div class="node-header" data-node-id="{{node._id}}"><span ng-click="nodeHeaderClick($event)">{{_tr('SELFEMPLOYED_TYPE_ABBR.' + node.selfemployedInfo.infoStatement.data["кодВидИП"])}} {{node.name | screen}}</span></div>
+        <div class="row">
+            <div class="span6 node-header" data-node-id="{{node._id}}"><span ng-click="nodeHeaderClick($event)">{{_tr('SELFEMPLOYED_TYPE_ABBR.' + node.selfemployedInfo.infoStatement.data["кодВидИП"])}} {{node.name | screen}}</span></div>
+            <div class="node-header-small align-right" ng-show="node.selfemployedInfo.createDate">{{
+                (node.selfemployedInfo.createDate | isScreen) ?
+                (node.selfemployedInfo.createDate | screen) :
+                (node.selfemployedInfo.createDate | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}')
+            }}</div>
+        </div>
         // TODO краткая карточка ИП
     </div>
 
