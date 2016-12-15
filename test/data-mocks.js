@@ -89,7 +89,7 @@ define(function(require, exports, module) {'use strict';
             // nkbrelation/api/nodes/SELFEMPLOYED
             $httpBackend.whenGET(/^\/nkbrelation\/api\/nodes\/SELFEMPLOYED/).respond(function(method, url){
                 $log.info(method, url);
-                return [200, testData.search['SELFEMPLOYED-1']];
+                return [200, testData.search['SELFEMPLOYED-2']];
             });
         }]);
     //

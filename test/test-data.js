@@ -31,6 +31,7 @@ define(function(require, exports, module) {'use strict';
         },
         search: {
             'SELFEMPLOYED-1':   angular.fromJson(require('text!./data/search/SELFEMPLOYED-1.json')),
+            'SELFEMPLOYED-2':   angular.fromJson(require('text!./data/search/SELFEMPLOYED-2.json'))
         },
         meta: {
             nodeTypes:      angular.fromJson(require('text!./data/meta/node-types.json')),
