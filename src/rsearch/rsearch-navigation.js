@@ -471,7 +471,8 @@ define(function(require) {'use strict';
                      *
                      */
                     var nodeForm = {
-                        egrulRequest: null
+                        egrulRequest: null,
+                        individualRequest: null
                     };
 
                     $rootScope.$on('np-rsearch-node-header-click', function(e, info){
@@ -545,6 +546,8 @@ define(function(require) {'use strict';
                         }
 
                         nodeFormView.scrollTop();
+
+                        fetchIndividual(node);
 
                         showAutokad(formType, node);
                         showFedresursBankruptcy(formType, node);
@@ -928,6 +931,44 @@ define(function(require) {'use strict';
                     }
 
                     /*
+                     * individual
+                     *
+                     */
+                    $rootScope.$on('np-rsearch-node-form-individual-click', function(e, node){
+                        doIndividual(node);
+                    });
+
+                    function doIndividual(node) {
+                        if (node.__individual) {
+                            showNodeForm('MINIREPORT', node.__individual);
+                        }
+                    }
+
+                    function fetchIndividual(node) {
+                        if (node._type !== 'INDIVIDUAL_IDENTITY') {
+                            return $q.all();
+                        }
+
+                        nodeForm.individualRequest = npRsearchResource.search({
+                            q: node.name,
+                            nodeType: 'INDIVIDUAL',
+                            pageConfig: {
+                                page: 1,
+                                pageSize: 1
+                            },
+                            previousRequest: nodeForm.individualRequest,
+                            success: function(data, status){
+                                node.__individual = _.get(data, 'list[0]');
+                            },
+                            error: function(data, status){
+                                node.__individual = null;
+                            }
+                        });
+
+                        return nodeForm.individualRequest.completePromise;
+                    }
+
+                    /*
                      * breadcrumbs
                      *
                      */
@@ -1220,6 +1261,12 @@ define(function(require) {'use strict';
                             },
                             productClick: function(productName) {
                                 doProduct(productName, nodeRelationsFilter.node);
+                            },
+
+                            individualClick: function() {
+                                $log.warn('Undeveloped individualClick...', nodeRelationsFilter.node);
+                                // clearLastBreadcrumb();
+                                // doIndividual(nodeRelationsFilter.node);
                             },
 
                             autokad: autokad,

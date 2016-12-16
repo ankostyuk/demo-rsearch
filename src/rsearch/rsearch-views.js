@@ -1001,6 +1001,9 @@ define(function(require) {'use strict';
                             productClick: function(productName) {
                                 $rootScope.$emit('np-rsearch-node-form-product-click', productName, scope.node);
                             },
+                            individualClick: function() {
+                                $rootScope.$emit('np-rsearch-node-form-individual-click', scope.node);
+                            },
                             autokadClick: function() {
                                 $rootScope.$emit('np-rsearch-node-form-autokad-click', scope.node);
                             },
