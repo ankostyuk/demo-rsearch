@@ -108,7 +108,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npL10n', 'NpRsearchAutokad', 'NpRsearchFedresursBankruptcyCompany', 'NpRsearchFnsRegDocsCompany', 'NpRsearchPurchaseDishonestSupplierCompany', 'npRsearchNavigationHelper', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npL10n, NpRsearchAutokad, NpRsearchFedresursBankruptcyCompany, NpRsearchFnsRegDocsCompany, NpRsearchPurchaseDishonestSupplierCompany, npRsearchNavigationHelper){
+        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npL10n', 'NpRsearchAutokad', 'NpRsearchFedresursBankruptcy', 'NpRsearchFnsRegDocsCompany', 'NpRsearchPurchaseDishonestSupplierCompany', 'npRsearchNavigationHelper', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npL10n, NpRsearchAutokad, NpRsearchFedresursBankruptcy, NpRsearchFnsRegDocsCompany, NpRsearchPurchaseDishonestSupplierCompany, npRsearchNavigationHelper){
             return {
                 restrict: 'A',
                 template: template,
@@ -130,7 +130,7 @@ define(function(require) {'use strict';
                     var autokad = new NpRsearchAutokad();
                     nodeFormView.setAutokad(autokad);
 
-                    var fedresursBankruptcy = new NpRsearchFedresursBankruptcyCompany();
+                    var fedresursBankruptcy = new NpRsearchFedresursBankruptcy();
                     nodeFormView.setFedresursBankruptcy(fedresursBankruptcy);
 
                     var fnsRegDocs = new NpRsearchFnsRegDocsCompany();

@@ -37,9 +37,7 @@ define(function(require) {'use strict';
 
     return angular.module('np.rsearch-fedresurs-bankruptcy', [])
         //
-        .factory('NpRsearchFedresursBankruptcyCompany', ['$log', '$rootScope', '$timeout', 'npExtraneousFedresursBankruptcyCompanyHelper', 'npRsearchFedresursBankruptcyConfig', function($log, $rootScope, $timeout, npExtraneousFedresursBankruptcyCompanyHelper, npRsearchFedresursBankruptcyConfig){
-            // TODO
-            // сделать общий компонент: и для компаний, и для ИП, и для физиков
+        .factory('NpRsearchFedresursBankruptcy', ['$log', '$rootScope', '$timeout', 'npExtraneousFedresursBankruptcyHelper', 'npRsearchFedresursBankruptcyConfig', function($log, $rootScope, $timeout, npExtraneousFedresursBankruptcyHelper, npRsearchFedresursBankruptcyConfig){
 
             // Class
             return function() {
@@ -84,7 +82,7 @@ define(function(require) {'use strict';
 
                     abortMessageCountRequest();
 
-                    messageCountRequest = npExtraneousFedresursBankruptcyCompanyHelper.getMessageCount(
+                    messageCountRequest = npExtraneousFedresursBankruptcyHelper.getMessageCount(
                         searchType,
                         messageSearch,
                         function(result){
@@ -143,14 +141,14 @@ define(function(require) {'use strict';
                     },
                     showMessages: function() {
                         $timeout(function(){
-                            $rootScope.$emit('np-extraneous-fedresurs-bankruptcy-company-do-search', {
+                            $rootScope.$emit('np-extraneous-fedresurs-bankruptcy-do-search', {
                                 search: getMessageSearch()
                             });
                         });
                     },
                     clear: function() {
                         reset();
-                        $rootScope.$emit('np-extraneous-fedresurs-bankruptcy-company-do-clear');
+                        $rootScope.$emit('np-extraneous-fedresurs-bankruptcy-do-clear');
                     }
                 };
             };

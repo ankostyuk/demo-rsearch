@@ -19,7 +19,7 @@ define(function(require) {'use strict';
         'np.utils':                     require('np.utils'),
         'nkb.user':                     require('nkb.user'),
         'autokad':                      require('autokad'),
-        'fedresursBankruptcy':          require('nkb.extraneous/fedresurs/bankruptcy/company/main'),
+        'fedresursBankruptcy':          require('nkb.extraneous/fedresurs/bankruptcy/base/main'),
         'fnsRegDocs':                   require('nkb.extraneous/fns/reg_docs/company/main'),
         'purchaseDishonestSupplier':    require('nkb.extraneous/purchase/dishonest_supplier/company/main')
     };

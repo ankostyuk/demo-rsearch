@@ -8,9 +8,9 @@ define(function(require) {'use strict';
     var angular = require('angular');
                   require('np.resource');
 
-    return angular.module('np.extraneous-fedresurs-bankruptcy-company-resource', ['np.resource'])
+    return angular.module('np.extraneous-fedresurs-bankruptcy-resource', ['np.resource'])
         //
-        .constant('npExtraneousFedresursBankruptcyCompanyResourceConfig', {
+        .constant('npExtraneousFedresursBankruptcyResourceConfig', {
             'search': {
                 'COMPANY': {
                     url: '/extraneous/fedresurs/company/bankruptcy'
@@ -21,9 +21,9 @@ define(function(require) {'use strict';
             }
         })
         //
-        .factory('npExtraneousFedresursBankruptcyCompanyResource', ['$log', '$q', '$http', 'npExtraneousFedresursBankruptcyCompanyResourceConfig', 'npResource', function($log, $q, $http, npExtraneousFedresursBankruptcyCompanyResourceConfig, npResource){
+        .factory('npExtraneousFedresursBankruptcyResource', ['$log', '$q', '$http', 'npExtraneousFedresursBankruptcyResourceConfig', 'npResource', function($log, $q, $http, npExtraneousFedresursBankruptcyResourceConfig, npResource){
 
-            var searchConfig = npExtraneousFedresursBankruptcyCompanyResourceConfig['search'];
+            var searchConfig = npExtraneousFedresursBankruptcyResourceConfig['search'];
 
             // API
             return {
