@@ -64,7 +64,7 @@ define(function(require) {'use strict';
                 }
             }
 
-            function getMessageCount(search, success, error, complete) {
+            function getMessageCount(searchType, search, success, error, complete) {
                 if (_.isEmpty(search)) {
                     $log.warn('getMessageCount... error: search is blank');
                     errorCallback();
@@ -72,6 +72,7 @@ define(function(require) {'use strict';
                 }
 
                 var request = npExtraneousFedresursBankruptcyCompanyResource.messageSearch({
+                    searchType,
                     search: search,
                     success: function(data, status){
                         var result = getResultTotal(data);
@@ -119,7 +120,9 @@ define(function(require) {'use strict';
             return {
                 restrict: 'A',
                 template: template,
-                scope: {},
+                scope: {
+                    searchType: '=npExtraneousFedresursBankruptcyCompany'
+                },
                 link: function(scope, element, attrs) {
                     var search = {
                         params: null,
@@ -205,6 +208,7 @@ define(function(require) {'use strict';
                         search.noResult = true;
 
                         search.request = npExtraneousFedresursBankruptcyCompanyResource.messageSearch({
+                            searchType: scope.searchType,
                             search: search.params,
                             previousRequest: search.request,
                             success: function(data, status){

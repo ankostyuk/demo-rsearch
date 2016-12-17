@@ -12,7 +12,12 @@ define(function(require) {'use strict';
         //
         .constant('npExtraneousFedresursBankruptcyCompanyResourceConfig', {
             'search': {
-                url: '/extraneous/fedresurs/company/bankruptcy'
+                'COMPANY': {
+                    url: '/extraneous/fedresurs/company/bankruptcy'
+                },
+                'INDIVIDUAL': {
+                    url: '/extraneous/fedresurs/individual/bankruptcy'
+                }
             }
         })
         //
@@ -25,7 +30,7 @@ define(function(require) {'use strict';
                 messageSearch: function(options) {
                     return npResource.request({
                         method: 'GET',
-                        url: searchConfig.url,
+                        url: searchConfig[options.searchType].url,
                         params: options.search,
                     }, null, options);
                 }
