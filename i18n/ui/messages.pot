@@ -31,53 +31,53 @@ msgctxt "Прямой эфир Системы комментариев"
 msgid "Прямой эфир"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-navigation.html:1
 msgid "Ожидайте..."
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
 msgid "NG_PLURALIZE::FEDRESURS_BANKRUPTCY_MESSAGE_COUNT"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
 msgid "Поиск сообщений о банкротстве..."
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 msgid "Поиск на федеральном ресурсе"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 msgctxt "Fedresurs. Сообщения о банкротстве"
 msgid "Дата публикации"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 msgctxt "Fedresurs. Сообщения о банкротстве"
 msgid "Тип сообщения"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 msgid "Сообщений о банкротстве не найдено"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
 msgctxt "Поиск в Fedresurs"
 msgid "Поиск"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
 msgctxt "Поиск в Fedresurs"
 msgid "сообщений о банкротстве"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
 msgctxt "Поиск в Fedresurs"
 msgid "временно недоступен"
@@ -436,6 +436,7 @@ msgstr ""
 #: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ИНН"
 msgstr ""
 
@@ -729,6 +730,10 @@ msgstr ""
 msgid "формы за последний год"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgid "ОГРНИП"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-list.html:1
 msgctxt "История связей"
 msgid "История"
@@ -753,6 +758,14 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Анализ аффилированных лиц"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Физическое лицо"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Закупки"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1

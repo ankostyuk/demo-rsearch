@@ -26,7 +26,7 @@ msgstr "{'0': 'Нет арбитражных дел', 'one': '{} арбитра�
 msgid "NG_PLURALIZE::EGRUL_LIST_MORE"
 msgstr "{'one': 'ещё {} выписка', 'few': 'ещё {} выписки', 'many': 'ещё {} выписок', 'other': 'ещё {} выписки'}"
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
 msgid "NG_PLURALIZE::FEDRESURS_BANKRUPTCY_MESSAGE_COUNT"
 msgstr "{'0': 'Нет сообщений о банкротстве', 'one': '{} сообщение о банкротстве', 'few': '{} сообщения о банкротстве', 'many': '{} сообщений о банкротстве', 'other': '{} сообщений о банкротстве'}"
@@ -201,7 +201,7 @@ msgid ""
 "из ЕГРЮЛ"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 msgctxt "Fedresurs. Сообщения о банкротстве"
 msgid "Дата публикации"
 msgstr ""
@@ -254,6 +254,10 @@ msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "Заказчик"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Закупки"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
@@ -382,6 +386,10 @@ msgid "ОГРН"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
+msgid "ОГРНИП"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ОКПО"
 msgstr ""
 
@@ -398,7 +406,7 @@ msgstr ""
 msgid "Однофамильцы"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-navigation.html:1
 msgid "Ожидайте..."
@@ -430,7 +438,7 @@ msgstr ""
 msgid "Поиск"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
 msgctxt "Поиск в Fedresurs"
 msgid "Поиск"
@@ -476,7 +484,7 @@ msgstr ""
 msgid "Поиск на сайте ФНС"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 msgid "Поиск на федеральном ресурсе"
 msgstr ""
 
@@ -487,7 +495,7 @@ msgid ""
 "конфликта интересов"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
 msgid "Поиск сообщений о банкротстве..."
 msgstr ""
@@ -567,7 +575,7 @@ msgstr ""
 msgid "Сделано в"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 msgid "Сообщений о банкротстве не найдено"
 msgstr ""
 
@@ -589,7 +597,7 @@ msgstr ""
 msgid "Схема аффилированных лиц"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 msgctxt "Fedresurs. Сообщения о банкротстве"
 msgid "Тип сообщения"
 msgstr ""
@@ -606,6 +614,10 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgctxt "Федеральная налоговая служба"
 msgid "ФНС"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Физическое лицо"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
@@ -648,7 +660,7 @@ msgctxt "возможно жена, сестра или мать"
 msgid "возможно"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
 msgctxt "Поиск в Fedresurs"
 msgid "временно недоступен"
@@ -796,7 +808,7 @@ msgstr ""
 msgid "сестра"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
 msgctxt "Поиск в Fedresurs"
 msgid "сообщений о банкротстве"
