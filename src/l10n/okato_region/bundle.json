@@ -334,7 +334,31 @@
         "ruleCode": "n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2",
         "cldrFormat": "one{0}few{1}many{2}other{2}"
       }
-    }
+    },
+    "01": [
+      null,
+      "Алтайский край"
+    ],
+    "03": [
+      null,
+      "Краснодарский край"
+    ],
+    "04": [
+      null,
+      "Красноярский край"
+    ],
+    "05": [
+      null,
+      "Приморский край"
+    ],
+    "07": [
+      null,
+      "Ставропольский край"
+    ],
+    "08": [
+      null,
+      "Хабаровский край"
+    ]
   },
   "en": {
     "1": [
@@ -671,6 +695,30 @@
         "ruleCode": "n != 1",
         "cldrFormat": "one{0}other{1}"
       }
-    }
+    },
+    "01": [
+      null,
+      "Altai Krai"
+    ],
+    "03": [
+      null,
+      "Krasnodar Krai"
+    ],
+    "04": [
+      null,
+      "Krasnoyarsk Krai"
+    ],
+    "05": [
+      null,
+      "Primorsky Krai"
+    ],
+    "07": [
+      null,
+      "Stavropol Krai"
+    ],
+    "08": [
+      null,
+      "Khabarovsk Krai"
+    ]
   }
 }

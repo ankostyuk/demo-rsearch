@@ -478,6 +478,7 @@ define(function(require) {'use strict';
                     } else
                     // идентифицированные физики
                     if (node._type === 'INDIVIDUAL_IDENTITY') {
+                        metaHelper.buildSelfemployedState(node);
                         node.__okato = nkbReferenceRegionCode.getOKATOByUnitCode(nkbReferenceUtils.getRegionUnitCodeByORGNIP(
                             // TODO remove when resolved https://bugtrack.nkb/issues/3300#note-6
                             _.get(node.selfemployedInfo, 'ogrnip')
@@ -728,6 +729,27 @@ define(function(require) {'use strict';
                             }
                         };
                     }
+                },
+
+                buildSelfemployedState: function(node) {
+                    // прекращение ИП
+                    var status = _.get(node.selfemployedInfo, 'infoTermination.data["свСтатус"]');
+
+                    if (!status) {
+                        return;
+                    }
+
+                    var _liquidate;
+
+                    node._liquidate = {
+                        state: {
+                            // intermediate: false
+                            // _actual: ?,
+                            // code: status['кодСтатус'],
+                            _since: status['датаПрекращ'],
+                            type: status['наимСтатус']
+                        }
+                    };
                 },
 
                 resolvePurchaseHref: function(node) {

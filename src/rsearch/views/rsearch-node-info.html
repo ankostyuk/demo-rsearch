@@ -48,8 +48,17 @@
                 (node.selfemployedInfo.createDate | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}')
             }}</div>
         </div>
-        // TODO краткая карточка ИП
-        <div class="node-entry">{{_tr(node.__okato)}}</div>
+        <div class="row node-entry liquidate-state">
+            <div class="span6">{{node._liquidate.state.type}}</div>
+            <div class="align-right">{{node._liquidate.state._since | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
+        </div>
+        <div class="node-entry">{{node.selfemployedInfo.infoOkved.data['свОКВЭДОсн']['кодОКВЭД']}} {{node.selfemployedInfo.infoOkved.data['свОКВЭДОсн']['наимОКВЭД']}}</div>
+        <div class="node-entry"><i class="icon i-map-marker-2 small"></i> {{_tr(node.__okato)}}</div>
+        <div class="node-entry value-muted" ng-show="node.selfemployedInfo.infoRegOrg.data['наимНО']">{{node.selfemployedInfo.infoRegOrg.data['наимНО']}}</div>
+        <ul class="inline">
+            <li ng-show="node.inn"><span class="value-label">${_tr("ИНН")}</span> {{node.inn | screen}}</li>
+            <li ng-show="node.selfemployedInfo.ogrnip"><span class="value-label">${_tr("ОГРНИП")}</span> {{node.selfemployedInfo.ogrnip | screen}}</li>
+        </ul>
     </div>
 
     <div ng-if="node._type === 'INDIVIDUAL'">
