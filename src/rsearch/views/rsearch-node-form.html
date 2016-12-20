@@ -64,30 +64,71 @@
                         </div>
                     </div>
                     <div ng-if="node._type === 'INDIVIDUAL_IDENTITY'">
-                        <!-- infoCitizenship -->
-                        <div class="info-block">
-                            <div class="info-block-entry" ng-show="node.selfemployedInfo.infoCitizenship.data['видГражд'] === '1'">${_tr("Гражданство")}: ${_tr("Российская Федерация")}</div>
-                            <div class="info-block-entry" ng-show="node.selfemployedInfo.infoCitizenship.data['видГражд'] === '2'">${_tr("Гражданство")}: {{node.selfemployedInfo.infoCitizenship.data['наимСтран']}}</div>
-                            <div class="info-block-entry" ng-show="node.selfemployedInfo.infoCitizenship.data['видГражд'] === '3'">${_tr("Без гражданства")}</div>
-                        </div>
-                        <!-- infoFns -->
-                        <!-- infoFss -->
-                        <!-- infoGrnip -->
-                        <!-- infoLicense -->
-                        <!-- infoName -->
-                        <!-- infoOkved -->
-                        <!-- infoPfr -->
-                        <!-- infoReg -->
-                        <!-- infoRegOrg -->
                         <!-- infoStatement -->
+
+                        <!-- infoName -->
+                        <div class="info-block" ng-show="node.selfemployedInfo.infoName.history">
+                            <div class="info-block-header"><span class="text">${_tr("История ФИО")}</span></div>
+                            <div class="row info-block-entry" ng-repeat="item in node.selfemployedInfo.infoName.history track by $index">
+                                <div class="span7">{{item.data['фиорус'].name}}</div>
+                                <div class="align-right value-muted">${_trc("до", "до такой-то даты")} {{item.terminateDate | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
+                            </div>
+                        </div>
+
                         <!-- infoStatus -->
                         <!-- infoTermination -->
-
+                        <!-- infoFns -->
+                        <!-- infoOkved -->
+                        <!-- infoLicense -->
+                        <!-- infoPfr -->
+                        <!-- infoFss -->
+                        <!-- infoReg -->
+                        <!-- infoRegOrg -->
+                        <!-- infoEmail -->
                         <!-- infoBirthday -->
                         <!-- infoDocIdentity -->
                         <!-- infoDocResident -->
                         <!-- infoAddress -->
-                        <!-- infoEmail -->
+
+                        <!-- infoGrnip -->
+                        <div class="info-block" ng-show="node.selfemployedInfo.infoGrnip.data">
+                            <div class="info-block-header"><span class="text">${_tr("Записи в ЕГРИП")}</span></div>
+                            <div class="info-block-entry" ng-repeat="item in node.selfemployedInfo.infoGrnip.data track by $index" ng-if="$index <= 3">
+                                <div class="row">
+                                    <div class="span7">
+                                        {{item['видЗап']['наимВидЗап']}}
+                                        <div class="small value-muted" ng-repeat="doc in item['сведПредДок']">- {{doc['наимДок']}}</div>
+                                    </div>
+                                    <div class="align-right value-muted">{{item['датаЗап'] | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
+                                </div>
+                                <div class="row small value-muted">
+                                    <div class="span7">{{item['свРегОрг']['кодНО']}} — {{item['свРегОрг']['наимНО']}}</div>
+                                    <div class="align-right">${_tr("ГРН")} {{item['грнип']}}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- infoCitizenship -->
+                        <div class="info-block" ng-show="node.selfemployedInfo.infoCitizenship">
+                            <div class="info-block-entry">
+                                <div class="info-block-header"><span class="text">${_tr("Гражданство")}</span></div>
+                                <div class="info-block-entry">
+                                    <span ng-show="node.selfemployedInfo.infoCitizenship.data['видГражд'] === '1'">${_tr("Российская Федерация")}</span>
+                                    <span ng-show="node.selfemployedInfo.infoCitizenship.data['видГражд'] === '2'">{{node.selfemployedInfo.infoCitizenship.data['наимСтран']}}</span>
+                                    <span ng-show="node.selfemployedInfo.infoCitizenship.data['видГражд'] === '3'">${_tr("Без гражданства")}</span>
+                                </div>
+                                <div ng-show="node.selfemployedInfo.infoCitizenship.history">
+                                    <div class="row info-block-entry" ng-repeat="item in node.selfemployedInfo.infoCitizenship.history track by $index">
+                                        <div class="span7">
+                                            <span ng-show="item.data['видГражд'] === '1'">${_tr("Российская Федерация")}</span>
+                                            <span ng-show="item.data['видГражд'] === '2'">{{item.data['наимСтран']}}</span>
+                                            <span ng-show="item.data['видГражд'] === '3'">${_tr("Без гражданства")}</span>
+                                        </div>
+                                        <div class="align-right value-muted">${_trc("до", "до такой-то даты")} {{item.terminateDate | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div ng-if="node._type === 'INDIVIDUAL' && !node.subtype">
                         <div class="row actions-row">
