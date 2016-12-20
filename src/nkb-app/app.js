@@ -26,6 +26,7 @@ define(function(require) {'use strict';
         require('app.log'),
         require('nkb.comment'),
         require('nkb.reference'),
+        require('nkb.selfemployed'),
         require('rsearch'),
 
         require('test')

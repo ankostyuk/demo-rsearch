@@ -64,7 +64,30 @@
                         </div>
                     </div>
                     <div ng-if="node._type === 'INDIVIDUAL_IDENTITY'">
-                        // TODO Профиль ИП
+                        <!-- infoCitizenship -->
+                        <div class="info-block">
+                            <div class="info-block-entry" ng-show="node.selfemployedInfo.infoCitizenship.data['видГражд'] === '1'">${_tr("Гражданство")}: ${_tr("Российская Федерация")}</div>
+                            <div class="info-block-entry" ng-show="node.selfemployedInfo.infoCitizenship.data['видГражд'] === '2'">${_tr("Гражданство")}: {{node.selfemployedInfo.infoCitizenship.data['наимСтран']}}</div>
+                            <div class="info-block-entry" ng-show="node.selfemployedInfo.infoCitizenship.data['видГражд'] === '3'">${_tr("Без гражданства")}</div>
+                        </div>
+                        <!-- infoFns -->
+                        <!-- infoFss -->
+                        <!-- infoGrnip -->
+                        <!-- infoLicense -->
+                        <!-- infoName -->
+                        <!-- infoOkved -->
+                        <!-- infoPfr -->
+                        <!-- infoReg -->
+                        <!-- infoRegOrg -->
+                        <!-- infoStatement -->
+                        <!-- infoStatus -->
+                        <!-- infoTermination -->
+
+                        <!-- infoBirthday -->
+                        <!-- infoDocIdentity -->
+                        <!-- infoDocResident -->
+                        <!-- infoAddress -->
+                        <!-- infoEmail -->
                     </div>
                     <div ng-if="node._type === 'INDIVIDUAL' && !node.subtype">
                         <div class="row actions-row">

@@ -108,6 +108,10 @@ root._RESOURCES_CONFIG = {
         location: 'src/reference',
         main: 'reference'
     }, {
+        name: 'nkb.selfemployed',
+        location: 'src/selfemployed',
+        main: 'selfemployed'
+    }, {
         name: 'nkb.extraneous',
         location: 'src/extraneous'
     }, {

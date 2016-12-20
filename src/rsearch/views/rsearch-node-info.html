@@ -48,11 +48,16 @@
                 (node.selfemployedInfo.createDate | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}')
             }}</div>
         </div>
+        <div class="node-entry value-muted" ng-show="node.selfemployedInfo.infoName.history">{{node.selfemployedInfo.infoName.history[0].data['фиорус'].name}}</div>
+        <!-- <div class="row node-entry value-muted" ng-repeat="item in node.selfemployedInfo.infoName.history track by $index">
+            <div class="span6">{{item.data['фиорус'].name}}</div>
+            <div class="align-right">{{item.terminateDate | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
+        </div> -->
         <div class="row node-entry liquidate-state">
-            <div class="span6">{{node._liquidate.state.type}}</div>
+            <div class="span6">{{node._liquidate.state.type | lowerAndCapitalizeFirst}}</div>
             <div class="align-right">{{node._liquidate.state._since | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
         </div>
-        <div class="node-entry">{{node.selfemployedInfo.infoOkved.data['свОКВЭДОсн']['кодОКВЭД']}} {{node.selfemployedInfo.infoOkved.data['свОКВЭДОсн']['наимОКВЭД']}}</div>
+        <div class="node-entry">{{node.selfemployedInfo.infoOkved.data['свОКВЭДОсн']['кодОКВЭД']}} {{node.selfemployedInfo.infoOkved.data['свОКВЭДОсн']['наимОКВЭД'] | lowerAndCapitalizeFirst}}</div>
         <div class="node-entry"><i class="icon i-map-marker-2 small"></i> {{_tr(node.__okato)}}</div>
         <div class="node-entry value-muted" ng-show="node.selfemployedInfo.infoRegOrg.data['наимНО']">{{node.selfemployedInfo.infoRegOrg.data['наимНО']}}</div>
         <ul class="inline">
