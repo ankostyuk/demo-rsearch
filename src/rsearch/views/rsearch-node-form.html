@@ -68,16 +68,17 @@
                         <!-- TODO ФИО+ИНН -->
                         <div class="info-block" ng-show="node.selfemployedInfo.infoName.history">
                             <div class="info-block-header"><span class="text">${_tr("История ФИО")}</span></div>
-                            <div class="row info-block-entry" ng-repeat="item in node.selfemployedInfo.infoName.history track by $index">
+                            <div class="row info-block-entry" ng-repeat="item in node.selfemployedInfo.infoName.history track by $index" ng-if="$index < node.selfemployedInfo.infoName.history.__threshold">
                                 <div class="span7">{{item.data['фиорус'].name}}</div>
                                 <div class="align-right value-muted">${_trc("до", "до такой-то даты")} {{item.terminateDate | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
                             </div>
+                            <div np-rsearch-more-items="node.selfemployedInfo.infoName.history" np-rsearch-more-items-threshold="3"></div>
                         </div>
 
                         <!-- infoGrnip -->
                         <div class="info-block" ng-show="node.selfemployedInfo.infoGrnip.data">
                             <div class="info-block-header"><span class="text">${_tr("Записи в ЕГРИП")}</span></div>
-                            <div class="info-block-entry" ng-repeat="item in node.selfemployedInfo.infoGrnip.data track by $index" ng-if="$index <= node.selfemployedInfo.infoGrnip.__xxx">
+                            <div class="info-block-entry" ng-repeat="item in node.selfemployedInfo.infoGrnip.data track by $index" ng-if="$index < node.selfemployedInfo.infoGrnip.data.__threshold">
                                 <div class="row">
                                     <div class="span7">
                                         {{item['видЗап']['наимВидЗап']}}
@@ -90,6 +91,7 @@
                                     <div class="align-right">${_tr("ГРН")} {{item['грнип']}}</div>
                                 </div>
                             </div>
+                            <div np-rsearch-more-items="node.selfemployedInfo.infoGrnip.data" np-rsearch-more-items-threshold="3"></div>
                         </div>
 
                         <!-- infoCitizenship -->
@@ -102,7 +104,7 @@
                                     <span ng-show="node.selfemployedInfo.infoCitizenship.data['видГражд'] === '3'">${_tr("Без гражданства")}</span>
                                 </div>
                                 <div ng-show="node.selfemployedInfo.infoCitizenship.history">
-                                    <div class="row info-block-entry" ng-repeat="item in node.selfemployedInfo.infoCitizenship.history track by $index">
+                                    <div class="row info-block-entry" ng-repeat="item in node.selfemployedInfo.infoCitizenship.history track by $index" ng-if="$index < node.selfemployedInfo.infoCitizenship.history.__threshold">
                                         <div class="span7">
                                             <span ng-show="item.data['видГражд'] === '1'">${_tr("Российская Федерация")}</span>
                                             <span ng-show="item.data['видГражд'] === '2'">{{item.data['наимСтран']}}</span>
@@ -110,6 +112,7 @@
                                         </div>
                                         <div class="align-right value-muted">${_trc("до", "до такой-то даты")} {{item.terminateDate | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
                                     </div>
+                                    <div np-rsearch-more-items="node.selfemployedInfo.infoCitizenship.history" np-rsearch-more-items-threshold="2" np-rsearch-more-items-threshold-inc="1"></div>
                                 </div>
                             </div>
                         </div>
