@@ -64,9 +64,8 @@
                         </div>
                     </div>
                     <div ng-if="node._type === 'INDIVIDUAL_IDENTITY'">
-                        <!-- infoStatement -->
-
                         <!-- infoName -->
+                        <!-- TODO ФИО+ИНН -->
                         <div class="info-block" ng-show="node.selfemployedInfo.infoName.history">
                             <div class="info-block-header"><span class="text">${_tr("История ФИО")}</span></div>
                             <div class="row info-block-entry" ng-repeat="item in node.selfemployedInfo.infoName.history track by $index">
@@ -75,25 +74,10 @@
                             </div>
                         </div>
 
-                        <!-- infoStatus -->
-                        <!-- infoTermination -->
-                        <!-- infoFns -->
-                        <!-- infoOkved -->
-                        <!-- infoLicense -->
-                        <!-- infoPfr -->
-                        <!-- infoFss -->
-                        <!-- infoReg -->
-                        <!-- infoRegOrg -->
-                        <!-- infoEmail -->
-                        <!-- infoBirthday -->
-                        <!-- infoDocIdentity -->
-                        <!-- infoDocResident -->
-                        <!-- infoAddress -->
-
                         <!-- infoGrnip -->
                         <div class="info-block" ng-show="node.selfemployedInfo.infoGrnip.data">
                             <div class="info-block-header"><span class="text">${_tr("Записи в ЕГРИП")}</span></div>
-                            <div class="info-block-entry" ng-repeat="item in node.selfemployedInfo.infoGrnip.data track by $index" ng-if="$index <= 3">
+                            <div class="info-block-entry" ng-repeat="item in node.selfemployedInfo.infoGrnip.data track by $index" ng-if="$index <= node.selfemployedInfo.infoGrnip.__xxx">
                                 <div class="row">
                                     <div class="span7">
                                         {{item['видЗап']['наимВидЗап']}}
@@ -129,6 +113,23 @@
                                 </div>
                             </div>
                         </div>
+
+                        <!-- infoStatement -->
+                        <!-- infoStatus -->
+                        <!-- infoTermination -->
+                        <!-- infoFns -->
+                        <!-- infoOkved -->
+                        <!-- infoLicense -->
+                        <!-- infoPfr -->
+                        <!-- infoFss -->
+                        <!-- infoReg -->
+                        <!-- infoRegOrg -->
+                        <!-- infoEmail -->
+                        <!-- infoBirthday -->
+                        <!-- infoDocIdentity -->
+                        <!-- infoDocResident -->
+                        <!-- infoAddress -->
+
                     </div>
                     <div ng-if="node._type === 'INDIVIDUAL' && !node.subtype">
                         <div class="row actions-row">

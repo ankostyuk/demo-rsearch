@@ -50,6 +50,7 @@ define(function(require) {'use strict';
                 infoGrnip: {
                     fix: function(info) {
                         // data
+                        // TODO no reverse when resolve https://bugtrack.nkb/issues/3325
                         if (_.isArray(info.data)) {
                             // info.data = _.sortByOrder(info.data, ['датаЗап'], ['desc']);
                             info.data.reverse();
