@@ -48,7 +48,7 @@
                 (node.selfemployedInfo.createDate | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}')
             }}</div>
         </div>
-        <div class="node-entry value-muted" ng-show="node.selfemployedInfo.infoName.history">{{node.selfemployedInfo.infoName.history[0].data['фиорус'].name}}</div>
+        <div class="node-entry value-muted" ng-show="!node.selfemployedInfo.isFarmer && node.selfemployedInfo.infoName.history">{{node.selfemployedInfo.infoName.history[0].data['фиорус'].name}}</div>
         <div class="row node-entry liquidate-state">
             <div class="span7">{{node._liquidate.state.type | lowerAndCapitalizeFirst}}</div>
             <div class="align-right">{{node._liquidate.state._since | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>

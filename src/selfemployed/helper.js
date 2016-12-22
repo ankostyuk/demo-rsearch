@@ -81,6 +81,12 @@ define(function(require) {'use strict';
             }
 
             function buildSelfemployedState(node) {
+                _.extend(node.selfemployedInfo || {}, {
+                    // КФХ
+                    // TODO перенести логику в бэкенд
+                    isFarmer: _.get(node.selfemployedInfo, 'infoStatement.data["кодВидИП"]') === '2'
+                });
+
                 // прекращение ИП
                 var status = _.get(node.selfemployedInfo, 'infoTermination.data["свСтатус"]');
 

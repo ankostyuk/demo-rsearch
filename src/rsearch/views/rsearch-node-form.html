@@ -114,7 +114,10 @@
                             <!-- infoName -->
                             <!-- TODO ФИО+ИНН -->
                             <div class="info-block" ng-show="node.selfemployedInfo.infoName.history">
-                                <div class="info-block-header"><span class="text">${_tr("История ФИО")}</span></div>
+                                <div class="info-block-header">
+                                    <span class="text" ng-hide="node.selfemployedInfo.isFarmer">${_tr("История ФИО")}</span>
+                                    <span class="text" ng-show="node.selfemployedInfo.isFarmer">${_tr("История глав КФХ")}</span>
+                                </div>
                                 <div class="row info-block-entry" ng-repeat="item in node.selfemployedInfo.infoName.history track by $index" ng-if="$index < node.selfemployedInfo.infoName.history.__threshold">
                                     <div class="span7">{{item.data['фиорус'].name}}</div>
                                     <div class="align-right value-muted">${_trc("до", "до такой-то даты")} {{item.terminateDate | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
