@@ -72,7 +72,7 @@ define(function(require) {'use strict';
                 }
 
                 var request = npExtraneousFedresursBankruptcyResource.messageSearch({
-                    searchType,
+                    searchType: searchType,
                     search: search,
                     success: function(data, status){
                         var result = getResultTotal(data);
