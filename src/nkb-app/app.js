@@ -3,6 +3,9 @@ define(function(require) {'use strict';
     var root = window;
 
     //
+    var PRODUCTION = root.APP_BUILD_TYPE === 'production';
+
+    //
                             require('jquery');
                             require('lodash');
 
@@ -151,7 +154,7 @@ define(function(require) {'use strict';
         })
         //
         .config(['$logProvider', function($logProvider){
-            $logProvider.debugEnabled(root.APP_BUILD_TYPE !== 'production');
+            $logProvider.debugEnabled(!PRODUCTION);
         }])
         //
         .run(['$log', '$rootScope', 'npL10n', function($log, $rootScope, npL10n){
@@ -182,7 +185,7 @@ define(function(require) {'use strict';
             return {
                 restrict: 'A',
                 link: function(scope, element, attrs) {
-                    if (root.APP_BUILD_TYPE !== 'production') {
+                    if (!PRODUCTION) {
                         return;
                     }
 
