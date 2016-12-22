@@ -81,10 +81,9 @@ msgid "mediumDate"
 msgstr "MMM D, YYYY"
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
-#, fuzzy
 msgctxt "Цепочки связанных объектов"
 msgid "Актуальные связи"
-msgstr "Актуальные связи"
+msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
@@ -117,6 +116,10 @@ msgstr "Balance"
 msgid "Без ИНН"
 msgstr "No INN"
 
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Без гражданства"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Бенефициары"
 msgstr "Beneficiaries"
@@ -143,9 +146,8 @@ msgid "Бизнес-справки онлайн"
 msgstr "Online reports"
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
-#, fuzzy
 msgid "Будут найдены все возможные цепочки связей до указанного уровня"
-msgstr "Will find all possible links up to specified level"
+msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-history-info.html:1
 msgid "Бывшее наименование"
@@ -206,11 +208,18 @@ msgstr ""
 "EGRUL\n"
 "Report"
 
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "ГРН"
+msgstr "GRN"
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Гражданство"
+msgstr ""
+
 #: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
-#, fuzzy
 msgctxt "Fedresurs. Сообщения о банкротстве"
 msgid "Дата публикации"
-msgstr "Дата публикации"
+msgstr ""
 
 #: ../src/nkb-app/components/login/views/login-form.html:1
 msgid "Демо-доступ"
@@ -236,6 +245,11 @@ msgid "Документы для государственной регистра
 msgstr "State registration documents"
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "ОКВЭД"
+msgid "Дополнительные виды деятельности"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
 msgctxt "Заказ продукта НКБ на странице миниотчета"
 msgid ""
 "Заказать бизнес-справку\n"
@@ -259,13 +273,16 @@ msgid "Заказать список учрежденных компаний"
 msgstr "Order Established Companies list"
 
 #: ../src/rsearch/rsearch-meta.js:1
-#, fuzzy
 msgid "Заказчик"
-msgstr "Заказчик"
+msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Закупки"
 msgstr "Procurements"
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Записи в ЕГРИП"
+msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
@@ -289,20 +306,26 @@ msgid "Исполнительные производства"
 msgstr "Enforcement proceedings"
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
-#, fuzzy
 msgctxt "Цепочки связанных объектов"
 msgid "Исторические связи"
-msgstr "Исторические связи"
+msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Исторический профиль"
 msgstr "Historical Report"
 
 #: ../src/rsearch/views/rsearch-node-list.html:1
-#, fuzzy
 msgctxt "История связей"
 msgid "История"
-msgstr "История"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "История ФИО"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "История глав КФХ"
+msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgid "Контакты"
@@ -320,6 +343,11 @@ msgstr "Credit Report"
 msgctxt "Состояние ЮЛ"
 msgid "Ликвидировано"
 msgstr "Liquidated"
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "Лицензии на виды деятельности"
+msgid "Лицензии"
+msgstr ""
 
 #: ../src/nkb-app/components/login/views/login-form.html:1
 msgid "Логин"
@@ -343,10 +371,9 @@ msgid "Любой регион"
 msgstr "Any region"
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
-#, fuzzy
 msgctxt "Цепочки связанных объектов"
 msgid "Любые цепочки"
-msgstr "Любые цепочки"
+msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgid "НАЛПОИНТЕР"
@@ -396,9 +423,8 @@ msgid "ОГРН"
 msgstr "OGRN"
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
-#, fuzzy
 msgid "ОГРНИП"
-msgstr "ОГРНИП"
+msgstr "OGRNIP"
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ОКПО"
@@ -451,7 +477,6 @@ msgstr "Search"
 
 #: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
-#, fuzzy
 msgctxt "Поиск в Fedresurs"
 msgid "Поиск"
 msgstr "Search"
@@ -463,7 +488,6 @@ msgid "Поиск"
 msgstr "Search"
 
 #: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
-#, fuzzy
 msgctxt "Поиск в реестре недобросовестных поставщиков"
 msgid "Поиск"
 msgstr "Search"
@@ -498,9 +522,8 @@ msgid "Поиск на сайте ФНС"
 msgstr "Search tax office site"
 
 #: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
-#, fuzzy
 msgid "Поиск на федеральном ресурсе"
-msgstr "Поиск на федеральном ресурсе"
+msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
@@ -511,9 +534,8 @@ msgstr ""
 
 #: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
-#, fuzzy
 msgid "Поиск сообщений о банкротстве..."
-msgstr "Поиск сообщений о банкротстве..."
+msgstr ""
 
 #: ../src/nkb-app/index.html:1
 msgctxt "Наименование приложения поиска"
@@ -549,11 +571,26 @@ msgstr "Advanced search"
 msgid "Регистрация"
 msgstr "Registration"
 
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "Регистрация в пенсионном фонде РФ"
+msgid "Регистрация в ПФР"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "Регистрация в фонде социального страхования"
+msgid "Регистрация в ФСС"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
 msgid ""
 "Реестр\n"
 "недобросовестных поставщиков"
 msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#, fuzzy
+msgid "Российская Федерация"
+msgstr "Российская Федерация"
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 msgctxt "ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
@@ -593,15 +630,13 @@ msgid "Сделано в"
 msgstr "Created by"
 
 #: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
-#, fuzzy
 msgid "Сообщений о банкротстве не найдено"
-msgstr "Сообщений о банкротстве не найдено"
+msgstr ""
 
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
 #: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
-#, fuzzy
 msgid "Сообщения о банкротстве"
-msgstr "Сообщения о банкротстве"
+msgstr ""
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 msgctxt "Сведения о представлении документов. ФНС. Сведения о юридических лицах и индивидуальных предпринимателях, в отношении которых представлены документы для государственной регистрации"
@@ -617,10 +652,9 @@ msgid "Схема аффилированных лиц"
 msgstr "Affiliated network diagram"
 
 #: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
-#, fuzzy
 msgctxt "Fedresurs. Сообщения о банкротстве"
 msgid "Тип сообщения"
-msgstr "Тип сообщения"
+msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-traces.html:1
 msgctxt "Уровень (глубина) поиска связанных объектов"
@@ -628,9 +662,8 @@ msgid "Укажите уровень..."
 msgstr "Select level..."
 
 #: ../src/rsearch/rsearch-meta.js:1
-#, fuzzy
 msgid "Управляющая компания"
-msgstr "Управляющая компания"
+msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgctxt "Федеральная налоговая служба"
@@ -638,9 +671,8 @@ msgid "ФНС"
 msgstr "Federal tax service"
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
-#, fuzzy
 msgid "Физическое лицо"
-msgstr "Физическое лицо"
+msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "Финансовая отчётность"
@@ -684,7 +716,6 @@ msgstr "possibly"
 
 #: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
-#, fuzzy
 msgctxt "Поиск в Fedresurs"
 msgid "временно недоступен"
 msgstr "temporarily unavailable"
@@ -701,15 +732,18 @@ msgid "временно недоступен"
 msgstr "temporarily unavailable"
 
 #: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
-#, fuzzy
 msgctxt "Поиск в реестре недобросовестных поставщиков"
 msgid "временно недоступен"
 msgstr "temporarily unavailable"
 
 #: ../src/rsearch/rsearch-meta.js:1
-#, fuzzy
 msgid "головная компания"
-msgstr "головная компания"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "до такой-то даты"
+msgid "до"
+msgstr ""
 
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
 msgctxt "Поиск в ФНС"
@@ -803,20 +837,23 @@ msgstr "of"
 msgid "отец"
 msgstr "father"
 
+#: ../src/rsearch/views/rsearch-more-items.html:1
+msgctxt "отобразить все элементы списка"
+msgid "показать все"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
 msgctxt "актуализация данных"
 msgid "последняя актуализация"
 msgstr "last update"
 
 #: ../src/rsearch/rsearch-meta.js:1
-#, fuzzy
 msgid "предшественник"
-msgstr "предшественник"
+msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
-#, fuzzy
 msgid "реестродержатель"
-msgstr "реестродержатель"
+msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "руб."
@@ -827,10 +864,14 @@ msgid "руководитель"
 msgstr "manager"
 
 #: ../src/rsearch/rsearch-meta.js:1
-#, fuzzy
 msgctxt "с такой-то даты"
 msgid "с"
-msgstr "с"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-more-items.html:1
+msgctxt "свернуть некоторые элементы списка"
+msgid "свернуть"
+msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "сестра"
@@ -838,10 +879,9 @@ msgstr "sister"
 
 #: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
-#, fuzzy
 msgctxt "Поиск в Fedresurs"
 msgid "сообщений о банкротстве"
-msgstr "сообщений о банкротстве"
+msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "супруга"

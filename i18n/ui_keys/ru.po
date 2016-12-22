@@ -203,31 +203,26 @@ msgid "PARTICIPANT"
 msgstr "участник"
 
 #: ../i18n/ui_keys/src/keys.txt:1
-#, fuzzy
 msgid "RELATION_GROUP_AFFILIATED"
 msgstr "Аффилированные лица"
 
 #: ../i18n/ui_keys/src/keys.txt:1
 msgid "RELATION_GROUP_BASE"
-msgstr ""
+msgstr "Основные связи"
 
 #: ../i18n/ui_keys/src/keys.txt:1
-#, fuzzy
 msgid "RELATION_GROUP_CONTACTS"
 msgstr "Контакты"
 
 #: ../i18n/ui_keys/src/keys.txt:1
-#, fuzzy
 msgid "RELATION_GROUP_PURCHASE"
 msgstr "Закупки"
 
 #: ../i18n/ui_keys/src/keys.txt:1
-#, fuzzy
 msgid "RELATION_actual"
 msgstr "актуальные"
 
 #: ../i18n/ui_keys/src/keys.txt:1
-#, fuzzy
 msgid "RELATION_outdated"
 msgstr "исторические"
 

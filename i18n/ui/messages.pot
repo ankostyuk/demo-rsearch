@@ -309,6 +309,13 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
@@ -549,6 +556,16 @@ msgstr ""
 msgid "Найти"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-more-items.html:1
+msgctxt "отобразить все элементы списка"
+msgid "показать все"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-more-items.html:1
+msgctxt "свернуть некоторые элементы списка"
+msgid "свернуть"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
 msgid "Поиск"
 msgstr ""
@@ -659,6 +676,62 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-node-form.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Исполнительные производства"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Гражданство"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Российская Федерация"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Без гражданства"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "до такой-то даты"
+msgid "до"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "История ФИО"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "История глав КФХ"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "ОКВЭД"
+msgid "Дополнительные виды деятельности"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "Лицензии на виды деятельности"
+msgid "Лицензии"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "Регистрация в пенсионном фонде РФ"
+msgid "Регистрация в ПФР"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "Регистрация в фонде социального страхования"
+msgid "Регистрация в ФСС"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Записи в ЕГРИП"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "ГРН"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1

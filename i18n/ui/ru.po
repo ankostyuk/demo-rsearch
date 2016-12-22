@@ -119,6 +119,10 @@ msgstr ""
 msgid "Без ИНН"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Без гражданства"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Бенефициары"
 msgstr ""
@@ -201,6 +205,14 @@ msgid ""
 "из ЕГРЮЛ"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "ГРН"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Гражданство"
+msgstr ""
+
 #: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 msgctxt "Fedresurs. Сообщения о банкротстве"
 msgid "Дата публикации"
@@ -227,6 +239,11 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
 msgid "Документы для государственной регистрации"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "ОКВЭД"
+msgid "Дополнительные виды деятельности"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -258,6 +275,10 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Закупки"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Записи в ЕГРИП"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
@@ -295,6 +316,14 @@ msgctxt "История связей"
 msgid "История"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "История ФИО"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "История глав КФХ"
+msgstr ""
+
 #: ../src/nkb-app/index.html:1
 msgid "Контакты"
 msgstr ""
@@ -310,6 +339,11 @@ msgstr ""
 #: ../src/rsearch/rsearch-meta.js:1
 msgctxt "Состояние ЮЛ"
 msgid "Ликвидировано"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "Лицензии на виды деятельности"
+msgid "Лицензии"
 msgstr ""
 
 #: ../src/nkb-app/components/login/views/login-form.html:1
@@ -534,10 +568,24 @@ msgstr ""
 msgid "Регистрация"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "Регистрация в пенсионном фонде РФ"
+msgid "Регистрация в ПФР"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "Регистрация в фонде социального страхования"
+msgid "Регистрация в ФСС"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-purchase-dishonest-supplier-info.html:1
 msgid ""
 "Реестр\n"
 "недобросовестных поставщиков"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Российская Федерация"
 msgstr ""
 
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
@@ -686,6 +734,11 @@ msgstr ""
 msgid "головная компания"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "до такой-то даты"
+msgid "до"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-fns-reg-docs-info.html:1
 msgctxt "Поиск в ФНС"
 msgid ""
@@ -778,6 +831,11 @@ msgstr ""
 msgid "отец"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-more-items.html:1
+msgctxt "отобразить все элементы списка"
+msgid "показать все"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
 msgctxt "актуализация данных"
 msgid "последняя актуализация"
@@ -802,6 +860,11 @@ msgstr ""
 #: ../src/rsearch/rsearch-meta.js:1
 msgctxt "с такой-то даты"
 msgid "с"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-more-items.html:1
+msgctxt "свернуть некоторые элементы списка"
+msgid "свернуть"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1

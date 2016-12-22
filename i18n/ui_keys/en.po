@@ -126,6 +126,7 @@ msgid "NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL-children"
 msgstr "{'one': '{} руководимая компания', 'few': '{} руководимые компании', 'many': '{} руководимых компаний', 'other': '{} руководимой компании'}"
 
 #: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
 msgid "NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL-parents"
 msgstr "{'one': 'Руководитель', 'few': '{} руководителя', 'many': '{} руководителей', 'other': '{} руководителя', 'null': 'Нет руководителя'}"
 
@@ -243,8 +244,9 @@ msgid "RELATION_GROUP_AFFILIATED"
 msgstr "Аффилированные лица"
 
 #: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
 msgid "RELATION_GROUP_BASE"
-msgstr ""
+msgstr "Основные связи"
 
 #: ../i18n/ui_keys/src/keys.txt:1
 #, fuzzy
@@ -262,6 +264,7 @@ msgid "RELATION_actual"
 msgstr "актуальные"
 
 #: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
 msgid "RELATION_outdated"
 msgstr "исторические"
 
