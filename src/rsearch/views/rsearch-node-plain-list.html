@@ -1,4 +1,4 @@
-<div class="node-list-item" ng-repeat="node in nodeList track by $index">
+<div class="node-list-item {{node._type}}" ng-repeat="node in nodeList track by $index">
     <div class="item-info">
         <div class="item-info-entry item-number" ng-show="showItemNumber">{{node.__index + 1 | number}}.</div>
         <div class="item-info-entry node-favorites" ng-if="node.__isFavoritesSupported"><div np-connections-widgets-node-favorites="node"></div></div>
