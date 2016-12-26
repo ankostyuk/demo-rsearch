@@ -209,8 +209,8 @@ msgstr ""
 "Report"
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "ГРН"
-msgstr "GRN"
+msgid "ГРНИП"
+msgstr "GRNIP"
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Гражданство"
@@ -1030,6 +1030,9 @@ msgstr "#"
 
 #~ msgid "Аффилированные лица"
 #~ msgstr "Affiliates"
+
+#~ msgid "ГРН"
+#~ msgstr "GRN"
 
 #~ msgid "ЕГРЮЛ"
 #~ msgstr "EGRUL"

@@ -206,7 +206,7 @@ msgid ""
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "ГРН"
+msgid "ГРНИП"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
