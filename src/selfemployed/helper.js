@@ -107,10 +107,21 @@ define(function(require) {'use strict';
                 };
             }
 
-            function buildSelfemployedOKATO(node) {
-                node.__okato = nkbReferenceRegionCode.getOKATOByUnitCode(nkbReferenceUtils.getRegionUnitCodeByORGNIP(
-                    _.get(node.selfemployedInfo, 'ogrnip')
-                ));
+            function buildRegion(node) {
+                // TODO remove when resolved https://bugtrack.nkb/issues/3300#note-6
+                // node.__region = nkbReferenceUtils.getRegionUnitCodeByORGNIP(
+                //     _.get(node.selfemployedInfo, 'ogrnip')
+                // );
+
+                var fnsCode = _.get(node.selfemployedInfo, 'infoRegOrg.data["кодНО"]');
+
+                if (!fnsCode) {
+                    return;
+                }
+
+                node.__region = fnsCode.substr(0, 2);
+                node.__okato = nkbReferenceRegionCode.getOKATOByUnitCode(node.__region);
+                node.__locality = nkbReferenceUtils.getLocalityByAddress(_.get(node.selfemployedInfo, 'infoRegOrg.data["адрРО"]'), node.__region);
             }
 
             // API
@@ -118,8 +129,7 @@ define(function(require) {'use strict';
                 buildSelfemployeNode: function(node) {
                     infoFix(node);
                     buildSelfemployedState(node);
-                    // TODO remove when resolved https://bugtrack.nkb/issues/3300#note-6
-                    buildSelfemployedOKATO(node);
+                    buildRegion(node);
                 }
             };
 
