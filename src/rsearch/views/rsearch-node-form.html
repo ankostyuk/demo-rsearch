@@ -113,16 +113,27 @@
 
                             <!-- infoName -->
                             <!-- TODO ФИО+ИНН -->
-                            <div class="info-block" ng-show="node.selfemployedInfo.infoName.history">
+                            <div class="info-block" ng-if="!node.selfemployedInfo.isFarmer && node.selfemployedInfo.infoName.history">
                                 <div class="info-block-header">
-                                    <span class="text" ng-hide="node.selfemployedInfo.isFarmer">${_tr("История ФИО")}</span>
-                                    <span class="text" ng-show="node.selfemployedInfo.isFarmer">${_tr("История глав КФХ")}</span>
+                                    <span class="text">${_tr("История ФИО")}</span>
                                 </div>
-                                <div class="row info-block-entry" ng-repeat="item in node.selfemployedInfo.infoName.history track by $index" ng-if="$index < node.selfemployedInfo.infoName.history.__threshold">
+                                <div class="row info-block-entry" ng-repeat="item in node.selfemployedInfo.infoName.history track by $index">
                                     <div class="span7">{{item.data['фиорус'].name}}</div>
                                     <div class="align-right value-muted">${_trc("до", "до такой-то даты")} {{item.terminateDate | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
                                 </div>
-                                <div np-rsearch-more-items="node.selfemployedInfo.infoName.history" np-rsearch-more-items-threshold="3"></div>
+                            </div>
+                            <div class="info-block" ng-if="node.selfemployedInfo.isFarmer && node.selfemployedInfo.infoName.history">
+                                <div class="info-block-header">
+                                    <span class="text">${_tr("История глав КФХ")}</span>
+                                </div>
+                                <div class="row info-block-entry">
+                                    <div class="span6">{{node.selfemployedInfo.infoName.data['фиорус'].name}}</div>
+                                    <div class="align-right value-muted">${_trc("с", "с такой-то даты")} {{node.selfemployedInfo.infoName.createDate | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
+                                </div>
+                                <div class="row info-block-entry" ng-repeat="item in node.selfemployedInfo.infoName.history track by $index">
+                                    <div class="span6">{{item.data['фиорус'].name}}</div>
+                                    <div class="align-right value-muted">{{item.createDate | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}—{{item.terminateDate | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
+                                </div>
                             </div>
 
                             <!-- infoOkved -->
