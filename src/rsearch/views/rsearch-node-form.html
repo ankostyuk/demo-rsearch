@@ -211,6 +211,19 @@
                                 <div np-rsearch-more-items="node.selfemployedInfo.infoGrnip.data" np-rsearch-more-items-threshold="3"></div>
                             </div>
                         </div>
+                        <hr>
+                        <div class="row actions-row">
+                            <div class="span4 egrul-products">
+                                <ul class="unstyled actions-list">
+                                    <li><a class="action" ng-click="actions.productClick('egripReport')"><i class="icon large i-document-stamp"></i> <span class="text">${_tr("Заказать выписку ЕГРИП")}</span></a> <span np-rsearch-user-product-limits-info="user.getProductLimitsInfo('egripReport')"></span></li>
+                                </ul>
+                            </div>
+                            <div class="span5 extra-search" ng-hide="proxy.isLightForm(node)">
+                                <p>
+                                    <a class="underline with-icon" ng-href="https://yandex.ru/yandsearch?text={{node.name}}&filter=people" target="_blank"><i class="icon large i-global-search-1"></i> <span class="text">${_tr("Искать в социальных сетях")}</span></a>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                     <div ng-if="node._type === 'INDIVIDUAL' && !node.subtype">
                         <div class="row actions-row">
