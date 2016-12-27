@@ -740,6 +740,10 @@ msgstr "temporarily unavailable"
 msgid "головная компания"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgid "действующее"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgctxt "до такой-то даты"
 msgid "до"
@@ -779,6 +783,11 @@ msgstr "available"
 msgid "дочь"
 msgstr "daughter"
 
+#: ../src/rsearch/views/rsearch-node-info.html:1
+#, fuzzy
+msgid "зарегистрировано"
+msgstr "зарегистрировано"
+
 #: ../src/nkb-app/components/login/views/login-form.html:1
 #: ../src/rsearch/views/rsearch-user-product-limits-info.html:1
 msgctxt "валюта"
@@ -814,6 +823,11 @@ msgctxt "лот в закупке"
 msgid "лоты"
 msgstr "lots"
 
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgctxt "на такую-то дату"
+msgid "на"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-egrul-data-update.html:1
 msgctxt "обработка заказа (запроса)"
 msgid "обрабатывается..."
@@ -836,6 +850,12 @@ msgstr "of"
 #: ../src/rsearch/rsearch-meta.js:1
 msgid "отец"
 msgstr "father"
+
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
+#: ../src/rsearch/rsearch-autokad.js:1
+#, fuzzy
+msgid "по ИНН"
+msgstr "по ИНН"
 
 #: ../src/rsearch/views/rsearch-more-items.html:1
 msgctxt "отобразить все элементы списка"
@@ -864,6 +884,7 @@ msgid "руководитель"
 msgstr "manager"
 
 #: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
 msgctxt "с такой-то даты"
 msgid "с"
 msgstr ""

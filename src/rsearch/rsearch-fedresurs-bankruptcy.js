@@ -28,6 +28,14 @@ define(function(require) {'use strict';
         'INDIVIDUAL': {
             searchType: 'INDIVIDUAL',
             getMessageSearch: function(node) {
+                var inn = _.get(node, '__formData.inn');
+
+                if (inn) {
+                    return {
+                        'inn': inn
+                    };
+                }
+
                 return {
                     'name': node['name']
                 };

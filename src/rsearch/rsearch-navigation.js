@@ -1050,6 +1050,8 @@ define(function(require) {'use strict';
                             return;
                         }
 
+                        clearFormData();
+
                         var index           = breadcrumb.index,
                             nextBreadcrumb  = breadcrumbs.list[index + 1];
 
@@ -1318,8 +1320,21 @@ define(function(require) {'use strict';
                     function hideRelationsFilters() {
                         relationsRegionFilterScope.toggle(false);
                         relationsInnFilterScope.toggle(false);
+
                         hideAffiliatedCauseFilters();
                         hideHistoryFilters();
+                    }
+
+                    function setCurrentInn(condition) {
+                        setFormData('inn', _.get(condition, 'rel.inn.equals'));
+                    }
+
+                    function setFormData(name, value) {
+                        _.set(nodeFormView.getNode(), '__formData.' + name, value);
+                    }
+
+                    function clearFormData() {
+                        _.set(nodeFormView.getNode(), '__formData', {});
                     }
 
                     function initRelationsFilters(byRelations) {
@@ -1332,6 +1347,7 @@ define(function(require) {'use strict';
                         if (!filters) {
                             var total = byRelations.result.total;
 
+                            //
                             var regionFilter = {
                                 values: _.get(byRelations.result.info.nodeFacet, 'region_code'),
                                 value: null,
@@ -1345,6 +1361,8 @@ define(function(require) {'use strict';
                                 }
                             };
 
+                            //
+                            setCurrentInn(null);
                             var innFilterValues = _.get(byRelations.result.info.relFacet, 'inn');
                             var innFilter = {
                                 // TODO поправить npRsearchInnFilter для работы с пустыми данными как с null
@@ -1360,9 +1378,11 @@ define(function(require) {'use strict';
                                         innFilter.condition['rel.inn.equals'] = value;
                                     }
                                     doRelations(byRelations, false, true);
+                                    setCurrentInn(innFilter.condition);
                                 }
                             };
 
+                            //
                             var affiliatedCauseFilter = {
                                 values: _.get(byRelations.result.info.relFacet, 'causes.name'),
                                 value: null,
@@ -1376,6 +1396,7 @@ define(function(require) {'use strict';
                                 }
                             };
 
+                            //
                             var historyFilterValues = _.get(byRelations.node, ['__relationData', 'relationCountMap', npRsearchMetaHelper.buildNodeRelationKey(byRelations.direction, byRelations.relationType), 'historyRelationCounts']);
                             var historyFilter = {
                                 values: historyFilterValues,
@@ -1390,6 +1411,7 @@ define(function(require) {'use strict';
                                 }
                             };
 
+                            //
                             filters = {
                                 region: regionFilter,
                                 inn: innFilter,

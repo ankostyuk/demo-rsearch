@@ -1011,6 +1011,9 @@ define(function(require) {'use strict';
                             scope.node = node;
                             showNodeFormProxy(scope.node, scope.formType);
                         },
+                        getNode: function() {
+                            return scope.node;
+                        },
                         setFormType: function(formType) {
                             scope.formType = formType;
                         },
