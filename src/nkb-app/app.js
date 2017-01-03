@@ -101,7 +101,7 @@ define(function(require) {'use strict';
                 },
                 'egripReport': {
                     'info.url': '/egryl/',
-                    'purchase.url': '/search/offlinep/?form[comp_name]={{node.name}}'
+                    'purchase.url': '/search/offlinep/?form[comp_name]={{node.name}}&form[regnum]={{node.selfemployedInfo.ogrnip}}'
                 },
                 'actualizeReport': {
                     'info.url': '/examples/quartal_profile/',
