@@ -7,9 +7,45 @@ define(function(require) {'use strict';
                           require('lodash');
         angular         = require('angular');
 
+    //
+    var BY_NODE_TYPE = {
+        'COMPANY': {
+            searchType: 'COMPANY',
+            getMessageSearch: function(node) {
+                return {
+                    'ogrn': node['ogrn']
+                };
+            }
+        },
+        'INDIVIDUAL_IDENTITY': {
+            searchType: 'INDIVIDUAL',
+            getMessageSearch: function(node) {
+                return {
+                    'inn': node['inn']
+                };
+            }
+        },
+        'INDIVIDUAL': {
+            searchType: 'INDIVIDUAL',
+            getMessageSearch: function(node) {
+                var inn = _.get(node, '__formData.inn');
+
+                if (inn) {
+                    return {
+                        'inn': inn
+                    };
+                }
+
+                return {
+                    'name': node['name']
+                };
+            }
+        }
+    };
+
     return angular.module('np.rsearch-fedresurs-bankruptcy', [])
         //
-        .factory('NpRsearchFedresursBankruptcyCompany', ['$log', '$rootScope', '$timeout', 'npExtraneousFedresursBankruptcyCompanyHelper', 'npRsearchFedresursBankruptcyConfig', function($log, $rootScope, $timeout, npExtraneousFedresursBankruptcyCompanyHelper, npRsearchFedresursBankruptcyConfig){
+        .factory('NpRsearchFedresursBankruptcy', ['$log', '$rootScope', '$timeout', 'npExtraneousFedresursBankruptcyHelper', 'npRsearchFedresursBankruptcyConfig', function($log, $rootScope, $timeout, npExtraneousFedresursBankruptcyHelper, npRsearchFedresursBankruptcyConfig){
 
             // Class
             return function() {
@@ -18,10 +54,20 @@ define(function(require) {'use strict';
 
                 reset();
 
+                function getSearchType() {
+                    if (!isNodeValid(node)) {
+                        return null;
+                    }
+
+                    return BY_NODE_TYPE[node._type].searchType;
+                }
+
                 function getMessageSearch() {
-                    return {
-                        'ogrn': node['ogrn']
-                    };
+                    if (!isNodeValid(node)) {
+                        return {};
+                    }
+
+                    return BY_NODE_TYPE[node._type].getMessageSearch(node);
                 }
 
                 function reset() {
@@ -37,13 +83,15 @@ define(function(require) {'use strict';
                 }
 
                 function doGetMessageCount() {
-                    var messageSearch = getMessageSearch();
+                    var searchType      = getSearchType(),
+                        messageSearch   = getMessageSearch();
 
                     messageCountPending = true;
 
                     abortMessageCountRequest();
 
-                    messageCountRequest = npExtraneousFedresursBankruptcyCompanyHelper.getMessageCount(
+                    messageCountRequest = npExtraneousFedresursBankruptcyHelper.getMessageCount(
+                        searchType,
                         messageSearch,
                         function(result){
                             node.__fedresursBankruptcy.messageCount = result;
@@ -58,7 +106,7 @@ define(function(require) {'use strict';
                 }
 
                 function isNodeValid(n) {
-                    return n._type === 'COMPANY';
+                    return n && (n._type === 'COMPANY' || n._type === 'INDIVIDUAL_IDENTITY' || n._type === 'INDIVIDUAL');
                 }
 
                 function setNode(n) {
@@ -86,6 +134,7 @@ define(function(require) {'use strict';
                 // API
                 return {
                     setNode: setNode,
+                    getSearchType: getSearchType,
                     gettingMessageCount: function() {
                         return npRsearchFedresursBankruptcyConfig.gettingMessageCount;
                     },
@@ -100,14 +149,14 @@ define(function(require) {'use strict';
                     },
                     showMessages: function() {
                         $timeout(function(){
-                            $rootScope.$emit('np-extraneous-fedresurs-bankruptcy-company-do-search', {
+                            $rootScope.$emit('np-extraneous-fedresurs-bankruptcy-do-search', {
                                 search: getMessageSearch()
                             });
                         });
                     },
                     clear: function() {
                         reset();
-                        $rootScope.$emit('np-extraneous-fedresurs-bankruptcy-company-do-clear');
+                        $rootScope.$emit('np-extraneous-fedresurs-bankruptcy-do-clear');
                     }
                 };
             };

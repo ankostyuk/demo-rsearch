@@ -108,7 +108,7 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npL10n', 'NpRsearchAutokad', 'NpRsearchFedresursBankruptcyCompany', 'NpRsearchFnsRegDocsCompany', 'NpRsearchPurchaseDishonestSupplierCompany', 'npRsearchNavigationHelper', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npL10n, NpRsearchAutokad, NpRsearchFedresursBankruptcyCompany, NpRsearchFnsRegDocsCompany, NpRsearchPurchaseDishonestSupplierCompany, npRsearchNavigationHelper){
+        .directive('npRsearchNavigation', ['$log', '$interpolate', '$q', '$timeout', '$rootScope', '$window', 'npRsearchViews', 'npRsearchMetaHelper', 'npRsearchResource', 'nkbUser', 'appConfig', 'npL10n', 'NpRsearchAutokad', 'NpRsearchFedresursBankruptcy', 'NpRsearchFnsRegDocsCompany', 'NpRsearchPurchaseDishonestSupplierCompany', 'npRsearchNavigationHelper', function($log, $interpolate, $q, $timeout, $rootScope, $window, npRsearchViews, npRsearchMetaHelper, npRsearchResource, nkbUser, appConfig, npL10n, NpRsearchAutokad, NpRsearchFedresursBankruptcy, NpRsearchFnsRegDocsCompany, NpRsearchPurchaseDishonestSupplierCompany, npRsearchNavigationHelper){
             return {
                 restrict: 'A',
                 template: template,
@@ -130,7 +130,7 @@ define(function(require) {'use strict';
                     var autokad = new NpRsearchAutokad();
                     nodeFormView.setAutokad(autokad);
 
-                    var fedresursBankruptcy = new NpRsearchFedresursBankruptcyCompany();
+                    var fedresursBankruptcy = new NpRsearchFedresursBankruptcy();
                     nodeFormView.setFedresursBankruptcy(fedresursBankruptcy);
 
                     var fnsRegDocs = new NpRsearchFnsRegDocsCompany();
@@ -184,6 +184,7 @@ define(function(require) {'use strict';
                             search.byNodeTypes[nodeType] = {
                                   nodeType: nodeType,
                                   resultPriority: data.searchResultPriority,
+                                  accentedResultPriority: data.accentedResultPriority,
                                   pageConfig: null,
                                   filters: null,
                                   request: null,
@@ -470,7 +471,8 @@ define(function(require) {'use strict';
                      *
                      */
                     var nodeForm = {
-                        egrulRequest: null
+                        egrulRequest: null,
+                        individualRequest: null
                     };
 
                     $rootScope.$on('np-rsearch-node-header-click', function(e, info){
@@ -544,6 +546,8 @@ define(function(require) {'use strict';
                         }
 
                         nodeFormView.scrollTop();
+
+                        fetchIndividual(node);
 
                         showAutokad(formType, node);
                         showFedresursBankruptcy(formType, node);
@@ -927,6 +931,44 @@ define(function(require) {'use strict';
                     }
 
                     /*
+                     * individual
+                     *
+                     */
+                    $rootScope.$on('np-rsearch-node-form-individual-click', function(e, node){
+                        doIndividual(node);
+                    });
+
+                    function doIndividual(node) {
+                        if (node.__individual) {
+                            showNodeForm('MINIREPORT', node.__individual);
+                        }
+                    }
+
+                    function fetchIndividual(node) {
+                        if (node._type !== 'INDIVIDUAL_IDENTITY') {
+                            return $q.all();
+                        }
+
+                        nodeForm.individualRequest = npRsearchResource.search({
+                            q: node.name,
+                            nodeType: 'INDIVIDUAL',
+                            pageConfig: {
+                                page: 1,
+                                pageSize: 1
+                            },
+                            previousRequest: nodeForm.individualRequest,
+                            success: function(data, status){
+                                node.__individual = _.get(data, 'list[0]');
+                            },
+                            error: function(data, status){
+                                node.__individual = null;
+                            }
+                        });
+
+                        return nodeForm.individualRequest.completePromise;
+                    }
+
+                    /*
                      * breadcrumbs
                      *
                      */
@@ -1008,6 +1050,8 @@ define(function(require) {'use strict';
                             return;
                         }
 
+                        clearFormData();
+
                         var index           = breadcrumb.index,
                             nextBreadcrumb  = breadcrumbs.list[index + 1];
 
@@ -1087,14 +1131,21 @@ define(function(require) {'use strict';
                             return false;
                         }
 
-                        var individualResult = search.byNodeTypes['INDIVIDUAL'].result,
-                            node;
+                        // TODO объединить с checkSearchResult
+
+                        var accentedResultPriority = 0,
+                            accentedResult, node;
 
                         if (search.total === 1) {
                             node = search.byNodeTypes[activeResult].result.list[0];
-                        } else if (individualResult && individualResult.total === 1) {
-                            var n = individualResult.list[0];
-                            node = n.gender ? n : null;
+                        } else {
+                            _.each(search.byNodeTypes, function(byNodeType, nodeType){
+                                if (_.get(byNodeType.result, 'total') === 1 && byNodeType.accentedResultPriority > accentedResultPriority) {
+                                    accentedResultPriority = byNodeType.accentedResultPriority;
+                                    accentedResult = nodeType;
+                                }
+                            });
+                            node = accentedResult && search.byNodeTypes[accentedResult].result.list[0];
                         }
 
                         if (!node) {
@@ -1214,6 +1265,12 @@ define(function(require) {'use strict';
                                 doProduct(productName, nodeRelationsFilter.node);
                             },
 
+                            individualClick: function() {
+                                $log.warn('Undeveloped individualClick...', nodeRelationsFilter.node);
+                                // clearLastBreadcrumb();
+                                // doIndividual(nodeRelationsFilter.node);
+                            },
+
                             autokad: autokad,
                             autokadClick: function() {
                                 clearLastBreadcrumb();
@@ -1263,8 +1320,21 @@ define(function(require) {'use strict';
                     function hideRelationsFilters() {
                         relationsRegionFilterScope.toggle(false);
                         relationsInnFilterScope.toggle(false);
+
                         hideAffiliatedCauseFilters();
                         hideHistoryFilters();
+                    }
+
+                    function setCurrentInn(condition) {
+                        setFormData('inn', _.get(condition, 'rel.inn.equals'));
+                    }
+
+                    function setFormData(name, value) {
+                        _.set(nodeFormView.getNode(), '__formData.' + name, value);
+                    }
+
+                    function clearFormData() {
+                        _.set(nodeFormView.getNode(), '__formData', {});
                     }
 
                     function initRelationsFilters(byRelations) {
@@ -1277,6 +1347,7 @@ define(function(require) {'use strict';
                         if (!filters) {
                             var total = byRelations.result.total;
 
+                            //
                             var regionFilter = {
                                 values: _.get(byRelations.result.info.nodeFacet, 'region_code'),
                                 value: null,
@@ -1290,6 +1361,8 @@ define(function(require) {'use strict';
                                 }
                             };
 
+                            //
+                            setCurrentInn(null);
                             var innFilterValues = _.get(byRelations.result.info.relFacet, 'inn');
                             var innFilter = {
                                 // TODO поправить npRsearchInnFilter для работы с пустыми данными как с null
@@ -1305,9 +1378,11 @@ define(function(require) {'use strict';
                                         innFilter.condition['rel.inn.equals'] = value;
                                     }
                                     doRelations(byRelations, false, true);
+                                    setCurrentInn(innFilter.condition);
                                 }
                             };
 
+                            //
                             var affiliatedCauseFilter = {
                                 values: _.get(byRelations.result.info.relFacet, 'causes.name'),
                                 value: null,
@@ -1321,6 +1396,7 @@ define(function(require) {'use strict';
                                 }
                             };
 
+                            //
                             var historyFilterValues = _.get(byRelations.node, ['__relationData', 'relationCountMap', npRsearchMetaHelper.buildNodeRelationKey(byRelations.direction, byRelations.relationType), 'historyRelationCounts']);
                             var historyFilter = {
                                 values: historyFilterValues,
@@ -1335,6 +1411,7 @@ define(function(require) {'use strict';
                                 }
                             };
 
+                            //
                             filters = {
                                 region: regionFilter,
                                 inn: innFilter,

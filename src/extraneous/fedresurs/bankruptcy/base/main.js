@@ -23,13 +23,13 @@ define(function(require) {'use strict';
     };
 
     //
-    return angular.module('np.extraneous-fedresurs-bankruptcy-company', _.pluck(extmodules, 'name').concat(_.pluck(submodules, 'name')))
+    return angular.module('np.extraneous-fedresurs-bankruptcy', _.pluck(extmodules, 'name').concat(_.pluck(submodules, 'name')))
         //
         .run([function(){
             template = i18n.translateTemplate(template);
         }])
         //
-        .factory('npExtraneousFedresursBankruptcyCompanyHelper', ['$log', '$timeout', 'npExtraneousFedresursBankruptcyCompanyResource', function($log, $timeout, npExtraneousFedresursBankruptcyCompanyResource){
+        .factory('npExtraneousFedresursBankruptcyHelper', ['$log', '$timeout', 'npExtraneousFedresursBankruptcyResource', function($log, $timeout, npExtraneousFedresursBankruptcyResource){
             /*
              * loading
              *
@@ -64,14 +64,15 @@ define(function(require) {'use strict';
                 }
             }
 
-            function getMessageCount(search, success, error, complete) {
+            function getMessageCount(searchType, search, success, error, complete) {
                 if (_.isEmpty(search)) {
                     $log.warn('getMessageCount... error: search is blank');
                     errorCallback();
                     return null;
                 }
 
-                var request = npExtraneousFedresursBankruptcyCompanyResource.messageSearch({
+                var request = npExtraneousFedresursBankruptcyResource.messageSearch({
+                    searchType: searchType,
                     search: search,
                     success: function(data, status){
                         var result = getResultTotal(data);
@@ -115,11 +116,13 @@ define(function(require) {'use strict';
             };
         }])
         //
-        .directive('npExtraneousFedresursBankruptcyCompany', ['$log', '$rootScope', 'npExtraneousFedresursBankruptcyCompanyResource', 'npExtraneousFedresursBankruptcyCompanyHelper', function($log, $rootScope, npExtraneousFedresursBankruptcyCompanyResource, npExtraneousFedresursBankruptcyCompanyHelper){
+        .directive('npExtraneousFedresursBankruptcy', ['$log', '$rootScope', 'npExtraneousFedresursBankruptcyResource', 'npExtraneousFedresursBankruptcyHelper', function($log, $rootScope, npExtraneousFedresursBankruptcyResource, npExtraneousFedresursBankruptcyHelper){
             return {
                 restrict: 'A',
                 template: template,
-                scope: {},
+                scope: {
+                    searchType: '=npExtraneousFedresursBankruptcy'
+                },
                 link: function(scope, element, attrs) {
                     var search = {
                         params: null,
@@ -129,7 +132,7 @@ define(function(require) {'use strict';
                             'list': null
                         },
                         getTotal: function() {
-                            return hasSearchResult() ? npExtraneousFedresursBankruptcyCompanyHelper.getResultTotal(search.result) || 0 : 0;
+                            return hasSearchResult() ? npExtraneousFedresursBankruptcyHelper.getResultTotal(search.result) || 0 : 0;
                         },
                         isEmptyResult: function() {
                             return !search.getTotal();
@@ -144,11 +147,11 @@ define(function(require) {'use strict';
                         error: null
                     };
 
-                    $rootScope.$on('np-extraneous-fedresurs-bankruptcy-company-do-clear', function(){
+                    $rootScope.$on('np-extraneous-fedresurs-bankruptcy-do-clear', function(){
                         clearSearch();
                     });
 
-                    $rootScope.$on('np-extraneous-fedresurs-bankruptcy-company-do-search', function(e, options){
+                    $rootScope.$on('np-extraneous-fedresurs-bankruptcy-do-search', function(e, options){
                         initSearch(options.search);
                         doSearch();
                     });
@@ -164,7 +167,7 @@ define(function(require) {'use strict';
                     function doSearch(success, error) {
                         resetSearchRequest();
 
-                        npExtraneousFedresursBankruptcyCompanyHelper.loading(element, function(done){
+                        npExtraneousFedresursBankruptcyHelper.loading(element, function(done){
                             searchRequest(function(hasError, result){
                                 complete(hasError, result);
                                 done();
@@ -204,7 +207,8 @@ define(function(require) {'use strict';
                     function searchRequest(callback) {
                         search.noResult = true;
 
-                        search.request = npExtraneousFedresursBankruptcyCompanyResource.messageSearch({
+                        search.request = npExtraneousFedresursBankruptcyResource.messageSearch({
+                            searchType: scope.searchType,
                             search: search.params,
                             previousRequest: search.request,
                             success: function(data, status){

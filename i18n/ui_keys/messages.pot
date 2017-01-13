@@ -268,3 +268,31 @@ msgstr ""
 #: ../i18n/ui_keys/src/keys.txt:1
 msgid "RELATION_outdated"
 msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "SELFEMPLOYED_TYPE.1"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "SELFEMPLOYED_TYPE.2"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "SELFEMPLOYED_TYPE_ABBR.1"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "SELFEMPLOYED_TYPE_ABBR.2"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "autokad_search_source::selfemployed_name"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "autokad_search_source::selfemployed_full_name"
+msgstr ""
+
+#: ../i18n/ui_keys/src/keys.txt:1
+msgid "autokad_search_source::selfemployed_inn"
+msgstr ""

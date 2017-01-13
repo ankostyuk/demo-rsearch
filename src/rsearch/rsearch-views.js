@@ -19,7 +19,7 @@ define(function(require) {'use strict';
         'np.utils':                     require('np.utils'),
         'nkb.user':                     require('nkb.user'),
         'autokad':                      require('autokad'),
-        'fedresursBankruptcy':          require('nkb.extraneous/fedresurs/bankruptcy/company/main'),
+        'fedresursBankruptcy':          require('nkb.extraneous/fedresurs/bankruptcy/base/main'),
         'fnsRegDocs':                   require('nkb.extraneous/fns/reg_docs/company/main'),
         'purchaseDishonestSupplier':    require('nkb.extraneous/purchase/dishonest_supplier/company/main')
     };
@@ -38,6 +38,7 @@ define(function(require) {'use strict';
         'np-rsearch-node-plain-list':                   require('text!./views/rsearch-node-plain-list.html'),
         'np-rsearch-node-traces':                       require('text!./views/rsearch-node-traces.html'),
         'np-rsearch-user-product-limits-info':          require('text!./views/rsearch-user-product-limits-info.html'),
+        'np-rsearch-more-items':                        require('text!./views/rsearch-more-items.html'),
         'np-rsearch-autokad-info':                      require('text!./views/rsearch-autokad-info.html'),
         'np-rsearch-fedresurs-bankruptcy-info':         require('text!./views/rsearch-fedresurs-bankruptcy-info.html'),
         'np-rsearch-fns-reg-docs-info':                 require('text!./views/rsearch-fns-reg-docs-info.html'),
@@ -74,7 +75,10 @@ define(function(require) {'use strict';
                     node: '=npRsearchNodeSimple',
                     targetInfo: '=npRsearchNodeTargetInfo'
                 },
-                template: templates['np-rsearch-node-simple']
+                template: templates['np-rsearch-node-simple'],
+                link: function(scope, element, attrs){
+                    _.extend(scope, i18n.translateFuncs);
+                }
             };
         }])
         //
@@ -234,6 +238,51 @@ define(function(require) {'use strict';
                     info: '=npRsearchUserProductLimitsInfo'
                 },
                 template: templates['np-rsearch-user-product-limits-info']
+            };
+        }])
+        //
+        .directive('npRsearchMoreItems', ['$log', function($log) {
+            return {
+                restrict: 'A',
+                scope: {
+                    items: '=npRsearchMoreItems',
+                    threshold: '=npRsearchMoreItemsThreshold',
+                    thresholdInc: '=npRsearchMoreItemsThresholdInc'
+                },
+                template: templates['np-rsearch-more-items'],
+                link: function(scope, element, attrs){
+
+                    scope.$watchGroup(['items', 'threshold', 'inc'], function(newValues, oldValues) {
+                        scope.itemsCount = _.size(scope.items) + (parseInt(scope.thresholdInc) || 0);
+                        scope.itemsThreshold = parseInt(scope.threshold) || 0;
+
+                        // выключить, если количество доотображаемых элементов < 25% всех элементов
+                        if ((scope.itemsCount - scope.itemsThreshold) / scope.itemsCount < 0.25) {
+                            scope.itemsThreshold = scope.itemsCount;
+                        }
+
+                        scope.expanded = false;
+
+                        if (scope.items) {
+                            scope.items.__threshold = scope.itemsThreshold;
+                        }
+                    });
+
+                    _.extend(scope, {
+                        itemsCount: 0,
+                        itemsThreshold: 0,
+                        expanded: false,
+                        toggle: function() {
+                            if (scope.items) {
+                                scope.items.__threshold = scope.expanded ? scope.itemsThreshold : scope.itemsCount;
+                            }
+                            scope.expanded = !scope.expanded;
+                        },
+                        isReady: function() {
+                            return scope.itemsCount > scope.itemsThreshold;
+                        }
+                    });
+                }
             };
         }])
         //
@@ -962,6 +1011,9 @@ define(function(require) {'use strict';
                             scope.node = node;
                             showNodeFormProxy(scope.node, scope.formType);
                         },
+                        getNode: function() {
+                            return scope.node;
+                        },
                         setFormType: function(formType) {
                             scope.formType = formType;
                         },
@@ -997,6 +1049,9 @@ define(function(require) {'use strict';
                             },
                             productClick: function(productName) {
                                 $rootScope.$emit('np-rsearch-node-form-product-click', productName, scope.node);
+                            },
+                            individualClick: function() {
+                                $rootScope.$emit('np-rsearch-node-form-individual-click', scope.node);
                             },
                             autokadClick: function() {
                                 $rootScope.$emit('np-rsearch-node-form-autokad-click', scope.node);

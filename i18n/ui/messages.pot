@@ -31,53 +31,59 @@ msgctxt "Прямой эфир Системы комментариев"
 msgid "Прямой эфир"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 #: ../src/extraneous/fns/reg_docs/company/views/view.html:1
 #: ../src/rsearch/views/rsearch-navigation.html:1
 msgid "Ожидайте..."
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
 msgid "NG_PLURALIZE::FEDRESURS_BANKRUPTCY_MESSAGE_COUNT"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
 msgid "Поиск сообщений о банкротстве..."
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
+#: ../src/rsearch/rsearch-autokad.js:1
+#: ../src/rsearch/rsearch-autokad.js:1
+msgid "по ИНН"
+msgstr ""
+
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 msgid "Поиск на федеральном ресурсе"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 msgctxt "Fedresurs. Сообщения о банкротстве"
 msgid "Дата публикации"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 msgctxt "Fedresurs. Сообщения о банкротстве"
 msgid "Тип сообщения"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 msgid "Сообщений о банкротстве не найдено"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
 msgctxt "Поиск в Fedresurs"
 msgid "Поиск"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
 msgctxt "Поиск в Fedresurs"
 msgid "сообщений о банкротстве"
 msgstr ""
 
-#: ../src/extraneous/fedresurs/bankruptcy/company/views/view.html:1
+#: ../src/extraneous/fedresurs/bankruptcy/base/views/view.html:1
 #: ../src/rsearch/views/rsearch-fedresurs-bankruptcy-info.html:1
 msgctxt "Поиск в Fedresurs"
 msgid "временно недоступен"
@@ -216,6 +222,12 @@ msgid "Регистрация"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
+#: ../src/nkb-app/index.html:1
+msgctxt "Продукты НКБ на главной странице"
+msgid "Новое"
+msgstr ""
+
+#: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
 msgid "Анализ\nаффилированных лиц"
 msgstr ""
@@ -223,11 +235,6 @@ msgstr ""
 #: ../src/nkb-app/index.html:1
 msgctxt "Продукты НКБ на главной странице"
 msgid "Связи между\nучастниками закупок"
-msgstr ""
-
-#: ../src/nkb-app/index.html:1
-msgctxt "Продукты НКБ на главной странице"
-msgid "Новое"
 msgstr ""
 
 #: ../src/nkb-app/index.html:1
@@ -298,6 +305,35 @@ msgstr ""
 #: ../src/rsearch/rsearch-meta.js:1
 msgctxt "Состояние ЮЛ"
 msgid "Ликвидировано"
+msgstr ""
+
+#: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/views/rsearch-egrul-data-update.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
+#: ../src/rsearch/views/rsearch-node-simple-ext.html:1
+msgctxt "Формат даты: http://momentjs.com/docs/#/displaying/format/"
+msgid "mediumDate"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
@@ -402,23 +438,9 @@ msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
 msgctxt "с такой-то даты"
 msgid "с"
-msgstr ""
-
-#: ../src/rsearch/rsearch-meta.js:1
-#: ../src/rsearch/rsearch-meta.js:1
-#: ../src/rsearch/rsearch-meta.js:1
-#: ../src/rsearch/rsearch-meta.js:1
-#: ../src/rsearch/views/rsearch-egrul-data-update.html:1
-#: ../src/rsearch/views/rsearch-node-form.html:1
-#: ../src/rsearch/views/rsearch-node-form.html:1
-#: ../src/rsearch/views/rsearch-node-info.html:1
-#: ../src/rsearch/views/rsearch-node-info.html:1
-#: ../src/rsearch/views/rsearch-node-info.html:1
-#: ../src/rsearch/views/rsearch-node-info.html:1
-msgctxt "Формат даты: http://momentjs.com/docs/#/displaying/format/"
-msgid "mediumDate"
 msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
@@ -431,6 +453,7 @@ msgstr ""
 
 #: ../src/rsearch/rsearch-meta.js:1
 #: ../src/rsearch/rsearch-meta.js:1
+#: ../src/rsearch/views/rsearch-node-info.html:1
 #: ../src/rsearch/views/rsearch-node-info.html:1
 msgid "ИНН"
 msgstr ""
@@ -544,6 +567,16 @@ msgstr ""
 msgid "Найти"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-more-items.html:1
+msgctxt "отобразить все элементы списка"
+msgid "показать все"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-more-items.html:1
+msgctxt "свернуть некоторые элементы списка"
+msgid "свернуть"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-navigation-breadcrumb.html:1
 msgid "Поиск"
 msgstr ""
@@ -558,6 +591,10 @@ msgstr ""
 
 #: ../src/rsearch/views/rsearch-navigation.html:1
 msgid "NG_PLURALIZE::NODE_COMPANY"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-navigation.html:1
+msgid "NG_PLURALIZE::NODE_SELFEMPLOYED"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-navigation.html:1
@@ -653,19 +690,77 @@ msgid "Исполнительные производства"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Заказать список руководимых компаний"
+msgid "Гражданство"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
-msgid "Заказать список учрежденных компаний"
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Российская Федерация"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Без гражданства"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "до такой-то даты"
+msgid "до"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "История ФИО"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "История глав КФХ"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "ОКВЭД"
+msgid "Дополнительные виды деятельности"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "Лицензии на виды деятельности"
+msgid "Лицензии"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "Регистрация в пенсионном фонде РФ"
+msgid "Регистрация в ПФР"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgctxt "Регистрация в фонде социального страхования"
+msgid "Регистрация в ФСС"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Записи в ЕГРИП"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "ГРНИП"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
 #: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Заказать выписку ЕГРИП"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
+#: ../src/rsearch/views/rsearch-node-form.html:1
 msgid "Искать в социальных сетях"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Заказать список руководимых компаний"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-form.html:1
+msgid "Заказать список учрежденных компаний"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-form.html:1
@@ -721,11 +816,29 @@ msgstr ""
 msgid "формы за последний год"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgid "зарегистрировано"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgid "действующее"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgctxt "на такую-то дату"
+msgid "на"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-info.html:1
+msgid "ОГРНИП"
+msgstr ""
+
 #: ../src/rsearch/views/rsearch-node-list.html:1
 msgctxt "История связей"
 msgid "История"
 msgstr ""
 
+#: ../src/rsearch/views/rsearch-node-relations.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Иски и судебные решения"
@@ -744,6 +857,14 @@ msgstr ""
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 #: ../src/rsearch/views/rsearch-node-relations.html:1
 msgid "Анализ аффилированных лиц"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Физическое лицо"
+msgstr ""
+
+#: ../src/rsearch/views/rsearch-node-relations.html:1
+msgid "Закупки"
 msgstr ""
 
 #: ../src/rsearch/views/rsearch-node-relations.html:1

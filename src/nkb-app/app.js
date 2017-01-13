@@ -3,6 +3,9 @@ define(function(require) {'use strict';
     var root = window;
 
     //
+    var PRODUCTION = root.APP_BUILD_TYPE === 'production';
+
+    //
                             require('jquery');
                             require('lodash');
 
@@ -17,16 +20,20 @@ define(function(require) {'use strict';
                             require('moment');
                             require('moment-timezone');
 
-    var angularModules = {
-        'angular-moment':   require('angular-moment'),
+    var angularModules = [
+        require('angular-moment'),
 
-        'np.l10n':          require('np.l10n/np.l10n'),
-        login:              require('app.login'),
-        lang:               require('app.lang'),
-        log:                require('app.log'),
-        nkbcomment:         require('nkb.comment'),
-        rsearch:            require('rsearch')
-    };
+        require('np.l10n/np.l10n'),
+        require('app.login'),
+        require('app.lang'),
+        require('app.log'),
+        require('nkb.comment'),
+        require('nkb.reference'),
+        require('nkb.selfemployed'),
+        require('rsearch'),
+
+        require('test')
+    ];
 
     var app = angular.module('app', _.pluck(angularModules, 'name'))
         //
@@ -94,7 +101,7 @@ define(function(require) {'use strict';
                 },
                 'egripReport': {
                     'info.url': '/egryl/',
-                    'purchase.url': '/search/offlinep/?form[comp_name]={{node.name}}'
+                    'purchase.url': '/search/offlinep/?form[comp_name]={{node.name}}&form[regnum]={{node.selfemployedInfo.ogrnip}}'
                 },
                 'actualizeReport': {
                     'info.url': '/examples/quartal_profile/',
@@ -147,7 +154,7 @@ define(function(require) {'use strict';
         })
         //
         .config(['$logProvider', function($logProvider){
-            $logProvider.debugEnabled(root.APP_BUILD_TYPE !== 'production');
+            $logProvider.debugEnabled(!PRODUCTION);
         }])
         //
         .run(['$log', '$rootScope', 'npL10n', function($log, $rootScope, npL10n){
@@ -178,7 +185,7 @@ define(function(require) {'use strict';
             return {
                 restrict: 'A',
                 link: function(scope, element, attrs) {
-                    if (root.APP_BUILD_TYPE !== 'production') {
+                    if (!PRODUCTION) {
                         return;
                     }
 

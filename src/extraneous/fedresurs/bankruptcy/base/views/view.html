@@ -1,9 +1,10 @@
 <div class="mask"><div class="message-box"><span class="message">${_tr("Ожидайте...")}</span></div></div>
 <div class="content">
     <div class="row filters">
-        <h5 class="span7 search-header nowrap">
-            <div ng-hide="search.isEmptyResult()"><np-pluralize count="search.getTotal()" when="::${_tr("NG_PLURALIZE::FEDRESURS_BANKRUPTCY_MESSAGE_COUNT")}"></np-pluralize></div>
-            <div ng-show="search.isEmptyResult()">${_tr("Поиск сообщений о банкротстве...")}</div>
+        <h5 class="span8 search-header nowrap">
+            <span ng-hide="search.isEmptyResult()"><np-pluralize count="search.getTotal()" when="::${_tr("NG_PLURALIZE::FEDRESURS_BANKRUPTCY_MESSAGE_COUNT")}"></np-pluralize></span>
+            <span ng-show="search.isEmptyResult()">${_tr("Поиск сообщений о банкротстве...")}</span>
+            <span ng-show="search.params.inn">${_tr("по ИНН")} {{search.params.inn}}</span>
         </h5>
         <div class="align-right link-box nowrap">
             <a class="underline" href="http://bankrot.fedresurs.ru/Default.aspx" target="_blank">${_tr("Поиск на федеральном ресурсе")}</a>

@@ -14,11 +14,11 @@
             }}</div>
         </div>
         <div class="row node-entry reg-state" ng-show="node._reg.state">
-            <div class="span6">{{node._reg.state.type}}</div>
+            <div class="span7">{{node._reg.state.type}}</div>
             <div class="align-right">{{node._reg.state._since | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
         </div>
         <div class="row node-entry liquidate-state">
-            <div class="span6">{{node._liquidate.state.type}}</div>
+            <div class="span7">{{node._liquidate.state.type}}</div>
             <div class="align-right">{{node._liquidate.state._since | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
         </div>
         <div class="node-entry" ng-show="node.name_diff">{{node.namesort | screen}}</div>
@@ -37,6 +37,30 @@
         }}&nbsp;${_tr("тыс. руб.")} <span class="value-label">— ${_tr("объём продаж за последний год")}</span></div>
         <div class="node-entry balance-forms" ng-show="node | isBalance">${_tr("Финансовая отчётность")}: {{node | balanceByPeriod}}, ${_tr("формы за последний год")}: {{node | balanceForms}}</div>
         <div class="node-entry okfs" ng-show="node.okfscode && node.okfscode !== 16">{{node.okfs_text}}</div>
+    </div>
+
+    <div ng-if="node._type === 'INDIVIDUAL_IDENTITY'">
+        <div class="row">
+            <div class="span6 node-header" data-node-id="{{node._id}}"><span ng-click="nodeHeaderClick($event)">{{_tr('SELFEMPLOYED_TYPE_ABBR.' + node.selfemployedInfo.infoStatement.data["кодВидИП"])}} {{node.name | screen}}</span></div>
+            <div class="node-header-small align-right" ng-show="node.selfemployedInfo.createDate">${_tr("зарегистрировано")} {{
+                (node.selfemployedInfo.createDate | isScreen) ?
+                (node.selfemployedInfo.createDate | screen) :
+                (node.selfemployedInfo.createDate | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}')
+            }}</div>
+        </div>
+        <div class="node-entry active-state align-right">${_tr("действующее")} ${_trc("на", "на такую-то дату")} {{node.selfemployedInfo.actualDate | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
+        <div class="node-entry value-muted" ng-repeat="item in node.selfemployedInfo.infoName.history track by $index">{{item.data['фиорус'].name}}</div>
+        <div class="row node-entry liquidate-state">
+            <div class="span7">{{node._liquidate.state.type | lowerAndCapitalizeFirst}}</div>
+            <div class="align-right">{{node._liquidate.state._since | amDateFormat:'${_trc("mediumDate", "Формат даты: http://momentjs.com/docs/#/displaying/format/")}'}}</div>
+        </div>
+        <div class="node-entry">{{node.selfemployedInfo.infoOkved.data['свОКВЭДОсн']['кодОКВЭД']}} {{node.selfemployedInfo.infoOkved.data['свОКВЭДОсн']['наимОКВЭД'] | lowerAndCapitalizeFirst}}</div>
+        <div class="node-entry" ng-show="node.__okato"><i class="icon i-map-marker-2 small"></i> {{_tr(node.__okato)}}{{node.__locality ? ', ' + node.__locality: ''}}</div>
+        <div class="node-entry value-muted" ng-show="node.selfemployedInfo.infoRegOrg.data['наимНО']">{{node.selfemployedInfo.infoRegOrg.data['кодНО']}} — {{node.selfemployedInfo.infoRegOrg.data['наимНО']}}</div>
+        <ul class="inline">
+            <li ng-show="node.inn"><span class="value-label">${_tr("ИНН")}</span> {{node.inn | screen}}</li>
+            <li ng-show="node.selfemployedInfo.ogrnip"><span class="value-label">${_tr("ОГРНИП")}</span> {{node.selfemployedInfo.ogrnip | screen}}</li>
+        </ul>
     </div>
 
     <div ng-if="node._type === 'INDIVIDUAL'">

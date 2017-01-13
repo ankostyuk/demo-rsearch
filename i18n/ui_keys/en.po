@@ -126,6 +126,7 @@ msgid "NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL-children"
 msgstr "{'one': '{} руководимая компания', 'few': '{} руководимые компании', 'many': '{} руководимых компаний', 'other': '{} руководимой компании'}"
 
 #: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
 msgid "NG_PLURALIZE::RELATION_EXECUTIVE_INDIVIDUAL-parents"
 msgstr "{'one': 'Руководитель', 'few': '{} руководителя', 'many': '{} руководителей', 'other': '{} руководителя', 'null': 'Нет руководителя'}"
 
@@ -243,8 +244,9 @@ msgid "RELATION_GROUP_AFFILIATED"
 msgstr "Аффилированные лица"
 
 #: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
 msgid "RELATION_GROUP_BASE"
-msgstr ""
+msgstr "Основные связи"
 
 #: ../i18n/ui_keys/src/keys.txt:1
 #, fuzzy
@@ -262,6 +264,7 @@ msgid "RELATION_actual"
 msgstr "актуальные"
 
 #: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
 msgid "RELATION_outdated"
 msgstr "исторические"
 
@@ -270,12 +273,47 @@ msgid "RUB"
 msgstr "rub."
 
 #: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
+msgid "SELFEMPLOYED_TYPE.1"
+msgstr "Индивидуальный предприниматель"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
+msgid "SELFEMPLOYED_TYPE.2"
+msgstr "Глава крестьянского (фермерского) хозяйства"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
+msgid "SELFEMPLOYED_TYPE_ABBR.1"
+msgstr "ИП"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
+msgid "SELFEMPLOYED_TYPE_ABBR.2"
+msgstr "КФХ"
+
+#: ../i18n/ui_keys/src/keys.txt:1
 msgid "USD"
 msgstr "$"
 
 #: ../i18n/ui_keys/src/keys.txt:1
 msgid "WIN"
 msgstr "winner"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
+msgid "autokad_search_source::selfemployed_full_name"
+msgstr "по полному наименованию"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
+msgid "autokad_search_source::selfemployed_inn"
+msgstr "по ИНН"
+
+#: ../i18n/ui_keys/src/keys.txt:1
+#, fuzzy
+msgid "autokad_search_source::selfemployed_name"
+msgstr "по наименованию"
 
 #: ../i18n/ui_keys/src/keys.txt:1
 msgid "disclosure"

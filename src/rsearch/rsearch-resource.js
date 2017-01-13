@@ -68,12 +68,13 @@ define(function(require) {'use strict';
                         params: params
                     }, {
                         // responseProcess: nodeListProcess
-                        // <<< remove when resolved https://github.com/newpointer/relations/issues/17
                         responseProcess: function(data) {
+                            // <<< remove when resolved https://github.com/newpointer/relations/issues/17
                             nodesLists(_.get(data.list, '[0]._type'), data.list);
+                            // >>>
+
                             return nodeListProcess(data);
                         }
-                        // >>>
                     }, options);
                 },
 

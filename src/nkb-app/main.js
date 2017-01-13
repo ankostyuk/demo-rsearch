@@ -38,6 +38,7 @@ root._RESOURCES_CONFIG = {
 
     paths: {
         'angular':              'external_components/angular/angular',
+        'angular-mocks':        'external_components/angular-mocks/angular-mocks',
         'angular-locale_ru':    'external_components/angular-i18n/angular-locale_ru',
         'angular-locale_en':    'external_components/angular-i18n/angular-locale_en',
         'ng-infinite-scroll':   'external_components/ngInfiniteScroll/ng-infinite-scroll',
@@ -88,6 +89,12 @@ root._RESOURCES_CONFIG = {
         location: 'src/rsearch',
         main: 'rsearch'
     },
+    // test
+    {
+        name: 'test',
+        location: 'test',
+        main: 'test'
+    },
     // external packages
     {
         name: 'lodash',
@@ -96,6 +103,14 @@ root._RESOURCES_CONFIG = {
         name: 'nkb.comment',
         location: 'src/comment',
         main: 'comment'
+    }, {
+        name: 'nkb.reference',
+        location: 'src/reference',
+        main: 'reference'
+    }, {
+        name: 'nkb.selfemployed',
+        location: 'src/selfemployed',
+        main: 'selfemployed'
     }, {
         name: 'nkb.extraneous',
         location: 'src/extraneous'
@@ -152,6 +167,9 @@ root._RESOURCES_CONFIG = {
     shim: {
         'angular': {
             exports: 'angular'
+        },
+        'angular-mocks': {
+            deps: ['angular']
         },
         'ng-infinite-scroll': {
             deps: ['angular']

@@ -294,13 +294,18 @@
     display: none;
 }
 [np-rsearch-node-info] .value-label,
-.np-rsearch-node-info .value-label {
+.np-rsearch-node-info .value-label,
+[np-rsearch-node-info] .value-muted,
+.np-rsearch-node-info .value-muted {
     color: @defaultDisabledColor;
 }
 [np-rsearch-node-info] .reg-state {
     display: none;
 }
 [np-rsearch-node-info] .liquidate-state {
+    display: none;
+}
+[np-rsearch-node-info] .active-state {
     display: none;
 }
 [np-rsearch-node-info] .liquidate .liquidate-state {
@@ -622,6 +627,13 @@
 [np-rsearch-node-form] .np-rsearch-node-info {
     padding: 0 7px 20px 7px;
 }
+[np-rsearch-node-form] .active-state {
+    display: block;
+    color: #5bb75b; /* TODO: config, commons */
+}
+[np-rsearch-node-form] .liquidate .active-state {
+    display: none;
+}
 [np-rsearch-node-form] .actions {
     padding: 0 7px 0 0;
 }
@@ -704,20 +716,67 @@
     padding: 0 0 5px 0;
 }
 
+[np-rsearch-node-form] .info-block .value-muted {
+    color: @defaultDisabledColor;
+}
+
+[np-rsearch-node-form] .report {
+    margin-bottom: 30px;
+}
+
+[np-rsearch-node-form] .info-block {
+    margin-bottom: 20px;
+}
+[np-rsearch-node-form] .info-block .info-block-entry {
+    padding-bottom: 5px;
+}
+[np-rsearch-node-form] .info-block .info-block-header {
+    z-index: 1;
+    position: relative;
+    padding: 10px 0;
+    text-align: left;
+}
+[np-rsearch-node-form] .info-block .info-block-header:before {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    right: 0;
+    height: 1px;
+    background-color: @defaultBorderColor;
+}
+[np-rsearch-node-form] .info-block .info-block-header .text {
+    padding: 0 6px;
+    margin-left: 20px;
+    background-color: @defaultBackgroundColor;
+    font-weight: bold;
+}
+[np-rsearch-node-form] .info-block [np-rsearch-more-items] {
+    text-align: right;
+}
+[np-rsearch-node-form] .info-block [np-rsearch-more-items] .wrapper {
+    padding-bottom: 5px;
+    font-size: 85%;
+}
+
 [np-rsearch-node-form] [np-autokad] {
     padding-bottom: 20px;
 }
 
 [np-rsearch-node-form] [np-autokad] h5,
 [np-rsearch-node-form] [np-autokad] .search-result table th,
-[np-extraneous-fedresurs-bankruptcy-company] h5,
-[np-extraneous-fedresurs-bankruptcy-company] .search-result table th,
+[np-extraneous-fedresurs-bankruptcy] h5,
+[np-extraneous-fedresurs-bankruptcy] .search-result table th,
 [np-rsearch-node-form] [np-extraneous-fns-reg-docs-company] h5,
 [np-rsearch-node-form] [np-extraneous-fns-reg-docs-company] .search-result table th {
     font-weight: normal;
     color: @defaultHeaderLightColor;
 }
 
+[np-rsearch-purchase-dishonest-supplier-info] .action .icon {
+     color: @invalidColor;
+}
 
 /* nkb-comment-widget */
 [nkb-comment-widget] {

@@ -14,6 +14,30 @@ msgstr ""
 "CLDR_PLURAL_FORMS_FORMAT: one{0}few{1}many{2}other{2}\n"
 
 #: ../i18n/okato_region/src/keys.txt:1
+msgid "01"
+msgstr "Алтайский край"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "03"
+msgstr "Краснодарский край"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "04"
+msgstr "Красноярский край"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "05"
+msgstr "Приморский край"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "07"
+msgstr "Ставропольский край"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "08"
+msgstr "Хабаровский край"
+
+#: ../i18n/okato_region/src/keys.txt:1
 msgid "1"
 msgstr "Алтайский край"
 
