@@ -201,7 +201,7 @@
     ],
     "RELATION_GROUP_BASE": [
       null,
-      ""
+      "Основные связи"
     ],
     "RELATION_GROUP_CONTACTS": [
       null,
@@ -223,6 +223,22 @@
       null,
       "руб."
     ],
+    "SELFEMPLOYED_TYPE.1": [
+      null,
+      "Индивидуальный предприниматель"
+    ],
+    "SELFEMPLOYED_TYPE.2": [
+      null,
+      "Глава крестьянского (фермерского) хозяйства"
+    ],
+    "SELFEMPLOYED_TYPE_ABBR.1": [
+      null,
+      "ИП"
+    ],
+    "SELFEMPLOYED_TYPE_ABBR.2": [
+      null,
+      "КФХ"
+    ],
     "USD": [
       null,
       "$"
@@ -230,6 +246,18 @@
     "WIN": [
       null,
       "победитель"
+    ],
+    "autokad_search_source::selfemployed_full_name": [
+      null,
+      "по полному наименованию"
+    ],
+    "autokad_search_source::selfemployed_inn": [
+      null,
+      "по ИНН"
+    ],
+    "autokad_search_source::selfemployed_name": [
+      null,
+      "по наименованию"
     ],
     "disclosure": [
       null,
@@ -466,7 +494,7 @@
     ],
     "RELATION_GROUP_BASE": [
       null,
-      ""
+      "Основные связи"
     ],
     "RELATION_GROUP_CONTACTS": [
       null,
@@ -488,6 +516,22 @@
       null,
       "rub."
     ],
+    "SELFEMPLOYED_TYPE.1": [
+      null,
+      "Индивидуальный предприниматель"
+    ],
+    "SELFEMPLOYED_TYPE.2": [
+      null,
+      "Глава крестьянского (фермерского) хозяйства"
+    ],
+    "SELFEMPLOYED_TYPE_ABBR.1": [
+      null,
+      "ИП"
+    ],
+    "SELFEMPLOYED_TYPE_ABBR.2": [
+      null,
+      "КФХ"
+    ],
     "USD": [
       null,
       "$"
@@ -495,6 +539,18 @@
     "WIN": [
       null,
       "winner"
+    ],
+    "autokad_search_source::selfemployed_full_name": [
+      null,
+      "по полному наименованию"
+    ],
+    "autokad_search_source::selfemployed_inn": [
+      null,
+      "по ИНН"
+    ],
+    "autokad_search_source::selfemployed_name": [
+      null,
+      "по наименованию"
     ],
     "disclosure": [
       null,

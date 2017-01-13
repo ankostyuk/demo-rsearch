@@ -21,23 +21,33 @@ define(function(require) {'use strict';
             nodeTypes: {
                 'COMPANY': {
                     search: true,
-                    searchResultPriority: 4
+                    searchResultPriority: 60,
+                    accentedResultPriority: 0
+                },
+                'SELFEMPLOYED': {
+                    search: true,
+                    searchResultPriority: 50,
+                    accentedResultPriority: 10
                 },
                 'INDIVIDUAL': {
                     search: true,
-                    searchResultPriority: 3
+                    searchResultPriority: 40,
+                    accentedResultPriority: 20
                 },
                 'ADDRESS': {
                     search: true,
-                    searchResultPriority: 2
+                    searchResultPriority: 30,
+                    accentedResultPriority: 0
                 },
                 'PHONE': {
                     search: true,
-                    searchResultPriority: 1
+                    searchResultPriority: 20,
+                    accentedResultPriority: 0
                 },
                 'PURCHASE': {
                     search: false,
-                    searchResultPriority: 0
+                    searchResultPriority: 10,
+                    accentedResultPriority: 0
                 }
             },
 
@@ -301,7 +311,7 @@ define(function(require) {'use strict';
             }
         })
         //
-        .factory('npRsearchMetaHelper', ['$log', '$window', '$q', '$rootScope', 'appConfig', 'npRsearchMeta', 'npRsearchResource', 'npConnectionsListsResource', function($log, $window, $q, $rootScope, appConfig, npRsearchMeta, npRsearchResource, npConnectionsListsResource){
+        .factory('npRsearchMetaHelper', ['$log', '$window', '$q', '$rootScope', 'appConfig', 'npRsearchMeta', 'npRsearchResource', 'npConnectionsListsResource', 'nkbSelfemployedHelper', function($log, $window, $q, $rootScope, appConfig, npRsearchMeta, npRsearchResource, npConnectionsListsResource, nkbSelfemployedHelper){
             var resourceConfig = appConfig.resource || {};
 
             // init meta
@@ -459,12 +469,16 @@ define(function(require) {'use strict';
                     node.__relationData = metaHelper.buildRelationDataByNodeInfo(node);
 
                     //
-                    node.__idField = nodeTypesMeta[node._type]['idField'];
+                    node.__idField = _.get(nodeTypesMeta[node._type], 'idField');
 
                     // компания
                     if (node._type === 'COMPANY') {
                         metaHelper.buildCompanyState(node);
                         node.__isFavoritesSupported = true;
+                    } else
+                    // идентифицированные физики
+                    if (node._type === 'INDIVIDUAL_IDENTITY') {
+                        nkbSelfemployedHelper.buildSelfemployeNode(node);
                     } else
                     // физик
                     if (node._type === 'INDIVIDUAL') {
@@ -1054,6 +1068,9 @@ define(function(require) {'use strict';
             return function(node){
                 if (node._type === 'COMPANY') {
                     return '<b>' + (node.nameshortsort || node.namesort) + '</b>';
+                }
+                if (node._type === 'INDIVIDUAL_IDENTITY') {
+                    return '<b>' + node.name + '</b>';
                 }
                 if (node._type === 'INDIVIDUAL') {
                     return '<b>' + node.name + '</b>';

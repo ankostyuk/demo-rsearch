@@ -1,0 +1,44 @@
+{
+    "_info": {
+        "in": {},
+        "out": {
+            "FOUNDER_INDIVIDUAL": {
+                "actual": 1
+            },
+            "EXECUTIVE_INDIVIDUAL": {
+                "actual": 1
+            }
+        }
+    },
+    "_relations": [{
+        "_holderDst": true,
+        "_actual": 1477220117717,
+        "_dstId": "8708612",
+        "outdated": false,
+        "_srcId": "35368187e76c68e80a35f360d4b1c3a676924266",
+        "name": "Костюк Андрей Григорьевич",
+        "inn": "772325788896",
+        "_type": "EXECUTIVE_INDIVIDUAL",
+        "_since": 1341432000000,
+        "_source": "egrul",
+        "position": "Генеральный директор"
+    }, {
+        "_holderDst": true,
+        "_actual": 1477220117717,
+        "_dstId": "8708612",
+        "outdated": false,
+        "_srcId": "35368187e76c68e80a35f360d4b1c3a676924266",
+        "inn": "772325788896",
+        "name": "Костюк Андрей Григорьевич",
+        "_type": "FOUNDER_INDIVIDUAL",
+        "_since": 1341432000000,
+        "_source": "egrul",
+        "sharePercent": 50.0,
+        "shareAmount": 5000.0
+    }],
+    "gender": "MALE",
+    "name": "Костюк Андрей Григорьевич",
+    "_type": "INDIVIDUAL",
+    "id": "35368187e76c68e80a35f360d4b1c3a676924266",
+    "_id": "35368187e76c68e80a35f360d4b1c3a676924266"
+}

@@ -87,3 +87,20 @@ RELATION_GROUP_PURCHASE
 # Актуальность связей (relation.outdated = true | false)
 RELATION_actual
 RELATION_outdated
+
+#
+# Индивидуальные предприниматели (ИП)
+#
+
+# Вид ИП: Индивидуальный предприниматель | Глава крестьянского (фермерского) хозяйства
+SELFEMPLOYED_TYPE.1
+SELFEMPLOYED_TYPE.2
+
+# Вид ИП аббревиатура: ИП | КФХ
+SELFEMPLOYED_TYPE_ABBR.1
+SELFEMPLOYED_TYPE_ABBR.2
+
+# TODO перенести в nullpointer-autokad?
+autokad_search_source::selfemployed_name
+autokad_search_source::selfemployed_full_name
+autokad_search_source::selfemployed_inn

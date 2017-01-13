@@ -15,6 +15,30 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 
 #: ../i18n/okato_region/src/keys.txt:1
+msgid "01"
+msgstr "Altai Krai"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "03"
+msgstr "Krasnodar Krai"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "04"
+msgstr "Krasnoyarsk Krai"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "05"
+msgstr "Primorsky Krai"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "07"
+msgstr "Stavropol Krai"
+
+#: ../i18n/okato_region/src/keys.txt:1
+msgid "08"
+msgstr "Khabarovsk Krai"
+
+#: ../i18n/okato_region/src/keys.txt:1
 msgid "1"
 msgstr "Altai Krai"
 

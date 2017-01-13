@@ -1,0 +1,56 @@
+/*
+ */
+
+ @import './config.less';
+
+[np-extraneous-fedresurs-bankruptcy] {
+    position: relative;
+}
+
+[np-extraneous-fedresurs-bankruptcy] .mask {
+    position: absolute;
+    z-index: 10;
+    display: none;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+}
+[np-extraneous-fedresurs-bankruptcy] .mask .message-box {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+}
+[np-extraneous-fedresurs-bankruptcy] .mask .message {
+    margin-left: -100%;
+}
+[np-extraneous-fedresurs-bankruptcy].loading .mask {
+    display: block;
+}
+[np-extraneous-fedresurs-bankruptcy].loading .content {
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+}
+
+[np-extraneous-fedresurs-bankruptcy] .filters {
+    padding: 10px 0 20px 0;
+}
+[np-extraneous-fedresurs-bankruptcy] .filters .search-header {
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+[np-extraneous-fedresurs-bankruptcy] .filters .link-box {
+    padding-top: 5px;
+}
+
+[np-extraneous-fedresurs-bankruptcy] .search-result table thead th {
+    vertical-align: top;
+}
+[np-extraneous-fedresurs-bankruptcy] .search-result th.col1 {
+    width: 180px;
+}
+
+[np-extraneous-fedresurs-bankruptcy] .search-result .empty-result {
+    padding-top: 20px;
+}

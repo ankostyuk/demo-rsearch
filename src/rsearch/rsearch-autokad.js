@@ -5,8 +5,10 @@
  */
 define(function(require) {'use strict';
 
-                          require('lodash');
-        angular         = require('angular');
+                      require('lodash');
+
+    var i18n        = require('i18n'),
+        angular     = require('angular');
 
     return angular.module('np.rsearch-autokad', [])
         //
@@ -21,21 +23,67 @@ define(function(require) {'use strict';
                         getCaseSearch: function() {
                             return {
                                 sources: [
-                                    {key: 'company_name', value: node['nameshortsort']},
-                                    {key: 'company_full_name', value: node['namesort']},
-                                    {key: 'company_ogrn', value: node['ogrn']},
-                                    {key: 'company_inn', value: node['inn']}
+                                    {key: 'company_name',       value: node['nameshortsort']},
+                                    {key: 'company_full_name',  value: node['namesort']},
+                                    {key: 'company_ogrn',       value: node['ogrn']},
+                                    {key: 'company_inn',        value: node['inn']}
+                                ]
+                            };
+                        }
+                    },
+                    'INDIVIDUAL_IDENTITY': {
+                        getCaseSearch: function() {
+                            if (!node.selfemployedInfo) {
+                                return null;
+                            }
+
+                            var byType = {
+                                '1': {
+                                    namePrefix: 'ИП',
+                                    fullNamePrefix: 'Индивидуальный предприниматель'
+                                },
+                                '2': {
+                                    namePrefix: 'КФХ',
+                                    fullNamePrefix: 'Глава крестьянского (фермерского) хозяйства'
+                                }
+                            };
+
+                            var type = _.get(node.selfemployedInfo.infoStatement, ['data', 'кодВидИП']);
+
+                            return {
+                                sources: [
+                                    {key: _tr("по ИНН") + ' ' + node['inn'],    value: node['inn'], noTranslation: true},
+                                    {key: 'selfemployed_name',                  value: _.get(byType[type], 'namePrefix') + ' ' + node['name']},
+                                    {key: 'selfemployed_full_name',             value: _.get(byType[type], 'fullNamePrefix') + ' ' + node['name']}
                                 ]
                             };
                         }
                     },
                     'INDIVIDUAL': {
                         getCaseSearch: function() {
-                            return {
-                                sources: [
-                                    {key: node.subtype === 'foreign' ? 'company_name' : 'individual_name', value: node['name']}
-                                ]
-                            };
+                            var inn = _.get(node, '__formData.inn');
+
+                            if (node.subtype === 'foreign') {
+                                return {
+                                    sources: [
+                                        {key: 'company_name', value: node['name']}
+                                    ]
+                                };
+                            } else {
+                                if (inn) {
+                                    return {
+                                        sources: [
+                                            {key: _tr("по ИНН") + ' ' + inn, value: inn, noTranslation: true}
+                                        ]
+                                    };
+                                } else {
+                                    return {
+                                        sources: [
+                                            {key: 'individual_name', value: node['name']}
+                                        ]
+                                    };
+                                }
+                            }
                         }
                     }
                 };
