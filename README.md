@@ -1,13 +1,1 @@
-# rsearch
-
-> Набор компонентов унифицированного поиска
-
-## [Сборка проекта](https://github.com/newpointer/web-app)
-
-## Файлы дистрибутивов
-
-### nkb-app
-
-[Приложение для интеграции в сайт НКБ](http://www.creditnet.ru/hyper/)
-
-[Дистрибутив](dist/nkb-app)
+[NCB Unisearch](http://www.creditnet.ru/hyper/?q=78486593&lang=en) frontend demo code
